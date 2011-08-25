@@ -74,7 +74,7 @@ Class Model_records extends CI_Model {
   {
   	if (isset($this->_single_type['fields']['lang']))
   	{
-  		//$this->db->where('lang', $language != '' ? $language : $this->lang->current_language);
+  		$this->db->where('lang', $language != '' ? $language : $this->lang->current_language);
   	}
   	return $this;
   }
@@ -224,8 +224,7 @@ Class Model_records extends CI_Model {
 
   	$record_columns = $this->config->item('record_columns');
 
-  	//Colonne non presenti nella tabella di produzione
-  	$not_selectable = $this->config->item('record_not_live_columns');
+  	
 
   	//Controllo se sto cercando una lista di singoli tipi (non dettaglio!)
   	if ($this->_is_list && $this->_single_type)
@@ -246,15 +245,17 @@ Class Model_records extends CI_Model {
   		}
   	} else {
   		//Estrazione standard
-  		foreach ($record_columns as $single_field)
-  		{
-  			//Controllo se il campo può essere estratto
-  			if (!in_array($single_field, $not_selectable))
-  			{
-  				$fields_to_select[] = $single_field;
-  			}
- 		}
+		$fields_to_select = $record_columns;
+  			
+ 		
   	}
+  	
+  	//Colonne non presenti nella tabella di produzione
+  	if ($this->table == $this->table_current)
+  	{
+  		$not_selectable = $this->config->item('record_not_live_columns');
+  		$fields_to_select = array_diff($fields_to_select, $not_selectable);
+  	}  	
 
     if (is_numeric($id))
     {

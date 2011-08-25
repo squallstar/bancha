@@ -22,6 +22,10 @@
 			<list>true</list>
 			<default>{id}</default>
 		</field>
+		<field id="published">
+			<type>hidden</type>
+			<default>0</default>
+		</field>
 		<field id="date_insert">
 			<type>hidden</type>
 			<list>true</list>

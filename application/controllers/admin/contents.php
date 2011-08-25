@@ -280,8 +280,10 @@ Class Contents extends Milk_Controller
 	      	}
       }
 
+      //Riprendo il record aggiornato dal db
       $record = $this->records->get($record_id);
 
+      //Aggiorno i testi alternativi delle immagini
       if ($this->input->post('_alt_text', FALSE)) {
       		$alt_texts = $this->input->post('_alt_text', FALSE);
       		$priorities = $this->input->post('_priority', FALSE);
