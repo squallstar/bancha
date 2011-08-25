@@ -6,10 +6,16 @@
 * @link			http://squallstar.it
 **************************************
 
-***
-1. Installazione di Milk
+**************************************
 
-	- Settare l'environment nel file index.php
-	- Configurare i parametri di connessione al database nel file application/config/database.php
+INSTALLAZIONE DI MILK
+ - Settare l'environment nel file index.php
+ - Configurare i parametri di connessione al database nel file application/config/database.php
+ - Lanciare dal browser l'indirizzo http://{nomehost}/admin/install
+ 
+**************************************
 
-***
+DOCUMENTAZIONE DI MILK
+	- La documentazione è visualizzabile tramite l'amministrazione alla voce "Gestione > Documentazione"
+	
+**************************************
