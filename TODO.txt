@@ -3,10 +3,12 @@ TODO LIST - MILK
 **********
 
 - scrivere programmato anziche' pubblicato se publish maggiore now
-- creazioni chiavi su script di installazione
+- creazioni chiavi su script di installazione (importante!)
+- filtro di tipo date + datetime su lista contenuti da creare
 - Hooks su pubblicazione contenuti? O cose simili
 - Versionamento su nuova tabella
 - Menu padre fatto bene su filtri e edit_record (tree/get_linear_dropdown. prendi spunto dalla get_branch) > ale
 - salvataggio in sessione dei filtri su records
 - creazione/modifica utente
 - modifica gruppi utente
+- refactor modulo di twitter
