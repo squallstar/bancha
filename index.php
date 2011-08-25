@@ -21,7 +21,6 @@ if (defined('ENVIRONMENT'))
 	{
 		case 'sqlite':
 		case 'development':
-		case 'ale':
 			error_reporting(E_ALL);
 		break;
 
