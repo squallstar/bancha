@@ -2,6 +2,7 @@
 TODO LIST - MILK
 **********
 
+- pagina elenco moduli + docs modulo
 - scrivere programmato anziche' pubblicato se publish maggiore now
 - creazioni chiavi su script di installazione (importante!)
 - filtro di tipo date + datetime su lista contenuti da creare
