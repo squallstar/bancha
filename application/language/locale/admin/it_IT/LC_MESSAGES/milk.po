@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Milk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-25 19:58+0100\n"
-"PO-Revision-Date: 2011-08-25 19:58+0100\n"
+"POT-Creation-Date: 2011-08-25 20:07+0100\n"
+"PO-Revision-Date: 2011-08-25 20:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -338,6 +338,7 @@ msgid "Add new type"
 msgstr ""
 
 #: views/admin/content/type_add.php:61
+#: views/admin/content/type_delete.php:30
 #: views/admin/content/type_edit_xml.php:22
 msgid "WARNING"
 msgstr ""
@@ -409,6 +410,27 @@ msgstr ""
 
 #: views/admin/content/type_categories.php:67
 msgid "They can be useful to make different extractions and use them such as tags."
+msgstr ""
+
+#: views/admin/content/type_delete.php:9
+msgid "Type delete"
+msgstr ""
+
+#: views/admin/content/type_delete.php:12
+#: views/admin/content/type_delete.php:38
+msgid "Cancel"
+msgstr ""
+
+#: views/admin/content/type_delete.php:30
+msgid "All contents associated to this type will be deleted."
+msgstr ""
+
+#: views/admin/content/type_delete.php:30
+msgid "You can disable this function through the variabile \"DEAD RECORDS\" in the config file."
+msgstr ""
+
+#: views/admin/content/type_delete.php:37
+msgid "Confirm deletion"
 msgstr ""
 
 #: views/admin/content/type_edit_xml.php:9
