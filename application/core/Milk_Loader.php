@@ -12,9 +12,12 @@ Class Milk_Loader extends CI_Loader {
   	//Loads milk standard libraries
   	$this->library(
   		array(
-  			'milk/content', 'milk/view'
+  			'milk/content', 'milk/xml', 'milk/view'
   		)
   	);
+  	
+  	//Preload the record class
+  	require_once(FRPATH . 'record.php');
 
   	//Loads the default helpers
   	$this->helper(

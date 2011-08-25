@@ -159,7 +159,7 @@ Class Record {
   {
     $CI = & get_instance();
     if (count($this->_data)) {
-      $this->xml = $CI->content->get_record_xml($this->_tipo, $this->_data);
+      $this->xml = $CI->xml->get_record_xml($this->_tipo, $this->_data);
 
       //Tolgo i caratteri di a capo per recuperare spazio
       $this->xml = str_replace(array("\r\n", "\r", "\n"), "", $this->xml);
