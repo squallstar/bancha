@@ -1,8 +1,8 @@
 <?php
 /**
- * Content Library Class
+ * Xml Library Class
  *
- * Gestione di contenuti, classe di utilità generale
+ * Libreria/Helper per lavorare con gli XML
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
