@@ -4,7 +4,7 @@
 		<div class="bheadl"></div>
 		<div class="bheadr"></div>
 
-		<h2>Svuota cache</h2>
+		<h2><?php echo _('Clear cache'); ?></h2>
 
 
 	</div>

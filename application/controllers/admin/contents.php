@@ -502,7 +502,7 @@ Class Contents extends Milk_Controller
 	  			if ($done) {
 	  				$this->view->set('message_ok', $this->lang->_trans('The category %n has been added.', array('n' => '['.$category_name.']')));
 	  			} else {
-	  				$this->view->set('message', 'Impossibile inserire la categoria ['.$category_name.'].');
+	  				$this->view->set('message', $this->lang->_trans('Cannot insert the category %n.', array('n' => '['.$category_name.']')));
 	  			}
   			} else {
   				$this->view->set('message', $this->lang->_trans('A category named %n already exists.', array('n' => '['.$category_name.']')));
