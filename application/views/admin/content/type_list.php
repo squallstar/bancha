@@ -46,9 +46,18 @@
 					}	?>
 			</tbody>
 		</table>
-		<?php } else { ?>
-		<p>Nessun tipo di <?php echo $_section == 'contents' ? 'contenuto' : 'pagine'; ?> inserito. Per iniziare, <a href="<?php echo admin_url($_section.'/add_type'); ?>">aggiungine uno</a>.
-		<?php } ?>
+		<?php } else {
+		
+			if ($_section == 'contents')
+			{
+				echo '<p>'.$this->lang->_trans('No type of contents found. To start, %link.', array(
+					'link'	=> '<a href="'.admin_url($_section.'/add_type').'">'._('add a new one').'</a>'
+				)).'</p>';
+			} else {
+				
+			}
+			?>
+			<?php } ?>
 	</div>
 
 	<div class="bendl"></div>

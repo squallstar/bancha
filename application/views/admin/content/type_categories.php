@@ -5,10 +5,10 @@
 		<div class="bheadl"></div>
 		<div class="bheadr"></div>
 
-		<h2>Categorie : <?php echo $tipo['description']; ?></h2>
+		<h2><?php echo _('Categories'); ?> : <?php echo $tipo['description']; ?></h2>
 
 		<ul>
-			<li><img class="middle" src="<?php echo site_url('widgets/admin/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url($_section.'/type/'.$tipo['name']); ?>">Torna ai contenuti</a></li>
+			<li><img class="middle" src="<?php echo site_url('widgets/admin/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url($_section.'/type/'.$tipo['name']); ?>"><?php echo _('Back to contents'); ?></a></li>
 		</ul>
 
 	</div>
@@ -19,14 +19,14 @@
 
 		<div class="sidebar">
 			<ul class="sidemenu">
-				<li><a href="#list">Lista categorie</a></li>
-				<li><a href="#add">Aggiungi nuova categoria</a></li>
+				<li><a href="#list"><?php echo _('Categories list'); ?></a></li>
+				<li><a href="#add"><?php echo _('Add new category'); ?></a></li>
 			</ul>
 			<p></p>
 		</div>
 
 		<div class="sidebar_content" id="list">
-			<h3>Lista categorie</h3>
+			<h3><?php echo _('Categories list'); ?></h3>
 			<p></p>
 
 			<?php if (isset($message)) { ?><div class="message errormsg"><p><?php echo $message; ?></p></div><?php } ?>
@@ -39,7 +39,7 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Nome categoria</th>
+						<th><?php echo _('Category name'); ?></th>
 						<td>&nbsp;</td>
 					</tr>
 				</thead>
@@ -49,29 +49,29 @@
 					<tr>
 						<td><?php echo $category->id; ?></td>
 						<td><?php echo $category->name; ?></td>
-						<td class="delete"><a href="<?php echo admin_url($_section.'/type_categories_delete/'.$tipo['name'].'/'.$category->id); ?>" onclick="return confirm('Eliminare questa categoria?');">Elimina categoria</a></td>
+						<td class="delete"><a href="<?php echo admin_url($_section.'/type_categories_delete/'.$tipo['name'].'/'.$category->id); ?>" onclick="return confirm('<?php echo _('Do you want to delete this category?'); ?>');"><?php echo _('Delete category'); ?></a></td>
 					</tr>
 					<?php } ?>
 				</tbody>
 			</table>
 			<?php } else { ?>
-			<p>Nessuna categoria inserita per questo tipo di contenuto.</p>
+			<p><?php echo _('This content type has no categories.'); ?></p>
 			<?php } ?>
 
 
 		</div>
 
 		<div class="sidebar_content" id="add">
-			<h3>Aggiungi nuova categoria</h3>
+			<h3><?php echo _('Add new category'); ?></h3>
 			<br />
-			<p>Le categorie permettono ai tuoi contenuti di differenziarsi maggiormente.<br />Possono essere molto utili per definire estrazioni diverse dalle pagine, o dalle tue azioni personalizzate.</p>
+			<p><?php echo _('Categories permits your contents to be more differents each other.'); ?><br /><?php echo _('They can be useful to make different extractions and use them such as tags.'); ?></p>
 			<?php
 			echo form_open('admin/'.$_section.'/type_categories/'.$tipo['name']);
 
-			echo form_label('Nome della categoria', 'category_name') . br(1);
+			echo form_label(_('Category name'), 'category_name') . br(1);
 			echo form_input(array('name' => 'category_name', 'class' => 'text')) . br(2);
 
-			echo form_submit('submit', 'Aggiungi', 'class="submit mid"');
+			echo form_submit('submit', _('Add'), 'class="submit mid"');
 			echo form_close();
 
 			?>

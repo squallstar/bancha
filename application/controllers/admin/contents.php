@@ -500,12 +500,12 @@ Class Contents extends Milk_Controller
 	  				$category_name
 	  			);
 	  			if ($done) {
-	  				$this->view->set('message_ok', 'La categoria ['.$category_name.'] &egrave; stata inserita.');
+	  				$this->view->set('message_ok', $this->lang->_trans('The category %n has been added.', array('n' => '['.$category_name.']')));
 	  			} else {
 	  				$this->view->set('message', 'Impossibile inserire la categoria ['.$category_name.'].');
 	  			}
   			} else {
-  				$this->view->set('message', 'Esiste gi&agrave; una categoria chiamata ['.$category_name.'].');
+  				$this->view->set('message', $this->lang->_trans('A category named %n already exists.', array('n' => '['.$category_name.']')));
   			}
   		}
 
@@ -528,9 +528,9 @@ Class Contents extends Milk_Controller
   			$done = $this->categories->delete_by_id($cat_id);
 
   			if ($done) {
-  				$this->view->set('message_ok', 'La categoria con ID ['.$cat_id.'] &egrave; stata eliminata');
+  				$this->view->set('message_ok', $this->lang->_trans('The category %n has been deleted.', array('n' => '['.$cat_id.']')));
   			} else {
-  				$this->view->set('message', 'Impossibile eliminare la categoria con ID ['.$cat_id.'].');
+  				$this->view->set('message', 'Cannot delete the category.');
   			}
   			$this->type_categories($type_id);
   		}
