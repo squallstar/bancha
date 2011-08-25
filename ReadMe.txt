@@ -8,5 +8,8 @@
 
 ***
 1. Installazione di Milk
+
+	- Settare l'environment nel file index.php
+	- Configurare i parametri di connessione al database nel file application/config/database.php
+
 ***
-........ to do
