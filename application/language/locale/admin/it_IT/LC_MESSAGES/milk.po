@@ -1,0 +1,477 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Milk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-20 10:57+0100\n"
+"PO-Revision-Date: 2011-08-20 10:58+0100\n"
+"Last-Translator: \n"
+"Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_trans\n"
+"X-Poedit-Basepath: ../../../../../../application/\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SearchPath-0: controllers/admin\n"
+"X-Poedit-SearchPath-1: libraries\n"
+"X-Poedit-SearchPath-2: models\n"
+"X-Poedit-SearchPath-3: views/admin\n"
+
+#: controllers/admin/ajax.php:83
+msgid "Nessun allegato caricato per questo contenuto."
+msgstr ""
+
+#: controllers/admin/contents.php:506
+msgid "Please insert a name for this type."
+msgstr ""
+
+#: controllers/admin/contents.php:534
+msgid "Cannot read the XML file."
+msgstr ""
+
+#: controllers/admin/contents.php:605
+msgid "The cache has been cleared."
+msgstr ""
+
+#: controllers/admin/contents.php:622
+msgid "The type named %n has been removed."
+msgstr ""
+
+#: libraries/Milk_Profiler.php:63
+msgid "Preview"
+msgstr ""
+
+#: libraries/Milk_Profiler.php:65
+msgid "Back to admin"
+msgstr ""
+
+#: libraries/Milk_Profiler.php:66
+msgid "Open profiler"
+msgstr ""
+
+#: views/admin/auth/login.php:7
+msgid "Accesso"
+msgstr ""
+
+#: views/admin/auth/login.php:9
+msgid "Torna al sito"
+msgstr ""
+
+#: views/admin/auth/login.php:22
+msgid "Nome utente"
+msgstr ""
+
+#: views/admin/auth/login.php:27
+msgid "Password"
+msgstr ""
+
+#: views/admin/auth/login.php:32
+msgid "Entra"
+msgstr ""
+
+#: views/admin/auth/login.php:33
+msgid "Ricordami"
+msgstr ""
+
+#: views/admin/content/documents_finder.php:9
+msgid "Browse attachments"
+msgstr ""
+
+#: views/admin/content/documents_finder.php:12
+msgid "Close window"
+msgstr ""
+
+#: views/admin/content/documents_finder.php:24
+#: views/admin/content/record_edit.php:253
+msgid "Original"
+msgstr ""
+
+#: views/admin/content/documents_finder.php:24
+#: views/admin/content/record_edit.php:253
+msgid "Resized"
+msgstr ""
+
+#: views/admin/content/documents_finder.php:24
+msgid "Thumbnail"
+msgstr ""
+
+#: views/admin/content/documents_finder.php:24
+#: views/admin/content/record_edit.php:253
+#: views/admin/content/record_edit.php:286
+msgid "Alternative text"
+msgstr ""
+
+#: views/admin/content/documents_finder.php:30
+#: views/admin/content/documents_finder.php:31
+#: views/admin/content/record_edit.php:258
+#: views/admin/content/record_edit.php:259
+msgid "View"
+msgstr ""
+
+#: views/admin/content/documents_finder.php:30
+#: views/admin/content/documents_finder.php:31
+#: views/admin/content/documents_finder.php:32
+msgid "Choose"
+msgstr ""
+
+#: views/admin/content/documents_finder.php:34
+#: views/admin/content/record_edit.php:262
+msgid "Delete image"
+msgstr ""
+
+#: views/admin/content/documents_finder.php:43
+msgid "No attachments found for this record."
+msgstr ""
+
+#: views/admin/content/record_edit.php:23
+#: views/admin/content/record_edit.php:79
+msgid "New content"
+msgstr ""
+
+#: views/admin/content/record_edit.php:23
+#: views/admin/content/record_edit.php:79
+msgid "Edit content"
+msgstr ""
+
+#: views/admin/content/record_edit.php:26
+msgid "Back to list"
+msgstr ""
+
+#: views/admin/content/record_edit.php:41
+#: views/admin/content/record_edit.php:321
+msgid "Categories"
+msgstr ""
+
+#: views/admin/content/record_edit.php:94
+msgid "First level"
+msgstr ""
+
+#: views/admin/content/record_edit.php:101
+msgid "Parent page"
+msgstr ""
+
+#: views/admin/content/record_edit.php:246
+#: views/admin/content/record_edit.php:249
+msgid "You can attach up to %n images"
+msgstr ""
+
+#: views/admin/content/record_edit.php:248
+msgid "Number of uploadable images excedeed."
+msgstr ""
+
+#: views/admin/content/record_edit.php:253
+msgid "Order"
+msgstr ""
+
+#: views/admin/content/record_edit.php:279
+#: views/admin/content/record_edit.php:282
+msgid "You can attach up to %n files"
+msgstr ""
+
+#: views/admin/content/record_edit.php:281
+msgid "File limit exceeded."
+msgstr ""
+
+#: views/admin/content/record_edit.php:286
+msgid "File name"
+msgstr ""
+
+#: views/admin/content/record_edit.php:286
+msgid "File type"
+msgstr ""
+
+#: views/admin/content/record_edit.php:292
+msgid "Delete file"
+msgstr ""
+
+# Bottone salva
+#: views/admin/content/record_edit.php:312
+#: views/admin/content/record_edit.php:341
+msgid "Save"
+msgstr ""
+
+#: views/admin/content/record_edit.php:313
+#: views/admin/content/record_edit.php:342
+msgid "Save and go to list"
+msgstr ""
+
+#: views/admin/content/record_edit.php:327
+msgid "This content can be associated to these categories"
+msgstr ""
+
+#: views/admin/content/record_edit.php:345
+msgid "This type has no categories"
+msgstr ""
+
+#: views/admin/content/record_list.php:13
+msgid "Pages"
+msgstr ""
+
+#: views/admin/content/record_list.php:13
+#: views/admin/content/type_edit_xml.php:20
+msgid "Contents"
+msgstr ""
+
+#: views/admin/content/record_list.php:16
+msgid "Insert new content"
+msgstr ""
+
+#: views/admin/content/record_list.php:16
+msgid "Insert new page"
+msgstr ""
+
+#: views/admin/content/record_list.php:17
+msgid "Manage categories"
+msgstr ""
+
+#: views/admin/content/record_list.php:38
+msgid "Status"
+msgstr ""
+
+#: views/admin/content/record_list.php:50
+#: views/admin/content/record_list.php:106
+msgid "Draft"
+msgstr ""
+
+#: views/admin/content/record_list.php:50
+#: views/admin/content/record_list.php:112
+msgid "Published"
+msgstr ""
+
+#: views/admin/content/record_list.php:50
+#: views/admin/content/record_list.php:109
+msgid "Different"
+msgstr ""
+
+#: views/admin/content/record_list.php:88
+msgid "Apply filters"
+msgstr ""
+
+#: views/admin/content/record_list.php:166
+msgid "Add child page"
+msgstr ""
+
+#: views/admin/content/record_list.php:167
+msgid "Are you sure?"
+msgstr ""
+
+#: views/admin/content/record_list.php:167
+#: views/admin/content/record_list.php:180
+msgid "Delete"
+msgstr ""
+
+#: views/admin/content/record_list.php:177
+msgid "Actions"
+msgstr ""
+
+#: views/admin/content/record_list.php:178
+msgid "Publish"
+msgstr ""
+
+#: views/admin/content/record_list.php:179
+msgid "Unpublish"
+msgstr ""
+
+#: views/admin/content/record_list.php:183
+msgid "Apply to selected"
+msgstr ""
+
+#: views/admin/content/record_list.php:185
+msgid "There is"
+msgstr ""
+
+#: views/admin/content/record_list.php:185
+msgid "There are"
+msgstr ""
+
+#: views/admin/content/record_list.php:193
+msgid "add a new one"
+msgstr ""
+
+#: views/admin/content/record_list.php:192
+msgid "There are no contents/pages for this type. To start, %a."
+msgstr ""
+
+#: views/admin/content/type_add.php:10
+#: views/admin/content/type_add.php:59
+msgid "Add new content type"
+msgstr ""
+
+#: views/admin/content/type_add.php:13
+msgid "Back to types list"
+msgstr ""
+
+#: views/admin/content/type_add.php:24
+msgid "Intro"
+msgstr ""
+
+#: views/admin/content/type_add.php:25
+msgid "Add new type"
+msgstr ""
+
+#: views/admin/content/type_add.php:61
+#: views/admin/content/type_edit_xml.php:22
+msgid "WARNING"
+msgstr ""
+
+#: views/admin/content/type_add.php:61
+msgid "You can't change the type name after its creation."
+msgstr ""
+
+#: views/admin/content/type_add.php:66
+msgid "Type name"
+msgstr ""
+
+#: views/admin/content/type_add.php:69
+#: views/admin/content/type_edit_xml.php:33
+msgid "Type description"
+msgstr ""
+
+#: views/admin/content/type_add.php:72
+msgid "Type structure"
+msgstr ""
+
+#: views/admin/content/type_add.php:73
+msgid "Simple (Contents)"
+msgstr ""
+
+#: views/admin/content/type_add.php:73
+msgid "Tree (Pages)"
+msgstr ""
+
+#: views/admin/content/type_add.php:75
+msgid "Add"
+msgstr ""
+
+#: views/admin/content/type_edit_xml.php:9
+#: views/admin/content/type_edit_xml.php:20
+msgid "Edit scheme"
+msgstr ""
+
+#: views/admin/content/type_edit_xml.php:12
+msgid "Discard all"
+msgstr ""
+
+#: views/admin/content/type_edit_xml.php:22
+msgid "A wrong compilation of the XML tree could cause a malfunction of the website."
+msgstr ""
+
+#: views/admin/content/type_edit_xml.php:40
+msgid "XML Structure"
+msgstr ""
+
+#: views/admin/content/type_edit_xml.php:43
+msgid "Save scheme"
+msgstr ""
+
+#: views/admin/content/type_list.php:24
+msgid "Name"
+msgstr ""
+
+#: views/admin/content/type_list.php:25
+msgid "Description"
+msgstr ""
+
+#: views/admin/content/type_list.php:26
+msgid "Structure type"
+msgstr ""
+
+#: views/admin/content/type_list.php:36
+msgid "Tree"
+msgstr ""
+
+#: views/admin/content/type_list.php:36
+msgid "Simple"
+msgstr ""
+
+#: views/admin/dashboard/welcome.php:7
+#, php-format
+msgid "Welcome back, %u"
+msgstr ""
+
+#: views/admin/dashboard/welcome.php:30
+msgid "Last events"
+msgstr ""
+
+#: views/admin/dashboard/welcome.php:41
+msgid "Today"
+msgstr ""
+
+#: views/admin/dashboard/welcome.php:41
+msgid "at %time"
+msgstr ""
+
+#: views/admin/dashboard/welcome.php:54
+#: views/admin/dashboard/welcome.php:67
+#: views/admin/dashboard/welcome.php:80
+msgid "Unknown"
+msgstr ""
+
+#: views/admin/dashboard/welcome.php:51
+msgid "%u updated the content %c of type %t."
+msgstr ""
+
+#: views/admin/dashboard/welcome.php:64
+msgid "%u created a new content of type %t named %c."
+msgstr ""
+
+#: views/admin/dashboard/welcome.php:77
+msgid "%u published the content %c of type %t."
+msgstr ""
+
+#: views/admin/dashboard/welcome.php:86
+#, php-format
+msgid "%u depublished the content %c."
+msgstr ""
+
+#: views/admin/layout/footer.php:19
+msgid "Page rendered in %n seconds."
+msgstr ""
+
+#: views/admin/layout/header.php:33
+msgid "Dashboard"
+msgstr ""
+
+#: views/admin/layout/header.php:56
+msgid "Users"
+msgstr ""
+
+#: views/admin/layout/header.php:58
+msgid "Add new user"
+msgstr ""
+
+#: views/admin/layout/header.php:59
+msgid "Users list"
+msgstr ""
+
+#: views/admin/layout/header.php:60
+msgid "Groups and permissions"
+msgstr ""
+
+#: views/admin/layout/header.php:64
+msgid "Moduls"
+msgstr ""
+
+#: views/admin/layout/header.php:67
+msgid "Manage"
+msgstr ""
+
+#: views/admin/layout/header.php:70
+msgid "Documentation"
+msgstr ""
+
+#: views/admin/layout/header.php:72
+msgid "Clear cache"
+msgstr ""
+
+#: views/admin/layout/header.php:78
+msgid "Back to site"
+msgstr ""
+
+#: views/admin/layout/header.php:78
+msgid "Logout"
+msgstr ""
+
+#~ msgid "ciao"
+#~ msgstr "Ciao"

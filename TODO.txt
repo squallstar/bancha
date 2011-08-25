@@ -1,0 +1,11 @@
+**********
+TODO LIST - MILK
+**********
+
+- scrivere programmato anzichè pubblicato se publish maggiore now
+- Hooks su pubblicazione contenuti? O cose simili
+- Versionamento su nuova tabella
+- Menu padre fatto bene su filtri e edit_record (tree/get_linear_dropdown. prendi spunto dalla get_branch) > ale
+- salvataggio in sessione dei filtri su records
+- creazione/modifica utente
+- modifica gruppi utente

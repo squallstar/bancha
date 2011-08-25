@@ -1,0 +1,79 @@
+ul#twit-twit, ul#twit-twit ul {
+	list-style-type: none;
+	padding-left: 0;
+	font-family: Arial, Georgia, Verdana, "Times New Roman", sans-serif;
+}
+
+
+ul#twit-twit {
+	width: 150px;
+}
+
+
+ul#twit-twit li ul {
+	margin: 6px 0 0 0;
+}
+
+
+ul#twit-twit li {
+	margin: 0 0 10px 10px;
+	border-top: 1px dashed #ccc;
+}
+
+
+ul#twit-twit li.twit-date {
+	font-weight: bold;
+	color: #600;
+	border: 0px solid #ccc;
+	margin: 10px 0 0 0;
+	font-size: 9pt;
+}
+
+
+ul#twit-twit li ul li {
+	font-weight: normal;
+	color: #222;
+	font-size: 8pt;
+	padding-top: 8px;
+}
+
+
+ul#twit-twit li.twit-alt {
+	color: #888;
+}
+
+
+ul#twit-twit li.twit-first {
+	color: #800;
+}
+
+
+ul#twit-twit a.twit {
+	color: #ddd;
+	text-decoration: none;
+	border: 0;
+}
+
+
+ul#twit-twit a.twit:hover, ul#twit-twit a.twit:visited:hover {
+	color: #600;
+}
+
+
+p.twit-more, li.twit-more {
+	text-align: right;
+	font-size: 8pt;
+	padding: 4px 0 0 0;
+}
+
+
+p.twit-more a.twit-more, li.twit-more a.twit-more {
+	color: #600;
+	text-decoration: none;
+}
+
+
+p.twit-more a.twit-more:hover, p.twit-more a.twit-more:visited:hover, li.twit-more a.twit-more:hover, li.twit-more a.twit-more:visited:hover {
+	color: #000;
+	border-bottom: 1px dashed #600;
+}

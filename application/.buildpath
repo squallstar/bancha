@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="config"/>
+	<buildpathentry kind="src" path="controllers"/>
+	<buildpathentry kind="src" path="core"/>
+	<buildpathentry kind="src" path="errors"/>
+	<buildpathentry kind="src" path="libraries/framework"/>
+	<buildpathentry kind="src" path="logs"/>
+	<buildpathentry kind="src" path="models"/>
+	<buildpathentry kind="src" path="views/admin/content"/>
+	<buildpathentry kind="src" path="views/admin/layout"/>
+	<buildpathentry kind="src" path="views/layout"/>
+	<buildpathentry kind="src" path="views/templates/Prodotti"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>

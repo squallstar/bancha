@@ -1,0 +1,72 @@
+@CHARSET "UTF-8";
+
+#milk_profiler
+{
+	position:fixed;
+	width:100%;
+	z-index:99999;
+	top:0;
+	left:0;
+	min-height:2px;
+	background: url(../../widgets/admin/hdr.gif) 0 0 repeat-x;
+	font-family: "Lucida Grande",Verdana,sans-serif;
+    font-size: 12px;
+    font-weight:bold;
+	line-height:12px;
+	color:#FFF;
+}
+
+#milk_profiler_preview
+{
+	width:100px;
+	position:fixed;
+	z-index:99999;
+	top:0;
+	left:20px;
+	background: url(../../widgets/admin/hdr.gif) 0 0 repeat-x;
+	color:#FFF;
+	font-family: "Lucida Grande",Verdana,sans-serif;
+    font-size: 12px;
+    font-weight:bold;
+	line-height:12px;
+	display:block !important;
+	text-align:center;
+	padding:6px 2px;
+	margin:0;
+}
+
+#milk_profiler_content
+{
+	display:none;
+	height:50px;
+	position:relative;
+	width:90%;
+	left:20px;
+	background: url(../../widgets/admin/hdr.gif) 0 0 repeat-x;
+	line-height:50px;
+}
+
+	#milk_profiler_content a
+	{
+		color:#999;
+		text-decoration:underline
+	}
+
+	#milk_profiler_content a:hover
+	{
+		color:#FFF;
+	}
+
+#milk_profiler_ci
+{
+	display:none;
+	line-height:20px;
+	font-weight:normal;
+	height:500px;
+	overflow-x:hidden;
+	overflow-y:scroll;
+	background:#FFF;
+	padding:0 10px;
+	border:10px solid #000;
+	left:-10px;
+}

@@ -1,0 +1,8 @@
+body {
+	font-family: "Lucida Grande", Verdana, sans-serif;
+	font-size: 13px;
+	padding: 5px 0;
+}
+div.wysiwyg iframe {
+	padding:20px
+}
