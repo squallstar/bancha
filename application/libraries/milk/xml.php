@@ -29,9 +29,10 @@ Class Xml
 	}
 	
 	/**
-	* Costruisce l'xml di un record
+	* Costruisce l'xml di un record dato il suo tipo di contenuto e i campi da popolare
 	* @param int|string $type
 	* @param array $data
+	* @return string xml
 	*/
 	function get_record_xml($type='', $data)
 	{
@@ -73,6 +74,12 @@ Class Xml
 		}
 	}
 	
+	/**
+	 * Ottiene il risultato di una query creata partendo da un nodo SQL (estratto da un file xml)
+	 * @param SimpleXMLElement $sql
+	 * @param int $id_type
+	 * @return array
+	 */
 	function records_from_sql_xml($sql, $id_type = '')
 	{
 		$this->CI->db->select((string)$sql->select);
@@ -108,10 +115,18 @@ Class Xml
 		return $this->CI->db->get()->result();
 	}
 	
-	
+	/**
+	 * Effettua il parsing di un file XML e lo converte in Array
+	 * E' una delle funzioni principali del framework e viene usata principalmente dalla cache dei tipi di contenuto
+	 * @param string $filepath
+	 */
 	function parse_file($filepath)
 	{
-		$node = simplexml_load_file($filepath);
+		$node = simplexml_load_file($filepath);		
+		if (!$node)
+		{
+			show_error('File not found: '.$filepath);
+		}
 		
 		//Gets the filename
 		$segments = explode('/', $filepath);
