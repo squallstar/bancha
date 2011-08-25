@@ -107,4 +107,199 @@ Class Xml
 		}
 		return $this->CI->db->get()->result();
 	}
+	
+	
+	function parse_file($filepath)
+	{
+		$node = simplexml_load_file($filepath);
+		
+		//Gets the filename
+		$segments = explode('/', $filepath);
+		$filename = $segments[count($segments)-1];
+		
+		//Filename sanitize
+		$safe_filename = str_replace(' ', '_', str_replace('.xml', '', $filename));
+		
+		//The type name
+		$name = (string) $node->name;
+		
+		$type_id = (int) $node->id;
+		
+		//Tipi di campi utilizzabili
+		$field_usable_inputs = array(
+			'text', 'textarea', 'date', 'checkbox', 'select', 'radio',
+			'images', 'files', 'number', 'textarea_full', 'datetime', 'hidden'
+		);
+		
+		$content = array(
+						'id'			=> $type_id,
+						'name'			=> $safe_filename,
+						'tree'			=> strtolower((string)$node->tree) == 'true' ? true : false,
+						'has_categories'=> strtolower((string)$node->has_categories) == 'true' ? true : false,
+						'description'	=> (string) $node->description,
+						'primary_key'	=> (string) $node->primary_key
+		);
+		
+		if (!$content['primary_key'])
+		{
+			show_error('Chiave primaria non definita per il tipo ['.$safe_filename.'].');
+		}
+		
+		//Tipi utilizzabili come parent di questo tipo
+		if (isset($node->parent_types))
+		{
+			$parent_types = array();
+			foreach ($node->parent_types->type as $parent_type)
+			{
+				$parent_types[] = (string) $parent_type;
+			}
+			$content['parent_types'] = $parent_types;
+		}
+		
+		$content['fieldsets'] = array();
+		
+		//True when the type has at leasts one images/files field.
+		$content['has_attachments'] = FALSE;
+		
+		foreach ($node->fieldset as $fieldset_node)
+		{
+		
+			$fieldset_name = isset($fieldset_node->name) ? (string)$fieldset_node->name : _('Untitled');
+		
+			if ($fieldset_name == '')
+			{
+				show_error('Uno dei fieldset del tipo ['.$safe_filename.'] non presenta il campo Nome obbligatorio.', 500, 'Errore XML');
+			} else if (array_key_exists($fieldset_name, $content['fieldsets'])) {
+				show_error('Il tipo ['.$safe_filename.'] presenta pi&ugrave; di un fieldset con nome ['.$fieldset_name.'].', 500, 'Errore XML');
+			}
+		
+			$fieldset = array('name' => $fieldset_name, 'fields' => array());			
+		
+			foreach ($fieldset_node->field as $field)
+			{
+				//Unique name
+				$field_name = (string) $field->attributes()->id;
+				if (!$field_name || $field_name == '') {
+					show_error('Tipo ['.$safe_filename.']: uno dei campi non presenta il nome (XML).', 500, 'Errore XML');
+				}
+		
+				//Reserved names check
+				if (in_array($field_name, $this->CI->config->item('restricted_field_names')))
+				{
+					show_error('Tipo ['.$safe_filename.']: Il nome del campo ['.$field_name.'] &egrave; riservato. Utilizzare un altro nome (XML).', 500, 'Uno dei campi &egrave; riservato');
+				}
+		
+				if (!in_array((string)$field->type, $field_usable_inputs))
+				{
+					show_error('Tipo ['.$safe_filename.']: Il valore utilizzato nel nodo "type" del campo ['.$field_name.'] non esiste. Valori ammessi: '.implode(', ', $field_usable_inputs).'.', 500, 'Valore sconosciuto');
+				}
+		
+				//Default fields for each field
+				$content_field = array(
+								'description'	=> isset($field->description) ? (string)$field->description : '',
+								'type'			=> (string) $field->type,
+								'length'		=> isset($field->length) ? (int)$field->length : 255,
+								'mandatory'		=> isset($field->mandatory) ? (strtoupper($field->mandatory) == 'TRUE' ? TRUE : FALSE) : FALSE,
+								'admin'			=> isset($field->admin) ? (strtoupper($field->admin) == 'TRUE' ? TRUE : FALSE) : FALSE,
+								'list'			=> isset($field->list) ? (strtoupper($field->list) == 'TRUE' ? TRUE : FALSE) : FALSE,
+								'visible'		=> isset($field->visible) ? (strtoupper($field->visible) == 'TRUE' ? TRUE : FALSE) : TRUE,
+								'default'		=> isset($field->default) ? (string)$field->default : ''
+				);
+		
+				if ($content_field['type'] == 'files' || $content_field['type'] == 'images')
+				{
+					$content['has_attachments'] = TRUE;
+				}
+		
+				if ($content_field['type'] == 'images')
+				{
+					$content_field['original'] = isset($field->original) ? (strtoupper($field->original) == 'TRUE' ? TRUE : FALSE) : FALSE;
+					$content_field['resized'] = isset($field->resized) ? (string)$field->resized : FALSE;
+					$content_field['thumbnail'] = isset($field->thumbnail) ? (string)$field->thumbnail : FALSE;
+				}
+		
+				if ($content_field['type'] == 'images' || $content_field['type'] == 'files')
+				{
+					$content_field['size'] = isset($field->size) ? (int)$field->size : 102400; //max 100mb
+					$content_field['mimes'] = isset($field->mimes) ? (string)$field->mimes : '*';
+					$content_field['max'] = isset($field->max) ? (int)$field->max : 10; //max 10 files
+				}
+		
+				//Onchange JS
+				if (isset($field->onchange))
+				{
+					$content_field['onchange'] = (string) $field->onchange.';';
+				}
+		
+				//Onkeyup JS
+				if (isset($field->onkeyup))
+				{
+					$content_field['onkeyup'] = (string) $field->onkeyup.';';
+				}
+		
+				//Options
+				$options = array();
+				if (isset($field->options))
+				{
+					if (isset($field->options->custom))
+					{
+						//Controllo se usa riferimenti custom come sorgente
+						$content_field['options'] = (string) $field->options->custom;
+						$content_field['extract'] = 'custom';
+					} else {
+						foreach ($field->options->option as $option)
+						{
+							$options[ (string)$option->attributes()->value ] = (string)$option;
+						}
+						$content_field['options'] = $options;
+					}
+				}
+		
+		
+				//Estrazioni SQL per le options
+				if (isset($field->sql))
+				{
+					$sql = $field->sql;
+		
+					//Estraggo i record
+					$records = $this->records_from_sql_xml($sql, $content['id']);
+		
+					//Controllo se la query di estrazione è da cacheare
+					$cache = (string) $sql->attributes()->cache;
+		
+					if ($cache == 'true')
+					{
+						//Preparo le options
+						foreach ($records as $record)
+						{
+							$options[$record->value] = $record->name;
+						}
+		
+						$content_field['options'] = $options;
+		
+					} else {
+						//Salvo la stringa della query
+						$query = str_replace("\n", ' ', $this->CI->db->last_query());
+						$content_field['options'] = $query;
+						$content_field['extract'] = 'query';
+					}
+				}
+		
+				//Aggiungo ai fields del tipo questo field
+				$content['fields'][$field_name] = $content_field;
+		
+				//Aggiungo a questo fieldset il campo (solo nome)
+				$fieldset['fields'][] = $field_name;
+			} //end foreach field
+		
+		
+			//Aggiungo un singolo fieldset
+			$content['fieldsets'][] = $fieldset;
+		
+		} //end foreach fieldsets
+		
+		//Aggiungo il tipo
+		return $content;
+	}
+	
 }
