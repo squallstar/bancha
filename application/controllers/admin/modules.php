@@ -31,7 +31,7 @@ Class Modules extends Milk_Controller
 
 	public function index()
 	{
-		$modules = get_filenames($this->config->item('modules_folder'));
+		$modules = directory_map($this->config->item('modules_folder'));
 		$this->view->set('modules', $modules);
 		$this->view->render_layout('modules/list');
 	}
