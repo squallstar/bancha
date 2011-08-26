@@ -2,7 +2,7 @@
 /**
  * Directories helper
  *
- * Funzioni di utilità per lavorare con le directory
+ * Funzioni ulteriori per lavorare con le directory
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
