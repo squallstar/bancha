@@ -36,4 +36,15 @@ Class Modules extends Milk_Controller
 		$this->view->render_layout('modules/list');
 	}
 
+	public function docs($module)
+	{
+		$folder = $this->config->item('modules_folder') . $module;
+		if (file_exists($folder . '/' . $module . '_docs'.EXT))
+		{
+			//Render docs
+		} else {
+			show_error($this->lang->_trans('The module %m has no documentation or not exists.', array('m' => $module)));
+		}
+	}
+
 }
