@@ -24,7 +24,7 @@
 				<li><a href="#sb-trees">10. Alberi di menu</a></li>
 				<li><a href="#sb-caching">11. Caching</a></li>
 			</ul>
-			<p>Revisione: 1.1<br />Data: 22 Ago 2011</p>
+			<p>Revisione: 0.3<br />Data: 26 Ago 2011</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
@@ -304,6 +304,15 @@ Nel nostro esempio sopra, dalla view sarà disponibile la variabile in questo mo
 <p>Nel caso fosse necessario eliminare una variabile prima del rendering della view, è possibile utilizzare il metodo <strong>remove()</strong> che accetta un singolo parametro (la chiave/nome dell'oggetto da eliminare).<br /><br />
 Di seguito, le funzioni utili a renderizzare view, o templates.</p><br />
 
+<p>La classe view, presenta anche delle proprietà utili al layout quali:</p>
+<ul>
+	<li><strong>javascript</strong> - array</li>
+	<li><strong>css</strong> - array</li>
+	<li><strong>title</strong> - stringa</li>
+	<li><strong>keywords</strong> - stringa</li>
+	<li><strong>description</strong> - stringa</li>
+</ul>
+
 <h3>render_template($template_file)</h3>
 <p>Renderizza un template presenta nella directory dei templates, utilizzando lo skin in uso (solitamente <strong>application/views/website/desktop/templates/</strong>).
 &Egrave; il metodo di rendering più utilizzato, e viene utilizzata soprattutto dal motore di routing generale del sito per renderizzare la struttura base delle pagine.</p>
@@ -440,7 +449,7 @@ $documenti = $this->documents->table('records')->id(12)->limit(10)->get();
 	<li><strong>delete_by_id($document_id)</strong> - elimina un documento fornendo il suo id</li>
 </ul>
 		</div>
-		
+
 <div class="sidebar_content" id="sb-trees">
 			<h3>10. Alberi di menu</h3>
 			<p>
@@ -455,7 +464,7 @@ $this->tree-><strong>get_default()</strong>;</code>
 
 $this->load->helper('menu');
 echo <strong>menu</strong>($albero);</code>
-<br /><p>L'helper provvederà in automatico a "flaggare" i vari stati sulle pagine aperte, o eventuali sotto pagine selezionate con le classi "open" e "selected".</p>	
+<br /><p>L'helper provvederà in automatico a "flaggare" i vari stati sulle pagine aperte, o eventuali sotto pagine selezionate con le classi "open" e "selected".</p>
 <div class="message info"><?php echo CMS; ?> provvede già ad estrarre il tipo di contenuto <strong>"<?php echo implode(', ', $this->config->item('default_tree_types')); ?>"</strong> come albero generale del sito internet.</div>
 <p>Puoi anche estrarre diversi alberi di menu secondo le tue esigenze. La classe Tree contiene metodi simili a quanto già visto con la classe Records. Ecco alcuni dei metodi utilizzabili per rifinire le estrazioni:</p>
 <ul>
@@ -492,22 +501,22 @@ echo menu($albero);
 	<li><strong>clear_cache($type)</strong> - pulisce i file di cache di un albero (o di quello principale se non viene passato il tipo)</li>
 	<li><strong>clear()</strong> - forza il refresh dei dati da DB alla ricerca successiva (normalmente un albero viene cacheato fino alla fine della richiesta)</li>
 </ul>
-		
+
 </div>
 
 <div class="sidebar_content" id="sb-caching">
 			<h3>11. Caching</h3>
 			<p><?php echo CMS; ?> utilizza 3 tipi differenti di cache:</p>
-		
-			
+
+
 			<h3>Cache dei tipi di contenuto</h3>
 			<p>Gli schemi XML dei tipi di contenuto vengono cacheati per garantire un rapido accesso alle definizioni senza il bisogno di effettuare il parsing degli schemi ad ogni richiesta. Per svuotare la cache, &egrave; sufficiente navigare attraverso il menu di amministrazione alla voce <strong>"Gestione" >> "Svuota cache"</strong>. La cache viene svuotata in automatico nel caso venga utilizzata la funzionalit&agrave; di "Modifica schema" dalla vista dei tipi di contenuto, anzich&egrave; intervenire direttamente dal file-system.</p>
 			<br />
-			
+
 			<h3>Cache degli alberi di menu</h3>
 			<p>Tutti gli alberi di menu estratti, vengono <strong>automaticamente cacheati su file-system</strong> in base al loro <strong>tipo</strong> di contenuto. Verranno cacheati <strong>due files</strong> per tipo: uno per l'albero di stage ed uno per quello di produzione. La cache degli alberi viene automaticamente svuotata quando l'albero viene modificato (ad esempio una pagina cambia indirizzo).</p>
 			<br />
-			
+
 			<h3>Cache delle pagine</h3>
 			<p>I tipi di contenuto con struttura a pagine, normalmente presentano un campo xml chiamato "<strong>page_cache</strong>" nella scheda <strong>"Aspetto e azioni"</strong> che rappresenta (nella maschera di inserimento/modifica di una pagina) un campo di input numerico relativo al <strong>numero di minuti</strong> da utilizzare per tenere tale pagina in cache. Per non cacheare la pagina, &egrave; sufficiente impostare tale numero a "0" (zero). La cache di una pagina viene automaticamente svuotata quando la pagina viene modificata, pubblicata o depubblicata.<br /><strong>ATTENZIONE</strong>: la cache delle pagine &egrave; una funzionalit&agrave; estremamente <strong>potente</strong> ma <strong>pericolosa</strong>. Verr&agrave; infatti salvato l'interno rendering finale della pagina e servito all'utente come fosse una <strong>pagina statica</strong> (<em>senza passare dal framework</em>). Utilizzarlo quindi con la dovuta cautela, dato che le uniche variazioni nelle diverse richieste potranno essere solamente modifiche client-side via Javascript.</p>
 </div>
