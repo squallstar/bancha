@@ -23,7 +23,7 @@
  *     production
  *
  */
-	define('ENVIRONMENT', 'sqlite');
+	define('ENVIRONMENT', 'development');
 /*
  */
 
