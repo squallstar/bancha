@@ -65,7 +65,7 @@ foreach ($this->content->types() as $tipo) {
 			</ul>
 		</li>
 		<li class="<?php echo $this->uri->segment(2) == 'modules' ? 'active' : ''; ?>">
-			<a href="#"><?php echo _('Moduls'); ?></a>
+			<a href="<?php echo admin_url('modules'); ?>"><?php echo _('Modules'); ?></a>
 		</li>
 		<li class="<?php echo $this->uri->segment(2) == 'manage' ? 'active' : ''; ?>">
 			<a href="#" style="cursor:default"><?php echo _('Manage'); ?></a>
