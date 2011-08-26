@@ -3,9 +3,7 @@
 	<div class="block_head">
 		<div class="bheadl"></div>
 		<div class="bheadr"></div>
-
 		<h2>Documentazione di <?php echo CMS; ?></h2>
-
 	</div>
 
 	<div class="block_content">
