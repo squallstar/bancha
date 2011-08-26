@@ -1,6 +1,6 @@
 <?php
 /**
- * Directory helper
+ * Directories helper
  *
  * Funzioni di utilità per lavorare con le directory
  *
