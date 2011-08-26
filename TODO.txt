@@ -2,7 +2,8 @@
 TODO LIST - MILK
 **********
 
-- scrivere programmato anzichè pubblicato se publish maggiore now
+- scrivere programmato anziche' pubblicato se publish maggiore now
+- creazioni chiavi su script di installazione
 - Hooks su pubblicazione contenuti? O cose simili
 - Versionamento su nuova tabella
 - Menu padre fatto bene su filtri e edit_record (tree/get_linear_dropdown. prendi spunto dalla get_branch) > ale
