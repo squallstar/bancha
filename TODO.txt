@@ -8,7 +8,7 @@ TODO LIST - MILK
 - filtro di tipo date + datetime su lista contenuti da creare
 - Hooks su pubblicazione contenuti? O cose simili
 - Versionamento su nuova tabella
-- Menu padre fatto bene su filtri e edit_record (tree/get_linear_dropdown. prendi spunto dalla get_branch) > ale
+- Menu padre fatto bene su filtri e edit_record (tree/get_linear_dropdown. prendi spunto dalla get_branch) > Alex
 - salvataggio in sessione dei filtri su records
 - utenti gestiti tramite xml?? (importante!)
 - creazione/modifica utente da finire
