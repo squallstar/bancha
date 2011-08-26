@@ -45,6 +45,7 @@ Class Modules extends Milk_Controller
 		{
 			//Render docs
 			$this->view->set('documentation', read_file($doc_file));
+			$this->view->set('module', $module);
 			$this->view->render_layout('modules/docs');
 		} else {
 			show_error($this->lang->_trans('The module %m has no documentation or not exists.', array('m' => $module)));
