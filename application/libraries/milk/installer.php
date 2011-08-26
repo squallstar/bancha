@@ -28,7 +28,7 @@ Class Installer
 		$this->CI->load->dbforge();
 		$this->CI->load->users();
 
-		$this->CI->load->helper('directory');
+		$this->CI->load->helper('directories');
 
 		$this->dbforge = & $this->CI->dbforge;
 		$this->users = & $this->CI->users;
