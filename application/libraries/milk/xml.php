@@ -15,19 +15,19 @@
 Class Xml
 {
 	private $CI;
-	
+
 	public $xml_folder;
 	public $types_cache_folder;
-	
+
 	public function __construct()
 	{
 		$this->CI = & get_instance();
-	
+
 		$this->xml_folder	= $this->CI->config->item('xml_folder');
 		$this->types_cache_folder	= $this->CI->config->item('types_cache_folder');
 
 	}
-	
+
 	/**
 	* Costruisce l'xml di un record dato il suo tipo di contenuto e i campi da popolare
 	* @param int|string $type
@@ -37,24 +37,24 @@ Class Xml
 	function get_record_xml($type='', $data)
 	{
 		if ($type != '') {
-	
+
 			$tipo = $this->CI->content->type($type);
-	
+
 			$xmlstring = read_file($this->CI->config->item('templates_folder').'Record.xml');
-	
+
 			$xml = new SimpleXMLElement($xmlstring);
-	
+
 			foreach ($tipo['fields'] as $field_name => $field)
 			{
 				//Solo se è una colonna non fisica
 				if (!in_array($field_name, $this->CI->config->item('record_columns')))
 				{
 					$value = isset($data[$field_name]) ? $data[$field_name] : '';
-	
+
 					//Inserisco il nodo solo se non è vuoto
 					if ($value != '') {
 						$column = $xml->addChild($field_name);
-	
+
 						if (is_array($value))
 						{
 							foreach ($value as $val) {
@@ -73,7 +73,7 @@ Class Xml
 			show_error('Tipo non settato (get_record_xml)');
 		}
 	}
-	
+
 	/**
 	 * Ottiene il risultato di una query creata partendo da un nodo SQL (estratto da un file xml)
 	 * @param SimpleXMLElement $sql
@@ -83,7 +83,7 @@ Class Xml
 	function records_from_sql_xml($sql, $id_type = '')
 	{
 		$this->CI->db->select((string)$sql->select);
-		
+
 		//Uso la tabella di staging se sono in staging
 		$from_tbl = (string)$sql->from;
 		if ($this->CI->content->is_stage && $from_tbl == 'records' || $from_tbl == 'pages')
@@ -91,7 +91,7 @@ Class Xml
 			$from_tbl = $from_tbl . '_stage';
 		}
 		$this->CI->db->from($from_tbl);
-	
+
 		if (isset($sql->where))
 		{
 			if ((string)$sql->where != '')
@@ -114,7 +114,7 @@ Class Xml
 		}
 		return $this->CI->db->get()->result();
 	}
-	
+
 	/**
 	 * Effettua il parsing di un file XML e lo converte in Array
 	 * E' una delle funzioni principali del framework e viene usata principalmente dalla cache dei tipi di contenuto
@@ -122,30 +122,30 @@ Class Xml
 	 */
 	function parse_file($filepath)
 	{
-		$node = simplexml_load_file($filepath);		
+		$node = simplexml_load_file($filepath);
 		if (!$node)
 		{
 			show_error('File not found: '.$filepath);
 		}
-		
+
 		//Gets the filename
-		$segments = explode('/', $filepath);
+		$segments = explode(DIRECTORY_SEPARATOR, $filepath);
 		$filename = $segments[count($segments)-1];
-		
+
 		//Filename sanitize
 		$safe_filename = str_replace(' ', '_', str_replace('.xml', '', $filename));
-		
+
 		//The type name
 		$name = (string) $node->name;
-		
+
 		$type_id = (int) $node->id;
-		
+
 		//Tipi di campi utilizzabili
 		$field_usable_inputs = array(
 			'text', 'textarea', 'date', 'checkbox', 'select', 'radio',
 			'images', 'files', 'number', 'textarea_full', 'datetime', 'hidden'
 		);
-		
+
 		$content = array(
 						'id'			=> $type_id,
 						'name'			=> $safe_filename,
@@ -154,12 +154,12 @@ Class Xml
 						'description'	=> (string) $node->description,
 						'primary_key'	=> (string) $node->primary_key
 		);
-		
+
 		if (!$content['primary_key'])
 		{
 			show_error('Chiave primaria non definita per il tipo ['.$safe_filename.'].');
 		}
-		
+
 		//Tipi utilizzabili come parent di questo tipo
 		if (isset($node->parent_types))
 		{
@@ -170,26 +170,26 @@ Class Xml
 			}
 			$content['parent_types'] = $parent_types;
 		}
-		
+
 		$content['fieldsets'] = array();
-		
+
 		//True when the type has at leasts one images/files field.
 		$content['has_attachments'] = FALSE;
-		
+
 		foreach ($node->fieldset as $fieldset_node)
 		{
-		
+
 			$fieldset_name = isset($fieldset_node->name) ? (string)$fieldset_node->name : _('Untitled');
-		
+
 			if ($fieldset_name == '')
 			{
 				show_error('Uno dei fieldset del tipo ['.$safe_filename.'] non presenta il campo Nome obbligatorio.', 500, 'Errore XML');
 			} else if (array_key_exists($fieldset_name, $content['fieldsets'])) {
 				show_error('Il tipo ['.$safe_filename.'] presenta pi&ugrave; di un fieldset con nome ['.$fieldset_name.'].', 500, 'Errore XML');
 			}
-		
-			$fieldset = array('name' => $fieldset_name, 'fields' => array());			
-		
+
+			$fieldset = array('name' => $fieldset_name, 'fields' => array());
+
 			foreach ($fieldset_node->field as $field)
 			{
 				//Unique name
@@ -197,18 +197,18 @@ Class Xml
 				if (!$field_name || $field_name == '') {
 					show_error('Tipo ['.$safe_filename.']: uno dei campi non presenta il nome (XML).', 500, 'Errore XML');
 				}
-		
+
 				//Reserved names check
 				if (in_array($field_name, $this->CI->config->item('restricted_field_names')))
 				{
 					show_error('Tipo ['.$safe_filename.']: Il nome del campo ['.$field_name.'] &egrave; riservato. Utilizzare un altro nome (XML).', 500, 'Uno dei campi &egrave; riservato');
 				}
-		
+
 				if (!in_array((string)$field->type, $field_usable_inputs))
 				{
 					show_error('Tipo ['.$safe_filename.']: Il valore utilizzato nel nodo "type" del campo ['.$field_name.'] non esiste. Valori ammessi: '.implode(', ', $field_usable_inputs).'.', 500, 'Valore sconosciuto');
 				}
-		
+
 				//Default fields for each field
 				$content_field = array(
 								'description'	=> isset($field->description) ? (string)$field->description : '',
@@ -220,38 +220,38 @@ Class Xml
 								'visible'		=> isset($field->visible) ? (strtoupper($field->visible) == 'TRUE' ? TRUE : FALSE) : TRUE,
 								'default'		=> isset($field->default) ? (string)$field->default : ''
 				);
-		
+
 				if ($content_field['type'] == 'files' || $content_field['type'] == 'images')
 				{
 					$content['has_attachments'] = TRUE;
 				}
-		
+
 				if ($content_field['type'] == 'images')
 				{
 					$content_field['original'] = isset($field->original) ? (strtoupper($field->original) == 'TRUE' ? TRUE : FALSE) : FALSE;
 					$content_field['resized'] = isset($field->resized) ? (string)$field->resized : FALSE;
 					$content_field['thumbnail'] = isset($field->thumbnail) ? (string)$field->thumbnail : FALSE;
 				}
-		
+
 				if ($content_field['type'] == 'images' || $content_field['type'] == 'files')
 				{
 					$content_field['size'] = isset($field->size) ? (int)$field->size : 102400; //max 100mb
 					$content_field['mimes'] = isset($field->mimes) ? (string)$field->mimes : '*';
 					$content_field['max'] = isset($field->max) ? (int)$field->max : 10; //max 10 files
 				}
-		
+
 				//Onchange JS
 				if (isset($field->onchange))
 				{
 					$content_field['onchange'] = (string) $field->onchange.';';
 				}
-		
+
 				//Onkeyup JS
 				if (isset($field->onkeyup))
 				{
 					$content_field['onkeyup'] = (string) $field->onkeyup.';';
 				}
-		
+
 				//Options
 				$options = array();
 				if (isset($field->options))
@@ -269,19 +269,19 @@ Class Xml
 						$content_field['options'] = $options;
 					}
 				}
-		
-		
+
+
 				//Estrazioni SQL per le options
 				if (isset($field->sql))
 				{
 					$sql = $field->sql;
-		
+
 					//Estraggo i record
 					$records = $this->records_from_sql_xml($sql, $content['id']);
-		
+
 					//Controllo se la query di estrazione è da cacheare
 					$cache = (string) $sql->attributes()->cache;
-		
+
 					if ($cache == 'true')
 					{
 						//Preparo le options
@@ -289,9 +289,9 @@ Class Xml
 						{
 							$options[$record->value] = $record->name;
 						}
-		
+
 						$content_field['options'] = $options;
-		
+
 					} else {
 						//Salvo la stringa della query
 						$query = str_replace("\n", ' ', $this->CI->db->last_query());
@@ -299,22 +299,22 @@ Class Xml
 						$content_field['extract'] = 'query';
 					}
 				}
-		
+
 				//Aggiungo ai fields del tipo questo field
 				$content['fields'][$field_name] = $content_field;
-		
+
 				//Aggiungo a questo fieldset il campo (solo nome)
 				$fieldset['fields'][] = $field_name;
 			} //end foreach field
-		
-		
+
+
 			//Aggiungo un singolo fieldset
 			$content['fieldsets'][] = $fieldset;
-		
+
 		} //end foreach fieldsets
-		
+
 		//Aggiungo il tipo
 		return $content;
 	}
-	
+
 }
