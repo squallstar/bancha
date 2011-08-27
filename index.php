@@ -18,7 +18,7 @@
  *---------------------------------------------------------------
  *
  *	   sqlite		: da utilizzare con DB sqlite
- *     development
+ *     development	: default
  *     testing
  *     production
  *
