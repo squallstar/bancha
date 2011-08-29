@@ -214,7 +214,7 @@ Class Record {
 			if ($this->is_page() && !$this->get('view_template'))
 			{
 	      		$CI = & get_instance();
-	      		$this->set('view_template', $CI->content->item('default_view_template'));
+	      		$this->set('view_template', $CI->config->item('default_view_template'));
 	      	}
 
 	      	$this->xml = '';
