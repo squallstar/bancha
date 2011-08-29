@@ -13,3 +13,4 @@ TODO LIST - MILK
 - creazione/modifica utente da finire
 - modifica gruppi utente
 - refactor modulo di twitter
+- fare modulo di sharing tumblr/twitter/facebook

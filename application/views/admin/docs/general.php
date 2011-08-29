@@ -83,6 +83,9 @@
 		&lt;type&gt;pagine&lt;/type&gt;
 	&lt;/parent_types&gt;
 	&lt;has_categories&gt;true&lt;/has_categories&gt;
+	&lt;primary_key&gt;id_record&lt;/primary_key&gt;
+	&lt;table&gt;records&lt;/table&gt;
+	&lt;stage&gt;true&lt;/stage&gt;
 	&lt;fieldset&gt;
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code><br />
@@ -90,6 +93,8 @@
 Il nodo <strong>&lt;tree&gt;</strong> è un booleano che descrive se il contenuto è strutturato ad albero o lineare/semplice (vedi la sezione <strong>3. Tipi di contenuto</strong> per maggiori informazioni).<br /><br />
 Il nodo <strong>&lt;parent_types&gt;</strong> è obbligatorio per i contenuti ad albero, e descrive i nomi di tutti i tipi di contenuto da utilizzare come riferimento per le pagine padre. Di default, viene impostato con il tipo di contenuto stesso.
 <br /><br />
+I parametri <strong>primary_key</strong> e <strong>table</strong> permettono di definire rispettivamente la chiave primaria e la tabella da utilizzare nel salvataggio del tipo di contenuto.<br />
+Sentiti libero di creare ulteriori tabelle oltre alla tabella records nel caso ne avessi bisogno. Se il nodo <strong>stage</strong> &egrave; impostato a "true", il tipo di contenuto user&agrave; anche uno staging sulla tabella records_stage (o quella impostata sul nodo table: {nometabella}_stage).<br /><br />
 Il nodo <strong>&lt;has_categories&gt;</strong> è sempre un booleano, e definisce se il tipo di contenuto deve presentare la sezione <strong>Categorie</strong>, che permette di raggruppare i contenuti di quel tipo in diverse categorie amministrabili dal pannello.</p>
 
 <h3>Fieldsets</h3>
@@ -121,6 +126,7 @@ Ogni nodo dovrà avere un id univoco descritto attraverso l'attributo <strong>id
 	<li><strong>files</strong> - Per utilizzare un campo di caricamento files</li>
 	<li><strong>images</strong> - Per utilizzare un campo di caricamento immagini</li>
 </ul>
+<p>Il nodo field pu&ograve; avere anche associato l'attributo <strong>column</strong> (booleano) che definisce se la colonna &egrave; fisica sul database. Se non definito, verr&agrave; usato l'xml per lo storage del campo.<br /></p>
 <div class="message warning">Ogni field dovrà sempre specificare il tipo di campo di appartenenza (tra quelli sopra descritti) attraverso il nodo <strong>&lt;type&gt;</strong></div>
 <p>Inoltre, ogni field ha a disposizione le seguenti proprietà definibili sempre tramite nodi:</p>
 <ul>
@@ -142,6 +148,7 @@ Ogni nodo dovrà avere un id univoco descritto attraverso l'attributo <strong>id
 	&lt;admin&gt;true&lt;/admin&gt;
 	&lt;default&gt;Senza titolo&lt;/default&gt;
 &lt;/field&gt;</code><br />
+<p>Il nodo <strong>default</strong> accetta anche codice php se viene preposto "eval", ad esempio <strong>&gt;default&lt;eval:time();&gt;/default&lt;</strong>
 <p>I campi di tipo <strong>select</strong> e <strong>checkbox</strong> inoltre, avranno a disposizione il nodo <strong>&lt;options&gt;</strong> per definire le opzioni associate a tale campo, come in questo esempio:</p>
 <code>&lt;options&gt;
 	&lt;option value="T"&gt;Si&lt;/option&gt;
