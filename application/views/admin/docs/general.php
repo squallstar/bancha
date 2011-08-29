@@ -43,6 +43,17 @@
 
 		<div class="sidebar_content" id="sb-install">
 			<h3>2. Installazione</h3>
+
+			<p>Prossimamente la procedura di installazione diventerà più dettagliata, per ora seguire questa:</p>
+
+			<ul>
+				<li>Settare l'environment nel file index.php</li>
+				<li>Configurare i parametri di connessione al database nel file application/config/database.php</li>
+				<li>Lanciare dal browser l'indirizzo <strong>http://{nomehost}/admin/install</strong></li>
+				<li>A fine installazione, eliminare il file application/controllers/admin/install.php</li>
+				<li>Il tipo di contenuto predefinito per l'albero di menu del sito è "Menu", e viene creato in automatico dall'installer</li>
+			</ul>
+
 		</div>
 
 		<div class="sidebar_content" id="sb-content-types">
