@@ -256,8 +256,12 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 	 */
 	function _rename_table($table_name, $new_table_name)
 	{
-		$sql = 'ALTER TABLE '.$this->db->_protect_identifiers($table_name)." RENAME TO ".$this->db->_protect_identifiers($new_table_name);
-		return $sql;
+		return 'ALTER TABLE '.$this->db->_protect_identifiers($table_name)." RENAME TO ".$this->db->_protect_identifiers($new_table_name);
+	}
+
+	function _show_tables()
+	{
+		return "SELECT * FROM sqlite_master WHERE type='table';";
 	}
 }
 

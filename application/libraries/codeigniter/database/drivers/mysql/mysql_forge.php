@@ -263,6 +263,11 @@ class CI_DB_mysql_forge extends CI_DB_forge {
 		return $sql;
 	}
 
+	function _show_tables()
+	{
+		$sql = 'SHOW TABLES;';
+	}
+
 }
 
 /* End of file mysql_forge.php */

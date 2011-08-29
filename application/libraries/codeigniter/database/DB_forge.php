@@ -376,6 +376,12 @@ class CI_DB_forge {
 		$this->primary_keys	= array();
 	}
 
+	function show_tables()
+	{
+		$sql = $this->_show_tables();
+		return $this->db->query($sql);
+	}
+
 }
 
 /* End of file DB_forge.php */
