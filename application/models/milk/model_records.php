@@ -277,7 +277,9 @@ Class Model_records extends CI_Model {
 	 		if (isset($this->_single_type['fields'][$single_field]['list']))
 	  		{
 	  			if ($this->_single_type['fields'][$single_field]['list'] === TRUE
-	  				&& !in_array($single_field, $not_selectable))
+	  				//&& !in_array($single_field, $not_selectable)
+	  				//TODO: da fixare o comunque controllare!
+	  				)
 		  			{
 		  				$fields_to_select[] = $single_field;
 		  			}
