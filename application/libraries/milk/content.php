@@ -316,6 +316,11 @@ Class Content {
 		return $record;
 	}
 
+	function build_type_table($type)
+	{
+
+	}
+
 
 
 }
