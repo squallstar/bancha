@@ -5,33 +5,35 @@
 	<name>{name}</name>
 	<description>{description}</description>
 	<tree>true</tree>
+	<table>records</table>
 	<primary_key>id_record</primary_key>
+	<stage>true</stage>
 	<parent_types>
 		<type>{name}</type>
 	</parent_types>
 	<has_categories>true</has_categories>
 	<fieldset>
 		<name>Informazioni generali</name>
-		<field id="id_record">
+		<field id="id_record" column="true">
 			<type>hidden</type>
 			<list>true</list>
 			<admin>true</admin>
 		</field>
-		<field id="id_type">
+		<field id="id_type" column="true">
 			<type>hidden</type>
 			<list>true</list>
 			<default>{id}</default>
 		</field>
-		<field id="published">
+		<field id="published" column="true">
 			<type>hidden</type>
 			<default>0</default>
 		</field>
-		<field id="date_insert">
+		<field id="date_insert" column="true">
 			<type>hidden</type>
 			<list>true</list>
 			<default>eval:time()</default>
 		</field>
-		<field id="id_parent">
+		<field id="id_parent" column="true">
 			<description>Pagina padre</description>
 			<type>select</type>
 			<list>true</list>
@@ -39,20 +41,20 @@
 				<custom>$this->view->get('parent_tree');</custom>
 			</options>
 		</field>
-		<field id="title">
+		<field id="title" column="true">
 			<description>Titolo</description>
 			<type>text</type>
 			<mandatory>true</mandatory>
 			<admin>true</admin>
 			<list>true</list>
 		</field>
-		<field id="uri">
+		<field id="uri" column="true">
 			<description>Parte finale URL</description>
 			<type>text</type>
 			<admin>true</admin>
 			<list>true</list>
 		</field>
-		<field id="lang">
+		<field id="lang" column="true">
 			<description>Lingua</description>
 			<type>select</type>
 			<admin>true</admin>
@@ -67,7 +69,7 @@
 			<type>textarea</type>
 			<list>true</list>
 		</field>
-		<field id="show_in_menu">
+		<field id="show_in_menu" column="true">
 			<description>Mostra nel menu</description>
 			<type>radio</type>
 			<mandatory>true</mandatory>
