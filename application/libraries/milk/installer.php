@@ -298,6 +298,35 @@ Class Installer
 	}
 
 	/**
+	 * Crea gli indici delle tabelle su DB
+	 */
+	public function create_indexes()
+	{
+		$indexes = array(
+			'records'			=> 'id_type',
+			'records'			=> 'date_publish',
+			'records'			=> 'lang',
+			'records_stage'		=> 'id_type',
+			'pages'				=> 'id_type',
+			'pages'				=> 'full_uri',
+			'pages_stage'		=> 'id_type',
+			'pages_stage'		=> 'full_uri',
+			'categories'		=> 'category_name',
+			'documents'			=> 'bind_id',
+			'documents_stage'	=> 'bind_id',
+			'record_categories'	=> 'id_category'
+
+		);
+
+		foreach ($indexes as $table => $column)
+		{
+			$sql = 'CREATE INDEX idx_'.$column.' ON '.$this->CI->db->dbprefix.$table.' ('.$column.');';
+			$this->CI->db->query($sql);
+		}
+
+	}
+
+	/**
 	 * Elimina e ricrea le directory base
 	 */
 	public function create_directories()

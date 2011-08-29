@@ -42,6 +42,9 @@ Class Install extends Milk_Controller
 		//Creo i tipi predefiniti
 		$this->installer->create_types();
 
+		//Creo gli indici
+		$this->installer->create_indexes();
+
 		//Svuoto la cache
 		$this->tree->clear_cache();
 
@@ -51,7 +54,7 @@ Class Install extends Milk_Controller
 
 		$this->view->set('username', $username);
 		$this->view->set('password', $password);
-		$this->view->set('message', $this->lang->_trans('%n has ben installed!', array('n' => CMS)));
+		$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
 		$this->view->render_layout('installer/success', FALSE);
 
 		return;
