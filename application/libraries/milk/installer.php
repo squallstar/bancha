@@ -306,7 +306,7 @@ Class Installer
 			'records'			=> 'id_type',
 			'records'			=> 'date_publish',
 			'records'			=> 'lang',
-			'records_stage'		=> 'id_type',
+			//'records_stage'		=> 'id_type',
 			'pages'				=> 'id_type',
 			'pages'				=> 'full_uri',
 			//'pages_stage'		=> 'id_type',
@@ -315,8 +315,9 @@ Class Installer
 			'documents'			=> 'bind_id',
 			//'documents_stage'	=> 'bind_id',
 			'record_categories'	=> 'id_category'
-
 		);
+
+		//TODO: correggere gli indici duplicati come nome (commentati sopra)
 
 		foreach ($indexes as $table => $column)
 		{

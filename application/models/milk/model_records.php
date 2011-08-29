@@ -18,20 +18,27 @@ Class Model_records extends CI_Model {
   private $_get_documents = FALSE;
   private $_is_list = FALSE;
   private $_single_type = FALSE;
+  private $_is_stage = FALSE;
 
-  public $table = 'records';
-  public $table_stage = 'records_stage';
-  public $table_current = '';
+  public $table;
+  public $table_stage;
+  public $table_current;
+  public $primary_key;
+  public $columns;
 
   public function __construct()
   {
     parent::__construct();
+
+    //Imposto il tipo predefinito "records"
+    $this->set_type();
   }
 
   public function set_stage($bool)
   {
   		//Imposto la tabella su cui fare query
    	 $this->table_current = $bool ? $this->table_stage : $this->table;
+   	 $this->_is_stage = $bool;
   }
 
   /**
@@ -52,19 +59,54 @@ Class Model_records extends CI_Model {
   {
     if ($type != '')
     {
-      $tipo = $this->content->type($type);
-      $this->db->where($this->table_current.'.id_type', $tipo['id']);
+    	$this->set_type($type);
+      	$tipo = $this->_single_type;
 
-      if ($tipo['tree'])
-      {
-        $this->last_search_has_tree = TRUE;
-      }else{
-        $this->last_search_has_tree = FALSE;
-      }
-      $this->_single_type = $tipo;
+        //Imposto tutti i riferimenti
+        $this->table = $tipo['table'];
+        $this->table_stage = $tipo['stage'] ? $tipo['table'] . '_stage' : $tipo['table'];
+        $this->primary_key = $tipo['primary_key'];
+
+        $this->db->where($this->table_current.'.id_type', $tipo['id']);
+
+        if ($tipo['tree'])
+        {
+        	$this->last_search_has_tree = TRUE;
+        }else{
+       		$this->last_search_has_tree = FALSE;
+        }
+      	$this->_single_type = $tipo;
     }
     return $this;
   }
+
+  /**
+   * Imposto il tipo (tabella e pkey) su cui fare le operazioni
+   * @param int|string $type
+   */
+  public function set_type($type='')
+  {
+	if ($type != '')
+	{
+		$tipo = $this->content->type($type);
+		$this->_single_type = $tipo;
+
+		//Imposto tutti i riferimenti
+	    $this->table = $tipo['table'];
+	    $this->table_stage = $tipo['stage'] ? $tipo['table'] . '_stage' : $tipo['table'];
+	    $this->primary_key = $tipo['primary_key'];
+	    $this->columns = $tipo['columns'];
+
+	} else {
+		$this->table = 'records';
+		$this->table_stage = 'records_stage';
+		$this->primary_key = 'id_record';
+   		$this->columns = $this->config->item('record_columns');
+	}
+	$this->table_current = $this->_is_stage ? $this->table_stage : $this->table;
+	return $this;
+  }
+
 
   /**
    * Imposta un filtro sulla lingua se il tipo lo prevede
@@ -102,9 +144,9 @@ Class Model_records extends CI_Model {
 	}
 	else if ($field != '')
     {
-	    if ($field == 'id' || $field == 'id_record')
+	    if ($field == 'id' || $field == $this->primary_key)
 	    {
-	      $this->db->where($this->table_current.'.id_record', $value);
+	      $this->db->where($this->table_current.'.'.$this->primary_key, $value);
 	      $this->db->limit(1);
 	    }
 	    else if ($field == 'id_type' || $field == 'type' || $field == 'id_tipo' || $field == 'tipo')
@@ -128,7 +170,7 @@ Class Model_records extends CI_Model {
    */
   public function id_in($record_ids)
   {
-      $this->db->where_in('id_record', $record_ids);
+      $this->db->where_in($this->primary_key, $record_ids);
       return $this;
   }
 
@@ -140,7 +182,7 @@ Class Model_records extends CI_Model {
   public function full_uri($string) {
 	//$this->db->select('full_uri');
   	$this->db->join($this->pages->table_current,
-  					$this->pages->table_current.'.id_record = '.$this->table_current.'.id_record',
+  					$this->pages->table_current.'.id_record = '.$this->table_current.'.'.$this->primary_key,
   					'inner')
   			 ->where('full_uri', $string);
   	return $this;
@@ -193,7 +235,7 @@ Class Model_records extends CI_Model {
    */
   public function count()
   {
-      $query = $this->db->select('COUNT('.$this->db->dbprefix.$this->table_current.'.id_record) as total')
+      $query = $this->db->select('COUNT('.$this->db->dbprefix.$this->table_current.'.'.$this->primary_key.') as total')
                 ->from($this->table_current)->get()->result();
       $row = $query[0];
       return (int)$row->total;
@@ -216,15 +258,15 @@ Class Model_records extends CI_Model {
    */
   public function get($id='')
   {
-
   	$stage = $this->content->is_stage;
   	$this->set_stage($stage);
 
   	$fields_to_select = array();
 
-  	$record_columns = $this->config->item('record_columns');
+  	//$record_columns = $this->config->item('record_columns');
+  	$record_columns = $this->columns;
 
-  	
+
 
   	//Controllo se sto cercando una lista di singoli tipi (non dettaglio!)
   	if ($this->_is_list && $this->_single_type)
@@ -246,21 +288,21 @@ Class Model_records extends CI_Model {
   	} else {
   		//Estrazione standard
 		$fields_to_select = $record_columns;
-  			
- 		
+
+
   	}
-  	
+
   	//Colonne non presenti nella tabella di produzione
   	if ($this->table == $this->table_current)
   	{
   		$not_selectable = $this->config->item('record_not_live_columns');
   		$fields_to_select = array_diff($fields_to_select, $not_selectable);
-  	}  	
+  	}
 
     if (is_numeric($id))
     {
       //Single record
-      $this->db->where($this->table_current.'.id_record', $id);
+      $this->db->where($this->table_current.'.'.$this->primary_key, $id);
       $this->db->limit(1);
     }
 
@@ -483,18 +525,18 @@ Class Model_records extends CI_Model {
    */
   public function delete_by_id($record_id) {
 
-    $done = $this->db->where('id_record', $record_id)
+    $done = $this->db->where($this->primary_key, $record_id)
               ->delete($this->table);
 
-    $done_stage = $this->db->where('id_record', $record_id)
+    $done_stage = $this->db->where($this->primary_key, $record_id)
                   ->delete($this->table_stage);
 
     if ($done && $done_stage)
     {
       //Elimino gli allegati associati su entrambe le tabelle (stage e produzione)
       $this->load->documents();
-      $this->documents->delete_by_binds('records', $record_id, FALSE);
-      $this->documents->delete_by_binds('records', $record_id, TRUE);
+      $this->documents->delete_by_binds($this->table, $record_id, FALSE);
+      $this->documents->delete_by_binds($this->table_stage, $record_id, TRUE);
       return true;
     }
     return false;
@@ -539,10 +581,10 @@ Class Model_records extends CI_Model {
   {
   		if ($id != '')
   		{
-  			$result = $this->db->where('id_record', $id)
+  			$result = $this->db->where($this->primary_key, $id)
   							   ->from($this->table)
   							   ->limit(1)
-  							   ->select('id_record')
+  							   ->select($this->primary_key)
   							   ->get();
   			if ($result->num_rows())
   			{
@@ -562,7 +604,7 @@ Class Model_records extends CI_Model {
         show_error('ID del contenuto da pubblicare non specificato. (records/publish)');
       }
     $record = $this->db->from($this->table_stage)
-               		   ->where('id_record', $id)
+               		   ->where($this->primary_key, $id)
                		   ->limit(1)
                		   ->select('*')
                		   ->get();
@@ -575,20 +617,20 @@ Class Model_records extends CI_Model {
       		$stage_record['date_publish'] = time();
       }
 
-      $this->events->log('publish', $stage_record['id_record'], $stage_record['title'], $stage_record['id_type']);
+      $this->events->log('publish', $stage_record[$this->primary_key], $stage_record['title'], $stage_record['id_type']);
 
       $published_record = $this->db->from($this->table)
-			                       ->where('id_record', $id)
+			                       ->where($this->primary_key, $id)
 			                       ->limit(1)
-			                       ->select('id_record')
+			                       ->select($this->primary_key)
 			                       ->get();
       $done = FALSE;
       if ($published_record->num_rows())
       {
         //Update
-        unset($stage_record['id_record']);
+        unset($stage_record[$this->primary_key]);
         unset($stage_record['published']);
-        $done = $this->db->where('id_record', $id)
+        $done = $this->db->where($this->primary_key, $id)
                      	 ->update($this->table, $stage_record);
       } else {
         //Insert
@@ -601,7 +643,7 @@ Class Model_records extends CI_Model {
       	$this->load->documents();
       	$this->documents->put_live_documents('records', $id);
       	//Aggiorno il record in stage
-        return $this->db->where('id_record', $id)
+        return $this->db->where($this->primary_key, $id)
                   		->update($this->table_stage, array('published' => 1, 'date_publish' => $stage_record['date_publish']));
       }
     }
@@ -619,7 +661,7 @@ Class Model_records extends CI_Model {
       {
         show_error('ID del contenuto da depubblicare non specificato. (records/depublish)');
       }
-    $done = $this->db->where('id_record', $id)
+    $done = $this->db->where($this->primary_key, $id)
              ->delete($this->table);
     if ($done)
     {
@@ -630,7 +672,7 @@ Class Model_records extends CI_Model {
       $this->documents->delete_records_by_binds('records', $id, TRUE);
 
       //Aggiorno lo stato del record di sviluppo
-      return $this->db->where('id_record', $id)
+      return $this->db->where($this->primary_key, $id)
               ->update($this->table_stage, array('published' => 0));
     }
   }
