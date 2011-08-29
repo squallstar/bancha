@@ -23,7 +23,7 @@ function show_exception($e, $message, $status_code = 500, $heading = 'An Error W
  * Metodo che stampa a video in modo umano un oggetto
  * @param mixed $obj
  * @param string $title
- * @param string $kill
+ * @param bool $kill
  */
 function debug($obj, $title='', $kill = FALSE) {
 	echo "<pre>-------------------\r\n";
