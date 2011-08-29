@@ -23,13 +23,15 @@ function show_exception($e, $message, $status_code = 500, $heading = 'An Error W
  * Metodo che stampa a video in modo umano un oggetto
  * @param mixed $obj
  * @param string $title
+ * @param string $kill
  */
-function debug($obj, $title='') {
+function debug($obj, $title='', $kill = FALSE) {
 	echo "<pre>-------------------\r\n";
 	if ($title != '') echo strtoupper($title)."\r\n";
 	if (is_string($obj)) $obj = htmlentities($obj);
 	var_dump($obj);
 	echo "-------------------</pre>";
+	if ($kill) die($kill);
 }
 
 function getter($url)
