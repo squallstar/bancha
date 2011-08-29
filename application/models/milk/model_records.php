@@ -64,7 +64,7 @@ Class Model_records extends CI_Model {
 
         //Imposto tutti i riferimenti
         $this->table = $tipo['table'];
-        $this->table_stage = $tipo['stage'] ? $tipo['table'] . '_stage' : $tipo['table'];
+        $this->table_stage = $tipo['stage'] ? $tipo['table_stage'] : $tipo['table'];
         $this->primary_key = $tipo['primary_key'];
 
         $this->db->where($this->table_current.'.id_type', $tipo['id']);
@@ -93,7 +93,7 @@ Class Model_records extends CI_Model {
 
 		//Imposto tutti i riferimenti
 	    $this->table = $tipo['table'];
-	    $this->table_stage = $tipo['stage'] ? $tipo['table'] . '_stage' : $tipo['table'];
+	    $this->table_stage = $tipo['table_stage'];
 	    $this->primary_key = $tipo['primary_key'];
 	    $this->columns = $tipo['columns'];
 
@@ -153,7 +153,7 @@ Class Model_records extends CI_Model {
 	    {
 	      $this->type($value);
 	    }
-	    else if (in_array($field, $this->_single_type['columns']))
+	    else if ($this->_single_type && in_array($field, $this->_single_type['columns']))
 	    {
 	      $this->db->where($this->table_current.'.'.$field, $value);
 	    } else{
@@ -492,10 +492,11 @@ Class Model_records extends CI_Model {
        	$is_published = $this->id_is_published($id);
 
          //Imposto il contenuto come non pubblicato (0 = bozza, 2 = bozza + pubblicato)
-         if ($tipo['stage'])
-         {
-         	$data['published'] = $is_published ? '2' : '0';
-         }
+        if ($tipo['stage'])
+        {
+        	$data['published'] = '0';
+        } 
+       	
 
          //Tolgo la chiave primaria
          unset($data[$tipo['primary_key']]);

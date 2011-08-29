@@ -3,7 +3,6 @@ TODO LIST - MILK
 **********
 
 - scrivere programmato anziche' pubblicato se publish maggiore now
-- creazioni chiavi su script di installazione (importante!)
 - filtro di tipo date + datetime su lista contenuti da creare
 - Hooks su pubblicazione contenuti? O cose simili
 - Versionamento su nuova tabella

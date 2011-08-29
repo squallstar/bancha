@@ -96,7 +96,7 @@
 	&lt;has_categories&gt;true&lt;/has_categories&gt;
 	&lt;primary_key&gt;id_record&lt;/primary_key&gt;
 	&lt;table&gt;records&lt;/table&gt;
-	&lt;stage&gt;true&lt;/stage&gt;
+	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
 	&lt;fieldset&gt;
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code><br />
@@ -105,7 +105,7 @@ Il nodo <strong>&lt;tree&gt;</strong> è un booleano che descrive se il contenut
 Il nodo <strong>&lt;parent_types&gt;</strong> è obbligatorio per i contenuti ad albero, e descrive i nomi di tutti i tipi di contenuto da utilizzare come riferimento per le pagine padre. Di default, viene impostato con il tipo di contenuto stesso.
 <br /><br />
 I parametri <strong>primary_key</strong> e <strong>table</strong> permettono di definire rispettivamente la chiave primaria e la tabella da utilizzare nel salvataggio del tipo di contenuto.<br />
-Sentiti libero di creare ulteriori tabelle oltre alla tabella records nel caso ne avessi bisogno. Se il nodo <strong>stage</strong> &egrave; impostato a "true", il tipo di contenuto user&agrave; anche uno staging sulla tabella records_stage (o quella impostata sul nodo table: {nometabella}_stage).<br /><br />
+Sentiti libero di creare ulteriori tabelle oltre alla tabella records nel caso ne avessi bisogno. Se il nodo <strong>table_stage</strong> &egrave; definito, il tipo di contenuto user&agrave; anche uno staging sulla tabella scelta (che dovr&agrave; contenere una colonna chiamata "published" definita come INT(1) DEFAULT 0).<br /><br />
 Il nodo <strong>&lt;has_categories&gt;</strong> è sempre un booleano, e definisce se il tipo di contenuto deve presentare la sezione <strong>Categorie</strong>, che permette di raggruppare i contenuti di quel tipo in diverse categorie amministrabili dal pannello.</p>
 
 <h3>Fieldsets</h3>

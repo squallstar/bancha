@@ -183,13 +183,11 @@ Class Content {
 	 */
 	public function type($type='')
 	{
-
 		if ($type!='')
 		{
 			//Check if a number is given (id_type)
 			if (!is_numeric($type))
 			{
-
 				foreach ($this->_content_types as $key => $val)
 				{
 					if ($val['name'] == $type) {
@@ -203,10 +201,10 @@ Class Content {
 				}
 			}
 
-			show_error('Il tipo di contenuto ['.$type.'] non esiste. (content/type)', 500, 'Tipo di contenuto non trovato');
+			log_message('error', 'Il tipo di contenuto ['.$type.'] non esiste. (content/type)', 500, 'Tipo di contenuto non trovato');
 
 		} else {
-			show_error('Tipo ['.$type.'] non trovato. (content/type)', 500, 'Tipo non trovato');
+			log_message('error', 'Tipo ['.$type.'] non trovato. (content/type)', 500, 'Tipo non trovato');
 		}
 	}
 

@@ -585,14 +585,14 @@ Class Contents extends Milk_Controller
 	  			$this->db->where('name', $tipo['name'])->delete('types');
 	  			
 	  			//Elimino i dead records
-	  			if ($this->CI->config->item('delete_dead_recods') == TRUE)
+	  			if ($this->config->item('delete_dead_recods') == TRUE)
 	  			{
 	  				$this->db->where('id_type', $tipo['id'])
 	  				->delete($tipo['table']);
 	  				if ($tipo['stage'])
 	  				{
 	  					$this->db->where('id_type', $tipo['id'])
-	  					->delete($tipo['table'].'_stage');
+	  					->delete($tipo['table_stage']);
 	  				}
 	  			}	
 

@@ -5,9 +5,9 @@
 	<name>Menu</name>
 	<description>Menu</description>
 	<tree>true</tree>
-	<table>records</table>
 	<primary_key>id_record</primary_key>
-	<stage>true</stage>
+	<table>records</table>
+	<table_stage>records_stage</table_stage>
 	<parent_types>
 		<type>Menu</type>
 	</parent_types>

@@ -35,7 +35,7 @@ $fields = array_keys($tipo['fields']);
 				<tr>
 					<th width="10"><input type="checkbox" class="check_all" /></th>
 					<th>ID</th>
-					<?php if ($tipo['stage']) { ?>
+					<?php if ($tipo['stage']) { ?>
 					<th><?php echo _('Status'); ?></th>
 					<?php } ?>
 
@@ -53,7 +53,7 @@ $fields = array_keys($tipo['fields']);
 					<td></td>
 					<td><?php echo form_input(array('class'	=> 'text filter tiny', 'name'	=> 'filter['.$tipo['primary_key'].']', 'value'	=> $filters[$tipo['primary_key']]));?></td>
 
-					<?php if ($tipo['stage']) { ?>
+					<?php if ($tipo['stage']) { ?>
 					<td><?php echo form_dropdown('filter[published]', array('' => '', 0 => _('Draft'), 1 => _('Published'), 2 => _('Different')), $filters['published']); ?></td>
 					<?php } ?>
 					<?php

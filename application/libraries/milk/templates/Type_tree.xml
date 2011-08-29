@@ -5,9 +5,9 @@
 	<name>{name}</name>
 	<description>{description}</description>
 	<tree>true</tree>
-	<table>records</table>
 	<primary_key>id_record</primary_key>
-	<stage>true</stage>
+	<table>records</table>
+	<table_stage>records_stage</table_stage>
 	<parent_types>
 		<type>{name}</type>
 	</parent_types>

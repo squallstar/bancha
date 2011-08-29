@@ -84,13 +84,15 @@ Class Xml
   {
     $this->CI->db->select((string)$sql->select);
 
+    $tipo = $this->CI->content->type($id_type);
+    
     //Uso la tabella di staging se sono in staging
-    //TODO: capire se il tipo ha un'altra tabella qui sotto
     $from_tbl = (string)$sql->from;
-    if ($this->CI->content->is_stage && $from_tbl == 'records' || $from_tbl == 'pages')
+    if ($this->CI->content->is_stage)
     {
-      $from_tbl = $from_tbl . '_stage';
+    	$from_tbl = str_replace($tipo['table'], $tipo['table_stage'], $from_tbl);
     }
+    
     $this->CI->db->from($from_tbl);
 
     if (isset($sql->where))
@@ -154,9 +156,17 @@ Class Xml
       'has_categories'=> strtolower((string)$node->has_categories) == 'true' ? true : false,
       'description'	=> (string) $node->description,
       'primary_key'	=> (string) $node->primary_key,
-      'table'			=> (string) $node->table,
-      'stage'			=> strtolower((string)$node->stage) == 'true' ? true : false
+      'table'			=> (string) $node->table
     );
+    
+    if (isset($node->table_stage))
+    {
+    	$content['stage'] = TRUE;
+    	$content['table_stage'] = (string) $node->table_stage;
+    } else {
+    	$content['stage'] = FALSE;
+    	$content['table_stage'] = $content['table'];
+    }
 
     if (!$content['primary_key'] || !$content['table'])
     {
