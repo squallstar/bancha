@@ -413,35 +413,43 @@ Class Model_records extends CI_Model {
 
         $id = $record->id;
 
-        //Se l'URI non esiste, uso il title del record.
-      	$uri = $record->get('uri');
-      	if (strlen($uri) < 1) {
-        	$uri = $record->get('title');
-      	}
+      	$this->set_type($record->_tipo);
+
+      	$tipo = $this->content->type($record->_tipo);
 
       	//Colonne valorizzate sempre
       	$data = array(
           'id_type'		=> $record->_tipo,
           'xml'			=> $record->xml,
-          'title'		=> substr($record->get('title'), 0, 127),
-          'uri'			=> $this->get_safe_uri($uri),
+          //'title'		=> substr($record->get('title'), 0, 127),
           'date_update'	=> time()
         );
 
-        $this->set_type($record->_tipo);
+        //TODO: da migliorare questi pezzi
 
-      	$tipo = $this->content->type($record->_tipo);
-
-        //Controllo se ha un parent
-        $parent = $record->get('id_parent');
-        if ($parent || $parent === '') {
-          if ($parent === '') {
-            $data['id_parent'] = null;
-          } else {
-            $data['id_parent'] = $parent;
-          }
+        $uri = '';
+        if (isset($tipo['fields']['uri']))
+        {
+	        $uri = $record->get('uri');
+	      	if (strlen($uri) < 1) {
+	        	$uri = $record->get('title');
+	      	}
+        	$data['uri'] = $this->get_safe_uri($uri);
         }
 
+
+        //Controllo se ha un parent
+        if (isset($tipo['fields']['id_parent']))
+        {
+	        $parent = $record->get('id_parent');
+	        if ($parent || $parent === '') {
+	          if ($parent === '') {
+	            $data['id_parent'] = null;
+	          } else {
+	            $data['id_parent'] = $parent;
+	          }
+	        }
+        }
 
         //Inserisco le colonne fisiche addizionali
         foreach ($this->config->item('record_columns') as $column)
