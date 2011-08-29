@@ -77,6 +77,7 @@ Class Contents extends Milk_Controller
   {
 
   	$type = $this->content->type($tipo);
+  	$this->records->set_type($tipo);
     $this->view->set('tipo', $type);
 
     //Pubblicazione record
@@ -154,7 +155,7 @@ Class Contents extends Milk_Controller
     }
 
     //Filtri manuali
-    $filters_manual = array('id_record', 'published');
+    $filters_manual = array($type['primary_key'], 'published');
     foreach ($filters_manual as $filter) {
     	$filters[$filter] = isset($post_filters[$filter]) ? $post_filters[$filter] : '';
     	if ($filters[$filter] != '') {
