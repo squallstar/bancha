@@ -14,3 +14,4 @@ TODO LIST - MILK
 - modifica gruppi utente
 - refactor modulo di twitter
 - fare modulo di sharing tumblr/twitter/facebook
+- list view su tipi con tabelle esterne/custom ovviamente non funziona

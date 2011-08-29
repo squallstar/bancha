@@ -47,7 +47,7 @@ Class Xml
       foreach ($tipo['fields'] as $field_name => $field)
       {
         //Solo se è una colonna non fisica
-        if (!in_array($field_name, $this->CI->config->item('record_columns')))
+        if (!in_array($field_name, $tipo['columns']))
         {
           $value = isset($data[$field_name]) ? $data[$field_name] : '';
 

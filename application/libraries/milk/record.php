@@ -173,42 +173,46 @@ Class Record {
    	*/
 	public function build_data()
 	{
-    	if ($this->xml != '')
+    	if ($this->xml || $this->xml == '')
     	{
     		$CI = & get_instance();
     		$tipo = & $CI->content->type($this->_tipo);
 
 	      	$xmltree = simplexml_load_string($this->xml, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-	      	foreach ($xmltree as $field_name => $field_value)
+	      	if ($xmltree)
 	      	{
-	      		if ($field_value instanceof SimpleXMLElement)
-	      		{
-
-	      			if (isset($field_value->value))
-	      			{
-	      				foreach ($field_value->value as $val)
-	      				{
-	      					$this->_data[$field_name][] = (string)$val;
-	      				}
-	      			} else {
-	      				$this->_data[$field_name] = (string)$field_value;
-	      			}
-	      		} else {
-	      			$this->_data[$field_name] = $field_value;
-	      		}
-
-	      		//Converto i timestamp in date
-	      		$field_type = $tipo['fields'][$field_name]['type'];
-	      		if ($field_type == 'date')
-	      		{
-	      			$this->_data[$field_name] = date('d/m/Y', $this->_data[$field_name]);
-	      		} else if ($field_type == 'datetime')
-	      		{
-	      			debug($this->_data[$field_name] . ' '.$this->_data['_time_'.$field_name]);
-	      			$this->_data[$field_name] = date('d/m/Y H:i', $this->_data[$field_name] . ' '.$this->_data['_time_'.$field_name]);
-	      		}
-			}
+		      	foreach ($xmltree as $field_name => $field_value)
+		      	{
+		      		if ($field_value instanceof SimpleXMLElement)
+		      		{
+	
+		      			if (isset($field_value->value))
+		      			{
+		      				foreach ($field_value->value as $val)
+		      				{
+		      					$this->_data[$field_name][] = (string)$val;
+		      				}
+		      			} else {
+		      				$this->_data[$field_name] = (string)$field_value;
+		      			}
+		      		} else {
+		      			$this->_data[$field_name] = $field_value;
+		      		}
+	
+		      		//Converto i timestamp in date
+		      		//TODO: mettere tutti i format date e datetime nel config per lingua (tipo d/m/Y)
+		      		$field_type = $tipo['fields'][$field_name]['type'];
+		      		if ($field_type == 'date')
+		      		{
+		      			$this->_data[$field_name] = date('d/m/Y', $this->_data[$field_name]);
+		      		} else if ($field_type == 'datetime')
+		      		{
+		      			debug($this->_data[$field_name] . ' '.$this->_data['_time_'.$field_name]);
+		      			$this->_data[$field_name] = date('d/m/Y H:i', $this->_data[$field_name] . ' '.$this->_data['_time_'.$field_name]);
+		      		}
+				}
+	      	}
 
 			//Se il template non e' impostato, metto quello di default
 			if ($this->is_page() && !$this->get('view_template'))

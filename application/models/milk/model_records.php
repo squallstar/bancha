@@ -426,6 +426,14 @@ Class Model_records extends CI_Model {
           //'title'		=> substr($record->get('title'), 0, 127),
           'date_update'	=> time()
         );
+      	
+      	foreach ($tipo['columns'] as $column)
+      	{
+      		if (!isset($data[$column]))
+      		{
+      			$data[$column] = $record->get($column);
+      		}	
+      	}
 
         //TODO: da migliorare questi pezzi
 
