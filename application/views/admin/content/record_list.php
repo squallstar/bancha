@@ -1,6 +1,7 @@
 <?php
 $this->load->helper('form');
 $fields = array_keys($tipo['fields']);
+$this->output->enable_profiler();
 ?>
 
 <div class="block">
@@ -34,7 +35,9 @@ $fields = array_keys($tipo['fields']);
 				<tr>
 					<th width="10"><input type="checkbox" class="check_all" /></th>
 					<th>ID</th>
+					<?php if ($tipo['stage']) { ?>
 					<th><?php echo _('Status'); ?></th>
+					<?php } ?>
 
 					<?php foreach ($admin_fields as $field) {
 							if ($field != $tipo['primary_key'])
@@ -50,7 +53,9 @@ $fields = array_keys($tipo['fields']);
 					<td></td>
 					<td><?php echo form_input(array('class'	=> 'text filter tiny', 'name'	=> 'filter['.$tipo['primary_key'].']', 'value'	=> $filters[$tipo['primary_key']]));?></td>
 
+					<?php if ($tipo['stage']) { ?>
 					<td><?php echo form_dropdown('filter[published]', array('' => '', 0 => _('Draft'), 1 => _('Published'), 2 => _('Different')), $filters['published']); ?></td>
+					<?php } ?>
 					<?php
 					foreach ($admin_fields as $field)
 					{
@@ -118,16 +123,18 @@ $fields = array_keys($tipo['fields']);
 			$primary_key = $tipo['primary_key'];
 			echo '<td>'.$record->get($primary_key).'</td>';
 	
-
-			if ($record->get('published') == '0' || !$record->get('published')) {
-				//Solo bozza
-				echo '<td><a href="'.$current_url.'?publish='.$record->id.'"><img class="middle" border="0" src="'.site_url('widgets/admin/icns/page_edit.png').'" /></a> '._('Draft').'</td>';
-			} else if ($record->get('published') == '2') {
-				//Bozza + pubblico
-				echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url('widgets/admin/icns/page_copy.png').'" /></a> '._('Different').'</td>';
-			} else {
-				//Pubblico
-				echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url('widgets/admin/icns/page_green.png').'" /></a> '._('Published').'</td>';
+			if ($tipo['stage'])
+			{
+				if ($record->get('published') == '0' || !$record->get('published')) {
+					//Solo bozza
+					echo '<td><a href="'.$current_url.'?publish='.$record->id.'"><img class="middle" border="0" src="'.site_url('widgets/admin/icns/page_edit.png').'" /></a> '._('Draft').'</td>';
+				} else if ($record->get('published') == '2') {
+					//Bozza + pubblico
+					echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url('widgets/admin/icns/page_copy.png').'" /></a> '._('Different').'</td>';
+				} else {
+					//Pubblico
+					echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url('widgets/admin/icns/page_green.png').'" /></a> '._('Published').'</td>';
+				}
 			}
 
 			$first = true;

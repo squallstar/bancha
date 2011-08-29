@@ -138,7 +138,7 @@ Class Model_records extends CI_Model {
    */
   public function where($field='', $value=null)
   {
-	if ($value == null)
+  	if ($value == null)
 	{
 		$this->db->where($field);
 	}
@@ -153,7 +153,7 @@ Class Model_records extends CI_Model {
 	    {
 	      $this->type($value);
 	    }
-	    else if (in_array($field, $this->config->item('record_columns')))
+	    else if (in_array($field, $this->_single_type['columns']))
 	    {
 	      $this->db->where($this->table_current.'.'.$field, $value);
 	    } else{
@@ -196,7 +196,7 @@ Class Model_records extends CI_Model {
   public function like($field='', $value='')
   {
       if ($field != '') {
-        if (in_array($field, $this->config->item('record_columns')))
+        if (in_array($field, $this->_single_type['columns']))
         {
        		$this->db->like($field, $value);
       	} else {
@@ -427,6 +427,7 @@ Class Model_records extends CI_Model {
           'date_update'	=> time()
         );
       	
+      	//Aggiungo le colonne fisiche
       	foreach ($tipo['columns'] as $column)
       	{
       		if (!isset($data[$column]))
@@ -462,6 +463,7 @@ Class Model_records extends CI_Model {
         }
 
         //Inserisco le colonne fisiche addizionali
+        /*
         foreach ($this->config->item('record_columns') as $column)
         {
           $value = $record->get($column);
@@ -469,9 +471,7 @@ Class Model_records extends CI_Model {
           if (!isset($data[$column]) && $value) {
             $data[$column] = $value;
           }
-        }
-
-        //TODO: mi sa che sto saltando le colonne fisiche definite nei fields hidden dello schema (forse)
+        }*/
 
         /* DEPRECATO - QUESTO CONTROLLO VA FATTO SU PAGES
         //Controllo se questo URI è in uso da altri record
@@ -492,7 +492,10 @@ Class Model_records extends CI_Model {
        	$is_published = $this->id_is_published($id);
 
          //Imposto il contenuto come non pubblicato (0 = bozza, 2 = bozza + pubblicato)
-         $data['published'] = $is_published ? '2' : '0';
+         if ($tipo['stage'])
+         {
+         	$data['published'] = $is_published ? '2' : '0';
+         }
 
          //Tolgo la chiave primaria
          unset($data[$tipo['primary_key']]);
@@ -511,7 +514,10 @@ Class Model_records extends CI_Model {
           if (isset($tipo['fields']['date_insert'])){
           		$data['date_insert'] = time();
           }
-          $data['published'] = '0';
+      		if ($tipo['stage'])
+        	{
+         		$data['published'] = '0';
+        	}
 
           if ($this->db->insert($this->table_stage, $data))
           {
