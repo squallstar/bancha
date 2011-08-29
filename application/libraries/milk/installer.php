@@ -309,17 +309,18 @@ Class Installer
 			'records_stage'		=> 'id_type',
 			'pages'				=> 'id_type',
 			'pages'				=> 'full_uri',
-			'pages_stage'		=> 'id_type',
-			'pages_stage'		=> 'full_uri',
+			//'pages_stage'		=> 'id_type',
+			//'pages_stage'		=> 'full_uri',
 			'categories'		=> 'category_name',
 			'documents'			=> 'bind_id',
-			'documents_stage'	=> 'bind_id',
+			//'documents_stage'	=> 'bind_id',
 			'record_categories'	=> 'id_category'
 
 		);
 
 		foreach ($indexes as $table => $column)
 		{
+			//In futuro, metterlo nel db forge per differenziarlo tra ogni db
 			$sql = 'CREATE INDEX idx_'.$column.' ON '.$this->CI->db->dbprefix.$table.' ('.$column.');';
 			$this->CI->db->query($sql);
 		}
