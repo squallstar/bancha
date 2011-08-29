@@ -195,7 +195,9 @@ $config['delete_dead_recods'] = TRUE;
  * Colonne fisiche presenti nella tabella records
  * Dopo aver fatto un ALTER-TABLE, aggiungere qui il nome della colonna e il campo relativo
  * verrà salvato sulla colonna anzichè nell'xml generico.
- */
+ *
+ * teoricamente **DEPRECATO** visto che ora l'xml definisce le colonne dei tipi da interrogare
+ 
 $config['record_columns'] = array(
 	'id_record',
 	'id_type',
@@ -210,6 +212,7 @@ $config['record_columns'] = array(
 	'show_in_menu',
 	'published'
 );
+ */
 
 /*
  * RECORD NOT LIVE COLUMNS
@@ -221,7 +224,7 @@ $config['record_not_live_columns'] = array(
 
 /*
  * PAGE EXTRACT COLUMNS
- * Indicare le colonne da estrarre nelle pagine per gli alberi di menu
+ * Indicare le colonne da estrarre nelle pagine per gli alberi di menu (tabella pages)
  */
 $config['page_extract_columns'] = array(
 	'id_record', 'uri', 'full_uri', 'title', 'id_parent', 'show_in_menu'

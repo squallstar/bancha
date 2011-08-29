@@ -136,6 +136,7 @@ Ogni nodo dovrà avere un id univoco descritto attraverso l'attributo <strong>id
 	<li><strong>checkbox</strong> - Per utilizzare un campo di scelta multipla</li>
 	<li><strong>files</strong> - Per utilizzare un campo di caricamento files</li>
 	<li><strong>images</strong> - Per utilizzare un campo di caricamento immagini</li>
+	<li><strong>hidden</strong> - Per utilizzare un campo di tipo hidden</li>
 </ul>
 <p>Il nodo field pu&ograve; avere anche associato l'attributo <strong>column</strong> (booleano) che definisce se la colonna &egrave; fisica sul database. Se non definito, verr&agrave; usato l'xml per lo storage del campo.<br /></p>
 <div class="message warning">Ogni field dovrà sempre specificare il tipo di campo di appartenenza (tra quelli sopra descritti) attraverso il nodo <strong>&lt;type&gt;</strong></div>
