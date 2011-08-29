@@ -147,17 +147,19 @@ Class Xml
 		);
 
 		$content = array(
-						'id'			=> $type_id,
-						'name'			=> $safe_filename,
-						'tree'			=> strtolower((string)$node->tree) == 'true' ? true : false,
-						'has_categories'=> strtolower((string)$node->has_categories) == 'true' ? true : false,
-						'description'	=> (string) $node->description,
-						'primary_key'	=> (string) $node->primary_key
+			'id'			=> $type_id,
+			'name'			=> $safe_filename,
+			'tree'			=> strtolower((string)$node->tree) == 'true' ? true : false,
+			'has_categories'=> strtolower((string)$node->has_categories) == 'true' ? true : false,
+			'description'	=> (string) $node->description,
+			'primary_key'	=> (string) $node->primary_key,
+			'table'			=> (string) $node->table,
+			'stage'			=> strtolower((string)$node->stage) == 'true' ? true : false
 		);
 
-		if (!$content['primary_key'])
+		if (!$content['primary_key'] || !$content['table'])
 		{
-			show_error('Chiave primaria non definita per il tipo ['.$safe_filename.'].');
+			show_error('Chiave primaria o tabella non definita per il tipo ['.$safe_filename.'].');
 		}
 
 		//Tipi utilizzabili come parent di questo tipo
