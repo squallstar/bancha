@@ -428,6 +428,8 @@ Class Model_records extends CI_Model {
           'date_update'	=> time()
         );
 
+        $this->set_type($record->_tipo);
+
       	$tipo = $this->content->type($record->_tipo);
 
         //Controllo se ha un parent
@@ -523,7 +525,12 @@ Class Model_records extends CI_Model {
    * @param int $record_id
    * @return bool
    */
-  public function delete_by_id($record_id) {
+  public function delete_by_id($record_id, $type = '') {
+
+  	if ($type != '')
+  	{
+  		$this->set_type($type);
+  	}
 
     $done = $this->db->where($this->primary_key, $record_id)
               ->delete($this->table);
@@ -641,7 +648,7 @@ Class Model_records extends CI_Model {
       {
       	//Aggiorno gli allegati
       	$this->load->documents();
-      	$this->documents->put_live_documents('records', $id);
+      	$this->documents->put_live_documents($this->table, $id);
       	//Aggiorno il record in stage
         return $this->db->where($this->primary_key, $id)
                   		->update($this->table_stage, array('published' => 1, 'date_publish' => $stage_record['date_publish']));
@@ -669,7 +676,7 @@ Class Model_records extends CI_Model {
 
       //Elimino gli allegati in produzione
       $this->load->documents();
-      $this->documents->delete_records_by_binds('records', $id, TRUE);
+      $this->documents->delete_records_by_binds($this->table, $id, TRUE);
 
       //Aggiorno lo stato del record di sviluppo
       return $this->db->where($this->primary_key, $id)
@@ -687,7 +694,7 @@ Class Model_records extends CI_Model {
   			case 'query':
   				$sql = $field['options'];
   				//Stage tables
-  				$sql = str_replace('FROM (`'.$this->db->dbprefix.'records`)', 'FROM (`'.$this->db->dbprefix.$this->table_current.'`)', $sql);
+  				$sql = str_replace('FROM (`'.$this->db->dbprefix.$this->table.'`)', 'FROM (`'.$this->db->dbprefix.$this->table_current.'`)', $sql);
   				$result = $this->db->query($sql)->result();
   				if (count($result)) {
   					foreach ($result as $option) {

@@ -68,12 +68,21 @@ Class Ajax extends Milk_Controller
 		}
 	}
 
-	public function finder($id_record='undefined')
+	public function finder($id_record='undefined', $type='')
 	{
 		if ($id_record != 'undefined')
 		{
 			$this->load->documents();
-			$documents = $this->documents->table('records')
+
+			if ($type != '')
+			{
+				$tipo = $this->content->type($type);
+				$table = $tipo['table'];
+			} else {
+				$table = 'records';
+			}
+
+			$documents = $this->documents->table($table)
 										 ->id($id_record)
 										 ->get();
 

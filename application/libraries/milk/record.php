@@ -247,7 +247,7 @@ Class Record {
 		if ($has_attachments)
 		{
 			//Estraggo tutti gli allegati di questo record
-			$all_attachs = $CI->documents->table('records')->id($this->id)->get();
+			$all_attachs = $CI->documents->table($tipo['table'])->id($this->id)->get();
 
 			foreach ($tipo['fields'] as $field_name => $field_value)
 			{

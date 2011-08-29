@@ -272,7 +272,7 @@ Class Contents extends Milk_Controller
 
 							$this->documents->upload($name, $upload_config, array(
 								'id'	=> $record_id,
-								'table'	=> 'records',
+								'table'	=> $tipo['table'],
 								'field'	=> $name
 							));
 						}
@@ -393,7 +393,7 @@ Class Contents extends Milk_Controller
 			$tipo = $this->content->type($record->_tipo);
 		}
 
-		$done = $this->records->delete_by_id($id_record);
+		$done = $this->records->delete_by_id($id_record, $tipo['id']);
 
 		if (!$done) {
 			show_error('Impossibile eliminare il record ['.$id_record.'] di tipo ['.$tipo['description'].'].', 500, 'Errore: eliminazione record non riuscita');
@@ -407,7 +407,7 @@ Class Contents extends Milk_Controller
 
 			//Elimino gli allegati collegati
   			$this->load->documents();
-			$this->documents->delete_by_binds('records', $id_record);
+			$this->documents->delete_by_binds($tipo['table'], $id_record);
 
 			//Pulisco la cache dei menu
 			$this->tree->clear_cache();
