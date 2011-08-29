@@ -186,14 +186,20 @@ Class Website extends Milk_Controller {
 						}
 						$this->records->limit($limit, $offset);
 					}
+					
+					$tipo = $page->get('action_list_type');
+					$type = $this->content->type($tipo);
 
 					$order_by = $page->get('action_list_order_by');
 					if ($order_by) {
+						if ($type)
+						{
+							$order_by = str_replace('id_record', $type['primary_key'], $order_by);
+						}	
 						$this->records->order_by($order_by);
 					}
 
-					$tipo = $page->get('action_list_type');
-					$type = $this->content->type($tipo);
+					
 
 					$this->db->start_cache();
 

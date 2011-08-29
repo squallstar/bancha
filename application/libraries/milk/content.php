@@ -277,13 +277,11 @@ Class Content {
 
 		}
 
-		//Elimino dal db i tipi che non esistono
-		$this->CI->db->where_not_in('name', $all_types)->delete('types');
-
 		if ($this->CI->config->item('delete_dead_recods') == TRUE)
 		{
 			//Elimino i dead records
 			$this->CI->load->records();
+			//TODO: modifica per fare il delete in base alla tabella del tipo
 			$this->CI->db->where_not_in('id_type', $all_types_id)->delete($this->CI->records->table_stage);
 			$this->CI->db->where_not_in('id_type', $all_types_id)->delete($this->CI->records->table);
 		}

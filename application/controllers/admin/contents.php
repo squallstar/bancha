@@ -224,6 +224,8 @@ Class Contents extends Milk_Controller
 	$this->load->documents();
 
     $tipo = $this->content->type($type);
+    $this->records->set_type($type);
+    
 
     //Aggiunta-Modifica record
     if ($this->input->post('id_type', FALSE)) {
@@ -313,11 +315,16 @@ Class Contents extends Milk_Controller
       }
 
     }else if ($record_id != '') {
+    	
     	$record = $this->records->get($record_id);
     }else {
     	//Nuovo record
 		$record = $this->content->make_record($tipo['id']);
-
+    }
+    
+    if (!$record)
+    {
+    	show_error('Qualcosa e\' andato storto...');
     }
 
     //Controllo se il tipo e' ad albero
@@ -573,6 +580,21 @@ Class Contents extends Milk_Controller
 	  			//Elimino gli eventi
 	  			$this->load->events();
 	  			$this->events->delete_by_content_type($tipo['name']);
+	  			
+	  			//Elimino dal db il tipo
+	  			$this->db->where('name', $tipo['name'])->delete('types');
+	  			
+	  			//Elimino i dead records
+	  			if ($this->CI->config->item('delete_dead_recods') == TRUE)
+	  			{
+	  				$this->db->where('id_type', $tipo['id'])
+	  				->delete($tipo['table']);
+	  				if ($tipo['stage'])
+	  				{
+	  					$this->db->where('id_type', $tipo['id'])
+	  					->delete($tipo['table'].'_stage');
+	  				}
+	  			}	
 
 	  			//Ricostruisco la cache
 	  			$this->content->rebuild();
