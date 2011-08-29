@@ -1,7 +1,7 @@
 <?php
 $this->load->helper('form');
 $fields = array_keys($tipo['fields']);
-$this->output->enable_profiler();
+
 ?>
 
 <div class="block">
