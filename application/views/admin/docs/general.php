@@ -159,7 +159,7 @@ Ogni nodo dovrà avere un id univoco descritto attraverso l'attributo <strong>id
 	&lt;admin&gt;true&lt;/admin&gt;
 	&lt;default&gt;Senza titolo&lt;/default&gt;
 &lt;/field&gt;</code><br />
-<p>Il nodo <strong>default</strong> accetta anche codice php se viene preposto "eval", ad esempio <strong>&gt;default&lt;eval:time();&gt;/default&lt;</strong>
+<p>Il nodo <strong>default</strong> accetta anche codice php se viene preposto "eval", ad esempio <strong>&lt;default&gt;eval:time();&lt;/default&gt;</strong>
 <p>I campi di tipo <strong>select</strong> e <strong>checkbox</strong> inoltre, avranno a disposizione il nodo <strong>&lt;options&gt;</strong> per definire le opzioni associate a tale campo, come in questo esempio:</p>
 <code>&lt;options&gt;
 	&lt;option value="T"&gt;Si&lt;/option&gt;
