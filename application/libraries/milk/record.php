@@ -91,9 +91,9 @@ Class Record {
     }
 
     //Imposto a parte il campo ID (serve per insert-update)
-    if (isset($data[$field['primary_key']]))
+    if (isset($data[$tipo['primary_key']]))
     {
-    	$this->id = $data[$field['primary_key']];
+    	$this->id = $data[$tipo['primary_key']];
     }
 
   }
