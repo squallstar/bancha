@@ -23,7 +23,8 @@
  *     production
  *
  */
-	define('ENVIRONMENT', 'development');
+//	define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', 'ale');
 /*
  */
 

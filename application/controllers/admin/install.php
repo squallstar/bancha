@@ -36,7 +36,7 @@ Class Install extends Milk_Controller
 		$username = 'admin';
 		$password = 'admin';
 		$this->installer->create_groups();
-		$this->installer->create_user($username, $password, 'Nicholas', 'Valbusa');
+		$this->installer->create_user($username, $password, 'Alessandro', 'Maroldi');
 		$this->auth->login($username, $password);
 
 		//Creo i tipi predefiniti
