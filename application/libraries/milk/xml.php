@@ -162,7 +162,11 @@ Class Xml
     if (isset($node->table_stage))
     {
     	$content['stage'] = TRUE;
-    	$content['table_stage'] = (string) $node->table_stage;
+    	if (strtolower((string)$node->table_stage) == 'true') {
+    		$content['table_stage'] = (string) $node->table.'_stage';
+    	} else {
+    		$content['table_stage'] = (string) $node->table_stage;
+		}
     } else {
     	$content['stage'] = FALSE;
     	$content['table_stage'] = $content['table'];
