@@ -190,6 +190,8 @@ Class Xml
     }
 
     $content['fieldsets'] = array();
+
+    //Facciamo finta che la colonna XML ci sia sempre per ogni tipo
     $content['columns'] = array('xml');
 
     //True when the type has at leasts one images/files field.
