@@ -21,4 +21,4 @@ INSTALLAZIONE DI MILK
 DOCUMENTAZIONE DI MILK
  - La documentazione e' disponibile tramite l'amministrazione alla voce "Gestione > Documentazione"
 
-***************************************
+**************************************
