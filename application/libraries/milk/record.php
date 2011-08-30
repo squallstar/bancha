@@ -50,7 +50,7 @@ Class Record {
     	$value = isset($data[$field_name]) ? $data[$field_name] : '';
     	if ($CI->config->item('strip_website_url'))
     	{
-    		$value = str_replace(site_url(), '', $value);
+    		$value = str_replace(site_url(), '/', $value);
     	}
    		$this->_data[$field_name] = $value;
 
