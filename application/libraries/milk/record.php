@@ -44,31 +44,14 @@ Class Record {
     $tipo = & $CI->content->type($this->_tipo);
 
     //$this->_all_data = $data;
-	/*
-    foreach ($tipo['fields'] as $field_name => $field)
-    {
-    	//Solo se non è una colonna fisica
-    	if (!in_array($field_name, $CI->config->item('record_columns')))
-    	{
-      		$value = isset($data[$field_name]) ? $data[$field_name] : '';
-      		$this->_data[$field_name] = $value;
-    	}
-    }
-
-    //Aggiungo le colonne fisiche
-
-    foreach ($CI->config->item('record_columns') as $field)
-    {
-      if (isset($data[$field]))
-      {
-        $this->_data[$field] = $data[$field];
-      }
-    }
-    */
 
     foreach ($tipo['fields'] as $field_name => $field)
     {
     	$value = isset($data[$field_name]) ? $data[$field_name] : '';
+    	if ($CI->config->item('strip_website_url'))
+    	{
+    		$value = str_replace(site_url(), '', $value);
+    	}
    		$this->_data[$field_name] = $value;
 
     	if ($field['type'] == 'date')
