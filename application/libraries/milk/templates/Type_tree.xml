@@ -7,7 +7,7 @@
 	<tree>true</tree>
 	<primary_key>id_record</primary_key>
 	<table>records</table>
-	<table_stage>records_stage</table_stage>
+	<table_stage>true</table_stage>
 	<parent_types>
 		<type>{name}</type>
 	</parent_types>
