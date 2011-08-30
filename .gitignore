@@ -13,3 +13,4 @@ Thumbs.db
 .project
 .buildpath
 .settings
+/application/cache/_milk/content.types
