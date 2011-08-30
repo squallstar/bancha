@@ -51,7 +51,7 @@ Class Installer
             'lang'			=> array('type' => 'VARCHAR', 'null' => TRUE, 'constraint' => '2'),
             'xml'			=> array('type'	=> 'TEXT', 'null'	=> FALSE),
             'uri'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
-            'id_parent'		=> array('type'	=> 'INT', 'unsigned'	=> TRUE),
+            'id_parent'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned'	=> TRUE),
             'title'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
             'show_in_menu'	=> array('type'	=> 'VARCHAR', 'constraint'=> '1'),
             'published'		=> array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE, 'default' => 0, 'constraint' => 1)
@@ -79,7 +79,7 @@ Class Installer
             'lang'			=> array('type' => 'VARCHAR', 'null' => TRUE, 'constraint' => '2'),
 		    'uri'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
 		    'full_uri'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
-		    'id_parent'		=> array('type'	=> 'INT', 'unsigned'	=> TRUE),
+		    'id_parent'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned'	=> TRUE),
 		    'title'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
 		    'show_in_menu'	=> array('type'	=> 'VARCHAR', 'constraint'=> '1')
 		);
