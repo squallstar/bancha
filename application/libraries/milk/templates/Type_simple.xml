@@ -26,6 +26,10 @@
 			<list>true</list>
 			<default>eval:time()</default>
 		</field>
+		<field id="published" column="true">
+			<type>hidden</type>
+			<default>0</default>
+		</field>
 		<field id="title" column="true">
 			<description>Titolo</description>
 			<type>text</type>
