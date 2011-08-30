@@ -85,7 +85,7 @@ Class Website extends Milk_Controller {
 		$result = array();
 		if (isset($this->records))
 		{
-			$result = $this->records->full_uri($current_request)->documents(FALSE)->limit(1)->get();
+			$result = $this->records->set_type()->full_uri($current_request)->documents(FALSE)->limit(1)->get();
 		}
 
 		//Controllo se la pagina richiesta esiste
@@ -93,6 +93,7 @@ Class Website extends Milk_Controller {
 		{
 			//Potrebbe essere un contenuto
 			$result = $this->records->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
+
 			if (count($result))
 			{
 				//Estraggo la pagina padre
@@ -186,7 +187,7 @@ Class Website extends Milk_Controller {
 						}
 						$this->records->limit($limit, $offset);
 					}
-					
+
 					$tipo = $page->get('action_list_type');
 					$type = $this->content->type($tipo);
 
@@ -195,11 +196,11 @@ Class Website extends Milk_Controller {
 						if ($type)
 						{
 							$order_by = str_replace('id_record', $type['primary_key'], $order_by);
-						}	
+						}
 						$this->records->order_by($order_by);
 					}
 
-					
+
 
 					$this->db->start_cache();
 

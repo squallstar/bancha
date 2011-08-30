@@ -196,8 +196,9 @@ $config['delete_dead_recods'] = TRUE;
  * Dopo aver fatto un ALTER-TABLE, aggiungere qui il nome della colonna e il campo relativo
  * verrà salvato sulla colonna anzichè nell'xml generico.
  *
- * teoricamente **DEPRECATO** visto che ora l'xml definisce le colonne dei tipi da interrogare
- 
+ * Viene usato dal router quando estrae un contenuto come ultimo parametro dell'url
+ */
+
 $config['record_columns'] = array(
 	'id_record',
 	'id_type',
@@ -212,7 +213,7 @@ $config['record_columns'] = array(
 	'show_in_menu',
 	'published'
 );
- */
+
 
 /*
  * RECORD NOT LIVE COLUMNS

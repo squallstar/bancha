@@ -12,6 +12,7 @@ class Milk_Profiler extends CI_Profiler {
 		'queries',
 		'renders',
 		'http_headers',
+		'session_data',
 		'config'
 	);
 
@@ -50,7 +51,7 @@ class Milk_Profiler extends CI_Profiler {
 
 		return $output;
 	}
-	
+
 	/**
 	* Run the Profiler
 	*
@@ -66,7 +67,7 @@ class Milk_Profiler extends CI_Profiler {
 			'<a href="#" onclick="_show_ciprofiler();">'._('Open profiler').'</a>'
 			.'<div id="milk_profiler_ci">'
 		;
-	
+
 		foreach ($this->_available_sections as $section)
 		{
 			if ($this->_compile_{$section} !== FALSE)
@@ -75,9 +76,9 @@ class Milk_Profiler extends CI_Profiler {
 				$output .= $this->{$func}();
 			}
 		}
-	
+
 		$output .= '</div></div></div>';
-	
+
 		return $output;
 	}
 

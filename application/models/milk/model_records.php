@@ -86,7 +86,7 @@ Class Model_records extends CI_Model {
    */
   public function set_type($type='')
   {
-	if ($type != '')
+  	if ($type != '')
 	{
 		$tipo = $this->content->type($type);
 		$this->_single_type = $tipo;
@@ -96,7 +96,6 @@ Class Model_records extends CI_Model {
 	    $this->table_stage = $tipo['table_stage'];
 	    $this->primary_key = $tipo['primary_key'];
 	    $this->columns = $tipo['columns'];
-
 	} else {
 		$this->table = 'records';
 		$this->table_stage = 'records_stage';
@@ -141,9 +140,8 @@ Class Model_records extends CI_Model {
   	if ($value == null)
 	{
 		$this->db->where($field);
-	}
-	else if ($field != '')
-    {
+	} else if ($field != '')
+	{
 	    if ($field == 'id' || $field == $this->primary_key)
 	    {
 	      $this->db->where($this->table_current.'.'.$this->primary_key, $value);
@@ -153,7 +151,7 @@ Class Model_records extends CI_Model {
 	    {
 	      $this->type($value);
 	    }
-	    else if ($this->_single_type && in_array($field, $this->_single_type['columns']))
+	    else if (in_array($field, $this->columns))
 	    {
 	      $this->db->where($this->table_current.'.'.$field, $value);
 	    } else{
@@ -265,8 +263,6 @@ Class Model_records extends CI_Model {
 
   	//$record_columns = $this->config->item('record_columns');
   	$record_columns = $this->columns;
-
-
 
   	//Controllo se sto cercando una lista di singoli tipi (non dettaglio!)
   	if ($this->_is_list && $this->_single_type)
@@ -426,14 +422,14 @@ Class Model_records extends CI_Model {
           //'title'		=> substr($record->get('title'), 0, 127),
           'date_update'	=> time()
         );
-      	
+
       	//Aggiungo le colonne fisiche
       	foreach ($tipo['columns'] as $column)
       	{
       		if (!isset($data[$column]))
       		{
       			$data[$column] = $record->get($column);
-      		}	
+      		}
       	}
 
         //TODO: da migliorare questi pezzi
@@ -495,8 +491,8 @@ Class Model_records extends CI_Model {
         if ($tipo['stage'])
         {
         	$data['published'] = '0';
-        } 
-       	
+        }
+
 
          //Tolgo la chiave primaria
          unset($data[$tipo['primary_key']]);
@@ -519,6 +515,8 @@ Class Model_records extends CI_Model {
         	{
          		$data['published'] = '0';
         	}
+
+        	unset($data[$tipo['primary_key']]);
 
           if ($this->db->insert($this->table_stage, $data))
           {
