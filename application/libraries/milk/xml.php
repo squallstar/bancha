@@ -85,14 +85,14 @@ Class Xml
     $this->CI->db->select((string)$sql->select);
 
     $tipo = $this->CI->content->type($id_type);
-    
+
     //Uso la tabella di staging se sono in staging
     $from_tbl = (string)$sql->from;
     if ($this->CI->content->is_stage)
     {
     	$from_tbl = str_replace($tipo['table'], $tipo['table_stage'], $from_tbl);
     }
-    
+
     $this->CI->db->from($from_tbl);
 
     if (isset($sql->where))
@@ -145,7 +145,7 @@ Class Xml
 
     //Tipi di campi utilizzabili
     $field_usable_inputs = array(
-      'text', 'textarea', 'date', 'checkbox', 'select', 'radio',
+      'text', 'textarea', 'date', 'checkbox', 'select', 'multiselect', 'radio',
       'images', 'files', 'number', 'textarea_full', 'datetime', 'hidden'
     );
 
@@ -158,7 +158,7 @@ Class Xml
       'primary_key'	=> (string) $node->primary_key,
       'table'			=> (string) $node->table
     );
-    
+
     if (isset($node->table_stage))
     {
     	$content['stage'] = TRUE;

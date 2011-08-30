@@ -234,6 +234,22 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				echo $p_end;
 				break;
 
+			case 'multiselect':
+				echo $p_start.$label.br(1);
+				foreach ($field['options'] as $opt_key => $opt_val) {
+					$checked = is_array($field_value) ? (in_array($opt_key, $field_value) ? 'checked' : '') : '';
+					$data = array(
+					    'name'        => $field_name.'[]',
+					    'value'       => $opt_key,
+					    'checked'     => $checked,
+					    'class'       => 'checkbox',
+					);
+
+					echo form_checkbox($data).form_label(' '.$opt_val, $field_name.'[]');
+				}
+				echo $p_end;
+				break;
+
 			case 'radio':
 				echo $p_start.$label.br(1);
 				foreach ($field['options'] as $opt_key => $opt_val) {
