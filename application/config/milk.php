@@ -50,7 +50,7 @@ $config['records_per_page'] = 10;
  * MILK CMS VERSION
  * Versione del framework
  */
-define('MILK_VERSION', '0.3');
+define('MILK_VERSION', '0.4');
 
 /*
  * NOME DEL CMS
