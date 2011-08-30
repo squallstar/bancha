@@ -32,6 +32,7 @@ if (defined('ENVIRONMENT'))
 {
 	switch (ENVIRONMENT)
 	{
+		case 'ale':
 		case 'sqlite':
 		case 'development':
 			error_reporting(E_ALL);
