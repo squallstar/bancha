@@ -128,8 +128,8 @@ $config['attach_custom_folder'] = date('YW') . DIRECTORY_SEPARATOR . date('d') .
 
 /*
  * STRIP WEBSITE URL
- * Se impostato a true, verrà rimosso l'indirizzo del sito da tutti i campi salvati nei records
- * è utile per popolare il sito in sviluppo e portarlo in produzione senza che rimangono i vecchi url
+ * Se impostato a true, verra' rimosso l'indirizzo del sito da tutti i campi salvati nei records
+ * e' utile per popolare il sito in sviluppo e portarlo in produzione senza che rimangono i vecchi url
  * nei campi (ad esempio nelle textarea)
  */
 $config['strip_website_url'] = TRUE;
