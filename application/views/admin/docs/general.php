@@ -133,7 +133,8 @@ Ogni nodo dovrà avere un id univoco descritto attraverso l'attributo <strong>id
 	<li><strong>text</strong> - Per utilizzare un input testuale su riga singola senza stile</li>
 	<li><strong>textarea</strong> - Per utilizzare un input multiriga con possibilità di inserimento stili e codice HTML</li>
 	<li><strong>select</strong> - Per utilizzare un campo di scelta singola a tendina</li>
-	<li><strong>checkbox</strong> - Per utilizzare un campo di scelta multipla</li>
+	<li><strong>multiselect</strong> - Per utilizzare un campo di scelta multipla (due tendine con add/remove)</li>
+	<li><strong>checkbox</strong> - Per utilizzare un campo di scelta multipla in stile "checkbox"</li>
 	<li><strong>files</strong> - Per utilizzare un campo di caricamento files</li>
 	<li><strong>images</strong> - Per utilizzare un campo di caricamento immagini</li>
 	<li><strong>hidden</strong> - Per utilizzare un campo di tipo hidden</li>
@@ -161,7 +162,7 @@ Ogni nodo dovrà avere un id univoco descritto attraverso l'attributo <strong>id
 	&lt;default&gt;Senza titolo&lt;/default&gt;
 &lt;/field&gt;</code><br />
 <p>Il nodo <strong>default</strong> accetta anche codice php se viene preposto "eval", ad esempio <strong>&lt;default&gt;eval:time();&lt;/default&gt;</strong>
-<p>I campi di tipo <strong>select</strong> e <strong>checkbox</strong> inoltre, avranno a disposizione il nodo <strong>&lt;options&gt;</strong> per definire le opzioni associate a tale campo, come in questo esempio:</p>
+<p>I campi di tipo <strong>select</strong>, <strong>multiselect</strong> e <strong>checkbox</strong> inoltre, avranno a disposizione il nodo <strong>&lt;options&gt;</strong> per definire le opzioni associate a tale campo, come in questo esempio:</p>
 <code>&lt;options&gt;
 	&lt;option value="T"&gt;Si&lt;/option&gt;
 	&lt;option value="F"&gt;No&lt;/option&gt;

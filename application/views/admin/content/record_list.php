@@ -83,12 +83,13 @@ $fields = array_keys($tipo['fields']);
 								case 'select':
 								case 'radio':
 								case 'checkbox':
+								case 'multiselect':
 									$tipo['fields'][$field]['options'] = $this->records->get_field_options($tipo['fields'][$field]);
 									if (count($tipo['fields'][$field]['options']))
 									{
 										//Aggiungo il primo elemento all'albero prima di stamparlo
 										$new_tree = array('' => '');
-	
+
 										foreach ($tipo['fields'][$field]['options'] as $item_key => $item_val) {
 											$new_tree[$item_key] = $item_val;
 										}
@@ -119,10 +120,10 @@ $fields = array_keys($tipo['fields']);
 
 			//Campi ricorrenti
 			echo '<td><input type="checkbox" name="record[]" value="'.$record->id.'"/></td>';
-			
+
 			$primary_key = $tipo['primary_key'];
 			echo '<td>'.$record->get($primary_key).'</td>';
-	
+
 			if ($tipo['stage'])
 			{
 				if ($record->get('published') == '0' || !$record->get('published')) {
@@ -176,8 +177,8 @@ $fields = array_keys($tipo['fields']);
 									$value = implode(', ', $values);
 								}
 								break;
-							
-			
+
+
 						}
 					}
 					if ($first) {
