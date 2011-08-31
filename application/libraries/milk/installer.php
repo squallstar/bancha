@@ -2,7 +2,7 @@
 /**
  * Installer Class
  *
- * Libreria per installare il cms
+ * Libreria per installare Milk
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
