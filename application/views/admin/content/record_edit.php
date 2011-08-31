@@ -169,10 +169,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['value'] = $field_value;
 				$attributes['class'] = ''.($field['mandatory']?' mandatory':'');
 				$attributes['id'] = 'ckeditor_'.$field_name;
-				$js_onload .="CKEDITOR.replace( '".$attributes['id']."',
-    {
-        filebrowserBrowseUrl : admin_url + 'ajax/finder/' + $('input[name=id]').val()
-    });";
+				$js_onload .="CKEDITOR.replace( '".$attributes['id']."', { filebrowserBrowseUrl : admin_url + 'ajax/finder/' + $('input[name=id]').val() });";
 				$has_full_textarea = TRUE;
 				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
 				break;
@@ -235,18 +232,41 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'multiselect':
-				echo $p_start.$label.br(1);
-				foreach ($field['options'] as $opt_key => $opt_val) {
-					$checked = is_array($field_value) ? (in_array($opt_key, $field_value) ? 'checked' : '') : '';
-					$data = array(
-					    'name'        => $field_name.'[]',
-					    'value'       => $opt_key,
-					    'checked'     => $checked,
-					    'class'       => 'checkbox',
-					);
-
-					echo form_checkbox($data).form_label(' '.$opt_val, $field_name.'[]');
+				$add = '';
+				if (isset($field['onchange'])) {
+					$add .= 'onchange="'.$field['onchange'].'" ';
+					$js_onload .= trim($field['onchange'], ';').'; ';
 				}
+				$add .= 'class="multi '.($field['mandatory']?' mandatory':'');
+				$add .='" ';
+				$field['options']['multiple'] = '';
+				echo $p_start.$label.br(1);
+
+				$left_options = array();
+				$right_options = array();
+				foreach ($field['options'] as $opt_key => $opt_val)
+				{
+					if (is_array($field_value) && in_array($opt_key, $field_value))
+					{
+						$right_options[$opt_key] = $opt_val;
+					} else {
+						$left_options[$opt_key] = $opt_val;
+					}
+				}
+
+				echo '<div class="multiselect_'.$field_name.'"><div class="multi_left">'.form_dropdown($field_name.'[]', $left_options, $field_value, $add);
+				echo '<a href="#" class="add">'._('Add').'</a>'.'</div>';
+
+				echo '<div class="multi_right">'.form_dropdown('_'.$field_name, $right_options, $field_value, $add);
+				echo '<a href="#" class="rem">'._('Remove').'</a>'.'</div></div>';
+
+				$nm = 'multiselect_'.$field_name;
+
+				$js_onload.= "$('.".$nm." .add').click(function(){ ".
+					 "return !$('.".$nm." .multi_left select option:selected').remove().appendTo('.".$nm." .multi_right select'); });";
+				$js_onload.= "$('.".$nm." .rem').click(function(){ ".
+					 "return !$('.".$nm." .multi_right select option:selected').remove().appendTo('.".$nm." .multi_left select'); });";
+
 				echo $p_end;
 				break;
 

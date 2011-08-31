@@ -50,7 +50,7 @@ $config['records_per_page'] = 10;
  * MILK CMS VERSION
  * Versione del framework
  */
-define('MILK_VERSION', '0.3');
+define('MILK_VERSION', '0.4');
 
 /*
  * NOME DEL CMS
@@ -125,6 +125,14 @@ $config['attach_out_folder'] = 'attach/';
  * Viene creata in automatico quando vengono caricati i files
  */
 $config['attach_custom_folder'] = date('YW') . DIRECTORY_SEPARATOR . date('d') . DIRECTORY_SEPARATOR;
+
+/*
+ * STRIP WEBSITE URL
+ * Se impostato a true, verra' rimosso l'indirizzo del sito da tutti i campi salvati nei records
+ * e' utile per popolare il sito in sviluppo e portarlo in produzione senza che rimangono i vecchi url
+ * nei campi (ad esempio nelle textarea)
+ */
+$config['strip_website_url'] = TRUE;
 
 /*
  * DOCUMENTS SELECT FIELDS
