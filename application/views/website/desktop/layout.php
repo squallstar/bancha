@@ -26,6 +26,11 @@
 			echo link_tag('css/'.$css);
 		}
 
+		if ($this->view->has_feed)
+		{
+			echo link_tag(current_url().'/feed.xml', 'alternate', 'application/rss+xml', 'My RSS Feed');
+		}
+
 		foreach ($this->view->javascript as $js) {
    			?><script type="text/javascript" src="<?php echo site_url('js/'.$js); ?>"></script><?php
    		}

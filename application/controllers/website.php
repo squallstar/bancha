@@ -247,7 +247,41 @@ Class Website extends Milk_Controller {
 						$this->pagination->initialize($pagination);
 					}
 
+					if ($this->view->is_feed)
+					{
+						$this->load->frlibrary('feed');
+						$feed_header = array(
+							'title' 		=> $page->get('title'),
+							'description'	=> substr(strip_tags($page->get('contenuto')), 0, 100)
+						);
+						$this->feed->create_new($feed_header);
 
+						if (count($records))
+						{
+							foreach ($records as $record)
+							{
+								$date_pub = $record->get('_date_publish');
+								if (!$date_pub)
+								{
+									$date_pub = $record->get('_date_insert');
+								}
+								$item = array(
+									'title'			=> $record->get('title'),
+									'link'			=> current_url().'/'.$record->get('uri'),
+									'guid'			=> current_url().'/'.$record->get('uri'),
+									'pubDate'		=> date(DATE_RFC822, (int)$date_pub),
+									'description'	=> $record->get('contenuto')
+								);
+								$this->feed->add_item($item);
+							}
+						}
+						$this->feed->render();
+						return;
+
+					} else if ($page->get('action_list_has_feed') == 'T')
+					{
+						$this->view->has_feed = TRUE;
+					}
 
 					$page->set('records', $records);
 					break;

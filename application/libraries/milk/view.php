@@ -29,6 +29,8 @@ Class View {
 	public $javascript = array();
 	public $css = array();
 	public $skin = '';
+	public $has_feed = FALSE;
+	public $is_feed = FALSE;
 
 	public function __construct()
 	{
@@ -134,13 +136,19 @@ Class View {
 
 	/**
 	 * Renderizza un template presente nella directory relativa
-	 * Passa sempre per il layout!
+	 * Passa per il layout se il secondo parametro e' TRUE
 	 * @param string $template_file
+	 * @param bool $layout
 	 */
-	public function render_template($template_file)
+	public function render_template($template_file, $layout = TRUE)
 	{
-		$this->set('_template_file', $this->_template_dir.$template_file);
-		$this->_CI->load->view($this->_prepend_dir.$this->skin.'/layout', $this->_data);
+		if ($layout)
+		{
+			$this->set('_template_file', $this->_template_dir.$template_file);
+			$this->_CI->load->view($this->_prepend_dir.$this->skin.'/layout', $this->_data);
+		} else {
+			$this->_CI->load->view($this->_prepend_dir.$this->skin.'/'.$this->_template_dir.$template_file, $this->_data);
+		}
 	}
 
 	/**

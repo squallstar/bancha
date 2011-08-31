@@ -251,6 +251,7 @@ Class Content {
 	public function rebuild()
 	{
 		//All types
+		$this->CI->load->helper('file');
 		$filenames = get_filenames($this->xml_folder);
 
 		//Restricted names
@@ -261,6 +262,11 @@ Class Content {
 
 		$all_types = array();
 		$all_types_id = array();
+
+		if (!isset($this->CI->xml))
+		{
+			$this->CI->load->frlibrary('xml');
+		}
 
 		foreach ($filenames as $filename)
 		{
