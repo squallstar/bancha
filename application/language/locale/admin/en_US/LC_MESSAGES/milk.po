@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Milk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-25 20:07+0100\n"
-"PO-Revision-Date: 2011-08-25 20:07+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2011-08-31 14:10+0100\n"
+"PO-Revision-Date: 2011-08-31 14:10+0100\n"
+"Last-Translator: Nicholas <nicholas@intesys.it>\n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,76 +18,84 @@ msgstr ""
 "X-Poedit-SearchPath-2: models\n"
 "X-Poedit-SearchPath-3: views/admin\n"
 
-#: controllers/admin/ajax.php:83
-msgid "Nessun allegato caricato per questo contenuto."
+#: controllers/admin/ajax.php:92
+msgid "This content has no attachments."
 msgstr ""
 
-#: controllers/admin/contents.php:333
+#: controllers/admin/contents.php:343
 msgid "First level"
 msgstr ""
 
-#: controllers/admin/contents.php:451
+#: controllers/admin/contents.php:461
 msgid "Please insert a name for this type."
 msgstr ""
 
-#: controllers/admin/contents.php:479
+#: controllers/admin/contents.php:489
 msgid "Cannot read the XML file."
 msgstr ""
 
-#: controllers/admin/contents.php:503
+#: controllers/admin/contents.php:513
 msgid "The category %n has been added."
 msgstr ""
 
-#: controllers/admin/contents.php:505
+#: controllers/admin/contents.php:515
 msgid "Cannot insert the category %n."
 msgstr ""
 
-#: controllers/admin/contents.php:508
+#: controllers/admin/contents.php:518
 msgid "A category named %n already exists."
 msgstr ""
 
-#: controllers/admin/contents.php:531
+#: controllers/admin/contents.php:541
 msgid "The category %n has been deleted."
 msgstr ""
 
-#: controllers/admin/contents.php:550
+#: controllers/admin/contents.php:560
 msgid "The cache has been cleared."
 msgstr ""
 
-#: controllers/admin/contents.php:577
+#: controllers/admin/contents.php:602
 msgid "The type named %n has been removed."
 msgstr ""
 
-#: controllers/admin/install.php:54
-msgid "%n has ben installed!"
+#: controllers/admin/install.php:57
+msgid "%n has been installed!"
 msgstr ""
 
-#: libraries/Milk_Profiler.php:63
+#: controllers/admin/modules.php:52
+msgid "The module %m has no documentation or not exists."
+msgstr ""
+
+#: libraries/Milk_Profiler.php:64
 msgid "Preview"
 msgstr ""
 
-#: libraries/Milk_Profiler.php:65
+#: libraries/Milk_Profiler.php:66
 msgid "Back to admin"
 msgstr ""
 
-#: libraries/Milk_Profiler.php:66
+#: libraries/Milk_Profiler.php:67
 msgid "Open profiler"
 msgstr ""
 
-#: libraries/milk/installer.php:294
+#: libraries/milk/installer.php:295
 msgid "Default content type not defined"
 msgstr ""
 
+#: libraries/milk/xml.php:209
+msgid "Untitled"
+msgstr ""
+
 #: views/admin/auth/login.php:7
-msgid "Accesso"
+msgid "Administration login"
 msgstr ""
 
 #: views/admin/auth/login.php:9
-msgid "Torna al sito"
+msgid "Back to site"
 msgstr ""
 
 #: views/admin/auth/login.php:19
-msgid "Nome utente"
+msgid "Username"
 msgstr ""
 
 #: views/admin/auth/login.php:24
@@ -95,11 +103,12 @@ msgid "Password"
 msgstr ""
 
 #: views/admin/auth/login.php:29
-msgid "Entra"
+#: views/admin/installer/success.php:22
+msgid "Login"
 msgstr ""
 
 #: views/admin/auth/login.php:30
-msgid "Ricordami"
+msgid "Remember me"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:9
@@ -111,12 +120,12 @@ msgid "Close window"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:24
-#: views/admin/content/record_edit.php:268
+#: views/admin/content/record_edit.php:304
 msgid "Original"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:24
-#: views/admin/content/record_edit.php:268
+#: views/admin/content/record_edit.php:304
 msgid "Resized"
 msgstr ""
 
@@ -125,15 +134,15 @@ msgid "Thumbnail"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:24
-#: views/admin/content/record_edit.php:268
-#: views/admin/content/record_edit.php:301
+#: views/admin/content/record_edit.php:304
+#: views/admin/content/record_edit.php:337
 msgid "Alternative text"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:30
 #: views/admin/content/documents_finder.php:31
-#: views/admin/content/record_edit.php:273
-#: views/admin/content/record_edit.php:274
+#: views/admin/content/record_edit.php:309
+#: views/admin/content/record_edit.php:310
 msgid "View"
 msgstr ""
 
@@ -144,7 +153,7 @@ msgid "Choose"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:34
-#: views/admin/content/record_edit.php:277
+#: views/admin/content/record_edit.php:313
 msgid "Delete image"
 msgstr ""
 
@@ -167,7 +176,8 @@ msgid "Back to list"
 msgstr ""
 
 #: views/admin/content/record_edit.php:41
-#: views/admin/content/record_edit.php:339
+#: views/admin/content/record_edit.php:375
+#: views/admin/content/type_categories.php:8
 msgid "Categories"
 msgstr ""
 
@@ -181,7 +191,7 @@ msgid "Save and go to list"
 msgstr ""
 
 #: views/admin/content/record_edit.php:53
-#: views/admin/content/record_list.php:200
+#: views/admin/content/record_list.php:207
 msgid "Publish"
 msgstr ""
 
@@ -189,53 +199,66 @@ msgstr ""
 msgid "The address of this page is:"
 msgstr ""
 
+#: views/admin/content/record_edit.php:258
+#: views/admin/content/type_add.php:75
+#: views/admin/content/type_categories.php:74
+msgid "Add"
+msgstr ""
+
 #: views/admin/content/record_edit.php:261
-#: views/admin/content/record_edit.php:264
+msgid "Remove"
+msgstr ""
+
+#: views/admin/content/record_edit.php:297
+#: views/admin/content/record_edit.php:300
 msgid "You can attach up to %n images"
 msgstr ""
 
-#: views/admin/content/record_edit.php:263
+#: views/admin/content/record_edit.php:299
 msgid "Number of uploadable images excedeed."
 msgstr ""
 
-#: views/admin/content/record_edit.php:268
+#: views/admin/content/record_edit.php:304
 msgid "Order"
 msgstr ""
 
-#: views/admin/content/record_edit.php:294
-#: views/admin/content/record_edit.php:297
+#: views/admin/content/record_edit.php:330
+#: views/admin/content/record_edit.php:333
 msgid "You can attach up to %n files"
 msgstr ""
 
-#: views/admin/content/record_edit.php:296
+#: views/admin/content/record_edit.php:332
 msgid "File limit exceeded."
 msgstr ""
 
-#: views/admin/content/record_edit.php:301
+#: views/admin/content/record_edit.php:337
 msgid "File name"
 msgstr ""
 
-#: views/admin/content/record_edit.php:301
+#: views/admin/content/record_edit.php:337
 msgid "File type"
 msgstr ""
 
-#: views/admin/content/record_edit.php:307
+#: views/admin/content/record_edit.php:343
 msgid "Delete file"
 msgstr ""
 
-#: views/admin/content/record_edit.php:345
+#: views/admin/content/record_edit.php:381
 msgid "This content can be associated to these categories"
 msgstr ""
 
-#: views/admin/content/record_edit.php:362
+#: views/admin/content/record_edit.php:398
 msgid "This type has no categories"
 msgstr ""
 
 #: views/admin/content/record_list.php:13
+#: views/admin/content/type_list.php:7
 msgid "Pages"
 msgstr ""
 
 #: views/admin/content/record_list.php:13
+#: views/admin/content/type_edit_xml.php:20
+#: views/admin/content/type_list.php:7
 msgid "Contents"
 msgstr ""
 
@@ -248,70 +271,73 @@ msgid "Insert new page"
 msgstr ""
 
 #: views/admin/content/record_list.php:17
+#: views/admin/content/type_list.php:40
 msgid "Manage categories"
 msgstr ""
 
-#: views/admin/content/record_list.php:38
+#: views/admin/content/record_list.php:39
 msgid "Status"
 msgstr ""
 
-#: views/admin/content/record_list.php:54
-#: views/admin/content/record_list.php:125
+#: views/admin/content/record_list.php:57
+#: views/admin/content/record_list.php:131
 msgid "Draft"
 msgstr ""
 
-#: views/admin/content/record_list.php:54
-#: views/admin/content/record_list.php:131
+#: views/admin/content/record_list.php:57
+#: views/admin/content/record_list.php:137
 msgid "Published"
 msgstr ""
 
-#: views/admin/content/record_list.php:54
-#: views/admin/content/record_list.php:128
+#: views/admin/content/record_list.php:57
+#: views/admin/content/record_list.php:134
 msgid "Different"
 msgstr ""
 
-#: views/admin/content/record_list.php:104
+#: views/admin/content/record_list.php:109
 msgid "Apply filters"
 msgstr ""
 
-#: views/admin/content/record_list.php:188
+#: views/admin/content/record_list.php:195
 msgid "Add child page"
 msgstr ""
 
-#: views/admin/content/record_list.php:189
+#: views/admin/content/record_list.php:196
 msgid "Are you sure?"
 msgstr ""
 
-#: views/admin/content/record_list.php:189
-#: views/admin/content/record_list.php:202
+#: views/admin/content/record_list.php:196
+#: views/admin/content/record_list.php:209
+#: views/admin/content/type_list.php:42
 msgid "Delete"
 msgstr ""
 
-#: views/admin/content/record_list.php:199
+#: views/admin/content/record_list.php:206
 msgid "Actions"
 msgstr ""
 
-#: views/admin/content/record_list.php:201
+#: views/admin/content/record_list.php:208
 msgid "Unpublish"
 msgstr ""
 
-#: views/admin/content/record_list.php:205
+#: views/admin/content/record_list.php:212
 msgid "Apply to selected"
 msgstr ""
 
-#: views/admin/content/record_list.php:207
+#: views/admin/content/record_list.php:214
 msgid "There is"
 msgstr ""
 
-#: views/admin/content/record_list.php:207
+#: views/admin/content/record_list.php:214
 msgid "There are"
 msgstr ""
 
-#: views/admin/content/record_list.php:214
+#: views/admin/content/record_list.php:221
+#: views/admin/content/type_list.php:54
 msgid "add a new one"
 msgstr ""
 
-#: views/admin/content/record_list.php:213
+#: views/admin/content/record_list.php:220
 msgid "There are no contents/pages for this type. To start, %a."
 msgstr ""
 
@@ -366,11 +392,6 @@ msgstr ""
 
 #: views/admin/content/type_add.php:73
 msgid "Tree (Pages)"
-msgstr ""
-
-#: views/admin/content/type_add.php:75
-#: views/admin/content/type_categories.php:74
-msgid "Add"
 msgstr ""
 
 #: views/admin/content/type_categories.php:11
@@ -456,7 +477,6 @@ msgid "Save scheme"
 msgstr ""
 
 #: views/admin/content/type_list.php:24
-#: views/admin/users/list.php:38
 msgid "Name"
 msgstr ""
 
@@ -529,10 +549,6 @@ msgstr ""
 msgid "%n Installer"
 msgstr ""
 
-#: views/admin/installer/success.php:22
-msgid "Login"
-msgstr ""
-
 #: views/admin/layout/footer.php:19
 msgid "Page rendered in %n seconds."
 msgstr ""
@@ -564,7 +580,7 @@ msgid "Groups and permissions"
 msgstr ""
 
 #: views/admin/layout/header.php:68
-msgid "Moduls"
+msgid "Modules"
 msgstr ""
 
 #: views/admin/layout/header.php:71
@@ -572,24 +588,29 @@ msgid "Manage"
 msgstr ""
 
 #: views/admin/layout/header.php:74
+#: views/admin/modules/list.php:21
 msgid "Documentation"
-msgstr ""
-
-#: views/admin/layout/header.php:82
-msgid "Back to site"
 msgstr ""
 
 #: views/admin/layout/header.php:82
 msgid "Logout"
 msgstr ""
 
+#: views/admin/modules/docs.php:6
+msgid "Module documentation"
+msgstr ""
+
+#: views/admin/modules/list.php:7
+msgid "Installed modules"
+msgstr ""
+
+#: views/admin/modules/list.php:37
+msgid "There are no modules installed."
+msgstr ""
+
 #: views/admin/users/list.php:22
 #: views/admin/users/groups/list.php:22
 msgid "List"
-msgstr ""
-
-#: views/admin/users/list.php:37
-msgid "Username"
 msgstr ""
 
 #: views/admin/users/list.php:39

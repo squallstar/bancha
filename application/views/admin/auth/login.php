@@ -4,9 +4,9 @@
           <div class="bheadl"></div>
           <div class="bheadr"></div>
 
-          <h2><?php echo _('Accesso'); ?></h2>
+          <h2><?php echo _('Administration login'); ?></h2>
           <ul>
-            <li><a href="<?php echo site_url(); ?>"><?php echo _('Torna al sito'); ?></a></li>
+            <li><a href="<?php echo site_url(); ?>"><?php echo _('Back to site'); ?></a></li>
           </ul>
         </div>
 
@@ -16,7 +16,7 @@
 
           <form action="" method="post">
             <p>
-              <label><?php echo _('Nome utente'); ?>:</label> <br />
+              <label><?php echo _('Username'); ?>:</label> <br />
               <input name="username" type="text" class="text" value="<?php echo $this->input->post('username'); ?>" />
             </p>
 
@@ -26,8 +26,8 @@
             </p>
 
             <p>
-              <input type="submit" class="submit" value="<?php echo _('Entra'); ?>" /> &nbsp;
-              <input type="checkbox" class="checkbox" checked="checked" id="rememberme" /> <label for="rememberme"><?php echo _('Ricordami'); ?></label>
+              <input type="submit" class="submit" value="<?php echo _('Login'); ?>" /> &nbsp;
+              <input type="checkbox" class="checkbox" checked="checked" id="rememberme" /> <label for="rememberme"><?php echo _('Remember me'); ?></label>
             </p>
           </form>
 

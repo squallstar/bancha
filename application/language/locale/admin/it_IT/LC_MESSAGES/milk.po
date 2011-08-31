@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Milk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-31 12:15+0100\n"
-"PO-Revision-Date: 2011-08-31 12:32+0100\n"
+"POT-Creation-Date: 2011-08-31 14:10+0100\n"
+"PO-Revision-Date: 2011-08-31 14:10+0100\n"
 "Last-Translator: Nicholas <nicholas@intesys.it>\n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -19,8 +19,8 @@ msgstr ""
 "X-Poedit-SearchPath-3: views/admin\n"
 
 #: controllers/admin/ajax.php:92
-msgid "Nessun allegato caricato per questo contenuto."
-msgstr ""
+msgid "This content has no attachments."
+msgstr "Questo contenuto non ha allegati."
 
 #: controllers/admin/contents.php:343
 msgid "First level"
@@ -87,28 +87,29 @@ msgid "Untitled"
 msgstr "Senza titolo"
 
 #: views/admin/auth/login.php:7
-msgid "Accesso"
-msgstr ""
+msgid "Administration login"
+msgstr "Login amministrazione"
 
 #: views/admin/auth/login.php:9
-msgid "Torna al sito"
-msgstr ""
+msgid "Back to site"
+msgstr "Torna al sito"
 
 #: views/admin/auth/login.php:19
-msgid "Nome utente"
-msgstr ""
+msgid "Username"
+msgstr "Nome utente"
 
 #: views/admin/auth/login.php:24
 msgid "Password"
 msgstr "Password"
 
 #: views/admin/auth/login.php:29
-msgid "Entra"
-msgstr ""
+#: views/admin/installer/success.php:22
+msgid "Login"
+msgstr "Entra"
 
 #: views/admin/auth/login.php:30
-msgid "Ricordami"
-msgstr ""
+msgid "Remember me"
+msgstr "Ricordami"
 
 #: views/admin/content/documents_finder.php:9
 msgid "Browse attachments"
@@ -548,10 +549,6 @@ msgstr "%u ha installato %c."
 msgid "%n Installer"
 msgstr "Installazione di %n"
 
-#: views/admin/installer/success.php:22
-msgid "Login"
-msgstr "Entra"
-
 #: views/admin/layout/footer.php:19
 msgid "Page rendered in %n seconds."
 msgstr "Pagina generata in %n secondi."
@@ -596,10 +593,6 @@ msgid "Documentation"
 msgstr "Documentazione"
 
 #: views/admin/layout/header.php:82
-msgid "Back to site"
-msgstr "Torna al sito"
-
-#: views/admin/layout/header.php:82
 msgid "Logout"
 msgstr "Esci"
 
@@ -619,10 +612,6 @@ msgstr "Non ci sono moduli installati."
 #: views/admin/users/groups/list.php:22
 msgid "List"
 msgstr "Lista"
-
-#: views/admin/users/list.php:37
-msgid "Username"
-msgstr "Nome utente"
 
 #: views/admin/users/list.php:39
 msgid "Surname"
