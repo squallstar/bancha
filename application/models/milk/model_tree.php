@@ -42,8 +42,8 @@ Class Model_tree extends CI_Model {
 		$this->_uri_segments = $this->uri->segment_array();
 
 		$pieces = count($this->_uri_segments);
-		
-		if ($pieces) 
+
+		if ($pieces)
 		{
 			//Controllo se e' un feed
 			if ($this->_uri_segments[$pieces] == $this->config->item('feed_uri'))
