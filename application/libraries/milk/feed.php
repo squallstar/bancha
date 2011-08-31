@@ -92,8 +92,10 @@ Class Feed
 		if ($this->_type == 'xml')
 		{
 			$this->CI->view->set('feed', $this->xml->asXML());
+			$this->CI->output->set_content_type('application/rss+xml');
 		} else if ($this->_type == 'json') {
 			$this->CI->view->set('feed', json_encode($this->json));
+			$this->CI->output->set_content_type('application/json');
 		}
 
 		$this->CI->view->render_template($template, FALSE);
