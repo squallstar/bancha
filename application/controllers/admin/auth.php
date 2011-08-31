@@ -39,6 +39,8 @@ Class Auth extends Milk_Controller {
 			);
 
 			if ($logged) {
+				$this->load->events();
+				$this->events->log('login');
 				redirect('admin/dashboard');
 			} else {
 				$this->view->set('message', 'Username e/o password errati.');
@@ -50,6 +52,10 @@ Class Auth extends Milk_Controller {
 
 	function logout() {
 		$this->auth->logout();
+
+		$this->load->events();
+		$this->events->log('logout');
+
 		redirect('admin/auth/login');
 	}
 

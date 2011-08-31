@@ -89,7 +89,7 @@ Class Ajax extends Milk_Controller
 			$this->view->set('documents', $documents);
 
 		} else {
-			show_error(_('Nessun allegato caricato per questo contenuto.'));
+			show_error(_('This content has no attachments.'));
 		}
 
 		$this->view->render_layout('content/documents_finder');
