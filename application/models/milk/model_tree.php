@@ -42,18 +42,20 @@ Class Model_tree extends CI_Model {
 		$this->_uri_segments = $this->uri->segment_array();
 
 		$pieces = count($this->_uri_segments);
-
-		//Controllo se e' un feed
-		if ($this->_uri_segments[$pieces] == $this->config->item('feed_uri'))
+		if ($pieces)
 		{
-			$this->uri->uri_string = str_replace('/'.$this->config->item('feed_uri'), '', $this->uri->uri_string);
-			unset($this->uri->segments[$pieces]);
-			$this->_uri_segments = $this->uri->segment_array();
-			if (!isset($this->view))
+			//Controllo se e' un feed
+			if ($this->_uri_segments[$pieces] == $this->config->item('feed_uri'))
 			{
-				$this->load->frlibrary('view');
+				$this->uri->uri_string = str_replace('/'.$this->config->item('feed_uri'), '', $this->uri->uri_string);
+				unset($this->uri->segments[$pieces]);
+				$this->_uri_segments = $this->uri->segment_array();
+				if (!isset($this->view))
+				{
+					$this->load->frlibrary('view');
+				}
+				$this->view->is_feed = TRUE;
 			}
-			$this->view->is_feed = TRUE;
 		}
 
 		$this->current_page_uri = $this->uri->segment($this->uri->total_segments());
