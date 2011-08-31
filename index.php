@@ -25,9 +25,9 @@
  */
 //	define('ENVIRONMENT', 'development');
 	define('ENVIRONMENT', 'ale');
+
 /*
  */
-
 if (defined('ENVIRONMENT'))
 {
 	switch (ENVIRONMENT)
