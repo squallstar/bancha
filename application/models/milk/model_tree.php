@@ -46,16 +46,18 @@ Class Model_tree extends CI_Model {
 		if ($pieces)
 		{
 			//Controllo se e' un feed
-			if ($this->_uri_segments[$pieces] == $this->config->item('feed_uri'))
+			$last_piece = $this->_uri_segments[$pieces];
+			if (in_array($last_piece,$this->config->item('feed_uri')))
 			{
-				$this->uri->uri_string = str_replace('/'.$this->config->item('feed_uri'), '', $this->uri->uri_string);
+				list($name, $type) = explode('.',$last_piece);
+				$this->uri->uri_string = str_replace('/'.$last_piece, '', $this->uri->uri_string);
 				unset($this->uri->segments[$pieces]);
 				$this->_uri_segments = $this->uri->segment_array();
 				if (!isset($this->view))
 				{
 					$this->load->frlibrary('view');
 				}
-				$this->view->is_feed = TRUE;
+				$this->view->is_feed = $type;
 			}
 		}
 

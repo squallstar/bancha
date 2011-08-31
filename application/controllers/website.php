@@ -254,7 +254,7 @@ Class Website extends Milk_Controller {
 							'title' 		=> $page->get('title'),
 							'description'	=> substr(strip_tags($page->get('contenuto')), 0, 100)
 						);
-						$this->feed->create_new($feed_header);
+						$this->feed->create_new($feed_header, $this->view->is_feed);
 
 						if (count($records))
 						{

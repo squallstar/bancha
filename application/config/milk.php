@@ -138,7 +138,7 @@ $config['strip_website_url'] = TRUE;
  * FEED URI
  * Segmento dell'url da utilizzare per i feed
  */
-$config['feed_uri'] = 'feed.xml';
+$config['feed_uri'] = array('feed.xml', 'feed.json');
 
 /*
  * DOCUMENTS SELECT FIELDS
