@@ -21,8 +21,9 @@
 				<li><a href="#sb-documents">9. Documenti (files)</a>
 				<li><a href="#sb-trees">10. Alberi di menu</a></li>
 				<li><a href="#sb-caching">11. Caching</a></li>
+				<li><a href="#sb-feeds">12. Feed dei contenuti</a></li>
 			</ul>
-			<p>Revisione: 0.3<br />Data: 26 Ago 2011</p>
+			<p>Revisione: <?php echo MILK_VERSION; ?><br />Data: 31 Ago 2011</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
@@ -537,6 +538,31 @@ echo menu($albero);
 
 			<h3>Cache delle pagine</h3>
 			<p>I tipi di contenuto con struttura a pagine, normalmente presentano un campo xml chiamato "<strong>page_cache</strong>" nella scheda <strong>"Aspetto e azioni"</strong> che rappresenta (nella maschera di inserimento/modifica di una pagina) un campo di input numerico relativo al <strong>numero di minuti</strong> da utilizzare per tenere tale pagina in cache. Per non cacheare la pagina, &egrave; sufficiente impostare tale numero a "0" (zero). La cache di una pagina viene automaticamente svuotata quando la pagina viene modificata, pubblicata o depubblicata.<br /><strong>ATTENZIONE</strong>: la cache delle pagine &egrave; una funzionalit&agrave; estremamente <strong>potente</strong> ma <strong>pericolosa</strong>. Verr&agrave; infatti salvato l'interno rendering finale della pagina e servito all'utente come fosse una <strong>pagina statica</strong> (<em>senza passare dal framework</em>). Utilizzarlo quindi con la dovuta cautela, dato che le uniche variazioni nelle diverse richieste potranno essere solamente modifiche client-side via Javascript.</p>
+</div>
+
+<div class="sidebar_content" id="sb-feeds">
+			<h3>12. Feed dei contenuti</h3>
+			<p>
+Le pagine configurate come "<strong>lista di contenuti</strong>" presentano due utili esportazioni predefinite: una <strong>xml rss 2.0</strong> ed una di tipo <strong>json</strong>.
+			</p>
+			<br />
+			<h3>feed.xml</h3>
+			<p>Aggiungendo al path di una pagina di tipo lista di contenuti il parametro "/feed.xml", verrà visualizzato il relativo feed RSS 2.0. Ad esempio:</p>
+<code>//Pagina lista di contenuti:
+http://localhost/lista-articoli
+
+//Relativo feed rss:
+http://localhost/lista-articoli/feed.xml</code><br />
+<p>Per il popolamento dei campi, vengono usati i parametri title, contenuto e date_update/date_insert dei contenuti. &Egrave; possibile variare tale comportamento agendo nel router di default del sito (controllers/website.php:routing())</p>
+
+<h3>feed.json</h3>
+			<p>In maniera simile a quanto avviene per il feed rss, aggiungendo al path di una pagina di tipo lista di contenuti il parametro "/feed.json", verrà visualizzata la relativa esportazione dati in formato JSON. Ad esempio:</p>
+<code>//Pagina lista di contenuti:
+http://localhost/lista-articoli/ultimi-post
+
+//Esportazione dati in formato JSON:
+http://localhost/lista-articoli/ultimi-post/feed.json</code><br />
+
 </div>
 
 	</div>
