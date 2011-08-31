@@ -84,6 +84,12 @@ Class Xml
   {
     $this->CI->db->select((string)$sql->select);
 
+    if (!isset($this->CI->content))
+    {
+    	//TODO: fix
+    	return;
+    }
+
     $tipo = $this->CI->content->type($id_type);
 
     //Uso la tabella di staging se sono in staging

@@ -44,6 +44,11 @@ Class Milk_Loader extends CI_Loader {
 		$this->model(FRNAME.'/'.$model, $name, $db_conn);
 	}
 
+	function frlibrary($library, $name = '')
+	{
+		$this->library(FRNAME.'/'.$library, $name);
+	}
+
 	function records()
 	{
 		$this->model(FRNAME.'/model_records', 'records');

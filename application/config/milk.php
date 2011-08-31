@@ -31,6 +31,17 @@ $config['languages'] = array(
 );
 
 /*
+ * MILK CMS VERSION
+ * Versione del framework
+ */
+define('MILK_VERSION', '0.5');
+
+/*
+ * NOME DEL CMS
+ */
+define('CMS', 'MILK');
+
+/*
  * WEBSITE SKINS
  * Skin da utilizzare. La prima si riferisce alla versione desktop, la seconda alla versione mobile (se presente)
  * I nomi sono relativi alle directory presenti in application/views/website/
@@ -45,17 +56,6 @@ $config['website_skins'] = array(
 * Il numero di record per pagina estratti in amministrazione nelle aree dei records.
 */
 $config['records_per_page'] = 10;
-
-/*
- * MILK CMS VERSION
- * Versione del framework
- */
-define('MILK_VERSION', '0.4');
-
-/*
- * NOME DEL CMS
- */
-define('CMS', 'MILK');
 
 /* FRAMEWORK PATH
  * Costante di definizione del path delle librerie di Milk
@@ -133,6 +133,12 @@ $config['attach_custom_folder'] = date('YW') . DIRECTORY_SEPARATOR . date('d') .
  * nei campi (ad esempio nelle textarea)
  */
 $config['strip_website_url'] = TRUE;
+
+/*
+ * FEED URI
+ * Segmento dell'url da utilizzare per i feed
+ */
+$config['feed_uri'] = 'feed.xml';
 
 /*
  * DOCUMENTS SELECT FIELDS

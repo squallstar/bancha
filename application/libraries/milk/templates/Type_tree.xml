@@ -148,6 +148,16 @@
 				<option value="date_publish ASC">Data di pubblicazione (ASC)</option>
 			</options>
 		</field>
+		<field id="action_list_has_feed">
+			<visible>false</visible>
+			<description>Feed RSS</description>
+			<type>select</type>
+			<options>
+				<option value="T">Si</option>
+				<option value="F">No</option>
+			</options>
+			<default>T</default>
+		</field>
 		<field id="action_custom_name">
 			<visible>false</visible>
 			<description>Nome azione</description>

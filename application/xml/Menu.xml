@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- generator="milk-0.3" -->
+<!-- generator="milk-0.5" -->
 <content>
 	<id>1</id>
 	<name>Menu</name>
@@ -147,6 +147,16 @@
 				<option value="date_publish DESC">Data di pubblicazione (DESC)</option>
 				<option value="date_publish ASC">Data di pubblicazione (ASC)</option>
 			</options>
+		</field>
+		<field id="action_list_has_feed">
+			<visible>false</visible>
+			<description>Feed RSS</description>
+			<type>select</type>
+			<options>
+				<option value="T">Si</option>
+				<option value="F">No</option>
+			</options>
+			<default>T</default>
 		</field>
 		<field id="action_custom_name">
 			<visible>false</visible>
