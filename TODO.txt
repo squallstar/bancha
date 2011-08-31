@@ -14,4 +14,4 @@ TODO LIST - MILK
 - refactor modulo di twitter
 - fare modulo di sharing tumblr/twitter/facebook
 - list view su tipi con tabelle esterne/custom ovviamente non funziona
-- multiselect
+- stile css multiselect
