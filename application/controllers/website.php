@@ -252,7 +252,7 @@ Class Website extends Milk_Controller {
 						$this->load->frlibrary('feed');
 						$feed_header = array(
 							'title' 		=> $page->get('title'),
-							'description'	=> CDATA_START.$page->get('contenuto').CDATA_END
+							'description'	=> $page->get('contenuto')
 						);
 						$this->feed->create_new($feed_header, $this->view->is_feed);
 
