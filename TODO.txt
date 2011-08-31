@@ -1,6 +1,6 @@
-**********
+****************
 TODO LIST - MILK
-**********
+****************
 
 - scrivere programmato anziche' pubblicato se publish maggiore now
 - filtro di tipo date + datetime su lista contenuti da creare
