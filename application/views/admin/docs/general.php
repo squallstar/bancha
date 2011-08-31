@@ -332,14 +332,16 @@ Di seguito, le funzioni utili a renderizzare view, o templates.</p><br />
 	<li><strong>description</strong> - stringa</li>
 </ul>
 
-<h3>render_template($template_file)</h3>
+<h3>render_template($template_file, $layout = true)</h3>
 <p>Renderizza un template presenta nella directory dei templates, utilizzando lo skin in uso (solitamente <strong>application/views/website/desktop/templates/</strong>).
-&Egrave; il metodo di rendering più utilizzato, e viene utilizzata soprattutto dal motore di routing generale del sito per renderizzare la struttura base delle pagine.</p>
+&Egrave; il metodo di rendering più utilizzato, e viene utilizzata soprattutto dal motore di routing generale del sito per renderizzare la struttura base delle pagine.<br />
+Nel caso non si volesse passare per il layout, passare come secondo parametro "false" e verr&agrave; renderizzato solo il template scelto.</p>
 <code>$this->render_template('default');
-//Renderizza il file application/views/layout/templates/default.php
+//Renderizza il file application/views/website/desktop/templates/default.php
 
 $this->render_template('home');
-//Renderizza la homepage del sito, ovvero il file application/views/layout/templates/home.php</code><br />
+//Renderizza la homepage del sito, ovvero il file application/views/website/desktop/templates/home.php
+//passando per il layout: application/views/website/desktop/layout.php</code><br />
 
 <h3>render($view_file)</h3>
 <p>Metodo base per il rendering di una singola vista lato front-end. Utilizza il path relativo allo skin in uso:</p>
@@ -555,6 +557,8 @@ http://localhost/lista-articoli
 http://localhost/lista-articoli/feed.xml</code><br />
 <p>Per il popolamento dei campi, vengono usati i parametri title, contenuto e date_update/date_insert dei contenuti. &Egrave; possibile variare tale comportamento agendo nel router di default del sito (controllers/website.php:routing())</p>
 
+<div class="message info">Puoi disattivare la funzionalità di esportazione feed di una pagina intervenendo sulla voce "Esportazione feed" presente nella maschera "Aspetto e azioni" di tale pagina. Il campo è definito nello schema xml dei tipi di contenuto ad albero ed è chiamato "action_list_has_feed".</div>
+<br />
 <h3>feed.json</h3>
 			<p>In maniera simile a quanto avviene per il feed rss, aggiungendo al path di una pagina di tipo lista di contenuti il parametro "/feed.json", verrà visualizzata la relativa esportazione dati in formato JSON. Ad esempio:</p>
 <code>//Pagina lista di contenuti:
