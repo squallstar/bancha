@@ -34,7 +34,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     }
 
     foreach ($this->view->javascript as $js) {
-         ?><script type="text/javascript" src="<?php echo theme_url('js/'.$js); ?>"></script><?php
+         ?><script type="text/javascript" src="<?php echo theme_url().'js/'.$js; ?>"></script><?php
        }
        ?>
 
