@@ -12,6 +12,8 @@
  *
  */
 
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 ?><!DOCTYPE html>
 <html lang="<?php echo $this->lang->current_language; ?>">
 	<head>
@@ -23,7 +25,7 @@
 		));
 
 		foreach ($this->view->css as $css) {
-			echo link_tag('css/'.$css);
+			echo link_tag(theme_url().'css/'.$css);
 		}
 
 		if ($this->view->has_feed)
@@ -32,7 +34,7 @@
 		}
 
 		foreach ($this->view->javascript as $js) {
-   			?><script type="text/javascript" src="<?php echo site_url('js/'.$js); ?>"></script><?php
+   			?><script type="text/javascript" src="<?php echo theme_url('js/'.$js); ?>"></script><?php
    		}
    		?>
 

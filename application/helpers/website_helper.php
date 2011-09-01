@@ -48,6 +48,15 @@ function admin_url($str='') {
 }
 
 /**
+ * Ritorna il path del tema in uso
+ * @param string $str path da appendere
+ */
+function theme_url() {
+	return THEME_PUB_PATH;
+}
+
+
+/**
  * Ritorna l'url pubblico di un attachment
  * @param string $str path relativa
  */

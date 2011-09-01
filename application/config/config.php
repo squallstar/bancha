@@ -209,7 +209,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'sgr4sqlstar';
+$config['encryption_key'] = 'm1lkcms45mdsdfj3d';
 
 /*
 |--------------------------------------------------------------------------
@@ -229,7 +229,7 @@ $config['encryption_key'] = 'sgr4sqlstar';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= '_probe';
+$config['sess_cookie_name']		= '_mprobe';
 $config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= FALSE;

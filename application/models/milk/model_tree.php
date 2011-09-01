@@ -237,16 +237,33 @@ Class Model_tree extends CI_Model {
 			//$this->db->order_by('uri', 'ASC'); non funziona perchè tanto l'array sotto poi si disordina
 			$this->_fetch();
 		}
-		$options = array();
-		if (count($this->_records))
+		
+		return $this->get_branch_dropdown($this->_records);
+	}
+	
+	
+	/**
+	 * Ritorna un albero ramificato sotto forma di array associativo
+	 * (utile per le select con alberatura)
+	 * @return array
+	 */
+	public function get_branch_dropdown($tree = NULL, $id_parent = NULL, $level = 0, $options = array())
+	{		
+		foreach ($tree as $key => $node) 
 		{
-			foreach ($this->_records as $page)
+			
+			if ($node->id_parent == $id_parent)
 			{
-				$options[$page->id_record] = $page->title;
+				$options [$node->id_record] = str_repeat('---' , $level)." ".$node->title;
+				unset($tree[$key]);
+				$level++;
+				$options = $this->get_branch_dropdown($tree, $node->id_record, $level, $options);
+				$level--;
 			}
 		}
 		return $options;
 	}
+
 
 	/**
 	 * Forza il refresh da DB dei dati alla prossima ricerca
@@ -400,6 +417,7 @@ Class Model_tree extends CI_Model {
 		return $this->get_default_branch($id);
 	}
 
+
 	/**
 	 * Crea un albero di menu
 	 * @param array $pages Array of Record objects
@@ -449,11 +467,10 @@ Class Model_tree extends CI_Model {
 
 		}
 
-
 		$tree = array();
 		foreach ($root as $r)
 		{
-			$this->_treemap($r, $nodes, $sons, '', $tree);
+			$this->_treemap($r, $nodes, $sons, '', $tree);				
 		}
 		if (isset($tree['sons']))
 		{
@@ -461,6 +478,7 @@ Class Model_tree extends CI_Model {
 		}
 		return $tree;
 	}
+
 
 	/**
 	 * Funzione ricorsiva interna per creare gerarchie di menu
@@ -493,6 +511,7 @@ Class Model_tree extends CI_Model {
 		}
 
 	}
+	
 
 	/**
 	 * Elimina il file relativo alla cache di un tipo

@@ -34,7 +34,7 @@ $config['languages'] = array(
  * MILK CMS VERSION
  * Versione del framework
  */
-define('MILK_VERSION', '0.5');
+define('MILK_VERSION', '0.6');
 
 /*
  * NOME DEL CMS
@@ -42,13 +42,13 @@ define('MILK_VERSION', '0.5');
 define('CMS', 'MILK');
 
 /*
- * WEBSITE SKINS
- * Skin da utilizzare. La prima si riferisce alla versione desktop, la seconda alla versione mobile (se presente)
- * I nomi sono relativi alle directory presenti in application/views/website/
+ * WEBSITE THEMES
+ * Temi da utilizzare. La prima si riferisce alla versione desktop, la seconda alla versione mobile (se presente)
+ * I nomi sono relativi alle directory presenti in themes/
  */
-$config['website_skins'] = array(
-	  'desktop'
-//	, 'mobile'
+$config['website_themes'] = array(
+	'desktop'	=> 'desktop',
+	'mobile'	=> 'desktop'
 );
 
 /*
