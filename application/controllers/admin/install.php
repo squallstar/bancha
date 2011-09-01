@@ -26,38 +26,47 @@ Class Install extends Milk_Controller
 	{
 		$this->load->library('milk/installer');
 
-		//Creo le tabelle
-		$this->installer->create_tables();
+		if ($this->input->post('install'))
+		{
+			//Creo le tabelle
+			$this->installer->create_tables();
 
-		//Creo le directory
-		$this->installer->create_directories();
+			//Creo le directory
+			$this->installer->create_directories();
 
-		//Creo un utente ed i relativi permessi
-		$username = 'admin';
-		$password = 'admin';
-		$this->installer->create_groups();
-		$this->installer->create_user($username, $password, 'Nicholas', 'Valbusa');
-		$this->auth->login($username, $password);
+			//Creo un utente ed i relativi permessi
+			$username = 'admin';
+			$password = 'admin';
+			$this->installer->create_groups();
+			$this->installer->create_user($username, $password, 'Nicholas', 'Valbusa');
+			$this->auth->login($username, $password);
 
-		//Creo i tipi predefiniti
-		$this->installer->create_types();
+			//Creo i tipi predefiniti
+			$this->installer->create_types();
 
-		//Creo gli indici
-		$this->installer->create_indexes();
+			//Creo gli indici
+			$this->installer->create_indexes();
 
-		//Svuoto la cache
-		$this->tree->clear_cache();
+			//Svuoto la cache
+			$this->tree->clear_cache();
 
-		//Loggo il primo evento
-		$this->load->events();
-		$this->events->log('install', null, CMS);
+			//Loggo il primo evento
+			$this->load->events();
+			$this->events->log('install', null, CMS);
 
-		$this->view->set('username', $username);
-		$this->view->set('password', $password);
-		$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
-		$this->view->render_layout('installer/success', FALSE);
+			$this->view->set('username', $username);
+			$this->view->set('password', $password);
+			$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
+			$this->view->render_layout('installer/success', FALSE);
+			return;
 
-		return;
+		} else {
+			$this->view->render_layout('installer/request', FALSE);
+		}
+
+
+
+
 
 	}
 }

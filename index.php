@@ -84,6 +84,16 @@ if (defined('ENVIRONMENT'))
  */
 	$application_folder = 'application';
 
+/*
+ *---------------------------------------------------------------
+ * THEMES FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * NO TRAILING SLASH!
+ *
+ */
+	$themes_folder = 'themes';
+
 
 /*
  * -------------------------------------------------------------------
@@ -168,6 +178,21 @@ if (defined('ENVIRONMENT'))
 		}
 
 		define('APPPATH', BASEPATH.$application_folder.'/');
+	}
+
+	// The path to the "application" folder
+	if (is_dir($themes_folder))
+	{
+		define('THEMESPATH', $themes_folder.'/');
+	}
+	else
+	{
+		if ( ! is_dir(BASEPATH.$themes_folder.'/'))
+		{
+			exit("Your themes folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
+		}
+
+		define('THEMESPATH', BASEPATH.$themes_folder.'/');
 	}
 
 /*

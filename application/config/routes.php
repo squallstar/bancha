@@ -22,8 +22,8 @@ $route['404_override'] = 'website/router';
 //Homepage del sito
 $route['default_controller'] = "website/home";
 
-//Route per switch skin da desktop a mobile
-$route['^go-([a-z]+)$'] = "website/change_skin/$1";
+//Route per switch theme
+$route['^go-([a-z]+)$'] = "website/change_theme/$1";
 
 //Route per cambio lingua
 $route['^change-language/([a-z]+)$'] = "website/change_language/$1";

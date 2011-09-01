@@ -36,19 +36,19 @@ Class Website extends Milk_Controller {
 		$this->view->set('tree', $this->tree->get_default());
 
 		$this->view->javascript = array('jquery.js', 'application.js');
-		$this->view->css = array($this->view->skin.'.css');
+		$this->view->css = array('style.css');
 
 		//Renderizzo il template home
 		$this->view->render_template('home');
 	}
 
 	/**
-	 * Cambia lo skin del sito
-	 * Invocata da: /go-{skin}
+	 * Cambia il theme del sito
+	 * Invocata da: /go-{theme}
 	 * @param string $new_language
 	 */
-	function change_skin($new_skin) {
-		$this->view->set_skin($new_skin);
+	function change_theme($new_theme) {
+		$this->view->set_theme($new_theme);
 		redirect('/');
 	}
 
@@ -70,7 +70,7 @@ Class Website extends Milk_Controller {
 	function router() {
 
 		$this->view->javascript = array('jquery.js', 'application.js');
-		$this->view->css = array($this->view->skin.'.css');
+		$this->view->css = array('style.css');
 
 		$found = FALSE;
 

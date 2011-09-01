@@ -28,58 +28,73 @@ Class View {
 	public $description = '';
 	public $javascript = array();
 	public $css = array();
-	public $skin = '';
+	public $themes = array();
+	public $theme = '';
+	public $theme_path = '';
 	public $has_feed = FALSE;
 	public $is_feed = FALSE;
 
 	public function __construct()
 	{
 		$this->_CI = & get_instance();
+		$this->themes = $this->_CI->config->item('website_themes');
 		$this->_prepend_dir = $this->_CI->config->item('website_views_folder');
-		$this->load_skin();
+		$this->load_theme();
 	}
 
 	/**
-	 * Loads a website skin
+	 * Loads a website theme
 	 */
-	public function load_skin() {
-		$this->skin = $this->_CI->session->userdata('_website_skin');
-		if (!$this->skin)
+	public function load_theme() {
+		$this->theme = $this->_CI->session->userdata('_website_theme');
+		if (!$this->theme)
 		{
-			$skins = $this->_CI->config->item('website_skins');
 			$this->_CI->load->library('user_agent');
-			if ($this->_CI->agent->is_mobile() && isset($skins[1]))
+			if ($this->_CI->agent->is_mobile() && isset($themes['mobile']))
 			{
-				$this->skin = $skins[1];
+				$this->theme = $themes['mobile'];
 			} else {
-				$this->skin = $skins[0];
+				$this->theme = $themes['desktop'];
 			}
-			$this->store_skin();
+			$this->store_theme();
 		}
+		$this->update_ci_path();
 	}
 
 	/**
-	 * Force and set a new skin
+	 * Force and set a new theme
 	 * @param string $to
 	 */
-	public function set_skin($to)
+	public function set_theme($to)
 	{
-		$skins = $this->_CI->config->item('website_skins');
-		if (in_array($to, $skins))
+		if (isset($this->themes[$to]))
 		{
-			$this->skin = $to;
-			$this->store_skin();
+			$this->theme = $this->themes[$to];
+			$this->store_theme();
 			return TRUE;
 		}
 		return FALSE;
 	}
 
 	/**
-	 * Store the current skin in session
+	 * Store the current theme in session
 	 */
-	public function store_skin()
+	public function store_theme()
 	{
-		$this->_CI->session->set_userdata('_website_skin', $this->skin);
+		$this->_CI->session->set_userdata('_website_theme', $this->theme);
+		$this->update_ci_path();
+	}
+
+	public function update_ci_path()
+	{
+		$theme_path = THEMESPATH . $this->theme . '/';
+		$this->theme_path = site_url() . $theme_path;
+		$this->_CI->load->add_view_path($theme_path . 'views/');
+
+		if (!defined('THEME_PUB_PATH'))
+		{
+			define('THEME_PUB_PATH', $this->theme_path);
+		}
 	}
 
 	/**
@@ -145,9 +160,10 @@ Class View {
 		if ($layout)
 		{
 			$this->set('_template_file', $this->_template_dir.$template_file);
-			$this->_CI->load->view($this->_prepend_dir.$this->skin.'/layout', $this->_data);
+			$this->_CI->load->view('layout', $this->_data);
+			//$this->_CI->load->view($this->_prepend_dir.$this->theme.'/layout', $this->_data);
 		} else {
-			$this->_CI->load->view($this->_prepend_dir.$this->skin.'/'.$this->_template_dir.$template_file, $this->_data);
+			$this->_CI->load->view($this->_template_dir.$template_file, $this->_data);
 		}
 	}
 
@@ -168,12 +184,12 @@ Class View {
 	}
 
 	/**
-	 * Renderizza una singola view nello skin in uso
+	 * Renderizza una singola view del theme in uso
 	 * @param string $view_file
 	 */
 	public function render($view_file)
 	{
-		$this->_CI->load->view($this->_prepend_dir.$this->skin.'/'.$view_file);
+		$this->_CI->load->view($view_file);
 	}
 
 }
