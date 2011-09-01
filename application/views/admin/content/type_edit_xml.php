@@ -9,7 +9,7 @@ $this->load->helper('form');
 		<h2><?php echo _('Edit scheme'); ?>: <?php echo $tipo['description']; ?></h2>
 
 		<ul>
-			<li><img class="middle" src="<?php echo site_url('widgets/admin/icns/delete.png'); ?>" /> <a href="<?php echo admin_url($_section.'/')?>"><?php echo _('Discard all'); ?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/delete.png'); ?>" /> <a href="<?php echo admin_url($_section.'/')?>"><?php echo _('Discard all'); ?></a></li>
 		</ul>
 
 

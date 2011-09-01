@@ -12,8 +12,8 @@
  *
  */
 
-$css_url = site_url() . 'css/admin/';
-$js_url = site_url() . 'js/admin/';
+$css_url = site_url() . THEMESPATH . 'admin/css/';
+$js_url = site_url() . THEMESPATH . 'admin/js/';
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="it">
