@@ -50,11 +50,11 @@ Class View {
 		if (!$this->theme)
 		{
 			$this->_CI->load->library('user_agent');
-			if ($this->_CI->agent->is_mobile() && isset($themes['mobile']))
+			if ($this->_CI->agent->is_mobile() && isset($this->themes['mobile']))
 			{
-				$this->theme = $themes['mobile'];
+				$this->theme = $this->themes['mobile'];
 			} else {
-				$this->theme = $themes['desktop'];
+				$this->theme = $this->themes['desktop'];
 			}
 			$this->store_theme();
 		}
