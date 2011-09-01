@@ -26,6 +26,7 @@ Class Model_tree extends CI_Model {
 	public $current_page_uri = '';
 	public $parent_page_uri = false;
 	public $stage_prefix = 'stage.';
+	public $breadcrumbs = array();
 
 	public function __construct()
 	{
@@ -364,7 +365,6 @@ Class Model_tree extends CI_Model {
 	 */
 	public function get()
 	{
-
 		if (!$this->_fetched)
 		{
 			$this->_fetch();
@@ -469,6 +469,7 @@ Class Model_tree extends CI_Model {
 		}
 
 		$tree = array();
+		//$this->breadcrumbs = array();
 		foreach ($root as $r)
 		{
 			$this->_treemap($r, $nodes, $sons, '', $tree);				
@@ -496,13 +497,21 @@ Class Model_tree extends CI_Model {
 		$link .= $page->uri . '/';
 		$alias = $page->uri;
 		$page->link = $link;
+		$open = in_array($page->uri, $this->_uri_segments) ? TRUE : FALSE;
 		$arr['sons'][$id] = array(
-					'title' => $page->title,
-					'link' => $link,
-					'open'	=> in_array($page->uri, $this->_uri_segments) ? TRUE : FALSE,
-					'selected'	=> $this->current_page_uri == $page->uri ? TRUE : FALSE,
-					'show_in_menu'	=> isset($page->show_in_menu) ? $page->show_in_menu : 'F'
+			'title' => $page->title,
+			'link' => $link,
+			'open'	=> $open,
+			'selected'	=> $this->current_page_uri == $page->uri ? TRUE : FALSE,
+			'show_in_menu'	=> isset($page->show_in_menu) ? $page->show_in_menu : 'F'
 		);
+		if ($open)
+		{
+			$this->breadcrumbs[$id] = array(
+				'title' => $page->title,
+				'link'	=> $link
+			);
+		}
 		if(isset($sons[$id]))
 		{
 			foreach($sons[$id] as $son)
