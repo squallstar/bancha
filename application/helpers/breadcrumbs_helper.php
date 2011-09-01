@@ -15,6 +15,7 @@
 
 /**
  * Helper per stampare delle breadcrumbs
+ * @param array
  * @return xhtml
  */
 if (!function_exists('breadcrumbs'))

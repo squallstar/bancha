@@ -73,6 +73,7 @@ foreach ($this->content->types() as $tipo) {
 				<li class="<?php echo $this->uri->segment(2) == 'docs' ? 'active' : ''; ?>">
 					<a href="<?php echo admin_url('docs'); ?>"><?php echo _('Documentation'); ?></a>
 				</li>
+				<li><a href="<?php echo admin_url('import'); ?>"><?php echo _('Import/export data'); ?></a></li>
 				<li><a href="<?php echo admin_url('contents/renew_cache'); ?>"><?php echo _('Clear cache'); ?></a></li>
 
 			</ul>
