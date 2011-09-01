@@ -225,7 +225,8 @@ $config['record_columns'] = array(
 	'xml',
 	'id_parent',
 	'show_in_menu',
-	'published'
+	'published',
+	'priority'
 );
 
 
@@ -242,7 +243,7 @@ $config['record_not_live_columns'] = array(
  * Indicare le colonne da estrarre nelle pagine per gli alberi di menu (tabella pages)
  */
 $config['page_extract_columns'] = array(
-	'id_record', 'uri', 'full_uri', 'title', 'id_parent', 'show_in_menu'
+	'id_record', 'uri', 'full_uri', 'title', 'id_parent', 'show_in_menu', 'priority'
 );
 
 /*

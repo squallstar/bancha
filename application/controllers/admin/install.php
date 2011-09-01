@@ -28,34 +28,49 @@ Class Install extends Milk_Controller
 
 		if ($this->input->post('install'))
 		{
-			//Creo le tabelle
-			$this->installer->create_tables();
+			if ($this->input->post('create_tables'))
+			{
+				//Creo le tabelle
+				$this->installer->create_tables();
 
-			//Creo le directory
-			$this->installer->create_directories();
+				//Creo gli indici
+				$this->installer->create_indexes();
 
-			//Creo un utente ed i relativi permessi
-			$username = 'admin';
-			$password = 'admin';
-			$this->installer->create_groups();
-			$this->installer->create_user($username, $password, 'Alessandro', 'Maroldi');
-			$this->auth->login($username, $password);
+				//Creo un utente ed i relativi permessi
+				$username = 'admin';
+				$password = 'admin';
+				$this->installer->create_groups();
+				$this->installer->create_user($username, $password, 'Alessandro', 'Maroldi');
+				$this->auth->login($username, $password);
+				$this->view->set('username', $username);
+				$this->view->set('password', $password);
+			}
 
-			//Creo i tipi predefiniti
-			$this->installer->create_types();
+			if ($this->input->post('create_directories'))
+			{
+				//Creo le directory
+				$this->installer->create_directories();
+			}
 
-			//Creo gli indici
-			$this->installer->create_indexes();
+			if ($this->input->post('create_types'))
+			{
+				//Creo i tipi predefiniti
+				$this->installer->create_types();
+			}
 
-			//Svuoto la cache
-			$this->tree->clear_cache();
+			if ($this->input->post('create_types') || $this->input->post('clear_cache'))
+			{
+				//Svuoto la cache
+				$this->tree->clear_cache();
+			}
 
-			//Loggo il primo evento
-			$this->load->events();
-			$this->events->log('install', null, CMS);
+			if ($this->input->post('log_events'))
+			{
+				//Loggo il primo evento
+				$this->load->events();
+				$this->events->log('install', null, CMS);
+			}
 
-			$this->view->set('username', $username);
-			$this->view->set('password', $password);
 			$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
 			$this->view->render_layout('installer/success', FALSE);
 			return;

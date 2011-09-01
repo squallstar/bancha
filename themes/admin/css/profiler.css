@@ -8,7 +8,7 @@
 	top:0;
 	left:0;
 	min-height:2px;
-	background: url(../../widgets/admin/hdr.gif) 0 0 repeat-x;
+	background: url(../widgets/hdr.gif) 0 0 repeat-x;
 	font-family: "Lucida Grande",Verdana,sans-serif;
     font-size: 12px;
     font-weight:bold;
@@ -23,7 +23,7 @@
 	z-index:99999;
 	top:0;
 	left:20px;
-	background: url(../../widgets/admin/hdr.gif) 0 0 repeat-x;
+	background: url(../widgets/hdr.gif) 0 0 repeat-x;
 	color:#FFF;
 	font-family: "Lucida Grande",Verdana,sans-serif;
     font-size: 12px;
@@ -42,7 +42,7 @@
 	position:relative;
 	width:90%;
 	left:20px;
-	background: url(../../widgets/admin/hdr.gif) 0 0 repeat-x;
+	background: url(../widgets/hdr.gif) 0 0 repeat-x;
 	line-height:50px;
 }
 

@@ -287,13 +287,13 @@ Scegliendo <strong>azione personalizzata</strong>, la pagina invocherà l'azione
 			<p>Milk utilizza un sistema di viste composto da un elemento principale (<strong>template</strong>) che a sua volta renderizza altre sotto viste, tra cui <strong>header</strong>, <strong>footer</strong> e <strong>content_render</strong>.<br /><br />
 Questo vuol dire che un sito potrebbe avere anche 10 template diversi per le varie sezioni del sito internet.<br /><br />Ogni pagina, presenta un campo chiamato <strong>view_template</strong> che definisce il template da renderizzare per tale pagina. L'elenco dei templates è contenuto nella cartella <strong>application/views/layout/templates</strong> e di base presenta questi templates:</p>
 <ul>
-	<li><strong>.../views/website/desktop/layout/templates/default.php</strong> - utilizzato di default per le pagine</li>
-	<li><strong>.../views/website/desktop/layout/templates/home.php</strong> - utilizzato dalla homepage del sito</li>
+	<li><strong><?php echo THEMESPATH; ?>/desktop/templates/default.php</strong> - utilizzato di default per le pagine</li>
+	<li><strong><?php echo THEMESPATH; ?>/desktop/templates/home.php</strong> - utilizzato dalla homepage del sito</li>
 </ul>
 <p>Come potrai vedere, ognuno di questi template contiene del codice HTML dichiarativo e a sua volta sceglie quali altre view renderizzare. Per renderizzare altre view, è sufficiente utilizzare la funzione nativa <strong>load->view</strong> di Code Igniter. Ecco un esempio di template:</p>
-<code>&lt;?php $this->load->view('layout/header'); ?&gt;
-&lt;?php $this->load->view('layout/content_render'); ?&gt;
-&lt;?php $this->load->view('layout/footer'); ?&gt;</code>
+<code>&lt;?php $this->load->view('header'); ?&gt;
+&lt;?php $this->load->view('content_render'); ?&gt;
+&lt;?php $this->load->view('footer'); ?&gt;</code>
 <br />
 <div class="message info">La parte di layout relativa alle dichiarazioni <strong>html, head, body</strong> è contenuta nel file ../views/website/desktop/layout.php</div>
 <p>Quando definisci altri template, ricorda di inserire una nuova option nel campo <strong>view_template</strong> all'interno del tipo di contenuto (solitamente "Pagine") di modo che venga visualizzato il nuovo template nell'area amministrativa.<br /><br />
@@ -309,9 +309,9 @@ Anche i tipi di contenuto semplici (non strutturabili ad albero) presentano dell
 
 		<div class="sidebar_content" id="sb-views">
 			<h3>7. View e rendering</h3>
-			<p>NOTA: il front-end del sito, pu&ograve; utilizzare pi&ugrave; skin per differenziare ad esempio il sito <strong>desktop</strong> dalla versone <strong>mobile</strong>.
-Tale configurazione è disponibile nel file di configurazione di milk alla voce "WEBSITE SKINS", e si riferiscono al nome della directory
-presente nella directory application/views/website. Per default, la skin utilizzata è la "desktop", e nel caso sia presente la skin mobile
+			<p>NOTA: il front-end del sito, pu&ograve; utilizzare pi&ugrave; temi per differenziare ad esempio il sito <strong>desktop</strong> dalla versone <strong>mobile</strong>.
+Tale configurazione è disponibile nel file di configurazione di milk alla voce "WEBSITE THEMES", e si riferiscono al nome della directory
+presente nella directory <?php echo THEMESPATH; ?>. Per default, la skin utilizzata è la "desktop", e nel caso sia presente la skin mobile
 verrà effettuato lo switch in automatico nel caso che il sito venga visitato da un device mobile.</p>
 			<p>Milk utilizza la classe <strong>View</strong> per settare degli oggetti nelle viste e renderizzarle.<br />
 L'oggetto view, è presente globalmente accedendo alla variabile "view" di Code Igniter in questo modo: <strong>$this->view</strong>.<br /><br />
@@ -340,16 +340,16 @@ Nel caso non si volesse passare per il layout, passare come secondo parametro "f
 //Renderizza il file application/views/website/desktop/templates/default.php
 
 $this->render_template('home');
-//Renderizza la homepage del sito, ovvero il file application/views/website/desktop/templates/home.php
-//passando per il layout: application/views/website/desktop/layout.php</code><br />
+//Renderizza la homepage del sito, ovvero il file <?php echo THEMESPATH; ?>/desktop/templates/home.php
+//passando per il layout: <?php echo THEMESPATH; ?>/desktop/layout.php</code><br />
 
 <h3>render($view_file)</h3>
 <p>Metodo base per il rendering di una singola vista lato front-end. Utilizza il path relativo allo skin in uso:</p>
 <code>$this->view->render('pagina');
-//Renderizzerà il file application/views/website/desktop/pagina.php
+//Renderizzerà il file <?php echo THEMESPATH; ?>/desktop/pagina.php
 
 $this->view->render('demo/prova');
-//Renderizzerà il file application/views/website/desktop/demo/prova.php</code><br />
+//Renderizzerà il file <?php echo THEMESPATH; ?>/desktop/demo/prova.php</code><br />
 
 <h3>render_type_template($type_name, $view_file)</h3>
 <p>Metodo per renderizzare una vista specifica di un tipo di contenuto. Principalmente viene usata dal <strong>content_render</strong> (views/layout/content_render.php) per renderizzare automaticamente le viste dei tipi di contenuti, ma nulla ci vieta di usarlo a nostro piacimento come segue:</p>

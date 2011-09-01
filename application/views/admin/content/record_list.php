@@ -13,8 +13,8 @@ $fields = array_keys($tipo['fields']);
 		<h2><?php echo ($tipo['tree']?_('Pages'):_('Contents')).': '.$tipo['description']; ?></h2>
 
 		<ul>
-			<li><img class="middle" src="<?php echo site_url('widgets/admin/icns/plus.png'); ?>" /> <a href="<?php echo admin_url($_section.'/edit_record/'.$tipo['name']); ?>"><?php echo $_section == 'contents' ? _('Insert new content') : _('Insert new page');?></a></li>
-			<li><img class="middle" src="<?php echo site_url('widgets/admin/icns/bookmark.png'); ?>" /> <a href="<?php echo admin_url($_section.'/type_categories/'.$tipo['name']); ?>"><?php echo _('Manage categories'); ?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url($_section.'/edit_record/'.$tipo['name']); ?>"><?php echo $_section == 'contents' ? _('Insert new content') : _('Insert new page');?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/bookmark.png'); ?>" /> <a href="<?php echo admin_url($_section.'/type_categories/'.$tipo['name']); ?>"><?php echo _('Manage categories'); ?></a></li>
 		</ul>
 	</div>
 
@@ -128,13 +128,13 @@ $fields = array_keys($tipo['fields']);
 			{
 				if ($record->get('published') == '0' || !$record->get('published')) {
 					//Solo bozza
-					echo '<td><a href="'.$current_url.'?publish='.$record->id.'"><img class="middle" border="0" src="'.site_url('widgets/admin/icns/page_edit.png').'" /></a> '._('Draft').'</td>';
+					echo '<td><a href="'.$current_url.'?publish='.$record->id.'"><img class="middle" border="0" src="'.site_url(THEMESPATH.'admin/widgets/icns/page_edit.png').'" /></a> '._('Draft').'</td>';
 				} else if ($record->get('published') == '2') {
 					//Bozza + pubblico
-					echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url('widgets/admin/icns/page_copy.png').'" /></a> '._('Different').'</td>';
+					echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url(THEMESPATH.'admin/widgets/icns/page_copy.png').'" /></a> '._('Different').'</td>';
 				} else {
 					//Pubblico
-					echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url('widgets/admin/icns/page_green.png').'" /></a> '._('Published').'</td>';
+					echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url(THEMESPATH.'admin/widgets/icns/page_green.png').'" /></a> '._('Published').'</td>';
 				}
 			}
 

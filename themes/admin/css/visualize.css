@@ -36,7 +36,7 @@
 .block .visualize .chart_tooltip {
 	padding: 6px 7px;
 	background: #000;
-	background: url(../../widgets/admin/mbg.png) 0 0 repeat;
+	background: url(../widgets/mbg.png) 0 0 repeat;
 	margin: 3px 4px 0;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;

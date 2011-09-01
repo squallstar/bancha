@@ -100,6 +100,11 @@
 			<type>number</type>
 			<default>0</default>
 		</field>
+		<field id="priority" column="true">
+			<description>Priorità</description>
+			<type>number</type>
+			<default>0</default>
+		</field>
 		<field id="action">
 			<description>Azione pagina</description>
 			<type>select</type>

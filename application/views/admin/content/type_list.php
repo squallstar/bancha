@@ -7,7 +7,7 @@
 		<h2><?php echo $_section == 'contents' ? _('Contents') : _('Pages'); ?></h2>
 
 		<ul>
-			<li><img class="middle" src="<?php echo site_url('widgets/admin/icns/plus.png'); ?>" /> <a href="<?php echo admin_url($_section.'/add_type/'); ?>"><?php echo _('Add new type'); ?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url($_section.'/add_type/'); ?>"><?php echo _('Add new type'); ?></a></li>
 		</ul>
 	</div>
 
@@ -47,14 +47,14 @@
 			</tbody>
 		</table>
 		<?php } else {
-		
+
 			if ($_section == 'contents')
 			{
 				echo '<p>'.$this->lang->_trans('No type of contents found. To start, %link.', array(
 					'link'	=> '<a href="'.admin_url($_section.'/add_type').'">'._('add a new one').'</a>'
 				)).'</p>';
 			} else {
-				
+
 			}
 			?>
 			<?php } ?>

@@ -73,12 +73,12 @@ $(function () {
 
 
 	// Set WYSIWYG editor
-	$('.wysiwyg').wysiwyg({css: site_url+"css/admin/wysiwyg.css", brIE: false });
+	$('.wysiwyg').wysiwyg({css: site_url+"themes/admin/css/wysiwyg.css", brIE: false });
 
 	$('.wysiwyg').wysiwyg("addControl",
 		    "controlName",
 		    {
-		        icon: "/widgets/admin/cal.jpg",
+		        icon: "/themes/admin/widgets/cal.jpg",
 		        exec:  function() { alert('Hello World'); }
 		    }
 		);
@@ -176,18 +176,6 @@ $(function () {
 			return false;
 		}
 	});
-
-
-
-	// Style file input
-	/*$("input[type=file]").filestyle({
-	    image: "../../widgets/admin/upload.gif",
-	    imageheight : 30,
-	    imagewidth : 80,
-	    width : 250
-	});*/
-
-
 
 	// File upload
 	if ($('#fileupload').length) {

@@ -8,23 +8,25 @@
 
         </div>
 
-		<div class="block_content">
+    <div class="block_content">
 
           <?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
 
-		  <p>
-		  	<ul>
-		  		<li>Username: <strong><?php echo $username; ?></strong></li>
-		  		<li>Password: <strong><?php echo $password; ?></strong></li>
-		  	</ul>
-		  	
-		  	<form action="<?php echo admin_url('auth'); ?>" method="POST">
-		  		<input type="submit" class="submit" value="<?php echo _('Login'); ?>" />
-		  	</form>
-		  	
-		  	
-		  </p>
-		  
+      <p>
+        <?php if (isset($username)) { ?>
+        <ul>
+          <li>Username: <strong><?php echo $username; ?></strong></li>
+          <li>Password: <strong><?php echo $password; ?></strong></li>
+        </ul>
+        <?php } ?>
+
+        <form action="<?php echo admin_url('auth'); ?>" method="POST">
+          <input type="submit" class="submit" value="<?php echo _('Login'); ?>" />
+        </form>
+
+
+      </p>
+
 
         </div>
 

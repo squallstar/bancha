@@ -10,7 +10,7 @@ $this->load->helper('form');
 		<h2><?php echo _('Add new content type'); ?></h2>
 
 		<ul>
-			<li><img class="middle" src="<?php echo site_url('widgets/admin/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url($_section.'/')?>"><?php echo _('Back to types list'); ?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url($_section.'/')?>"><?php echo _('Back to types list'); ?></a></li>
 		</ul>
 
 	</div>

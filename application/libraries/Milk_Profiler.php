@@ -59,8 +59,8 @@ class Milk_Profiler extends CI_Profiler {
 	*/
 	public function run()
 	{
-		$output = link_tag(site_url('css/admin/profiler.css')).
-			'<script type="text/javascript" src="'.site_url('js/admin/profiler.js').'"></script>'.
+		$output = link_tag(site_url(THEMESPATH . 'admin/css/profiler.css')).
+			'<script type="text/javascript" src="'.site_url(THEMESPATH . 'admin/js/profiler.js').'"></script>'.
 			'<a id="milk_profiler_preview" onclick="_show_profiler();" href="#">'._('Preview').'</a>'.
 			'<div id="milk_profiler"><div id="milk_profiler_content">'.
 			'MILK&nbsp; &nbsp; <a href="'.admin_url().'">'._('Back to admin').'</a> - '.
