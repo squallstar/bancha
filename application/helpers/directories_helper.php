@@ -17,16 +17,19 @@
  * Elimina una directory ed i file contenuti ricorsivamente
  * @param string $dir directory da eliminare
  */
-function delete_directory($dir)
+if (!function_exists('delete_directory'))
 {
-    if (!file_exists($dir)) return true;
-    if (!is_dir($dir) || is_link($dir)) return unlink($dir);
-    foreach (scandir($dir) as $item) {
-    	if ($item == '.' || $item == '..') continue;
-    	if (!delete_directory($dir . "/" . $item)) {
-    		chmod($dir . "/" . $item, 0777);
-        	if (!delete_directory($dir . "/" . $item)) return false;
-    	};
-    }
-    return rmdir($dir);
+	function delete_directory($dir)
+	{
+	    if (!file_exists($dir)) return true;
+	    if (!is_dir($dir) || is_link($dir)) return unlink($dir);
+	    foreach (scandir($dir) as $item) {
+	    	if ($item == '.' || $item == '..') continue;
+	    	if (!delete_directory($dir . "/" . $item)) {
+	    		chmod($dir . "/" . $item, 0777);
+	        	if (!delete_directory($dir . "/" . $item)) return false;
+	    	};
+	    }
+	    return rmdir($dir);
+	}
 }

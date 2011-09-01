@@ -3,6 +3,10 @@ if (isset($page) && $page->is_page()) {
 
 	$action = $page->get('action');
 	if ($action) {
+		
+		$this->load->helper('breadcrumbs');
+		echo _('You are here: ').breadcrumbs($this->tree->breadcrumbs).br(1);
+		
 		switch ($action) {
 
 			case 'text':

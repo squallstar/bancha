@@ -22,31 +22,34 @@
  * @param string $str Stringa interna riservata
  * @return xhtml
  */
-function menu(&$tree, $max_depth=99, $level=1, $show_in_menu='T', &$str='')
+if (!function_exists('menu'))
 {
-	if (is_array($tree) && count($tree) && $level <= $max_depth ) {
-		if ($level == 1) {
-			$str .= '<ul class="menu">';
-		}
-
-		foreach ($tree as $page) {
-			if ($page['show_in_menu'] == $show_in_menu)
-			{
-				$str .= '<li class="'.($page['open'] ? 'open' : '').($page['selected'] ? ' selected' : '').'">';
-				$str .= '<a href="'.site_url($page['link']).'">'.$page['title'].'</a>';
-				if (isset($page['sons']))
+	function menu(&$tree, $max_depth=99, $level=1, $show_in_menu='T', &$str='')
+	{
+		if (is_array($tree) && count($tree) && $level <= $max_depth ) {
+			if ($level == 1) {
+				$str .= '<ul class="menu">';
+			}
+	
+			foreach ($tree as $page) {
+				if ($page['show_in_menu'] == $show_in_menu)
 				{
-					$str .= '<ul class="level_'.$level.'">';
-					$str .= menu($page['sons'], $max_depth, $level+1, $show_in_menu);
-					$str .= '</ul>';
+					$str .= '<li class="'.($page['open'] ? 'open' : '').($page['selected'] ? ' selected' : '').'">';
+					$str .= '<a href="'.site_url($page['link']).'">'.$page['title'].'</a>';
+					if (isset($page['sons']))
+					{
+						$str .= '<ul class="level_'.$level.'">';
+						$str .= menu($page['sons'], $max_depth, $level+1, $show_in_menu);
+						$str .= '</ul>';
+					}
+					$str .= '</li>';
 				}
-				$str .= '</li>';
+			}
+	
+			if ($level == 1) {
+				$str .= '</ul>';
 			}
 		}
-
-		if ($level == 1) {
-			$str .= '</ul>';
-		}
+		return $str;
 	}
-	return $str;
 }
