@@ -415,8 +415,8 @@ echo form_close() . br(2);
 </div>
 
 <?php if ($has_full_textarea) { ?>
-<script type="text/javascript" src="<?php echo site_url(); ?>js/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="<?php echo site_url(); ?>js/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/ckeditor/adapters/jquery.js"></script>
 <?php } ?>
 
 <script type="text/javascript">
