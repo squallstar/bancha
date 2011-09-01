@@ -169,7 +169,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['value'] = $field_value;
 				$attributes['class'] = ''.($field['mandatory']?' mandatory':'');
 				$attributes['id'] = 'ckeditor_'.$field_name;
-				$js_onload .="CKEDITOR.replace( '".$attributes['id']."', { filebrowserBrowseUrl : admin_url + 'ajax/finder/' + $('input[name=id]').val() });";
+				$js_onload .="CKEDITOR.replace( '".$attributes['id']."', { filebrowserBrowseUrl : admin_url + 'ajax/finder/' + $('input[name=".$tipo['primary_key']."]').val() });";
 				$has_full_textarea = TRUE;
 				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
 				break;
