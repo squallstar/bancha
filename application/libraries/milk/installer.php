@@ -54,7 +54,8 @@ Class Installer
             'id_parent'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned' => TRUE),
             'title'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
             'show_in_menu'	=> array('type'	=> 'VARCHAR', 'constraint'=> '1'),
-            'published'		=> array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE, 'default' => 0, 'constraint' => 1)
+            'published'		=> array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE, 'default' => 0, 'constraint' => 1),
+			'priority'		=> array('type'	=> 'INT', 'unsigned' => TRUE, 'default' => 0, 'constraint' => 2)
 		);
 
 		$this->dbforge->drop_table('records_stage');
@@ -81,7 +82,8 @@ Class Installer
 		    'full_uri'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
 		    'id_parent'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned'	=> TRUE),
 		    'title'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
-		    'show_in_menu'	=> array('type'	=> 'VARCHAR', 'constraint'=> '1')
+		    'show_in_menu'	=> array('type'	=> 'VARCHAR', 'constraint'=> '1'),
+			'priority'		=> array('type'	=> 'INT', 'unsigned' => TRUE, 'default' => 0, 'constraint' => 2)
 		);
 
 		$this->dbforge->drop_table('pages');

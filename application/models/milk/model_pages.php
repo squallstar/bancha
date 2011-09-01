@@ -79,7 +79,8 @@ Class Model_Pages extends CI_Model {
 			'id_type'		=> $data['id_type'],
 			'lang'			=> isset($data['lang']) ? $data['lang'] : $this->lang->current_language,
 			'show_in_menu'	=> isset($data['show_in_menu']) ? $data['show_in_menu'] : 'F',
-			'date_publish'	=> isset($data['date_publish']) ? $data['date_publish'] : ''
+			'date_publish'	=> isset($data['date_publish']) ? $data['date_publish'] : '',
+			'priority'		=> isset($data['priority']) ? $data['priority'] : '0',
 		);
 
 		//Controllo se esiste
