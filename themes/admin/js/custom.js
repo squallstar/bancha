@@ -73,7 +73,7 @@ $(function () {
 
 
 	// Set WYSIWYG editor
-	$('.wysiwyg').wysiwyg({css: site_url+"css/admin/wysiwyg.css", brIE: false });
+	$('.wysiwyg').wysiwyg({css: site_url+"themes/admin/css/wysiwyg.css", brIE: false });
 
 	$('.wysiwyg').wysiwyg("addControl",
 		    "controlName",
