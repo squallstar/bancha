@@ -12,13 +12,6 @@
  *
  */
 
-function show_exception($e, $message, $status_code = 500, $heading = 'An Error Was Encountered')
-{
-	$_error =& load_class('Exceptions', 'core');
-	echo $_error->show_exception($heading, $message, 'error_general', $status_code, $e);
-	exit;
-}
-
 /**
  * Metodo che stampa a video in modo umano un oggetto
  * @param mixed $obj

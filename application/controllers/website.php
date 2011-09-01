@@ -35,7 +35,7 @@ Class Website extends Milk_Controller {
 		//Estraggo il menu di default
 		$this->view->set('tree', $this->tree->get_default());
 
-		$this->view->javascript = array('jquery.js', 'generico.js');
+		$this->view->javascript = array('jquery.js', 'application.js');
 		$this->view->css = array($this->view->skin.'.css');
 
 		//Renderizzo il template home
@@ -69,7 +69,7 @@ Class Website extends Milk_Controller {
 	 */
 	function router() {
 
-		$this->view->javascript = array('jquery.js', 'generico.js');
+		$this->view->javascript = array('jquery.js', 'application.js');
 		$this->view->css = array($this->view->skin.'.css');
 
 		$found = FALSE;
@@ -252,7 +252,7 @@ Class Website extends Milk_Controller {
 						$this->load->frlibrary('feed');
 						$feed_header = array(
 							'title' 		=> $page->get('title'),
-							'description'	=> substr(strip_tags($page->get('contenuto')), 0, 100)
+							'description'	=> $page->get('contenuto')
 						);
 						$this->feed->create_new($feed_header, $this->view->is_feed);
 

@@ -76,27 +76,4 @@ class Milk_Exceptions extends CI_Exceptions {
 		echo $this->show_error($heading, $message, 'error_404', 404);
 		exit;
 	}
-
-	//TODO: finire di implementarlo sulla view
-	function show_exception($heading, $message, $template = 'error_general', $status_code = 500, $e)
-	{
-
-			$msg = $e->getMessage();
-			$trace = $e->getTraceAsString();
-
-			set_status_header($status_code);
-
-			$message = '<p>'.implode('</p><p>', ( ! is_array($message)) ? array($message) : $message).'</p>';
-
-			if (ob_get_level() > $this->ob_level + 1)
-			{
-				ob_end_flush();
-			}
-			ob_start();
-			include(APPPATH.'errors/error_general'.EXT);
-			$buffer = ob_get_contents();
-			ob_end_clean();
-			return $buffer;
-	}
-
 }
