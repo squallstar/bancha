@@ -227,10 +227,10 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Ritorna un albero lineare sotto forma di array associativo
-	 * (utile per le select)
-	 * @return array
-	 */
+	* Ritorna un albero lineare sotto forma di array associativo
+	* (utile per le select)
+	* @return array
+	*/
 	public function get_linear_dropdown()
 	{
 		if (!$this->_fetched)
@@ -238,15 +238,30 @@ Class Model_tree extends CI_Model {
 			//$this->db->order_by('uri', 'ASC'); non funziona perchè tanto l'array sotto poi si disordina
 			$this->_fetch();
 		}
-		$options = array();
-		if (count($this->_records))
+		return $this->get_branch_dropdown($this->_records);
+	}
+
+
+	/**
+	* Ritorna un albero ramificato sotto forma di array associativo
+	* (utile per le select con alberatura)
+	* @return array
+	*/
+	public function get_branch_dropdown($tree = NULL, $id_parent = NULL, $level = 0, $options = array())
+	{
+		foreach ($tree as $key => $node)
 		{
-			foreach ($this->_records as $page)
-			{
-				$options[$page->id_record] = $page->title;
-			}
+
+		if ($node->id_parent == $id_parent)
+		{
+			$options [$node->id_record] = str_repeat('---' , $level)." ".$node->title;
+			unset($tree[$key]);
+			$level++;
+			$options = $this->get_branch_dropdown($tree, $node->id_record, $level, $options);
+			$level--;
 		}
-		return $options;
+	}
+	return $options;
 	}
 
 	/**
