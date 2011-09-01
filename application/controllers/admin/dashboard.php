@@ -28,7 +28,13 @@ Class Dashboard extends Milk_Controller {
 		$this->welcome();
 	}
 
-	public function welcome() {
+	public function welcome($lang = '') {
+		
+		if ($lang != '')
+		{
+			$this->lang->set_lang($lang);
+			$this->lang->set_cookie();
+		}
 
 		$this->view->set('events', $this->events->get_last(10));
 
