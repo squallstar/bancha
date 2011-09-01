@@ -177,6 +177,7 @@ Class Model_tree extends CI_Model {
 		}
 
 		$this->_records = $this->db->from($this->content->is_stage ? $this->pages->table_stage : $this->pages->table)
+							 ->order_by('priority', 'DESC')
 						     ->get()
 						 	 ->result();
 		$this->_fetched = true;
