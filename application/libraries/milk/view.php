@@ -230,6 +230,10 @@ Class View
 		if (is_numeric($code))
 		{
 			$this->_CI->output->set_status_header($code);
+			if ($code == 404)
+			{
+				log_message('error', 'Page not found: '.current_url());
+			}
 		}
 		if ($layout)
 		{
