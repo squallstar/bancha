@@ -130,7 +130,8 @@ Class Website extends Milk_Controller {
 
 
 		if (!$found) {
-			show_404(_('Page not found'));
+			$this->view->render_template('not_found', TRUE, 404);
+			return;
 		}
 
 		//Ottengo l'albero delle pagine
@@ -324,9 +325,10 @@ Class Website extends Milk_Controller {
 			$date_publish = $record->get('_date_publish');
 			if ($date_publish && $date_publish > time())
 			{
-				show_404(_('Page not found'));
+				$this->view->render_template('not_found', TRUE, 404);
+				return;
 			}
-			
+
 			$this->tree->breadcrumbs[$record->id] = array(
 				'title'	=> $record->get('title'),
 				'link'	=> uri_string().'/'

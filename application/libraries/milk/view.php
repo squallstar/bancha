@@ -225,8 +225,12 @@ Class View
 	 * @param string $template_file
 	 * @param bool $layout
 	 */
-	public function render_template($template_file, $layout = TRUE)
+	public function render_template($template_file, $layout = TRUE, $code = '')
 	{
+		if (is_numeric($code))
+		{
+			$this->_CI->output->set_status_header($code);
+		}
 		if ($layout)
 		{
 			$this->set('_template_file', $this->_template_dir.$template_file);
