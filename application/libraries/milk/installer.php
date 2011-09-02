@@ -16,10 +16,24 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 Class Installer
 {
+	/**
+	 * @var mixed Istanza di CodeIgniter
+	 */
 	private $CI;
+
+	/**
+	 * @var mixed Reference all'oggetto dbforge di CodeIgniter
+	 */
 	private $dbforge;
+
+	/**
+	 * @var mixed Reference al model_users
+	 */
 	private $users;
 
+	/**
+	 * @var int Contiene l'id del gruppo creato come default (Administrators)
+	 */
 	public $group_id;
 
 	public function __construct()
@@ -41,7 +55,6 @@ Class Installer
 	public function create_tables()
 	{
 		//Creazione tabelle records
-
 		$record_fields = array(
             'id_record'		=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
             'date_insert'	=> array('type'	=> 'INT'),
@@ -72,7 +85,6 @@ Class Installer
 		$this->dbforge->create_table('records');
 
 		//Creazione tabelle pages
-
 		$page_fields = array(
 		    'id_record'		=> array('type'	=> 'INT', 'unsigned' => TRUE),
 		    'date_publish'	=> array('type'	=> 'INT'),
@@ -97,7 +109,6 @@ Class Installer
 		$this->dbforge->create_table('pages_stage');
 
 		//Creazione tabella types
-
 		$types_fields = array(
 		    'id_type'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'name'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 255)
@@ -109,7 +120,6 @@ Class Installer
 		$this->dbforge->create_table('types');
 
 		//Creazione tabella utenti
-
 		$user_fields = array(
 		    'id_user'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'id_group'	=> array('type'	=> 'INT', 'unsigned'	=> TRUE, 'constraint' => 3, 'null' => FALSE),
@@ -126,7 +136,6 @@ Class Installer
 		$this->dbforge->create_table('users');
 
 		//Creazione tabella acl
-
 		$acl_fields = array(
 		    'id_acl'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'acl_name'	=> array('type'	=> 'VARCHAR', 'constraint'	=> 64, 'null' => FALSE),
@@ -140,7 +149,6 @@ Class Installer
 		$this->dbforge->create_table('acl');
 
 		//Creazione tabella groups
-
 		$group_fields = array(
 		    'id_group'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'group_name'=> array('type'	=> 'VARCHAR', 'constraint'	=> 64, 'null' => FALSE)
@@ -152,7 +160,6 @@ Class Installer
 		$this->dbforge->create_table('groups');
 
 		//Creazione tabella groups acl
-
 		$group_acl_fields = array(
 		    'id_group_acl'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'group_id'		=> array('type'	=> 'INT', 'null' => FALSE),
@@ -165,7 +172,6 @@ Class Installer
 		$this->dbforge->create_table('groups_acl');
 
 		//Creazione tabella categories
-
 		$categories_fields = array(
 		    'id_category'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'category_name'	=> array('type'	=> 'VARCHAR', 'constraint' => 64, 'null' => FALSE),
@@ -178,7 +184,6 @@ Class Installer
 		$this->dbforge->create_table('categories');
 
 		//Creazione tabelle documents
-
 		$documents_fields = array(
 		    'id_document'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'date_upload'	=> array('type'	=> 'INT', 'null' => TRUE),
@@ -210,7 +215,6 @@ Class Installer
 		$this->dbforge->create_table('documents');
 
 		//Creazione tabella events
-
 		$event_fields = array(
 		    'id_event'		=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'user_id'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned' => TRUE),
@@ -227,7 +231,6 @@ Class Installer
 		$this->dbforge->create_table('events');
 
 		//Creazione tabella record categories
-
 		$record_categories_fields = array(
 		    'id_record'		=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE),
 		    'id_category'	=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE)
