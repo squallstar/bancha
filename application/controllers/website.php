@@ -130,6 +130,7 @@ Class Website extends Milk_Controller {
 
 
 		if (!$found) {
+			$this->view->title = _('Page not found');
 			$this->view->render_template('not_found', TRUE, 404);
 			return;
 		}
@@ -325,6 +326,7 @@ Class Website extends Milk_Controller {
 			$date_publish = $record->get('_date_publish');
 			if ($date_publish && $date_publish > time())
 			{
+				$this->view->title = _('Page not found');
 				$this->view->render_template('not_found', TRUE, 404);
 				return;
 			}

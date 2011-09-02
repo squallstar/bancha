@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Milk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-31 14:10+0100\n"
-"PO-Revision-Date: 2011-08-31 14:10+0100\n"
+"POT-Creation-Date: 2011-09-02 17:02+0100\n"
+"PO-Revision-Date: 2011-09-02 17:02+0100\n"
 "Last-Translator: Nicholas <nicholas@intesys.it>\n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -11,15 +11,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_trans\n"
 "X-Poedit-Basepath: ../../../../../../application/\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
-"X-Poedit-SearchPath-0: controllers/admin\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SearchPath-0: controllers\n"
 "X-Poedit-SearchPath-1: libraries\n"
 "X-Poedit-SearchPath-2: models\n"
 "X-Poedit-SearchPath-3: views/admin\n"
 
+#: controllers/website.php:133
+#: controllers/website.php:329
+msgid "Page not found"
+msgstr ""
+
 #: controllers/admin/ajax.php:92
 msgid "This content has no attachments."
+msgstr ""
+
+#: controllers/admin/auth.php:46
+msgid "Username/password wrong."
 msgstr ""
 
 #: controllers/admin/contents.php:343
@@ -58,7 +67,11 @@ msgstr ""
 msgid "The type named %n has been removed."
 msgstr ""
 
-#: controllers/admin/install.php:57
+#: controllers/admin/import.php:36
+msgid "Choose one..."
+msgstr ""
+
+#: controllers/admin/install.php:74
 msgid "%n has been installed!"
 msgstr ""
 
@@ -78,7 +91,7 @@ msgstr ""
 msgid "Open profiler"
 msgstr ""
 
-#: libraries/milk/installer.php:295
+#: libraries/milk/installer.php:300
 msgid "Default content type not defined"
 msgstr ""
 
@@ -103,7 +116,6 @@ msgid "Password"
 msgstr ""
 
 #: views/admin/auth/login.php:29
-#: views/admin/installer/success.php:22
 msgid "Login"
 msgstr ""
 
@@ -545,12 +557,80 @@ msgstr ""
 msgid "%u installed %c."
 msgstr ""
 
+#: views/admin/dashboard/welcome.php:100
+#, php-format
+msgid "%u login."
+msgstr ""
+
+#: views/admin/dashboard/welcome.php:104
+#, php-format
+msgid "%u logout."
+msgstr ""
+
+#: views/admin/import/records.php:7
+#: views/admin/layout/header.php:76
+msgid "Import/export data"
+msgstr ""
+
+#: views/admin/import/records.php:14
+#: views/admin/import/records.php:20
+#: views/admin/import/records.php:34
+msgid "Import records"
+msgstr ""
+
+#: views/admin/import/records.php:15
+#: views/admin/import/records.php:42
+msgid "Export records"
+msgstr ""
+
+#: views/admin/import/records.php:22
+#: views/admin/import/records.php:45
+msgid "This function is under construction!"
+msgstr ""
+
+#: views/admin/import/records.php:28
+msgid "Content type"
+msgstr ""
+
+#: views/admin/import/records.php:31
+msgid "File"
+msgstr ""
+
+#: views/admin/installer/request.php:7
 #: views/admin/installer/success.php:7
 msgid "%n Installer"
 msgstr ""
 
-#: views/admin/layout/footer.php:19
-msgid "Page rendered in %n seconds."
+#: views/admin/installer/request.php:15
+msgid "Select the operations you want to perform"
+msgstr ""
+
+#: views/admin/installer/request.php:20
+msgid "Remove/Create directories"
+msgstr ""
+
+#: views/admin/installer/request.php:21
+msgid "Drop records and create tables"
+msgstr ""
+
+#: views/admin/installer/request.php:22
+msgid "Restore default types"
+msgstr ""
+
+#: views/admin/installer/request.php:23
+msgid "Clear and rebuild cache"
+msgstr ""
+
+#: views/admin/installer/request.php:24
+msgid "Enable event logging"
+msgstr ""
+
+#: views/admin/installer/request.php:28
+msgid "Install"
+msgstr ""
+
+#: views/admin/layout/footer.php:17
+msgid "Page rendered in %n seconds using %m of memory."
 msgstr ""
 
 #: views/admin/layout/header.php:33
@@ -592,7 +672,7 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: views/admin/layout/header.php:82
+#: views/admin/layout/header.php:83
 msgid "Logout"
 msgstr ""
 
