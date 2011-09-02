@@ -6,11 +6,17 @@
 
 # OS generated files #
 ######################
-.DS_Store?
+*.DS_Store
 ehthumbs.db
 Icon?
 Thumbs.db
 .project
 .buildpath
 .settings
+
+# Custom install files #
+######################
 /application/cache/_milk/content.types
+/application/views/website/type_templates
+/application/xml
+/attach
