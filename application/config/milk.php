@@ -15,18 +15,20 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /* LANGUAGES
- * Lingue utilizzabili
+ * Configurazione delle lingue utilizzabili
  */
 $config['languages'] = array(
 	'it' => array(
 		'name'			=> 'italian',
 		'locale'		=> 'it_IT',
-		'description'	=> 'Italiano'
+		'description'	=> 'Italiano',
+		'date_format'	=> 'd/m/Y'
 	),
 	'en' => array(
 		'name'			=> 'english',
 		'locale'		=> 'en_US',
-		'description'	=> 'English'
+		'description'	=> 'English',
+		'date_format'	=> 'Y-m-d'
 	)
 );
 
