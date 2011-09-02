@@ -417,7 +417,15 @@ echo form_close() . br(2);
 <?php if ($has_full_textarea) { ?>
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/ckeditor/adapters/jquery.js"></script>
+<?php }
+
+if ($tipo['has_attachments']) {
+	$js_onload.= "$('table.sortable').sortable({ stop: function(event, ui) { milk.sort_priority(event, ui); } });";
+	?>
+<script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/jquery-ui.js"></script>
 <?php } ?>
+
+
 
 <script type="text/javascript">
 $(document).ready(function() {

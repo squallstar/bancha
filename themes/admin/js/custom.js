@@ -227,6 +227,9 @@ var milk = {
 			return false;
 		}
 	},
+	sort_priority : function (event, ui) {
+
+	},
 	check : {
 		uri: function(e) {
 			clearInterval(document._to);
