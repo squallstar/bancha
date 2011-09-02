@@ -326,6 +326,11 @@ Class Website extends Milk_Controller {
 			{
 				show_404(_('Page not found'));
 			}
+			
+			$this->tree->breadcrumbs[$record->id] = array(
+				'title'	=> $record->get('title'),
+				'link'	=> uri_string().'/'
+			);
 
 			$this->view->set('page', $page);
 			$this->view->set('record', $record);
