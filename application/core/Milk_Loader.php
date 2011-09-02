@@ -46,7 +46,7 @@ Class Milk_Loader extends CI_Loader {
 
 	function frlibrary($library, $name = '')
 	{
-		$this->library(FRNAME.'/'.$library, $name);
+		$this->library(FRNAME.'/'.$library, NULL, $name);
 	}
 
 	function records()
@@ -104,6 +104,12 @@ Class Milk_Loader extends CI_Loader {
 		}
 		$class_name = ucfirst($module_name).'_Module';
 		return new $class_name();
+	}
+	
+	function dispatcher($name = 'default')
+	{
+		$this->library(FRNAME.'/dispatchers/dispatcher_'.$name, NULL, 'dispatcher');
+		
 	}
 
 	// --------------------------------------------------------------------
