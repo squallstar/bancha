@@ -104,7 +104,6 @@
 			<description>Priorità</description>
 			<type>number</type>
 			<default>0</default>
-			<admin>true</admin>
 		</field>
 		<field id="action">
 			<description>Azione pagina</description>
