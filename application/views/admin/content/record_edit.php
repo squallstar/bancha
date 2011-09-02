@@ -420,7 +420,7 @@ echo form_close() . br(2);
 <?php }
 
 if ($tipo['has_attachments']) {
-	$js_onload.= "$('table.sortable').sortable({ stop: function(event, ui) { milk.sort_priority(event, ui); } });";
+	$js_onload.= "$('table.sortable tbody').sortable({ stop: function(event, ui) { milk.sort_priority(event, ui); } });";
 	?>
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/jquery-ui.js"></script>
 <?php } ?>
