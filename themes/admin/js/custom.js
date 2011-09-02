@@ -217,6 +217,7 @@ $(function () {
 });
 
 var milk = {
+	_priority : 0,
 	delete : {
 		document : function(self, e) {
 			$.post(admin_url+'ajax/delete_document', {document_id : e});
@@ -228,7 +229,12 @@ var milk = {
 		}
 	},
 	sort_priority : function (event, ui) {
-
+		var rows = $('tbody tr', $(ui.item[0]).closest('.sortable'));
+		milk._priority = rows.length;
+		rows.each(function() {
+			$('.tbl-priority', this).val(milk._priority);
+			milk._priority--;
+		});
 	},
 	check : {
 		uri: function(e) {
