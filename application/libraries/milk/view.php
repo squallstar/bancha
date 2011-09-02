@@ -12,26 +12,92 @@
  *
  */
 
-Class View {
+Class View
+{
 
+	/**
+	 * @var mixed Istanza di CodeIgniter
+	 */
 	private $_CI;
+
+	/**
+	 * @var array Dati da passare alle view
+	 */
 	private $_data = array();
 
+	/**
+	 * @var string Directory da prependere ai render
+	 */
 	private $_prepend_dir;
+
+	/**
+	 * @var string Directory dei templates di un tema
+	 */
 	private $_template_dir = 'templates/';
+
+	/**
+	 * @var string Path del layout di amministrazione
+	 */
 	private $_layout_dir = 'layout/layout';
 
+	/**
+	 * @var array Elenco delle viste renderizzate nella request attuale
+	 */
 	public $rendered_views = array();
+
+	/**
+	 * @var string base-path delle view
+	 */
 	public $base = '';
+
+	/**
+	 * @var string Contenuto del title tag (head)
+	 */
 	public $title = '';
+
+	/**
+	 * @var string Keywords meta tag
+	 */
 	public $keywords = '';
+
+	/**
+	 * @var string Description Meta tag
+	 */
 	public $description = '';
+
+	/**
+	 * @var array Risorse javascript
+	 */
 	public $javascript = array();
+
+	/**
+	 * @var mixed array Fogli di stile
+	 */
 	public $css = array();
+
+	/**
+	 * @var array Temi disponibili nel front-end
+	 */
 	public $themes = array();
+
+	/**
+	 * @var string Tema attuale
+	 */
 	public $theme = '';
+
+	/**
+	 * @var string Directory dei temi
+	 */
 	public $theme_path = '';
+
+	/**
+	 * @var bool Imposta se questa view ha un feed associato
+	 */
 	public $has_feed = FALSE;
+
+	/**
+	 * @var bool Imposta se questa view e' un feed xml/json
+	 */
 	public $is_feed = FALSE;
 
 	public function __construct()
@@ -43,7 +109,8 @@ Class View {
 	}
 
 	/**
-	 * Loads a website theme
+	 * Carica il tema attuale
+	 * Se non in sessione, viene caricato il tema di default (sia desktop che mobile)
 	 */
 	public function load_theme() {
 		$this->theme = $this->_CI->session->userdata('_website_theme');
@@ -62,14 +129,14 @@ Class View {
 	}
 
 	/**
-	 * Force and set a new theme
-	 * @param string $to
+	 * Imposta un nuovo tema
+	 * @param string $new_theme
 	 */
-	public function set_theme($to)
+	public function set_theme($new_theme)
 	{
-		if (isset($this->themes[$to]))
+		if (isset($this->themes[$new_theme]))
 		{
-			$this->theme = $this->themes[$to];
+			$this->theme = $this->themes[$new_theme];
 			$this->store_theme();
 			return TRUE;
 		}
@@ -77,7 +144,7 @@ Class View {
 	}
 
 	/**
-	 * Store the current theme in session
+	 * Aggiorna il cookie relativo al tema corrente
 	 */
 	public function store_theme()
 	{
@@ -85,6 +152,9 @@ Class View {
 		$this->update_ci_path();
 	}
 
+	/**
+	 * Aggiorna i path di rendering delle view di CodeIgniter per includere il tema attuale
+	 */
 	public function update_ci_path()
 	{
 		$theme_path = THEMESPATH . $this->theme . '/';
