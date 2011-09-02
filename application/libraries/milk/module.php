@@ -1,6 +1,9 @@
 <?php
 abstract class Milk_Module
 {
+	/**
+	 * @var mixed Reference alla View Library
+	 */
 	public $view;
 
 	public function __construct()
@@ -9,6 +12,10 @@ abstract class Milk_Module
 		$this->view = & $CI->view;
 	}
 
+	/**
+	 * Renderizza un modulo
+	 * @param string $view Nome della view da utilizzare (default = 'view')
+	 */
 	public function render($view = 'view')
 	{
 		$CI = & get_instance();
