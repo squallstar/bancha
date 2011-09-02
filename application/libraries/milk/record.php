@@ -14,11 +14,24 @@
 
 Class Record {
 
+	/**
+	 * @var array Contiene i dati del record
+	 */
 	private $_data	= array();
-	//private $_all_data = array();
 
+	/**
+	 * @var int Chiave primaria del record
+	 */
 	public $id 		= FALSE;
-  	public $_tipo	= '';
+
+	/**
+	 * @var array Tipo di contenuto del record
+	 */
+	public $_tipo	= '';
+
+	/**
+	 * @var string Stringa xml dei dati non fisici del record
+	 */
   	public $xml 	= '';
 
   	public function __construct($type='')
@@ -42,8 +55,6 @@ Class Record {
   {
     $CI = & get_instance();
     $tipo = & $CI->content->type($this->_tipo);
-
-    //$this->_all_data = $data;
 
     foreach ($tipo['fields'] as $field_name => $field)
     {
@@ -121,6 +132,7 @@ Class Record {
 
   /**
    * Controlla se un record e' una pagina
+   * @return bool
    */
   public function is_page()
   {
@@ -169,7 +181,7 @@ Class Record {
 		      	{
 		      		if ($field_value instanceof SimpleXMLElement)
 		      		{
-	
+
 		      			if (isset($field_value->value))
 		      			{
 		      				foreach ($field_value->value as $val)
@@ -182,7 +194,7 @@ Class Record {
 		      		} else {
 		      			$this->_data[$field_name] = $field_value;
 		      		}
-	
+
 		      		//Converto i timestamp in date
 		      		//TODO: mettere tutti i format date e datetime nel config per lingua (tipo d/m/Y)
 		      		$field_type = $tipo['fields'][$field_name]['type'];
@@ -241,7 +253,6 @@ Class Record {
 				$ordered_attachs = array();
 				if ($field_value['type'] == 'files' || $field_value['type'] == 'images')
 				{
-
 					$has_attachments = TRUE;
 					//Ordino per campo gli allegati
 					foreach ($all_attachs as $attach)
