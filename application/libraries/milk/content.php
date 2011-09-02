@@ -14,12 +14,34 @@
 
 Class Content {
 
+	/**
+	 * @var array Elenco dei tipi
+	 */
 	private $_content_types;
+
+	/**
+	 * @var array Elenco dei nomi dei tipi
+	 */
 	private $_string_types;
+
+	/**
+	 * @var mixed Istanza di CodeIgniter
+	 */
 	private $CI;
 
+	/**
+	 * @var string Directory che contiene gli XML dei tipi
+	 */
 	public $xml_folder;
+
+	/**
+	 * @var string Directory che contiene i files di cache dei tipi
+	 */
 	public $types_cache_folder;
+
+	/**
+	 * @var bool Definisce se siamo in stage
+	 */
 	public $is_stage = FALSE;
 
 	public function __construct()
@@ -33,16 +55,20 @@ Class Content {
 		$this->read();
 	}
 
-	public function set_stage($bool)
+	/**
+	 * Imposta se stiamo in stage
+	 * @param boolean $bool
+	 */
+	public function set_stage($stage)
 	{
-		$this->is_stage = $bool;
+		$this->is_stage = $stage;
 		if (isset($this->CI->records))
 		{
-			$this->CI->records->set_stage($bool);
+			$this->CI->records->set_stage($stage);
 		}
 		if (isset($this->CI->pages))
 		{
-			$this->CI->pages->set_stage($bool);
+			$this->CI->pages->set_stage($stage);
 		}
 	}
 
@@ -239,6 +265,7 @@ Class Content {
 
 	/**
 	 * Restituisce i tipi
+	 * @return array
 	 */
 	public function types()
 	{
@@ -247,6 +274,7 @@ Class Content {
 
 	/**
 	 * Ricostruisce la cache dei tipi
+	 * @return bool success
 	 */
 	public function rebuild()
 	{
@@ -318,6 +346,11 @@ Class Content {
 		return $record;
 	}
 
+	/**
+	 * In futuro verra' implementata la creazione automatica
+	 * delle tabelle dei tipi su tabelle esterne
+	 * @param int|string $type
+	 */
 	function build_type_table($type)
 	{
 

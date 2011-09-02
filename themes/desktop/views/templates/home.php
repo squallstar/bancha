@@ -27,7 +27,7 @@ $this->view->render('header');
 
 	</div>
 
-	<div class="x"></div>
+	<div class="clear"></div>
 </div>
 
 <?php
