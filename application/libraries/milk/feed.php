@@ -16,11 +16,29 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 Class Feed
 {
+	/**
+	 * @var mixed Istanza di CodeIgniter
+	 */
 	private $CI;
+
+	/**
+	 * @var string Tipo del feed (xml, json)
+	 */
 	private $_type;
 
+	/**
+	 * @var SimpleXMLElement Contiene il feed man mano che viene creato
+	 */
 	public $xml;
+
+	/**
+	 * @var array Intestazione del feed
+	 */
 	public $feed_head;
+
+	/**
+	 * @var array Contiene i dati del JSON man mano che viene creato
+	 */
 	public $json;
 
 	public function __construct()
@@ -38,6 +56,11 @@ Class Feed
 		);
 	}
 
+	/**
+	 * Crea un nuovo feed
+	 * @param array $data Header del feed
+	 * @param string $type Tipo del feed
+	 */
 	public function create_new($data, $type='xml')
 	{
 		foreach ($data as $key => $val)
@@ -67,6 +90,10 @@ Class Feed
      	return $this;
 	}
 
+	/**
+	 * Aggiunge un elemento al feed
+	 * @param array $item
+	 */
 	public function add_item($item)
 	{
 		if ($this->_type == 'xml')
@@ -84,6 +111,10 @@ Class Feed
 		return $this;
 	}
 
+	/**
+	 * Renderizza il feed
+	 * @param string $template
+	 */
 	public function render($template='feed')
 	{
 		$this->CI->output->enable_profiler(FALSE);
