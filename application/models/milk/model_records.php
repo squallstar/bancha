@@ -2,7 +2,7 @@
 /**
  * Records Model Class
  *
- * Classe per estrarre record/pagine dal db
+ * Classe per lavorare con i records del db
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -14,71 +14,109 @@
 
 Class Model_records extends CI_Model {
 
-  public $last_search_has_tree = FALSE;
-  private $_get_documents = FALSE;
-  private $_is_list = FALSE;
-  private $_single_type = FALSE;
-  private $_is_stage = FALSE;
+	/**
+	 * @var bool Definisce se il tipo ricercato e' di tipo albero
+	 */
+  	public $last_search_has_tree = FALSE;
 
-  public $table;
-  public $table_stage;
-  public $table_current;
-  public $primary_key;
-  public $columns;
+  	/**
+  	* @var bool Imposta se estrarre i documenti dalla prossima ricerca
+  	*/
+  	private $_get_documents = FALSE;
+  	
+  	/**
+  	* @var bool Definisce se e' una ricerca di tipo lista o dettaglio
+  	*/
+ 	private $_is_list = FALSE;
+ 	
+ 	/**
+ 	* @var bool|array Il tipo su cui si sta effettuando la ricerca
+ 	*/
+  	private $_single_type = FALSE;
+  	
+  	/**
+  	* @var bool Definisce se siamo in stage
+  	*/
+  	private $_is_stage = FALSE;
 
-  public function __construct()
-  {
-    parent::__construct();
+  	/**
+  	* @var string Tabella di produzione
+  	*/
+  	public $table;
+  	
+  	/**
+  	* @var string Tabella di sviluppo
+  	*/
+ 	public $table_stage;
+  
+ 	/**
+ 	* @var string Tabella corrente per le operazioni
+ 	*/
+ 	public $table_current;
+ 	
+ 	/**
+ 	* @var string Chiave primaria delle tabelle correnti
+ 	*/
+  	public $primary_key;
+  	
+  	/**
+  	* @var array Colonne da estrarre nelle SELECT di questo tipo
+  	*/
+  	public $columns;
 
-    //Imposto il tipo predefinito "records"
-    $this->set_type();
-  }
+  	public function __construct()
+  	{
+    	parent::__construct();
 
-  public function set_stage($bool)
-  {
+    	//Imposto il tipo predefinito "records"
+    	$this->set_type();
+  	}
+
+  	public function set_stage($bool)
+  	{
   		//Imposto la tabella su cui fare query
-   	 $this->table_current = $bool ? $this->table_stage : $this->table;
-   	 $this->_is_stage = $bool;
-  }
+   	 	$this->table_current = $bool ? $this->table_stage : $this->table;
+   	 	$this->_is_stage = $bool;
+  	}
 
-  /**
-   * Imposto se estrarre solo le colonne estraibili in modalità lista
-   * @param bool $extract
-   */
-  public function set_list($extract=TRUE)
-  {
-  	$this->_is_list = $extract;
-  	return $this;
-  }
+  	/**
+   	* Imposto se estrarre solo le colonne estraibili in modalità lista
+   	* @param bool $extract
+   	*/
+  	public function set_list($extract=TRUE)
+  	{
+  		$this->_is_list = $extract;
+  		return $this;
+  	}
 
-  /**
-   * Imposta un filtro where sul tipo
-   * @param int|string $type
-   */
-  public function type($type='')
-  {
-    if ($type != '')
-    {
-    	$this->set_type($type);
-      	$tipo = $this->_single_type;
-
-        //Imposto tutti i riferimenti
-        $this->table = $tipo['table'];
-        $this->table_stage = $tipo['stage'] ? $tipo['table_stage'] : $tipo['table'];
-        $this->primary_key = $tipo['primary_key'];
-
-        $this->db->where($this->table_current.'.id_type', $tipo['id']);
-
-        if ($tipo['tree'])
-        {
-        	$this->last_search_has_tree = TRUE;
-        }else{
-       		$this->last_search_has_tree = FALSE;
-        }
-      	$this->_single_type = $tipo;
-    }
-    return $this;
-  }
+  	/**
+   	* Imposta un filtro where sul tipo
+   	* @param int|string $type
+   	*/
+  	public function type($type='')
+  	{
+    	if ($type != '')
+    	{
+	    	$this->set_type($type);
+	      	$tipo = $this->_single_type;
+	
+	        //Imposto tutti i riferimenti
+	        $this->table = $tipo['table'];
+	        $this->table_stage = $tipo['stage'] ? $tipo['table_stage'] : $tipo['table'];
+	        $this->primary_key = $tipo['primary_key'];
+	
+	        $this->db->where($this->table_current.'.id_type', $tipo['id']);
+	
+	        if ($tipo['tree'])
+	        {
+	        	$this->last_search_has_tree = TRUE;
+	        }else{
+	       		$this->last_search_has_tree = FALSE;
+	        }
+	      	$this->_single_type = $tipo;
+    	}
+    	return $this;
+  	}
 
   /**
    * Imposto il tipo (tabella e pkey) su cui fare le operazioni
@@ -120,15 +158,15 @@ Class Model_records extends CI_Model {
   	return $this;
   }
 
-  /**
-   * Imposta se prendere anche i documenti dei record durante le estrazioni
-   * @param bool $extract
-   */
-  public function documents($extract = TRUE)
-  {
-    $this->_get_documents = $extract;
-    return $this;
-  }
+	/**
+   	* Imposta se prendere anche i documenti dei record durante le estrazioni
+   	* @param bool $extract
+   	*/
+  	public function documents($extract = TRUE)
+  	{
+    	$this->_get_documents = $extract;
+    	return $this;
+  	}
 
   /**
    * Imposta un filtro where (anche sui campi xml del record)
@@ -162,15 +200,15 @@ Class Model_records extends CI_Model {
     return $this;
   }
 
-  /**
-   * Imposta una condizione WHERE IN sull'id_record
-   * @param array $record_ids
-   */
-  public function id_in($record_ids)
-  {
-      $this->db->where_in($this->primary_key, $record_ids);
-      return $this;
-  }
+  	/**
+   	* Imposta una condizione WHERE IN sull'id_record
+   	* @param array $record_ids
+   	*/
+  	public function id_in($record_ids)
+  	{
+    	$this->db->where_in($this->primary_key, $record_ids);
+    	return $this;
+  	}
 
   /**
    * Imposta una JOIN con la tabella delle pagine ricercando l'URI richiesto
@@ -429,6 +467,10 @@ Class Model_records extends CI_Model {
       		if (!isset($data[$column]))
       		{
       			$data[$column] = $record->get($column);
+      			if (is_array($data[$column]))
+      			{
+      				$data[$column] = '<value>'.implode('</value><value>', $data[$column]).'</value>';
+      			}
       		}
       	}
 
@@ -707,6 +749,11 @@ Class Model_records extends CI_Model {
     }
   }
 
+  /**
+   * Estrazione delle options di un tipo
+   * @param string (id) $field
+   * @return array
+   */
   function get_field_options($field)
   {
   	if (isset($field['extract'])) {
