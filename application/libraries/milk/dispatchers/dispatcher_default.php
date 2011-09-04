@@ -161,7 +161,6 @@ Class Dispatcher_default
 					$CI->db->stop_cache();
 		
 					$records = $CI->records->get();
-					$this->db->flush_cache();
 		
 					//Paginazione se impostato un limite
 					if ($limit)
@@ -182,6 +181,8 @@ Class Dispatcher_default
 						$CI->load->library('pagination');
 						$CI->pagination->initialize($pagination);
 					}
+					
+					$this->db->flush_cache();
 		
 					if ($CI->view->is_feed)
 					{
