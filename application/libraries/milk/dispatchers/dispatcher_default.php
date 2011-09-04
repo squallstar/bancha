@@ -100,16 +100,28 @@ Class Dispatcher_default
 			{
 				case 'list':
 					$categories = $page->get('action_list_categories');
-					if ($categories) {
-						$categories = explode(',', $categories);
-		
+					$get_category = $CI->input->get('category');
+					
+					if ($categories || $get_category) {
+						if ($categories)
+						{
+							$categories = explode(',', $categories);
+						}
+						if ($get_category)
+						{
+							$categories[] = $get_category;
+						}
+
 						$CI->load->categories();
 						$cat_ids = $CI->categories->name_in($categories)->get_ids();
-		
+
 						$category_record_ids = $CI->categories->get_records_for_categories($cat_ids);
-						$CI->db->start_cache();
-						$CI->records->id_in($category_record_ids);
-						$CI->db->stop_cache();
+						if (count($category_record_ids))
+						{
+							$CI->db->start_cache();
+							$CI->records->id_in($category_record_ids);
+							$CI->db->stop_cache();
+						}
 					}
 		
 					$limit = (int)$page->get('action_list_limit');
@@ -182,7 +194,7 @@ Class Dispatcher_default
 						$CI->pagination->initialize($pagination);
 					}
 					
-					$this->db->flush_cache();
+					$CI->db->flush_cache();
 		
 					if ($CI->view->is_feed)
 					{
