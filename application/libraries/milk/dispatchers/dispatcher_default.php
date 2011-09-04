@@ -161,6 +161,7 @@ Class Dispatcher_default
 					$CI->db->stop_cache();
 		
 					$records = $CI->records->get();
+					$this->db->flush_cache();
 		
 					//Paginazione se impostato un limite
 					if ($limit)
