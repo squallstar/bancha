@@ -299,7 +299,6 @@ Class Installer
 		} else {
 			show_error(_('Default content type not defined'));
 		}
-
 	}
 
 	/**
@@ -350,5 +349,50 @@ Class Installer
 			delete_directory($dir);
 			mkdir($dir, DIR_WRITE_MODE);
 		}
+	}
+
+	/**
+	 * Crea una installazione premade, ad esempio per un blog
+	 * @param string $type Tipo di installazione
+	 */
+	public function create_premade($type = '')
+	{
+		if ($type == '')
+		{
+			return;
+		}
+
+		$folder = $this->CI->config->item('templates_folder').'premades'.DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR;
+
+		$premades_xml = get_filenames($folder);
+		if (count($premades_xml))
+		{
+			foreach ($premades_xml as $file_name)
+			{
+				$name = str_replace('.xml', '', $file_name);
+				$type_id = $this->CI->content->add_type($name, $name, 'false', TRUE);
+				$this->copy_premade_xml($folder.$file_name, $name, $type_id);
+			}
+		}
+
+		switch (strtolower($type))
+		{
+			case 'blog':
+
+				break;
+		}
+	}
+
+	public function copy_premade_xml($path, $type_name, $type_id)
+	{
+		$xml = read_file($this->CI->config->item('templates_folder').'premades/'.$path.'.xml');
+
+		//Parso il file con le pseudovariabili
+		$xml = $this->CI->parser->parse_string($xml, array(
+		          'id'			=> $type_id,
+		          'version'		=> MILK_VERSION
+		),TRUE);
+
+		$storage_path = $this->CI->config->item('xml_folder').$type_name.'.xml';
 	}
 }

@@ -189,7 +189,7 @@ Class Content {
 			show_error('Impossibile scrivere il file ['.$type_name.'.xml] nella directory dei tipi.', 500, 'Errore di scrittura');
 		}
 
-		return TRUE;
+		return $type_id;
 
 	}
 
