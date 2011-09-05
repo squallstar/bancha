@@ -14,7 +14,7 @@ $fields = array_keys($tipo['fields']);
 
 		<ul>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url($_section.'/edit_record/'.$tipo['name']); ?>"><?php echo $_section == 'contents' ? _('Insert new content') : _('Insert new page');?></a></li>
-			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/bookmark.png'); ?>" /> <a href="<?php echo admin_url($_section.'/type_categories/'.$tipo['name']); ?>"><?php echo _('Manage categories'); ?></a></li>
+			<?php if ($tipo['has_categories']) { ?><li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/bookmark.png'); ?>" /> <a href="<?php echo admin_url($_section.'/type_categories/'.$tipo['name']); ?>"><?php echo _('Manage categories'); ?></a></li><?php } ?>
 		</ul>
 	</div>
 

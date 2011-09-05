@@ -184,7 +184,7 @@ Class Model_Documents extends CI_Model {
 
 		$result = $this->db->select(implode(', ', $this->config->item('documents_select_fields')))
 				 		   ->from($this->table_current)
-				 		   ->order_by('priority', 'ASC')
+				 		   ->order_by('priority', 'DESC')
 				 		   ->get();
 
 		if ($result->num_rows())

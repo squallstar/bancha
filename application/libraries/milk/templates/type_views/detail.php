@@ -11,6 +11,8 @@
  *
  */
 
+if(!defined('BASEPATH')) exit('No direct script access allowed');
+
 echo '<div class="details"><h1>'.$page->get('title').'</h1>'.
 	 '<p class="info">'.menu($this->tree->get_current_branch()).'</p></div>'.
 	 '<div class="body">';

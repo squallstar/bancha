@@ -244,6 +244,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 				$left_options = array();
 				$right_options = array();
+				debug($field_value);
 				foreach ($field['options'] as $opt_key => $opt_val)
 				{
 					if (is_array($field_value) && in_array($opt_key, $field_value))
@@ -254,11 +255,11 @@ foreach ($tipo['fieldsets'] as $fieldset)
 					}
 				}
 
-				echo '<div class="multiselect_'.$field_name.'"><div class="multi_left">'.form_dropdown($field_name.'[]', $left_options, $field_value, $add);
-				echo '<a href="#" class="add">'._('Add').'</a>'.'</div>';
+				echo '<div class="multiselect multiselect_'.$field_name.'"><div class="multi_left">'.form_dropdown($field_name.'[]', $left_options, $field_value, $add);
+				echo '<br /><input type="button" class="add button tiny" value="'._('Add').'" />'.'</div>';
 
 				echo '<div class="multi_right">'.form_dropdown('_'.$field_name, $right_options, $field_value, $add);
-				echo '<a href="#" class="rem">'._('Remove').'</a>'.'</div></div>';
+				echo '<br /><input type="button" class="rem button tiny" value="'._('Remove').'" />'.'</div></div><br /><br />';
 
 				$nm = 'multiselect_'.$field_name;
 
@@ -309,7 +310,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 							.'<td><a target="_blank" href="'. attach_url($image->path) . '">'._('View').'</a><br />'.$image->width.' x '.$image->height.' px<br />'.$image->size.' Kb</td>'
 							.'<td>'.($image->resized_path ? '<a target="_blank" href="'. attach_url($image->resized_path) . '">'._('View').'</a>':'').'</td>'
 							.'<td><input name="_alt_text['.$image->id_document.']" type="text" class="text small" value="' . $image->alt_text . '" /></td>'
-							.'<td><input class="tbl-priority" name="_priority['.$image->id_document.']" type="text" class="text small" value="' . $image->priority . '" /></td>'
+							.'<td><input class="tbl-priority text small" name="_priority['.$image->id_document.']" type="text" value="' . $image->priority . '" /></td>'
 							.'<td class="delete"><img align="absmiddle" src="'.site_url(THEMESPATH.'admin/widgets/icns/delete.png').'" /> <a href="#" onclick="return milk.delete.document(this, '.$image->id_document.');">'._('Delete image').'</a></td>'
 							."</tr>\n";
 					}

@@ -1036,3 +1036,14 @@ input.small {
 	float: right;
 	text-align: right;
 	}
+	
+.multiselect .multi_left , .multiselect .multi_right {
+	width:250px;
+	float:left
+}
+.multiselect select {
+	height:100px	
+}
+.multiselect input {
+	margin-top:10px;
+}

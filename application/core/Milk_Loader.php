@@ -46,7 +46,7 @@ Class Milk_Loader extends CI_Loader {
 
 	function frlibrary($library, $name = '')
 	{
-		$this->library(FRNAME.'/'.$library, $name);
+		$this->library(FRNAME.'/'.$library, NULL, $name);
 	}
 
 	function records()
@@ -104,6 +104,12 @@ Class Milk_Loader extends CI_Loader {
 		}
 		$class_name = ucfirst($module_name).'_Module';
 		return new $class_name();
+	}
+	
+	function dispatcher($name = 'default')
+	{
+		$this->library(FRNAME.'/dispatchers/dispatcher_'.$name, NULL, 'dispatcher');
+		
 	}
 
 	// --------------------------------------------------------------------
@@ -245,9 +251,16 @@ Class Milk_Loader extends CI_Loader {
 		}
 	}
 
+	/**
+	 * Aggiunge un path come caricamento delle view
+	 * @param string $path
+	 */
 	public function add_view_path($path)
 	{
+		// La path aggiunta sta sempre in fondo
+		$this->_ci_view_paths = array_reverse($this->_ci_view_paths);
 		$this->_ci_view_paths[$path] = TRUE;
+		$this->_ci_view_paths = array_reverse($this->_ci_view_paths);
 	}
 
 }

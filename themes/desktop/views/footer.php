@@ -1,3 +1,4 @@
+<?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <div class="col">
 	<h3><a href="#">Ut enim risus rhoncus</a></h3>
 	<p>Quisque consectetur odio ut sem semper commodo. Maecenas iaculis leo a ligula euismod condimentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>

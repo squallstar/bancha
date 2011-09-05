@@ -11,6 +11,8 @@
  *
  */
 
+if(!defined('BASEPATH')) exit('No direct script access allowed');
+
 $records = & $page->get('records');
 
 echo '<div class="details"><h1>'.$page->get('title').'</h1>'.
