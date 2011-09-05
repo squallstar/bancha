@@ -431,7 +431,7 @@ Class Installer
 		}
 		
 		//Pulisco la cache di questo tipo di albero
-		//$this->CI->tree->clear_cache('Menu');
+		$this->CI->tree->clear_cache('Menu');
 	}
 
 	public function copy_premade_xml($path, $type_name, $type_id)
