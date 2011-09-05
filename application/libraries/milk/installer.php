@@ -299,6 +299,7 @@ Class Installer
 		} else {
 			show_error(_('Default content type not defined'));
 		}
+		$this->content->rebuild();
 	}
 
 	/**
@@ -378,7 +379,11 @@ Class Installer
 		switch (strtolower($type))
 		{
 			case 'blog':
-
+				//Creo un post
+				$post = new Record('Blog');
+				$post->set('title', _('My first post'));
+				$post->set('contenuto', _('Hello world'));
+				$this->CI->records->save($post);
 				break;
 		}
 	}
