@@ -363,6 +363,7 @@ Class Installer
 			return;
 		}
 
+		//Directory con i premade per i wizard
 		$folder = $this->CI->config->item('templates_folder').'premades'.DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR;
 
 		$premades_xml = array();
@@ -434,6 +435,13 @@ Class Installer
 		$this->CI->tree->clear_cache('Menu');
 	}
 
+	/**
+	 * Copia un XML dalla cartella di un premade ad un tipo di contenuto
+	 * @param string $path Directory del file xml premade
+	 * @param string $type_name Nome del tipo per la sostituzione
+	 * @param int $type_id Chiave primaria del tipo di contenuto
+	 * @return bool
+	 */
 	public function copy_premade_xml($path, $type_name, $type_id)
 	{
 		$xml = read_file($path);
