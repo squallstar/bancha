@@ -59,7 +59,7 @@ Class Record {
     	foreach ($tipo['fields'] as $field_name => $field)
     	{
     		$value = isset($data[$field_name]) ? $data[$field_name] : '';
-    		if ($CI->config->item('strip_website_url') && $tipo['type'] == 'textarea' || $tipo['type'] == 'textarea_full')
+    		if ($CI->config->item('strip_website_url') && $field['type'] == 'textarea' || $field['type'] == 'textarea_full')
     		{
     			//Elimino il percorso del sito dalle textarea
     			$value = str_replace(site_url(), '/', $value);
