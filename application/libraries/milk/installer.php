@@ -365,16 +365,21 @@ Class Installer
 
 		$folder = $this->CI->config->item('templates_folder').'premades'.DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR;
 
-		$premades_xml = get_filenames($folder);
-		if (count($premades_xml))
+		$premades_xml = array();
+		
+		if (file_exists($folder))
 		{
-			foreach ($premades_xml as $file_name)
+			$premades_xml = get_filenames($folder);
+			if (count($premades_xml))
 			{
-				$name = str_replace('.xml', '', $file_name);
-				$type_id = $this->CI->content->add_type($name, $name, 'false', TRUE);
-				$this->copy_premade_xml($folder.$file_name, $name, $type_id);
+				foreach ($premades_xml as $file_name)
+				{
+					$name = str_replace('.xml', '', $file_name);
+					$type_id = $this->CI->content->add_type($name, $name, 'false', TRUE);
+					$this->copy_premade_xml($folder.$file_name, $name, $type_id);
+				}
 			}
-		}
+		}		
 		
 		//Svuoto e ricarico la cache dei tipi
 		$this->CI->content->rebuild();
@@ -408,12 +413,25 @@ Class Installer
 					 ->set('action_list_type', $this->CI->content->type_id('Blog'))
 				;
 				$this->CI->records->save($page);
+
+				break;
 				
-				//Pulisco la cache di questo tipo di albero
-				$this->CI->tree->clear_cache('Menu');
+			case 'default':
+				//Creo una pagina dimostrativa
+				$page = new Record('Menu');
+				$page->set('title', 'My first page')
+				->set('action', 'text')
+				->set('lang', $this->CI->lang->current_language)
+				->set('show_in_menu', 'T')
+				->set('contenuto', _('Hello world'))
+				;
+				$this->CI->records->save($page);
 				
 				break;
 		}
+		
+		//Pulisco la cache di questo tipo di albero
+		$this->CI->tree->clear_cache('Menu');
 	}
 
 	public function copy_premade_xml($path, $type_name, $type_id)
