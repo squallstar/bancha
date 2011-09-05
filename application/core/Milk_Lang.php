@@ -39,7 +39,8 @@ class Milk_Lang extends CI_Lang {
 		}
 
         //Checks if a language exists
-		if (array_key_exists($lang, $this->languages)) {
+		if (in_array($lang, array_keys($this->languages))) {
+		
 			$this->gettext_language = $this->languages[$lang]['locale'];
 			$this->current_language = $lang;
 		} else {
@@ -65,7 +66,7 @@ class Milk_Lang extends CI_Lang {
     	$keys = array_keys($this->languages);
     	$this->current_language = $keys[0];
 
-		$this->gettext_language = $this->languages[$this->language]['locale'];
+		$this->gettext_language = $this->languages[$this->current_language]['locale'];
 
     	if ($load_gettext) {
 			$this->load_gettext();
