@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Milk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-02 17:01+0100\n"
-"PO-Revision-Date: 2011-09-02 17:01+0100\n"
+"POT-Creation-Date: 2011-09-05 12:50+0100\n"
+"PO-Revision-Date: 2011-09-05 12:51+0100\n"
 "Last-Translator: Nicholas <nicholas@intesys.it>\n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -17,11 +17,6 @@ msgstr ""
 "X-Poedit-SearchPath-1: libraries\n"
 "X-Poedit-SearchPath-2: models\n"
 "X-Poedit-SearchPath-3: views/admin\n"
-
-#: controllers/website.php:133
-#: controllers/website.php:329
-msgid "Page not found"
-msgstr "Pagina non trovata"
 
 #: controllers/admin/ajax.php:92
 msgid "This content has no attachments."
@@ -71,7 +66,7 @@ msgstr "Il tipo %n è stato rimosso."
 msgid "Choose one..."
 msgstr "Seleziona uno..."
 
-#: controllers/admin/install.php:74
+#: controllers/admin/install.php:80
 msgid "%n has been installed!"
 msgstr "%n è stato correttamente installato!"
 
@@ -79,15 +74,15 @@ msgstr "%n è stato correttamente installato!"
 msgid "The module %m has no documentation or not exists."
 msgstr "Il modulo %n non contiene alcuna documentazione."
 
-#: libraries/Milk_Profiler.php:64
+#: libraries/Milk_Profiler.php:80
 msgid "Preview"
 msgstr "Anteprima"
 
-#: libraries/Milk_Profiler.php:66
+#: libraries/Milk_Profiler.php:82
 msgid "Back to admin"
 msgstr "Torna all'amministrazione"
 
-#: libraries/Milk_Profiler.php:67
+#: libraries/Milk_Profiler.php:83
 msgid "Open profiler"
 msgstr "Apri profiler"
 
@@ -95,9 +90,14 @@ msgstr "Apri profiler"
 msgid "Default content type not defined"
 msgstr "Tipo predefinito non definito."
 
-#: libraries/milk/xml.php:209
+#: libraries/milk/xml.php:218
 msgid "Untitled"
 msgstr "Senza titolo"
+
+#: libraries/milk/dispatchers/dispatcher_default.php:80
+#: libraries/milk/dispatchers/dispatcher_default.php:288
+msgid "Page not found"
+msgstr "Pagina non trovata"
 
 #: views/admin/auth/login.php:7
 msgid "Administration login"
@@ -132,12 +132,12 @@ msgid "Close window"
 msgstr "Chiudi finestra"
 
 #: views/admin/content/documents_finder.php:24
-#: views/admin/content/record_edit.php:304
+#: views/admin/content/record_edit.php:305
 msgid "Original"
 msgstr "Originale"
 
 #: views/admin/content/documents_finder.php:24
-#: views/admin/content/record_edit.php:304
+#: views/admin/content/record_edit.php:305
 msgid "Resized"
 msgstr "Ridimensionata"
 
@@ -146,15 +146,15 @@ msgid "Thumbnail"
 msgstr "Anteprima"
 
 #: views/admin/content/documents_finder.php:24
-#: views/admin/content/record_edit.php:304
-#: views/admin/content/record_edit.php:337
+#: views/admin/content/record_edit.php:305
+#: views/admin/content/record_edit.php:338
 msgid "Alternative text"
 msgstr "Testo alternativo"
 
 #: views/admin/content/documents_finder.php:30
 #: views/admin/content/documents_finder.php:31
-#: views/admin/content/record_edit.php:309
 #: views/admin/content/record_edit.php:310
+#: views/admin/content/record_edit.php:311
 msgid "View"
 msgstr "Visualizza"
 
@@ -165,7 +165,7 @@ msgid "Choose"
 msgstr "Scegli"
 
 #: views/admin/content/documents_finder.php:34
-#: views/admin/content/record_edit.php:313
+#: views/admin/content/record_edit.php:314
 msgid "Delete image"
 msgstr "Elimina immagine"
 
@@ -188,7 +188,7 @@ msgid "Back to list"
 msgstr "Torna alla lista"
 
 #: views/admin/content/record_edit.php:41
-#: views/admin/content/record_edit.php:375
+#: views/admin/content/record_edit.php:376
 #: views/admin/content/type_categories.php:8
 msgid "Categories"
 msgstr "Categorie"
@@ -211,55 +211,55 @@ msgstr "Pubblica"
 msgid "The address of this page is:"
 msgstr "L'indirizzo di questa pagina è:"
 
-#: views/admin/content/record_edit.php:258
+#: views/admin/content/record_edit.php:259
 #: views/admin/content/type_add.php:75
 #: views/admin/content/type_categories.php:74
 msgid "Add"
 msgstr "Aggiungi"
 
-#: views/admin/content/record_edit.php:261
+#: views/admin/content/record_edit.php:262
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: views/admin/content/record_edit.php:297
-#: views/admin/content/record_edit.php:300
+#: views/admin/content/record_edit.php:298
+#: views/admin/content/record_edit.php:301
 msgid "You can attach up to %n images"
 msgstr "Puoi allegare %n immagini"
 
-#: views/admin/content/record_edit.php:299
+#: views/admin/content/record_edit.php:300
 msgid "Number of uploadable images excedeed."
 msgstr "Numero consentito di immagini superato."
 
-#: views/admin/content/record_edit.php:304
+#: views/admin/content/record_edit.php:305
 msgid "Order"
 msgstr "Ordinamento"
 
-#: views/admin/content/record_edit.php:330
-#: views/admin/content/record_edit.php:333
+#: views/admin/content/record_edit.php:331
+#: views/admin/content/record_edit.php:334
 msgid "You can attach up to %n files"
 msgstr "Puoi allegare fino a %n files"
 
-#: views/admin/content/record_edit.php:332
+#: views/admin/content/record_edit.php:333
 msgid "File limit exceeded."
 msgstr "Limite di caricamento files superato"
 
-#: views/admin/content/record_edit.php:337
+#: views/admin/content/record_edit.php:338
 msgid "File name"
 msgstr "Nome del file"
 
-#: views/admin/content/record_edit.php:337
+#: views/admin/content/record_edit.php:338
 msgid "File type"
 msgstr "Tipo"
 
-#: views/admin/content/record_edit.php:343
+#: views/admin/content/record_edit.php:344
 msgid "Delete file"
 msgstr "Elimina file"
 
-#: views/admin/content/record_edit.php:381
+#: views/admin/content/record_edit.php:382
 msgid "This content can be associated to these categories"
 msgstr "Questo contenuto può essere associato a queste categorie"
 
-#: views/admin/content/record_edit.php:398
+#: views/admin/content/record_edit.php:399
 msgid "This type has no categories"
 msgstr "Questo tipo non ha categorie"
 
@@ -625,7 +625,19 @@ msgstr "Svuota e ricrea cache"
 msgid "Enable event logging"
 msgstr "Abilita logging degli eventi"
 
+#: views/admin/installer/request.php:26
+msgid "Install type"
+msgstr "Tipo di installazione"
+
 #: views/admin/installer/request.php:28
+msgid "Default"
+msgstr "Predefinita"
+
+#: views/admin/installer/request.php:29
+msgid "Blog"
+msgstr "Blog"
+
+#: views/admin/installer/request.php:33
 msgid "Install"
 msgstr "Installa"
 
