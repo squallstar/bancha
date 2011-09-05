@@ -299,7 +299,7 @@ Class Installer
 		} else {
 			show_error(_('Default content type not defined'));
 		}
-		$this->content->rebuild();
+		$this->CI->content->rebuild();
 	}
 
 	/**
