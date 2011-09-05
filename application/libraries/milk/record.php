@@ -47,121 +47,116 @@ Class Record {
 		}
   	}
 
-  /**
-   * Imposta i dati del record
-   * @param array $data
-   */
-  public function set_data($data)
-  {
-    $CI = & get_instance();
-    $tipo = & $CI->content->type($this->_tipo);
+  	/**
+   	* Imposta i dati del record
+   	* @param array $data
+   	*/
+  	public function set_data($data)
+  	{
+    	$CI = & get_instance();
+    	$tipo = & $CI->content->type($this->_tipo);
 
-    foreach ($tipo['fields'] as $field_name => $field)
-    {
-    	$value = isset($data[$field_name]) ? $data[$field_name] : '';
-    	if ($CI->config->item('strip_website_url'))
+    	foreach ($tipo['fields'] as $field_name => $field)
     	{
-    		$value = str_replace(site_url(), '/', $value);
-    	}
-   		$this->_data[$field_name] = $value;
-
-    	if ($field['type'] == 'date')
-    	{
-    		if (strpos($this->_data[$field_name], '/'))
+    		$value = isset($data[$field_name]) ? $data[$field_name] : '';
+    		if ($CI->config->item('strip_website_url') && $tipo['type'] == 'textarea' || $tipo['type'] == 'textarea_full')
     		{
-    			$this->_data[$field_name] = implode('-', array_reverse(explode('/', $this->_data[$field_name])));
+    			//Elimino il percorso del sito dalle textarea
+    			$value = str_replace(site_url(), '/', $value);
     		}
-    		$this->_data[$field_name] = strtotime($this->_data[$field_name]);
-    	}
-    	else if ($field['type'] == 'datetime')
-    	{
-    		if (strpos($this->_data[$field_name], '/'))
+   			$this->_data[$field_name] = $value;
+
+    		if ($field['type'] == 'date')
     		{
-    			$this->_data[$field_name] = implode('-', array_reverse(explode('/', $this->_data[$field_name])));
-    			$this->_data[$field_name] = $this->_data[$field_name]  . ' ' . $data['_time_'.$field_name] . ':00';
+    			if (strpos($this->_data[$field_name], '/'))
+    			{
+    				$this->_data[$field_name] = implode('-', array_reverse(explode('/', $this->_data[$field_name])));
+    			}
+    			$this->_data[$field_name] = strtotime($this->_data[$field_name]);
     		}
-    		$this->_data[$field_name] = strtotime($this->_data[$field_name]);
+    		else if ($field['type'] == 'datetime')
+    		{
+    			if (strpos($this->_data[$field_name], '/'))
+    			{
+    				$this->_data[$field_name] = implode('-', array_reverse(explode('/', $this->_data[$field_name])));
+    				$this->_data[$field_name] = $this->_data[$field_name]  . ' ' . $data['_time_'.$field_name] . ':00';
+    			}
+    			$this->_data[$field_name] = strtotime($this->_data[$field_name]);
+    		}
     	}
-    }
 
-    //Imposto a parte il campo ID (serve per insert-update)
-    if (isset($data[$tipo['primary_key']]))
-    {
-    	$this->id = $data[$tipo['primary_key']];
-    }
+    	//Imposto a parte il campo ID (serve per insert-update)
+    	if (isset($data[$tipo['primary_key']]))
+    	{
+    		$this->id = $data[$tipo['primary_key']];
+    	}
+  	}
 
-  }
+  	/**
+   	* Ottiene un dato del record
+   	* @param string $key
+   	* @param string $default
+   	*/
+  	public function get($key='', $default='')
+  	{
+    	return isset($this->_data[$key]) ? $this->_data[$key] : $default;
+  	}
 
-  /**
-   * Ottiene un dato del record
-   * @param string $key
-   * @param string $default
-   */
-  public function get($key='', $default='')
-  {
-    if ($key != '')
-    {
-      if (isset($this->_data[$key])) {
-      	return $this->_data[$key];
-      }
-    }
-	return $default;
-  }
+  	/**
+   	* Imposta un dato nel record
+   	* @param string $key
+   	* @param mixed $val
+   	*/
+  	public function set($key='', $val)
+  	{
+    	if ($key != '')
+    	{
+      		$this->_data[$key] = $val;
+    	}
+    	return $this;
+  	}
 
-  /**
-   * Imposta un dato nel record
-   * @param string $key
-   * @param mixed $val
-   */
-  public function set($key='', $val)
-  {
-    if ($key != '') {
-      $this->_data[$key] = $val;
-    }
-    return $this;
-  }
+  	/**
+   	* Controlla se il record ha un parent
+   	* @return BOOL
+   	*/
+  	public function has_parent()
+  	{
+		return $this->get('id_parent') ? TRUE : FALSE;
+  	}
 
-  /**
-   * Controlla se il record ha un parent
-   * @return BOOL
-   */
-  public function has_parent()
-  {
-	return $this->get('id_parent') ? TRUE : FALSE;
-  }
-
-  /**
-   * Controlla se un record e' una pagina
-   * @return bool
-   */
-  public function is_page()
-  {
-  	$CI = & get_instance();
-	  $tipo = $CI->content->type($this->_tipo);
+  	/**
+   	* Controlla se un record e' una pagina
+   	* @return bool
+   	*/
+  	public function is_page()
+  	{
+  		$CI = & get_instance();
+	  	$tipo = $CI->content->type($this->_tipo);
 	  	if ($tipo['tree'] == TRUE)
 	  	{
 	  		return TRUE;
 	  	} else {
 	  		return FALSE;
 	  	}
-  }
+  	}
 
-  /**
-   * Costruisce un XML relativo al record
-   * Necessita che siano stati popolati i campi con la funzione set_data()
-   */
-  public function build_xml()
-  {
-    $CI = & get_instance();
-    if (count($this->_data)) {
-      $this->xml = $CI->xml->get_record_xml($this->_tipo, $this->_data);
+  	/**
+   	* Costruisce un XML relativo al record
+   	* Necessita che siano stati popolati i campi con la funzione set_data()
+   	*/
+  	public function build_xml()
+  	{
+    	$CI = & get_instance();
+    	if (count($this->_data)) {
+     		$this->xml = $CI->xml->get_record_xml($this->_tipo, $this->_data);
 
-      //Tolgo i caratteri di a capo per recuperare spazio
-      $this->xml = str_replace(array("\r\n", "\r", "\n"), "", $this->xml);
-    }else{
-      show_error('Impossibile costruire i nodi xml, il record &egrave; vuoto. (record/build_xml)');
-    }
-  }
+      		//Tolgo i caratteri di a capo per recuperare spazio
+      		$this->xml = str_replace(array("\r\n", "\r", "\n"), "", $this->xml);
+    	} else {
+      		show_error('Impossibile costruire i nodi xml, il record &egrave; vuoto. (record/build_xml)');
+    	}
+  	}
 
   	/**
    	* Costruisce i dati del record dato un xml
