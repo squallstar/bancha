@@ -409,7 +409,7 @@ Class Installer
 
 	public function copy_premade_xml($path, $type_name, $type_id)
 	{
-		$xml = read_file($this->CI->config->item('templates_folder').'premades/'.$path.'.xml');
+		$xml = read_file($path);
 
 		//Parso il file con le pseudovariabili
 		$xml = $this->CI->parser->parse_string($xml, array(
@@ -418,5 +418,6 @@ Class Installer
 		),TRUE);
 
 		$storage_path = $this->CI->config->item('xml_folder').$type_name.'.xml';
+		return write_file($storage_path, $xml);
 	}
 }
