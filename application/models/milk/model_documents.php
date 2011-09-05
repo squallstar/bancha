@@ -14,23 +14,41 @@
 
 Class Model_Documents extends CI_Model {
 
+	/**
+	 * @var string Directory che contiene gli allegati
+	 */
 	public $attach_folder;
 
+	/**
+	 * @var string Tabella di produzione
+	 */
 	public $table = 'documents';
-	public $table_stage = 'documents_stage';
-	public $table_current = '';
 
-	public function set_stage($bool)
-	{
-		//Imposto la tabella su cui fare query
-		$this->table_current = $bool ? $this->table_stage : $this->table;
-	}
+	/**
+	 * @var string Tabella di stage
+	 */
+	public $table_stage = 'documents_stage';
+
+	/**
+	 * @var string Tabella corrente per le estrazioni
+	 */
+	public $table_current = '';
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->attach_folder = $this->config->item('attach_folder');
 		$this->set_stage($this->content->is_stage);
+	}
+
+	/**
+	 * Imposta se siamo in stage
+	 * @param bool $is_stage
+	 */
+	public function set_stage($is_stage)
+	{
+		//Imposto la tabella su cui fare query
+		$this->table_current = $is_stage ? $this->table_stage : $this->table;
 	}
 
 	/**
@@ -401,5 +419,4 @@ Class Model_Documents extends CI_Model {
 							->where('id_document', $document_id)->update($this->table_stage);
 		}
 	}
-
 }
