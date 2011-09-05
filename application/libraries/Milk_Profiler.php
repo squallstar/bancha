@@ -1,7 +1,25 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+/**
+ * Milk Profiler
+ *
+ * Estensione del profiler di Code Igniter
+ * E' stata aggiunta la sezione "render" ed una nuova grafica
+ *
+ * @package		Milk
+ * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
+ * @copyright	Copyright (c) 2011, Squallstar
+ * @license		GNU/GPL (General Public License)
+ * @link		http://squallstar.it
+ *
+ */
+
+if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Milk_Profiler extends CI_Profiler {
 
+	/**
+	 * @var array Sezioni da stampare
+	 */
 	protected $_available_sections = array(
 		'benchmarks',
 		'get',
@@ -17,9 +35,8 @@ class Milk_Profiler extends CI_Profiler {
 	);
 
 	/**
-	 * Compile Rendered Views
-	 *
-	 * @return	string
+	 * Compila la sezione del rendering delle view
+	 * @return string
 	 */
 	protected function _compile_renders()
 	{
@@ -53,9 +70,8 @@ class Milk_Profiler extends CI_Profiler {
 	}
 
 	/**
-	* Run the Profiler
-	*
-	* @return	string
+	* Renderizza il profiler
+	* @return string
 	*/
 	public function run()
 	{
