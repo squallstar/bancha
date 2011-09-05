@@ -379,6 +379,13 @@ Class Installer
 		switch (strtolower($type))
 		{
 			case 'blog':
+				//Aggiungo le colonne che mi servono
+				$fields = array(
+					'post_id' => array('type' => 'INT', 'null' => TRUE)
+				);
+				$this->dbforge->add_column('records', $fields);
+				$this->dbforge->add_column('records_stage', $fields);
+				
 				//Creo un post
 				$post = new Record('Blog');
 				$post->set('title', _('My first post'));
