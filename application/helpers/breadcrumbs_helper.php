@@ -33,7 +33,7 @@ if (!function_exists('breadcrumbs'))
 			{
 				if ($i > 0)
 				{
-					$tmp.= ' &raquo;&raquo; ';
+					$tmp.= ' &raquo; ';
 				}
 
 				if ($current_uri == $breadcrumb['link'])
