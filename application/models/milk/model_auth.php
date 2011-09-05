@@ -14,7 +14,14 @@
 
 Class Model_auth extends CI_Model {
 
+	/**
+	 * @var string Nome del cookie di sessione
+	 */
 	private $_str_loggedin = 'logged_in';
+
+	/**
+	 * @var array ACL dell'utente attuale
+	 */
 	private $_acl;
 
 	public function __construct()
@@ -23,6 +30,9 @@ Class Model_auth extends CI_Model {
 		$this->_acl = $this->user('acl');
 	}
 
+	/**
+	 * Controlla se un utente e' loggato, altrimenti lo reindirizza al login
+	 */
 	public function needs_login()
 	{
 		if (!$this->session->userdata($this->_str_loggedin))
@@ -31,11 +41,21 @@ Class Model_auth extends CI_Model {
 		}
 	}
 
+	/**
+	 * Controlla se un utente e' loggato
+	 * @return bool
+	 */
 	public function is_logged()
 	{
 		return $this->session->userdata($this->_str_loggedin);
 	}
 
+	/**
+	 * Prova ad effettuare il login per un utente
+	 * @param string $username
+	 * @param string $password
+	 * @return bool
+	 */
 	public function login($username, $password)
 	{
 		$result = $this->db->select('id_user, name, surname, id_group')
@@ -63,12 +83,23 @@ Class Model_auth extends CI_Model {
 		return FALSE;
 	}
 
+	/**
+	 * Distrugge la sessione ed effettua il logout
+	 * @return bool
+	 */
 	public function logout()
 	{
 		$this->session->sess_destroy();
 		return TRUE;
 	}
 
+	/**
+	 * Ottiene un valore dalla sessione, o ne imposta uno
+	 * se viene passato il valore come secondo parametro
+	 * @param string $key
+	 * @param string|int $val
+	 * @return mixed
+	 */
 	public function user($key, $val='')
 	{
 		if ($val == '')
