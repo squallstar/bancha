@@ -395,6 +395,14 @@ Class Installer
 				$post->set('title', _('My first post'));
 				$post->set('contenuto', _('Hello world'));
 				$this->CI->records->save($post);
+				
+				//Creo una pagina di vista lista contenuti
+				$page = new Record('Menu');
+				$page->set('title', 'Blog')
+					 ->set('action', 'list')
+					 ->set('action_list_type', $this->CI->content->type_id('Blog'))
+				;
+				$this->CI->records->save($page);
 				break;
 		}
 	}
