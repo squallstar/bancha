@@ -375,6 +375,10 @@ Class Installer
 				$this->copy_premade_xml($folder.$file_name, $name, $type_id);
 			}
 		}
+		
+		//Svuoto e ricarico la cache dei tipi
+		$this->CI->content->rebuild();
+		$this->CI->content->read();
 
 		switch (strtolower($type))
 		{
