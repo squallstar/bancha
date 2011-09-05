@@ -392,17 +392,26 @@ Class Installer
 				
 				//Creo un post
 				$post = new Record('Blog');
-				$post->set('title', _('My first post'));
-				$post->set('contenuto', _('Hello world'));
+				$post->set('title', _('My first post'))
+					 ->set('contenuto', _('Hello world'))
+					 ->set('lang', $this->CI->lang->current_language)
+					 ->set('date_publish', time())
+				;
 				$this->CI->records->save($post);
 				
 				//Creo una pagina di vista lista contenuti
 				$page = new Record('Menu');
 				$page->set('title', 'Blog')
 					 ->set('action', 'list')
+					 ->set('lang', $this->CI->lang->current_language)
+					 ->set('show_in_menu', 'T')
 					 ->set('action_list_type', $this->CI->content->type_id('Blog'))
 				;
 				$this->CI->records->save($page);
+				
+				//Pulisco la cache di questo tipo di albero
+				$this->CI->tree->clear_cache('Menu');
+				
 				break;
 		}
 	}
