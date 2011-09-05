@@ -244,9 +244,8 @@ Class Content {
 		if (isset($this->_string_types[$type_string]))
 		{
 			return $this->_string_types[$type_string];
-		} else {
-			show_error('Tipo ['.$type_string.'] non trovato. (content/type_id)', 500, 'Tipo non trovato');
 		}
+		return;
 	}
 
 	/**

@@ -379,7 +379,7 @@ Class Installer
 					$this->copy_premade_xml($folder.$file_name, $name, $type_id);
 				}
 			}
-		}		
+		}
 		
 		//Svuoto e ricarico la cache dei tipi
 		$this->CI->content->rebuild();
@@ -395,7 +395,7 @@ Class Installer
 				$this->dbforge->add_column('records', $fields);
 				$this->dbforge->add_column('records_stage', $fields);
 				
-				//Creo un post
+				//Creo un post			
 				$post = new Record('Blog');
 				$post->set('title', _('My first post'))
 					 ->set('contenuto', _('Hello world'))
@@ -403,7 +403,7 @@ Class Installer
 					 ->set('date_publish', time())
 				;
 				$this->CI->records->save($post);
-				
+
 				//Creo una pagina di vista lista contenuti
 				$page = new Record('Menu');
 				$page->set('title', 'Blog')
@@ -431,7 +431,7 @@ Class Installer
 		}
 		
 		//Pulisco la cache di questo tipo di albero
-		$this->CI->tree->clear_cache('Menu');
+		//$this->CI->tree->clear_cache('Menu');
 	}
 
 	public function copy_premade_xml($path, $type_name, $type_id)
