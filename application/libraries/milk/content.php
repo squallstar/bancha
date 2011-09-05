@@ -91,6 +91,7 @@ Class Content {
 	/**
 	 * Aggiunge un tipo al DB
 	 * @param string $name
+	 * @return int Type id (autoincrement)
 	 */
 	public function add_type($type_name, $type_description, $type_structure, $delete_if_exists=FALSE)
 	{
