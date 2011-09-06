@@ -71,6 +71,12 @@ Class Install extends Milk_Controller
 				$this->events->log('install', null, CMS);
 			}
 
+			$premade = $this->input->post('premade');
+			if ($premade && $premade != '')
+			{
+				$this->installer->create_premade($premade);
+			}
+
 			$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
 			$this->view->render_layout('installer/success', FALSE);
 			return;

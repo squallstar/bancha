@@ -91,6 +91,7 @@ Class Content {
 	/**
 	 * Aggiunge un tipo al DB
 	 * @param string $name
+	 * @return int Type id (autoincrement)
 	 */
 	public function add_type($type_name, $type_description, $type_structure, $delete_if_exists=FALSE)
 	{
@@ -189,7 +190,7 @@ Class Content {
 			show_error('Impossibile scrivere il file ['.$type_name.'.xml] nella directory dei tipi.', 500, 'Errore di scrittura');
 		}
 
-		return TRUE;
+		return $type_id;
 
 	}
 
@@ -243,9 +244,8 @@ Class Content {
 		if (isset($this->_string_types[$type_string]))
 		{
 			return $this->_string_types[$type_string];
-		} else {
-			show_error('Tipo ['.$type_string.'] non trovato. (content/type_id)', 500, 'Tipo non trovato');
 		}
+		return;
 	}
 
 	/**

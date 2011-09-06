@@ -14,6 +14,9 @@
 
 Class Model_events extends CI_Model {
 
+	/**
+	 * @var string Tabella per le estrazioni da DB
+	 */
 	public $table = 'events';
 
 	/**
@@ -36,6 +39,10 @@ Class Model_events extends CI_Model {
 		return $this->db->insert($this->table, $data);
 	}
 
+	/**
+	 * Ottiene gli ultimi eventi dal DB
+	 * @param $limit numero eventi da estrarre
+	 */
 	public function get_last($limit=10)
 	{
 		$this->db->select('id_event, event, content_id, content_type, content_name, event_date, username as user_name')
@@ -48,6 +55,10 @@ Class Model_events extends CI_Model {
 		return $events;
 	}
 
+	/**
+	 * Elimina gli eventi associati ad un determinato tipo di contenuto
+	 * @param int $content_type
+	 */
 	public function delete_by_content_type($content_type)
 	{
 		return $this->db->where('content_type', $content_type)->delete($this->table);

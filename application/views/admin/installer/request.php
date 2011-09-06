@@ -23,6 +23,11 @@
 			  		<input type="checkbox" checked="checked" name="clear_cache" value="T" /> <?php echo _('Clear and rebuild cache'); ?><br />
 			  		<input type="checkbox" checked="checked" name="log_events" value="T" /> <?php echo _('Enable event logging'); ?><br />
 					<br />
+					<?php echo _('Install type'); ?><br />
+					<select class="styled" name="premade">
+						<option value="default"><?php echo _('Default'); ?></option>
+						<option value="blog"><?php echo _('Blog'); ?></option>
+					</select><br />
 			  	</div>
 
 		  		<input name="install" type="submit" class="submit" value="<?php echo _('Install'); ?>" />

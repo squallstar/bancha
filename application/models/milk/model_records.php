@@ -481,7 +481,7 @@ Class Model_records extends CI_Model {
         {
 	        $uri = $record->get('uri');
 	      	if (strlen($uri) < 1) {
-	        	$uri = $record->get('title');
+	        	$uri = strtolower($record->get('title'));
 	      	}
         	$data['uri'] = $this->get_safe_uri($uri);
         }

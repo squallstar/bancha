@@ -244,7 +244,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 				$left_options = array();
 				$right_options = array();
-				debug($field_value);
 				foreach ($field['options'] as $opt_key => $opt_val)
 				{
 					if (is_array($field_value) && in_array($opt_key, $field_value))

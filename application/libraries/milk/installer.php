@@ -299,7 +299,7 @@ Class Installer
 		} else {
 			show_error(_('Default content type not defined'));
 		}
-
+		$this->CI->content->rebuild();
 	}
 
 	/**
@@ -350,5 +350,109 @@ Class Installer
 			delete_directory($dir);
 			mkdir($dir, DIR_WRITE_MODE);
 		}
+	}
+
+	/**
+	 * Crea una installazione premade, ad esempio per un blog
+	 * @param string $type Tipo di installazione
+	 */
+	public function create_premade($type = '')
+	{
+		if ($type == '')
+		{
+			return;
+		}
+
+		//Directory con i premade per i wizard
+		$folder = $this->CI->config->item('templates_folder').'premades'.DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR;
+
+		$premades_xml = array();
+		
+		if (file_exists($folder))
+		{
+			$premades_xml = get_filenames($folder);
+			if (count($premades_xml))
+			{
+				foreach ($premades_xml as $file_name)
+				{
+					$name = str_replace('.xml', '', $file_name);
+					$type_id = $this->CI->content->add_type($name, $name, 'false', TRUE);
+					$this->copy_premade_xml($folder.$file_name, $name, $type_id);
+				}
+			}
+		}
+		
+		//Svuoto e ricarico la cache dei tipi
+		$this->CI->content->rebuild();
+		$this->CI->content->read();
+
+		switch (strtolower($type))
+		{
+			case 'blog':
+				//Aggiungo le colonne che mi servono
+				$fields = array(
+					'post_id' => array('type' => 'INT', 'null' => TRUE)
+				);
+				$this->dbforge->add_column('records', $fields);
+				$this->dbforge->add_column('records_stage', $fields);
+				
+				//Creo un post			
+				$post = new Record('Blog');
+				$post->set('title', _('My first post'))
+					 ->set('contenuto', _('Hello world'))
+					 ->set('lang', $this->CI->lang->current_language)
+					 ->set('date_publish', time())
+				;
+				$this->CI->records->save($post);
+
+				//Creo una pagina di vista lista contenuti
+				$page = new Record('Menu');
+				$page->set('title', 'Blog')
+					 ->set('action', 'list')
+					 ->set('lang', $this->CI->lang->current_language)
+					 ->set('show_in_menu', 'T')
+					 ->set('action_list_type', $this->CI->content->type_id('Blog'))
+				;
+				$this->CI->records->save($page);
+
+				break;
+				
+			case 'default':
+				//Creo una pagina dimostrativa
+				$page = new Record('Menu');
+				$page->set('title', 'My first page')
+				->set('action', 'text')
+				->set('lang', $this->CI->lang->current_language)
+				->set('show_in_menu', 'T')
+				->set('contenuto', _('Hello world'))
+				;
+				$this->CI->records->save($page);
+				
+				break;
+		}
+		
+		//Pulisco la cache di questo tipo di albero
+		$this->CI->tree->clear_cache('Menu');
+	}
+
+	/**
+	 * Copia un XML dalla cartella di un premade ad un tipo di contenuto
+	 * @param string $path Directory del file xml premade
+	 * @param string $type_name Nome del tipo per la sostituzione
+	 * @param int $type_id Chiave primaria del tipo di contenuto
+	 * @return bool
+	 */
+	public function copy_premade_xml($path, $type_name, $type_id)
+	{
+		$xml = read_file($path);
+
+		//Parso il file con le pseudovariabili
+		$xml = $this->CI->parser->parse_string($xml, array(
+		          'id'			=> $type_id,
+		          'version'		=> MILK_VERSION
+		),TRUE);
+
+		$storage_path = $this->CI->config->item('xml_folder').$type_name.'.xml';
+		return write_file($storage_path, $xml);
 	}
 }
