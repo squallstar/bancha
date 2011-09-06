@@ -211,11 +211,8 @@ Class Xml
     		$triggers = array();
     		foreach ($node->triggers->trigger as $node_trigger)
     		{
-    			$attr = $node_trigger->attributes();
-
     			$trigger = array();
-
-
+				$attr = $node_trigger->attributes();
 
     			//Action field
     			if (isset($attr->field))
@@ -223,6 +220,7 @@ Class Xml
     				$trigger['field'] = trim((string) $attr->field);
     			}
 
+    			//Aggiungo i nodi sql se presenti
     			if (isset($node_trigger->sql))
     			{
     				$node_sql = $node_trigger->sql;
@@ -237,7 +235,7 @@ Class Xml
     				);
     			}
 
-    			//Action
+    			//Azione Trigger
     			if (isset($attr->on))
     			{
     				$tmp = explode(',', $attr->on);
