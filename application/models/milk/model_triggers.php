@@ -143,6 +143,26 @@ Class Model_triggers extends CI_Model {
 							break;
 					}
 					break;
+				
+				//Chiamata ad azione custom
+				case 'call':
+					
+					if (!defined('CUSTOM_TRIGGER'))
+					{
+						define('CUSTOM_TRIGGER', TRUE);
+					}
+					
+					$folder = $this->config->item('custom_controllers_folder');
+					require_once($folder . 'triggers.php');
+					$trigger_class = new Triggers();
+					$method_name = $trigger['method'];
+					
+					//Chiamo l'azione definita su controllers/custom/triggers
+					if (is_callable(array($trigger_class, $method_name)))
+					{
+						$trigger_class->$method_name(isset($this->_delegate) ? $this->_delegate : NULL);
+					}				
+					break;
 									
 			} //end-switch
 		} //end-foreach

@@ -36,7 +36,7 @@ $config['languages'] = array(
  * MILK CMS VERSION
  * Versione del framework
  */
-define('MILK_VERSION', '0.6');
+define('MILK_VERSION', '0.6.5');
 
 /*
  * NOME DEL CMS

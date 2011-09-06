@@ -234,6 +234,13 @@ Class Xml
     					'escape'	=> isset($sql_attrib->escape) ? (trim(strtolower((string)$sql_attrib->escape)) == 'false' ? FALSE : TRUE) : TRUE
     				);
     			}
+				
+				//Aggiungo i nodi call
+    			if (isset($node_trigger->call))
+    			{
+    				$trigger['action'] = 'call';
+					$trigger['method'] = (string)$node_trigger->call->attributes()->action;
+				}
 
     			//Azione Trigger
     			if (isset($attr->on))

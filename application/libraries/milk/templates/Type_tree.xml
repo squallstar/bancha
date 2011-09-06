@@ -16,6 +16,9 @@
 		<trigger on="insert, update, delete" field="id_parent">
 			<sql action="recount" type="Menu" target="child_count" />
 		</trigger>
+		<trigger on="insert">
+			<call action="demotrigger" />
+		</trigger>
 	</triggers>
 	<fieldset>
 		<name>Informazioni generali</name>

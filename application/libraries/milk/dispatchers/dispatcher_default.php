@@ -190,14 +190,14 @@ Class Dispatcher_default
 					if ($limit)
 					{
 						$pagination = array(
-						        	'total_rows'			=> $CI->records->count(), //TODO reapply filters
-						        	'per_page'				=> $limit,
-						        	'base_url'				=> current_url().'?',
-						        	'cur_tag_open'			=> '',
-						        	'cur_tag_close'			=> '',
-						        	'page_query_string'		=> TRUE,
-						        	'query_string_segment'	=> 'page',
-						        	'first_url'				=> current_url()
+				        	'total_rows'			=> $CI->records->count(), //TODO reapply filters
+				        	'per_page'				=> $limit,
+				        	'base_url'				=> current_url().'?',
+				        	'cur_tag_open'			=> '',
+				        	'cur_tag_close'			=> '',
+				        	'page_query_string'		=> TRUE,
+				        	'query_string_segment'	=> 'page',
+				        	'first_url'				=> current_url()
 						);
 
 						$CI->view->set('total_records', $pagination['total_rows']);
@@ -212,8 +212,8 @@ Class Dispatcher_default
 					{
 						$CI->load->frlibrary('feed');
 						$feed_header = array(
-									'title' 		=> $page->get('title'),
-									'description'	=> $page->get('contenuto')
+							'title' 		=> $page->get('title'),
+							'description'	=> $page->get('contenuto')
 						);
 						$CI->feed->create_new($feed_header, $CI->view->is_feed);
 
@@ -227,11 +227,11 @@ Class Dispatcher_default
 									$date_pub = $record->get('_date_insert');
 								}
 								$item = array(
-											'title'			=> $record->get('title'),
-											'link'			=> current_url().'/'.$record->get('uri'),
-											'guid'			=> current_url().'/'.$record->get('uri'),
-											'pubDate'		=> date(DATE_RFC822, (int)$date_pub),
-											'description'	=> $record->get('contenuto')
+									'title'			=> $record->get('title'),
+									'link'			=> current_url().'/'.$record->get('uri'),
+									'guid'			=> current_url().'/'.$record->get('uri'),
+									'pubDate'		=> date(DATE_RFC822, (int)$date_pub),
+									'description'	=> $record->get('contenuto')
 								);
 								$CI->feed->add_item($item);
 							}
