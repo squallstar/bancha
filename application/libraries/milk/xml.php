@@ -229,7 +229,7 @@ Class Xml
     				$trigger['sql'] = array(
     					'action'	=> trim((string) $sql_attrib->action),
     					'type'		=> trim((string) $sql_attrib->type),
-    					'field'		=> trim((string) $sql_attrib->field),
+    					'target'	=> trim((string) $sql_attrib->target),
     					'value'		=> (string)	$sql_attrib->value,
     					'escape'	=> isset($sql_attrib->escape) ? (trim(strtolower((string)$sql_attrib->escape)) == 'false' ? FALSE : TRUE) : TRUE
     				);

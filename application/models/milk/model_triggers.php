@@ -2,7 +2,7 @@
 /**
  * Triggers Model
  *
- * Classe per gestire i trigger dei tipi di contenuto
+ * Classe per gestire i triggers impostati dai tipi di contenuto
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -28,6 +28,21 @@ Class Model_triggers extends CI_Model {
 	 * @var mixed Delegato (oggetto dell'operazione)
 	 */
 	private $_delegate = FALSE;
+	
+	/**
+	 * @var bool Indica se siamo in stage
+	 */
+	private $_is_stage = TRUE;
+	
+	/**
+	 * Imposta se utilizzare i trigger sulle tabelle di stage
+	 * @param bool $stage
+	 */
+	public function set_stage($stage)
+	{
+		$this->_is_stage = $stage;
+		return $this;
+	}
 
 	/**
 	 * Imposta l'operazione da eseguire
@@ -71,35 +86,68 @@ Class Model_triggers extends CI_Model {
 	}
 
 	/**
-	 * Esegue i trigger
+	 * Esegue i trigger preimpostati
 	 */
 	public function fire()
 	{
-		if (count($this->_triggers))
-		{
-			foreach ($this->_triggers as $trigger)
-			{
-				switch (strtolower($trigger['action']))
-				{
-					case 'sql':
-						$sql = $trigger['sql'];
-						$tipo = $this->content->type($sql['type']);
-
-						if (isset($trigger['field']) && $this->_delegate)
-						{
-							$this->db->where($tipo['primary_key'], $this->_delegate->get($trigger['field']));
-						}
-
-						//Nuovo valore
-						$this->db->set($sql['field'], $sql['value'], $sql['escape'] ? TRUE : FALSE);
-
-						//Commit
-						$this->db->update($tipo['table_stage']);
-
-						break;
-				}
-			}
+		if (!count($this->_triggers)) {
+			return;
 		}
+		
+		foreach ($this->_triggers as $trigger)
+		{
+			switch (strtolower($trigger['action']))
+			{
+				//Vari triggers che generano query SQL
+				case 'sql':
+					
+					$sql = $trigger['sql'];
+					$target_tipo = $this->content->type($sql['type']);
+					$table_key = $this->_is_stage ? 'table_stage' : 'table';
+					
+					switch ($sql['action'])
+					{
+						//Effettua una update sul DB
+						case 'update':
+							if (isset($trigger['field']) && $this->_delegate)
+							{
+								$value = $this->_delegate->get($trigger['field']);
+								if (!$value)
+								{
+									return;
+								}
+								$this->db->where($target_tipo['primary_key'], $value);
+							}
+	
+							$this->db->set($sql['target'], $sql['value'], $sql['escape'] ? TRUE : FALSE);
+							$this->db->update($target_tipo[$table_key]);
+							break;
+						
+						//Riconta i figli di un record
+						case 'recount':
+							$record_tipo = $this->content->type($this->_delegate->_tipo);
+							
+							$value = $this->_delegate->get($trigger['field']);
+							
+							if ($value)
+							{
+								$count = $this->db->select('count(*) AS total')
+												  ->from($record_tipo[$table_key])
+												  ->where($trigger['field'], $value)
+												  ->get()->row(0);
+												  
+								$this->db->set($sql['target'], $count->total);
+								$this->db->where($target_tipo['primary_key'], $value);
+								$this->db->update($target_tipo[$table_key]);
+							}
+							break;
+					}
+					break;
+									
+			} //end-switch
+		} //end-foreach
+		
+		//Elimino i trigger
+		$this->_triggers = array();
 	}
-
 }

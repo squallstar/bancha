@@ -13,11 +13,8 @@
 	</parent_types>
 	<has_categories>true</has_categories>
 	<triggers>
-		<trigger on="insert, update" field="id_parent">
-			<sql action="update" type="Menu" field="child_count" value="child_count +1" escape="false"/>
-		</trigger>
-		<trigger on="delete" field="id_parent">
-			<sql action="update" type="Menu" field="child_count" value="child_count -1" escape="false" />
+		<trigger on="insert, update, delete" field="id_parent">
+			<sql action="recount" type="Menu" target="child_count" />
 		</trigger>
 	</triggers>
 	<fieldset>
@@ -59,7 +56,6 @@
 		<field id="uri" column="true">
 			<description>Parte finale URL</description>
 			<type>text</type>
-			<admin>true</admin>
 			<list>true</list>
 		</field>
 		<field id="lang" column="true">
@@ -89,6 +85,13 @@
 				<option value="F">Non visualizzare</option>
 			</options>
 			<default>T</default>
+		</field>
+		<field id="child_count" column="true">
+			<description>N. figli</description>
+			<type>hidden</type>
+			<list>true</list>
+			<default>0</default>
+			<admin>true</admin>
 		</field>
 	</fieldset>
 	<fieldset>

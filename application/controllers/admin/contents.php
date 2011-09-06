@@ -286,16 +286,6 @@ Class Contents extends Milk_Controller
       //Riprendo il record aggiornato dal db
       $record = $this->records->get($record_id);
 
-   		//Triggers
-	  	if (isset($tipo['triggers']) && count($tipo['triggers']))
-	  	{
-	  		$this->load->triggers();
-	  		$this->triggers->delegate($record)
-	  					   ->operation('update')
-	  					   ->add($tipo['triggers']['update'])
-	  					   ->fire();
-	  	}
-
       //Aggiorno i testi alternativi delle immagini
       if ($this->input->post('_alt_text', FALSE)) {
       		$alt_texts = $this->input->post('_alt_text', FALSE);

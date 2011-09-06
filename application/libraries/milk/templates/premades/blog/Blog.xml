@@ -64,6 +64,13 @@
 			<type>textarea_full</type>
 			<list>true</list>
 		</field>
+		<field id="child_count" column="true">
+			<description>Commenti</description>
+			<type>hidden</type>
+			<list>true</list>
+			<default>0</default>
+			<admin>true</admin>
+		</field>
 	</fieldset>
 	<fieldset>
 		<name>Immagini e allegati</name>

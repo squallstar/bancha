@@ -425,6 +425,7 @@ Class Installer
 				->set('action', 'text')
 				->set('lang', $this->CI->lang->current_language)
 				->set('show_in_menu', 'T')
+				->set('child_count', 0)
 				->set('contenuto', _('Hello world'))
 				;
 				$this->CI->records->save($page);

@@ -501,9 +501,10 @@ Class Model_records extends CI_Model {
         }
 
 	  $done = FALSE;
+		$action = 'insert';
 
       if ($id) {
-
+		$action = 'update';
        	$is_published = $this->id_is_published($id);
 
          //Imposto il contenuto come non pubblicato (0 = bozza, 2 = bozza + pubblicato)
@@ -554,6 +555,16 @@ Class Model_records extends CI_Model {
       		//Se è un tipo pagina, aggiorno i riferimenti
       		$this->pages->set_stage(TRUE)->save($data);
       	}
+		
+		//Triggers
+	  	if (isset($tipo['triggers']) && count($tipo['triggers']))
+	  	{
+	  		$this->load->triggers();
+	  		$this->triggers->delegate($record)
+	  					   ->operation($action)
+	  					   ->add($tipo['triggers'][$action])
+	  					   ->fire();
+	  	}
 
       }
       return $done;
@@ -562,35 +573,50 @@ Class Model_records extends CI_Model {
   }
 }
 
-  /**
-   * Elimina un record dal db
-   * @param int $record_id
-   * @return bool
-   */
-  public function delete_by_id($record_id, $type = '') {
+	/**
+  	* Elimina un record dal db
+  	* @param int $record_id
+  	* @return bool
+  	*/
+ 	public function delete_by_id($record_id, $type = '') {
 
-  	if ($type != '')
-  	{
-  		$this->set_type($type);
+  		if ($type != '')
+  		{
+  			$this->set_type($type);
+  		}
+		
+		//Ottengo il record per usarlo piu' avanti
+		$record = $this->get($record_id);
+
+    	$done = $this->db->where($this->primary_key, $record_id)
+       		             ->delete($this->table);
+
+    	$done_stage = $this->db->where($this->primary_key, $record_id)
+        			           ->delete($this->table_stage);
+
+    	if ($done && $done_stage && $record)
+    	{
+      		//Elimino gli allegati associati su entrambe le tabelle (stage e produzione)
+     		$this->load->documents();
+      		$this->documents->delete_by_binds($this->table, $record_id, FALSE);
+     		$this->documents->delete_by_binds($this->table_stage, $record_id, TRUE);
+	  
+	  		$action = 'delete';
+	  
+	  		$this->load->triggers();
+			$this->triggers->delegate($record)
+						   ->operation($action);
+						   
+			$tipo = $this->content->type($record->_tipo);
+			
+			//Chiamo i trigger su stage e produzione
+			$this->triggers->set_stage(FALSE)->add($tipo['triggers'][$action])->fire();
+			$this->triggers->set_stage(TRUE)->add($tipo['triggers'][$action])->fire();
+	  
+      		return true;
+    	}
+    	return false;
   	}
-
-    $done = $this->db->where($this->primary_key, $record_id)
-              ->delete($this->table);
-
-    $done_stage = $this->db->where($this->primary_key, $record_id)
-                  ->delete($this->table_stage);
-
-    if ($done && $done_stage)
-    {
-      //Elimino gli allegati associati su entrambe le tabelle (stage e produzione)
-      $this->load->documents();
-      $this->documents->delete_by_binds($this->table, $record_id, FALSE);
-      $this->documents->delete_by_binds($this->table_stage, $record_id, TRUE);
-      return true;
-    }
-    return false;
-
-  }
 
   /**
    * Ottiene un URI sicuro da utilizzare
