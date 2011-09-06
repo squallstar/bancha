@@ -204,7 +204,7 @@ Class Xml
       		}
       		$content['parent_types'] = $parent_types;
     	}
-    	
+
     	//Attivatori (triggers)
     	if (isset($node->triggers))
     	{
@@ -212,28 +212,28 @@ Class Xml
     		foreach ($node->triggers->trigger as $node_trigger)
     		{
     			$attr = $node_trigger->attributes();
-    			
+
     			$trigger = array();
-    			
+
     			//Action
     			if (isset($attr->on))
     			{
     				$tmp = explode(',', $attr->on);
     				foreach ($tmp as $fire)
     				{
-    					if (!isset($triggers[$key]))
+    					if (!isset($triggers[$fire]))
     					{
-    						$triggers[$key] = array();
+    						$triggers[$fire] = array();
     					}
     				}
     			}
-    			
+
     			//Action field
     			if (isset($attr->field))
     			{
     				$trigger['field'] = trim((string) $attr->field);
     			}
-    			
+
     			if (isset($node_trigger->sql))
     			{
     				$node_sql = $node_trigger->sql;
