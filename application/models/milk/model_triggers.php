@@ -51,5 +51,21 @@ Class Model_triggers extends CI_Model {
 		}
 		return $this;
 	}
+	
+	public function add($trigger)
+	{
+		$this->_triggers[]= $trigger;
+	}
+	
+	public function fire()
+	{
+		if (count($this->_triggers))
+		{
+			foreach ($this->_triggers as $trigger)
+			{
+			
+			}
+		}
+	}
 
 }
