@@ -257,7 +257,6 @@ Class Contents extends Milk_Controller
 							$upload_config = array(
 								'allowed_types' => $tipo['fields'][$name]['mimes'],
 								'max_size'		=> $tipo['fields'][$name]['size'],
-								'encrypt_name'	=> TRUE,
 								'resized'		=> isset($tipo['fields'][$name]['resized']) ? $tipo['fields'][$name]['resized'] : FALSE,
 								'thumbnail'		=> isset($tipo['fields'][$name]['thumbnail']) ? $tipo['fields'][$name]['thumbnail'] : FALSE
 							);
@@ -275,7 +274,8 @@ Class Contents extends Milk_Controller
 							$this->documents->upload($name, $upload_config, array(
 								'id'	=> $record_id,
 								'table'	=> $tipo['table'],
-								'field'	=> $name
+								'field'	=> $name,
+								'type'	=> $tipo['name']
 							));
 						}
 					}
