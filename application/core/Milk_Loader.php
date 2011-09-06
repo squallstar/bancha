@@ -1,6 +1,25 @@
 <?php
+/**
+ * Milk_Loader
+ *
+ * Classe per il caricamento di altre classi
+ *
+ * @package		Milk
+ * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
+ * @copyright	Copyright (c) 2011, Squallstar
+ * @license		GNU/GPL (General Public License)
+ * @link		http://squallstar.it
+ *
+ */
+
+//Classe che gestisce i records
+require_once(FRPATH . 'record.php');
+
 Class Milk_Loader extends CI_Loader {
 
+	/**
+	 * @var array Elenco dei moduli caricati
+	 */
 	private $_loaded_modules = array();
 
 	/**
@@ -8,18 +27,14 @@ Class Milk_Loader extends CI_Loader {
 	 */
 	function milk()
 	{
-
-		//Loads milk standard libraries
+		//Librerie standard
 		$this->library(
 			array(
 				'milk/content', 'milk/xml', 'milk/view'
 			)
 		);
 
-		//Preload the record class
-		require_once(FRPATH . 'record.php');
-
-		//Loads the default helpers
+		//Helper generici
 		$this->helper(
 			array(
 				'file', 'website', 'text'
@@ -39,56 +54,95 @@ Class Milk_Loader extends CI_Loader {
 		$this->tree();
 	}
 
+	/**
+	 * Carica un model del framework di Milk
+	 * @param string $model
+	 * @param string $name
+	 * @param bool $db_conn
+	 */
 	function frmodel($model, $name = '', $db_conn = FALSE)
 	{
 		$this->model(FRNAME.'/'.$model, $name, $db_conn);
 	}
 
+	/**
+	 * Carica una libreria dal framework di Milk
+	 * @param string $library
+	 * @param string $name
+	 */
 	function frlibrary($library, $name = '')
 	{
 		$this->library(FRNAME.'/'.$library, NULL, $name);
 	}
 
+	/**
+	 * Carica il model dei records
+	 */
 	function records()
 	{
 		$this->model(FRNAME.'/model_records', 'records');
 	}
 
+	/**
+	 * Carica il model degli alberi di menu
+	 */
 	function tree()
 	{
 		$this->model(FRNAME.'/model_tree', 'tree');
 	}
 
+	/**
+	 * Carica il model dei documenti
+	 */
 	function documents()
 	{
 		$this->model(FRNAME.'/model_documents', 'documents');
 	}
 
+	/**
+	 * Carica il model delle categorie
+	 */
 	function categories()
 	{
 		$this->model(FRNAME.'/model_categories', 'categories');
 	}
 
+	/**
+	 * Carica il model che gestisce le ACL utenti
+	 */
 	function auth()
 	{
 		$this->model(FRNAME.'/model_auth', 'auth');
 	}
 
+	/**
+	 * Carica il model degli utenti
+	 */
 	function users()
 	{
 		$this->model(FRNAME.'/model_users', 'users');
 	}
 
+	/**
+	 * Carica il model delle pagine
+	 */
 	function pages()
 	{
 		$this->model(FRNAME.'/model_pages', 'pages');
 	}
 
+	/**
+	 * Carica il model degli eventi
+	 */
 	function events()
 	{
 		$this->model(FRNAME.'/model_events', 'events');
 	}
 
+	/**
+	 * Carica un modulo esterno
+	 * @param string $module_name
+	 */
 	function module($module_name)
 	{
 		if (!count($this->_loaded_modules))
@@ -105,11 +159,15 @@ Class Milk_Loader extends CI_Loader {
 		$class_name = ucfirst($module_name).'_Module';
 		return new $class_name();
 	}
-	
+
+	/**
+	 * Carica un dispatcher
+	 * @param string $name
+	 */
 	function dispatcher($name = 'default')
 	{
 		$this->library(FRNAME.'/dispatchers/dispatcher_'.$name, NULL, 'dispatcher');
-		
+
 	}
 
 	// --------------------------------------------------------------------
