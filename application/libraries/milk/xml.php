@@ -92,13 +92,13 @@ Class Xml
    	*/
   	function records_from_sql_xml($sql, $id_type = '')
   	{
-    	$this->CI->db->select((string)$sql->select);
-
     	if (!isset($this->CI->content))
     	{
     		//TODO: fix - capire quando accade
     		return;
     	}
+    	
+    	$this->CI->db->select((string)$sql->select);
 
     	$tipo = $this->CI->content->type($id_type);
 
