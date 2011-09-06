@@ -204,6 +204,51 @@ Class Xml
       		}
       		$content['parent_types'] = $parent_types;
     	}
+    	
+    	//Attivatori (triggers)
+    	if (isset($node->triggers))
+    	{
+    		$triggers = array();
+    		foreach ($node->triggers->trigger as $node_trigger)
+    		{
+    			$attr = $node_trigger->attributes();
+    			
+    			$trigger = array();
+    			
+    			//Action
+    			if (isset($attr->on))
+    			{
+    				$tmp = explode(',', $attr->on);
+    				foreach ($tmp as $fire)
+    				{
+    					if (!isset($triggers[$key]))
+    					{
+    						$triggers[$key] = array();
+    					}
+    				}
+    			}
+    			
+    			//Action field
+    			if (isset($attr->field))
+    			{
+    				$trigger['field'] = trim((string) $attr->field);
+    			}
+    			
+    			if (isset($node_trigger->sql))
+    			{
+    				$node_sql = $node_trigger->sql;
+    				$trigger['action'] = 'sql';
+    				$trigger['sql'] = array(
+    					'action'	=> trim((string) $node_sql->action),
+    					'type'		=> trim((string) $node_sql->type),
+    					'field'		=> trim((string) $node_sql->field),
+    					'value'		=> (string)	$node_sql->value,
+    					'escape'	=> isset($node_sql->escape) ? (trim(strtolower((string)$node_sql->escape)) == 'true' ? TRUE : FALSE) : FALSE
+    				);
+    			}
+    		}
+    		$content['triggers'] = $triggers;
+    	}
 
     	$content['fieldsets'] = array();
 
