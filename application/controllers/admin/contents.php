@@ -225,7 +225,7 @@ Class Contents extends Milk_Controller
 
     $tipo = $this->content->type($type);
     $this->records->set_type($type);
-    
+
 
     //Aggiunta-Modifica record
     if ($this->input->post('id_type', FALSE)) {
@@ -286,6 +286,16 @@ Class Contents extends Milk_Controller
       //Riprendo il record aggiornato dal db
       $record = $this->records->get($record_id);
 
+   		//Triggers
+	  	if (isset($tipo['triggers']) && count($tipo['triggers']))
+	  	{
+	  		$this->load->triggers();
+	  		$this->triggers->delegate($record)
+	  					   ->operation('update')
+	  					   ->add($tipo['triggers']['update'])
+	  					   ->fire();
+	  	}
+
       //Aggiorno i testi alternativi delle immagini
       if ($this->input->post('_alt_text', FALSE)) {
       		$alt_texts = $this->input->post('_alt_text', FALSE);
@@ -315,13 +325,13 @@ Class Contents extends Milk_Controller
       }
 
     }else if ($record_id != '') {
-    	
+
     	$record = $this->records->get($record_id);
     }else {
     	//Nuovo record
 		$record = $this->content->make_record($tipo['id']);
     }
-    
+
     if (!$record)
     {
     	show_error('Qualcosa e\' andato storto...');
@@ -580,10 +590,10 @@ Class Contents extends Milk_Controller
 	  			//Elimino gli eventi
 	  			$this->load->events();
 	  			$this->events->delete_by_content_type($tipo['name']);
-	  			
+
 	  			//Elimino dal db il tipo
 	  			$this->db->where('name', $tipo['name'])->delete('types');
-	  			
+
 	  			//Elimino i dead records
 	  			if ($this->config->item('delete_dead_records') == TRUE)
 	  			{
@@ -594,7 +604,7 @@ Class Contents extends Milk_Controller
 	  					$this->db->where('id_type', $tipo['id'])
 	  					->delete($tipo['table_stage']);
 	  				}
-	  			}	
+	  			}
 
 	  			//Ricostruisco la cache
 	  			$this->content->rebuild();

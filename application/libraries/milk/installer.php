@@ -65,6 +65,7 @@ Class Installer
             'xml'			=> array('type'	=> 'TEXT', 'null' => FALSE),
             'uri'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
             'id_parent'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned' => TRUE),
+			'child_count'	=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned' => TRUE, 'default'	=> 0),
             'title'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
             'show_in_menu'	=> array('type'	=> 'VARCHAR', 'constraint'=> '1'),
             'published'		=> array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE, 'default' => 0, 'constraint' => 1),
@@ -367,7 +368,7 @@ Class Installer
 		$folder = $this->CI->config->item('templates_folder').'premades'.DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR;
 
 		$premades_xml = array();
-		
+
 		if (file_exists($folder))
 		{
 			$premades_xml = get_filenames($folder);
@@ -381,7 +382,7 @@ Class Installer
 				}
 			}
 		}
-		
+
 		//Svuoto e ricarico la cache dei tipi
 		$this->CI->content->rebuild();
 		$this->CI->content->read();
@@ -395,8 +396,8 @@ Class Installer
 				);
 				$this->dbforge->add_column('records', $fields);
 				$this->dbforge->add_column('records_stage', $fields);
-				
-				//Creo un post			
+
+				//Creo un post
 				$post = new Record('Blog');
 				$post->set('title', _('My first post'))
 					 ->set('contenuto', _('Hello world'))
@@ -416,7 +417,7 @@ Class Installer
 				$this->CI->records->save($page);
 
 				break;
-				
+
 			case 'default':
 				//Creo una pagina dimostrativa
 				$page = new Record('Menu');
@@ -427,10 +428,10 @@ Class Installer
 				->set('contenuto', _('Hello world'))
 				;
 				$this->CI->records->save($page);
-				
+
 				break;
 		}
-		
+
 		//Pulisco la cache di questo tipo di albero
 		$this->CI->tree->clear_cache('Menu');
 	}

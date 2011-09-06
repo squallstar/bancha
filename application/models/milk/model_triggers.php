@@ -27,7 +27,7 @@ Class Model_triggers extends CI_Model {
 	/**
 	 * @var mixed Delegato (oggetto dell'operazione)
 	 */
-	private $_delegate;
+	private $_delegate = FALSE;
 
 	/**
 	 * Imposta l'operazione da eseguire
@@ -51,19 +51,53 @@ Class Model_triggers extends CI_Model {
 		}
 		return $this;
 	}
-	
+
+	/**
+	 * Aggiunge uno o piu' triggers
+	 * @param array $trigger
+	 */
 	public function add($trigger)
 	{
-		$this->_triggers[]= $trigger;
+		if (isset($trigger[0]))
+		{
+			foreach ($trigger as $tr)
+			{
+				$this->add($tr);
+			}
+		} else {
+			$this->_triggers[]= $trigger;
+		}
+		return $this;
 	}
-	
+
+	/**
+	 * Esegue i trigger
+	 */
 	public function fire()
 	{
 		if (count($this->_triggers))
 		{
 			foreach ($this->_triggers as $trigger)
 			{
-			
+				switch (strtolower($trigger['action']))
+				{
+					case 'sql':
+						$sql = $trigger['sql'];
+						$tipo = $this->content->type($sql['type']);
+
+						if (isset($trigger['field']) && $this->_delegate)
+						{
+							$this->db->where($tipo['primary_key'], $this->_delegate->get($trigger['field']));
+						}
+
+						//Nuovo valore
+						$this->db->set($sql['field'], $sql['value'], $sql['escape'] ? TRUE : FALSE);
+
+						//Commit
+						$this->db->update($tipo['table_stage']);
+
+						break;
+				}
 			}
 		}
 	}

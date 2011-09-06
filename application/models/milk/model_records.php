@@ -23,17 +23,17 @@ Class Model_records extends CI_Model {
   	* @var bool Imposta se estrarre i documenti dalla prossima ricerca
   	*/
   	private $_get_documents = FALSE;
-  	
+
   	/**
   	* @var bool Definisce se e' una ricerca di tipo lista o dettaglio
   	*/
  	private $_is_list = FALSE;
- 	
+
  	/**
  	* @var bool|array Il tipo su cui si sta effettuando la ricerca
  	*/
   	private $_single_type = FALSE;
-  	
+
   	/**
   	* @var bool Definisce se siamo in stage
   	*/
@@ -43,22 +43,22 @@ Class Model_records extends CI_Model {
   	* @var string Tabella di produzione
   	*/
   	public $table;
-  	
+
   	/**
   	* @var string Tabella di sviluppo
   	*/
  	public $table_stage;
-  
+
  	/**
  	* @var string Tabella corrente per le operazioni
  	*/
  	public $table_current;
- 	
+
  	/**
  	* @var string Chiave primaria delle tabelle correnti
  	*/
   	public $primary_key;
-  	
+
   	/**
   	* @var array Colonne da estrarre nelle SELECT di questo tipo
   	*/
@@ -99,14 +99,14 @@ Class Model_records extends CI_Model {
     	{
 	    	$this->set_type($type);
 	      	$tipo = $this->_single_type;
-	
+
 	        //Imposto tutti i riferimenti
 	        $this->table = $tipo['table'];
 	        $this->table_stage = $tipo['stage'] ? $tipo['table_stage'] : $tipo['table'];
 	        $this->primary_key = $tipo['primary_key'];
-	
+
 	        $this->db->where($this->table_current.'.id_type', $tipo['id']);
-	
+
 	        if ($tipo['tree'])
 	        {
 	        	$this->last_search_has_tree = TRUE;
@@ -500,29 +500,6 @@ Class Model_records extends CI_Model {
 	        }
         }
 
-        //Inserisco le colonne fisiche addizionali
-        /*
-        foreach ($this->config->item('record_columns') as $column)
-        {
-          $value = $record->get($column);
-          //Se non è ancora stata valorizzata la colonna
-          if (!isset($data[$column]) && $value) {
-            $data[$column] = $value;
-          }
-        }*/
-
-        /* DEPRECATO - QUESTO CONTROLLO VA FATTO SU PAGES
-        //Controllo se questo URI è in uso da altri record
-        $uri_used = $this->uri_is_used($data['uri']);
-
-        if ($uri_used) {
-          if ($uri_used->id != $id) {
-            $tipo = $this->content->type($uri_used->_tipo);
-            show_error('L\'indirizzo (URI) "'.$data['uri'].'" &egrave; gi&agrave; utilizzato dal record [<a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$uri_used->id).'">'.$uri_used->get('title').'</a>] di tipo ['.$tipo['description'].'].', 500, 'URI Già utilizzato');
-          }
-       }
-       */
-
 	  $done = FALSE;
 
       if ($id) {
@@ -542,7 +519,7 @@ Class Model_records extends CI_Model {
           //Update
           if ($this->db->where($tipo['primary_key'], $id)
                ->update($this->table_stage, $data))
-               {
+          {
             $done = $id;
             $this->events->log('update', $id, $data['title'], $data['id_type']);
           } else {

@@ -97,7 +97,7 @@ Class Xml
     		//TODO: fix - capire quando accade
     		return;
     	}
-    	
+
     	$this->CI->db->select((string)$sql->select);
 
     	$tipo = $this->CI->content->type($id_type);
@@ -241,6 +241,7 @@ Class Xml
     				$tmp = explode(',', $attr->on);
     				foreach ($tmp as $fire)
     				{
+    					$fire = trim($fire);
     					if (!isset($triggers[$fire]))
     					{
     						$triggers[$fire] = array();

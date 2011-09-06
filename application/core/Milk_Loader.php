@@ -30,7 +30,7 @@ Class Milk_Loader extends CI_Loader {
 				'milk/content', 'milk/xml', 'milk/view'
 			)
 		);
-		
+
 		//Classe che gestisce i records
 		require_once(FRPATH . 'record.php');
 
@@ -137,6 +137,14 @@ Class Milk_Loader extends CI_Loader {
 	function events()
 	{
 		$this->model(FRNAME.'/model_events', 'events');
+	}
+
+	/**
+	 * Carica il model degli attivatori
+	 */
+	function triggers()
+	{
+		$this->model(FRNAME.'/model_triggers', 'triggers');
 	}
 
 	/**
