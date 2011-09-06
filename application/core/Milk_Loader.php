@@ -12,9 +12,6 @@
  *
  */
 
-//Classe che gestisce i records
-require_once(FRPATH . 'record.php');
-
 Class Milk_Loader extends CI_Loader {
 
 	/**
@@ -33,6 +30,9 @@ Class Milk_Loader extends CI_Loader {
 				'milk/content', 'milk/xml', 'milk/view'
 			)
 		);
+		
+		//Classe che gestisce i records
+		require_once(FRPATH . 'record.php');
 
 		//Helper generici
 		$this->helper(
