@@ -309,7 +309,7 @@ Class Content {
 
 		}
 
-		if ($this->CI->config->item('delete_dead_recods') == TRUE)
+		if ($this->CI->config->item('delete_dead_records') == TRUE)
 		{
 			//Elimino i dead records
 			$this->CI->load->records();
