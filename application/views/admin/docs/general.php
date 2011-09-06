@@ -37,6 +37,8 @@
 				<li>&Egrave; modulare, ovvero pu&ograve; essere esteso con diverse tipologie di moduli che potrai sviluppare tu stesso.</li>
 				<li>&Egrave; open-source (puoi scaricarlo direttamente da <a href="https://github.com/squallstar/milk" target="_blank">qui</a>).</li>
 				<li>&Egrave; facile da installare e da mantenere. Non necessita di infrastrutture particolari e/o avanzate.</li>
+				<li>Separa in maniera netta l'applicazioni dai temi e permette quindi la portabilit&agrave; di quest'ultimi</li>
+				<li>Utilizza un sistema ORM per gestire gli oggetti del database</li>
 			</ul>
 			<?php echo CMS; ?> &egrave; stato interamente sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.
 			</p>

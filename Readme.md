@@ -8,6 +8,8 @@ MILK basa la sua potenza su alcuni pilastri che lo rendono differente da altri C
  * È modulare, ovvero può essere esteso con diverse tipologie di moduli che potrai sviluppare tu stesso.
  * È open-source (puoi scaricarlo direttamente da qui).
  * È facile da installare e da mantenere. Non necessita di infrastrutture particolari e/o avanzate.
+ * Separa in maniera netta l'applicazioni dai temi e permette quindi la portabilità di quest'ultimi
+ * Utilizza un sistema ORM per gestire gli oggetti del database
 
 La documentazione di MILK e' disponibile tramite la sua amministrazione alla voce "Gestione > Documentazione"
 
