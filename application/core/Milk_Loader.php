@@ -70,9 +70,9 @@ Class Milk_Loader extends CI_Loader {
 	 * @param string $library
 	 * @param string $name
 	 */
-	function frlibrary($library, $name = '')
+	function frlibrary($library, $name = NULL)
 	{
-		$this->library(FRNAME.'/'.$library, NULL, $name);
+		$this->library(FRNAME.'/'.$library, NULL, $name );
 	}
 
 	/**

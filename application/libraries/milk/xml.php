@@ -375,9 +375,12 @@ Class Xml
           			if ($cache == 'true')
           			{
             			//Preparo le options
-            			foreach ($records as $record)
+            			if (count($records))
             			{
-              				$options[$record->value] = $record->name;
+	            			foreach ($records as $record)
+	            			{
+	              				$options[$record->value] = $record->name;
+	            			}
             			}
 
             			$content_field['options'] = $options;

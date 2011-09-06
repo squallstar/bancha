@@ -348,7 +348,7 @@ Class Installer
 		foreach ($directories as $dir)
 		{
 			delete_directory($dir);
-			mkdir($dir, DIR_WRITE_MODE);
+			mkdir($dir, DIR_WRITE_MODE, TRUE);
 		}
 	}
 

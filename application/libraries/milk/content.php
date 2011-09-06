@@ -245,7 +245,7 @@ Class Content {
 		{
 			return $this->_string_types[$type_string];
 		}
-		return;
+		return 0;
 	}
 
 	/**
