@@ -215,18 +215,7 @@ Class Xml
 
     			$trigger = array();
 
-    			//Action
-    			if (isset($attr->on))
-    			{
-    				$tmp = explode(',', $attr->on);
-    				foreach ($tmp as $fire)
-    				{
-    					if (!isset($triggers[$fire]))
-    					{
-    						$triggers[$fire] = array();
-    					}
-    				}
-    			}
+
 
     			//Action field
     			if (isset($attr->field))
@@ -237,14 +226,29 @@ Class Xml
     			if (isset($node_trigger->sql))
     			{
     				$node_sql = $node_trigger->sql;
+    				$sql_attrib = $node_sql->attributes();
     				$trigger['action'] = 'sql';
     				$trigger['sql'] = array(
-    					'action'	=> trim((string) $node_sql->action),
-    					'type'		=> trim((string) $node_sql->type),
-    					'field'		=> trim((string) $node_sql->field),
-    					'value'		=> (string)	$node_sql->value,
-    					'escape'	=> isset($node_sql->escape) ? (trim(strtolower((string)$node_sql->escape)) == 'true' ? TRUE : FALSE) : FALSE
+    					'action'	=> trim((string) $sql_attrib->action),
+    					'type'		=> trim((string) $sql_attrib->type),
+    					'field'		=> trim((string) $sql_attrib->field),
+    					'value'		=> (string)	$sql_attrib->value,
+    					'escape'	=> isset($sql_attrib->escape) ? (trim(strtolower((string)$sql_attrib->escape)) == 'false' ? FALSE : TRUE) : TRUE
     				);
+    			}
+
+    			//Action
+    			if (isset($attr->on))
+    			{
+    				$tmp = explode(',', $attr->on);
+    				foreach ($tmp as $fire)
+    				{
+    					if (!isset($triggers[$fire]))
+    					{
+    						$triggers[$fire] = array();
+    					}
+    					$triggers[$fire][] = $trigger;
+    				}
     			}
     		}
     		$content['triggers'] = $triggers;
