@@ -20,6 +20,9 @@ Class Dispatcher_Images
 	 */
 	public function retrieve($data)
 	{
+		//Increase limit
+		ini_set('memory_limit', '128M');
+
 		$CI = & get_instance();
 		$CI->output->enable_profiler(FALSE);
 
@@ -49,6 +52,12 @@ Class Dispatcher_Images
 		$store_path = $CI->config->item('attach_folder') . 'cache' . $sep . $path
 					. $data['preset'] . $sep;
 
+		if (!file_exists($source_image))
+		{
+			echo 'Not found';
+			return;
+		}
+
 		if (!file_exists($store_path))
 		{
 			@mkdir($store_path, DIR_WRITE_MODE, TRUE);
@@ -61,6 +70,7 @@ Class Dispatcher_Images
 		);
 
 		$first = TRUE;
+		$done = TRUE;
 		foreach ($preset as $operation)
 		{
 			$config = array(
@@ -105,7 +115,7 @@ Class Dispatcher_Images
 			{
 				case 'resize':
 					$CI->image_lib->initialize($config); 
-					$CI->image_lib->resize();
+					$done = $CI->image_lib->resize();
 
 					break;
 				
@@ -119,10 +129,17 @@ Class Dispatcher_Images
 						$config['y_axis'] = (int) $operation['y'];
 					}
 					$CI->image_lib->initialize($config); 
-					$CI->image_lib->crop();
+					$done = $CI->image_lib->crop();
 					
 
 			}
+
+			if (!$done)
+			{
+				log_message('error', $CI->image_lib->display_errors());
+				return;
+			}
+
 		}
 
 		

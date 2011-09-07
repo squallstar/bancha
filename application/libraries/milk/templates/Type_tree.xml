@@ -186,6 +186,20 @@
 		</field>
 	</fieldset>
 	<fieldset>
+		<name>Allegati</name>
+		<field id="immagini">
+			<description>Immagini</description>
+			<type>images</type>
+			<size>4096</size>
+			<mimes>jpg|gif|png|jpeg</mimes>
+			<original>true</original>
+			<resized>640x?</resized>
+			<thumbnail>60x?</thumbnail>
+			<max>3</max>
+			<list>true</list>
+		</field>
+	</fieldset>
+	<fieldset>
 		<name>Meta tags</name>
 		<field id="meta_title">
 			<description>Title</description>
