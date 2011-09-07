@@ -1,7 +1,7 @@
 **************************************
 * @package		Milk
 * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
-* @copyright	Copyright (C) 2011, Squallstar
+* @copyright		Copyright (C) 2011, Squallstar
 * @license		GNU/GPL (General Public License)
 * @link			http://squallstar.it
 **************************************
