@@ -122,6 +122,16 @@ Class Dispatcher_Images
 					$config['width'] = (int)$width;
 					$config['height'] = (int)$height;
 				}
+				if (isset($operation['fixed']) && $operation['fixed'] == TRUE)
+				{
+					list($img_w, $img_h) = getimagesize($config['source_image']);	
+					if ($img_h <= $img_w && $config['height'] != '?')
+					{
+						$config['width'] = round($config['height']*$img_w/$img_h);
+					} else if ($config['width'] != '?') {
+						$config['height'] = round($config['width']*$img_h/$img_w);
+					}
+				}
 			} 
 
 			switch ($operation['operation'])

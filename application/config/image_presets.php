@@ -16,13 +16,13 @@
  *
  **/
 
-//Ridimensiona una immagine, tenendone le proporzioni
+//Ridimensiona una immagine, tenendone le proporzioni e ogni lato di minimo 100px, poi la ritaglia a quadrato
 $config['presets']['user_profile'] = array(
-	array('operation' => 'resize', 'size' => '100x100', 'quality' => 85, 'ratio' => TRUE)
+	array('operation' => 'resize', 'size' => '150x150', 'fixed' => TRUE, 'quality' => 100, 'ratio' => TRUE),
+	array('operation' => 'crop', 'size' => '125x125', 'quality' => 80, 'x' => 25, 'y' => 25)
 );
 
-//Ritaglia una immagine e poi la ridimensiona senza tenere conto delle proporzioni (stretch)
-$config['presets']['demo_preset'] = array(
-	array('operation' => 'crop', 'size' => '320x?', 'quality' => 100, 'ratio' => FALSE, 'x' => 50, 'y' => 50),
-	array('operation' => 'resize', 'size' => '150x150', 'quality' => 85, 'ratio' => FALSE)
+//Ridimensiona una immagine tenendo come larghezza massima 640px mantenendo le proporzioni.
+$config['presets']['standard'] = array(
+	array('operation' => 'resize', 'size' => '640x?', 'ratio' => TRUE, 'quality' => 70)
 );
