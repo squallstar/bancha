@@ -20,18 +20,19 @@ Class Dispatcher_Images
 	 */
 	public function retrieve($data)
 	{
-		$tipo = $this->content->type($data['type']);
+		$CI = & get_instance();
+
+		$tipo = $CI->content->type($data['type']);
 		if ($tipo['fields'][$data['field']] != 'imagelist')
 		{
 			show_error('The field [' . $data['field'] . '] is not an "imagelist" field.', 400);
 		}
 
-		//Increase limit
+		//Aumento il limite di memoria
 		ini_set('memory_limit', '128M');
 
-		$CI = & get_instance();
+		//Carico le librerie che mi servono
 		$CI->output->enable_profiler(FALSE);
-
 		$CI->load->library('image_lib');
 		$CI->load->config('image_presets');
 
