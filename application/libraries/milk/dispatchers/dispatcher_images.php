@@ -20,10 +20,14 @@ Class Dispatcher_Images
 	 */
 	public function retrieve($data)
 	{
+		//Istanza di Code Igniter
 		$CI = & get_instance();
 
+		//Ottengo il tipo di contenuto in questione
 		$tipo = $CI->content->type($data['type']);
-		if ($tipo['fields'][$data['field']] != 'imagelist')
+
+		//Controllo se il field richiesto e' un campo image
+		if ($tipo['fields'][$data['field']]['type'] != 'images')
 		{
 			show_error('The field [' . $data['field'] . '] is not an "imagelist" field.', 400);
 		}
