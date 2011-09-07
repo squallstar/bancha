@@ -23,17 +23,17 @@ Class Model_records extends CI_Model {
   	* @var bool Imposta se estrarre i documenti dalla prossima ricerca
   	*/
   	private $_get_documents = FALSE;
-  	
+
   	/**
   	* @var bool Definisce se e' una ricerca di tipo lista o dettaglio
   	*/
  	private $_is_list = FALSE;
- 	
+
  	/**
  	* @var bool|array Il tipo su cui si sta effettuando la ricerca
  	*/
   	private $_single_type = FALSE;
-  	
+
   	/**
   	* @var bool Definisce se siamo in stage
   	*/
@@ -43,22 +43,22 @@ Class Model_records extends CI_Model {
   	* @var string Tabella di produzione
   	*/
   	public $table;
-  	
+
   	/**
   	* @var string Tabella di sviluppo
   	*/
  	public $table_stage;
-  
+
  	/**
  	* @var string Tabella corrente per le operazioni
  	*/
  	public $table_current;
- 	
+
  	/**
  	* @var string Chiave primaria delle tabelle correnti
  	*/
   	public $primary_key;
-  	
+
   	/**
   	* @var array Colonne da estrarre nelle SELECT di questo tipo
   	*/
@@ -99,14 +99,14 @@ Class Model_records extends CI_Model {
     	{
 	    	$this->set_type($type);
 	      	$tipo = $this->_single_type;
-	
+
 	        //Imposto tutti i riferimenti
 	        $this->table = $tipo['table'];
 	        $this->table_stage = $tipo['stage'] ? $tipo['table_stage'] : $tipo['table'];
 	        $this->primary_key = $tipo['primary_key'];
-	
+
 	        $this->db->where($this->table_current.'.id_type', $tipo['id']);
-	
+
 	        if ($tipo['tree'])
 	        {
 	        	$this->last_search_has_tree = TRUE;
@@ -500,33 +500,11 @@ Class Model_records extends CI_Model {
 	        }
         }
 
-        //Inserisco le colonne fisiche addizionali
-        /*
-        foreach ($this->config->item('record_columns') as $column)
-        {
-          $value = $record->get($column);
-          //Se non è ancora stata valorizzata la colonna
-          if (!isset($data[$column]) && $value) {
-            $data[$column] = $value;
-          }
-        }*/
-
-        /* DEPRECATO - QUESTO CONTROLLO VA FATTO SU PAGES
-        //Controllo se questo URI è in uso da altri record
-        $uri_used = $this->uri_is_used($data['uri']);
-
-        if ($uri_used) {
-          if ($uri_used->id != $id) {
-            $tipo = $this->content->type($uri_used->_tipo);
-            show_error('L\'indirizzo (URI) "'.$data['uri'].'" &egrave; gi&agrave; utilizzato dal record [<a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$uri_used->id).'">'.$uri_used->get('title').'</a>] di tipo ['.$tipo['description'].'].', 500, 'URI Già utilizzato');
-          }
-       }
-       */
-
 	  $done = FALSE;
+		$action = 'insert';
 
       if ($id) {
-
+		$action = 'update';
        	$is_published = $this->id_is_published($id);
 
          //Imposto il contenuto come non pubblicato (0 = bozza, 2 = bozza + pubblicato)
@@ -542,7 +520,7 @@ Class Model_records extends CI_Model {
           //Update
           if ($this->db->where($tipo['primary_key'], $id)
                ->update($this->table_stage, $data))
-               {
+          {
             $done = $id;
             $this->events->log('update', $id, $data['title'], $data['id_type']);
           } else {
@@ -577,6 +555,16 @@ Class Model_records extends CI_Model {
       		//Se è un tipo pagina, aggiorno i riferimenti
       		$this->pages->set_stage(TRUE)->save($data);
       	}
+		
+		//Triggers
+	  	if (isset($tipo['triggers']) && count($tipo['triggers']))
+	  	{
+	  		$this->load->triggers();
+	  		$this->triggers->delegate($record)
+	  					   ->operation($action)
+	  					   ->add($tipo['triggers'][$action])
+	  					   ->fire();
+	  	}
 
       }
       return $done;
@@ -585,35 +573,50 @@ Class Model_records extends CI_Model {
   }
 }
 
-  /**
-   * Elimina un record dal db
-   * @param int $record_id
-   * @return bool
-   */
-  public function delete_by_id($record_id, $type = '') {
+	/**
+  	* Elimina un record dal db
+  	* @param int $record_id
+  	* @return bool
+  	*/
+ 	public function delete_by_id($record_id, $type = '') {
 
-  	if ($type != '')
-  	{
-  		$this->set_type($type);
+  		if ($type != '')
+  		{
+  			$this->set_type($type);
+  		}
+		
+		//Ottengo il record per usarlo piu' avanti
+		$record = $this->get($record_id);
+
+    	$done = $this->db->where($this->primary_key, $record_id)
+       		             ->delete($this->table);
+
+    	$done_stage = $this->db->where($this->primary_key, $record_id)
+        			           ->delete($this->table_stage);
+
+    	if ($done && $done_stage && $record)
+    	{
+      		//Elimino gli allegati associati su entrambe le tabelle (stage e produzione)
+     		$this->load->documents();
+      		$this->documents->delete_by_binds($this->table, $record_id, FALSE);
+     		$this->documents->delete_by_binds($this->table_stage, $record_id, TRUE);
+	  
+	  		$action = 'delete';
+	  
+	  		$this->load->triggers();
+			$this->triggers->delegate($record)
+						   ->operation($action);
+						   
+			$tipo = $this->content->type($record->_tipo);
+			
+			//Chiamo i trigger su stage e produzione
+			$this->triggers->set_stage(FALSE)->add($tipo['triggers'][$action])->fire();
+			$this->triggers->set_stage(TRUE)->add($tipo['triggers'][$action])->fire();
+	  
+      		return true;
+    	}
+    	return false;
   	}
-
-    $done = $this->db->where($this->primary_key, $record_id)
-              ->delete($this->table);
-
-    $done_stage = $this->db->where($this->primary_key, $record_id)
-                  ->delete($this->table_stage);
-
-    if ($done && $done_stage)
-    {
-      //Elimino gli allegati associati su entrambe le tabelle (stage e produzione)
-      $this->load->documents();
-      $this->documents->delete_by_binds($this->table, $record_id, FALSE);
-      $this->documents->delete_by_binds($this->table_stage, $record_id, TRUE);
-      return true;
-    }
-    return false;
-
-  }
 
   /**
    * Ottiene un URI sicuro da utilizzare

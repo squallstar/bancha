@@ -12,6 +12,8 @@
  *
  */
 
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+ 
 Class Website extends Milk_Controller {
 
 	public function __construct() {

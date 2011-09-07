@@ -9,6 +9,11 @@
 	<table>records</table>
 	<table_stage>records_stage</table_stage>
 	<has_categories>false</has_categories>
+	<triggers>
+		<trigger on="insert, update, delete" field="post_id">
+			<sql action="recount" type="Blog" target="child_count" />
+		</trigger>
+	</triggers>
 	<fieldset>
 		<name>Informazioni sulla persona</name>
 		<field id="id_record" column="true">

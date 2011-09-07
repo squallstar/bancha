@@ -155,7 +155,7 @@ Class Content {
 			//Creo la directory con i template di questo tipo
 			$type_view_abs_dir = $this->CI->config->item('views_absolute_templates_folder') . $type_name . '/';
 			$this->CI->load->helper('directories');
-			//$this->CI->load->helper('directory');
+
 			if (!delete_directory($type_view_abs_dir)) {
 				$this->delete_type($type_name);
 				show_error('Impossibile eliminare la directory di template per le view del tipo ['.$type_name.'].', 500, 'Errore');
@@ -245,7 +245,7 @@ Class Content {
 		{
 			return $this->_string_types[$type_string];
 		}
-		return;
+		return 0;
 	}
 
 	/**
@@ -309,7 +309,7 @@ Class Content {
 
 		}
 
-		if ($this->CI->config->item('delete_dead_recods') == TRUE)
+		if ($this->CI->config->item('delete_dead_records') == TRUE)
 		{
 			//Elimino i dead records
 			$this->CI->load->records();

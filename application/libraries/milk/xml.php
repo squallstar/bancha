@@ -92,13 +92,13 @@ Class Xml
    	*/
   	function records_from_sql_xml($sql, $id_type = '')
   	{
-    	$this->CI->db->select((string)$sql->select);
-
     	if (!isset($this->CI->content))
     	{
     		//TODO: fix - capire quando accade
     		return;
     	}
+
+    	$this->CI->db->select((string)$sql->select);
 
     	$tipo = $this->CI->content->type($id_type);
 
@@ -203,6 +203,61 @@ Class Xml
         		$parent_types[] = (string) $parent_type;
       		}
       		$content['parent_types'] = $parent_types;
+    	}
+
+    	//Attivatori (triggers)
+    	if (isset($node->triggers))
+    	{
+    		$triggers = array();
+    		foreach ($node->triggers->trigger as $node_trigger)
+    		{
+    			$trigger = array();
+				$attr = $node_trigger->attributes();
+
+    			//Action field
+    			if (isset($attr->field))
+    			{
+    				$trigger['field'] = trim((string) $attr->field);
+    			}
+
+    			//Aggiungo i nodi sql se presenti
+    			if (isset($node_trigger->sql))
+    			{
+    				$node_sql = $node_trigger->sql;
+    				$sql_attrib = $node_sql->attributes();
+    				$trigger['action'] = 'sql';
+    				$trigger['sql'] = array(
+    					'action'	=> trim((string) $sql_attrib->action),
+    					'type'		=> trim((string) $sql_attrib->type),
+    					'target'	=> trim((string) $sql_attrib->target),
+    					'value'		=> (string)	$sql_attrib->value,
+    					'escape'	=> isset($sql_attrib->escape) ? (trim(strtolower((string)$sql_attrib->escape)) == 'false' ? FALSE : TRUE) : TRUE
+    				);
+    			}
+				
+				//Aggiungo i nodi call
+    			if (isset($node_trigger->call))
+    			{
+    				$trigger['action'] = 'call';
+					$trigger['method'] = (string)$node_trigger->call->attributes()->action;
+				}
+
+    			//Azione Trigger
+    			if (isset($attr->on))
+    			{
+    				$tmp = explode(',', $attr->on);
+    				foreach ($tmp as $fire)
+    				{
+    					$fire = trim($fire);
+    					if (!isset($triggers[$fire]))
+    					{
+    						$triggers[$fire] = array();
+    					}
+    					$triggers[$fire][] = $trigger;
+    				}
+    			}
+    		}
+    		$content['triggers'] = $triggers;
     	}
 
     	$content['fieldsets'] = array();
@@ -328,9 +383,12 @@ Class Xml
           			if ($cache == 'true')
           			{
             			//Preparo le options
-            			foreach ($records as $record)
+            			if (count($records))
             			{
-              				$options[$record->value] = $record->name;
+	            			foreach ($records as $record)
+	            			{
+	              				$options[$record->value] = $record->name;
+	            			}
             			}
 
             			$content_field['options'] = $options;

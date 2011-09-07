@@ -25,7 +25,7 @@ Class Record {
 	public $id 		= FALSE;
 
 	/**
-	 * @var array Tipo di contenuto del record
+	 * @var int Tipo di contenuto del record
 	 */
 	public $_tipo	= '';
 

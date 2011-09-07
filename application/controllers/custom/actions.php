@@ -20,7 +20,7 @@ Class Actions
 
 	public function __construct()
 	{
-		$this->CI = &get_instance();
+		$this->CI = & get_instance();
 	}
 
 	/**
@@ -28,7 +28,8 @@ Class Actions
 	 */
 	function helloworld()
 	{
-		//Estraggo il menu di default (dovrebbe comunque esserci gia)
+		//Estraggo il menu di default
+		//(dovrebbe comunque esserci gia, visto che questo e' un forward del router)
 		$this->CI->view->set('tree', $this->CI->tree->get_default());
 
 		//Renderizzo il template default

@@ -22,8 +22,9 @@
 				<li><a href="#sb-trees">10. Alberi di menu</a></li>
 				<li><a href="#sb-caching">11. Caching</a></li>
 				<li><a href="#sb-feeds">12. Feed dei contenuti</a></li>
+				<li><a href="#sb-triggers">13. Triggers (attivatori)</a></li>
 			</ul>
-			<p>Revisione: <?php echo MILK_VERSION; ?><br />Data: 31 Ago 2011</p>
+			<p>Revisione: <?php echo MILK_VERSION; ?><br />Data: 06 Set 2011</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
@@ -37,6 +38,8 @@
 				<li>&Egrave; modulare, ovvero pu&ograve; essere esteso con diverse tipologie di moduli che potrai sviluppare tu stesso.</li>
 				<li>&Egrave; open-source (puoi scaricarlo direttamente da <a href="https://github.com/squallstar/milk" target="_blank">qui</a>).</li>
 				<li>&Egrave; facile da installare e da mantenere. Non necessita di infrastrutture particolari e/o avanzate.</li>
+				<li>Separa in maniera netta l'applicazioni dai temi e permette quindi la portabilit&agrave; di quest'ultimi</li>
+				<li>Utilizza un sistema ORM per gestire gli oggetti del database</li>
 			</ul>
 			<?php echo CMS; ?> &egrave; stato interamente sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.
 			</p>
@@ -572,6 +575,67 @@ http://localhost/lista-articoli/ultimi-post
 //Esportazione dati in formato JSON:
 http://localhost/lista-articoli/ultimi-post/feed.json</code><br />
 
+</div>
+
+<div class="sidebar_content" id="sb-triggers">
+			<h3>13. Triggers (attivatori)</h3>
+			<p>
+<?php echo CMS; ?> ti mette a disposizione una serie di funzionalit&agrave; per permettere ai tuoi contenuti di "scatenare" eventi personalizzati in pi&ugrave; occasioni, tra le quali al loro inserimento, aggiornamento, eliminazione, pubblicazione e depubblicazione.
+			</p>
+			<p>I trigger possono essere chiamati ad esempio per aggiornare un campo di un altro tipo di contenuto. Un tipo di contenuto "Commento", potrebbe ad esempio chiamare il contenuto "Blog" ed aggiornare il campo "numero_commenti" di un suo post con il numero dei commenti figli di quel post.</p>
+			<br />
+			<h3>Definizione di un trigger</h3>
+			<p>Attraverso lo schema di un tipo di contenuto, puoi definire dei trigger come segue:</p>
+<code>&lt;triggers&gt;
+	&lt;trigger on="insert, update, delete" field="id_parent"&gt;
+		&lt;sql action="recount" type="Menu" target="child_count" /&gt;
+	&lt;/trigger&gt;
+	&lt;trigger on="insert"&gt;
+		&lt;call action="demotrigger" /&gt;
+	&lt;/trigger&gt;
+&lt;/triggers&gt;</code><br />
+<p>Qui sopra sono stati definiti due trigger:</p>
+<ul>
+	<li>Il primo trigger, esegue una query sql all'inserimento, aggiornamento ed eliminazione di un record di questo tipo di contenuto. L'azione, sar&agrave; "recount", ovvero conter&agrave; i contenuti del tipo appartenente che hanno come campo "id_parent" il valore inserito. Dopodich&egrave; effettuer&agrave; la query di aggiornamento utilizzando come target la colonna "child_count" del tipo di contenuto "Menu".</li>
+	<li>Il secondo trigger, all'inserimento di un record chiamer&agrave; il metodo <strong>demotrigger()</strong> definito nel file relativo ai triggers. Verr&agrave; inoltre passato come primo parametro della funzione, il record oggetto della chiamata.</li>
+</ul>
+<br />
+<h3>Attivatori SQL</h3>
+<p>I trigger di tipo <strong>"sql"</strong>, accettano i seguenti attributi nel nodo "trigger":</p>
+<ul>
+	<li><strong>on</strong> - bind della chiamata (insert, update, delete, ...)</li>
+	<li><strong>field</strong> - il campo (e valore) da utilizzare per la query del trigger</li>
+</ul>
+<p>Ed all'interno, contengono un nodo "sql" con tali attributi:</p>
+<ul>
+	<li><strong>action</strong> - azione da effettuare. Attualmente i valori disponibili sono <strong>update</strong> e <strong>recount</strong>. Per tenere traccia della cardinalit&agrave; di una relazione 1-n &egrave; consigliabile utilizzare come valore "recount".</li>
+	<li><strong>type</strong> - il nome del tipo di contenuto "target" per questa azione</li>
+	<li><strong>target</strong> - il nome del campo "target" del tipo di contenuto "target"</li>
+	<li><strong>value</strong> - (opzionale - <strong>string|int</strong>) immette l'eventuale valore da utilizzare nella query di update</li>
+	<li><strong>escape</strong> - (opzionale - <strong>bool</strong>, default "true") definisce se usare il carattere di escape per il valore del record in questione</li>
+</ul>
+<p>Esempio:</p>
+<code>&lt;trigger on="insert" field="id_parent"&gt;
+	&lt;sql action="update" type="Blog" target="num_commenti" value="num_commenti+1" escape="false"/&gt;
+&lt;/trigger&gt;</code>
+<br />
+<p>Per le <strong>relazioni 1-n</strong>, ad esempio tra i post di un blog ed i suoi commenti, aggiungere un trigger così definito nello schema xml dei commenti:</p>
+<code>&lt;trigger on="insert, update, delete" field="post_id"&gt;
+	&lt;sql action="recount" type="Blog" target="child_count" /&gt;
+&lt;/trigger&gt;</code><br />
+<h3>Attivatori con chiamata esterna</h3>
+<p>I trigger di tipo <strong>"call"</strong>, accettano i seguenti attributi nel nodo "trigger":</p>
+<ul>
+	<li><strong>on</strong> - bind della chiamata (insert, update, delete, ...)</li>
+</ul>
+<p>Ed all'interno, contengono un nodo "call" con tali attributi:</p>
+<ul>
+	<li><strong>action</strong> - nome del metodo da chiamare. Il metodo deve essere stato definito nel file <strong><?php echo $this->config->item('custom_controllers_folder'); ?>triggers.php</strong> e riceverà come primo parametro il record che esegue la chiamata.</li>
+</ul>
+<p>Esempio:</p>
+<code>&lt;trigger on="insert"&gt;
+	&lt;call action="publish_on_twitter" /&gt;
+&lt;/trigger&gt;</code>
 </div>
 
 	</div>

@@ -36,7 +36,7 @@ $config['languages'] = array(
  * MILK CMS VERSION
  * Versione del framework
  */
-define('MILK_VERSION', '0.6');
+define('MILK_VERSION', '0.6.5');
 
 /*
  * NOME DEL CMS
@@ -204,7 +204,7 @@ $config['default_tree_types'] = array('Menu');
  * Imposta se eliminare i record quando perdono la referenza al tipo di contenuto.
  * (prevalentemente quando viene eliminato un tipo di contenuto).
  */
-$config['delete_dead_recods'] = TRUE;
+$config['delete_dead_records'] = TRUE;
 
 /*
  * RECORD COLUMNS

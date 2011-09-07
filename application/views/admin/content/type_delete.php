@@ -26,7 +26,7 @@ $this->load->helper('form');
 		<li>Files relativi a viste di lista e dettaglio per i contenuti (template .php)</li>
 	</ul>
 
-<?php if ($this->config->item('delete_dead_recods')) { ?>
+<?php if ($this->config->item('delete_dead_records')) { ?>
 	<div class="message warning"><p><?php echo _('WARNING'); ?>: <?php echo _('All contents associated to this type will be deleted.'); ?><br /><?php echo _('You can disable this function through the variabile "DEAD RECORDS" in the config file.'); ?></p></div>
 
 <?php }
