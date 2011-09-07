@@ -77,7 +77,7 @@
 			<admin>true</admin>
 			<list>true</list>
 			<options></options>
-			<sql cache="true">
+			<sql>
 				<select>id_record AS value, title AS name</select>
 				<from>records</from>
 				<type>Blog</type>

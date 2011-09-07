@@ -19,4 +19,5 @@ Thumbs.db
 /application/cache/_milk/content.types
 /application/views/website/type_templates
 /application/xml
+/application/logs/*.php
 /attach

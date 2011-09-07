@@ -378,7 +378,12 @@ Class Xml
           			$records = $this->records_from_sql_xml($sql, $content['id']);
 
           			//Controllo se la query di estrazione è da cacheare
-          			$cache = (string) $sql->attributes()->cache;
+          			if (isset($sql->attributes()->cache))
+          			{
+          				$cache = (string) $sql->attributes()->cache;
+          			} else {
+          				$cache = 'false';
+          			}
 
           			if ($cache == 'true')
           			{
