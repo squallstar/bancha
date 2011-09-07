@@ -20,6 +20,12 @@ Class Dispatcher_Images
 	 */
 	public function retrieve($data)
 	{
+		$tipo = $this->content->type($data['type']);
+		if ($tipo['fields'][$data['field']] != 'imagelist')
+		{
+			show_error('The field [' . $data['field'] . '] is not an "imagelist" field.', 400);
+		}
+
 		//Increase limit
 		ini_set('memory_limit', '128M');
 
@@ -37,8 +43,8 @@ Class Dispatcher_Images
 		{
 			$preset = $presets_list[$data['preset']];
 		} else {
-			//Preset non trovata
-			echo 'Preset not found';
+			//Preset non trovato
+			show_error('Preset ' . $data['preset'] . ' not found', 404);
 			return;
 		}
 
@@ -52,12 +58,14 @@ Class Dispatcher_Images
 		$store_path = $CI->config->item('attach_folder') . 'cache' . $sep . $path
 					. $data['preset'] . $sep;
 
+		//Controllo se il file originale esiste
 		if (!file_exists($source_image))
 		{
-			echo 'Not found';
+			show_error('The original source image was not found.', 404);
 			return;
 		}
 
+		//Se non esista la directory (per la cache), la creo
 		if (!file_exists($store_path))
 		{
 			@mkdir($store_path, DIR_WRITE_MODE, TRUE);
@@ -130,8 +138,6 @@ Class Dispatcher_Images
 					}
 					$CI->image_lib->initialize($config); 
 					$done = $CI->image_lib->crop();
-					
-
 			}
 
 			if (!$done)
@@ -142,12 +148,9 @@ Class Dispatcher_Images
 
 		}
 
-		
-
 		//Output finale dell'immagine
 		$CI->output->set_content_type($data['ext'])
 				   ->set_output(file_get_contents($store_path  . $file_name));
-		return;
 	}
 
 }

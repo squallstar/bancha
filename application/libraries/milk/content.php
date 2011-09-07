@@ -102,6 +102,12 @@ Class Content {
 		//Pulisco il nome del tipo
 		$type_name = url_title(convert_accented_characters($type_name), 'underscore');
 
+		if ($type_name == 'cache')
+		{
+			//Il nome "cache" viene usato per il path delle immagini cacheate
+			show_error('Il nome "cache" e\' riservato. Inseriscine un altro.', 500, 'Nome riservato');
+		}
+
 		//Controllo se esiste
 		$storage_path = $this->CI->config->item('xml_folder').$type_name.'.xml';
 		if (file_exists($storage_path) && !$delete_if_exists) {
@@ -205,14 +211,15 @@ Class Content {
 	}
 
 	/**
-	 * Restituisce un tipo
+	 * Restituisce lo schema di un tipo di contenuto
+	 * E' possibile chiamare la funzione sia passando l'ID che il nome del tipo
 	 * @param int|string $type
 	 */
 	public function type($type='')
 	{
 		if ($type!='')
 		{
-			//Check if a number is given (id_type)
+			//Controllo se mi viene richiesto il tipo da un numero o stringa
 			if (!is_numeric($type))
 			{
 				foreach ($this->_content_types as $key => $val)
@@ -264,7 +271,7 @@ Class Content {
 	}
 
 	/**
-	 * Restituisce i tipi
+	 * Restituisce tutti gli schemi dei tipi di contenuto
 	 * @return array
 	 */
 	public function types()
@@ -273,7 +280,7 @@ Class Content {
 	}
 
 	/**
-	 * Ricostruisce la cache dei tipi
+	 * Ricostruisce la cache dei tipi di contenuto
 	 * @return bool success
 	 */
 	public function rebuild()
@@ -298,7 +305,6 @@ Class Content {
 
 		foreach ($filenames as $filename)
 		{
-
 			$content = $this->CI->xml->parse_file($this->xml_folder . $filename);
 
 			$all_types_id[] = $content['id'];
@@ -306,7 +312,6 @@ Class Content {
 
 			//Aggiungo il tipo
 			$contents[$content['id']] = $content;
-
 		}
 
 		if ($this->CI->config->item('delete_dead_records') == TRUE)
@@ -334,6 +339,7 @@ Class Content {
 	 * Costruisce un Record
 	 * @param int|string $type
 	 * @param array $recordData
+	 * @return Record
 	 */
 	function make_record($type='', $recordData='')
 	{
@@ -347,13 +353,14 @@ Class Content {
 	}
 
 	/**
+	 * FUNZIONE NON ANCORA IMPLEMENTATA
 	 * In futuro verra' implementata la creazione automatica
 	 * delle tabelle dei tipi su tabelle esterne
 	 * @param int|string $type
 	 */
 	function build_type_table($type)
 	{
-
+		//Blah blah blash
 	}
 
 
