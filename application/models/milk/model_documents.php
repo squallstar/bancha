@@ -80,8 +80,6 @@ Class Model_Documents extends CI_Model {
 			//Increase limit
 			ini_set('memory_limit', '128M');
 
-			//$custom_path = $this->config->item('attach_custom_folder');
-
 			$custom_path = strtolower($save_params['type']) . DIRECTORY_SEPARATOR
 				. strtolower($save_params['field']) . DIRECTORY_SEPARATOR;
 
