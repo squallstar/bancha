@@ -95,8 +95,7 @@ Class Content {
 	 */
 	public function add_type($type_name, $type_description, $type_structure, $delete_if_exists=FALSE)
 	{
-
-		$this->CI->load->helper(array('file', 'text'));
+		//$this->CI->load->helper(array('file', 'text')); /7autoloaded by core
 		$this->CI->load->library('parser');
 
 		//Pulisco il nome del tipo
