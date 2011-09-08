@@ -2,7 +2,7 @@
 /**
  * Directories helper
  *
- * Funzioni ulteriori per lavorare con le directory
+ * Some functions to work with directories
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -14,8 +14,8 @@
 
 
 /**
- * Elimina una directory ed i file contenuti ricorsivamente
- * @param string $dir directory da eliminare
+ * Completely deletes a directory and its files
+ * @param string $dir The directory to remove
  */
 if (!function_exists('delete_directory'))
 {
