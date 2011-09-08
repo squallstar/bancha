@@ -2,7 +2,7 @@
 /**
  * Website Helper
  *
- * Funzioni di utilità genera del sito (sia back-end che front-end)
+ * Some utilities for the website (back and front end)
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -13,7 +13,7 @@
  */
 
 /**
- * Metodo che stampa a video in modo umano un oggetto
+ * Dumps an object (or a variable)
  * @param mixed $obj
  * @param string $title
  * @param bool $kill
@@ -27,6 +27,10 @@ function debug($obj, $title='', $kill = FALSE) {
 	if ($kill) die($kill);
 }
 
+/**
+ * Makes a simple GET cURL call to a webservice
+ * @param string $url
+ */
 function getter($url)
 {
 	$ch = curl_init();
@@ -40,24 +44,23 @@ function getter($url)
 }
 
 /**
- * Wrapper della funzione site_url che aggiunge il path dell'amministrazione
- * @param string $str path da appendere
+ * Returns the url of the administration
+ * @param string $str path to append
  */
 function admin_url($str='') {
 	return site_url('admin/'.$str);
 }
 
 /**
- * Ritorna il path del tema in uso
- * @param string $str path da appendere
+ * Returns the path of the current theme
+ * @param string $str path to append
  */
-function theme_url() {
-	return THEME_PUB_PATH;
+function theme_url($str = '') {
+	return THEME_PUB_PATH . $str;
 }
 
-
 /**
- * Ritorna l'url pubblico di un attachment
+ * Returns the public url of an attachment
  * @param string $str path relativa
  */
 function attach_url($str='') {
