@@ -2,7 +2,7 @@
 /**
  * Xml Library Class
  *
- * Libreria/Helper per lavorare con gli XML
+ * The library that works with the XML schemes
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
