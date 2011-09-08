@@ -42,7 +42,28 @@ Class Dispatcher_default
 		{
 			//Potrebbe essere un contenuto
 			$result = $CI->records->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
-
+			
+			// Ricerco sulle tabelle di contenuti Custom
+			if (!count($result)) 
+			{
+				$nomeTabelle = array();
+				// Ricavo la lista dei tipi di contenuto
+				$tipiContenuti = $CI->content->types();
+				
+				$tipiRicerca = array();
+				foreach ($tipiContenuti as $idTipo => $nomeTipo)
+				{
+					//Se la tabella non è quella dei records, non ho ancora trovato nulla e non ho già cercato in quella determinata tabella
+					if ($nomeTipo['table'] != 'records' && !$found && !(in_array($idTipo, $tipiRicerca))) {
+						$result = $CI->records->type($idTipo)->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
+						if (count($result)) {
+							break;
+						}
+						$tipiRicerca[] = $idTipo;	
+					}
+				} 
+			} 
+			
 			if (count($result))
 			{
 				//Estraggo la pagina padre
@@ -74,7 +95,6 @@ Class Dispatcher_default
 			$record = $result[0];
 			$found = TRUE;
 		}
-
 
 		if (!$found) {
 			$CI->view->title = _('Page not found');
