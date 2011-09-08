@@ -15,17 +15,17 @@
 Class Xml
 {
 	/**
-	 * @var mixed Istanza di Code Igniter
+	 * @var mixed CodeiIgniter instance
 	 */
   	private $CI;
 
   	/**
-	 * @var string Directory con gli schemi XML
+	 * @var string Directory with the XML schemes
 	 */
   	public $xml_folder;
 
   	/**
-	 * @var string Path del file di cache degli schemi
+	 * @var string The file which contains the content types cache
 	 */
   	public $types_cache_folder;
 
@@ -38,11 +38,11 @@ Class Xml
   	}
 
   	/**
-  	* Costruisce l'xml di un record dato il suo tipo di contenuto e i campi da popolare
-  	* @param int|string $type
-  	* @param array $data
-  	* @return string xml
-  	*/
+  	 * Builds the XML of a record, given it's type and its field values
+  	 * @param int|string $type
+  	 * @param array $data
+  	 * @return string xml
+  	 */
   	function get_record_xml($type='', $data)
   	{
     	if ($type != '')
@@ -85,16 +85,16 @@ Class Xml
   	}
 
   	/**
-   	* Ottiene il risultato di una query creata partendo da un nodo SQL (estratto da un file xml)
-   	* @param SimpleXMLElement $sql
-   	* @param int $id_type
-   	* @return array
-   	*/
+  	 * Takes the result of a single query starting from an SQL node (extracted from an XML scheme)
+   	 * @param SimpleXMLElement $sql
+   	 * @param int $id_type
+   	 * @return array
+   	 */
   	function records_from_sql_xml($sql, $id_type = '')
   	{
     	if (!isset($this->CI->content))
     	{
-    		//TODO: fix - capire quando accade
+    		//TODO: fix - how and when it happens?
     		return;
     	}
 
@@ -102,7 +102,7 @@ Class Xml
 
     	$tipo = $this->CI->content->type($id_type);
 
-    	//Uso la tabella di staging se sono in staging
+    	//We will use the staging table if we are in stage
     	$from_tbl = (string)$sql->from;
     	if ($this->CI->content->is_stage)
     	{
@@ -135,10 +135,10 @@ Class Xml
   	}
 
   	/**
-  	* Effettua il parsing di un file XML e lo converte in Array
-   	* E' una delle funzioni principali del framework e viene usata principalmente dalla cache dei tipi di contenuto
-   	* @param string $filepath
-   	*/
+  	 * Parses an XML file and converts it into an Array
+  	 * It is one of the most important functions of the framework and the content types cache uses it
+   	 * @param string $filepath
+   	 */
   	function parse_file($filepath)
   	{
     	$node = simplexml_load_file($filepath);
@@ -159,7 +159,7 @@ Class Xml
 
     	$type_id = (int) $node->id;
 
-    	//Tipi di campi utilizzabili
+    	//Allowed types of field
     	$field_usable_inputs = array(
       		'text', 'textarea', 'date', 'checkbox', 'select', 'multiselect', 'radio',
       		'images', 'files', 'number', 'textarea_full', 'datetime', 'hidden'
@@ -194,7 +194,7 @@ Class Xml
       	show_error('Chiave primaria o tabella non definita per il tipo ['.$safe_filename.'].');
     	}
 
-    	//Tipi utilizzabili come parent di questo tipo
+    	//Parent types
     	if (isset($node->parent_types))
     	{
       		$parent_types = array();
@@ -205,7 +205,7 @@ Class Xml
       		$content['parent_types'] = $parent_types;
     	}
 
-    	//Attivatori (triggers)
+    	//Triggers
     	if (isset($node->triggers))
     	{
     		$triggers = array();
@@ -217,10 +217,10 @@ Class Xml
     			//Action field
     			if (isset($attr->field))
     			{
-    				$trigger['field'] = trim((string) $attr->field);
+    				$trigger['field'] = str_replace(' ', '_', trim((string) $attr->field));
     			}
 
-    			//Aggiungo i nodi sql se presenti
+    			//We add the SQL node if it exists
     			if (isset($node_trigger->sql))
     			{
     				$node_sql = $node_trigger->sql;
@@ -234,15 +234,15 @@ Class Xml
     					'escape'	=> isset($sql_attrib->escape) ? (trim(strtolower((string)$sql_attrib->escape)) == 'false' ? FALSE : TRUE) : TRUE
     				);
     			}
-				
-				//Aggiungo i nodi call
+
+				//Let's add a custom call it it exists
     			if (isset($node_trigger->call))
     			{
     				$trigger['action'] = 'call';
 					$trigger['method'] = (string)$node_trigger->call->attributes()->action;
 				}
 
-    			//Azione Trigger
+    			//Trigger will be triggered on...
     			if (isset($attr->on))
     			{
     				$tmp = explode(',', $attr->on);
@@ -262,7 +262,7 @@ Class Xml
 
     	$content['fieldsets'] = array();
 
-    	//Facciamo finta che la colonna XML ci sia sempre per ogni tipo
+    	//The XML column, is always present on each type, but it is not on the scheme
     	$content['columns'] = array('xml');
 
     	//True when the type has at leasts one images/files field.
@@ -274,9 +274,9 @@ Class Xml
 
       		if ($fieldset_name == '')
       		{
-        		show_error('Uno dei fieldset del tipo ['.$safe_filename.'] non presenta il campo Nome obbligatorio.', 500, 'Errore XML');
+        		show_error('One of the fieldsets of type ['.$safe_filename.'] does not have the node <name> (mandatory).', 500, 'Error: XML parser');
       		} else if (array_key_exists($fieldset_name, $content['fieldsets'])) {
-        		show_error('Il tipo ['.$safe_filename.'] presenta pi&ugrave; di un fieldset con nome ['.$fieldset_name.'].', 500, 'Errore XML');
+        		show_error('Il tipo ['.$safe_filename.'] presenta pi&ugrave; di un fieldset con nome ['.$fieldset_name.'].', 500, 'Error: XML parser');
       		}
 
       		$fieldset = array('name' => $fieldset_name, 'fields' => array());
@@ -327,6 +327,7 @@ Class Xml
         		if ($content_field['type'] == 'images')
         		{
           			$content_field['original'] = isset($field->original) ? (strtoupper($field->original) == 'TRUE' ? TRUE : FALSE) : FALSE;
+          			$content_field['encrypt_name'] = isset($field->encrypt_name) ? (strtoupper($field->encrypt_name) == 'TRUE' ? TRUE : FALSE) : FALSE;
           			$content_field['resized'] = isset($field->resized) ? (string)$field->resized : FALSE;
           			$content_field['thumbnail'] = isset($field->thumbnail) ? (string)$field->thumbnail : FALSE;
         		}
@@ -356,7 +357,7 @@ Class Xml
         		{
           			if (isset($field->options->custom))
           			{
-            			//Controllo se usa riferimenti custom come sorgente
+            			//Custom references as source
             			$content_field['options'] = (string) $field->options->custom;
             			$content_field['extract'] = 'custom';
           			} else {
@@ -369,15 +370,15 @@ Class Xml
         		}
 
 
-        		//Estrazioni SQL per le options
+        		//Options SQL extractions
         		if (isset($field->sql))
         		{
           			$sql = $field->sql;
 
-          			//Estraggo i record
+          			//Let's extract the records
           			$records = $this->records_from_sql_xml($sql, $content['id']);
 
-          			//Controllo se la query di estrazione è da cacheare
+          			//Check if the query has to be cached
           			if (isset($sql->attributes()->cache))
           			{
           				$cache = (string) $sql->attributes()->cache;
@@ -387,7 +388,7 @@ Class Xml
 
           			if ($cache == 'true')
           			{
-            			//Preparo le options
+            			//We now make the options key-value array
             			if (count($records))
             			{
 	            			foreach ($records as $record)
@@ -399,28 +400,25 @@ Class Xml
             			$content_field['options'] = $options;
 
           			} else {
-            			//Salvo la stringa della query
+            			//Save the query string for later
            				$query = str_replace("\n", ' ', $this->CI->db->last_query());
             			$content_field['options'] = $query;
             			$content_field['extract'] = 'query';
           			}
         		}
 
-        		//Aggiungo ai fields del tipo questo field
+        		//Adds the properties to this field
         		$content['fields'][$field_name] = $content_field;
 
-        		//Aggiungo a questo fieldset il campo (solo nome)
+        		//We add the field name to the available fields
         		$fieldset['fields'][] = $field_name;
       		} //end foreach field
 
 
-      		//Aggiungo un singolo fieldset
+      		//And we add a fieldset to our list
       		$content['fieldsets'][] = $fieldset;
 
     	} //end foreach fieldsets
-
-    	//Aggiungo il tipo
     	return $content;
   	}
-
 }

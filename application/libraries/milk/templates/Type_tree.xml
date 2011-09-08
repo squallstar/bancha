@@ -192,6 +192,7 @@
 			<type>images</type>
 			<size>4096</size>
 			<mimes>jpg|gif|png|jpeg</mimes>
+			<encrypt_name>false</encrypt_name>
 			<original>true</original>
 			<resized>640x?</resized>
 			<thumbnail>60x?</thumbnail>

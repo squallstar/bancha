@@ -99,8 +99,6 @@ Class Model_Documents extends CI_Model {
 			//Sanitize del nome del file
 			$specs['filename'] = url_title(convert_accented_characters($save_params['name']), 'underscore');
 
-			$specs['encrypt_name'] = FALSE;
-
 			$this->load->library('upload');
 			$this->upload->initialize($specs);
 

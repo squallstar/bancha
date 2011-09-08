@@ -256,6 +256,7 @@ Class Contents extends Milk_Controller
 						if ($val['tmp_name'][$i] != '') {
 							$upload_config = array(
 								'allowed_types' => $tipo['fields'][$name]['mimes'],
+								'encrypt_name'	=> $tipo['fields'][$name]['encrypt_name'],
 								'max_size'		=> $tipo['fields'][$name]['size'],
 								'resized'		=> isset($tipo['fields'][$name]['resized']) ? $tipo['fields'][$name]['resized'] : FALSE,
 								'thumbnail'		=> isset($tipo['fields'][$name]['thumbnail']) ? $tipo['fields'][$name]['thumbnail'] : FALSE
