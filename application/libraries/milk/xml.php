@@ -141,9 +141,6 @@ Class Xml
    	 */
   	function parse_file($filepath)
   	{
-  		//It should be work on every system :)
-  		$filepath = str_replace('\\', '/', $filepath);
-
     	$node = simplexml_load_file($filepath);
     	if (!$node)
     	{
