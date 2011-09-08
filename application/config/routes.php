@@ -23,7 +23,7 @@ $route['404_override'] = 'website/router';
 $route['default_controller'] = "website/home";
 
 //Route per switch theme
-$route['^go-([a-z]+)$'] = "website/change_theme/$1";
+$route['^go-([a-zA-Z_-]+)$'] = "website/change_theme/$1";
 
 //Route per cambio lingua
 $route['^change-language/([a-z]+)$'] = "website/change_language/$1";
