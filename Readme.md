@@ -11,7 +11,7 @@ MILK basa la sua potenza su alcuni pilastri che lo rendono differente da altri C
  * Separa in maniera netta l'applicazioni dai temi e permette quindi la portabilità di quest'ultimi
  * Utilizza un sistema ORM per gestire gli oggetti del database
 
-La documentazione di MILK e' disponibile tramite la sua amministrazione alla voce "Gestione > Documentazione"
+La **documentazione di MILK** e' disponibile tramite la sua amministrazione alla voce **"Gestione > Documentazione"**.
 
 
 # Resources

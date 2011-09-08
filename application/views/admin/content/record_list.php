@@ -132,6 +132,9 @@ $fields = array_keys($tipo['fields']);
 				} else if ($record->get('published') == '2') {
 					//Bozza + pubblico
 					echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url(THEMESPATH.'admin/widgets/icns/page_copy.png').'" /></a> '._('Different').'</td>';
+				} else if (isset($tipo['fields']['date_publish']) && ((int)$record->get('_date_publish')) > time()) {
+					//Programmato
+					echo '<td><a href="'.$current_url.'?publish='.$record->id.'"><img class="middle" border="0" src="'.site_url(THEMESPATH.'admin/widgets/icns/time.png').'" /></a> '._('Programmed').'</td>';
 				} else {
 					//Pubblico
 					echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url(THEMESPATH.'admin/widgets/icns/page_green.png').'" /></a> '._('Published').'</td>';

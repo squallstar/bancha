@@ -14,9 +14,10 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
-Class Website extends Milk_Controller {
-
-	public function __construct() {
+Class Website extends Milk_Controller
+{
+	public function __construct()
+	{
 		parent::__construct();
 
 		//Se l'utente è loggato, imposto lo stage come attivo
@@ -33,7 +34,8 @@ Class Website extends Milk_Controller {
 	/**
 	 * Website homepage
 	 */
-	function home() {
+	function home()
+	{
 		//Estraggo il menu di default
 		$this->view->set('tree', $this->tree->get_default());
 
@@ -49,7 +51,8 @@ Class Website extends Milk_Controller {
 	 * Invocata da: /go-{theme}
 	 * @param string $new_language
 	 */
-	function change_theme($new_theme) {
+	function change_theme($new_theme)
+	{
 		$this->view->set_theme($new_theme);
 		redirect('/');
 	}
@@ -59,7 +62,8 @@ Class Website extends Milk_Controller {
 	 * Invocata da: /change-language/{lang}
 	 * @param string $new_language
 	 */
-	function change_language($new_language) {
+	function change_language($new_language)
+	{
 		$this->lang->set_lang($new_language);
 		$this->lang->set_cookie();
 		redirect('/');
@@ -69,12 +73,31 @@ Class Website extends Milk_Controller {
 	 * Website Routing
 	 * Metodo per il routing generale del front-end
 	 */
-	function router() {
-
+	function router()
+	{
 		$this->view->javascript = array('jquery.js', 'application.js');
 		$this->view->css = array('style.css');
 		
 		$this->load->dispatcher('default');
 		$this->dispatcher->start();
+	}
+
+	/**
+	 * Route per le immagini con preset
+	 */
+	function image_router($type, $field, $id, $preset, $n, $ext)
+	{
+		$this->load->dispatcher('images');
+
+		$data = array(
+			'type'		=> $type,
+			'field'		=> $field,
+			'id'		=> $id,
+			'preset'	=> $preset,
+			'n'			=> $n,
+			'ext'		=> $ext
+		);
+
+		$this->dispatcher->retrieve($data);
 	}
 }

@@ -48,7 +48,7 @@ $this->load->helper('form'); ?>
 
 <?php
 
-$save_buttons = form_submit('_bt_save', _('Save'), 'class="submit"')
+$save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="milk.add_form_hash();"')
 			   .form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
 			   .form_submit('_bt_publish', _('Publish'), 'class="submit"')
 ;

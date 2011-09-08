@@ -673,7 +673,7 @@ Class Model_records extends CI_Model {
    * Pubblica un record e i suoi allegati
    * @param int $id
    */
-  function publish($id = '')
+  public function publish($id = '')
   {
       if ($id == '') {
         show_error('ID del contenuto da pubblicare non specificato. (records/publish)');
@@ -730,7 +730,7 @@ Class Model_records extends CI_Model {
    * @param $id
    * @return bool
    */
-  function depublish($id = '')
+  public function depublish($id = '')
   {
       if ($id == '')
       {
@@ -757,7 +757,7 @@ Class Model_records extends CI_Model {
    * @param string (id) $field
    * @return array
    */
-  function get_field_options($field)
+  public function get_field_options($field)
   {
   	if (isset($field['extract'])) {
   		$options = array();
@@ -767,7 +767,13 @@ Class Model_records extends CI_Model {
   			case 'query':
   				$sql = $field['options'];
   				//Stage tables
-  				$sql = str_replace('FROM (`'.$this->db->dbprefix.$this->table.'`)', 'FROM (`'.$this->db->dbprefix.$this->table_current.'`)', $sql);
+  				$sql = str_replace(
+  					array('FROM (`'.$this->db->dbprefix.$this->table.'`)',
+  						  'FROM '.$this->db->dbprefix.$this->table)
+  						  ,
+  					array('FROM (`'.$this->db->dbprefix.$this->table_current.'`)',
+  						  'FROM '.$this->db->dbprefix.$this->table_current)
+  						  , $sql);
   				$result = $this->db->query($sql)->result();
   				if (count($result)) {
   					foreach ($result as $option) {

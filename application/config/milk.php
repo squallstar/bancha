@@ -120,15 +120,6 @@ $config['attach_folder'] = FCPATH . 'attach' . DIRECTORY_SEPARATOR;
 $config['attach_out_folder'] = 'attach/';
 
 /*
- * ATTACH CUSTOM DIRECTORY
- * Nome del path di generazione da appendere alla cartella degli allegati caricati
- * Di default, crea una cartella per ogni settimana dell'anno, ed una cartella relativa al giorno
- * del caricamento del file.
- * Viene creata in automatico quando vengono caricati i files
- */
-$config['attach_custom_folder'] = date('YW') . DIRECTORY_SEPARATOR . date('d') . DIRECTORY_SEPARATOR;
-
-/*
  * STRIP WEBSITE URL
  * Se impostato a true, verra' rimosso l'indirizzo del sito da tutti i campi salvati nei records
  * e' utile per popolare il sito in sviluppo e portarlo in produzione senza che rimangono i vecchi url

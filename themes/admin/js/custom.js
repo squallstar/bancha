@@ -228,6 +228,10 @@ var milk = {
 			return false;
 		}
 	},
+	add_form_hash : function() {
+		$('form').attr('action', $('form').attr('action') + window.location.hash);
+		return true;
+	},
 	sort_priority : function (event, ui) {
 		var rows = $('tbody tr', $(ui.item[0]).closest('.sortable'));
 		milk._priority = rows.length;
