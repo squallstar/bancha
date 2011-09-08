@@ -216,5 +216,6 @@
 			<description>Keywords</description>
 			<type>text</type>
 			<length>128</length>
+		</field>
 	</fieldset>
 </content>
