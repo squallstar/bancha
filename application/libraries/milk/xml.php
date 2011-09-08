@@ -80,7 +80,7 @@ Class Xml
       		}
       		return $xml->asXML();
     	} else {
-      		show_error('Tipo non settato (get_record_xml)');
+      		show_error(_('Type not set.') . ' (xml/get_record_xml)');
     	}
   	}
 
@@ -191,7 +191,7 @@ Class Xml
 
     	if (!$content['primary_key'] || !$content['table'])
     	{
-      	show_error($this->CI->lang->_trans('Primary key or table not defined for the content type %n.', array('n' => '['.$safe_filename.']')));
+      	show_error($this->CI->lang->_trans('Primary key or table not defined for the content type %n.', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
     	}
 
     	//Parent types
@@ -274,9 +274,9 @@ Class Xml
 
       		if ($fieldset_name == '')
       		{
-        		show_error('One of the fieldsets of type ['.$safe_filename.'] does not have the node <name> (mandatory).', 500, 'Error: XML parser');
+        		show_error($this->CI->_trans('One of the fieldsets of type %n does not have the node <name> (mandatory).', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
       		} else if (array_key_exists($fieldset_name, $content['fieldsets'])) {
-        		show_error('Il tipo ['.$safe_filename.'] presenta pi&ugrave; di un fieldset con nome ['.$fieldset_name.'].', 500, 'Error: XML parser');
+        		show_error($this->CI->_trans('The type %t has more than one fieldset named %n.', array('t' => '['.$safe_filename.']', 'n' => '['.$fieldset_name.']')), 500, _('XML parser: Error'));
       		}
 
       		$fieldset = array('name' => $fieldset_name, 'fields' => array());
@@ -286,7 +286,7 @@ Class Xml
         		//Unique name
         		$field_name = (string) $field->attributes()->id;
         		if (!$field_name || $field_name == '') {
-          			show_error('Tipo ['.$safe_filename.']: uno dei campi non presenta il nome (XML).', 500, 'Errore XML');
+          			show_error($this->CI->_trans('One of the fields of type %t does not have a name.', array('t' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
         		}
 
         		//Physical column
@@ -299,12 +299,12 @@ Class Xml
         		//Reserved names check
         		if (in_array($field_name, $this->CI->config->item('restricted_field_names')))
         		{
-          			show_error('Tipo ['.$safe_filename.']: Il nome del campo ['.$field_name.'] &egrave; riservato. Utilizzare un altro nome (XML).', 500, 'Uno dei campi &egrave; riservato');
+          			show_error($this->CI->_trans('The field name %n is reserved (Type: %t) and needs to be changed!', array('t' => '['.$safe_filename.']', 'n' => '['.$field_name.']')), 500, _('XML parser: Error'));
         		}
 
         		if (!in_array((string)$field->type, $field_usable_inputs))
         		{
-          			show_error('Tipo ['.$safe_filename.']: Il valore utilizzato nel nodo "type" del campo ['.$field_name.'] non esiste. Valori ammessi: '.implode(', ', $field_usable_inputs).'.', 500, 'Valore sconosciuto');
+          			show_error($this->CI->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are:', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
         		}
 
         		//Default fields for each field

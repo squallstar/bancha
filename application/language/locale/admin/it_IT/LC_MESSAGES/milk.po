@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Milk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-08 12:43+0100\n"
-"PO-Revision-Date: 2011-09-08 12:44+0100\n"
+"POT-Creation-Date: 2011-09-08 14:40+0100\n"
+"PO-Revision-Date: 2011-09-08 14:40+0100\n"
 "Last-Translator: Nicholas <nicholas@intesys.it>\n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -99,13 +99,46 @@ msgstr "Il mio primo post"
 msgid "Hello world"
 msgstr "Ciao mondo"
 
+#: libraries/milk/xml.php:83
+msgid "Type not set."
+msgstr "Tipo non settato."
+
 #: libraries/milk/xml.php:194
 msgid "Primary key or table not defined for the content type %n."
 msgstr "Chiave primaria o tabella non definita per il tipo di contenuto %n."
 
+#: libraries/milk/xml.php:194
+#: libraries/milk/xml.php:277
+#: libraries/milk/xml.php:279
+#: libraries/milk/xml.php:289
+#: libraries/milk/xml.php:302
+#: libraries/milk/xml.php:307
+msgid "XML parser: Error"
+msgstr "Errore durante il parsing XML"
+
 #: libraries/milk/xml.php:273
 msgid "Untitled"
 msgstr "Senza titolo"
+
+#: libraries/milk/xml.php:277
+msgid "One of the fieldsets of type %n does not have the node <name> (mandatory)."
+msgstr "One dei fieldset di tipo %n non ha il nodo obbligatorio <name>."
+
+#: libraries/milk/xml.php:279
+msgid "The type %t has more than one fieldset named %n."
+msgstr "Il tipo %t ha più di un fieldset chiamato %n."
+
+#: libraries/milk/xml.php:289
+msgid "One of the fields of type %t does not have a name."
+msgstr "One dei campi del tipo %t è senza nome."
+
+#: libraries/milk/xml.php:302
+msgid "The field name %n is reserved (Type: %t) and needs to be changed!"
+msgstr "Il campo %n di tipo %t utilizza un nome riservato che deve essere necessariamente cambiato."
+
+#: libraries/milk/xml.php:307
+msgid "The value of the node named type (field: %n, type %t) does not exists. Allowed values are:"
+msgstr "Il valore inserito nel nodo type del campo %n di tipo %t non è ammesso. I valori consentiti sono:"
 
 #: libraries/milk/dispatchers/dispatcher_default.php:102
 #: libraries/milk/dispatchers/dispatcher_default.php:310
