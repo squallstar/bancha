@@ -42,9 +42,8 @@ Class Dispatcher_default
 		{
 			//Potrebbe essere un contenuto
 			$result = $CI->records->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
-			
-			// Ricerco sulle tabelle di contenuti Custom
-			if (!count($result)) 
+
+			if (!count($result))
 			{
 				$nomeTabelle = array();
 				// Ricavo la lista dei tipi di contenuto
