@@ -2,10 +2,10 @@
 /**
  * Base Layout
  *
- * Layout base per la renderizzazione del sito
+ * Website base rendering layout
  *
  * @package		Milk
- * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
+ * @author		Matteo Gildone - @dombender
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
@@ -34,7 +34,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	foreach ($this->view->css as $css) {
       echo link_tag(theme_url().'css/'.$css);
     }
-	
+
 	if ($this->view->has_feed)
     {
       echo link_tag(current_url().'/feed.xml', 'alternate', 'application/rss+xml', isset($page) ? $page->get('title').' - Feed': 'RSS Feed');
@@ -45,9 +45,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 </head>
 <body>
     <div id="wrapper">
-<?php 	
-		$this->view->render($_template_file); 
-?>
+		<?php $this->view->render($_template_file); ?>
     </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
@@ -68,7 +66,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 <!--[if lt IE 7 ]>
 	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
 	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
-<![endif]-->    
+<![endif]-->
 
 </body>
 </html>
