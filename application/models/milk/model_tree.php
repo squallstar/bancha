@@ -43,6 +43,7 @@ Class Model_tree extends CI_Model {
 		$this->_uri_segments = $this->uri->segment_array();
 
 		$pieces = count($this->_uri_segments);
+
 		if ($pieces)
 		{
 			//Controllo se e' un feed
@@ -264,6 +265,7 @@ Class Model_tree extends CI_Model {
 	return $options;
 	}
 
+
 	/**
 	 * Forza il refresh da DB dei dati alla prossima ricerca
 	 */
@@ -415,6 +417,7 @@ Class Model_tree extends CI_Model {
 		return $this->get_default_branch($id);
 	}
 
+
 	/**
 	 * Crea un albero di menu
 	 * @param array $pages Array of Record objects
@@ -464,12 +467,11 @@ Class Model_tree extends CI_Model {
 
 		}
 
-
 		$tree = array();
 		//$this->breadcrumbs = array();
 		foreach ($root as $r)
 		{
-			$this->_treemap($r, $nodes, $sons, '', $tree);
+			$this->_treemap($r, $nodes, $sons, '', $tree);				
 		}
 		if (isset($tree['sons']))
 		{
@@ -477,6 +479,7 @@ Class Model_tree extends CI_Model {
 		}
 		return $tree;
 	}
+
 
 	/**
 	 * Funzione ricorsiva interna per creare gerarchie di menu
@@ -517,6 +520,7 @@ Class Model_tree extends CI_Model {
 		}
 
 	}
+	
 
 	/**
 	 * Elimina il file relativo alla cache di un tipo

@@ -45,26 +45,24 @@ Class Dispatcher_default
 
 			if (!count($result))
 			{
-				//Provo a cercare il contenuto anche sulle tabelle custom dei tipi di contenuto (se ce ne sono)
 				$nomeTabelle = array();
 				// Ricavo la lista dei tipi di contenuto
-				$content_types = $CI->content->types();
-
-				$tipi_ricerca = array();
-				foreach ($content_types as $id_tipo => $single_tipo)
+				$tipiContenuti = $CI->content->types();
+				
+				$tipiRicerca = array();
+				foreach ($tipiContenuti as $idTipo => $nomeTipo)
 				{
-					//Se la tabella non e' quella dei records, non ho ancora trovato nulla
-					//e non ho gia' cercato in quella determinata tabella
-					if ($single_tipo['table'] != 'records' && !$found && !(in_array($id_tipo, $tipi_ricerca))) {
-						$result = $CI->records->type($id_tipo)->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
+					//Se la tabella non è quella dei records, non ho ancora trovato nulla e non ho già cercato in quella determinata tabella
+					if ($nomeTipo['table'] != 'records' && !$found && !(in_array($idTipo, $tipiRicerca))) {
+						$result = $CI->records->type($idTipo)->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
 						if (count($result)) {
 							break;
 						}
-						$tipi_ricerca[] = $id_tipo;
+						$tipiRicerca[] = $idTipo;	
 					}
-				}
-			}
-
+				} 
+			} 
+			
 			if (count($result))
 			{
 				//Estraggo la pagina padre
@@ -96,7 +94,6 @@ Class Dispatcher_default
 			$record = $result[0];
 			$found = TRUE;
 		}
-
 
 		if (!$found) {
 			$CI->view->title = _('Page not found');
