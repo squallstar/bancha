@@ -57,7 +57,7 @@
 			<options>
 				<custom>$this->config->item('languages_select')</custom>
 			</options>
-			<default>it</default>
+			<default>eval:$this->lang->current_language</default>
 		</field>
 		<field id="contenuto">
 			<description>Contenuto</description>
