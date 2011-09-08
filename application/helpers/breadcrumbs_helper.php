@@ -2,7 +2,7 @@
 /**
  * Breadcrumbs helper
  *
- * Funzioni di utilità per le briciole di pane
+ * Helper functions for the breadcrumbs
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -14,7 +14,7 @@
 
 
 /**
- * Helper per stampare delle breadcrumbs
+ * Prints the website breadcrumbs using the current state
  * @param array
  * @return xhtml
  */
