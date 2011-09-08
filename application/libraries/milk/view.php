@@ -56,12 +56,12 @@ Class View
 	public $title = '';
 
 	/**
-	 * @var string Keywords meta tag
+	 * @var string Keywords (meta tag)
 	 */
 	public $keywords = '';
 
 	/**
-	 * @var string Description Meta tag
+	 * @var string Description (meta tag
 	 */
 	public $description = '';
 
@@ -74,6 +74,11 @@ Class View
 	 * @var mixed array Fogli di stile
 	 */
 	public $css = array();
+
+	/**
+	 * @var string Autore della pagina (meta tag)
+	 */
+	public $author = '';
 
 	/**
 	 * @var array Temi disponibili nel front-end
