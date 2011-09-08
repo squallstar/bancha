@@ -191,7 +191,7 @@ Class Xml
 
     	if (!$content['primary_key'] || !$content['table'])
     	{
-      	show_error('Chiave primaria o tabella non definita per il tipo ['.$safe_filename.'].');
+      	show_error($this->CI->lang->_trans('Primary key or table not defined for the content type %n.', array('n' => '['.$safe_filename.']')));
     	}
 
     	//Parent types
@@ -369,7 +369,6 @@ Class Xml
           			}
         		}
 
-
         		//Options SQL extractions
         		if (isset($field->sql))
         		{
@@ -413,7 +412,6 @@ Class Xml
         		//We add the field name to the available fields
         		$fieldset['fields'][] = $field_name;
       		} //end foreach field
-
 
       		//And we add a fieldset to our list
       		$content['fieldsets'][] = $fieldset;
