@@ -29,7 +29,7 @@ $route['^go-([a-z]+)$'] = "website/change_theme/$1";
 $route['^change-language/([a-z]+)$'] = "website/change_language/$1";
 
 //Route per ricevere immagini
-$route['^attach/cache/([A-Za-z0-9_]+)/([A-Za-z0-9_]+)/([0-9]+)/([a-z0-9_]+)/pic-([0-9]+)\.(jpg|png|jpeg|gif)'] = "website/image_router/$1/$2/$3/$4/$5/$6";
+$route['^attach/cache/([A-Za-z0-9_]+)/([A-Za-z0-9_]+)/([0-9]+)/([a-z0-9_]+)/([A-Za-z0-9_-]+)\.(jpg|png|jpeg|gif)'] = "website/image_router/$1/$2/$3/$4/$5/$6";
 
 
 /* End of file routes.php */

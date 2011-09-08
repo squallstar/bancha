@@ -78,23 +78,27 @@ Class Model_Documents extends CI_Model {
 		{
 
 			//Increase limit
-			ini_set('memory_limit', '128M');
+			ini_set('memory_limit', MEMORY_LIMIT);
 
 			$custom_path = $save_params['type'] . DIRECTORY_SEPARATOR
-				. strtolower($save_params['field']) . DIRECTORY_SEPARATOR
+				. $save_params['field'] . DIRECTORY_SEPARATOR
 				. $save_params['id'] . DIRECTORY_SEPARATOR;
 
 			//Attach folder
 			$specs['upload_path'] = $this->attach_folder . $custom_path;
-			
+
 
 			//Create the directory if not exists
 			if (!file_exists($specs['upload_path'])) {
 				mkdir($specs['upload_path'], DIR_WRITE_MODE, TRUE);
 			}
-			
-			$count = count(get_filenames($specs['upload_path']));
-			$specs['file_name'] = 'pic-'.($count+1);
+
+			//$count = count(get_filenames($specs['upload_path']));
+			//$specs['file_name'] = 'pic-'.($count+1);
+
+			//Sanitize del nome del file
+			$specs['filename'] = url_title(convert_accented_characters($save_params['name']), 'underscore');
+
 			$specs['encrypt_name'] = FALSE;
 
 			$this->load->library('upload');
@@ -374,7 +378,7 @@ Class Model_Documents extends CI_Model {
 
 		$this->load->library('image_lib');
 
-		//Uniformo il path per essere sicuro di esploderlo correttamente
+		//Uniformo il path (fix per windows)
 		$tmp_path = str_replace(DIRECTORY_SEPARATOR, '/', $path);
 		$tmp = explode('/', $tmp_path);
 

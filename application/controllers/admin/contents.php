@@ -275,7 +275,8 @@ Class Contents extends Milk_Controller
 								'id'	=> $record_id,
 								'table'	=> $tipo['table'],
 								'field'	=> $name,
-								'type'	=> $tipo['name']
+								'type'	=> $tipo['name'],
+								'name'	=> $single_file['name']
 							));
 						}
 					}

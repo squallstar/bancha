@@ -33,7 +33,7 @@ Class Dispatcher_Images
 		}
 
 		//Aumento il limite di memoria
-		ini_set('memory_limit', '128M');
+		ini_set('memory_limit', MEMORY_LIMIT);
 
 		//Carico le librerie che mi servono
 		$CI->output->enable_profiler(FALSE);
@@ -56,12 +56,16 @@ Class Dispatcher_Images
 		$path = $data['type'] . $sep . $data['field'] . $sep
 			  . $data['id'] . $sep;
 
-		$file_name =  'pic-' . $data['n'] . '.' . $data['ext'];
+		$file_name =  $data['filename'] . '.' . $data['ext'];
 
 		$source_image  = $CI->config->item('attach_folder') . $path . $file_name;
 
 		$store_path = $CI->config->item('attach_folder') . 'cache' . $sep . $path
 					. $data['preset'] . $sep;
+
+		//Uniformo il path (fix per windows)
+		$source_image = str_replace(DIRECTORY_SEPARATOR, '/', $source_image);
+		$store_path = str_replace(DIRECTORY_SEPARATOR, '/', $store_path);
 
 		//Controllo se il file originale esiste
 		if (!file_exists($source_image))
@@ -86,6 +90,10 @@ Class Dispatcher_Images
 		$done = TRUE;
 		foreach ($preset as $operation)
 		{
+			if (!$done)
+			{
+				break;
+			}
 			$config = array(
 				'source_image'		=> $first ? $source_image : $store_path . $file_name,
 				'new_image'			=> $store_path . $file_name
@@ -124,7 +132,7 @@ Class Dispatcher_Images
 				}
 				if (isset($operation['fixed']) && $operation['fixed'] == TRUE)
 				{
-					list($img_w, $img_h) = getimagesize($config['source_image']);	
+					list($img_w, $img_h) = getimagesize($config['source_image']);
 					if ($img_h <= $img_w && $config['height'] != '?')
 					{
 						$config['width'] = round($config['height']*$img_w/$img_h);
@@ -132,16 +140,15 @@ Class Dispatcher_Images
 						$config['height'] = round($config['width']*$img_h/$img_w);
 					}
 				}
-			} 
+			}
 
 			switch ($operation['operation'])
 			{
 				case 'resize':
-					$CI->image_lib->initialize($config); 
+					$CI->image_lib->initialize($config);
 					$done = $CI->image_lib->resize();
-
 					break;
-				
+
 				case 'crop':
 					if (isset($operation['x']))
 					{
@@ -151,8 +158,9 @@ Class Dispatcher_Images
 					{
 						$config['y_axis'] = (int) $operation['y'];
 					}
-					$CI->image_lib->initialize($config); 
+					$CI->image_lib->initialize($config);
 					$done = $CI->image_lib->crop();
+					break;
 			}
 
 			if (!$done)
