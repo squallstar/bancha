@@ -2,7 +2,7 @@
 /**
  * View Library Class
  *
- * Classe per la gestione e rendering di una view
+ * The library that renders the website views
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -16,87 +16,92 @@ Class View
 {
 
 	/**
-	 * @var mixed Istanza di CodeIgniter
+	 * @var mixed CodeIgniter instance
 	 */
 	private $_CI;
 
 	/**
-	 * @var array Dati da passare alle view
+	 * @var array The variables that will be passed to the view
 	 */
 	private $_data = array();
 
 	/**
-	 * @var string Directory da prependere ai render
+	 * @var string The directory appended to rendering path
 	 */
 	private $_prepend_dir;
 
 	/**
-	 * @var string Directory dei templates di un tema
+	 * @var string The theme templates directory
 	 */
 	private $_template_dir = 'templates/';
 
 	/**
-	 * @var string Path del layout di amministrazione
+	 * @var string This path contains the layouts of the admin
 	 */
 	private $_layout_dir = 'layout/layout';
 
 	/**
-	 * @var array Elenco delle viste renderizzate nella request attuale
+	 * @var array List of the rendered views
 	 */
 	public $rendered_views = array();
 
 	/**
-	 * @var string base-path delle view
+	 * @var string The views base_path
 	 */
 	public $base = '';
 
 	/**
-	 * @var string Contenuto del title tag (head)
+	 * @var string Title tag (head)
 	 */
 	public $title = '';
 
 	/**
-	 * @var string Keywords meta tag
+	 * @var string Keywords (meta tag)
 	 */
 	public $keywords = '';
 
 	/**
-	 * @var string Description Meta tag
+	 * @var string Description (meta tag
 	 */
 	public $description = '';
 
 	/**
-	 * @var array Risorse javascript
+	 * @var array Javascript resources
 	 */
 	public $javascript = array();
 
 	/**
-	 * @var mixed array Fogli di stile
+	 * @var mixed array List of CSS
 	 */
 	public $css = array();
 
 	/**
-	 * @var array Temi disponibili nel front-end
+	 * @var string Author of the page (meta tag)
+	 */
+	public $author = '';
+
+	/**
+	 * @var array Available themes on the front-end
 	 */
 	public $themes = array();
 
 	/**
-	 * @var string Tema attuale
+	 * @var string Current theme
 	 */
 	public $theme = '';
 
 	/**
-	 * @var string Directory dei temi
+	 * @var string Themes directory
 	 */
 	public $theme_path = '';
 
 	/**
-	 * @var bool Imposta se questa view ha un feed associato
+	 * @var bool Choose if the view has a linked feed
 	 */
 	public $has_feed = FALSE;
 
 	/**
-	 * @var bool Imposta se questa view e' un feed xml/json
+	 * @var bool Choose if this view is a feed (xml/json)
 	 */
 	public $is_feed = FALSE;
 
@@ -109,8 +114,8 @@ Class View
 	}
 
 	/**
-	 * Carica il tema attuale
-	 * Se non in sessione, viene caricato il tema di default (sia desktop che mobile)
+	 * Loads the current theme
+	 * If it not exists in the session, will be loaded the default one (desktop or mobile)
 	 */
 	public function load_theme() {
 		$this->theme = $this->_CI->session->userdata('_website_theme');
@@ -129,7 +134,7 @@ Class View
 	}
 
 	/**
-	 * Imposta un nuovo tema
+	 * Sets a new theme as active
 	 * @param string $new_theme
 	 */
 	public function set_theme($new_theme)
@@ -144,7 +149,7 @@ Class View
 	}
 
 	/**
-	 * Aggiorna il cookie relativo al tema corrente
+	 * Updates the cookie that stores the website current theme
 	 */
 	public function store_theme()
 	{
@@ -153,7 +158,7 @@ Class View
 	}
 
 	/**
-	 * Aggiorna i path di rendering delle view di CodeIgniter per includere il tema attuale
+	 * Updates che CodeIgniter rendering view paths to include the current theme
 	 */
 	public function update_ci_path()
 	{
@@ -168,7 +173,7 @@ Class View
 	}
 
 	/**
-	 * Imposta un valore nella view
+	 * Sets a value to be passed to the views during their rendering
 	 * @param string $key
 	 * @param mixed $val
 	 */
@@ -178,7 +183,7 @@ Class View
 	}
 
 	/**
-	 * Ottiene un valore pre impostato nella view
+	 * Returns a pre-setted value from the view
 	 * @param string $key
 	 */
 	public function get($key)
@@ -195,7 +200,7 @@ Class View
 	}
 
 	/**
-	 * Rimuove un valore dalla view
+	 * Removes a value from the view
 	 * @param string $key
 	 */
 	public function remove($key)
@@ -204,8 +209,8 @@ Class View
 	}
 
 	/**
-	 * Renderizza un layout utilizzando la struttura base.
-	 * Viene usato prevalentemente dall'amministrazione
+	 * Renders a layout using the base structure.
+	 * This function is used only by the administration!!!
 	 * @param string $view_file
 	*/
 	public function render_layout($view_file, $header=true)
@@ -220,10 +225,11 @@ Class View
 	}
 
 	/**
-	 * Renderizza un template presente nella directory relativa
-	 * Passa per il layout se il secondo parametro e' TRUE
+	 * Renders a theme template
+	 * If the second param is set to FALSE, the layout will not be rendered
 	 * @param string $template_file
 	 * @param bool $layout
+	 * @param int $code HTTP code
 	 */
 	public function render_template($template_file, $layout = TRUE, $code = '')
 	{
@@ -239,16 +245,15 @@ Class View
 		{
 			$this->set('_template_file', $this->_template_dir.$template_file);
 			$this->_CI->load->view('layout', $this->_data);
-			//$this->_CI->load->view($this->_prepend_dir.$this->theme.'/layout', $this->_data);
 		} else {
 			$this->_CI->load->view($this->_template_dir.$template_file, $this->_data);
 		}
 	}
 
 	/**
-	 * Metodo per renderizzare un template specifico di un tipo scelto
-	 * @param string $type_name
-	 * @param string $view_file
+	 * Renders the template of a content type
+	 * @param string $type_name The name of the type
+	 * @param string $view_file (detail, list, etc...)
 	 */
 	public function render_type_template($type_name='', $view_file='')
 	{
@@ -262,7 +267,7 @@ Class View
 	}
 
 	/**
-	 * Renderizza una singola view del theme in uso
+	 * Renders a single view file in the current theme
 	 * @param string $view_file
 	 */
 	public function render($view_file)

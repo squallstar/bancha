@@ -57,7 +57,7 @@
 			<options>
 				<custom>$this->config->item('languages_select')</custom>
 			</options>
-			<default>it</default>
+			<default>eval:$this->lang->current_language</default>
 		</field>
 		<field id="contenuto">
 			<description>Contenuto</description>
@@ -73,6 +73,7 @@
 			<size>4096</size>
 			<mimes>jpg|gif|png|jpeg</mimes>
 			<original>true</original>
+			<encrypt_name>false</encrypt_name>
 			<resized>640x?</resized>
 			<thumbnail>60x?</thumbnail>
 			<max>3</max>

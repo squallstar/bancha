@@ -2,8 +2,6 @@
 /**
  * 404 Page not found template
  *
- * Template per l'errore 404 - Pagina non trovata
- *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar

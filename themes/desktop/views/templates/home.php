@@ -1,8 +1,6 @@
 <?php
 /**
- * Default template
- *
- * Template predefinito per la renderizzazione del sito
+ * Default website home template
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
