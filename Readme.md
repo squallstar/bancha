@@ -3,6 +3,7 @@
 MILK is a Content Management System made with PHP5 and Code Igniter, a light and powerful PHP framework.
 It is capable to manage medium and big projects/websites specially when they have many different types of contents.
 
+
 MILK bases its power on some pillars that make it different from other CMS:
 It allows you to handle any type of content: pages, news, photo galleries, products, etc ... through XML schemas.
 
