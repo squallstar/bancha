@@ -1,4 +1,4 @@
-  <?php
+<?php
 /**
  * Xml Library Class
  *
