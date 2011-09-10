@@ -225,7 +225,6 @@ Class Contents extends Milk_Controller
 
     $tipo = $this->content->type($type);
     $this->records->set_type($type);
-$this->output->enable_profiler();
 
     //Aggiunta-Modifica record
     if ($this->input->post('id_type', FALSE)) {
