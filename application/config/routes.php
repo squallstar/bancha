@@ -5,12 +5,12 @@
 | -------------------------------------------------------------------------
 */
 
-//Routing interni per l'amministrazione (Milk)
+//Internal routing systems for administration
 $route['^admin$'] = "admin/auth/login";
 $route['^admin/pages$'] = "admin/contents";
 $route['^admin/pages/(.+)$'] = "admin/contents/$1";
 
-//Router da utilizzare come default
+//The default routing method used for the website
 $route['404_override'] = 'website/router';
 
 /*
@@ -19,17 +19,17 @@ $route['404_override'] = 'website/router';
 | -------------------------------------------------------------------------
 */
 
-//Homepage del sito
+//Website homepage
 $route['default_controller'] = "website/home";
 
-//Route per switch theme
-$route['^go-([a-z]+)$'] = "website/change_theme/$1";
+//This route let you switch between the website themes
+$route['^go-([a-zA-Z_-]+)$'] = "website/change_theme/$1";
 
-//Route per cambio lingua
+//Change language route
 $route['^change-language/([a-z]+)$'] = "website/change_language/$1";
 
-//Route per ricevere immagini
-$route['^attach/cache/([A-Za-z0-9_]+)/([A-Za-z0-9_]+)/([0-9]+)/([a-z0-9_]+)/pic-([0-9]+)\.(jpg|png|jpeg|gif)'] = "website/image_router/$1/$2/$3/$4/$5/$6";
+//The route that generates images with presets
+$route['^attach/cache/([A-Za-z0-9_]+)/([A-Za-z0-9_]+)/([0-9]+)/([a-z0-9_]+)/([A-Za-z0-9_-]+)\.(jpg|png|jpeg|gif)'] = "website/image_router/$1/$2/$3/$4/$5/$6";
 
 
 /* End of file routes.php */

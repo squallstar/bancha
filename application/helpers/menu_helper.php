@@ -2,7 +2,7 @@
 /**
  * Menu helper
  *
- * Funzioni di utilità per i menu
+ * The website menu helpers
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -14,12 +14,12 @@
 
 
 /**
- * Helper per stampare l'XHTML un ramo di menu
- * @param array $tree L'albero da stampare
- * @param int $max_depth Profondità massima
- * @param int $level Livello di partenza
- * @param string $show_in_menu Menu da stampare (Default: T)
- * @param string $str Stringa interna riservata
+ * Prints a tree as an XHTML (UL>LI>A tags)
+ * @param array $tree The tree that we print
+ * @param int $max_depth Max depth
+ * @param int $level Starting level
+ * @param string $show_in_menu The only value of the column "show_in_menu" to accept
+ * @param string $str A private string for internal use
  * @return xhtml
  */
 if (!function_exists('menu'))
@@ -30,7 +30,6 @@ if (!function_exists('menu'))
 			if ($level == 1) {
 				$str .= '<ul class="menu">';
 			}
-	
 			foreach ($tree as $page) {
 				if ($page['show_in_menu'] == $show_in_menu)
 				{
@@ -45,7 +44,6 @@ if (!function_exists('menu'))
 					$str .= '</li>';
 				}
 			}
-	
 			if ($level == 1) {
 				$str .= '</ul>';
 			}

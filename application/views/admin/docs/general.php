@@ -209,12 +209,13 @@ Il campo <strong>&lt;mimes&gt;</strong> accetta anche il valore "<strong>*</stro
 
 <p>I campi di tipo <strong>images</strong> avranno a disposizione le propriet&agrave; dei campi files ed anche le seguenti propriet&agrave;:</p>
 <code>&lt;original&gt;true&lt;/original&gt;
+&lt;encrypt_name&gt;true&lt;/encrypt_name&gt;
 &lt;resized&gt;640x?&lt;/resized&gt;
 &lt;thumbnail&gt;150x100&lt;/thumbnail&gt;</code>
 <br />
-<p>Il campo <strong>&lt;original&gt;</strong> imposta se salvare l'immagine originale. I campi <strong>&lt;resized&gt;</strong> e <strong>&lt;thumbnail&gt;</strong>
-impostano le dimensioni dell'immagine da ridimensionare per le due nuove rispettive immagini. Il marcatore <strong>"?"</strong> pu&ograve; essere
-utilizzato come misura automatica per mantenere le proporzioni della misura definita.</p>
+<p>Il campo <strong>&lt;original&gt;</strong> imposta se salvare l'immagine originale. Il campo <strong>&lt;encrypt_name&gt;</strong> definisce se il nome del file salvato deve essere mantenuto tale.<br />
+I campi <strong>&lt;resized&gt;</strong> e <strong>&lt;thumbnail&gt;</strong> impostano le dimensioni dell'immagine da ridimensionare per le due nuove rispettive immagini.<br />
+Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura automatica per mantenere le proporzioni della misura definita.</p>
 
 <p>Di seguito un esempio completo di struttura per definire un tipo di contenuto con un campo di testo, una select ed un campo di caricamento per una singola immagine:</p>
 <code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -256,6 +257,7 @@ utilizzato come misura automatica per mantenere le proporzioni della misura defi
 			&lt;description&gt;Immagine profilo&lt;/description&gt;
 			&lt;type&gt;images&lt;/type&gt;
 			&lt;mandatory&gt;true&lt;/mandatory&gt;
+			&lt;encrypt_name&gt;false&lt;/encrypt_name&gt;
 			&lt;mimes&gt;jpg|gif|png&lt;/mimes&gt;
 			&lt;max&gt;1&lt;/max&gt;
 			&lt;original&gt;false&lt;/original&gt;

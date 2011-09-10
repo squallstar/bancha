@@ -78,6 +78,7 @@
 			<description>Immagini</description>
 			<type>images</type>
 			<size>4096</size>
+			<encrypt_name>false</encrypt_name>
 			<mimes>jpg|gif|png|jpeg</mimes>
 			<original>true</original>
 			<resized>640x?</resized>

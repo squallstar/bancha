@@ -1,6 +1,6 @@
 <div class="sidebar">
 	<ul class="sidemenu">
-		<li><a href="#sb-intro">Utilizzo</a></li>
+		<li><a href="#sb-intro">Google+ Module documentation</a></li>
 	</ul>
 <p>
 	Author: Nicholas Valbusa<br />
@@ -9,9 +9,9 @@
 </div>
 
 <div class="sidebar_content" id="sb-intro">
-	<h3>Utilizzo del modulo Google Plus</h3>
-	<p>Questo modulo, stampa a video il pulsante <strong>+1</strong> di Google Plus.</p>
-	<p>L'utilizzo è molto semplice, basta inserire questo codice in una qualsiasi view:</p>
-<code>&lt;?php $this->load->module('googleplus')->render(); ?&gt;</code>
+	<h3>Using the sharing G+ module</h3>
+	<p>This module, simply prints the <strong>+1</strong> Google+ sharing button.</p>
+	<p>Use it as the example below:</p>
+<code>&lt;?php echo $this->load->module('googleplus')->render(); ?&gt;</code>
 
 </div>

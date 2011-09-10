@@ -36,6 +36,6 @@ abstract class Milk_Module
 		$CI = & get_instance();
 		$module_name = strtolower(str_replace('_Module', '', get_class($this)));
 		$CI->load->add_view_path($CI->config->item('modules_folder'));
-		$CI->load->view($module_name.DIRECTORY_SEPARATOR.$module_name.'_'.$view, $CI->view->get_data());
+		return $CI->load->view($module_name.DIRECTORY_SEPARATOR.$module_name.'_'.$view, $CI->view->get_data(), TRUE);
 	}
 }

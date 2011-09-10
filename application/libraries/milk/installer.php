@@ -370,7 +370,8 @@ Class Installer
 		}
 
 		//Directory con i premade per i wizard
-		$folder = $this->CI->config->item('templates_folder').'premades'.DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR;
+		$folder = $this->CI->config->item('templates_folder') . 'premades' . DIRECTORY_SEPARATOR
+				. $type . DIRECTORY_SEPARATOR;
 
 		$premades_xml = array();
 

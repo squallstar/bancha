@@ -13,7 +13,7 @@
  */
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
- 
+
 Class Website extends Milk_Controller
 {
 	public function __construct()
@@ -77,7 +77,7 @@ Class Website extends Milk_Controller
 	{
 		$this->view->javascript = array('jquery.js', 'application.js');
 		$this->view->css = array('style.css');
-		
+
 		$this->load->dispatcher('default');
 		$this->dispatcher->start();
 	}
@@ -85,7 +85,7 @@ Class Website extends Milk_Controller
 	/**
 	 * Route per le immagini con preset
 	 */
-	function image_router($type, $field, $id, $preset, $n, $ext)
+	function image_router($type, $field, $id, $preset, $filename, $ext)
 	{
 		$this->load->dispatcher('images');
 
@@ -94,7 +94,7 @@ Class Website extends Milk_Controller
 			'field'		=> $field,
 			'id'		=> $id,
 			'preset'	=> $preset,
-			'n'			=> $n,
+			'filename'	=> $filename,
 			'ext'		=> $ext
 		);
 

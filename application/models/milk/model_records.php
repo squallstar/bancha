@@ -288,7 +288,7 @@ Class Model_records extends CI_Model {
   }
 
   /**
-   * Ottiene i record
+   * Gets the records
    * @param int $id parametro opzionale per ricevere un singolo record
    * se impostato l'id, ritorna il record richiesto anzichè un array di records
    */
@@ -298,17 +298,15 @@ Class Model_records extends CI_Model {
   	$this->set_stage($stage);
 
   	$fields_to_select = array();
-
-  	//$record_columns = $this->config->item('record_columns');
   	$record_columns = $this->columns;
 
-  	//Controllo se sto cercando una lista di singoli tipi (non dettaglio!)
+  	//We check if we're searching for a list (not detail), and just for one type
   	if ($this->_is_list && $this->_single_type)
   	{
   		foreach ($record_columns as $single_field)
   		{
-			//Se è da estrarre in modalità lista e non è tra quelli da non estrarre
-	 		if (isset($this->_single_type['fields'][$single_field]['list']))
+			//If we are in list mode, we check if we have to extract this field (only physical columns)
+	 		if (isset($this->_single_type['fields'][$single_field]))
 	  		{
 	  			if ($this->_single_type['fields'][$single_field]['list'] === TRUE
 	  				//&& !in_array($single_field, $not_selectable)
@@ -322,13 +320,11 @@ Class Model_records extends CI_Model {
 	  		}
   		}
   	} else {
-  		//Estrazione standard
+  		//Standard SELECT extraction
 		$fields_to_select = $record_columns;
-
-
   	}
 
-  	//Colonne non presenti nella tabella di produzione
+  	//Columns not available in the production table
   	if ($this->table == $this->table_current)
   	{
   		$not_selectable = $this->config->item('record_not_live_columns');
@@ -362,9 +358,7 @@ Class Model_records extends CI_Model {
 
 	        if ($item->id_type)
 	        {
-
 		    	$record = $this->content->make_record($item->id_type);
-
 		    	$tipo = $this->content->type($item->id_type);
 
 		        if ($record instanceof Record) {
@@ -434,147 +428,139 @@ Class Model_records extends CI_Model {
     }
   }
 
-  /**
-   * Aggiunge o salva un record su db
-   * @param Record $record
-   * @return BOOL
-   */
-  public function save($record)
-  {
-    if ($record instanceof Record)
-    {
+	/**
+   	* Insert or updates a Record into DB
+   	* @param Record $record
+   	* @return BOOL
+   	*/
+	public function save($record)
+  	{
+	    if ($record instanceof Record)
+	    {
 
-        //Costruisco l'XML del record
-        $record->build_xml();
+			//We build the record xml
+	        $record->build_xml();
 
-        $id = $record->id;
+	        $id = $record->id;
 
-      	$this->set_type($record->_tipo);
+	      	$this->set_type($record->_tipo);
 
-      	$tipo = $this->content->type($record->_tipo);
+	      	$tipo = $this->content->type($record->_tipo);
 
-      	//Colonne valorizzate sempre
-      	$data = array(
-          'id_type'		=> $record->_tipo,
-          'xml'			=> $record->xml,
-          //'title'		=> substr($record->get('title'), 0, 127),
-          'date_update'	=> time()
-        );
+	      	//Colonne valorizzate sempre
+	      	$data = array(
+	          'id_type'		=> $record->_tipo,
+	          'xml'			=> $record->xml,
+	          'date_update'	=> time()
+	        );
 
-      	//Aggiungo le colonne fisiche
-      	foreach ($tipo['columns'] as $column)
-      	{
-      		if (!isset($data[$column]))
-      		{
-      			$data[$column] = $record->get($column);
-      			if (is_array($data[$column]))
-      			{
-      				$data[$column] = '<value>'.implode('</value><value>', $data[$column]).'</value>';
-      			}
-      		}
-      	}
-
-        //TODO: da migliorare questi pezzi
-
-        $uri = '';
-        if (isset($tipo['fields']['uri']))
-        {
-	        $uri = $record->get('uri');
-	      	if (strlen($uri) < 1) {
-	        	$uri = strtolower($record->get('title'));
+	      	//Aggiungo le colonne fisiche
+	      	foreach ($tipo['columns'] as $column)
+	      	{
+	      		if (!isset($data[$column]))
+	      		{
+	      			$data[$column] = $record->get($column);
+	      			if (is_array($data[$column]))
+	      			{
+	      				$data[$column] = '<value>'.implode('</value><value>', $data[$column]).'</value>';
+	      			}
+	      		}
 	      	}
-        	$data['uri'] = $this->get_safe_uri($uri);
-        }
 
-
-        //Controllo se ha un parent
-        if (isset($tipo['fields']['id_parent']))
-        {
-	        $parent = $record->get('id_parent');
-	        if ($parent || $parent === '') {
-	          if ($parent === '') {
-	            $data['id_parent'] = null;
-	          } else {
-	            $data['id_parent'] = $parent;
-	          }
+	        if (isset($tipo['fields']['uri']))
+	        {
+		        $uri = $record->get('uri');
+		      	if (strlen($uri) < 1) {
+		        	$uri = strtolower($record->get('title'));
+		      	}
+	        	$data['uri'] = $this->get_safe_uri($uri);
 	        }
-        }
 
-	  $done = FALSE;
-		$action = 'insert';
+	        //This type has a parent?
+	        if (isset($tipo['fields']['id_parent']))
+	        {
+		        $parent = $record->get('id_parent');
+		        if ($parent || $parent === '') {
+		          if ($parent === '') {
+		            $data['id_parent'] = null;
+		          } else {
+		            $data['id_parent'] = $parent;
+		          }
+		        }
+	        }
 
-      if ($id) {
-		$action = 'update';
-       	$is_published = $this->id_is_published($id);
-
-         //Imposto il contenuto come non pubblicato (0 = bozza, 2 = bozza + pubblicato)
-        if ($tipo['stage'])
-        {
-        	$data['published'] = '0';
-        }
-
-
-         //Tolgo la chiave primaria
-         unset($data[$tipo['primary_key']]);
-
-          //Update
-          if ($this->db->where($tipo['primary_key'], $id)
-               ->update($this->table_stage, $data))
-          {
-            $done = $id;
-            $this->events->log('update', $id, $data['title'], $data['id_type']);
-          } else {
-            show_error('Impossibile aggiornare il record ['.$id.'].', 500, 'Aggiornamento record');
-          }
-      } else {
-          //Insert
-          if (isset($tipo['fields']['date_insert'])){
-          		$data['date_insert'] = time();
-          }
-      		if ($tipo['stage'])
+	    	//We set the record as not published if the type has the stage table
+        	if ($tipo['stage'])
         	{
-         		$data['published'] = '0';
+	        	$data['published'] = '0';
         	}
 
-        	unset($data[$tipo['primary_key']]);
+		  	$done = FALSE;
 
-          if ($this->db->insert($this->table_stage, $data))
-          {
-            $done = $this->db->insert_id();
-            $this->events->log('insert', $done, $data['title'], $data['id_type']);
-          } else {
-            show_error('Impossibile aggiungere il record di tipo ['.$data['id_type'].'].', 500, 'Inserimento record');
-          }
-      }
-      if ($done)
-      {
+		  	//Trigger action
+			$action = $id ? 'update' : 'insert';
 
-      	if ($tipo['tree'])
-      	{
-      		$data[$tipo['primary_key']] = $done;
-      		//Se è un tipo pagina, aggiorno i riferimenti
-      		$this->pages->set_stage(TRUE)->save($data);
-      	}
-		
-		//Triggers
-	  	if (isset($tipo['triggers']) && count($tipo['triggers']))
-	  	{
-	  		$this->load->triggers();
-	  		$this->triggers->delegate($record)
-	  					   ->operation($action)
-	  					   ->add($tipo['triggers'][$action])
-	  					   ->fire();
+	      	if ($id) {
+	      		//Let's check if the id is published >> useless????
+	       		//$is_published = $this->id_is_published($id);
+
+		        //The primary key will be used as update where clause
+	         	unset($data[$tipo['primary_key']]);
+
+		      	//Update query
+	          	if ($this->db->where($tipo['primary_key'], $id)
+	               			 ->update($this->table_stage, $data))
+	          	{
+	            	$done = $id;
+	            	$this->events->log('update', $id, $data['title'], $data['id_type']);
+	          	} else {
+		            show_error('Impossibile aggiornare il record ['.$id.'].', 500, 'Aggiornamento record');
+	          	}
+
+	      	} else {
+	        	//Insert
+	        	if (isset($tipo['fields']['date_insert'])){
+	          		$data['date_insert'] = time();
+	          	}
+
+	        	unset($data[$tipo['primary_key']]);
+
+	          	if ($this->db->insert($this->table_stage, $data))
+	          	{
+		            $done = $this->db->insert_id();
+	            	$this->events->log('insert', $done, $data['title'], $data['id_type']);
+	          	} else {
+	          		show_error('Impossibile aggiungere il record di tipo ['.$data['id_type'].'].', 500, 'Inserimento record');
+	          	}
+	      	}
+
+	      	if ($done)
+	      	{
+	      		if ($tipo['tree'])
+	      		{
+	      			$data[$tipo['primary_key']] = $done;
+	      			//If this type is a page, let's update all the references
+	      			$this->pages->set_stage(TRUE)->save($data);
+	      		}
+
+				//Triggers
+		  		if (isset($tipo['triggers']) && count($tipo['triggers']))
+		  		{
+		  			$this->load->triggers();
+		  			$this->triggers->delegate($record)
+		  						   ->operation($action)
+		  						   ->add($tipo['triggers'][$action])
+		  						   ->fire();
+		  		}
+	      	}
+	      	return $done;
+	  	} else {
+	    	show_error('Impossibile salvare un oggetto di tipo NON record.', 500);
 	  	}
-
-      }
-      return $done;
-  } else {
-    show_error('Impossibile salvare un oggetto di tipo NON record.');
-  }
-}
+	}
 
 	/**
-  	* Elimina un record dal db
+  	* Deletes a record
   	* @param int $record_id
   	* @return bool
   	*/
@@ -584,8 +570,8 @@ Class Model_records extends CI_Model {
   		{
   			$this->set_type($type);
   		}
-		
-		//Ottengo il record per usarlo piu' avanti
+
+		//First of all, we get the record
 		$record = $this->get($record_id);
 
     	$done = $this->db->where($this->primary_key, $record_id)
@@ -596,23 +582,25 @@ Class Model_records extends CI_Model {
 
     	if ($done && $done_stage && $record)
     	{
-      		//Elimino gli allegati associati su entrambe le tabelle (stage e produzione)
+      		//We delete the attachments from both tables
      		$this->load->documents();
       		$this->documents->delete_by_binds($this->table, $record_id, FALSE);
      		$this->documents->delete_by_binds($this->table_stage, $record_id, TRUE);
-	  
-	  		$action = 'delete';
-	  
-	  		$this->load->triggers();
-			$this->triggers->delegate($record)
-						   ->operation($action);
-						   
-			$tipo = $this->content->type($record->_tipo);
-			
-			//Chiamo i trigger su stage e produzione
-			$this->triggers->set_stage(FALSE)->add($tipo['triggers'][$action])->fire();
-			$this->triggers->set_stage(TRUE)->add($tipo['triggers'][$action])->fire();
-	  
+
+     		$tipo = $this->content->type($record->_tipo);
+
+	  		if (isset($tipo['triggers']) && count($tipo['triggers']))
+	  		{
+	  			$triggers = $tipo['triggers']['delete'];
+
+	  			$this->load->triggers();
+				$this->triggers->delegate($record)
+							   ->operation('delete');
+
+				//Fires the triggers
+				$this->triggers->set_stage(FALSE)->add($triggers)->fire();
+				$this->triggers->set_stage(TRUE)->add($triggers)->fire();
+	  		}
       		return true;
     	}
     	return false;
