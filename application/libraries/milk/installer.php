@@ -49,6 +49,11 @@ Class Installer
 		$this->users = & $this->CI->users;
 	}
 
+	public function is_already_installed()
+	{
+		return $this->CI->db->table_exists('records');
+	}
+
 	/**
 	 * Crea le tabelle su database
 	 */
