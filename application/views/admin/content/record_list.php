@@ -141,8 +141,6 @@ $fields = array_keys($tipo['fields']);
 				}
 			}
 
-			$first = true;
-
 			foreach ($fields as $field) {
 
 				if ($tipo['fields'][$field]['admin'] === true && $field != $primary_key) {
@@ -184,8 +182,7 @@ $fields = array_keys($tipo['fields']);
 
 						}
 					}
-					if ($first) {
-						$first = false;
+					if ($tipo['edit_link'] == $field) {
 						echo '<td><a href="'.admin_url($_section.'/edit_record/'.$track_str).'">'.$value.'</a></td>';
 					} else {
 						echo '<td>'.$value.'</td>';
