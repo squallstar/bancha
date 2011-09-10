@@ -46,7 +46,7 @@
 				<custom>$this->view->get('parent_tree');</custom>
 			</options>
 		</field>
-		<field id="title" column="true">
+		<field id="title" column="true" link="edit">
 			<description>Titolo</description>
 			<type>text</type>
 			<mandatory>true</mandatory>
