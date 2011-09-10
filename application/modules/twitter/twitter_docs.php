@@ -1,6 +1,18 @@
-<div class="sidebar">
+<?php
+/**
+ * Twitter Module Documentation
+ *
+ * @package		Milk
+ * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
+ * @copyright	Copyright (c) 2011, Squallstar
+ * @license		GNU/GPL (General Public License)
+ * @link		http://squallstar.it
+ *
+ */
+
+ ?><div class="sidebar">
 	<ul class="sidemenu">
-		<li><a href="#sb-intro">Introduzione</a></li>
+		<li><a href="#sb-intro">Twitter Module</a></li>
 	</ul>
 <p>
 	Author: Nicholas Valbusa<br />
@@ -9,6 +21,6 @@
 </div>
 
 <div class="sidebar_content" id="sb-intro">
-	<h3>Introduzione</h3>
-	<p>Lorem ipsum dolor sit amet...</p>
+	<h3>Twitter Module</h3>
+	<div class="message warning">Currently under development</div>
 </div>

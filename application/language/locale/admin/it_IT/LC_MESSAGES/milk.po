@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Milk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-10 17:33+0100\n"
-"PO-Revision-Date: 2011-09-10 17:33+0100\n"
+"POT-Creation-Date: 2011-09-10 18:48+0100\n"
+"PO-Revision-Date: 2011-09-10 18:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -103,24 +103,28 @@ msgid "Cannot create that type"
 msgstr "Impossibile creare il tipo di contenuto."
 
 #: libraries/milk/content.php:128
-#, fuzzy
 msgid "Cannot insert that content type."
-msgstr "Impossibile inserire il tipo di contenuto."
+msgstr "Impossibile inserire questo tipo di contenuto."
 
 #: libraries/milk/content.php:128
+#: libraries/milk/content.php:174
 msgid "Error"
 msgstr "Errore"
+
+#: libraries/milk/content.php:173
+msgid "Cannot delete the template view directory for the content type %n."
+msgstr "Impossibile eliminare la directory delle view di template per il tipo di contenuto %n."
 
 #: libraries/milk/installer.php:306
 msgid "Default content type not defined"
 msgstr "Tipo predefinito non definito."
 
-#: libraries/milk/installer.php:414
+#: libraries/milk/installer.php:419
 msgid "My first post"
 msgstr "Il mio primo post"
 
-#: libraries/milk/installer.php:415
-#: libraries/milk/installer.php:441
+#: libraries/milk/installer.php:420
+#: libraries/milk/installer.php:446
 msgid "Hello world"
 msgstr "Ciao mondo"
 
@@ -554,7 +558,7 @@ msgid "Save scheme"
 msgstr "Salva schema"
 
 #: views/admin/content/type_list.php:24
-#: views/admin/modules/list.php:20
+#: views/admin/modules/list.php:22
 #: views/admin/users/list.php:38
 msgid "Name"
 msgstr "Nome"
@@ -749,7 +753,7 @@ msgid "Manage"
 msgstr "Gestione"
 
 #: views/admin/layout/header.php:74
-#: views/admin/modules/list.php:21
+#: views/admin/modules/list.php:23
 msgid "Documentation"
 msgstr "Documentazione"
 
@@ -765,7 +769,11 @@ msgstr "Documentazione modulo"
 msgid "Installed modules"
 msgstr "Moduli installati"
 
-#: views/admin/modules/list.php:37
+#: views/admin/modules/list.php:16
+msgid "This are the currently installed modules. To install a module, just place it in the application/modules folder."
+msgstr "Di seguito l'elenco dei moduli correntemente installati. Per installare un modulo, inseriscilo nella directory application/modules."
+
+#: views/admin/modules/list.php:39
 msgid "There are no modules installed."
 msgstr "Non ci sono moduli installati."
 
