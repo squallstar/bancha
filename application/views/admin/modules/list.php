@@ -33,10 +33,9 @@
 					?>
 			</tbody>
 		</table>
-		<?php
-			echo _('There are no modules installed.');
-		?>
-			<?php } ?>
+			<?php } else {
+				echo _('There are no modules installed.');
+			} ?>
 	</div>
 
 	<div class="bendl"></div>
