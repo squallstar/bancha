@@ -14,10 +14,25 @@ It allows you to handle any type of content: pages, news, photo galleries, produ
   * It totally separates the application framework (MVC) from the website themes, so it's easy to use for web developers as well as web designers.
   * It use a wonderful ORM system to "play" with the database objects without the needs to write a single query.
 
-The complete **MILK documentation** is available through the MILK administration panel, under **Manage > Documentation**.
+The **MILK documentation** is available through the MILK administration panel, under **Manage > Documentation**.
+
+# How to install
+
+1. Before all, sets your current environment in the /index.php file
+    The default environment is "sqlite" (to use the Sqlite Database)
+    but you are encouraged to use "development" or "production"
+ 
+2. Sets the database configuration parameters here: application/config/database.php
+
+3. Go through your browser to this URL: http://<yourwebsitename>/admin/install
+
+4. Choose your install type between "Default" and "Blog". The Blog one, will create and configures the "Blog" and "Comments" content types for you.
+
+4. When install is done, place a die(); at the start of this file: application/controllers/admin/install.php (alternately you can also delete it!)
+ 
+5. You're done! The install script will create a content type named "Menu" which is linked to the page tree of your website.
 
 # Resources
 
  * [Project homepage](https://github.com/squallstar/milk)
- * [How to install](https://github.com/squallstar/milk/wiki/2.-Installazione)
  * [Open issues](https://github.com/squallstar/milk/issues)
