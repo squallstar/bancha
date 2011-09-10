@@ -2,7 +2,7 @@
 /**
  * Contents Controller
  *
- * Gestione dei contenuti (amministrazione)
+ * This controller manage, creates and deletes any type of content
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar

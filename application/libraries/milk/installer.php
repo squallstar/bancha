@@ -2,7 +2,7 @@
 /**
  * Installer Class
  *
- * Libreria per installare Milk
+ * This library let you install the CMS
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -17,22 +17,22 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 Class Installer
 {
 	/**
-	 * @var mixed Istanza di CodeIgniter
+	 * @var mixed Code Igniter instance
 	 */
 	private $CI;
 
 	/**
-	 * @var mixed Reference all'oggetto dbforge di CodeIgniter
+	 * @var mixed Reference to the Code Igniter DB Forge
 	 */
 	private $dbforge;
 
 	/**
-	 * @var mixed Reference al model_users
+	 * @var mixed Reference to the users model
 	 */
 	private $users;
 
 	/**
-	 * @var int Contiene l'id del gruppo creato come default (Administrators)
+	 * @var int The administrator group autoincrement ID
 	 */
 	public $group_id;
 
@@ -55,11 +55,11 @@ Class Installer
 	}
 
 	/**
-	 * Crea le tabelle su database
+	 * Creates all the database tables
 	 */
 	public function create_tables()
 	{
-		//Creazione tabelle records
+		//Records and Records_stage tables
 		$record_fields = array(
             'id_record'		=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
             'date_insert'	=> array('type'	=> 'INT'),
@@ -90,7 +90,7 @@ Class Installer
 		$this->dbforge->add_key('id_record', TRUE);
 		$this->dbforge->create_table('records');
 
-		//Creazione tabelle pages
+		//Pages and Pages_stage tables
 		$page_fields = array(
 		    'id_record'		=> array('type'	=> 'INT', 'unsigned' => TRUE),
 		    'date_publish'	=> array('type'	=> 'INT'),
@@ -114,7 +114,7 @@ Class Installer
 		$this->dbforge->add_key('id_record', TRUE);
 		$this->dbforge->create_table('pages_stage');
 
-		//Creazione tabella types
+		//Cotent types table
 		$types_fields = array(
 		    'id_type'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'name'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 255)
@@ -125,7 +125,7 @@ Class Installer
 		$this->dbforge->add_key('id_type', TRUE);
 		$this->dbforge->create_table('types');
 
-		//Creazione tabella utenti
+		//Users table
 		$user_fields = array(
 		    'id_user'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'id_group'	=> array('type'	=> 'INT', 'unsigned'	=> TRUE, 'constraint' => 3, 'null' => FALSE),
@@ -141,7 +141,7 @@ Class Installer
 		$this->dbforge->add_key('id_user', TRUE);
 		$this->dbforge->create_table('users');
 
-		//Creazione tabella acl
+		//ACL table
 		$acl_fields = array(
 		    'id_acl'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'acl_name'	=> array('type'	=> 'VARCHAR', 'constraint'	=> 64, 'null' => FALSE),
@@ -154,7 +154,7 @@ Class Installer
 		$this->dbforge->add_key('id_acl', TRUE);
 		$this->dbforge->create_table('acl');
 
-		//Creazione tabella groups
+		//Groups table
 		$group_fields = array(
 		    'id_group'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'group_name'=> array('type'	=> 'VARCHAR', 'constraint'	=> 64, 'null' => FALSE)
@@ -165,7 +165,7 @@ Class Installer
 		$this->dbforge->add_key('id_group', TRUE);
 		$this->dbforge->create_table('groups');
 
-		//Creazione tabella groups acl
+		//Groups ACL table
 		$group_acl_fields = array(
 		    'id_group_acl'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'group_id'		=> array('type'	=> 'INT', 'null' => FALSE),
@@ -177,7 +177,7 @@ Class Installer
 		$this->dbforge->add_key('id_group_acl', TRUE);
 		$this->dbforge->create_table('groups_acl');
 
-		//Creazione tabella categories
+		//Categories table
 		$categories_fields = array(
 		    'id_category'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'category_name'	=> array('type'	=> 'VARCHAR', 'constraint' => 64, 'null' => FALSE),
@@ -189,7 +189,7 @@ Class Installer
 		$this->dbforge->add_key('id_category', TRUE);
 		$this->dbforge->create_table('categories');
 
-		//Creazione tabelle documents
+		//Documents table
 		$documents_fields = array(
 		    'id_document'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'date_upload'	=> array('type'	=> 'INT', 'null' => TRUE),
@@ -220,7 +220,7 @@ Class Installer
 		$this->dbforge->add_key('id_document', TRUE);
 		$this->dbforge->create_table('documents');
 
-		//Creazione tabella events
+		//Events table
 		$event_fields = array(
 		    'id_event'		=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 		    'user_id'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned' => TRUE),
@@ -236,7 +236,7 @@ Class Installer
 		$this->dbforge->add_key('id_event', TRUE);
 		$this->dbforge->create_table('events');
 
-		//Creazione tabella record categories
+		//Record categories table
 		$record_categories_fields = array(
 		    'id_record'		=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE),
 		    'id_category'	=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE)
@@ -250,20 +250,20 @@ Class Installer
 	}
 
 	/**
-	 * Crea i gruppi + acl di default
+	 * Creates the basic ACLs and groups
 	 */
 	public function create_groups()
 	{
 		//Inserisco le ACL di default
 		$acls = array();
-		$acls[]= $this->users->add_acl('users', 'list', 'Lista utenti');
-		$acls[]= $this->users->add_acl('users', 'add', 'Aggiunta utenti');
-		$acls[]= $this->users->add_acl('types', 'add', 'Aggiunta tipi di contenuto');
-		$acls[]= $this->users->add_acl('types', 'manage', 'Modifica schema tipo di contenuto');
-		$acls[]= $this->users->add_acl('types', 'delete', 'Eliminazione tipi di contenuto');
+		$acls[]= $this->users->add_acl('users', 'list', 'Users list');
+		$acls[]= $this->users->add_acl('users', 'add', 'Create users');
+		$acls[]= $this->users->add_acl('types', 'add', 'Add content types');
+		$acls[]= $this->users->add_acl('types', 'manage', 'Edit XML schemes');
+		$acls[]= $this->users->add_acl('types', 'delete', 'Delete content types');
 
-		$this->group_id = $this->users->add_group('Amministratore');
-		$this->users->add_group('Editor');
+		$this->group_id = $this->users->add_group('Administrators');
+		$this->users->add_group('Editors');
 
 		$this->CI->auth->update_permissions($acls, $this->group_id);
 
@@ -317,22 +317,28 @@ Class Installer
 			'records'			=> 'id_type',
 			'records'			=> 'date_publish',
 			'records'			=> 'lang',
-			//'records_stage'		=> 'id_type',
+			'records_stage'		=> 'id_type',
 			'pages'				=> 'id_type',
 			'pages'				=> 'full_uri',
-			//'pages_stage'		=> 'id_type',
-			//'pages_stage'		=> 'full_uri',
+			'pages_stage'		=> 'id_type',
+			'pages_stage'		=> 'full_uri',
 			'categories'		=> 'category_name',
 			'documents'			=> 'bind_id',
-			//'documents_stage'	=> 'bind_id',
+			'documents_stage'	=> 'bind_id',
 			'record_categories'	=> 'id_category'
 		);
 
-		//TODO: correggere gli indici duplicati come nome (commentati sopra)
+		$created = array();
 
 		foreach ($indexes as $table => $column)
 		{
-			//In futuro, metterlo nel db forge per differenziarlo tra ogni db
+			if (in_array($column, $created_indexes))
+			{
+				$column = $column . '_2';
+			}
+			$created[] = $column;
+
+			//In the future, move this query into DB forge to let it change between different Databases
 			$sql = 'CREATE INDEX idx_'.$column.' ON '.$this->CI->db->dbprefix.$table.' ('.$column.');';
 			$this->CI->db->query($sql);
 		}
@@ -340,7 +346,7 @@ Class Installer
 	}
 
 	/**
-	 * Elimina e ricrea le directory base
+	 * Delete and re-create the directories
 	 */
 	public function create_directories()
 	{
@@ -359,8 +365,8 @@ Class Installer
 	}
 
 	/**
-	 * Crea una installazione premade, ad esempio per un blog
-	 * @param string $type Tipo di installazione
+	 * Create a custom installation (example: for a Blog)
+	 * @param string $type Premade name
 	 */
 	public function create_premade($type = '')
 	{
@@ -369,7 +375,7 @@ Class Installer
 			return;
 		}
 
-		//Directory con i premade per i wizard
+		//This directory contains the premade schemes of the chosen type
 		$folder = $this->CI->config->item('templates_folder') . 'premades' . DIRECTORY_SEPARATOR
 				. $type . DIRECTORY_SEPARATOR;
 
@@ -389,21 +395,21 @@ Class Installer
 			}
 		}
 
-		//Svuoto e ricarico la cache dei tipi
+		//Let the framework rebuild the content types cache
 		$this->CI->content->rebuild();
 		$this->CI->content->read();
 
 		switch (strtolower($type))
 		{
 			case 'blog':
-				//Aggiungo le colonne che mi servono
+				//We add the columns that we need
 				$fields = array(
 					'post_id' => array('type' => 'INT', 'null' => TRUE)
 				);
 				$this->dbforge->add_column('records', $fields);
 				$this->dbforge->add_column('records_stage', $fields);
 
-				//Creo un post
+				//Then, we create a dummy post
 				$post = new Record('Blog');
 				$post->set('title', _('My first post'))
 					 ->set('contenuto', _('Hello world'))
@@ -412,7 +418,7 @@ Class Installer
 				;
 				$this->CI->records->save($post);
 
-				//Creo una pagina di vista lista contenuti
+				//And a simple page that lists the posts
 				$page = new Record('Menu');
 				$page->set('title', 'Blog')
 					 ->set('action', 'list')
@@ -425,7 +431,7 @@ Class Installer
 				break;
 
 			case 'default':
-				//Creo una pagina dimostrativa
+				//We create a dummy page
 				$page = new Record('Menu');
 				$page->set('title', 'My first page')
 				->set('action', 'text')
@@ -439,22 +445,22 @@ Class Installer
 				break;
 		}
 
-		//Pulisco la cache di questo tipo di albero
+		//This tree needs to be cleared cos we added some pages before
 		$this->CI->tree->clear_cache('Menu');
 	}
 
 	/**
-	 * Copia un XML dalla cartella di un premade ad un tipo di contenuto
-	 * @param string $path Directory del file xml premade
-	 * @param string $type_name Nome del tipo per la sostituzione
-	 * @param int $type_id Chiave primaria del tipo di contenuto
+	 * Duplicates an XML from a premade overriding the default one
+	 * @param string $path Source of the XML scheme
+	 * @param string $type_name Type name
+	 * @param int $type_id Primary key of this type
 	 * @return bool
 	 */
 	public function copy_premade_xml($path, $type_name, $type_id)
 	{
 		$xml = read_file($path);
 
-		//Parso il file con le pseudovariabili
+		//We parse the file with some pseudovariables
 		$xml = $this->CI->parser->parse_string($xml, array(
 		          'id'			=> $type_id,
 		          'version'		=> MILK_VERSION
