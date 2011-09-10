@@ -314,32 +314,37 @@ Class Installer
 	public function create_indexes()
 	{
 		$indexes = array(
-			'records'			=> 'id_type',
-			'records'			=> 'date_publish',
-			'records'			=> 'lang',
-			'records_stage'		=> 'id_type',
-			'pages'				=> 'id_type',
-			'pages'				=> 'full_uri',
-			'pages_stage'		=> 'id_type',
-			'pages_stage'		=> 'full_uri',
-			'categories'		=> 'category_name',
-			'documents'			=> 'bind_id',
-			'documents_stage'	=> 'bind_id',
-			'record_categories'	=> 'id_category'
+			array('records', 'id_type'),
+			array('records', 'date_publish'),
+			array('records', 'lang'),
+			array('records_stage', 'id_type'),
+			array('pages', 'id_type'),
+			array('pages', 'full_uri'),
+			array('pages_stage', 'id_type'),
+			array('pages_stage', 'full_uri'),
+			array('categories', 'category_name'),
+			array('documents', 'bind_id'),
+			array('documents_stage', 'bind_id'),
+			array('record_categories', 'id_category')
 		);
 
-		$created = array();
+		//If we encounter index with same name, we will append _N (where N is the index number)
+		//This is because in a database you cannot have indexes with the same name
+		$created_indexes = array();
 
-		foreach ($indexes as $table => $column)
+		foreach ($indexes as $index)
 		{
-			if (in_array($column, $created_indexes))
-			{
-				$column = $column . '_2';
-			}
-			$created[] = $column;
+			list($table, $column) = $index;
+			$index_name = $column;
 
-			//In the future, move this query into DB forge to let it change between different Databases
-			$sql = 'CREATE INDEX idx_'.$column.' ON '.$this->CI->db->dbprefix.$table.' ('.$column.');';
+			$created_indexes[$column][] = TRUE;
+			if (array_key_exists($column, $created_indexes) && count($created_indexes[$column]) > 1)
+			{
+				$index_name = $column . '_' . count($created_indexes[$column]);
+			}
+
+			//TODO: move this query into DB forge to let it change between different Databases
+			$sql = 'CREATE INDEX idx_m_'.$index_name.' ON '.$this->CI->db->dbprefix.$table.' ('.$column.');';
 			$this->CI->db->query($sql);
 		}
 

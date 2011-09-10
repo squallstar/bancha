@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Milk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-10 16:58+0100\n"
-"PO-Revision-Date: 2011-09-10 16:58+0100\n"
+"POT-Creation-Date: 2011-09-10 17:33+0100\n"
+"PO-Revision-Date: 2011-09-10 17:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -86,16 +86,41 @@ msgstr "Torna all'amministrazione"
 msgid "Open profiler"
 msgstr "Apri profiler"
 
+#: libraries/milk/content.php:109
+msgid "You cannot create a content type named [cache]."
+msgstr "Non puoi creare un tipo di contenuto chiamato [cache]."
+
+#: libraries/milk/content.php:109
+msgid "Name reserved"
+msgstr "Nome riservato"
+
+#: libraries/milk/content.php:116
+msgid "A content type named %n already exists"
+msgstr "Esiste già un tipo di contenuto chiamato %n."
+
+#: libraries/milk/content.php:117
+msgid "Cannot create that type"
+msgstr "Impossibile creare il tipo di contenuto."
+
+#: libraries/milk/content.php:128
+#, fuzzy
+msgid "Cannot insert that content type."
+msgstr "Impossibile inserire il tipo di contenuto."
+
+#: libraries/milk/content.php:128
+msgid "Error"
+msgstr "Errore"
+
 #: libraries/milk/installer.php:306
 msgid "Default content type not defined"
 msgstr "Tipo predefinito non definito."
 
-#: libraries/milk/installer.php:408
+#: libraries/milk/installer.php:414
 msgid "My first post"
 msgstr "Il mio primo post"
 
-#: libraries/milk/installer.php:409
-#: libraries/milk/installer.php:435
+#: libraries/milk/installer.php:415
+#: libraries/milk/installer.php:441
 msgid "Hello world"
 msgstr "Ciao mondo"
 
