@@ -595,7 +595,7 @@ Class Model_records extends CI_Model {
 
      		$tipo = $this->content->type($record->_tipo);
 
-	  		if (isset($tipo['triggers']) && count($tipo['triggers']))
+	  		if (isset($tipo['triggers']['delete']) && count($tipo['triggers']['delete']))
 	  		{
 	  			$triggers = $tipo['triggers']['delete'];
 
