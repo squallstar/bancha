@@ -300,7 +300,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 					echo '<div class="hidden limit">'.br(1).form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n images', array('n' => $field['max'])).')</div>';
 				}
 				if ($count && is_array($field_value)) {
-					echo '<table cellpadding="0" cellspacing="0" width="100%" class="sortable">'
+					echo '<table cellpadding="0" cellspacing="0" width="100%" class="sortable cursor">'
 						.'<thead><tr><th>'._('Preview').'</th><th>'._('Original').'</th><th>'._('Resized').'</th><th>'._('Alternative text').'</th><th>'._('Order').'</th><th></th></tr></thead><tbody>';
 					;
 					foreach ($field_value as $image) {
@@ -338,7 +338,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 					echo '<div class="hidden limit">'.br(1).form_upload($attributes).br(1).'('._trans('You can attach up to %n files', array('n' => $field['max'])).')</div>';
 				}
 				if ($count && is_array($field_value)) {
-					echo '<table cellpadding="0" cellspacing="0" width="100%" class="sortable">'
+					echo '<table cellpadding="0" cellspacing="0" width="100%" class="sortable cursor">'
 						.'<thead><tr><th>'._('File name').'</th><th>'._('File type').'</th><th>'._('Alternative text').'</th><th></th></tr></thead><tbody>';
 					;
 					foreach ($field_value as $file) {
