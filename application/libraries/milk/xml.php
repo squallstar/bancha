@@ -334,12 +334,19 @@ Class Xml
           			$content['has_attachments'] = TRUE;
         		}
 
-        		if ($content_field['type'] == 'images')
+      			if ($content_field['type'] == 'images')
         		{
+        			$content_field['presets'] = array();
+        			
           			$content_field['original'] = isset($field->original) ? (strtoupper($field->original) == 'TRUE' ? TRUE : FALSE) : FALSE;
           			$content_field['encrypt_name'] = isset($field->encrypt_name) ? (strtoupper($field->encrypt_name) == 'TRUE' ? TRUE : FALSE) : FALSE;
           			$content_field['resized'] = isset($field->resized) ? (string)$field->resized : FALSE;
           			$content_field['thumbnail'] = isset($field->thumbnail) ? (string)$field->thumbnail : FALSE;
+          			
+          			if ($content_field['thumbnail'] != FALSE && $preset = (string)$field->thumbnail->attributes()->preset)
+          			{
+          				$content_field['presets']['thumbnail'] = $preset;
+          			}
         		}
 
         		if ($content_field['type'] == 'images' || $content_field['type'] == 'files')
