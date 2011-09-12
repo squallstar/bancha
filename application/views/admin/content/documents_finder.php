@@ -31,7 +31,7 @@ $this->load->helper('form');
 							.'<td>'.($image->resized_path ? '<a target="_blank" href="'. attach_url($image->resized_path) . '">'._('View').'</a> - <a href="#" onclick="finder_choose(\''. attach_url($image->resized_path) . '\');">'._('Choose').'</a>':'').'</td>'
 							.'<td>'.($src ? '<a href="#" onclick="finder_choose(\''. attach_url($src) . '\');">'._('Choose').'</a>':'').'</td>'
 							.'<td>'.$image->alt_text.'</td>'
-							.'<td class="delete"><img align="absmiddle" src="'.site_url(THEMESPATH . 'admin/widgets/icns/delete.png').'" /> <a href="#" onclick="return milk.delete.document(this, '.$image->id_document.');">'._('Delete image').'</a></td>'
+							.'<td class="delete"><img align="absmiddle" src="'.site_url(THEMESPATH . 'admin/widgets/icns/delete.png').'" /> <a href="#" onclick="return bancha.delete.document(this, '.$image->id_document.');">'._('Delete image').'</a></td>'
 							.'</tr>';
 
 		}

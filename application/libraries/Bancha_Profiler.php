@@ -77,11 +77,11 @@ class Bancha_Profiler extends CI_Profiler {
 	{
 		$output = link_tag(site_url(THEMESPATH . 'admin/css/profiler.css')).
 			'<script type="text/javascript" src="'.site_url(THEMESPATH . 'admin/js/profiler.js').'"></script>'.
-			'<a id="milk_profiler_preview" onclick="_show_profiler();" href="#">'._('Preview').'</a>'.
-			'<div id="milk_profiler"><div id="milk_profiler_content">'.
+			'<a id="bancha_profiler_preview" onclick="_show_profiler();" href="#">'._('Preview').'</a>'.
+			'<div id="bancha_profiler"><div id="bancha_profiler_content">'.
 			'BANCHA&nbsp; &nbsp; <a href="'.admin_url().'">'._('Back to admin').'</a> - '.
 			'<a href="#" onclick="_show_ciprofiler();">'._('Open profiler').'</a>'
-			.'<div id="milk_profiler_ci">'
+			.'<div id="bancha_profiler_ci">'
 		;
 
 		foreach ($this->_available_sections as $section)

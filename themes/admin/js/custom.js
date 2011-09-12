@@ -216,7 +216,7 @@ $(function () {
 
 });
 
-var milk = {
+var bancha = {
 	_priority : 0,
 	delete : {
 		document : function(self, e) {
@@ -234,16 +234,16 @@ var milk = {
 	},
 	sort_priority : function (event, ui) {
 		var rows = $('tbody tr', $(ui.item[0]).closest('.sortable'));
-		milk._priority = rows.length;
+		bancha._priority = rows.length;
 		rows.each(function() {
-			$('.tbl-priority', this).val(milk._priority);
-			milk._priority--;
+			$('.tbl-priority', this).val(bancha._priority);
+			bancha._priority--;
 		});
 	},
 	check : {
 		uri: function(e) {
 			clearInterval(document._to);
-			document._to=setTimeout(function(){milk.check._triggers.uri(e);},1000);
+			document._to=setTimeout(function(){bancha.check._triggers.uri(e);},1000);
 		},
 		_triggers : {
 			uri : function(e) {

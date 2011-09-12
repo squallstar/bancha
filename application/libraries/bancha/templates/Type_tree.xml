@@ -119,7 +119,7 @@
 		<field id="action">
 			<description>Azione pagina</description>
 			<type>select</type>
-			<onchange>milk.actions.record_act();</onchange>
+			<onchange>bancha.actions.record_act();</onchange>
 			<options>
 				<option value="text">Testo introduttivo</option>
 				<option value="list">Lista di contenuti</option>

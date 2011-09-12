@@ -48,7 +48,7 @@ $this->load->helper('form'); ?>
 
 <?php
 
-$save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="milk.add_form_hash();"')
+$save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="bancha.add_form_hash();"')
 			   .form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
 			   .form_submit('_bt_publish', _('Publish'), 'class="submit"')
 ;
@@ -315,7 +315,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 							.'<td>'.($image->resized_path ? '<a target="_blank" href="'. attach_url($image->resized_path) . '">'._('View').'</a>':'').'</td>'
 							.'<td><input name="_alt_text['.$image->id_document.']" type="text" class="text small" value="' . $image->alt_text . '" /></td>'
 							.'<td><input class="tbl-priority text small" name="_priority['.$image->id_document.']" type="text" value="' . $image->priority . '" /></td>'
-							.'<td class="delete"><img align="absmiddle" src="'.site_url(THEMESPATH.'admin/widgets/icns/delete.png').'" /> <a href="#" onclick="return milk.delete.document(this, '.$image->id_document.');">'._('Delete image').'</a></td>'
+							.'<td class="delete"><img align="absmiddle" src="'.site_url(THEMESPATH.'admin/widgets/icns/delete.png').'" /> <a href="#" onclick="return bancha.delete.document(this, '.$image->id_document.');">'._('Delete image').'</a></td>'
 							."</tr>\n";
 					}
 					echo '</tbody></table>';
@@ -345,7 +345,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 						echo '<tr><td><a href="'. attach_url($file->path) . '">'.$file->name.'</a></td>'
 							.'<td>'.$file->mime.'</td>'
 							.'<td><input name="_alt_text['.$file->id_document.']" type="text" class="text small" value="' . $file->alt_text . '" /></td>'
-							.'<td class="delete"><img align="absmiddle" src="'.site_url(THEMESPATH.'admin/widgets/icns/delete.png').'" /> <a href="#" onclick="return milk.delete.document(this, '.$file->id_document.');">'._('Delete file').'</a></td>'
+							.'<td class="delete"><img align="absmiddle" src="'.site_url(THEMESPATH.'admin/widgets/icns/delete.png').'" /> <a href="#" onclick="return bancha.delete.document(this, '.$file->id_document.');">'._('Delete file').'</a></td>'
 							."</tr>\n";
 					}
 					echo '</tbody></table>';
@@ -425,7 +425,7 @@ echo form_close() . br(2);
 <?php }
 
 if ($tipo['has_attachments']) {
-	$js_onload.= "$('table.sortable tbody').sortable({ stop: function(event, ui) { milk.sort_priority(event, ui); } });";
+	$js_onload.= "$('table.sortable tbody').sortable({ stop: function(event, ui) { bancha.sort_priority(event, ui); } });";
 	?>
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/jquery-ui.js"></script>
 <?php } ?>
