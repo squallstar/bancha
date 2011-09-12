@@ -356,7 +356,7 @@ Class Installer
 			}
 
 			//TODO: move this query into DB forge to let it change between different Databases
-			$sql = 'CREATE INDEX idx_m_'.$index_name.' ON '.$this->CI->db->dbprefix.$table.' ('.$column.');';
+			$sql = 'CREATE INDEX idx_bancha_'.$index_name.' ON '.$this->CI->db->dbprefix.$table.' ('.$column.');';
 			$this->CI->db->query($sql);
 		}
 

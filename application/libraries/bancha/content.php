@@ -294,6 +294,7 @@ Class Content {
 	{
 		//All types
 		$this->CI->load->helper('file');
+
 		$filenames = get_filenames($this->xml_folder);
 
 		//Restricted names

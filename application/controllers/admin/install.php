@@ -24,7 +24,7 @@ Class Install extends Bancha_Controller
 
 	public function index()
 	{
-		$this->load->library('milk/installer');
+		$this->load->frlibrary('installer');
 
 		if ($this->input->post('install'))
 		{
