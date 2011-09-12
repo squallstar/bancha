@@ -253,15 +253,15 @@ Class Model_tree extends CI_Model {
 		foreach ($tree as $key => $node)
 		{
 
-		if ($node->id_parent == $id_parent)
-		{
-			$options [$node->id_record] = str_repeat('---' , $level)." ".$node->title;
-			unset($tree[$key]);
-			$level++;
-			$options = $this->get_branch_dropdown($tree, $node->id_record, $level, $options);
-			$level--;
+			if ($node->id_parent == $id_parent)
+			{
+				$options [$node->id_record] = str_repeat('---' , $level)." ".$node->title;
+				unset($tree[$key]);
+				$level++;
+				$options = $this->get_branch_dropdown($tree, $node->id_record, $level, $options);
+				$level--;
+			}
 		}
-	}
 	return $options;
 	}
 
