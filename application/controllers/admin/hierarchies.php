@@ -39,6 +39,7 @@ Class Hierarchies extends Milk_Controller
 		$list = $this->hierarchies->get();
 		$this->view->set('hierarchies', $list);
 		$this->view->set('dropdown', $this->hierarchies->dropdown());
+		$this->view->set('tree', $this->hierarchies->get_tree());
 
 		$this->view->render_layout('hierarchies/list');
 	}

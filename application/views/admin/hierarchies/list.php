@@ -34,7 +34,7 @@ $this->load->helper('form');
 
 			<?php if (count($hierarchies)) { ?>
 
-
+<?php debug($tree); ?>
 
 			<?php
 			} else {
