@@ -131,7 +131,6 @@ Class Model_hierarchies extends CI_Model {
 			}
 			$nodes[$hierarchy->id_hierarchy] = array('id_parent' => $hierarchy->id_parent, 'value' => $hierarchy);
 		}
-
 		$tree = array();
 
 		foreach ($root as $r)
@@ -143,5 +142,21 @@ Class Model_hierarchies extends CI_Model {
 			$tree = $tree['children'];
 		}
 		return $tree;
+	}
+
+	/**
+	 * Converts a GET hierarchies string to an array
+	 * @param string $get_string
+	 * @return array
+	 */
+	public function parse_data($get_string)
+	{
+		$selected_hierarchies = array();
+		$data = explode('&', str_replace('hierarchies=&', '', $get_string));
+		foreach ($data as $item)
+		{
+			$selected_hierarchies[] = str_replace('selNodes=', '', $item);
+		}
+		return $selected_hierarchies;
 	}
 }

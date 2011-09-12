@@ -31,13 +31,15 @@ $this->load->helper('form');
 			<p>Lorem ipsum dolor sit amet
 			</p>
 
+			<?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
+
 			<form action="" method="POST" class="tree">
-			<div id="tree" name="selNodes"></div>
+				<input type="hidden" name="hierarchies" />
+				<div id="tree" name="selNodes"></div>
 
-			<?php echo form_submit('submit', _('Aggiorna'), 'class="submit mid"'); ?>
-			</form>
+				<?php echo form_submit('submit', _('Aggiorna'), 'class="submit mid"'); ?>
+				</form>
 
-			<?php debug($this->input->post()); ?>
 
 
 			<?php if (count($hierarchies)) { ?>
@@ -60,10 +62,9 @@ $this->load->helper('form');
 <?php
 echo form_open();
 
+echo form_hidden('new', '1');
 echo form_label(_('Hierarchy name'), 'name') . br(1);
 echo form_input(array('name' => 'name', 'class' => 'text')) . br(2);
-
-
 
 echo form_label(_('Parent hierarchy'), 'id_parent') . br(1);
 echo form_dropdown('id_parent', $dropdown, null, 'class="styled"') . br(1);
@@ -99,12 +100,20 @@ $(document).ready(function() {
     });
 
 	$("form.tree").submit(function() {
-	      // Serialize standard form fields:
+		// Serialize standard form fields:
 	      var formData = $(this).serializeArray();
 
 	      // then append Dynatree selected 'checkboxes':
 	      var tree = $("#tree").dynatree("getTree");
-	      alert(tree);
+	      formData = formData.concat(tree.serializeArray());
+
+	      // and/or add the active node as 'radio button':
+	      if(tree.getActiveNode()){
+	        formData.push({name: "activeNode", value: tree.getActiveNode().data.key});
+	      }
+
+	      $('input[name=hierarchies]').val(jQuery.param(formData));
+
 	});
 });
 </script>

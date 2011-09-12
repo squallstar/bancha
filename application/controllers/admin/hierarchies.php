@@ -36,6 +36,24 @@ Class Hierarchies extends Milk_Controller
 
 	public function index()
 	{
+
+		//New hierarchy added
+		if ($this->input->post('new'))
+		{
+			$name = $this->input->post('name');
+			$done = $this->hierarchies->add($name, $this->input->post('id_parent'));
+			if ($done)
+			{
+				$this->view->set('message', $this->lang->_trans('The hierarchy %n has been added.', array('n' => $name)));
+			}
+		}
+
+		//We delete this hierarchies
+		if ($data = $this->input->post('hierarchies'))
+		{
+			$elements = $this->hierarchies->parse_data($data);
+		}
+
 		$list = $this->hierarchies->get();
 		$this->view->set('hierarchies', $list);
 		$this->view->set('dropdown', $this->hierarchies->dropdown());
