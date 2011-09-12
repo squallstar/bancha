@@ -148,6 +148,14 @@ Class Milk_Loader extends CI_Loader {
 	}
 
 	/**
+	 * Loads the hierarchies model
+	 */
+	function hierarchies()
+	{
+		$this->model(FRNAME.'/model_hierarchies', 'hierarchies');
+	}
+
+	/**
 	 * Carica un modulo esterno
 	 * @param string $module_name
 	 */

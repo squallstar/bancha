@@ -246,6 +246,18 @@ Class Installer
 		$this->dbforge->add_field($record_categories_fields);
 		$this->dbforge->create_table('record_categories');
 
+		//Hierarchies table
+		$hierarchies_fields = array(
+		    'id_hierarchy'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
+		    'id_parent'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned' => TRUE),
+			'name'			=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 64)
+		);
+
+		$this->dbforge->drop_table('hierarchies');
+		$this->dbforge->add_field($hierarchies_fields);
+		$this->dbforge->add_key('id_hierarchy', TRUE);
+		$this->dbforge->create_table('hierarchies');
+
 		return TRUE;
 	}
 
