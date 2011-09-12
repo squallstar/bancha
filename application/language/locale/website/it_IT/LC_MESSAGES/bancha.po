@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-02 16:51+0100\n"
-"PO-Revision-Date: 2011-09-02 16:51+0100\n"
+"POT-Creation-Date: 2011-09-12 18:04+0100\n"
+"PO-Revision-Date: 2011-09-12 18:04+0100\n"
 "Last-Translator: Nicholas <nicholas@intesys.it>\n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -11,18 +11,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_trans\n"
 "X-Poedit-Basepath: ../../../../../../themes\n"
-"X-Poedit-Language: English\n"
-"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
 "X-Poedit-SearchPath-0: desktop\n"
 
 #: desktop/views/content_render.php:8
 msgid "You are here: "
-msgstr ""
+msgstr "Sei qui:"
 
-#: desktop/views/header.php:1
-#: desktop/views/layout.php:20
+#: desktop/views/header.php:3
+#: desktop/views/layout.php:26
 msgid "Website title"
-msgstr ""
+msgstr "Il mio sito internet"
 
 #~ msgid "ciao"
 #~ msgstr "Ciao"

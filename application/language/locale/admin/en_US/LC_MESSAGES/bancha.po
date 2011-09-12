@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-02 17:02+0100\n"
-"PO-Revision-Date: 2011-09-02 17:02+0100\n"
+"POT-Creation-Date: 2011-09-12 18:06+0100\n"
+"PO-Revision-Date: 2011-09-12 18:06+0100\n"
 "Last-Translator: Nicholas <nicholas@intesys.it>\n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -18,11 +18,6 @@ msgstr ""
 "X-Poedit-SearchPath-2: models\n"
 "X-Poedit-SearchPath-3: views/admin\n"
 
-#: controllers/website.php:133
-#: controllers/website.php:329
-msgid "Page not found"
-msgstr ""
-
 #: controllers/admin/ajax.php:92
 msgid "This content has no attachments."
 msgstr ""
@@ -31,47 +26,51 @@ msgstr ""
 msgid "Username/password wrong."
 msgstr ""
 
-#: controllers/admin/contents.php:343
+#: controllers/admin/contents.php:349
 msgid "First level"
 msgstr ""
 
-#: controllers/admin/contents.php:461
+#: controllers/admin/contents.php:467
 msgid "Please insert a name for this type."
 msgstr ""
 
-#: controllers/admin/contents.php:489
+#: controllers/admin/contents.php:495
 msgid "Cannot read the XML file."
 msgstr ""
 
-#: controllers/admin/contents.php:513
+#: controllers/admin/contents.php:519
 msgid "The category %n has been added."
 msgstr ""
 
-#: controllers/admin/contents.php:515
+#: controllers/admin/contents.php:521
 msgid "Cannot insert the category %n."
 msgstr ""
 
-#: controllers/admin/contents.php:518
+#: controllers/admin/contents.php:524
 msgid "A category named %n already exists."
 msgstr ""
 
-#: controllers/admin/contents.php:541
+#: controllers/admin/contents.php:547
 msgid "The category %n has been deleted."
 msgstr ""
 
-#: controllers/admin/contents.php:560
+#: controllers/admin/contents.php:566
 msgid "The cache has been cleared."
 msgstr ""
 
-#: controllers/admin/contents.php:602
+#: controllers/admin/contents.php:608
 msgid "The type named %n has been removed."
+msgstr ""
+
+#: controllers/admin/hierarchies.php:47
+msgid "The hierarchy %n has been added."
 msgstr ""
 
 #: controllers/admin/import.php:36
 msgid "Choose one..."
 msgstr ""
 
-#: controllers/admin/install.php:74
+#: controllers/admin/install.php:80
 msgid "%n has been installed!"
 msgstr ""
 
@@ -79,24 +78,108 @@ msgstr ""
 msgid "The module %m has no documentation or not exists."
 msgstr ""
 
-#: libraries/Bancha_Profiler.php:64
+#: libraries/Milk_Profiler.php:80
 msgid "Preview"
 msgstr ""
 
-#: libraries/Bancha_Profiler.php:66
+#: libraries/Milk_Profiler.php:82
 msgid "Back to admin"
 msgstr ""
 
-#: libraries/Bancha_Profiler.php:67
+#: libraries/Milk_Profiler.php:83
 msgid "Open profiler"
 msgstr ""
 
-#: libraries/milk/installer.php:300
+#: libraries/milk/content.php:109
+msgid "You cannot create a content type named [cache]."
+msgstr ""
+
+#: libraries/milk/content.php:109
+msgid "Name reserved"
+msgstr ""
+
+#: libraries/milk/content.php:116
+msgid "A content type named %n already exists"
+msgstr ""
+
+#: libraries/milk/content.php:117
+msgid "Cannot create that type"
+msgstr ""
+
+#: libraries/milk/content.php:128
+msgid "Cannot insert that content type."
+msgstr ""
+
+#: libraries/milk/content.php:128
+#: libraries/milk/content.php:174
+msgid "Error"
+msgstr ""
+
+#: libraries/milk/content.php:173
+msgid "Cannot delete the template view directory for the content type %n."
+msgstr ""
+
+#: libraries/milk/installer.php:318
 msgid "Default content type not defined"
 msgstr ""
 
-#: libraries/milk/xml.php:209
+#: libraries/milk/installer.php:431
+msgid "My first post"
+msgstr ""
+
+#: libraries/milk/installer.php:432
+#: libraries/milk/installer.php:458
+msgid "Hello world"
+msgstr ""
+
+#: libraries/milk/xml.php:83
+msgid "Type not set."
+msgstr ""
+
+#: libraries/milk/xml.php:190
+msgid "Primary key or table not defined for the content type %n."
+msgstr ""
+
+#: libraries/milk/xml.php:190
+#: libraries/milk/xml.php:273
+#: libraries/milk/xml.php:275
+#: libraries/milk/xml.php:286
+#: libraries/milk/xml.php:312
+#: libraries/milk/xml.php:317
+msgid "XML parser: Error"
+msgstr ""
+
+#: libraries/milk/xml.php:269
 msgid "Untitled"
+msgstr ""
+
+#: libraries/milk/xml.php:273
+msgid "One of the fieldsets of type %n does not have the node <name> (mandatory)."
+msgstr ""
+
+#: libraries/milk/xml.php:275
+msgid "The type %t has more than one fieldset named %n."
+msgstr ""
+
+#: libraries/milk/xml.php:286
+msgid "One of the fields of type %t does not have a name."
+msgstr ""
+
+#: libraries/milk/xml.php:312
+msgid "The field name %n is reserved (Type: %t) and needs to be changed!"
+msgstr ""
+
+#: libraries/milk/xml.php:317
+msgid "The value of the node named type (field: %n, type %t) does not exists. Allowed values are:"
+msgstr ""
+
+#: libraries/milk/dispatchers/dispatcher_default.php:102
+#: libraries/milk/dispatchers/dispatcher_default.php:310
+msgid "Page not found"
+msgstr ""
+
+#: models/milk/model_hierarchies.php:71
+msgid "You cannot create a hierarchy without a name."
 msgstr ""
 
 #: views/admin/auth/login.php:7
@@ -147,14 +230,14 @@ msgstr ""
 
 #: views/admin/content/documents_finder.php:24
 #: views/admin/content/record_edit.php:304
-#: views/admin/content/record_edit.php:337
+#: views/admin/content/record_edit.php:342
 msgid "Alternative text"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:30
 #: views/admin/content/documents_finder.php:31
-#: views/admin/content/record_edit.php:309
-#: views/admin/content/record_edit.php:310
+#: views/admin/content/record_edit.php:314
+#: views/admin/content/record_edit.php:315
 msgid "View"
 msgstr ""
 
@@ -165,7 +248,7 @@ msgid "Choose"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:34
-#: views/admin/content/record_edit.php:313
+#: views/admin/content/record_edit.php:318
 msgid "Delete image"
 msgstr ""
 
@@ -188,8 +271,7 @@ msgid "Back to list"
 msgstr ""
 
 #: views/admin/content/record_edit.php:41
-#: views/admin/content/record_edit.php:375
-#: views/admin/content/type_categories.php:8
+#: views/admin/content/record_edit.php:380
 msgid "Categories"
 msgstr ""
 
@@ -212,8 +294,6 @@ msgid "The address of this page is:"
 msgstr ""
 
 #: views/admin/content/record_edit.php:258
-#: views/admin/content/type_add.php:75
-#: views/admin/content/type_categories.php:74
 msgid "Add"
 msgstr ""
 
@@ -234,43 +314,40 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: views/admin/content/record_edit.php:330
-#: views/admin/content/record_edit.php:333
+#: views/admin/content/record_edit.php:335
+#: views/admin/content/record_edit.php:338
 msgid "You can attach up to %n files"
 msgstr ""
 
-#: views/admin/content/record_edit.php:332
+#: views/admin/content/record_edit.php:337
 msgid "File limit exceeded."
 msgstr ""
 
-#: views/admin/content/record_edit.php:337
+#: views/admin/content/record_edit.php:342
 msgid "File name"
 msgstr ""
 
-#: views/admin/content/record_edit.php:337
+#: views/admin/content/record_edit.php:342
 msgid "File type"
 msgstr ""
 
-#: views/admin/content/record_edit.php:343
+#: views/admin/content/record_edit.php:348
 msgid "Delete file"
 msgstr ""
 
-#: views/admin/content/record_edit.php:381
+#: views/admin/content/record_edit.php:386
 msgid "This content can be associated to these categories"
 msgstr ""
 
-#: views/admin/content/record_edit.php:398
+#: views/admin/content/record_edit.php:403
 msgid "This type has no categories"
 msgstr ""
 
 #: views/admin/content/record_list.php:13
-#: views/admin/content/type_list.php:7
 msgid "Pages"
 msgstr ""
 
 #: views/admin/content/record_list.php:13
-#: views/admin/content/type_edit_xml.php:20
-#: views/admin/content/type_list.php:7
 msgid "Contents"
 msgstr ""
 
@@ -283,7 +360,6 @@ msgid "Insert new page"
 msgstr ""
 
 #: views/admin/content/record_list.php:17
-#: views/admin/content/type_list.php:40
 msgid "Manage categories"
 msgstr ""
 
@@ -297,7 +373,7 @@ msgid "Draft"
 msgstr ""
 
 #: views/admin/content/record_list.php:57
-#: views/admin/content/record_list.php:137
+#: views/admin/content/record_list.php:140
 msgid "Published"
 msgstr ""
 
@@ -310,6 +386,10 @@ msgstr ""
 msgid "Apply filters"
 msgstr ""
 
+#: views/admin/content/record_list.php:137
+msgid "Programmed"
+msgstr ""
+
 #: views/admin/content/record_list.php:195
 msgid "Add child page"
 msgstr ""
@@ -320,7 +400,6 @@ msgstr ""
 
 #: views/admin/content/record_list.php:196
 #: views/admin/content/record_list.php:209
-#: views/admin/content/type_list.php:42
 msgid "Delete"
 msgstr ""
 
@@ -345,7 +424,6 @@ msgid "There are"
 msgstr ""
 
 #: views/admin/content/record_list.php:221
-#: views/admin/content/type_list.php:54
 msgid "add a new one"
 msgstr ""
 
@@ -354,6 +432,7 @@ msgid "There are no contents/pages for this type. To start, %a."
 msgstr ""
 
 #: views/admin/content/renewed.php:7
+#: views/admin/layout/header.php:78
 msgid "Clear cache"
 msgstr ""
 
@@ -378,6 +457,9 @@ msgstr ""
 #: views/admin/content/type_add.php:61
 #: views/admin/content/type_delete.php:30
 #: views/admin/content/type_edit_xml.php:22
+#: views/admin/import/records.php:22
+#: views/admin/import/records.php:45
+#: views/admin/installer/request.php:34
 msgid "WARNING"
 msgstr ""
 
@@ -567,8 +649,42 @@ msgstr ""
 msgid "%u logout."
 msgstr ""
 
+#: views/admin/hierarchies/list.php:10
+msgid "Manage hierarchies"
+msgstr ""
+
+#: views/admin/hierarchies/list.php:23
+#: views/admin/hierarchies/list.php:30
+msgid "Hierarchies list"
+msgstr ""
+
+#: views/admin/hierarchies/list.php:24
+#: views/admin/hierarchies/list.php:59
+msgid "Add hierarchy"
+msgstr ""
+
+#: views/admin/hierarchies/list.php:31
+msgid "Here you will find the inserted hierarchies."
+msgstr ""
+
+#: views/admin/hierarchies/list.php:39
+msgid "Delete selected"
+msgstr ""
+
+#: views/admin/hierarchies/list.php:50
+msgid "There are no hierarchies."
+msgstr ""
+
+#: views/admin/hierarchies/list.php:65
+msgid "Hierarchy name"
+msgstr ""
+
+#: views/admin/hierarchies/list.php:68
+msgid "Parent hierarchy"
+msgstr ""
+
 #: views/admin/import/records.php:7
-#: views/admin/layout/header.php:76
+#: views/admin/layout/header.php:77
 msgid "Import/export data"
 msgstr ""
 
@@ -625,7 +741,23 @@ msgstr ""
 msgid "Enable event logging"
 msgstr ""
 
+#: views/admin/installer/request.php:26
+msgid "Install type"
+msgstr ""
+
 #: views/admin/installer/request.php:28
+msgid "Default"
+msgstr ""
+
+#: views/admin/installer/request.php:29
+msgid "Blog"
+msgstr ""
+
+#: views/admin/installer/request.php:34
+msgid "Bancha is already installed on this database!"
+msgstr ""
+
+#: views/admin/installer/request.php:37
 msgid "Install"
 msgstr ""
 
@@ -638,24 +770,18 @@ msgid "Dashboard"
 msgstr ""
 
 #: views/admin/layout/header.php:60
-#: views/admin/users/list.php:22
 msgid "Users"
 msgstr ""
 
 #: views/admin/layout/header.php:62
-#: views/admin/users/list.php:15
 msgid "Add new user"
 msgstr ""
 
 #: views/admin/layout/header.php:63
-#: views/admin/users/list.php:12
 msgid "Users list"
 msgstr ""
 
 #: views/admin/layout/header.php:64
-#: views/admin/users/list.php:16
-#: views/admin/users/groups/list.php:12
-#: views/admin/users/groups/list.php:22
 msgid "Groups and permissions"
 msgstr ""
 
@@ -668,11 +794,14 @@ msgid "Manage"
 msgstr ""
 
 #: views/admin/layout/header.php:74
-#: views/admin/modules/list.php:21
 msgid "Documentation"
 msgstr ""
 
-#: views/admin/layout/header.php:83
+#: views/admin/layout/header.php:76
+msgid "Hierarchies"
+msgstr ""
+
+#: views/admin/layout/header.php:84
 msgid "Logout"
 msgstr ""
 
@@ -684,7 +813,11 @@ msgstr ""
 msgid "Installed modules"
 msgstr ""
 
-#: views/admin/modules/list.php:37
+#: views/admin/modules/list.php:16
+msgid "This are the currently installed modules. To install a module, just place it in the application/modules folder."
+msgstr ""
+
+#: views/admin/modules/list.php:39
 msgid "There are no modules installed."
 msgstr ""
 

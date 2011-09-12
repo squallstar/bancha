@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-12 13:47+0100\n"
-"PO-Revision-Date: 2011-09-12 13:48+0100\n"
+"POT-Creation-Date: 2011-09-12 18:05+0100\n"
+"PO-Revision-Date: 2011-09-12 18:05+0100\n"
 "Last-Translator: Nicholas <nicholas@intesys.it>\n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -62,6 +62,10 @@ msgstr "La cache è stata ricreata correttamente."
 msgid "The type named %n has been removed."
 msgstr "Il tipo %n è stato rimosso."
 
+#: controllers/admin/hierarchies.php:47
+msgid "The hierarchy %n has been added."
+msgstr "La gerarchia %n è stata aggiunta."
+
 #: controllers/admin/import.php:36
 msgid "Choose one..."
 msgstr "Seleziona uno..."
@@ -74,15 +78,15 @@ msgstr "%n è stato correttamente installato!"
 msgid "The module %m has no documentation or not exists."
 msgstr "Il modulo %n non contiene alcuna documentazione."
 
-#: libraries/Bancha_Profiler.php:80
+#: libraries/Milk_Profiler.php:80
 msgid "Preview"
 msgstr "Anteprima"
 
-#: libraries/Bancha_Profiler.php:82
+#: libraries/Milk_Profiler.php:82
 msgid "Back to admin"
 msgstr "Torna all'amministrazione"
 
-#: libraries/Bancha_Profiler.php:83
+#: libraries/Milk_Profiler.php:83
 msgid "Open profiler"
 msgstr "Apri profiler"
 
@@ -115,16 +119,16 @@ msgstr "Errore"
 msgid "Cannot delete the template view directory for the content type %n."
 msgstr "Impossibile eliminare la directory delle view di template per il tipo di contenuto %n."
 
-#: libraries/milk/installer.php:317
+#: libraries/milk/installer.php:318
 msgid "Default content type not defined"
 msgstr "Tipo predefinito non definito."
 
-#: libraries/milk/installer.php:430
+#: libraries/milk/installer.php:431
 msgid "My first post"
 msgstr "Il mio primo post"
 
-#: libraries/milk/installer.php:431
-#: libraries/milk/installer.php:457
+#: libraries/milk/installer.php:432
+#: libraries/milk/installer.php:458
 msgid "Hello world"
 msgstr "Ciao mondo"
 
@@ -174,7 +178,7 @@ msgstr "Il valore inserito nel nodo type del campo %n di tipo %t non è ammesso.
 msgid "Page not found"
 msgstr "Pagina non trovata"
 
-#: models/milk/model_hierarchies.php:44
+#: models/milk/model_hierarchies.php:71
 msgid "You cannot create a hierarchy without a name."
 msgstr "Non puoi creare una gerarchia senza nome."
 
@@ -428,6 +432,7 @@ msgid "There are no contents/pages for this type. To start, %a."
 msgstr "Non ci sono contenuti/pagine inserite per questo tipo. Per iniziare, %a."
 
 #: views/admin/content/renewed.php:7
+#: views/admin/layout/header.php:78
 msgid "Clear cache"
 msgstr "Svuota cache"
 
@@ -566,7 +571,6 @@ msgid "Save scheme"
 msgstr "Salva schema"
 
 #: views/admin/content/type_list.php:24
-#: views/admin/modules/list.php:22
 msgid "Name"
 msgstr "Nome"
 
@@ -655,15 +659,27 @@ msgid "Hierarchies list"
 msgstr "Lista gerarchie"
 
 #: views/admin/hierarchies/list.php:24
-#: views/admin/hierarchies/list.php:39
+#: views/admin/hierarchies/list.php:59
 msgid "Add hierarchy"
 msgstr "Aggiungi gerarchia"
 
-#: views/admin/hierarchies/list.php:44
+#: views/admin/hierarchies/list.php:31
+msgid "Here you will find the inserted hierarchies."
+msgstr "Qui trovi tutte le gerarchie inserite."
+
+#: views/admin/hierarchies/list.php:39
+msgid "Delete selected"
+msgstr "Elimina selezionati"
+
+#: views/admin/hierarchies/list.php:50
+msgid "There are no hierarchies."
+msgstr "Non ci sono gerarchie."
+
+#: views/admin/hierarchies/list.php:65
 msgid "Hierarchy name"
 msgstr "Nome della gerarchia"
 
-#: views/admin/hierarchies/list.php:49
+#: views/admin/hierarchies/list.php:68
 msgid "Parent hierarchy"
 msgstr "Gerarchia padre"
 
@@ -778,7 +794,6 @@ msgid "Manage"
 msgstr "Gestione"
 
 #: views/admin/layout/header.php:74
-#: views/admin/modules/list.php:23
 msgid "Documentation"
 msgstr "Documentazione"
 
