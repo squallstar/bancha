@@ -79,4 +79,84 @@ Class Model_hierarchies extends CI_Model {
   		}
   		return $this->db->insert($this->table, $data);
   	}
+
+	/**
+	 * Recursive function to create a tree of the hierarchies
+	 * @param int $id
+	 * @param array $nodes
+	 * @param array $sons
+	 * @param string $link
+	 * @param string $arr
+	 */
+	private function _hierarchymap($id, &$nodes, &$sons, $link='/', &$arr)
+	{
+		$hierarchy = $nodes[$id]['value'];
+
+		$tmp = array(
+			'title' 		=> $hierarchy->name,
+			'id_parent' 	=> $hierarchy->id_parent ? $hierarchy->id_parent : '',
+			'key'			=> $hierarchy->id_hierarchy,
+			'select'		=> FALSE
+		);
+		$arr['children'][] = & $tmp;
+
+		if(isset($sons[$id]))
+		{
+			foreach($sons[$id] as $son)
+			{
+				$this->_hierarchymap($son, $nodes, $sons, $link, $tmp);
+			}
+		}
+	}
+
+	/**
+	 * Returns the tree of hierarchies
+	 * @return array
+	 */
+	public function get_tree()
+	{
+		$this->get();
+
+		$sons = array();
+		$nodes = array();
+		$root = array();
+
+		foreach($this->list as $hierarchy)
+		{
+			if(!$hierarchy->id_parent || $hierarchy->id_parent === null)
+			{
+				$root[] = $hierarchy->id_hierarchy;
+			}else{
+				$sons[$hierarchy->id_parent][] = $hierarchy->id_hierarchy;
+			}
+			$nodes[$hierarchy->id_hierarchy] = array('id_parent' => $hierarchy->id_parent, 'value' => $hierarchy);
+		}
+		$tree = array();
+
+		foreach ($root as $r)
+		{
+			$this->_hierarchymap($r, $nodes, $sons, '', $tree);
+		}
+		if (isset($tree['children']))
+		{
+			$tree = $tree['children'];
+		}
+		return $tree;
+	}
+
+	/**
+	 * Converts a GET hierarchies string to an array
+	 * @param string $get_string
+	 * @return array
+	 */
+	public function parse_data($get_string)
+	{
+		$selected_hierarchies = array();
+		$data = explode('&', str_replace('hierarchies=&', '', $get_string));
+		foreach ($data as $item)
+		{
+			$selected_hierarchies[] = str_replace('selNodes=', '', $item);
+		}
+		return $selected_hierarchies;
+	}
 }
