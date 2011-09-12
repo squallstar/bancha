@@ -22,12 +22,12 @@ Class Bancha_Loader extends CI_Loader {
 	/**
 	 * Funzione che precarica ciò che serve normalmente in Bancha
 	 */
-	function milk()
+	function bancha()
 	{
 		//Librerie standard
 		$this->library(
 			array(
-				'milk/content', 'milk/xml', 'milk/view'
+				FRNAME . '/content', FRNAME . '/xml', FRNAME . '/view'
 			)
 		);
 

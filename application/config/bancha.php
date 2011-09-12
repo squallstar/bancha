@@ -195,7 +195,7 @@ $config['default_tree_types'] = array('Menu');
  * Imposta se eliminare i record quando perdono la referenza al tipo di contenuto.
  * (prevalentemente quando viene eliminato un tipo di contenuto).
  */
-$config['delete_dead_records'] = TRUE;
+$config['delete_dead_records'] = FALSE;
 
 /*
  * RECORD COLUMNS

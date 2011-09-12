@@ -37,7 +37,7 @@
 				<li>Permette di gestire qualsiasi tipo di contenuto (pagine, news, gallerie fotografiche, prodotti, etc...) attraverso schemi XML.</li>
 				<li>Non sacrifica le prestazioni di un sito statico, perch&egrave; utilizza svariati sistemi di caching interno.</li>
 				<li>&Egrave; modulare, ovvero pu&ograve; essere esteso con diverse tipologie di moduli che potrai sviluppare tu stesso.</li>
-				<li>&Egrave; open-source (puoi scaricarlo direttamente da <a href="https://github.com/squallstar/milk" target="_blank">qui</a>).</li>
+				<li>&Egrave; open-source (puoi scaricarlo direttamente da <a href="https://getbancha.com" target="_blank">qui</a>).</li>
 				<li>&Egrave; facile da installare e da mantenere. Non necessita di infrastrutture particolari e/o avanzate.</li>
 				<li>Separa in maniera netta l'applicazioni dai temi e permette quindi la portabilit&agrave; di quest'ultimi</li>
 				<li>Utilizza un sistema ORM per gestire gli oggetti del database</li>
@@ -321,7 +321,7 @@ Anche i tipi di contenuto semplici (non strutturabili ad albero) presentano dell
 		<div class="sidebar_content" id="sb-views">
 			<h3>7. View e rendering</h3>
 			<p>NOTA: il front-end del sito, pu&ograve; utilizzare pi&ugrave; temi per differenziare ad esempio il sito <strong>desktop</strong> dalla versone <strong>mobile</strong>.
-Tale configurazione &egrave; disponibile nel file di configurazione di milk alla voce "WEBSITE THEMES", e si riferiscono al nome della directory
+Tale configurazione &egrave; disponibile nel file di configurazione di Bancha alla voce "WEBSITE THEMES", e si riferiscono al nome della directory
 presente nella directory <?php echo THEMESPATH; ?>. Per default, la skin utilizzata &egrave; la "desktop", e nel caso sia presente la skin mobile
 verr&agrave; effettuato lo switch in automatico nel caso che il sito venga visitato da un device mobile.</p>
 			<p>Bancha utilizza la classe <strong>View</strong> per settare degli oggetti nelle viste e renderizzarle.<br />

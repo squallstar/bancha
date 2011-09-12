@@ -26,7 +26,7 @@ Class Bancha_Controller extends CI_Controller
 		$this->lang->check($section == 'admin' ? 'admin' : 'website');
 
 		//Loads the framework :)
-		$this->load->milk();
+		$this->load->bancha();
 
 	}
 

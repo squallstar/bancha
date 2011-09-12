@@ -130,7 +130,7 @@ Class Sharer_Module extends Bancha_Module
 
   /**
    * Renders the sharing button
-   * @see application/libraries/milk/Bancha_Module::render()
+   * @see application/libraries/bancha/Bancha_Module::render()
    * @return xhtml
    */
   public function render()

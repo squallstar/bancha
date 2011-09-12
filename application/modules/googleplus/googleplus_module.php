@@ -19,7 +19,7 @@ Class Googleplus_Module extends Bancha_Module
 	/**
 	 * Renders the Gplus Module
 	 * @return xhtml
-	 * @see application/libraries/milk/Bancha_Module::render()
+	 * @see application/libraries/bancha/Bancha_Module::render()
 	 */
 	public function render()
 	{
