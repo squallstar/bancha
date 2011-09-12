@@ -1,10 +1,10 @@
 <?php
 /**
- * Milk_Exceptions
+ * Bancha_Exceptions
  *
  * Estensione della libreria nativa delle eccezioni
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -12,7 +12,7 @@
  *
  */
 
-class Milk_Exceptions extends CI_Exceptions {
+class Bancha_Exceptions extends CI_Exceptions {
 
 	/**
 	 * Constructor

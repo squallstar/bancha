@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Milk\n"
+"Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-12 13:47+0100\n"
 "PO-Revision-Date: 2011-09-12 13:48+0100\n"
@@ -74,15 +74,15 @@ msgstr "%n è stato correttamente installato!"
 msgid "The module %m has no documentation or not exists."
 msgstr "Il modulo %n non contiene alcuna documentazione."
 
-#: libraries/Milk_Profiler.php:80
+#: libraries/Bancha_Profiler.php:80
 msgid "Preview"
 msgstr "Anteprima"
 
-#: libraries/Milk_Profiler.php:82
+#: libraries/Bancha_Profiler.php:82
 msgid "Back to admin"
 msgstr "Torna all'amministrazione"
 
-#: libraries/Milk_Profiler.php:83
+#: libraries/Bancha_Profiler.php:83
 msgid "Open profiler"
 msgstr "Apri profiler"
 
@@ -738,8 +738,8 @@ msgid "Blog"
 msgstr "Blog"
 
 #: views/admin/installer/request.php:34
-msgid "Milk is already installed on this database!"
-msgstr "Milk è già installato su questo database!"
+msgid "Bancha is already installed on this database!"
+msgstr "Bancha è già installato su questo database!"
 
 #: views/admin/installer/request.php:37
 msgid "Install"

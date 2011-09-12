@@ -4,7 +4,7 @@
  *
  * This library manage the content types of the website and lets you read and rebuild them.
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -149,7 +149,7 @@ Class Content {
 		          'id'			=> $type_id,
 		          'name'		=> $type_name,
 		          'description'	=> $type_description,
-		          'version'		=> MILK_VERSION
+		          'version'		=> BANCHA_VERSION
 		),TRUE);
 
 

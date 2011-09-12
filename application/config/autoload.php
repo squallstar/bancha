@@ -83,7 +83,7 @@ $autoload['helper'] = array('html', 'url');
 |
 */
 
-$autoload['config'] = array('milk');
+$autoload['config'] = array('bancha');
 
 
 /*

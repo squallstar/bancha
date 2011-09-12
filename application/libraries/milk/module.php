@@ -4,7 +4,7 @@
  *
  * Libreria per gestire un modulo
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -14,7 +14,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-abstract class Milk_Module
+abstract class Bancha_Module
 {
 	/**
 	 * @var mixed Reference alla View Library

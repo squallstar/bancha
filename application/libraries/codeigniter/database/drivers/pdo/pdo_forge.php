@@ -2,7 +2,7 @@
 
 /**
  * PDO Forge Class
- * Milk Cms + CodeIgniter
+ * Bancha Cms + CodeIgniter
  *
  * @category	Database
  * @author		Nicholas Valbusa - Squallstar.it - info@squallstar.it

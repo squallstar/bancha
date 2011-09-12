@@ -4,7 +4,7 @@
  *
  * Website base rendering layout
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Matteo Gildone - @dombender
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)

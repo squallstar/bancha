@@ -1,10 +1,10 @@
 <?php
 /**
- * Milk_Loader
+ * Bancha_Loader
  *
  * Classe per il caricamento di altre classi
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -12,7 +12,7 @@
  *
  */
 
-Class Milk_Loader extends CI_Loader {
+Class Bancha_Loader extends CI_Loader {
 
 	/**
 	 * @var array Elenco dei moduli caricati
@@ -20,7 +20,7 @@ Class Milk_Loader extends CI_Loader {
 	private $_loaded_modules = array();
 
 	/**
-	 * Funzione che precarica ciò che serve normalmente in Milk
+	 * Funzione che precarica ciò che serve normalmente in Bancha
 	 */
 	function milk()
 	{
@@ -55,7 +55,7 @@ Class Milk_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica un model del framework di Milk
+	 * Carica un model del framework di Bancha
 	 * @param string $model
 	 * @param string $name
 	 * @param bool $db_conn
@@ -66,7 +66,7 @@ Class Milk_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica una libreria dal framework di Milk
+	 * Carica una libreria dal framework di Bancha
 	 * @param string $library
 	 * @param string $name
 	 */

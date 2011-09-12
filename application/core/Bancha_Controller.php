@@ -1,10 +1,10 @@
 <?php
 /**
- * Milk_Controller
+ * Bancha_Controller
  *
  * Controller ereditato da tutti gli altri controllers
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -12,7 +12,7 @@
  *
  */
 
-Class Milk_Controller extends CI_Controller
+Class Bancha_Controller extends CI_Controller
 {
 	public function __construct()
 	{

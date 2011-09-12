@@ -4,7 +4,7 @@
  *
  * File collettore delle richieste
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -54,7 +54,7 @@ if (defined('ENVIRONMENT'))
  * Will be used around the framework for the directory paths
  *
  */
-	define('FRNAME', 'milk');
+	define('FRNAME', 'bancha');
 
 /*
  *---------------------------------------------------------------

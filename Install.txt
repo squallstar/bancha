@@ -1,5 +1,5 @@
 **************************************
-* @package		Milk
+* @package		Bancha
 * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
 * @copyright	Copyright (C) 2011, Squallstar
 * @license		GNU/GPL (General Public License)
@@ -8,7 +8,7 @@
 
 **************************************
 
-HOW TO INSTALL MILK
+HOW TO INSTALL BANCHA
 
  1. Before all, sets your current environment in the /index.php file
     The default environment is "sqlite" (to use the Sqlite Database)
@@ -30,7 +30,7 @@ HOW TO INSTALL MILK
 
 **************************************
 
-MILK DOCUMENTATION
+BANCHA DOCUMENTATION
  - Just go to the "Documentation" page of the administration under the "Manage" section
 
 **************************************

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Milk\n"
+"Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-02 17:02+0100\n"
 "PO-Revision-Date: 2011-09-02 17:02+0100\n"
@@ -79,15 +79,15 @@ msgstr ""
 msgid "The module %m has no documentation or not exists."
 msgstr ""
 
-#: libraries/Milk_Profiler.php:64
+#: libraries/Bancha_Profiler.php:64
 msgid "Preview"
 msgstr ""
 
-#: libraries/Milk_Profiler.php:66
+#: libraries/Bancha_Profiler.php:66
 msgid "Back to admin"
 msgstr ""
 
-#: libraries/Milk_Profiler.php:67
+#: libraries/Bancha_Profiler.php:67
 msgid "Open profiler"
 msgstr ""
 

@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * Milk Framework
+ * Bancha Framework
  * Riga 313: modificato comportamento like
  */
 

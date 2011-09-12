@@ -6,7 +6,7 @@ if ( ! defined('CUSTOM_ACTION')) exit('This controller should be called only fro
  *
  * Controller per le azioni custom del front-end del sito internet
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)

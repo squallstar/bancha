@@ -4,7 +4,7 @@
  *
  * This library let you install the CMS
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -480,7 +480,7 @@ Class Installer
 		//We parse the file with some pseudovariables
 		$xml = $this->CI->parser->parse_string($xml, array(
 		          'id'			=> $type_id,
-		          'version'		=> MILK_VERSION
+		          'version'		=> BANCHA_VERSION
 		),TRUE);
 
 		$storage_path = $this->CI->config->item('xml_folder').$type_name.'.xml';

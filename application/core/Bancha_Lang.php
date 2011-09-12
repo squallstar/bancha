@@ -1,6 +1,6 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Milk_Lang extends CI_Lang {
+class Bancha_Lang extends CI_Lang {
 
 	private $_CI;
 
@@ -15,7 +15,7 @@ class Milk_Lang extends CI_Lang {
     }
 
 	/**
-     * Loads the languages from the Milk config file
+     * Loads the languages from the Bancha config file
      */
     private function _load_languages() {
         $this->languages = $this->_CI->config->item('languages');

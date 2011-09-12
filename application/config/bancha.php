@@ -1,10 +1,10 @@
 <?php
 /**
- * Milk configuration
+ * Bancha configuration
  *
  * Configurazione generica del framework
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -33,15 +33,15 @@ $config['languages'] = array(
 );
 
 /*
- * MILK CMS VERSION
+ * BANCHA CMS VERSION
  * Versione del framework
  */
-define('MILK_VERSION', '0.6.6');
+define('BANCHA_VERSION', '0.6.6');
 
 /*
  * NOME DEL CMS
  */
-define('CMS', 'MILK');
+define('CMS', 'BANCHA');
 
 /*
  * WEBSITE THEMES
@@ -60,7 +60,7 @@ $config['website_themes'] = array(
 $config['records_per_page'] = 10;
 
 /* FRAMEWORK PATH
- * Costante di definizione del path delle librerie di Milk
+ * Costante di definizione del path delle librerie di Bancha
  */
 define('FRPATH', APPPATH . 'libraries' . DIRECTORY_SEPARATOR . FRNAME . DIRECTORY_SEPARATOR);
 
@@ -95,7 +95,7 @@ $config['tree_cache_folder'] = $config['fr_cache_folder'] . '{name}.tree';
 
 /*
  * TEMPLATES DIRECTORY
- * Directory che contiene i template di default di Milk. Vengono usati come base per
+ * Directory che contiene i template di default di Bancha. Vengono usati come base per
  * quelli creati da zero.
  */
 $config['templates_folder'] = FRPATH . 'templates' . DIRECTORY_SEPARATOR;
@@ -164,7 +164,7 @@ $config['default_view_template'] = 'default';
 /*
  * VIEW TEMPLATES TO COPY
  * Nomi dei template .php da copiare nelle views alla creazione di un tipo
- * Tali files devono trovarsi nella directory type_templates delle librerie di Milk
+ * Tali files devono trovarsi nella directory type_templates delle librerie di Bancha
  */
 $config['view_templates_to_copy'] = array('detail', 'list');
 

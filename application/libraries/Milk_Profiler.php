@@ -1,11 +1,11 @@
 <?php
 /**
- * Milk Profiler
+ * Bancha Profiler
  *
  * Estensione del profiler di Code Igniter
  * E' stata aggiunta la sezione "render" ed una nuova grafica
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -15,7 +15,7 @@
 
 if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Milk_Profiler extends CI_Profiler {
+class Bancha_Profiler extends CI_Profiler {
 
 	/**
 	 * @var array Sezioni da stampare
@@ -79,7 +79,7 @@ class Milk_Profiler extends CI_Profiler {
 			'<script type="text/javascript" src="'.site_url(THEMESPATH . 'admin/js/profiler.js').'"></script>'.
 			'<a id="milk_profiler_preview" onclick="_show_profiler();" href="#">'._('Preview').'</a>'.
 			'<div id="milk_profiler"><div id="milk_profiler_content">'.
-			'MILK&nbsp; &nbsp; <a href="'.admin_url().'">'._('Back to admin').'</a> - '.
+			'BANCHA&nbsp; &nbsp; <a href="'.admin_url().'">'._('Back to admin').'</a> - '.
 			'<a href="#" onclick="_show_ciprofiler();">'._('Open profiler').'</a>'
 			.'<div id="milk_profiler_ci">'
 		;

@@ -4,7 +4,7 @@
  *
  * This library generates the feeds
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -52,7 +52,7 @@ Class Feed
 			'link'			=> current_url(),
 			'last_update'	=> date(DATE_RFC822),
 			'lang'			=> $this->CI->lang->current_language,
-			'generator'		=> CMS . ' ' . MILK_VERSION
+			'generator'		=> CMS . ' ' . BANCHA_VERSION
 		);
 	}
 
