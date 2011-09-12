@@ -1,8 +1,8 @@
 <?php
 /**
- * Index Collector
+ * Bancha Requests Collector (Index)
  *
- * File collettore delle richieste
+ * All the requests pass here!
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -14,13 +14,12 @@
 
 /*
  *---------------------------------------------------------------
- * APPLICATION ENVIRONMENT
+ * BANCHA APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
  *
- *	   sqlite		: da utilizzare con DB sqlite
- *     development	: default
- *     testing
- *     production
+ *	   sqlite		: will use the sqlite internal database	(application/config/sqlite/database.php)
+ *     development	: the default one						(application/config/database.php)
+ *     production	: errors will not be displayed
  *
  */
 	define('ENVIRONMENT', 'sqlite');
@@ -42,7 +41,7 @@ if (defined('ENVIRONMENT'))
 		break;
 
 		default:
-			exit('The application environment is not set correctly.');
+			exit('Bencha application environment is not set correctly.');
 	}
 }
 
@@ -93,25 +92,6 @@ if (defined('ENVIRONMENT'))
  *
  */
 	$themes_folder = 'themes';
-
-
-/*
- * -------------------------------------------------------------------
- *  CUSTOM CONFIG VALUES
- * -------------------------------------------------------------------
- *
- * The $assign_to_config array below will be passed dynamically to the
- * config class when initialized. This allows you to set custom config
- * items or override any default config values found in the config.php file.
- * This can be handy as it permits you to share one application between
- * multiple front controller files, with each file containing different
- * config values.
- *
- * Un-comment the $assign_to_config array below to use this feature
- *
- */
-	// $assign_to_config['name_of_config_item'] = 'value of config item';
-
 
 
 // --------------------------------------------------------------------
@@ -203,7 +183,6 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
-require_once BASEPATH.'core/CodeIgniter'.EXT;
+require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */
-/* Location: ./index.php */
