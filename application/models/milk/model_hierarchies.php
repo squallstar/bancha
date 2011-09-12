@@ -96,7 +96,7 @@ Class Model_hierarchies extends CI_Model {
 			'title' 		=> $hierarchy->name,
 			'id_parent' 	=> $hierarchy->id_parent ? $hierarchy->id_parent : '',
 			'key'			=> $hierarchy->id_hierarchy,
-			'select'		=> TRUE
+			'select'		=> FALSE
 		);
 		$arr['children'][] = & $tmp;
 
