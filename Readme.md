@@ -1,4 +1,4 @@
-# MILK CMS
+# BANCHA CMS
 
 MILK is a Content Management System made with PHP5 and Code Igniter, a light and powerful PHP framework.
 It is capable to manage medium and big projects/websites specially when they have many different types of contents.
