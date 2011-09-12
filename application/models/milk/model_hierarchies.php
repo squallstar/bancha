@@ -92,22 +92,26 @@ Class Model_hierarchies extends CI_Model {
 	{
 		$hierarchy = $nodes[$id]['value'];
 
-		$arr['sons'][$id] = array(
-			'name' => $hierarchy->name,
-			'id_parent' => $hierarchy->id_parent ? $hierarchy->id_parent : '',
+		$tmp = array(
+			'title' 		=> $hierarchy->name,
+			'id_parent' 	=> $hierarchy->id_parent ? $hierarchy->id_parent : '',
+			'key'			=> $hierarchy->id_hierarchy,
+			'select'		=> TRUE
 		);
+		$arr['children'][] = & $tmp;
 
 		if(isset($sons[$id]))
 		{
 			foreach($sons[$id] as $son)
 			{
-				$this->_hierarchymap($son, $nodes, $sons, $link, $arr['sons'][$id]);
+				$this->_hierarchymap($son, $nodes, $sons, $link, $tmp);
 			}
 		}
 	}
 
 	/**
 	 * Returns the tree of hierarchies
+	 * @return array
 	 */
 	public function get_tree()
 	{
@@ -134,9 +138,9 @@ Class Model_hierarchies extends CI_Model {
 		{
 			$this->_hierarchymap($r, $nodes, $sons, '', $tree);
 		}
-		if (isset($tree['sons']))
+		if (isset($tree['children']))
 		{
-			$tree = $tree['sons'];
+			$tree = $tree['children'];
 		}
 		return $tree;
 	}

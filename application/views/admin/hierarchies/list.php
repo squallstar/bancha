@@ -31,10 +31,18 @@ $this->load->helper('form');
 			<p>Lorem ipsum dolor sit amet
 			</p>
 
+			<form action="" method="POST" class="tree">
+			<div id="tree" name="selNodes"></div>
+
+			<?php echo form_submit('submit', _('Aggiorna'), 'class="submit mid"'); ?>
+			</form>
+
+			<?php debug($this->input->post()); ?>
+
 
 			<?php if (count($hierarchies)) { ?>
 
-<?php debug($tree); ?>
+
 
 			<?php
 			} else {
@@ -73,3 +81,30 @@ echo form_close();
 	<div class="bendr"></div>
 
 </div>
+
+<link type="text/css" rel="stylesheet" href="<?php echo site_url(THEMESPATH.'admin/css/dynatree.css'); ?>" />
+<script type="text/javascript" src="<?php echo site_url(THEMESPATH.'admin/js/jquery-ui.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo site_url(THEMESPATH.'admin/js/jquery.dynatree.min.js'); ?>"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#tree").dynatree({
+    	onActivate: function(node) {
+        	// A DynaTreeNode object is passed to the activation handler
+        	// Note: we also get this event, if persistence is on, and the page is reloaded.
+        	alert("You activated " + node.data.title);
+      	},
+      	checkbox: true,
+        selectMode: 3,
+      	children: <?php echo json_encode($tree); ?>
+    });
+
+	$("form.tree").submit(function() {
+	      // Serialize standard form fields:
+	      var formData = $(this).serializeArray();
+
+	      // then append Dynatree selected 'checkboxes':
+	      var tree = $("#tree").dynatree("getTree");
+	      alert(tree);
+	});
+});
+</script>
