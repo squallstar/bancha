@@ -28,16 +28,15 @@ $this->load->helper('form');
 
 		<div class="sidebar_content" id="list">
 			<h3><?php echo _('Hierarchies list'); ?></h3>
-			<p>Lorem ipsum dolor sit amet
-			</p>
+			<p><?php echo _('Here you will find the inserted hierarchies.'); ?></p>
 
 			<?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
 
 			<form action="" method="POST" class="tree">
 				<input type="hidden" name="hierarchies" />
 				<div id="tree" name="selNodes"></div>
-
-				<?php echo form_submit('submit', _('Aggiorna'), 'class="submit mid"'); ?>
+				<br />
+				<?php echo form_submit('submit', _('Delete selected'), 'class="submit long"'); ?>
 				</form>
 
 
@@ -90,9 +89,6 @@ echo form_close();
 $(document).ready(function() {
 	$("#tree").dynatree({
     	onActivate: function(node) {
-        	// A DynaTreeNode object is passed to the activation handler
-        	// Note: we also get this event, if persistence is on, and the page is reloaded.
-        	alert("You activated " + node.data.title);
       	},
       	checkbox: true,
         selectMode: 3,
