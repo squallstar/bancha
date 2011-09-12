@@ -300,11 +300,16 @@ foreach ($tipo['fieldsets'] as $fieldset)
 					echo '<div class="hidden limit">'.br(1).form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n images', array('n' => $field['max'])).')</div>';
 				}
 				if ($count && is_array($field_value)) {
-					echo '<table cellpadding="0" cellspacing="0" width="100%" class="sortable">'
+					echo '<table cellpadding="0" cellspacing="0" width="100%" class="sortable cursor">'
 						.'<thead><tr><th>'._('Preview').'</th><th>'._('Original').'</th><th>'._('Resized').'</th><th>'._('Alternative text').'</th><th>'._('Order').'</th><th></th></tr></thead><tbody>';
 					;
 					foreach ($field_value as $image) {
-						$src = $image->thumb_path ? $image->thumb_path : $image->path;
+						if (array_key_exists('thumbnail', $field['presets']))
+						{
+							$src = 'cache/' . $tipo['name'] . '/' . $field_name . '/' . $record->id . '/' . $field['presets']['thumbnail'] . '/' . $image->name;
+						} else {
+							$src = $image->thumb_path ? $image->thumb_path : $image->path;
+						}
 						echo '<tr><td><img src="'. attach_url($src) . '" alt="" border="0" /></td>'
 							.'<td><a target="_blank" href="'. attach_url($image->path) . '">'._('View').'</a><br />'.$image->width.' x '.$image->height.' px<br />'.$image->size.' Kb</td>'
 							.'<td>'.($image->resized_path ? '<a target="_blank" href="'. attach_url($image->resized_path) . '">'._('View').'</a>':'').'</td>'
@@ -333,7 +338,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 					echo '<div class="hidden limit">'.br(1).form_upload($attributes).br(1).'('._trans('You can attach up to %n files', array('n' => $field['max'])).')</div>';
 				}
 				if ($count && is_array($field_value)) {
-					echo '<table cellpadding="0" cellspacing="0" width="100%" class="sortable">'
+					echo '<table cellpadding="0" cellspacing="0" width="100%" class="sortable cursor">'
 						.'<thead><tr><th>'._('File name').'</th><th>'._('File type').'</th><th>'._('Alternative text').'</th><th></th></tr></thead><tbody>';
 					;
 					foreach ($field_value as $file) {

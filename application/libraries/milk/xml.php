@@ -15,7 +15,7 @@
 Class Xml
 {
 	/**
-	 * @var mixed CodeiIgniter instance
+	 * @var mixed Code Igniter instance
 	 */
   	private $CI;
 
@@ -104,10 +104,6 @@ Class Xml
 
     	//We will use the staging table if we are in stage
     	$from_tbl = (string)$sql->from;
-    	if ($this->CI->content->is_stage)
-    	{
-    		$from_tbl = str_replace($tipo['table'], $tipo['table_stage'], $from_tbl);
-    	}
 
     	$this->CI->db->from($from_tbl);
 
@@ -284,7 +280,8 @@ Class Xml
       		foreach ($fieldset_node->field as $field)
       		{
         		//Unique name
-        		$field_name = (string) $field->attributes()->id;
+            $attr = $field->attributes();
+        		$field_name = (string) $attr->id;
         		if (!$field_name || $field_name == '') {
           			show_error($this->CI->_trans('One of the fields of type %t does not have a name.', array('t' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
         		}
@@ -295,6 +292,19 @@ Class Xml
         		{
           			$content['columns'][] = $field_name;
         		}
+
+            //Includes a link?
+            if (isset($attr->link))
+            {
+              $link = (string) $attr->link;
+              switch (strtolower($link))
+              {
+                case 'edit':
+                  //Admin edit record link
+                  $content['edit_link'] = $field_name;
+                  break;
+              }
+            }
 
         		//Reserved names check
         		if (in_array($field_name, $this->CI->config->item('restricted_field_names')))
@@ -324,12 +334,19 @@ Class Xml
           			$content['has_attachments'] = TRUE;
         		}
 
-        		if ($content_field['type'] == 'images')
+      			if ($content_field['type'] == 'images')
         		{
+        			$content_field['presets'] = array();
+        			
           			$content_field['original'] = isset($field->original) ? (strtoupper($field->original) == 'TRUE' ? TRUE : FALSE) : FALSE;
           			$content_field['encrypt_name'] = isset($field->encrypt_name) ? (strtoupper($field->encrypt_name) == 'TRUE' ? TRUE : FALSE) : FALSE;
           			$content_field['resized'] = isset($field->resized) ? (string)$field->resized : FALSE;
           			$content_field['thumbnail'] = isset($field->thumbnail) ? (string)$field->thumbnail : FALSE;
+          			
+          			if ($content_field['thumbnail'] != FALSE && $preset = (string)$field->thumbnail->attributes()->preset)
+          			{
+          				$content_field['presets']['thumbnail'] = $preset;
+          			}
         		}
 
         		if ($content_field['type'] == 'images' || $content_field['type'] == 'files')

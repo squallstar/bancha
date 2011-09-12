@@ -30,7 +30,7 @@
 			<type>hidden</type>
 			<default>0</default>
 		</field>
-		<field id="title" column="true">
+		<field id="title" column="true" link="edit">
 			<description>Titolo</description>
 			<type>text</type>
 			<mandatory>true</mandatory>

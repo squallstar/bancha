@@ -23,6 +23,7 @@
 				<li><a href="#sb-caching">11. Caching</a></li>
 				<li><a href="#sb-feeds">12. Feed dei contenuti</a></li>
 				<li><a href="#sb-triggers">13. Triggers (attivatori)</a></li>
+				<li><a href="#sb-image-presets">14. Image presets</a></li>
 			</ul>
 			<p>Revisione: <?php echo MILK_VERSION; ?><br />Data: 06 Set 2011</p>
 		</div>
@@ -215,6 +216,7 @@ Il campo <strong>&lt;mimes&gt;</strong> accetta anche il valore "<strong>*</stro
 <br />
 <p>Il campo <strong>&lt;original&gt;</strong> imposta se salvare l'immagine originale. Il campo <strong>&lt;encrypt_name&gt;</strong> definisce se il nome del file salvato deve essere mantenuto tale.<br />
 I campi <strong>&lt;resized&gt;</strong> e <strong>&lt;thumbnail&gt;</strong> impostano le dimensioni dell'immagine da ridimensionare per le due nuove rispettive immagini.<br />
+Il campo thumbnail accetta anche l'attributo <strong>preset</strong> relativo al preset da utilizzare nella visualizzazione del thumbnail in amministrazione.<br />
 Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura automatica per mantenere le proporzioni della misura definita.</p>
 
 <p>Di seguito un esempio completo di struttura per definire un tipo di contenuto con un campo di testo, una select ed un campo di caricamento per una singola immagine:</p>
@@ -262,7 +264,7 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 			&lt;max&gt;1&lt;/max&gt;
 			&lt;original&gt;false&lt;/original&gt;
 			&lt;resized&gt;150x?&lt;/resized&gt;
-			&lt;thumb&gt;50x50&lt;/thumb&gt;
+			&lt;thumbnail preset="user_profile"&gt;50x50&lt;/thumbnail&gt;
 			&lt;list&gt;true&lt;/list&gt;
 		&lt;/field&gt;
 
@@ -638,6 +640,12 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code><br />
 <code>&lt;trigger on="insert"&gt;
 	&lt;call action="publish_on_twitter" /&gt;
 &lt;/trigger&gt;</code>
+</div>
+
+<div class="sidebar_content" id="sb-image-presets">
+			<h3>14. Image presets</h3>
+			<p></p>
+			<div class="message warning">In costruzione...</div>
 </div>
 
 	</div>

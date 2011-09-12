@@ -30,6 +30,10 @@
 					</select><br />
 			  	</div>
 
+			  	<?php if ($already_installed) { ?>
+			  	<div class="warning message"><?php echo _('WARNING').': '._('Milk is already installed on this database!'); ?></div>
+			  	<?php } ?>
+
 		  		<input name="install" type="submit" class="submit" value="<?php echo _('Install'); ?>" />
 		  	</form>
 

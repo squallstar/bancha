@@ -2,7 +2,7 @@
 /**
  * Content Library Class
  *
- * Gestione di contenuti, classe di utilità generale
+ * This library manage the content types of the website and lets you read and rebuild them.
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -15,32 +15,32 @@
 Class Content {
 
 	/**
-	 * @var array Elenco dei tipi
+	 * @var array Content types list
 	 */
 	private $_content_types;
 
 	/**
-	 * @var array Elenco dei nomi dei tipi
+	 * @var array List of all content types names
 	 */
 	private $_string_types;
 
 	/**
-	 * @var mixed Istanza di CodeIgniter
+	 * @var mixed Code Igniter instance
 	 */
 	private $CI;
 
 	/**
-	 * @var string Directory che contiene gli XML dei tipi
+	 * @var string This directory contains the XML schemes
 	 */
 	public $xml_folder;
 
 	/**
-	 * @var string Directory che contiene i files di cache dei tipi
+	 * @var string This is the file that caches the content types
 	 */
 	public $types_cache_folder;
 
 	/**
-	 * @var bool Definisce se siamo in stage
+	 * @var bool Defines if we are in stage
 	 */
 	public $is_stage = FALSE;
 
@@ -51,12 +51,12 @@ Class Content {
 		$this->xml_folder	= $this->CI->config->item('xml_folder');
 		$this->types_cache_folder	= $this->CI->config->item('types_cache_folder');
 
-		//Carica i tipi
+		//We read the content types
 		$this->read();
 	}
 
 	/**
-	 * Imposta se stiamo in stage
+	 * Sets the current operations to stage or production
 	 * @param boolean $bool
 	 */
 	public function set_stage($stage)
@@ -73,7 +73,8 @@ Class Content {
 	}
 
 	/**
-	 * Legge i tipi XML e li carica in sessione
+	 * Reads the XML schemes from the cache.
+	 * It will also create the cache file if it not exists
 	 */
 	public function read()
 	{
@@ -89,46 +90,52 @@ Class Content {
 	}
 
 	/**
-	 * Aggiunge un tipo al DB
-	 * @param string $name
+	 * Adds a content type to the DB
+	 * @param string $type_name
+	 * @param string $type_description
+	 * @param bool $type_structure True when pages, False when contents
 	 * @return int Type id (autoincrement)
 	 */
 	public function add_type($type_name, $type_description, $type_structure, $delete_if_exists=FALSE)
 	{
-		//$this->CI->load->helper(array('file', 'text')); /7autoloaded by core
 		$this->CI->load->library('parser');
 
-		//Pulisco il nome del tipo
+		//We clears the type name
 		$type_name = url_title(convert_accented_characters($type_name), 'underscore');
 
 		if ($type_name == 'cache')
 		{
-			//Il nome "cache" viene usato per il path delle immagini cacheate
-			show_error('Il nome "cache" e\' riservato. Inseriscine un altro.', 500, 'Nome riservato');
+			//Cached images uses the "cache" name for their attach folder
+			show_error(_('You cannot create a content type named [cache].'), 500, _('Name reserved'));
 		}
 
-		//Controllo se esiste
+		//Let's check if already exists on filesystem
 		$storage_path = $this->CI->config->item('xml_folder').$type_name.'.xml';
 		if (file_exists($storage_path) && !$delete_if_exists) {
-			show_error('Esiste gi&agrave; un tipo denominato ['.$type_name.'].', 500, 'Errore: Impossibile salvare il tipo');
+			show_error(
+				$this->CI->lang->_trans('A content type named %n already exists', array('n' => '['.$type_name.']')),
+				500, _('Cannot create that type'));
 		} else {
 			$this->delete_type($type_name);
 		}
 
-		//Salvo il tipo su db
+		//Saves the content type into the DB
 		$done = $this->CI->db->insert('types', array(
 			'name'	=> $type_name
 		));
 		if (!$done)
 		{
-			show_error('Impossibile inserire il tipo. (content/add_type)', 500, 'Tipo non inserito');
+			show_error(_('Cannot insert that content type.') . ' (content/add_type)', 500, _('Error'));
 		}
 		$type_id = $this->CI->db->insert_id();
 
-		//In base al tipo scelto, carico il relativo xml
-		$type_complexity = $type_structure == 'true' ? 'tree' : 'simple';
-
-		//Leggo il template di default di un tipo su DB
+		//Loads the base XML (Type_simple of Type_tree)
+		if (is_bool($type_structure))
+		{
+			$type_complexity = $type_structure;
+		} else {
+			$type_complexity = strtolower($type_structure) == 'true' ? 'tree' : 'simple';
+		}
 		$xml = read_file($this->CI->config->item('templates_folder').'Type_'.$type_complexity.'.xml');
 
 		$type_description = strip_tags($type_description);
@@ -137,7 +144,7 @@ Class Content {
 			$type_description = $type_name;
 		}
 
-		//Parso il file con le pseudovariabili
+		//Parses the base file with the content types variables
 		$xml = $this->CI->parser->parse_string($xml, array(
 		          'id'			=> $type_id,
 		          'name'		=> $type_name,
@@ -146,24 +153,25 @@ Class Content {
 		),TRUE);
 
 
-		//Salvo il file xml di definizione dei campi
+		//Saves the XML scheme
 		if (write_file($storage_path, $xml)) {
 
-			//Aggiungo le acl di questo tipo di contenuto
+			//We add the ACL for this content type
 			$this->CI->load->users();
-			$acl_id = $this->CI->users->add_acl('content', $type_name, 'Gestione ' . $type_name);
+			$acl_id = $this->CI->users->add_acl('content', $type_name, 'Manage ' . $type_name);
 
-			//Aggiungo i permessi all'utente corrente
+			//Permissions to the current user
 			$this->CI->auth->add_permission($acl_id);
 			$this->CI->auth->cache_permissions();
 
-			//Creo la directory con i template di questo tipo
+			//We create the directory with the view templates
 			$type_view_abs_dir = $this->CI->config->item('views_absolute_templates_folder') . $type_name . '/';
 			$this->CI->load->helper('directories');
 
 			if (!delete_directory($type_view_abs_dir)) {
 				$this->delete_type($type_name);
-				show_error('Impossibile eliminare la directory di template per le view del tipo ['.$type_name.'].', 500, 'Errore');
+				show_error(_('Cannot delete the template view directory for the content type %n.', array('n' => '['.$type_name.']'),
+				500, _('Error')));
 			}
 			$created = mkdir($type_view_abs_dir, DIR_WRITE_MODE);
 

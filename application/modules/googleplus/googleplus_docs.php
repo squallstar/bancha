@@ -1,6 +1,19 @@
-<div class="sidebar">
+<?php
+/**
+ * GooglePlus Module Documentation
+ *
+ *
+ * @package		Milk
+ * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
+ * @copyright	Copyright (c) 2011, Squallstar
+ * @license		GNU/GPL (General Public License)
+ * @link		http://squallstar.it
+ *
+ */
+
+ ?><div class="sidebar">
 	<ul class="sidemenu">
-		<li><a href="#sb-intro">Utilizzo</a></li>
+		<li><a href="#sb-intro">Google+ Module</a></li>
 	</ul>
 <p>
 	Author: Nicholas Valbusa<br />
@@ -9,9 +22,9 @@
 </div>
 
 <div class="sidebar_content" id="sb-intro">
-	<h3>Utilizzo del modulo Google Plus</h3>
-	<p>Questo modulo, stampa a video il pulsante <strong>+1</strong> di Google Plus.</p>
-	<p>L'utilizzo è molto semplice, basta inserire questo codice in una qualsiasi view:</p>
-<code>&lt;?php $this->load->module('googleplus')->render(); ?&gt;</code>
+	<h3>Using the sharing Google+ module</h3>
+	<p>This module, simply prints the <strong>+1</strong> sharing button for Google+.</p>
+	<p>Use it as in the example below:</p>
+<code>&lt;?php echo $this-&gt;load-&gt;module('googleplus')-&gt;render(); ?&gt;</code>
 
 </div>

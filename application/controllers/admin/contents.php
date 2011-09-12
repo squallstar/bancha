@@ -2,7 +2,7 @@
 /**
  * Contents Controller
  *
- * Gestione dei contenuti (amministrazione)
+ * This controller manage, creates and deletes any type of content
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -226,7 +226,6 @@ Class Contents extends Milk_Controller
     $tipo = $this->content->type($type);
     $this->records->set_type($type);
 
-
     //Aggiunta-Modifica record
     if ($this->input->post('id_type', FALSE)) {
 
@@ -306,7 +305,12 @@ Class Contents extends Milk_Controller
       }
 
       if ($this->input->post('_bt_save_list')) {
-      		$this->session->set_flashdata('message', 'Il contenuto "<a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$record->get('title').'</a>" &egrave; stato correttamente salvato.');
+          $value = $record->get('title');
+          if (!$value || $value == '')
+          {
+            $value = $record->get($tipo['edit_link']);
+          }
+      		$this->session->set_flashdata('message', 'Il contenuto <a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$value.'</a> &egrave; stato correttamente salvato.');
       	 	redirect('admin/contents/type/' . $tipo['name']);
       } else if ($this->input->post('_bt_publish')) {
       		$this->records->publish($record_id);

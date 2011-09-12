@@ -2,7 +2,7 @@
 /**
  * Feed Class
  *
- * Libreria per generare un feed
+ * This library generates the feeds
  *
  * @package		Milk
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -17,27 +17,27 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 Class Feed
 {
 	/**
-	 * @var mixed Istanza di CodeIgniter
+	 * @var mixed CodeIgniter instance
 	 */
 	private $CI;
 
 	/**
-	 * @var string Tipo del feed (xml, json)
+	 * @var string Feed type (xml, json)
 	 */
 	private $_type;
 
 	/**
-	 * @var SimpleXMLElement Contiene il feed man mano che viene creato
+	 * @var SimpleXMLElement Will contains the feed
 	 */
 	public $xml;
 
 	/**
-	 * @var array Intestazione del feed
+	 * @var array Feed headers
 	 */
 	public $feed_head;
 
 	/**
-	 * @var array Contiene i dati del JSON man mano che viene creato
+	 * @var array Will contains the JSON data
 	 */
 	public $json;
 
@@ -57,9 +57,9 @@ Class Feed
 	}
 
 	/**
-	 * Crea un nuovo feed
-	 * @param array $data Header del feed
-	 * @param string $type Tipo del feed
+	 * Create a new feed
+	 * @param array $data Feed header
+	 * @param string $type Feed type
 	 */
 	public function create_new($data, $type='xml')
 	{
@@ -91,7 +91,7 @@ Class Feed
 	}
 
 	/**
-	 * Aggiunge un elemento al feed
+	 * Adds an element to the feed
 	 * @param array $item
 	 */
 	public function add_item($item)
@@ -112,7 +112,7 @@ Class Feed
 	}
 
 	/**
-	 * Renderizza il feed
+	 * Renders the feed
 	 * @param string $template
 	 */
 	public function render($template='feed')

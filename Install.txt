@@ -1,25 +1,37 @@
 **************************************
 * @package		Milk
 * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
-* @copyright		Copyright (C) 2011, Squallstar
+* @copyright	Copyright (C) 2011, Squallstar
 * @license		GNU/GPL (General Public License)
 * @link			http://squallstar.it
 **************************************
 
 **************************************
 
-INSTALLAZIONE DI MILK
- - Settare l'environment nel file index.php
- - Configurare i parametri di connessione al database nel file application/config/database.php
- - Lanciare dal browser l'indirizzo http://{nomehost}/admin/install
- - A fine installazione, eliminare il file application/controllers/admin/install.php
- - Il tipo di contenuto predefinito per l'albero di menu del sito è "Menu", e viene
-   creato in automatico dall'installer
+HOW TO INSTALL MILK
+
+ 1. Before all, sets your current environment in the /index.php file
+    The default environment is "sqlite" (to use the Sqlite Database)
+    but you are encouraged to use "development" or "production"
+ 
+ 2. Sets the database configuration parameters here: application/config/database.php
+
+ 3. Go through your browser to this URL: http://<yourwebsitename>/admin/install
+
+ 4. Choose your install type between "Default" and "Blog".
+ 	The Blog one, will create and configures the "Blog" and "Comments" content types for you.
+
+ 4. When install is done, place a die(); at the start of this file:
+ 	application/controllers/admin/install.php
+ 	Alternately you can also delete it!
+ 
+ 5. You're done! The install script will create a content type named "Menu" which is
+ 	linked to the page tree of your website.
 
 **************************************
 
-DOCUMENTAZIONE DI MILK
- - La documentazione e' disponibile tramite l'amministrazione alla voce "Gestione > Documentazione"
+MILK DOCUMENTATION
+ - Just go to the "Documentation" page of the administration under the "Manage" section
 
 **************************************
 

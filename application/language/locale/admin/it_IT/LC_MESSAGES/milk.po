@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Milk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-08 14:53+0100\n"
-"PO-Revision-Date: 2011-09-08 14:53+0100\n"
-"Last-Translator: Nicholas <nicholas@intesys.it>\n"
+"POT-Creation-Date: 2011-09-10 18:48+0100\n"
+"PO-Revision-Date: 2011-09-10 18:48+0100\n"
+"Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,16 +86,45 @@ msgstr "Torna all'amministrazione"
 msgid "Open profiler"
 msgstr "Apri profiler"
 
-#: libraries/milk/installer.php:301
+#: libraries/milk/content.php:109
+msgid "You cannot create a content type named [cache]."
+msgstr "Non puoi creare un tipo di contenuto chiamato [cache]."
+
+#: libraries/milk/content.php:109
+msgid "Name reserved"
+msgstr "Nome riservato"
+
+#: libraries/milk/content.php:116
+msgid "A content type named %n already exists"
+msgstr "Esiste già un tipo di contenuto chiamato %n."
+
+#: libraries/milk/content.php:117
+msgid "Cannot create that type"
+msgstr "Impossibile creare il tipo di contenuto."
+
+#: libraries/milk/content.php:128
+msgid "Cannot insert that content type."
+msgstr "Impossibile inserire questo tipo di contenuto."
+
+#: libraries/milk/content.php:128
+#: libraries/milk/content.php:174
+msgid "Error"
+msgstr "Errore"
+
+#: libraries/milk/content.php:173
+msgid "Cannot delete the template view directory for the content type %n."
+msgstr "Impossibile eliminare la directory delle view di template per il tipo di contenuto %n."
+
+#: libraries/milk/installer.php:306
 msgid "Default content type not defined"
 msgstr "Tipo predefinito non definito."
 
-#: libraries/milk/installer.php:402
+#: libraries/milk/installer.php:419
 msgid "My first post"
 msgstr "Il mio primo post"
 
-#: libraries/milk/installer.php:403
-#: libraries/milk/installer.php:429
+#: libraries/milk/installer.php:420
+#: libraries/milk/installer.php:446
 msgid "Hello world"
 msgstr "Ciao mondo"
 
@@ -529,7 +558,7 @@ msgid "Save scheme"
 msgstr "Salva schema"
 
 #: views/admin/content/type_list.php:24
-#: views/admin/modules/list.php:20
+#: views/admin/modules/list.php:22
 #: views/admin/users/list.php:38
 msgid "Name"
 msgstr "Nome"
@@ -679,7 +708,11 @@ msgstr "Predefinita"
 msgid "Blog"
 msgstr "Blog"
 
-#: views/admin/installer/request.php:33
+#: views/admin/installer/request.php:34
+msgid "Milk is already installed on this database!"
+msgstr "Milk è già installato su questo database!"
+
+#: views/admin/installer/request.php:37
 msgid "Install"
 msgstr "Installa"
 
@@ -720,7 +753,7 @@ msgid "Manage"
 msgstr "Gestione"
 
 #: views/admin/layout/header.php:74
-#: views/admin/modules/list.php:21
+#: views/admin/modules/list.php:23
 msgid "Documentation"
 msgstr "Documentazione"
 
@@ -736,7 +769,11 @@ msgstr "Documentazione modulo"
 msgid "Installed modules"
 msgstr "Moduli installati"
 
-#: views/admin/modules/list.php:37
+#: views/admin/modules/list.php:16
+msgid "This are the currently installed modules. To install a module, just place it in the application/modules folder."
+msgstr "Di seguito l'elenco dei moduli correntemente installati. Per installare un modulo, inseriscilo nella directory application/modules."
+
+#: views/admin/modules/list.php:39
 msgid "There are no modules installed."
 msgstr "Non ci sono moduli installati."
 

@@ -499,7 +499,13 @@ Class Model_records extends CI_Model {
 
 		  	//Trigger action
 			$action = $id ? 'update' : 'insert';
-
+			
+			//Title fix
+			if (!isset($data['title']))
+			{
+				$data['title'] = $record->get($tipo['edit_link']);
+			}
+			
 	      	if ($id) {
 	      		//Let's check if the id is published >> useless????
 	       		//$is_published = $this->id_is_published($id);
@@ -589,7 +595,7 @@ Class Model_records extends CI_Model {
 
      		$tipo = $this->content->type($record->_tipo);
 
-	  		if (isset($tipo['triggers']) && count($tipo['triggers']))
+	  		if (isset($tipo['triggers']['delete']) && count($tipo['triggers']['delete']))
 	  		{
 	  			$triggers = $tipo['triggers']['delete'];
 

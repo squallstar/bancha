@@ -82,6 +82,7 @@ Class Install extends Milk_Controller
 			return;
 
 		} else {
+			$this->view->set('already_installed', $this->installer->is_already_installed());
 			$this->view->render_layout('installer/request', FALSE);
 		}
 
