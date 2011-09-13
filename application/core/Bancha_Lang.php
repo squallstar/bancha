@@ -39,16 +39,15 @@ class Bancha_Lang extends CI_Lang {
 		}
 
         //Checks if a language exists
-		if (in_array($lang, array_keys($this->languages))) {
-		
+		if (isset($this->languages[$lang])) {
 			$this->gettext_language = $this->languages[$lang]['locale'];
 			$this->current_language = $lang;
+			if ($load_gettext) {
+				$this->load_gettext();
+			}
 		} else {
 			//Loads the first defined language
 			$this->set_default($load_gettext);
-		}
-		if ($load_gettext) {
-			$this->load_gettext();
 		}
 
 		//Update CI config
@@ -122,10 +121,9 @@ class Bancha_Lang extends CI_Lang {
 
 		// Choose domain
 		textdomain(FRNAME);
-
     }
 
-    function _trans( $original, $aParams = false ) {
+    function _trans($original, $aParams = false) {
         if ( isset($aParams['plural']) && isset($aParams['count']) ) {
             $sTranslate = ngettext($original, $aParams['plural'], $aParams['count']);
             $sTranslate = $this->replace_dynamically($sTranslate, $aParams);
