@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-#milk_profiler
+#bancha_profiler
 {
 	position:fixed;
 	width:100%;
@@ -16,7 +16,7 @@
 	color:#FFF;
 }
 
-#milk_profiler_preview
+#bancha_profiler_preview
 {
 	width:100px;
 	position:fixed;
@@ -35,7 +35,7 @@
 	margin:0;
 }
 
-#milk_profiler_content
+#bancha_profiler_content
 {
 	display:none;
 	height:50px;
@@ -46,18 +46,18 @@
 	line-height:50px;
 }
 
-	#milk_profiler_content a
+	#bancha_profiler_content a
 	{
 		color:#999;
 		text-decoration:underline
 	}
 
-	#milk_profiler_content a:hover
+	#bancha_profiler_content a:hover
 	{
 		color:#FFF;
 	}
 
-#milk_profiler_ci
+#bancha_profiler_ci
 {
 	display:none;
 	line-height:20px;

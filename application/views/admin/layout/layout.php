@@ -1,10 +1,10 @@
 <?php
 /**
- * Milk Layout View (Administration)
+ * Bancha Layout View (Administration)
  *
  * Vista di layout per l'amministrazione
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -18,11 +18,11 @@ $js_url = site_url() . THEMESPATH . 'admin/js/';
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="it">
 	<head>
-		<title><?php echo $title != '' ? $title . ' &bull; ' : ''; ?>Milk</title>
+		<title><?php echo $title != '' ? $title . ' &bull; ' : ''; ?>Bancha</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=7" />
 		<?php echo meta(array(
 			array('Content-type', 'text/html; charset=utf-8', 'equiv'),
-			array('name' => 'description', 'content' => 'Milk'),
+			array('name' => 'description', 'content' => 'Bancha'),
 			array('name' => 'robots', 'content' => 'no-cache')
 		)); ?>
 		<style type="text/css" media="all">

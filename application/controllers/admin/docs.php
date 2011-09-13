@@ -2,9 +2,9 @@
 /**
  * Docs Controller
  *
- * Documentazione di Milk (amministrazione)
+ * Documentazione di Bancha (amministrazione)
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -14,7 +14,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class Docs extends Milk_Controller {
+Class Docs extends Bancha_Controller {
 
 	public function __construct() {
 	    parent::__construct();

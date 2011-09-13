@@ -1,7 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------------
-| MILK INTERNAL ROUTING
+| BANCHA INTERNAL ROUTING
 | -------------------------------------------------------------------------
 */
 

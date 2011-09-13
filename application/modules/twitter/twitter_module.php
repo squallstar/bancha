@@ -4,7 +4,7 @@
  *
  * See the Twitter Documentation for an example of usage
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -12,7 +12,7 @@
  *
  */
 
-Class Twitter_Module extends Milk_Module
+Class Twitter_Module extends Bancha_Module
 {
 	/**
 	 * @var string The user twitter username :)

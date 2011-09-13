@@ -20,7 +20,7 @@
  * 			      ->message('This is cool')
  * 				  ->get_link();
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -28,7 +28,7 @@
  *
  */
 
-Class Sharer_Module extends Milk_Module
+Class Sharer_Module extends Bancha_Module
 {
   /**
    * @var string The social network
@@ -130,7 +130,7 @@ Class Sharer_Module extends Milk_Module
 
   /**
    * Renders the sharing button
-   * @see application/libraries/milk/Milk_Module::render()
+   * @see application/libraries/bancha/Bancha_Module::render()
    * @return xhtml
    */
   public function render()

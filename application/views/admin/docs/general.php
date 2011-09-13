@@ -25,7 +25,7 @@
 				<li><a href="#sb-triggers">13. Triggers (attivatori)</a></li>
 				<li><a href="#sb-image-presets">14. Image presets</a></li>
 			</ul>
-			<p>Revisione: <?php echo MILK_VERSION; ?><br />Data: 06 Set 2011</p>
+			<p>Revisione: <?php echo BANCHA_VERSION; ?><br />Data: 06 Set 2011</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
@@ -37,7 +37,7 @@
 				<li>Permette di gestire qualsiasi tipo di contenuto (pagine, news, gallerie fotografiche, prodotti, etc...) attraverso schemi XML.</li>
 				<li>Non sacrifica le prestazioni di un sito statico, perch&egrave; utilizza svariati sistemi di caching interno.</li>
 				<li>&Egrave; modulare, ovvero pu&ograve; essere esteso con diverse tipologie di moduli che potrai sviluppare tu stesso.</li>
-				<li>&Egrave; open-source (puoi scaricarlo direttamente da <a href="https://github.com/squallstar/milk" target="_blank">qui</a>).</li>
+				<li>&Egrave; open-source (puoi scaricarlo direttamente da <a href="https://getbancha.com" target="_blank">qui</a>).</li>
 				<li>&Egrave; facile da installare e da mantenere. Non necessita di infrastrutture particolari e/o avanzate.</li>
 				<li>Separa in maniera netta l'applicazioni dai temi e permette quindi la portabilit&agrave; di quest'ultimi</li>
 				<li>Utilizza un sistema ORM per gestire gli oggetti del database</li>
@@ -63,7 +63,7 @@
 
 		<div class="sidebar_content" id="sb-content-types">
 			<h3>3. Tipi di contenuto</h3>
-			<p>Milk ti permette di definire diversi contenuti per il tuo sito internet.
+			<p>Bancha ti permette di definire diversi contenuti per il tuo sito internet.
 			Ogni contenuto, &egrave; basato su un file XML che ne descrive tutti i campi gestibili.
 			In questo modo, puoi creare centinaia di schemi per amministrare i vari contenuti del tuo sito internet.
 			Ad esempio, un tipo di contenuto potrebbero essere i <strong>Prodotti</strong>, oppure delle <strong>Gallerie immagini</strong>.
@@ -74,7 +74,7 @@
 				<li><strong>Ad albero</strong> (per contenuti strutturabili gerarchicamente, come le pagine di un sito internet)</li>
 			</ul>
 			Come avrai intuito, anche le pagine stesse di un sito internet sono a loro volta un tipo di contenuto. &Egrave; proprio per questo che
-			dovr&agrave; essere definito almeno un tipo di contenuto associato all'albero delle pagine del sito. Tale associazione viene impostata nel file di configurazione di Milk alla voce "<strong>DEFAULT TREE TYPE</strong>".
+			dovr&agrave; essere definito almeno un tipo di contenuto associato all'albero delle pagine del sito. Tale associazione viene impostata nel file di configurazione di Bancha alla voce "<strong>DEFAULT TREE TYPE</strong>".
 			<br /><br />
 			Aggiungendo un nuovo tipo di contenuto, verranno <strong>automaticamente creati</strong> i seguenti files:<br /><br />
 			<ul>
@@ -105,7 +105,7 @@
 	&lt;fieldset&gt;
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code><br />
-<p>Il nodo <strong>&lt;id&gt;</strong> verr&agrave; popolato automaticamente da Milk quando verr&agrave; creato il tipo di contenuto, cos&igrave; come i nodi <strong>&lt;name&gt;</strong> e <strong>&lt;description&gt;</strong> che definiscono rispettivamente il nome utilizzato internamente come chiave, e quello visualizzato all'utente nel pannello.<br />
+<p>Il nodo <strong>&lt;id&gt;</strong> verr&agrave; popolato automaticamente da Bancha quando verr&agrave; creato il tipo di contenuto, cos&igrave; come i nodi <strong>&lt;name&gt;</strong> e <strong>&lt;description&gt;</strong> che definiscono rispettivamente il nome utilizzato internamente come chiave, e quello visualizzato all'utente nel pannello.<br />
 Il nodo <strong>&lt;tree&gt;</strong> &egrave; un booleano che descrive se il contenuto &egrave; strutturato ad albero o lineare/semplice (vedi la sezione <strong>3. Tipi di contenuto</strong> per maggiori informazioni).<br /><br />
 Il nodo <strong>&lt;parent_types&gt;</strong> &egrave; obbligatorio per i contenuti ad albero, e descrive i nomi di tutti i tipi di contenuto da utilizzare come riferimento per le pagine padre. Di default, viene impostato con il tipo di contenuto stesso.
 <br /><br />
@@ -295,7 +295,7 @@ Scegliendo <strong>azione personalizzata</strong>, la pagina invocher&agrave; l'
 
 		<div class="sidebar_content" id="sb-template-layout">
 			<h3>6. Template e Layout</h3>
-			<p>Milk utilizza un sistema di viste composto da un elemento principale (<strong>template</strong>) che a sua volta renderizza altre sotto viste, tra cui <strong>header</strong>, <strong>footer</strong> e <strong>content_render</strong>.<br /><br />
+			<p>Bancha utilizza un sistema di viste composto da un elemento principale (<strong>template</strong>) che a sua volta renderizza altre sotto viste, tra cui <strong>header</strong>, <strong>footer</strong> e <strong>content_render</strong>.<br /><br />
 Questo vuol dire che un sito potrebbe avere anche 10 template diversi per le varie sezioni del sito internet.<br /><br />Ogni pagina, presenta un campo chiamato <strong>view_template</strong> che definisce il template da renderizzare per tale pagina. L'elenco dei templates &egrave; contenuto nella cartella <strong>application/views/layout/templates</strong> e di base presenta questi templates:</p>
 <ul>
 	<li><strong><?php echo THEMESPATH; ?>desktop/templates/default.php</strong> - utilizzato di default per le pagine</li>
@@ -321,10 +321,10 @@ Anche i tipi di contenuto semplici (non strutturabili ad albero) presentano dell
 		<div class="sidebar_content" id="sb-views">
 			<h3>7. View e rendering</h3>
 			<p>NOTA: il front-end del sito, pu&ograve; utilizzare pi&ugrave; temi per differenziare ad esempio il sito <strong>desktop</strong> dalla versone <strong>mobile</strong>.
-Tale configurazione &egrave; disponibile nel file di configurazione di milk alla voce "WEBSITE THEMES", e si riferiscono al nome della directory
+Tale configurazione &egrave; disponibile nel file di configurazione di Bancha alla voce "WEBSITE THEMES", e si riferiscono al nome della directory
 presente nella directory <?php echo THEMESPATH; ?>. Per default, la skin utilizzata &egrave; la "desktop", e nel caso sia presente la skin mobile
 verr&agrave; effettuato lo switch in automatico nel caso che il sito venga visitato da un device mobile.</p>
-			<p>Milk utilizza la classe <strong>View</strong> per settare degli oggetti nelle viste e renderizzarle.<br />
+			<p>Bancha utilizza la classe <strong>View</strong> per settare degli oggetti nelle viste e renderizzarle.<br />
 L'oggetto view, &egrave; presente globalmente accedendo alla variabile "view" di Code Igniter in questo modo: <strong>$this->view</strong>.<br /><br />
 Il metodo base per settare un oggetto nella view, &egrave; il <strong>set()</strong>, e va utilizzato in questa maniera:</p>
 <code>$this->view->set('nome_oggetto', $valore);</code><br />
@@ -382,7 +382,7 @@ $this->view->render_layout('docs/general');
 
 		<div class="sidebar_content" id="sb-extract-records">
 			<h3>8. Estrazione di contenuti</h3>
-			<p>Utilizzando azioni personalizzate per il rendering delle pagine, potrebbe essere necessario che tu debba estrarre manualmente dei contenuti. Milk porta avanti la filosofia di Code Igniter, e ti mette a disposizione la classe "Records" per le estrazioni dei record. Tale classe &egrave; gi&agrave; disponibile in qualsiasi punto della tua applicazione, facendo riferimento all'oggetto <strong>$this</strong> di Code Igniter in questo modo:</p>
+			<p>Utilizzando azioni personalizzate per il rendering delle pagine, potrebbe essere necessario che tu debba estrarre manualmente dei contenuti. Bancha porta avanti la filosofia di Code Igniter, e ti mette a disposizione la classe "Records" per le estrazioni dei record. Tale classe &egrave; gi&agrave; disponibile in qualsiasi punto della tua applicazione, facendo riferimento all'oggetto <strong>$this</strong> di Code Igniter in questo modo:</p>
 <code>$this->records</code><br />
 <p>I metodi a disposizione della classe Records sono molto semplici da utilizzare. Ad esempio, se tu volessi estrarre gli ultimi 20 contenuti di tipo "News", potrai procedere come di seguito:</p>
 <code>$notizie = $this->records->type('News')->limit(10)->get();</code>
@@ -439,8 +439,8 @@ In alternativa, &egrave; possibile utilizzare la funzione <strong>documents()</s
 	<li><strong>priority</strong> - numero intero che indica la priorit&agrave; di una pagina nell'albero di menu</li>
 	<li><strong>published</strong> - definisce se un record &egrave; pubblicato (0 = bozza, 1 = pubblicato, 2 = differente tra sviluppo e produzione)</li>
 </ul>
-<div class="message info">Puoi aggiungere campi fisici ad un record (utili per le estrazioni negli alberi di menu) intervenendo sulla variabile <strong>record_columns</strong> all'interno del file di configurazione di Milk.
-Dopodich&egrave;, sar&agrave; necessario anche aggiungere tale colonna alla tabella <strong>records</strong> di Milk con un ALTER-TABLE.</div>
+<div class="message info">Puoi aggiungere campi fisici ad un record (utili per le estrazioni negli alberi di menu) intervenendo sulla variabile <strong>record_columns</strong> all'interno del file di configurazione di Bancha.
+Dopodich&egrave;, sar&agrave; necessario anche aggiungere tale colonna alla tabella <strong>records</strong> di Bancha con un ALTER-TABLE.</div>
 		</div>
 
 		<div class="sidebar_content" id="sb-documents">
@@ -454,7 +454,7 @@ print_r($record->get('lista_immagini');</code><br />
 records per procedere alla valorizzazione automatica dei documenti:</p>
 <code>$records = $this->records->type('Menu')-><strong>documents(TRUE)</strong>->get();</code><br />
 <div class="message warning">Attenzione: quest'ultimo esempio comporta maggior carico lato database poich&egrave; per ogni record estratto, verr&egrave; effettuata una seconda query per estrarre subito i suoi allegati.</div>
-<p>Milk, mette a disposizione anche una classe di estrazione dei documenti. Per inizializzare la classe, utilizzare la seguente sintassi:</p>
+<p>Bancha, mette a disposizione anche una classe di estrazione dei documenti. Per inizializzare la classe, utilizzare la seguente sintassi:</p>
 <code>$this->load->documents();</code><br />
 <p>La classe Documents presenta i seguenti metodi di estrazione (il funzionamento &egrave; simile alla classe Records):</p>
 <ul>

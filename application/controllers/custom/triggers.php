@@ -6,7 +6,7 @@ if ( ! defined('CUSTOM_TRIGGER')) exit('You cannot call the triggers directly');
  *
  * Attivatori chiamabili dai tipi di contenuto
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)

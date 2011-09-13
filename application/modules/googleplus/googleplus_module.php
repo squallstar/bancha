@@ -6,7 +6,7 @@
  * $gplus = $this->load->module('googleplus');
  * echo $gplus->render();
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -14,12 +14,12 @@
  *
  */
 
-Class Googleplus_Module extends Milk_Module
+Class Googleplus_Module extends Bancha_Module
 {
 	/**
 	 * Renders the Gplus Module
 	 * @return xhtml
-	 * @see application/libraries/milk/Milk_Module::render()
+	 * @see application/libraries/bancha/Bancha_Module::render()
 	 */
 	public function render()
 	{

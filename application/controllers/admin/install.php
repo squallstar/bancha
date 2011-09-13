@@ -4,7 +4,7 @@
  *
  * Installazione sito
  *
- * @package		Milk
+ * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
@@ -14,7 +14,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class Install extends Milk_Controller
+Class Install extends Bancha_Controller
 {
 	public function __construct()
 	{
@@ -24,7 +24,7 @@ Class Install extends Milk_Controller
 
 	public function index()
 	{
-		$this->load->library('milk/installer');
+		$this->load->frlibrary('installer');
 
 		if ($this->input->post('install'))
 		{

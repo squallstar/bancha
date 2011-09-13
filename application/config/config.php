@@ -5,7 +5,7 @@
 | Base Site URL
 |--------------------------------------------------------------------------
 |
-| URL to your Milk root. Typically this will be your base URL,
+| URL to your Bancha root. Typically this will be your base URL,
 | WITH a trailing slash:
 |
 |	http://example.com/
@@ -91,7 +91,7 @@ $config['enable_hooks'] = FALSE;
 | Class Extension Prefix
 |--------------------------------------------------------------------------
 */
-$config['subclass_prefix'] = 'Milk_';
+$config['subclass_prefix'] = 'Bancha_';
 
 
 /*
@@ -209,7 +209,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'm1lkcms45mdsdfj3d';
+$config['encryption_key'] = 'banchacms45mdsdfj3d';
 
 /*
 |--------------------------------------------------------------------------
@@ -229,12 +229,12 @@ $config['encryption_key'] = 'm1lkcms45mdsdfj3d';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= '_mprobe';
+$config['sess_cookie_name']		= '_bprobe';
 $config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= FALSE;
 $config['sess_use_database']	= FALSE;
-$config['sess_table_name']		= 'ci_sessions';
+$config['sess_table_name']		= 'bancha_sessions';
 $config['sess_match_ip']		= FALSE;
 $config['sess_match_useragent']	= TRUE;
 $config['sess_time_to_update']	= 300;

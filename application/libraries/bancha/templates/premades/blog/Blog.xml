@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="bancha-{version}" -->
+<content>
+	<id>{id}</id>
+	<name>Blog</name>
+	<description>Blog</description>
+	<tree>false</tree>
+	<primary_key>id_record</primary_key>
+	<table>records</table>
+	<table_stage>records_stage</table_stage>
+	<has_categories>true</has_categories>
+	<fieldset>
+		<name>Contenuto del post</name>
+		<field id="id_record" column="true">
+			<type>hidden</type>
+			<list>true</list>
+			<admin>true</admin>
+		</field>
+		<field id="id_type" column="true">
+			<type>hidden</type>
+			<list>true</list>
+			<default>2</default>
+		</field>
+		<field id="date_insert" column="true">
+			<type>hidden</type>
+			<list>true</list>
+			<default>eval:time()</default>
+		</field>
+		<field id="published" column="true">
+			<type>hidden</type>
+			<default>0</default>
+		</field>
+		<field id="title" column="true" link="edit">
+			<description>Titolo</description>
+			<type>text</type>
+			<mandatory>true</mandatory>
+			<admin>true</admin>
+			<list>true</list>
+		</field>
+		<field id="date_publish" column="true">
+			<description>Data di visibilità</description>
+			<type>datetime</type>
+			<admin>true</admin>
+			<list>true</list>
+		</field>
+		<field id="uri" column="true">
+			<description>Parte finale URL</description>
+			<type>text</type>
+			<admin>true</admin>
+			<list>true</list>
+		</field>
+		<field id="lang" column="true">
+			<description>Lingua</description>
+			<type>select</type>
+			<admin>true</admin>
+			<list>true</list>
+			<options>
+				<custom>$this->config->item('languages_select')</custom>
+			</options>
+			<default>it</default>
+		</field>
+		<field id="contenuto">
+			<description>Contenuto</description>
+			<type>textarea_full</type>
+			<list>true</list>
+		</field>
+		<field id="child_count" column="true">
+			<description>Commenti</description>
+			<type>hidden</type>
+			<list>true</list>
+			<default>0</default>
+			<admin>true</admin>
+		</field>
+	</fieldset>
+	<fieldset>
+		<name>Immagini e allegati</name>
+		<field id="immagini">
+			<description>Immagini</description>
+			<type>images</type>
+			<size>4096</size>
+			<encrypt_name>false</encrypt_name>
+			<mimes>jpg|gif|png|jpeg</mimes>
+			<original>true</original>
+			<resized>640x?</resized>
+			<thumbnail>80x?</thumbnail>
+			<max>30</max>
+			<list>true</list>
+		</field>
+	</fieldset>
+	<fieldset>
+		<name>Meta tags</name>
+		<field id="meta_title">
+			<description>Title</description>
+			<type>text</type>
+			<length>128</length>
+		</field>
+		<field id="meta_description">
+			<description>Description</description>
+			<type>text</type>
+			<length>128</length>
+		</field>
+		<field id="meta_keywords">
+			<description>Keywords</description>
+			<type>text</type>
+			<length>128</length>
+		</field>
+	</fieldset>
+</content>
