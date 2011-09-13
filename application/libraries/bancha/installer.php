@@ -258,6 +258,16 @@ Class Installer
 		$this->dbforge->add_key('id_hierarchy', TRUE);
 		$this->dbforge->create_table('hierarchies');
 
+		//Record hierarchies table
+		$record_hierarchies_fields = array(
+		    'id_record'		=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE),
+		    'id_hierarchy'	=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE)
+		);
+
+		$this->dbforge->drop_table('record_hierarchies');
+		$this->dbforge->add_field($record_hierarchies_fields);
+		$this->dbforge->create_table('record_hierarchies');
+
 		return TRUE;
 	}
 
@@ -282,7 +292,7 @@ Class Installer
 	}
 
 	/**
-	 * Crea un utente
+	 * Insert a new user
 	 * @param string $username
 	 * @param string $password
 	 * @param string $name
@@ -303,7 +313,7 @@ Class Installer
 	}
 
 	/**
-	 * Crea i tipi di contenuto di default
+	 * Create the default content types
 	 */
 	public function create_types()
 	{
@@ -321,7 +331,7 @@ Class Installer
 	}
 
 	/**
-	 * Crea gli indici delle tabelle su DB
+	 * Create the Database indexes
 	 */
 	public function create_indexes()
 	{
