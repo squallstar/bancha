@@ -393,7 +393,7 @@ Class Installer
 		foreach ($directories as $dir)
 		{
 			delete_directory($dir);
-			mkdir($dir, DIR_WRITE_MODE, TRUE);
+			@mkdir($dir, DIR_WRITE_MODE, TRUE);
 			if ($dir != $this->CI->config->item('xml_folder'))
 			{
 				write_file($dir.'index.html', CMS.' does not allow directory listing.');

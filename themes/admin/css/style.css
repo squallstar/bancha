@@ -518,7 +518,7 @@ a:hover {
 .block .block_content ul {
 	padding-left: 15px;
 	padding-bottom: 15px;
-	}
+}
 
 .block .block_content ol {
 	padding-left: 15px;
@@ -530,7 +530,17 @@ a:hover {
 	margin-bottom: 5px;
 	padding-left: 15px;
 	background: url(../widgets/li.gif) 0 7px no-repeat;
- 	}
+ }
+
+.dynatree-container ul {
+	padding-left: 0px !important;
+	padding-bottom: 0px !important;
+}
+ .dynatree-container li {
+	margin-bottom: 0px !important;
+	/*padding-left: 0px !important;*/
+	background: none !important;
+ }
 
 .block .block_content ol li {
 	margin-bottom: 5px;

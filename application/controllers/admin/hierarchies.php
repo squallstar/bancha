@@ -61,7 +61,10 @@ Class Hierarchies extends Bancha_Controller
 		//We add a first blank element to the select
 		$dropdown = $this->hierarchies->dropdown();
 		$tmp = array('' => '');
-		foreach ($dropdown as $key => $val) $tmp[$key] = $val;
+		foreach ($dropdown as $key => $val)
+		{
+			$tmp[$key] = $val;
+		}
 		$dropdown = $tmp;
 
 		$list = $this->hierarchies->get();

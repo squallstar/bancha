@@ -20,6 +20,11 @@ Class Model_hierarchies extends CI_Model {
 	public $table = 'hierarchies';
 
 	/**
+	 * @var string the table we use for relations between records and hierarchies
+	 */
+	public $table_relations = 'record_hierarchies';
+
+	/**
 	 * @var array|bool contains the hierarchies
 	 */
 	public $list = FALSE;
@@ -97,6 +102,29 @@ Class Model_hierarchies extends CI_Model {
   			$this->db->or_where('id_parent', $hierarchy);
   		}
   		return $this->db->delete($this->table);
+  	}
+
+  	/**
+	 * Updates all the hierarchies of a record
+	 * @param int $id_record
+	 * @param array $new_hierarchies
+	 */
+  	public function update_record_hierarchies($id_record, $new_hierarchies)
+  	{
+  		//First of all, let's delete the current hierarchies
+  		$this->db->where('id_record', $id_record)->delete($this->table_relations);
+
+  		//And now, let's add the hierarchies
+  		if (count($new_hierarchies))
+  		{
+  			foreach ($new_hierarchies as $hierarchy)
+  			{
+  				$this->db->insert($this->table_relations, array(
+  					'id_record'		=> $id_record,
+  					'id_hierarchy'	=> $hierarchy
+	  			));
+  			}
+  		}
   	}
 
 	/**

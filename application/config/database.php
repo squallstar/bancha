@@ -15,10 +15,10 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = '127.0.0.1';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
-$db['default']['database'] = 'demo';
+$db['default']['password'] = '';
+$db['default']['database'] = 'bancha';
 $db['default']['dbdriver'] = 'mysql';
-$db['default']['dbprefix'] = 'demo_';
+$db['default']['dbprefix'] = 'bancha_';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;

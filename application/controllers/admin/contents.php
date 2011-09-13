@@ -300,6 +300,17 @@ Class Contents extends Bancha_Controller
                 }
             }
 
+            //We delete this hierarchies
+            if ($new_hierarchies = $this->input->post('_hierarchies', FALSE))
+            {
+                $new_hierarchies = $this->hierarchies->parse_data($new_hierarchies);
+                $done = $this->hierarchies->update_record_hierarchies($record_id, $new_hierarchies);
+                if ($done)
+                {
+                    $this->view->message('success', _('The selected hierarchies have been deleted.'));
+                }
+            }
+
             //Pulisco la cache di questo tipo di albero
             $this->tree->clear_cache($tipo['name']);
 

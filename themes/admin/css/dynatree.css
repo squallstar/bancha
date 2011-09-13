@@ -23,7 +23,7 @@ ul.dynatree-container ul
 
 ul.dynatree-container li
 {
-	list-style-image: none;
+	list-style-image: none !important;
 	list-style-position: outside;
 	list-style-type: none;
 	-moz-background-clip:border;

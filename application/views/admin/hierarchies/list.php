@@ -1,4 +1,15 @@
 <?php
+/**
+ * Hierarchies List
+ *
+ * @package		Bancha
+ * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
+ * @copyright	Copyright (c) 2011, Squallstar
+ * @license		GNU/GPL (General Public License)
+ * @link		http://squallstar.it
+ *
+ */
+
 $this->load->helper('form');
 ?>
 <div class="block withsidebar">
@@ -78,34 +89,13 @@ echo form_close();
 
 </div>
 
-<link type="text/css" rel="stylesheet" href="<?php echo site_url(THEMESPATH.'admin/css/dynatree.css'); ?>" />
-<script type="text/javascript" src="<?php echo site_url(THEMESPATH.'admin/js/jquery-ui.js'); ?>"></script>
-<script type="text/javascript" src="<?php echo site_url(THEMESPATH.'admin/js/jquery.dynatree.min.js'); ?>"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#tree").dynatree({
-    	onActivate: function(node) {
-      	},
-      	checkbox: true,
-        selectMode: 1,
-      	children: <?php echo json_encode($tree); ?>
-    });
-
-	$("form.tree").submit(function() {
-		// Serialize standard form fields:
-	      var formData = $(this).serializeArray();
-
-	      // then append Dynatree selected 'checkboxes':
-	      var tree = $("#tree").dynatree("getTree");
-	      formData = formData.concat(tree.serializeArray());
-
-	      // and/or add the active node as 'radio button':
-	      if(tree.getActiveNode()){
-	        formData.push({name: "activeNode", value: tree.getActiveNode().data.key});
-	      }
-
-	      $('input[name=hierarchies]').val(jQuery.param(formData));
-
-	});
-});
-</script>
+<?php
+$data = array(
+	'tree_input'	=> 'hierarchies',
+	'tree_id'		=> 'tree',
+	'tree_form'		=> '.tree',
+	'tree_mode'		=> 2,
+	'tree'			=> $tree
+);
+$this->view->render('admin/hierarchies/dynatree', $data);
+?>

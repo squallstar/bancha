@@ -275,9 +275,9 @@ Class View
 	 * Renders a single view file in the current theme
 	 * @param string $view_file
 	 */
-	public function render($view_file)
+	public function render($view_file, $data = array())
 	{
-		$this->_CI->load->view($view_file);
+		$this->_CI->load->view($view_file, $data);
 	}
 
 	/**
