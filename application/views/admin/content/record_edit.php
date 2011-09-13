@@ -2,8 +2,6 @@
 /**
  * Record Edit View
  *
- * Vista di modifica di un record
- *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
@@ -55,17 +53,7 @@ $save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="banc
 
 echo form_open_multipart('admin/'.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
 
-/*
-echo form_hidden('id_type', $tipo['id']);
-
-if ($record->id) {
-	echo form_hidden('id', $record->id);
-}
-*/
-
-//Contiene le funzioni onchange da richiamare al load della pagina
 $js_onload = '';
-
 $first_lap = TRUE;
 $has_full_textarea = FALSE;
 $p_start = '<p>';
@@ -76,9 +64,8 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 	echo '<div class="sidebar_content" id="sb-'.url_title($fieldset['name']).'">';
 
-	//Messaggi di errore
-	echo isset($message) ? '<div class="message errormsg"><p>'.$message.'</p></div>' : '';
-	echo isset($ok_message) ? '<div class="message success"><p>'.$ok_message.'</p></div>' : '';
+	//Messages
+	echo $this->view->get_messages();
 
 	?>
 			<p class="breadcrumb">
@@ -94,36 +81,33 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	{
 		$first_lap = false;
 
-		//Spostare in xml
-		if ($tipo['tree'] && isset($tree)) {
+		//TODO: move into xml
+		if ($tipo['tree']) {
 
 			if ($record->id && isset($page_url))
 			{
 				$url = site_url($page_url);
 				echo _('The address of this page is:').br(1).'<a target="_blank" href="'.$url.'">'.$url.'</a>'.br(2);
 			}
-
-			//echo $p_start.form_label(_('Parent page'), 'id_parent') . br(1);
-			//echo form_dropdown('id_parent', $new_tree, $record->get('id_parent'), 'class="styled"') . $p_end.br(1);
 		}
-
 	}
 
 	foreach ($fieldset['fields'] as $field_name)
 	{
-
 		$field = $tipo['fields'][$field_name];
 
 		$attributes = array();
 
 		$label = form_label($field['description'], $field_name, $attributes);
 
+		//We evaluates the evals
 		if ($field['default'] && substr($field['default'], 0, 5) == 'eval:')
 		{
 			eval('$value = '.substr($field['default'], 5).';');
 			$field['default'] = $value;
 		}
 
+		//The default value will be set when no stored value is found
 		$field_value = $record->get($field_name, $field['default']);
 
 		if (isset($field['visible']))

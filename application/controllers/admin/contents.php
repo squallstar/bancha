@@ -73,7 +73,7 @@ Class Contents extends Bancha_Controller
     }
 
     /**
-    * Lista record di un tipo
+    * A record list of a single content type
     * @param int|string $tipo
     */
     public function type($tipo='', $page=0)
@@ -91,7 +91,7 @@ Class Contents extends Bancha_Controller
         	if ($done)
         	{
         		$this->pages->publish($to_publish);
-        		$this->view->set('message', 'Il record ['.$to_publish.'] &egrave; stato pubblicato.');
+        		$this->view->message('success', 'Il record ['.$to_publish.'] &egrave; stato pubblicato.');
         		$this->tree->clear_cache();
         	}
         }
@@ -104,7 +104,7 @@ Class Contents extends Bancha_Controller
         	if ($done)
         	{
         		$this->pages->depublish($to_depublish);
-        		$this->view->set('message', 'Il record ['.$to_depublish.'] &egrave; stato depubblicato.');
+        		$this->view->message('success', 'Il record ['.$to_depublish.'] &egrave; stato depubblicato.');
         		$this->tree->clear_cache();
         	}
         }
@@ -122,7 +122,7 @@ Class Contents extends Bancha_Controller
             			{
             				$this->records->publish($record);
             				$this->pages->publish($record);
-            				$this->view->set('message', 'I record sono stati pubblicati.');
+            				$this->view->message('success', 'I record sono stati pubblicati.');
             			}
             			break;
         			case 'depublish':
@@ -130,14 +130,14 @@ Class Contents extends Bancha_Controller
         				{
         					$this->records->depublish($record);
         					$this->pages->depublish($record);
-        					$this->view->set('message', 'I record sono stati depubblicati.');
+        					$this->view->message('success', 'I record sono stati depubblicati.');
         				}
         				break;
         			case 'delete':
         				foreach ($records as $record)
         				{
         					$this->delete_record(NULL, $record, TRUE);
-        					$this->view->set('message', 'I record sono stati eliminati.');
+        					$this->view->message('success', 'I record sono stati eliminati.');
         				}
         				break;
             	}
@@ -199,7 +199,7 @@ Class Contents extends Bancha_Controller
         $this->view->set('records', $records);
 
         if ($this->session->flashdata('message')) {
-        	$this->view->set('message', $this->session->flashdata('message'));
+        	$this->view->message('success', $this->session->flashdata('message'));
         }
 
         $this->view->render_layout('content/record_list');
@@ -325,7 +325,7 @@ Class Contents extends Bancha_Controller
           		redirect('admin/contents/type/' . $tipo['name']);
 
             } else{
-          		$this->view->set('ok_message', 'Il contenuto &egrave; stato correttamente salvato.');
+          		$this->view->message('success', 'Il contenuto &egrave; stato correttamente salvato.');
             }
 
         }else if ($record_id != '') {
@@ -574,7 +574,7 @@ Class Contents extends Bancha_Controller
         {
     		show_error(_('Cannot renew the cache.'), 500, _('Error'));
     	} else {
-            $this->view->set('message', _('The cache has been cleared.'));
+            $this->view->message('success', _('The cache has been cleared.'));
             $this->view->render_layout('content/renewed');
         }
     }
