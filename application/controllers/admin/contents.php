@@ -18,7 +18,7 @@ Class Contents extends Bancha_Controller
 {
 
     /**
-     * @var string Currenc section
+     * @var string Current section
      */
     private $_section;
 
