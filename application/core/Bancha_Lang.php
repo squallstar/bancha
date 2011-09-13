@@ -121,6 +121,7 @@ class Bancha_Lang extends CI_Lang {
 
 		// Choose domain
 		textdomain(FRNAME);
+
     }
 
     function _trans($original, $aParams = false) {
