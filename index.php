@@ -40,7 +40,7 @@ if (defined('ENVIRONMENT'))
 		break;
 
 		default:
-			exit('Bencha application environment is not set correctly.');
+			exit('Bancha application environment is not set correctly.');
 	}
 }
 
