@@ -113,6 +113,7 @@ Class Feed
 
 	/**
 	 * Renders the feed
+	 * NOTE: The profiler will be always forced to be disabled
 	 * @param string $template
 	 */
 	public function render($template='feed')

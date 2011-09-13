@@ -80,6 +80,7 @@ Class Installer
 		$this->dbforge->drop_table('records_stage');
 		$this->dbforge->add_field($record_fields);
 		$this->dbforge->add_key('id_record', TRUE);
+		$this->dbforge->add_foreign_key('id_type', 'types', 'id_type');
 		$this->dbforge->create_table('records_stage');
 
 		$record_fields['id_record']['auto_increment'] = FALSE;
@@ -88,6 +89,8 @@ Class Installer
 		$this->dbforge->drop_table('records');
 		$this->dbforge->add_field($record_fields);
 		$this->dbforge->add_key('id_record', TRUE);
+		$this->dbforge->add_foreign_key('id_type', 'types', 'id_type');
+		$this->dbforge->add_foreign_key('id_record', 'records_stage', 'id_record');
 		$this->dbforge->create_table('records');
 
 		//Pages and Pages_stage tables
@@ -347,7 +350,10 @@ Class Installer
 			array('categories', 'category_name'),
 			array('documents', 'bind_id'),
 			array('documents_stage', 'bind_id'),
-			array('record_categories', 'id_category')
+			array('record_categories','id_record'),
+			array('record_categories', 'id_category'),
+			array('record_hierarchies', 'id_record'),
+			array('record_hierarchies', 'id_hierarchy')
 		);
 
 		//If we encounter index with same name, we will append _N (where N is the index number)

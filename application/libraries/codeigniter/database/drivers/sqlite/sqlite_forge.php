@@ -162,6 +162,12 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 			}
 		}
 
+		//Patch added by Nicholas Valbusa
+		if (isset($this->fkeys) && count($this->fkeys))
+		{
+			$sql .= ",\n\t" . implode(",\n\t", $this->fkeys);
+		}
+
 		$sql .= "\n)";
 
 		return $sql;
@@ -262,6 +268,20 @@ class CI_DB_sqlite_forge extends CI_DB_forge {
 	function _show_tables()
 	{
 		return "SELECT * FROM sqlite_master WHERE type='table';";
+	}
+
+	/**
+	 * Generate a platform-specific Add foreign key query
+	 * Made by Nicholas Valbusa
+	 */
+	function _add_foreign_key($field, $to_table, $to_field, $action='', $set='')
+	{
+		if ($action != '')
+		{
+			$action = ' ON '.strtoupper($action);
+			$set = strtoupper($set);
+		}
+		return "FOREIGN KEY (".$this->db->_protect_identifiers($field).") REFERENCES ".$this->db->_protect_identifiers($this->db->dbprefix.$to_table)."(".$this->db->_protect_identifiers($to_field).")".$action.' '.$set;
 	}
 }
 
