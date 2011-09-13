@@ -371,13 +371,17 @@ Class Installer
 			$this->CI->config->item('attach_folder'),					//Attachs directory
 			$this->CI->config->item('xml_folder'),						//XML Types schemes
 			$this->CI->config->item('views_absolute_templates_folder'),	//XML Views,
-			$this->CI->config->item('fr_cache_folder')					//Path file di cache
+			$this->CI->config->item('fr_cache_folder')					//Cache files
 		);
 
 		foreach ($directories as $dir)
 		{
 			delete_directory($dir);
 			mkdir($dir, DIR_WRITE_MODE, TRUE);
+			if ($dir != $this->CI->config->item('xml_folder'))
+			{
+				write_file($dir.'index.html', CMS.' does not allow directory listing.');
+			}
 		}
 	}
 

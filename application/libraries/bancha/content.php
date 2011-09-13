@@ -80,6 +80,7 @@ Class Content {
 	{
 		if (!file_exists($this->types_cache_folder))
 		{
+			mkdir($this->CI->config->item('fr_cache_folder'), DIR_WRITE_MODE, TRUE);
 			$this->rebuild();
 		}
 		$this->_content_types = unserialize(file_get_contents($this->types_cache_folder));
