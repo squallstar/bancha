@@ -35,16 +35,15 @@ Class Hierarchies extends Bancha_Controller
   	}
 
 	public function index()
-	{
-
-		//New hierarchy added
+	{	
 		if ($this->input->post('new'))
 		{
+			//New hierarchy
 			$name = $this->input->post('name');
 			$done = $this->hierarchies->add($name, $this->input->post('id_parent'));
 			if ($done)
 			{
-				$this->view->set('message', $this->lang->_trans('The hierarchy %n has been added.', array('n' => $name)));
+				$this->view->message('success', $this->lang->_trans('The hierarchy %n has been added.', array('n' => '['.$name.']')));
 			}
 		}
 
@@ -52,11 +51,22 @@ Class Hierarchies extends Bancha_Controller
 		if ($data = $this->input->post('hierarchies'))
 		{
 			$elements = $this->hierarchies->parse_data($data);
+			$done = $this->hierarchies->delete($elements);
+			if ($done)
+			{
+				$this->view->message('success', _('The selected hierarchies have been deleted.'));
+			}
 		}
+
+		//We add a first blank element to the select
+		$dropdown = $this->hierarchies->dropdown();
+		$tmp = array('' => '');
+		foreach ($dropdown as $key => $val) $tmp[$key] = $val;
+		$dropdown = $tmp;
 
 		$list = $this->hierarchies->get();
 		$this->view->set('hierarchies', $list);
-		$this->view->set('dropdown', $this->hierarchies->dropdown());
+		$this->view->set('dropdown', $dropdown);
 		$this->view->set('tree', $this->hierarchies->get_tree());
 
 		$this->view->render_layout('hierarchies/list');

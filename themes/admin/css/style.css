@@ -579,7 +579,7 @@ a:hover {
 	float: left;
 	}
 
-.block .message.errormsg {
+.block .message.errormsg, .block .message.error {
 	border: 1px solid #e9c59b;
 	background: #ffecce url(../widgets/error.gif) 12px 12px no-repeat;
 	color: #e3302c;

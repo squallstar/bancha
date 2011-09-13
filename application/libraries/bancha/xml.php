@@ -164,8 +164,9 @@ Class Xml
     	$content = array(
       		'id'			=> $type_id,
       		'name'			=> $safe_filename,
-      		'tree'			=> strtolower((string)$node->tree) == 'true' ? true : false,
-      		'has_categories'=> strtolower((string)$node->has_categories) == 'true' ? true : false,
+      		'tree'			=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
+      		'has_categories'=> isset($node->has_categories) ? (strtolower((string)$node->has_categories) == 'true' ? TRUE : FALSE) : FALSE,
+          'has_hierarchies'=> isset($node->has_hierarchies) ? (strtolower((string)$node->has_hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
       		'description'	=> (string) $node->description,
       		'primary_key'	=> (string) $node->primary_key,
       		'table'			=> (string) $node->table

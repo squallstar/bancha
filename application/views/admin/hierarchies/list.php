@@ -30,19 +30,15 @@ $this->load->helper('form');
 			<h3><?php echo _('Hierarchies list'); ?></h3>
 			<p><?php echo _('Here you will find the inserted hierarchies.'); ?></p>
 
-			<?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
+			<?php echo $this->view->get_messages(); ?>
 
+			<?php if (count($hierarchies)) { ?>
 			<form action="" method="POST" class="tree">
 				<input type="hidden" name="hierarchies" />
 				<div id="tree" name="selNodes"></div>
 				<br />
 				<?php echo form_submit('submit', _('Delete selected'), 'class="submit long"'); ?>
-				</form>
-
-
-
-			<?php if (count($hierarchies)) { ?>
-
+			</form>
 
 
 			<?php
@@ -91,7 +87,7 @@ $(document).ready(function() {
     	onActivate: function(node) {
       	},
       	checkbox: true,
-        selectMode: 3,
+        selectMode: 1,
       	children: <?php echo json_encode($tree); ?>
     });
 

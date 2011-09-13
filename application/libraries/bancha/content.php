@@ -279,7 +279,7 @@ Class Content {
 	}
 
 	/**
-	 * Restituisce tutti gli schemi dei tipi di contenuto
+	 * Returns all the content types schemes
 	 * @return array
 	 */
 	public function types()
@@ -288,7 +288,7 @@ Class Content {
 	}
 
 	/**
-	 * Ricostruisce la cache dei tipi di contenuto
+	 * Rebuilds the content types cache
 	 * @return bool success
 	 */
 	public function rebuild()
@@ -345,7 +345,7 @@ Class Content {
 	}
 
 	/**
-	 * Costruisce un Record
+	 * Makes a Record
 	 * @param int|string $type
 	 * @param array $recordData
 	 * @return Record

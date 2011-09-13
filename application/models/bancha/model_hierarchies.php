@@ -80,6 +80,25 @@ Class Model_hierarchies extends CI_Model {
   		return $this->db->insert($this->table, $data);
   	}
 
+  	/**
+  	 * Delete one or more hierarchies
+  	 * @param int|array $hierarchy The hyerarchy, or the hierarchies to delete
+  	 * @return bool success
+  	 */
+  	public function delete($hierarchy)
+  	{
+  		if (is_array($hierarchy))
+  		{
+  			$this->db->where_in('id_hierarchy', $hierarchy);
+  			$this->db->or_where_in('id_parent', $hierarchy);
+  		} else if (is_numeric($hierarchy))
+  		{
+  			$this->db->where('id_hierarchy', $hierarchy);
+  			$this->db->or_where('id_parent', $hierarchy);
+  		}
+  		return $this->db->delete($this->table);
+  	}
+
 	/**
 	 * Recursive function to create a tree of the hierarchies
 	 * @param int $id

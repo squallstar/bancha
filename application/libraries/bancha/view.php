@@ -105,6 +105,11 @@ Class View
 	 */
 	public $is_feed = FALSE;
 
+	/**
+	 * @var array The flashmessages to show
+	 */
+	public $messages = array();
+
 	public function __construct()
 	{
 		$this->_CI = & get_instance();
@@ -273,6 +278,38 @@ Class View
 	public function render($view_file)
 	{
 		$this->_CI->load->view($view_file);
+	}
+
+	/**
+	 * Adds a flash message to the view
+	 * @param success|warning|info|error $type
+	 * @param string $message
+	 */
+	public function message($type, $message = '')
+	{
+		if ($message != '')
+			{$this->messages[] = array(
+				'type' 	=> $type,
+				'text'	=> $message
+			);
+		}
+	}
+
+	/**
+	 * Returns all the flash messages
+	 * @return XHTML
+	 */
+	public function get_messages()
+	{
+		$tmp = '';
+		if (count($this->messages))
+		{
+			foreach ($this->messages as $message)
+			{
+				$tmp.= '<div class="message '.$message['type'].'"><p>'.$message['text'].'</p></div>';
+			}
+		}
+		return $tmp;
 	}
 
 }
