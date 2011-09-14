@@ -352,7 +352,6 @@ Class Xml
         			$content_field['presets'] = array();
         			
           			$content_field['original'] = isset($field->original) ? (strtoupper($field->original) == 'TRUE' ? TRUE : FALSE) : FALSE;
-          			$content_field['encrypt_name'] = isset($field->encrypt_name) ? (strtoupper($field->encrypt_name) == 'TRUE' ? TRUE : FALSE) : FALSE;
           			$content_field['resized'] = isset($field->resized) ? (string)$field->resized : FALSE;
           			$content_field['thumbnail'] = isset($field->thumbnail) ? (string)$field->thumbnail : FALSE;
           			
@@ -367,6 +366,7 @@ Class Xml
           			$content_field['size'] = isset($field->size) ? (int)$field->size : 102400; //max 100mb
           			$content_field['mimes'] = isset($field->mimes) ? (string)$field->mimes : '*';
           			$content_field['max'] = isset($field->max) ? (int)$field->max : 10; //max 10 files
+                $content_field['encrypt_name'] = isset($field->encrypt_name) ? (strtoupper($field->encrypt_name) == 'TRUE' ? TRUE : FALSE) : FALSE;
         		}
 
         		//Onchange JS

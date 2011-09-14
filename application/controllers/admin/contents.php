@@ -296,7 +296,11 @@ Class Contents extends Bancha_Controller
                 $alt_texts = $this->input->post('_alt_text', FALSE);
                 $priorities = $this->input->post('_priority', FALSE);
                 foreach ($alt_texts as $document_id => $new_text) {
-                    $this->documents->update_alt_text($document_id, $new_text, $priorities[$document_id]);
+                    if (isset($priorities[$document_id]))
+                    {
+                        //TODO: capire quando la chiave $priorities[$document_id] non è settata
+                        $this->documents->update_alt_text($document_id, $new_text, $priorities[$document_id]);
+                    }
                 }
             }
 

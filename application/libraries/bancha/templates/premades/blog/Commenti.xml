@@ -2,8 +2,8 @@
 <!-- generator="bancha-{version}" -->
 <content>
 	<id>{id}</id>
-	<name>Commenti</name>
-	<description>Commenti</description>
+	<name>Comments</name>
+	<description>Comments</description>
 	<tree>false</tree>
 	<primary_key>id_record</primary_key>
 	<table>records</table>
@@ -15,7 +15,7 @@
 		</trigger>
 	</triggers>
 	<fieldset>
-		<name>Informazioni sulla persona</name>
+		<name>Author info</name>
 		<field id="id_record" column="true">
 			<type>hidden</type>
 			<list>true</list>
@@ -39,40 +39,40 @@
 			<type>text</type>
 			<admin>true</admin>
 			<list>true</list>
-			<description>Nome</description>
+			<description>Name</description>
 		</field>
 		<field id="www">
-			<description>Sito internet</description>
+			<description>Website</description>
 			<type>text</type>
 			<list>true</list>
 			<admin>true</admin>
 		</field>
 		<field id="email">
-			<description>Indirizzo e-mail</description>
+			<description>E-mail address</description>
 			<type>text</type>
 			<list>true</list>
 			<admin>true</admin>
 		</field>
 		<field id="contenuto">
-			<description>Messaggio</description>
+			<description>Message</description>
 			<type>textarea</type>
 			<list>true</list>
 		</field>
 		<field id="date_publish" column="true">
-			<description>Data di visibilità</description>
+			<description>Visibility date</description>
 			<type>hidden</type>
 			<default>eval:time()</default>
 		</field>
 		<field id="lang" column="true">
-			<description>Lingua</description>
+			<description>Language</description>
 			<type>hidden</type>
 			<default>it</default>
 		</field>
 	</fieldset>
 	<fieldset>
-		<name>Post collegato</name>
+		<name>Linked post</name>
 		<field id="post_id" column="true">
-			<description>Post collegato (Blog)</description>
+			<description>Linked post</description>
 			<type>select</type>
 			<admin>true</admin>
 			<list>true</list>

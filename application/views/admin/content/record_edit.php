@@ -72,9 +72,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 	?>
 			<p class="breadcrumb">
-				<a href="<?php echo admin_url($_section); ?>">Contenuti</a> &raquo;
-				<a href="<?php echo admin_url($_section.'/type/'.$tipo['id'])?>"><?php echo $tipo['description']; ?></a> &raquo;
-				<strong><?php echo !$record->id ? _('New content') : _('Edit content'); ?></strong>
+				<a href="<?php echo admin_url($_section); ?>">Contenuti</a> &raquo; <a href="<?php echo admin_url($_section.'/type/'.$tipo['id'])?>"><?php echo $tipo['description']; ?></a> &raquo; <strong><?php echo !$record->id ? _('New content') : _('Edit content'); ?></strong>
 			</p>
 			<?php
 
@@ -330,17 +328,17 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['multiple'] = ' ';
 
 				if ($count < $field['max']) {
-					echo br(1).form_upload($attributes).br(1).'('._trans('You can attach up to %n files', array('n' => $field['max'])).')';
+					echo br(1).form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n files', array('n' => $field['max'])).')';
 				} else {
 					echo '<span class="limit">'._('File limit exceeded.').'</span>';
-					echo '<div class="hidden limit">'.br(1).form_upload($attributes).br(1).'('._trans('You can attach up to %n files', array('n' => $field['max'])).')</div>';
+					echo '<div class="hidden limit">'.br(1).form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n files', array('n' => $field['max'])).')</div>';
 				}
 				if ($count && is_array($field_value)) {
 					echo '<table cellpadding="0" cellspacing="0" width="100%" class="sortable cursor">'
 						.'<thead><tr><th>'._('File name').'</th><th>'._('File type').'</th><th>'._('Alternative text').'</th><th></th></tr></thead><tbody>';
 					;
 					foreach ($field_value as $file) {
-						echo '<tr><td><a href="'. attach_url($file->path) . '">'.$file->name.'</a></td>'
+						echo '<tr><td><a target="_blank" href="'. attach_url($file->path) . '">'.$file->name.'</a></td>'
 							.'<td>'.$file->mime.'</td>'
 							.'<td><input name="_alt_text['.$file->id_document.']" type="text" class="text small" value="' . $file->alt_text . '" /></td>'
 							.'<td class="delete"><img align="absmiddle" src="'.site_url(THEMESPATH.'admin/widgets/icns/delete.png').'" /> <a href="#" onclick="return bancha.delete.document(this, '.$file->id_document.');">'._('Delete file').'</a></td>'
