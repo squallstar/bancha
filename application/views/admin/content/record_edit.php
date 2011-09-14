@@ -78,7 +78,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			</p>
 			<?php
 
-			echo br(1).'<h3>'.$fieldset['name'].'</h3>'.br(1);
+			echo br(1).'<h3>'._($fieldset['name']).'</h3>'.br(1);
 
 	if ($first_lap == true)
 	{
