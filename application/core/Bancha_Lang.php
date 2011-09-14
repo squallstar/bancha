@@ -9,7 +9,8 @@ class Bancha_Lang extends CI_Lang {
     public $gettext_language;
     public $gettext_path;
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->gettext_path = APPPATH.'language/locale';
     }
@@ -17,7 +18,8 @@ class Bancha_Lang extends CI_Lang {
 	/**
      * Loads the languages from the Bancha config file
      */
-    private function _load_languages() {
+    private function _load_languages()
+    {
         $this->languages = $this->_CI->config->item('languages');
         
         $select = array();
@@ -33,16 +35,20 @@ class Bancha_Lang extends CI_Lang {
      * @param string $lang
      * @param bool $load_gettext
      */
-    function set_lang($lang, $load_gettext = true) {
-		if (!$this->languages) {
+    function set_lang($lang, $load_gettext = true)
+    {
+		if (!$this->languages)
+		{
 			$this->_load_languages();
 		}
 
         //Checks if a language exists
-		if (isset($this->languages[$lang])) {
+		if (isset($this->languages[$lang]))
+		{
 			$this->gettext_language = $this->languages[$lang]['locale'];
 			$this->current_language = $lang;
-			if ($load_gettext) {
+			if ($load_gettext)
+			{
 				$this->load_gettext();
 			}
 		} else {
@@ -58,8 +64,10 @@ class Bancha_Lang extends CI_Lang {
      * Sets the website language to the default one
      * @param $load_gettext
      */
-    function set_default($load_gettext = true) {
- 	    if (!$this->languages) {
+    function set_default($load_gettext = true)
+    {
+ 	    if (!$this->languages)
+ 	    {
 			$this->_load_languages();
 		}
     	$keys = array_keys($this->languages);
@@ -67,15 +75,22 @@ class Bancha_Lang extends CI_Lang {
 
 		$this->gettext_language = $this->languages[$this->current_language]['locale'];
 
-    	if ($load_gettext) {
+    	if ($load_gettext)
+    	{
 			$this->load_gettext();
 		}
     }
 
-    function check($folder='website') {
+    /**
+     * Checks the current language
+     * @param string $folder The locale folder to check in
+     */
+    function check($folder='website')
+    {
     	$this->gettext_path = $this->gettext_path . '/' . trim($folder, '/');
-    	$this->_CI = &get_instance();
-    	if (!$this->languages) {
+    	$this->_CI = & get_instance();
+    	if (!$this->languages)
+    	{
 			$this->_load_languages();
 		}
 
@@ -86,10 +101,13 @@ class Bancha_Lang extends CI_Lang {
 			$current_lang = $this->_CI->session->userdata('current_language');
 		}
 		
-    	if (!$current_lang) {
+    	if (!$current_lang)
+    	{
     		$browser_languages = $this->get_browser_languages();
-			foreach ($browser_languages as $current_lang) {
-				if (isset($this->languages[$current_lang])) {
+			foreach ($browser_languages as $current_lang)
+			{
+				if (isset($this->languages[$current_lang]))
+				{
 					break;
 				}
 			}
@@ -107,21 +125,26 @@ class Bancha_Lang extends CI_Lang {
 		//Accept-Language:	it-it,it;q=0.8,en-us;q=0.5,en;q=0.3
 		$accepted_languages = $this->_CI->input->server('HTTP_ACCEPT_LANGUAGE');
 		$langs = array();
-		foreach (explode(',', $accepted_languages) as $k => $pref) {
+		foreach (explode(',', $accepted_languages) as $k => $pref)
+		{
 			list($pref, $q) = explode(';q=', $pref, 2);
-			if ($q==='' || $q === NULL) {
+			if ($q==='' || $q === NULL)
+			{
 				$q = 1;
 			}
-			list($langCode, $nation) = explode('-', $pref, 2);
-			$langCode = strtolower($langCode);
-			if ($langCode) {
+			list($lang_code, $nation) = explode('-', $pref, 2);
+			$lang_code = strtolower($lang_code);
+			if ($lang_code)
+			{
 				$nation = strtoupper($nation);
-				if ($nation == '' || $nation == '*') {
-					$langs[$langCode] = $q;	
+				if ($nation == '' || $nation == '*')
+				{
+					$langs[$lang_code] = $q;	
 				} else {
-					$langs[$langCode."_".$nation] = $q;
-					if (!isset($langs[$langCode])) {
-						$langs[$langCode] = $q;
+					$langs[$lang_code."_".$nation] = $q;
+					if (!isset($langs[$lang_code]))
+					{
+						$langs[$lang_code] = $q;
 					}
 				}
 			}
@@ -134,7 +157,8 @@ class Bancha_Lang extends CI_Lang {
     /**
      * Store the current language in session
      */
-    function set_cookie() {
+    function set_cookie()
+    {
     	if (isset($this->_CI->session))
 		{
 			$this->_CI->session->set_userdata('current_language', $this->current_language);
@@ -144,8 +168,8 @@ class Bancha_Lang extends CI_Lang {
     /**
      * Loads the .mo files of the current language
      */
-    function load_gettext() {
-
+    function load_gettext()
+    {
     	putenv('LC_ALL='.$this->gettext_language);
 		setlocale(LC_ALL, $this->gettext_language);
 
@@ -155,38 +179,53 @@ class Bancha_Lang extends CI_Lang {
 
 		// Choose domain
 		textdomain(FRNAME);
-
     }
 
-    function _trans($original, $aParams = false) {
-        if ( isset($aParams['plural']) && isset($aParams['count']) ) {
-            $sTranslate = ngettext($original, $aParams['plural'], $aParams['count']);
-            $sTranslate = $this->replace_dynamically($sTranslate, $aParams);
-        }
-        else{
-            $sTranslate = gettext( $original );
-            if (is_array($aParams) && count($aParams) ) $sTranslate = $this->replace_dynamically($sTranslate, $aParams);
+    /**
+     * Translates a string binding some params
+     * example: I am %n (where %n will be the param "n")
+     * @param string $original The key of the translation
+     * @param array $bind_params The params to bind
+     */
+    function _trans($original, $bind_params = false)
+    {
+        if (isset($bind_params['plural']) && isset($bind_params['count']))
+        {
+            $sTranslate = ngettext($original, $bind_params['plural'], $bind_params['count']);
+            $sTranslate = $this->replace_dynamically($sTranslate, $bind_params);
+        } else {
+            $sTranslate = gettext($original);
+            if (is_array($bind_params) && count($bind_params))
+            {
+	            $sTranslate = $this->replace_dynamically($sTranslate, $bind_params);
+	        }
         }
         return $sTranslate;
     }
 
-    function replace_dynamically($sString) {
-        $aTrad = array();
-        for ( $i=1, $iMax = func_num_args(); $i<$iMax; $i++) {
+    /**
+     * Replace a string with some arguments
+     * This function accepts infinite parameters
+     * @param string $s_string The string to translate
+     */
+    function replace_dynamically($s_string)
+    {
+        $a_trad = array();
+        for ( $i=1, $i_max = func_num_args(); $i<$i_max; $i++)
+        {
             $arg = func_get_arg($i);
-            if (is_array($arg)) {
-                foreach ($arg as $key => $sValue) {
-                    $aTrad['%'.$key] = $sValue;
+            if (is_array($arg))
+            {
+                foreach ($arg as $key => $sValue)
+                {
+                    $a_trad['%'.$key] = $sValue;
                 }
-            }
-            else {
-                $aTrad['%'.$key] = $arg;
+            } else {
+                $a_trad['%'.$key] = $arg;
             }
         }
-        return strtr($sString, $aTrad);
+        return strtr($s_string, $a_trad);
     }
-
-
 }
 
 ?>
