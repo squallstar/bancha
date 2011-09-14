@@ -27,6 +27,7 @@ Class Model_tree extends CI_Model {
 	public $parent_page_uri = false;
 	public $stage_prefix = 'stage.';
 	public $breadcrumbs = array();
+	public $last_piece = '';
 
 	public function __construct()
 	{
@@ -39,16 +40,17 @@ Class Model_tree extends CI_Model {
 			show_error('L\'albero di menu principale non &egrave; stato definito nel file di configurazione.');
 		}
 
-		//Imposto i segmenti dell'URI
+		//We set the URI segments
 		$this->_uri_segments = $this->uri->segment_array();
 
 		$pieces = count($this->_uri_segments);
 		if ($pieces)
 		{
-			//Controllo se e' un feed
+			//We check if the requested URL is a feed
 			$last_piece = $this->_uri_segments[$pieces];
 			if (in_array($last_piece,$this->config->item('feed_uri')))
 			{
+				$this->last_piece = '/' . $last_piece;
 				list($name, $type) = explode('.',$last_piece);
 				$this->uri->uri_string = str_replace('/'.$last_piece, '', $this->uri->uri_string);
 				unset($this->uri->segments[$pieces]);

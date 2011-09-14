@@ -27,7 +27,5 @@ Class Bancha_Controller extends CI_Controller
 
 		//Loads the framework :)
 		$this->load->bancha();
-
 	}
-
 }
