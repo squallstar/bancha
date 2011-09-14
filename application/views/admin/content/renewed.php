@@ -11,7 +11,7 @@
 
 	<div class="block_content">
 
-		<div class="message success"><?php echo $this->view->get_messages(); ?></div>
+		<?php echo $this->view->get_messages(); ?>
 
 	</div>
 

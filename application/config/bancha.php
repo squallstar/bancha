@@ -161,6 +161,12 @@ $config['view_templates_to_copy'] = array('detail', 'list');
 $config['views_absolute_templates_folder'] = APPPATH . 'views' . DIRECTORY_SEPARATOR . $config['views_templates_folder'];
 
 /*
+ * XML TRANSLATIONS PATH
+ * The XML parser will save the translations here, as PHP labels
+ */
+$config['xml_translations_path'] = APPPATH . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'content' . DIRECTORY_SEPARATOR . 'translations.php';
+
+/*
  * RESTRICTED FIELD NAMES
  * The restriced names for the XML fields. They are not available due to internal use.
  */
@@ -255,4 +261,3 @@ $config['tree_linear_fields'] = array('id_record', 'title', 'uri');
  * will be also extracted.
  */
 $config['record_select_tree_fields'] = array('id_parent');
-

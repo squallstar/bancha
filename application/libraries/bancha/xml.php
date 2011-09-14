@@ -29,6 +29,11 @@ Class Xml
 	 */
   	public $types_cache_folder;
 
+    /**
+     * @var array Translations
+     */
+    private $_translations = array();
+
   	public function __construct()
   	{
    		$this->CI = & get_instance();
@@ -172,6 +177,8 @@ Class Xml
       		'table'			=> (string) $node->table
     	);
 
+        $this->_translations[$content['description']] = TRUE;
+
     	if (isset($node->table_stage))
     	{
     		$content['stage'] = TRUE;
@@ -267,7 +274,10 @@ Class Xml
 
     	foreach ($node->fieldset as $fieldset_node)
     	{
-      		$fieldset_name = isset($fieldset_node->name) ? (string)$fieldset_node->name : _('Untitled');
+      		$fieldset_name = isset($fieldset_node->name) ? convert_accented_characters((string)$fieldset_node->name) : _('Untitled');
+
+          $this->_translations[$fieldset_name] = TRUE;
+
 
       		if ($fieldset_name == '')
       		{
@@ -317,10 +327,10 @@ Class Xml
         		{
           			show_error($this->CI->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are:', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
         		}
-
+                
         		//Default fields for each field
         		$content_field = array(
-          			'description'	=> isset($field->description) ? (string)$field->description : '',
+          			'description'	=> isset($field->description) ? convert_accented_characters((string)$field->description) : '',
           			'type'			=> (string) $field->type,
           			'length'		=> isset($field->length) ? (int)$field->length : 255,
           			'mandatory'		=> isset($field->mandatory) ? (strtoupper($field->mandatory) == 'TRUE' ? TRUE : FALSE) : FALSE,
@@ -329,6 +339,8 @@ Class Xml
          			'visible'		=> isset($field->visible) ? (strtoupper($field->visible) == 'TRUE' ? TRUE : FALSE) : TRUE,
           			'default'		=> isset($field->default) ? (string)$field->default : ''
         		);
+
+                $this->_translations[$content_field['description']] = TRUE;
 
         		if ($content_field['type'] == 'files' || $content_field['type'] == 'images')
         		{
@@ -381,7 +393,9 @@ Class Xml
           			} else {
             			foreach ($field->options->option as $option)
             			{
-              				$options[ (string)$option->attributes()->value ] = (string)$option;
+              				$opt = (string)$option;
+                      $options[ (string)$option->attributes()->value ] = $opt;
+                      $this->_translations[$opt] = TRUE;
             			}
             			$content_field['options'] = $options;
           			}
@@ -437,4 +451,20 @@ Class Xml
     	} //end foreach fieldsets
     	return $content;
   	}
+
+    public function update_translations()
+    {
+        if (count($this->_translations))
+        {
+            $str = '//These translations are used to update the .po files and are generated automatically by the XML parser' . "\n<?php";
+            foreach (array_keys($this->_translations) as $key)
+            {
+                if ($key != '')
+                {
+                    $str.= "\n_('" . str_replace("'", "\'", $key) . "');";
+                }
+            }
+            write_file($this->CI->config->item('xml_translations_path'), $str);
+        }
+    }
 }

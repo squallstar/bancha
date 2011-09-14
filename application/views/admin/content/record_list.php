@@ -42,7 +42,7 @@ $fields = array_keys($tipo['fields']);
 					<?php foreach ($admin_fields as $field) {
 							if ($field != $tipo['primary_key'])
 							{
-								echo '<th>'.$tipo['fields'][$field]['description'].'</th>';
+								echo '<th>'._($tipo['fields'][$field]['description']).'</th>';
 							}
 						}
 						?>
@@ -111,7 +111,8 @@ $fields = array_keys($tipo['fields']);
 
 			<tbody>
 <?php
-	foreach ($records as $record) {
+	foreach ($records as $record)
+	{
 		echo '<tr>';
 
 			$track_str = $tipo['name'].'/'.$record->id;
@@ -141,18 +142,19 @@ $fields = array_keys($tipo['fields']);
 				}
 			}
 
-			foreach ($fields as $field) {
-
+			foreach ($fields as $field)
+			{
 				if ($tipo['fields'][$field]['admin'] === true && $field != $primary_key) {
-
-
 					$value = $record->get($field);
 
-					if (isset($tipo['fields'][$field])) {
-						switch ($tipo['fields'][$field]['type']) {
+					if (isset($tipo['fields'][$field]))
+					{
+						switch ($tipo['fields'][$field]['type'])
+						{
 							case 'select':
 							case 'radio':
-								if (isset($tipo['fields'][$field]['options'])) {
+								if (isset($tipo['fields'][$field]['options']))
+								{
 									$tmp = (string)$value;
 									if (isset($tipo['fields'][$field]['options'][$tmp])) {
 										$value = $tipo['fields'][$field]['options'][$tmp];
@@ -182,7 +184,8 @@ $fields = array_keys($tipo['fields']);
 
 						}
 					}
-					if ($tipo['edit_link'] == $field) {
+					if ($tipo['edit_link'] == $field)
+					{
 						echo '<td><a href="'.admin_url($_section.'/edit_record/'.$track_str).'">'.$value.'</a></td>';
 					} else {
 						echo '<td>'.$value.'</td>';

@@ -341,6 +341,8 @@ Class Content {
 			$this->CI->tree->clear_cache();
 		}
 
+		$this->CI->xml->update_translations();
+
 		return $done;
 	}
 
