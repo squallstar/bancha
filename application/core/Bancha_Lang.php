@@ -130,11 +130,17 @@ class Bancha_Lang extends CI_Lang {
             $langs = array();
             foreach (explode(',', $accepted_languages) as $k => $pref)
             {
+            	//list($pref, $q) = preg_match('/.;q=./', $pref) ? explode(';q=', $pref, 2) : array($pref, NULL);
                 list($pref, $q) = explode(';q=', $pref, 2);
                 if ($q==='' || $q === NULL)
                 {
                     $q = 1;
                 }
+				if (preg_match('/.-./', $pref)) {
+					print_r($pref);
+					die;
+				}
+				//list($lang_code, $nation) = preg_match('/.-./', $pref) ? explode('-', $pref, 2) : array($pref, $pref); 
                 list($lang_code, $nation) = explode('-', $pref, 2);
                 $lang_code = strtolower($lang_code);
                 if ($lang_code)
