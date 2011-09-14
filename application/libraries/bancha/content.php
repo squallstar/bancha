@@ -294,7 +294,7 @@ Class Content {
 	public function rebuild()
 	{
 		//All types
-		$this->CI->load->helper('file');
+		$this->CI->load->helper(array('file', 'text'));
 
 		$filenames = get_filenames($this->xml_folder);
 
