@@ -14,10 +14,34 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-/* LANGUAGES
- * Configurazione delle lingue utilizzabili
+/* WEBSITE LANGUAGES
+ * Configurazione delle lingue utilizzabili lato website
  */
-$config['languages'] = array(
+$config['website_languages'] = array(
+	'it' => array(
+		'name'			=> 'italian',
+		'locale'		=> 'it_IT',
+		'description'	=> 'Italiano',
+		'date_format'	=> 'd/m/Y'
+	),
+	'en' => array(
+		'name'			=> 'english',
+		'locale'		=> 'en_US',
+		'description'	=> 'English',
+		'date_format'	=> 'Y-m-d'
+	),
+	'es' => array(
+		'name'			=> 'spanish',
+		'locale'		=> 'es_ES',
+		'description'	=> 'Español',
+		'date_format'	=> 'd/m/Y'
+	)
+);
+
+/* ADMIN LANGUAGES
+ * Configurazione delle lingue utilizzabili in amministrazione
+ */
+$config['admin_languages'] = array(
 	'it' => array(
 		'name'			=> 'italian',
 		'locale'		=> 'it_IT',
