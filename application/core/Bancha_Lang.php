@@ -124,33 +124,40 @@ class Bancha_Lang extends CI_Lang {
 	{
 		//Accept-Language:	it-it,it;q=0.8,en-us;q=0.5,en;q=0.3
 		$accepted_languages = $this->_CI->input->server('HTTP_ACCEPT_LANGUAGE');
-		$langs = array();
-		foreach (explode(',', $accepted_languages) as $k => $pref)
-		{
-			list($pref, $q) = explode(';q=', $pref, 2);
-			if ($q==='' || $q === NULL)
-			{
-				$q = 1;
-			}
-			list($lang_code, $nation) = explode('-', $pref, 2);
-			$lang_code = strtolower($lang_code);
-			if ($lang_code)
-			{
-				$nation = strtoupper($nation);
-				if ($nation == '' || $nation == '*')
-				{
-					$langs[$lang_code] = $q;	
-				} else {
-					$langs[$lang_code."_".$nation] = $q;
-					if (!isset($langs[$lang_code]))
-					{
-						$langs[$lang_code] = $q;
-					}
-				}
-			}
-		}
-		arsort($langs);
-		return array_keys($langs);
+
+        if (strpos($accepted_languages, ',') !== FALSE)
+        {
+            $langs = array();
+            foreach (explode(',', $accepted_languages) as $k => $pref)
+            {
+                list($pref, $q) = explode(';q=', $pref, 2);
+                if ($q==='' || $q === NULL)
+                {
+                    $q = 1;
+                }
+                list($lang_code, $nation) = explode('-', $pref, 2);
+                $lang_code = strtolower($lang_code);
+                if ($lang_code)
+                {
+                    $nation = strtoupper($nation);
+                    if ($nation == '' || $nation == '*')
+                    {
+                        $langs[$lang_code] = $q;    
+                    } else {
+                        $langs[$lang_code."_".$nation] = $q;
+                        if (!isset($langs[$lang_code]))
+                        {
+                            $langs[$lang_code] = $q;
+                        }
+                    }
+                }
+            }
+            arsort($langs);
+            return array_keys($langs);
+        } else {
+            return array(substr($accepted_languages, 0, 2));
+        }
+		
 	}
 
 
