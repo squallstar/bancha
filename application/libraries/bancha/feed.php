@@ -119,6 +119,11 @@ Class Feed
 	public function render($template='feed')
 	{
 		$this->CI->output->enable_profiler(FALSE);
+
+		//Before rendering, we re-add the /feed.type to the path
+		//so CI can cache that page differently from the real one
+		$this->CI->uri->uri_string .= $this->CI->tree->last_piece; 
+
 		$this->CI->view->set('type', $this->_type);
 
 		if ($this->_type == 'xml')

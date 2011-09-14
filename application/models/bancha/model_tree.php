@@ -27,6 +27,7 @@ Class Model_tree extends CI_Model {
 	public $parent_page_uri = false;
 	public $stage_prefix = 'stage.';
 	public $breadcrumbs = array();
+	public $last_piece = '';
 
 	public function __construct()
 	{
@@ -36,19 +37,20 @@ Class Model_tree extends CI_Model {
 
 		if (!count($this->_menu_type))
 		{
-			show_error('L\'albero di menu principale non &egrave; stato definito nel file di configurazione.');
+			show_error('The default content type has not been defined in the file config/bancha.php!');
 		}
 
-		//Imposto i segmenti dell'URI
+		//We set the URI segments
 		$this->_uri_segments = $this->uri->segment_array();
 
 		$pieces = count($this->_uri_segments);
 		if ($pieces)
 		{
-			//Controllo se e' un feed
+			//We check if the requested URL is a feed
 			$last_piece = $this->_uri_segments[$pieces];
 			if (in_array($last_piece,$this->config->item('feed_uri')))
 			{
+				$this->last_piece = '/' . $last_piece;
 				list($name, $type) = explode('.',$last_piece);
 				$this->uri->uri_string = str_replace('/'.$last_piece, '', $this->uri->uri_string);
 				unset($this->uri->segments[$pieces]);
@@ -67,7 +69,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Imposta se estrarre le pagine invisibili
+	 * Defines if the hidden pages needs to be extracted
 	 * @param bool $bool
 	 * @return $this
 	 */
@@ -78,7 +80,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Imposta il tipo su cui estrarre l'albero
+	 * Sets the content type to extract
 	 * @param int|string $type
 	 * @return Tree
 	 */
@@ -92,7 +94,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Imposta i tipi su cui estrarre l'albero
+	 * Sets the content types to extract
 	 * @param array $types
 	 * @return $this;
 	 */
@@ -115,7 +117,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Imposta l'utilizzo di tutti i parent types di un tipo per la ricerca
+	 * Sets the parent types to search in
 	 * @param int|string $type
 	 */
 	public function parent_types($type = '')
@@ -131,7 +133,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Imposta una condizione where nella ricerca
+	 * Adds a where condition
 	 * @param string $key
 	 * @param int|string $val
 	 */
@@ -145,19 +147,18 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Funzione chiamata dalle get per estrarre i dati
-	 * Il primo parametro sceglie se cercare in sviluppo (FALSE) o produzione (TRUE)
+	 * The getters call it to fetch the data from the database
+	 * @param bool $stage Are we in stage?
 	 */
 	private function _fetch($stage = FALSE)
 	{
-
-		//Se non impostato, estraggo il tipo impostato come default per i menu
+		//If type has not be setted, we use the default ones
 		if ($this->_tipo == '')
 		{
 			$this->type_in($this->_menu_type);
 		}
 
-		//Imposto la lingua se richiesta
+		//We extract only the pages for the current lang
 		if ($this->_use_lang)
 		{
 			$this->where('lang', $this->_use_lang);
@@ -165,13 +166,13 @@ Class Model_tree extends CI_Model {
 
 		$this->db->select(implode(', ', $this->config->item('page_extract_columns')));
 
-		//Se il tipo è ad albero, estraggo i parent
+		//If type is tree, let's extract also the column id_parent
 		if ($this->_tipo['tree'])
 		{
 			$this->db->select('id_parent');
 		}
 
-		//Scelgo se estrarre le pagine invisibili
+		//We choose if the invisible pages must be extracted
 		if ($this->_show_invisibles !== TRUE)
 		{
 			$this->db->where('show_in_menu !=', 'F');
@@ -185,7 +186,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Esclude dalla ricerca una pagina
+	 * Excludes a page from the search
 	 * @param int $id
 	 * @return $this
 	 */
@@ -199,7 +200,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Esclude dalla ricerca dei record che hanno l'id_parent fornito
+	 * Excludes the records that have that id_parent
 	 * @param int $id
 	 * @return $this
 	 */
@@ -214,7 +215,7 @@ Class Model_tree extends CI_Model {
 
 
 	/**
-	 * Ritorna un albero lineare
+	 * Returns a linear tree
 	 * @return array
 	 */
 	public function get_linear()
@@ -227,15 +228,13 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	* Ritorna un albero lineare sotto forma di array associativo
-	* (utile per le select)
+	* Returns a linear tree as an associative array, useful for the Select fields
 	* @return array
 	*/
 	public function get_linear_dropdown()
 	{
 		if (!$this->_fetched)
 		{
-			//$this->db->order_by('uri', 'ASC'); non funziona perchè tanto l'array sotto poi si disordina
 			$this->_fetch();
 		}
 		return $this->get_branch_dropdown($this->_records);
@@ -243,8 +242,7 @@ Class Model_tree extends CI_Model {
 
 
 	/**
-	* Ritorna un albero ramificato sotto forma di array associativo
-	* (utile per le select con alberatura)
+	* Gets a tree as an associative array, starting from a pages list
 	* @return array
 	*/
 	public function get_branch_dropdown($tree = NULL, $id_parent = NULL, $level = 0, $options = array())
@@ -265,7 +263,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Forza il refresh da DB dei dati alla prossima ricerca
+	 * Force the data to be fetched again from the database on the next request
 	 */
 	public function clear()
 	{
@@ -274,7 +272,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Ottiene la gerarchia di una pagina
+	 * Gets a page hierarchy
 	 * @param Record $record
 	 */
 	public function get_page_hierarchy($record)
@@ -282,12 +280,14 @@ Class Model_tree extends CI_Model {
 		if ($record instanceof Record && $record->is_page())
 		{
 			$parent = $record->get('id_parent');
-			//TODO FINIRE
+			
+			//TODO: !!!!!!!!!!!!!!!!!!
 		}
 	}
 
 	/**
-	 * Ottiene la path dell'albero cacheato di un tipo (in base anche a stage/production)
+	 * Returns the path of the cache file, given the type
+	 * The path changes between stage and production.
 	 * @param int|string $type
 	 */
 	public function get_type_cachepath($type = '')
@@ -304,7 +304,7 @@ Class Model_tree extends CI_Model {
 			}
 		}
 
-		//Imposto l'utilizzo della lingua dell'albero
+		//Sets the language to be added to the path
 		$name = $this->lang->current_language . '-' . $name;
 		$this->_use_lang = $this->lang->current_language;
 
@@ -312,27 +312,24 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Ottiene il menu di default del sito
-	 * Il tipo di estrazione di default viene impostato nei file di configurazione
+	 * Gets the default tree of a website, using the content types defined in the config file
 	 * @return array
 	 */
 	public function get_default($type='')
 	{
-		//Ottengo il path dell'albero
 		$tree_file = $this->get_type_cachepath($type='');
 		return $this->_cache_tree($tree_file);
 	}
 
 	/**
-	 * Mette in cache l'albero di un tipo, o lo crea se non esiste
+	 * This will caches a tree, or will create it if not exists (and then, caches it!) 
 	 * @param string $file path cache
 	 */
 	private function _cache_tree($file)
 	{
 		if (file_exists($file))
 		{
-
-			//Carico in memoria i dati come se fossero stati estratti dal DB
+			//We reads the record from the cache file instead of performing a query
 			$this->_records = unserialize(file_get_contents($file));
 			$this->_fetched = true;
 
@@ -342,22 +339,20 @@ Class Model_tree extends CI_Model {
 
 			if($stage === FALSE)
 			{
-				//Fetch dai dati di produzione
+				//Fetch from the production
 				$this->_fetch();
-			} else
-			{
-				//Fetch dai dati di sviluppo
+			} else {
+				//Fetch from the stage
 				$this->_fetch(FALSE);
 			}
 			write_file($file, serialize($this->_records));
 		}
-
-		//Costruisco l'albero
+		//And then, we create the tree
 		return $this->get();
 	}
 
 	/**
-	 * Ottiene una struttura ad albero del tipo di contenuto estratto
+	 * Returns the tree, using the setted conditions
 	 * @return array
 	 */
 	public function get()
@@ -373,7 +368,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Ottiene un ramo dell'albero di menu principale, partendo dalla pagina con id scelto
+	 * Returns a leaf (branch) of the main tree, starting from the given id
 	 * @param int $starting_id
 	 * @return array
 	 */
@@ -395,7 +390,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Ottiene il ramo attuale dalla pagina/record corrente
+	 * Returns the tree starting from the current page
 	 * @return array
 	 */
 	public function get_current_branch()
@@ -416,7 +411,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Crea un albero di menu
+	 * Builds a single tree, given the pages
 	 * @param array $pages Array of Record objects
 	 * @param int $starting_id
 	 */
@@ -452,7 +447,8 @@ Class Model_tree extends CI_Model {
 
 		if ($starting_id != '' && $direct_parent)
 		{
-			//Costruisco il path base di partenza nel caso di padre non root
+			//We build the base path if we are not starting from the root
+			//Is useful when a child page requests a menu branch
 			$this->base_uri = '';
 			while (is_numeric($direct_parent))
 			{
@@ -461,12 +457,9 @@ Class Model_tree extends CI_Model {
 				$direct_parent = $node['id_parent'];
 			}
 			$nodes[$starting_id]['value']->uri = $this->base_uri . $nodes[$starting_id]['value']->uri;
-
 		}
 
-
 		$tree = array();
-		//$this->breadcrumbs = array();
 		foreach ($root as $r)
 		{
 			$this->_treemap($r, $nodes, $sons, '', $tree);
@@ -479,7 +472,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * Funzione ricorsiva interna per creare gerarchie di menu
+	 * Internal recursive function that generates the trees
 	 * @param int $id
 	 * @param array $nodes
 	 * @param array $sons
@@ -515,18 +508,18 @@ Class Model_tree extends CI_Model {
 				$this->_treemap($son, $nodes, $sons, $link, $arr['sons'][$id]);
 			}
 		}
-
 	}
 
 	/**
-	 * Elimina il file relativo alla cache di un tipo
+	 * Deletes a tree cached file, given the type (when not given, it deletes the default one)
 	 * @param int|string $tipo
 	 */
 	public function clear_cache($tipo='')
 	{
 		$path = $this->get_type_cachepath($tipo);
-		if (file_exists($path)) {
-			unlink($path);
+		if (file_exists($path))
+		{
+			@unlink($path);
 		}
 	}
 
