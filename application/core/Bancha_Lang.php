@@ -86,16 +86,50 @@ class Bancha_Lang extends CI_Lang {
 			$current_lang = $this->_CI->session->userdata('current_language');
 		}
 		
-    	
     	if (!$current_lang) {
-    		//Browser language
-			$current_lang = strtolower(substr($this->_CI->input->server('HTTP_ACCEPT_LANGUAGE'),0,2));
-			$this->set_lang($current_lang);
-			$this->set_cookie();
-    	} else {
-    		$this->set_lang($current_lang);
-    	}
+    		$browser_languages = $this->get_browser_languages();
+			foreach ($browser_languages as $current_lang) {
+				if (isset($this->languages[$current_lang])) {
+					break;
+				}
+			}
+		}
+		$this->set_lang($current_lang);
+    	$this->set_cookie();
     }
+
+	/**
+	 * Returns browser languages setted into HTTP header Accept-Language
+	 * @return array
+	 */
+	function get_browser_languages()
+	{
+		//Accept-Language:	it-it,it;q=0.8,en-us;q=0.5,en;q=0.3
+		$accepted_languages = $this->_CI->input->server('HTTP_ACCEPT_LANGUAGE');
+		$langs = array();
+		foreach (explode(',', $accepted_languages) as $k => $pref) {
+			list($pref, $q) = explode(';q=', $pref, 2);
+			if ($q==='' || $q === NULL) {
+				$q = 1;
+			}
+			list($langCode, $nation) = explode('-', $pref, 2);
+			$langCode = strtolower($langCode);
+			if ($langCode) {
+				$nation = strtoupper($nation);
+				if ($nation == '' || $nation == '*') {
+					$langs[$langCode] = $q;	
+				} else {
+					$langs[$langCode."_".$nation] = $q;
+					if (!isset($langs[$langCode])) {
+						$langs[$langCode] = $q;
+					}
+				}
+			}
+		}
+		arsort($langs);
+		return array_keys($langs);
+	}
+
 
     /**
      * Store the current language in session
