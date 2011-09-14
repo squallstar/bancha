@@ -33,7 +33,7 @@ $this->load->helper('form'); ?>
 		<div class="sidebar">
 			<ul class="sidemenu">
 				<?php foreach ($tipo['fieldsets'] as $fieldset) { ?>
-				<li><a href="#sb-<?php echo url_title($fieldset['name']); ?>"><?php echo $fieldset['name']; ?></a></li>
+				<li><a href="#sb-<?php echo url_title($fieldset['name']); ?>"><?php echo _($fieldset['name']); ?></a></li>
 				<?php }
 				if ($tipo['has_categories']) { ?>
 				<li><a href="#sb_category"><?php echo _('Categories'); ?></a>
@@ -101,7 +101,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		$attributes = array();
 
-		$label = form_label($field['description'], $field_name, $attributes);
+		$label = form_label(_($field['description']), $field_name, $attributes);
 
 		//We evaluates the evals
 		if ($field['default'] && substr($field['default'], 0, 5) == 'eval:')
@@ -129,6 +129,17 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		if ($field['mandatory'] && in_array($field['type'], array('text', 'number', 'date', 'datetime')))
 		{
 			$attributes['required'] = 'required';
+		}
+
+		//Localized options
+		if (isset($field['options']))
+		{
+			$tmp = array();
+			foreach ($field['options'] as $opt_key => $opt_val)
+			{
+				$tmp[$opt_key] = _($opt_val);
+			}
+			$field['options'] = $tmp;
 		}
 
 		switch ($field['type'])
