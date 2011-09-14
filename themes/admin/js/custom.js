@@ -218,7 +218,7 @@ $(function () {
 
 var bancha = {
 	_priority : 0,
-	delete : {
+	remove : {
 		document : function(self, e) {
 			$.post(admin_url+'ajax/delete_document', {document_id : e});
 			$(self).closest('tr').fadeOut(200);
