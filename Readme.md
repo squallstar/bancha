@@ -36,3 +36,13 @@ The **BANCHA documentation** is available through the BANCHA administration pane
 
  * [Project homepage](https://github.com/squallstar/bancha)
  * [Open issues](https://github.com/squallstar/bancha/issues)
+
+# Contribute via GitHub
+
+To contribute through GitHub, first of all fork the main Bancha repository.
+Then, checkout your new fork and type this line into the terminal to stay updated with the main repo:
+ * git remote add upstream git://github.com/squallstar/bancha.git
+
+Now you can pull the upstream updates anytime you want via these commands:
+ * git fetch upstream
+ * git merge upstream/master
