@@ -15,9 +15,12 @@
    Front-end Developer: Matteo Gildone
    Location: Verona, IT
 
+   Side-Developer: Umberto Gariggio
+   Location: Verona, IT
+
 /* THANKS */
-   Michela Tannoia, Umberto Gariggio, Marco Solazzi,
-   
+   Michela Tannoia, Marco Solazzi
+
 /* SITE */
    Standards: HTML5, CSS3
    Components: jQuery, jQuery UI
