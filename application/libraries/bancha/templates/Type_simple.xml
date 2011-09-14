@@ -9,6 +9,7 @@
 	<table>records</table>
 	<table_stage>true</table_stage>
 	<has_categories>true</has_categories>
+	<has_hierarchies>true</has_hierarchies>
 	<fieldset>
 		<name>Informazioni generali</name>
 		<field id="id_record" column="true">

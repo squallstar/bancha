@@ -80,6 +80,7 @@ Class Installer
 		$this->dbforge->drop_table('records_stage');
 		$this->dbforge->add_field($record_fields);
 		$this->dbforge->add_key('id_record', TRUE);
+		$this->dbforge->add_foreign_key('id_type', 'types', 'id_type');
 		$this->dbforge->create_table('records_stage');
 
 		$record_fields['id_record']['auto_increment'] = FALSE;
@@ -88,6 +89,8 @@ Class Installer
 		$this->dbforge->drop_table('records');
 		$this->dbforge->add_field($record_fields);
 		$this->dbforge->add_key('id_record', TRUE);
+		$this->dbforge->add_foreign_key('id_type', 'types', 'id_type');
+		$this->dbforge->add_foreign_key('id_record', 'records_stage', 'id_record');
 		$this->dbforge->create_table('records');
 
 		//Pages and Pages_stage tables
@@ -258,6 +261,16 @@ Class Installer
 		$this->dbforge->add_key('id_hierarchy', TRUE);
 		$this->dbforge->create_table('hierarchies');
 
+		//Record hierarchies table
+		$record_hierarchies_fields = array(
+		    'id_record'		=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE),
+		    'id_hierarchy'	=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE)
+		);
+
+		$this->dbforge->drop_table('record_hierarchies');
+		$this->dbforge->add_field($record_hierarchies_fields);
+		$this->dbforge->create_table('record_hierarchies');
+
 		return TRUE;
 	}
 
@@ -282,7 +295,7 @@ Class Installer
 	}
 
 	/**
-	 * Crea un utente
+	 * Insert a new user
 	 * @param string $username
 	 * @param string $password
 	 * @param string $name
@@ -303,7 +316,7 @@ Class Installer
 	}
 
 	/**
-	 * Crea i tipi di contenuto di default
+	 * Create the default content types
 	 */
 	public function create_types()
 	{
@@ -321,7 +334,7 @@ Class Installer
 	}
 
 	/**
-	 * Crea gli indici delle tabelle su DB
+	 * Create the Database indexes
 	 */
 	public function create_indexes()
 	{
@@ -337,7 +350,10 @@ Class Installer
 			array('categories', 'category_name'),
 			array('documents', 'bind_id'),
 			array('documents_stage', 'bind_id'),
-			array('record_categories', 'id_category')
+			array('record_categories','id_record'),
+			array('record_categories', 'id_category'),
+			array('record_hierarchies', 'id_record'),
+			array('record_hierarchies', 'id_hierarchy')
 		);
 
 		//If we encounter index with same name, we will append _N (where N is the index number)
@@ -371,13 +387,17 @@ Class Installer
 			$this->CI->config->item('attach_folder'),					//Attachs directory
 			$this->CI->config->item('xml_folder'),						//XML Types schemes
 			$this->CI->config->item('views_absolute_templates_folder'),	//XML Views,
-			$this->CI->config->item('fr_cache_folder')					//Path file di cache
+			$this->CI->config->item('fr_cache_folder')					//Cache files
 		);
 
 		foreach ($directories as $dir)
 		{
 			delete_directory($dir);
-			mkdir($dir, DIR_WRITE_MODE, TRUE);
+			@mkdir($dir, DIR_WRITE_MODE, TRUE);
+			if ($dir != $this->CI->config->item('xml_folder'))
+			{
+				write_file($dir.'index.html', CMS.' does not allow directory listing.');
+			}
 		}
 	}
 

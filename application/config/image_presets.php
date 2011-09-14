@@ -1,28 +1,45 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-/**
- * Image presets
+/*
+ *   Image presets
  *
- * Questo file definisce tutti i preset utilizzabili per le immagini
- * Per utilizzare un preset dopo averlo definito:
+ *   Here you can set all the image presets!
+ *   All the operations will be performed from the top to bottom of a preset
+ *   For more informations about the usage, read the Bancha documentation
  *
- * - Path normale di una immagine
+ * - Base path of an image
  *   http://localhost/attach/blog/immagini/123/pic-1.jpg
  *
- * - Path con il preset chiamato "user_profile"
- *   http://localhost/attach/cache/blog/immagini/123/user_profike/pic-1.jpg
+ * - Preset path with the preset named "user_profile"
+ *   http://localhost/attach/cache/blog/immagini/123/user_profile/pic-1.jpg
  *
- * Per eliminare la cache generata dai preset, eliminare la directory /attach/cache
+ *   To reset the preset cache, delete the directory /attach/cache
  *
  **/
 
-//Ridimensiona una immagine, tenendone le proporzioni e ogni lato di minimo 100px, poi la ritaglia a quadrato
+
 $config['presets']['user_profile'] = array(
-	array('operation' => 'resize', 'size' => '150x150', 'fixed' => TRUE, 'quality' => 100, 'ratio' => TRUE),
-	array('operation' => 'crop', 'size' => '125x125', 'quality' => 80, 'x' => 25, 'y' => 25)
+	array(
+		'operation' => 'resize',
+		'size' => '150x150',
+		'fixed' => TRUE,
+		'quality' => 100,
+		'ratio' => TRUE
+	),
+	array(
+		'operation' => 'crop',
+		'size' => '125x125',
+		'quality' => 80,
+		'x' => 25,
+		'y' => 25
+	)
 );
 
-//Ridimensiona una immagine tenendo come larghezza massima 640px mantenendo le proporzioni.
 $config['presets']['standard'] = array(
-	array('operation' => 'resize', 'size' => '640x?', 'ratio' => TRUE, 'quality' => 70)
+	array(
+		'operation' => 'resize',
+		'size' => '640x?',
+		'ratio' => TRUE,
+		'quality' => 70
+	)
 );

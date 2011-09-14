@@ -80,6 +80,7 @@ Class Content {
 	{
 		if (!file_exists($this->types_cache_folder))
 		{
+			@mkdir($this->CI->config->item('fr_cache_folder'), DIR_WRITE_MODE, TRUE);
 			$this->rebuild();
 		}
 		$this->_content_types = unserialize(file_get_contents($this->types_cache_folder));
@@ -278,7 +279,7 @@ Class Content {
 	}
 
 	/**
-	 * Restituisce tutti gli schemi dei tipi di contenuto
+	 * Returns all the content types schemes
 	 * @return array
 	 */
 	public function types()
@@ -287,7 +288,7 @@ Class Content {
 	}
 
 	/**
-	 * Ricostruisce la cache dei tipi di contenuto
+	 * Rebuilds the content types cache
 	 * @return bool success
 	 */
 	public function rebuild()
@@ -344,7 +345,7 @@ Class Content {
 	}
 
 	/**
-	 * Costruisce un Record
+	 * Makes a Record
 	 * @param int|string $type
 	 * @param array $recordData
 	 * @return Record

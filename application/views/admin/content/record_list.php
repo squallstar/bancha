@@ -22,7 +22,7 @@ $fields = array_keys($tipo['fields']);
 
 	<p class="breadcrumb"><a href="<?php echo admin_url($_section); ?>"><?php echo $tipo['tree']?'Pagine':'Contenuti'; ?></a> &raquo; <?php echo $tipo['description']; ?></p>
 
-	<?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
+	<?php echo $this->view->get_messages(); ?>
 
 
 		<form action="<?php echo admin_url($_section . '/type/'.$tipo['name']); ?>" method="post">

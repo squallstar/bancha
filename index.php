@@ -37,13 +37,12 @@ if (defined('ENVIRONMENT'))
 			error_reporting(E_ALL);
 		break;
 
-		case 'testing':
 		case 'production':
 			error_reporting(0);
 		break;
 
 		default:
-			exit('Bencha application environment is not set correctly.');
+			exit('Bancha application environment is not set correctly.');
 	}
 }
 

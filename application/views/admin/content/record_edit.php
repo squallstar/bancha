@@ -2,8 +2,6 @@
 /**
  * Record Edit View
  *
- * Vista di modifica di un record
- *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar
@@ -39,6 +37,9 @@ $this->load->helper('form'); ?>
 				<?php }
 				if ($tipo['has_categories']) { ?>
 				<li><a href="#sb_category"><?php echo _('Categories'); ?></a>
+				<?php }
+				if ($tipo['has_hierarchies']) { ?>
+				<li><a href="#sb_hierarchies"><?php echo _('Hierarchies'); ?></a>
 				<?php } ?>
 			</ul>
 			<p></p>
@@ -55,17 +56,7 @@ $save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="banc
 
 echo form_open_multipart('admin/'.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
 
-/*
-echo form_hidden('id_type', $tipo['id']);
-
-if ($record->id) {
-	echo form_hidden('id', $record->id);
-}
-*/
-
-//Contiene le funzioni onchange da richiamare al load della pagina
 $js_onload = '';
-
 $first_lap = TRUE;
 $has_full_textarea = FALSE;
 $p_start = '<p>';
@@ -76,9 +67,8 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 	echo '<div class="sidebar_content" id="sb-'.url_title($fieldset['name']).'">';
 
-	//Messaggi di errore
-	echo isset($message) ? '<div class="message errormsg"><p>'.$message.'</p></div>' : '';
-	echo isset($ok_message) ? '<div class="message success"><p>'.$ok_message.'</p></div>' : '';
+	//Messages
+	echo $this->view->get_messages();
 
 	?>
 			<p class="breadcrumb">
@@ -94,36 +84,33 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	{
 		$first_lap = false;
 
-		//Spostare in xml
-		if ($tipo['tree'] && isset($tree)) {
+		//TODO: move into xml
+		if ($tipo['tree']) {
 
 			if ($record->id && isset($page_url))
 			{
 				$url = site_url($page_url);
 				echo _('The address of this page is:').br(1).'<a target="_blank" href="'.$url.'">'.$url.'</a>'.br(2);
 			}
-
-			//echo $p_start.form_label(_('Parent page'), 'id_parent') . br(1);
-			//echo form_dropdown('id_parent', $new_tree, $record->get('id_parent'), 'class="styled"') . $p_end.br(1);
 		}
-
 	}
 
 	foreach ($fieldset['fields'] as $field_name)
 	{
-
 		$field = $tipo['fields'][$field_name];
 
 		$attributes = array();
 
 		$label = form_label($field['description'], $field_name, $attributes);
 
+		//We evaluates the evals
 		if ($field['default'] && substr($field['default'], 0, 5) == 'eval:')
 		{
 			eval('$value = '.substr($field['default'], 5).';');
 			$field['default'] = $value;
 		}
 
+		//The default value will be set when no stored value is found
 		$field_value = $record->get($field_name, $field['default']);
 
 		if (isset($field['visible']))
@@ -381,7 +368,12 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		<?php
 
-		if (count($categories)) { ?>
+		if (count($categories)) {
+
+			//Messages
+			echo $this->view->get_messages();
+
+			?>
 
 		<p><?php echo _('This content can be associated to these categories'); ?>:<br /></p>
 
@@ -401,6 +393,38 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		} else {
 			echo '<p>'._('This type has no categories').'.</p>';
+		}
+
+
+		?>
+
+	</div>
+	<?php }
+
+	if ($tipo['has_hierarchies']) { ?>
+	<div class="sidebar_content" id="sb_hierarchies">
+		<h3><?php echo _('Hierarchies'); ?></h3>
+
+		<?php
+
+		if (count($hierarchies)) {
+
+			echo form_hidden('_hierarchies');
+
+			//Messages
+			echo $this->view->get_messages();
+			?>
+
+		<p><?php echo _('This content can be associated to these hierarchies'); ?>:<br /></p>
+
+		<div id="hierarchies"></div>
+
+		<?php
+
+			echo br(3).$save_buttons;
+
+		} else {
+			echo '<p>'._('This type has no hierarchies').'.</p>';
 		}
 
 
@@ -430,10 +454,19 @@ if ($tipo['has_attachments']) {
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/jquery-ui.js"></script>
 <?php } ?>
 
-
-
 <script type="text/javascript">
 $(document).ready(function() {
 	<?php echo $js_onload; ?>
 });
 </script>
+
+<?php if ($tipo['has_hierarchies']) { 
+	$data = array(
+		'tree_input'	=> '_hierarchies',
+		'tree_id'		=> 'hierarchies',
+		'tree_form'		=> '#record_form',
+		'tree_mode'		=> 2,
+		'tree'			=> $hierarchies
+	);
+	//$this->view->render('admin/hierarchies/dynatree', $data);
+}

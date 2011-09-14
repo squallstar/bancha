@@ -2,8 +2,8 @@
 /**
  * Bancha Profiler
  *
- * Estensione del profiler di Code Igniter
- * E' stata aggiunta la sezione "render" ed una nuova grafica
+ * A Code Igniter Profiler extension
+ * We changed the skin and we added a new rendering section
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -18,7 +18,7 @@ if(!defined('BASEPATH')) exit('No direct script access allowed');
 class Bancha_Profiler extends CI_Profiler {
 
 	/**
-	 * @var array Sezioni da stampare
+	 * @var array Sections to print
 	 */
 	protected $_available_sections = array(
 		'benchmarks',
@@ -35,7 +35,7 @@ class Bancha_Profiler extends CI_Profiler {
 	);
 
 	/**
-	 * Compila la sezione del rendering delle view
+	 * Compiles the view rendering section
 	 * @return string
 	 */
 	protected function _compile_renders()
@@ -70,7 +70,7 @@ class Bancha_Profiler extends CI_Profiler {
 	}
 
 	/**
-	* Renderizza il profiler
+	* Renders the profiler
 	* @return string
 	*/
 	public function run()

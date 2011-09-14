@@ -1,18 +1,27 @@
-/* the humans responsible & colophon */
+/* The humans responsible & colophon */
 /* humanstxt.org */
 
 
 /* TEAM */
-  Developer: Nicholas Valbusa
-  Site: www.squallstar.it
-  Twitter: @squallstar
-  Location: Verona, IT
+   Lead Developer: Nicholas Valbusa
+   Site: www.squallstar.it
+   Twitter: @squallstar
+   Location: Verona, IT
+
+   Co-Developer: Alessandro Maroldi
+   Twitter: @alexmaroldi
+   Location: Verona, IT
+
+   Front-end Developer: Matteo Gildone
+   Location: Verona, IT
+
+   Side-Developer: Umberto Gariggio
+   Location: Verona, IT
 
 /* THANKS */
-  Alessandro Maroldi, Matteo Gildone, Marco Solazzi,
-  Michela Tannoia, Umberto Gariggio
+   Michela Tannoia, Marco Solazzi
 
 /* SITE */
-  Standards: HTML5, CSS3
-  Components: jQuery, jQuery UI
-  Software: Espresso, Eclipse, Aptana, Adobe Photoshop
+   Standards: HTML5, CSS3
+   Components: jQuery, jQuery UI
+   Software: Espresso, Eclipse, Aptana, Adobe Photoshop

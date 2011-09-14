@@ -28,6 +28,7 @@ class CI_DB_forge {
 	var $keys			= array();
 	var $primary_keys	= array();
 	var $db_char_set	=	'';
+	var $fkeys			= array();
 
 	/**
 	 * Constructor
@@ -374,12 +375,28 @@ class CI_DB_forge {
 		$this->fields		= array();
 		$this->keys			= array();
 		$this->primary_keys	= array();
+
+		//Added by Nicholas Valbusa
+		$this->fkeys 		= array();
 	}
 
+	/**
+	 * TODO
+	 */
 	function show_tables()
 	{
 		$sql = $this->_show_tables();
 		return $this->db->query($sql);
+	}
+
+	/**
+	 * Adds a foreign key (must be called before a create table)
+	 * Made by Nicholas Valbusa
+	 */
+	function add_foreign_key($field, $to_table, $to_field, $action='delete', $set='cascade')
+	{
+		return; //TODO: to be added soon :)
+		$this->fkeys[]= $this->_add_foreign_key($field, $to_table, $to_field, $action, $set);
 	}
 
 }
