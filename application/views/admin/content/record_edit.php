@@ -71,7 +71,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 	?>
 			<p class="breadcrumb">
-				<a href="<?php echo admin_url($_section); ?>">Contenuti</a> &raquo; <a href="<?php echo admin_url($_section.'/type/'.$tipo['id'])?>"><?php echo $tipo['description']; ?></a> &raquo; <strong><?php echo !$record->id ? _('New content') : _('Edit content'); ?></strong>
+				<a href="<?php echo admin_url($_section); ?>">Contenuti</a> &raquo; <a href="<?php echo admin_url($_section.'/type/'.$tipo['id'])?>"><?php echo $tipo['description']; ?></a> &raquo; <?php echo !$record->id ? _('New content') : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>'); ?>
 			</p>
 			<?php
 			
