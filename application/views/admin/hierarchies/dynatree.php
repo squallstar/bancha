@@ -33,14 +33,9 @@ $(document).ready(function() {
     });
 
 	$("form<?php echo $tree_form; ?>").submit(function() {
-		
-		// Serialize standard form fields:
-	    //var formData = $(this).serializeArray();
 
 	    // then append Dynatree selected 'checkboxes':
 	    var tree = $("#<?php echo $tree_id; ?>").dynatree("getTree");
-
-	   
 		
 		if (tree) {
 			 
@@ -51,17 +46,8 @@ $(document).ready(function() {
 			
 			$('input[name=<?php echo $tree_input; ?>]').val(arr.join('|'));
 		}
-	
-	    
-	 return true;
-	    //formData = formData.concat(tree.serializeArray());
 
-	    // and/or add the active node as 'radio button':
-	    if(tree.getActiveNode()){
-	    	formData.push({name: "activeNode", value: tree.getActiveNode().data.key});
-	    }
-
-	    $('input[name=<?php echo $tree_input; ?>]').val(jQuery.param(formData));
+		bancha.add_form_hash();
 	    return true;
 	});
 });
