@@ -27,7 +27,7 @@ Class Picasa_Module extends Bancha_Module
   /**
    * @var string URL for Picasa API
    */	
-   private $_url = 'http://picasaweb.google.com/data/feed/api/';
+   private $_picasaUrl = 'http://picasaweb.google.com/data/feed/api/';
    
   /**
    * @var string Username of Picasa account
@@ -47,8 +47,15 @@ Class Picasa_Module extends Bancha_Module
   
   public function getAlbums($maxAlbums = FALSE)
   {
-  		$_url;
-		//var url = 'http://picasaweb.google.com/data/feed/api/user/' + pwi_username + '?category=album' + (pwi_maxalbums > 0 ? '&max-results=' + pwi_maxalbums: "") + '&access=public&alt=json';
+  	$data = getter($this->_picasaUrl.'user/'.$this->_username.'?category=album'.($maxAlbums ? '&max-results='.$maxAlbums : '').'&access=public&alt=json');
+	//var url = 'http://picasaweb.google.com/data/feed/api/user/' + pwi_username + '?category=album' + (pwi_maxalbums > 0 ? '&max-results=' + pwi_maxalbums: "") + '&access=public&alt=json';
+	$array = json_decode($data);
+	debug($array,'DATI DECODE JSON Picasa',1);
+  }
+  
+  public function getAlbum($albumId, $newPage = FALSE, $maxAlbums = FALSE)
+  {
+  	return '';
   }
 
   /**
@@ -134,7 +141,7 @@ Class Picasa_Module extends Bancha_Module
    */
   public function render()
   {
-    if ($this->_type != '')
+    /*if ($this->_type != '')
     {
       $this->get_link();
       $this->view->set('_sharer', array(
@@ -144,7 +151,8 @@ Class Picasa_Module extends Bancha_Module
         'title'	=> $this->_title != '' ? $this->_title : $this->view->title
       ));
       return parent::render();
-    }
+    }*/
+    return parent::render();
   }
 
   /**

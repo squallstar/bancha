@@ -25,6 +25,9 @@ $this->view->render('header');
 
 	$sharer = $this->load->module('sharer');
 	echo $sharer->type('facebook')->render();
+	
+	$picasa = $this->load->module('picasa');
+	echo $picasa->getAlbums()->render();
 
 	?>
 
