@@ -4,6 +4,7 @@ class Bancha_Lang extends CI_Lang {
 
 	private $_CI;
 
+	public $language_context = 'website';
 	public $current_language = '';
 	public $languages = FALSE;
     public $gettext_language;
@@ -13,14 +14,31 @@ class Bancha_Lang extends CI_Lang {
     {
         parent::__construct();
         $this->gettext_path = APPPATH.'language/locale';
+		//$this->_CI = & get_instance();
     }
+
+	/**
+     * Sets the language context (i.e.: 'website', 'admin')
+	 * 
+	 * @param string $new_language_context
+     */
+    function set_new_language_context($new_language_context)
+    {
+    	if ($new_language_context && $new_language_context != $this->language_context)
+    	{
+    		$this->language_context = $new_language_context;
+			$this->languages = FALSE;
+			$this->current_language = '';
+    	}
+	}
 
 	/**
      * Loads the languages from the Bancha config file
      */
     private function _load_languages()
     {
-        $this->languages = $this->_CI->config->item('languages');
+    	$this->_CI = & get_instance();
+        $this->languages = $this->_CI->config->item($this->language_context.'_languages');
         
         $select = array();
         foreach ($this->languages as $lang => $val)
@@ -33,10 +51,13 @@ class Bancha_Lang extends CI_Lang {
     /**
      * Sets the website language to a new one (es. it, en)
      * @param string $lang
+	 * @param string $new_language_context
      * @param bool $load_gettext
      */
-    function set_lang($lang, $load_gettext = true)
+    function set_lang($lang, $load_gettext = true, $new_language_context = NULL)
     {
+    	$this->set_new_language_context($new_language_context);
+		
 		if (!$this->languages)
 		{
 			$this->_load_languages();
@@ -61,7 +82,7 @@ class Bancha_Lang extends CI_Lang {
     }
 
     /**
-     * Sets the website language to the default one
+     * Sets language to the default one
      * @param $load_gettext
      */
     function set_default($load_gettext = true)
@@ -83,12 +104,14 @@ class Bancha_Lang extends CI_Lang {
 
     /**
      * Checks the current language
-     * @param string $folder The locale folder to check in
+     * @param string $new_language_context
      */
-    function check($folder='website')
+    function check($new_language_context = NULL)
     {
+    	$this->set_new_language_context($new_language_context);
+    	
+    	$folder = $this->language_context;
     	$this->gettext_path = $this->gettext_path . '/' . trim($folder, '/');
-    	$this->_CI = & get_instance();
     	if (!$this->languages)
     	{
 			$this->_load_languages();
@@ -98,7 +121,7 @@ class Bancha_Lang extends CI_Lang {
 		{
 			$current_lang = FALSE;
 		} else {
-			$current_lang = $this->_CI->session->userdata('current_language');
+			$current_lang = $this->_CI->session->userdata('current_' . $this->language_context);
 		}
 		
     	if (!$current_lang)
@@ -173,7 +196,7 @@ class Bancha_Lang extends CI_Lang {
     {
     	if (isset($this->_CI->session))
 		{
-			$this->_CI->session->set_userdata('current_language', $this->current_language);
+			$this->_CI->session->set_userdata('current_'.$this->language_context, $this->current_language);
 		}
     }
 
