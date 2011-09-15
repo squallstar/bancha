@@ -24,6 +24,7 @@ $(document).ready(function() {
 	$("#<?php echo $tree_id; ?>").dynatree({
     	onActivate: function(node) {
       	},
+      	debugLevel : 0,
       	minExpandLevel : 3,
       	checkbox: true,
         selectMode: <?php echo $tree_mode; ?>,
@@ -34,12 +35,26 @@ $(document).ready(function() {
 	$("form<?php echo $tree_form; ?>").submit(function() {
 		
 		// Serialize standard form fields:
-	    var formData = $(this).serializeArray();
+	    //var formData = $(this).serializeArray();
 
 	    // then append Dynatree selected 'checkboxes':
 	    var tree = $("#<?php echo $tree_id; ?>").dynatree("getTree");
-	 
-	    formData = formData.concat(tree.serializeArray());
+
+	   
+		
+		if (tree) {
+			 
+			var nodeList = tree.getSelectedNodes(), arr = [];
+			for(var i=0, l=nodeList.length; i<l; i++){
+				arr.push(nodeList[i].data.key);
+			}
+			
+			$('input[name=<?php echo $tree_input; ?>]').val(arr.join('|'));
+		}
+	
+	    
+	 return true;
+	    //formData = formData.concat(tree.serializeArray());
 
 	    // and/or add the active node as 'radio button':
 	    if(tree.getActiveNode()){

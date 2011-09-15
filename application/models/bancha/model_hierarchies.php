@@ -198,12 +198,6 @@ Class Model_hierarchies extends CI_Model {
 	 */
 	public function parse_data($get_string)
 	{
-		$selected_hierarchies = array();
-		$data = explode('&', str_replace('hierarchies=&', '', $get_string));
-		foreach ($data as $item)
-		{
-			$selected_hierarchies[] = str_replace('selNodes=', '', $item);
-		}
-		return $selected_hierarchies;
+		return explode('|', $get_string);
 	}
 }
