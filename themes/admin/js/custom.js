@@ -231,6 +231,7 @@ var bancha = {
 	},
 	add_form_hash : function() {
 		$('form').attr('action', $('form').attr('action') + window.location.hash);
+	
 		return true;
 	},
 	sort_priority : function (event, ui) {

@@ -67,14 +67,16 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 	echo '<div class="sidebar_content" id="sb-'.url_title($fieldset['name']).'">';
 
-	//Messages
-	echo $this->view->get_messages();
+	
 
 	?>
 			<p class="breadcrumb">
 				<a href="<?php echo admin_url($_section); ?>">Contenuti</a> &raquo; <a href="<?php echo admin_url($_section.'/type/'.$tipo['id'])?>"><?php echo $tipo['description']; ?></a> &raquo; <strong><?php echo !$record->id ? _('New content') : _('Edit content'); ?></strong>
 			</p>
 			<?php
+			
+			//Messages
+			echo $this->view->get_messages();
 
 			echo br(1).'<h3>'._($fieldset['name']).'</h3>'.br(1);
 
