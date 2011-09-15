@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-14 14:16+0100\n"
-"PO-Revision-Date: 2011-09-14 14:24+0100\n"
-"Last-Translator: Nicholas <nicholas@intesys.it>\n"
+"POT-Creation-Date: 2011-09-14 19:27+0100\n"
+"PO-Revision-Date: 2011-09-14 19:27+0100\n"
+"Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -317,7 +317,7 @@ msgid "Save and go to list"
 msgstr "Salva e vai alla lista"
 
 #: views/admin/content/record_edit.php:54
-#: views/admin/content/record_list.php:207
+#: views/admin/content/record_list.php:210
 msgid "Publish"
 msgstr "Pubblica"
 
@@ -408,17 +408,17 @@ msgid "Status"
 msgstr "Stato"
 
 #: views/admin/content/record_list.php:57
-#: views/admin/content/record_list.php:131
+#: views/admin/content/record_list.php:132
 msgid "Draft"
 msgstr "Bozza"
 
 #: views/admin/content/record_list.php:57
-#: views/admin/content/record_list.php:140
+#: views/admin/content/record_list.php:141
 msgid "Published"
 msgstr "Pubblicato"
 
 #: views/admin/content/record_list.php:57
-#: views/admin/content/record_list.php:134
+#: views/admin/content/record_list.php:135
 msgid "Different"
 msgstr "Differente"
 
@@ -426,48 +426,48 @@ msgstr "Differente"
 msgid "Apply filters"
 msgstr "Applica filtri"
 
-#: views/admin/content/record_list.php:137
+#: views/admin/content/record_list.php:138
 msgid "Programmed"
 msgstr "Programmato"
 
-#: views/admin/content/record_list.php:195
+#: views/admin/content/record_list.php:198
 msgid "Add child page"
 msgstr "Aggiungi pagina figlia"
 
-#: views/admin/content/record_list.php:196
+#: views/admin/content/record_list.php:199
 msgid "Are you sure?"
 msgstr "Sei sicuro?"
 
-#: views/admin/content/record_list.php:196
-#: views/admin/content/record_list.php:209
+#: views/admin/content/record_list.php:199
+#: views/admin/content/record_list.php:212
 msgid "Delete"
 msgstr "Elimina"
 
-#: views/admin/content/record_list.php:206
+#: views/admin/content/record_list.php:209
 msgid "Actions"
 msgstr "Azioni"
 
-#: views/admin/content/record_list.php:208
+#: views/admin/content/record_list.php:211
 msgid "Unpublish"
 msgstr "Depubblica"
 
-#: views/admin/content/record_list.php:212
+#: views/admin/content/record_list.php:215
 msgid "Apply to selected"
 msgstr "Applica ai selez."
 
-#: views/admin/content/record_list.php:214
+#: views/admin/content/record_list.php:217
 msgid "There is"
 msgstr "C'è"
 
-#: views/admin/content/record_list.php:214
+#: views/admin/content/record_list.php:217
 msgid "There are"
 msgstr "Ci sono"
 
-#: views/admin/content/record_list.php:221
+#: views/admin/content/record_list.php:224
 msgid "add a new one"
 msgstr "aggiungine uno"
 
-#: views/admin/content/record_list.php:220
+#: views/admin/content/record_list.php:223
 msgid "There are no contents/pages for this type. To start, %a."
 msgstr "Non ci sono contenuti/pagine inserite per questo tipo. Per iniziare, %a."
 
@@ -638,6 +638,14 @@ msgstr "Descrizione"
 #: views/admin/content/translations.php:43
 msgid "Keywords"
 msgstr "Parole chiave"
+
+#: views/admin/content/translations.php:44
+msgid "Test"
+msgstr ""
+
+#: views/admin/content/translations.php:45
+msgid "Visibility date"
+msgstr "Data di visibilità"
 
 #: views/admin/content/type_add.php:10
 #: views/admin/content/type_add.php:59

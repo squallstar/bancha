@@ -11,7 +11,7 @@
 	<has_categories>true</has_categories>
 	<has_hierarchies>true</has_hierarchies>
 	<fieldset>
-		<name>Informazioni generali</name>
+		<name>General informations</name>
 		<field id="id_record" column="true">
 			<type>hidden</type>
 			<list>true</list>
@@ -32,26 +32,26 @@
 			<default>0</default>
 		</field>
 		<field id="title" column="true" link="edit">
-			<description>Titolo</description>
+			<description>Title</description>
 			<type>text</type>
 			<mandatory>true</mandatory>
 			<admin>true</admin>
 			<list>true</list>
 		</field>
 		<field id="date_publish" column="true">
-			<description>Data di visibilità</description>
+			<description>Visibility date</description>
 			<type>datetime</type>
 			<admin>true</admin>
 			<list>true</list>
 		</field>
 		<field id="uri" column="true">
-			<description>Parte finale URL</description>
+			<description>Page URL</description>
 			<type>text</type>
 			<admin>true</admin>
 			<list>true</list>
 		</field>
 		<field id="lang" column="true">
-			<description>Lingua</description>
+			<description>Language</description>
 			<type>select</type>
 			<admin>true</admin>
 			<list>true</list>
@@ -61,15 +61,15 @@
 			<default>eval:$this->lang->current_language</default>
 		</field>
 		<field id="contenuto">
-			<description>Contenuto</description>
+			<description>Content</description>
 			<type>textarea</type>
 			<list>true</list>
 		</field>
 	</fieldset>
 	<fieldset>
-		<name>Allegati</name>
-		<field id="immagini">
-			<description>Immagini</description>
+		<name>Attachments</name>
+		<field id="images">
+			<description>Images</description>
 			<type>images</type>
 			<size>4096</size>
 			<mimes>jpg|gif|png|jpeg</mimes>

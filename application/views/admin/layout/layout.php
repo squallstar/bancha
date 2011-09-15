@@ -19,12 +19,8 @@ $js_url = site_url() . THEMESPATH . 'admin/js/';
 <html xmlns="http://www.w3.org/1999/xhtml" lang="it">
 	<head>
 		<title><?php echo $title != '' ? $title . ' &bull; ' : ''; ?>Bancha</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
 		<meta http-equiv="X-UA-Compatible" content="IE=7" />
-		<?php echo meta(array(
-			array('Content-type', 'text/html; charset=utf-8', 'equiv'),
-			array('name' => 'description', 'content' => 'Bancha'),
-			array('name' => 'robots', 'content' => 'no-cache')
-		)); ?>
 		<style type="text/css" media="all">
 			@import url("<?php echo $css_url; ?>style.css");
 			@import url("<?php echo $css_url; ?>jquery.wysiwyg.css");
