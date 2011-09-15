@@ -100,12 +100,8 @@ $(function () {
 		$(this).parent().fadeOut('slow', function() { $(this).remove(); });
 	});
 
-
-
 	// Form select styling
 	$("form select.styled").select_skin();
-
-
 
 	// Tabs
 	$(".tab_content").hide();
@@ -276,7 +272,10 @@ var bancha = {
 					$(list_fields).show(200);
 					$(action_fields).hide(200);
 					$(link_fields).hide(200);
-					$(link_fields).hide(200);
+					$(link_fields).hide(200, function(){
+						//Temporary fix
+						$('.cmf-skinned-text').css('height', '20px');
+					});
 					break;
 
 				case 'action':
