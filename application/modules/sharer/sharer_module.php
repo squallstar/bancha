@@ -159,11 +159,11 @@ Class Sharer_Module extends Bancha_Module
         switch ($this->_type)
         {
             case 'facebook':
-                $this->_link = '"http://www.facebook.com/sharer/sharer.php?u=' . urlencode($this->_url);
+                $this->_link = 'http://www.facebook.com/sharer/sharer.php?u=' . urlencode($this->_url);
                 break;
 
             case 'twitter':
-                $this->_link = 'http://twitter.com/intent/tweet?via=' . urlencode($this->_via) . '&hashtags=' . urlencode($this->_tags)
+                $this->_link = 'http://twitter.com/intent/tweet?'.($this->_via != '' ? 'via=' . urlencode($this->_via) . '&' : '') . 'hashtags=' . urlencode($this->_tags)
                 . '&text=' . urlencode($this->_text) . '%20' . urlencode($this->_url);
                 break;
 
