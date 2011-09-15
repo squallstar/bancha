@@ -482,6 +482,5 @@ $(document).ready(function() {
 		'tree_mode'		=> 2,
 		'tree'			=> $hierarchies
 	);
-	//Suspended... it does not work!
 	$this->view->render('admin/hierarchies/dynatree', $data);
 }
