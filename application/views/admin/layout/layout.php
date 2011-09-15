@@ -15,6 +15,12 @@
 $css_url = site_url() . THEMESPATH . 'admin/css/';
 $js_url = site_url() . THEMESPATH . 'admin/js/';
 
+//If is an ajax request, we will render just the content.
+if ($this->input->is_ajax_request())
+{
+	$this->load->view($view, $content);
+} else {
+
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="it">
 	<head>
@@ -34,7 +40,7 @@ $js_url = site_url() . THEMESPATH . 'admin/js/';
 		<div id="hld">
 			<div class="wrapper">
 				<?php if ($header) { $this->load->view($base.'layout/header', $content); } ?>
-				<?php $this->load->view($view, $content); ?>
+				<div id="content_wrapper"><?php $this->load->view($view, $content); ?></div>
 				<?php if ($header) { $this->load->view($base.'layout/footer', $content); } ?>
 			</div>
 		</div>
@@ -44,16 +50,11 @@ $js_url = site_url() . THEMESPATH . 'admin/js/';
 		</script>
 		<!--[if IE]><script type="text/javascript" src="<?php echo $js_url; ?>excanvas.js"></script><![endif]-->
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.img.preload.js"></script>
-		<!--<script type="text/javascript" src="<?php echo $js_url; ?>jquery.filestyle.mini.js"></script>-->
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.wysiwyg.js"></script>
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.date_input.pack.js"></script>
-		<!--<script type="text/javascript" src="<?php echo $js_url; ?>facebox.js"></script>
-		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.visualize.js"></script>
-		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.visualize.tooltip.js"></script>-->
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.select_skin.js"></script>
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.tablesorter.min.js"></script>
-		<!--<script type="text/javascript" src="<?php echo $js_url; ?>ajaxupload.js"></script>-->
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.pngfix.js"></script>
 		<script type="text/javascript" src="<?php echo $js_url; ?>custom.js"></script>
 	</body>
-</html>
+</html><?php } ?>

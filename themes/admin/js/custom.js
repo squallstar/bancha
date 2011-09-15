@@ -214,6 +214,11 @@ $(function () {
 
 var bancha = {
 	_priority : 0,
+	load : function(url) {
+		$.get(admin_url + url, function(data) {
+			$('#content_wrapper').html(data);
+		});
+	},
 	remove : {
 		document : function(self, e) {
 			$.post(admin_url+'ajax/delete_document', {document_id : e});

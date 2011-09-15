@@ -474,8 +474,9 @@ $(document).ready(function() {
 		'tree_input'	=> '_hierarchies',
 		'tree_id'		=> 'hierarchies',
 		'tree_form'		=> '#record_form',
-		'tree_mode'		=> 2,
+		'tree_mode'		=> 1,
 		'tree'			=> $hierarchies
 	);
+	//Suspended... it does not work!
 	//$this->view->render('admin/hierarchies/dynatree', $data);
 }

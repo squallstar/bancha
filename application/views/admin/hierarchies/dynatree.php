@@ -24,12 +24,15 @@ $(document).ready(function() {
 	$("#<?php echo $tree_id; ?>").dynatree({
     	onActivate: function(node) {
       	},
+      	minExpandLevel : 3,
       	checkbox: true,
         selectMode: <?php echo $tree_mode; ?>,
       	children: <?php echo json_encode($tree); ?>
+
     });
 
 	$("form<?php echo $tree_form; ?>").submit(function() {
+		
 		// Serialize standard form fields:
 	    var formData = $(this).serializeArray();
 
@@ -37,8 +40,6 @@ $(document).ready(function() {
 	    var tree = $("#<?php echo $tree_id; ?>").dynatree("getTree");
 	 
 	    formData = formData.concat(tree.serializeArray());
-
-	    console.log(tree.getActiveNode().data.key);
 
 	    // and/or add the active node as 'radio button':
 	    if(tree.getActiveNode()){
