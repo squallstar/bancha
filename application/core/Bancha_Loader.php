@@ -163,17 +163,20 @@ Class Bancha_Loader extends CI_Loader {
 	{
 		if (!count($this->_loaded_modules))
 		{
-			require_once(FRPATH . 'module'.EXT);
+			require_once(FRPATH . 'module.php');
 		}
 		$module_name = strtolower($module_name);
 		if (!isset($this->_loaded_modules[$module_name]))
 		{
 			$CI = & get_instance();
-			require_once($CI->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR.$module_name.'_module'.EXT);
+			require_once($CI->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR.$module_name.'_module.php');
 			$this->_loaded_modules[$module_name] = TRUE;
 		}
 		$class_name = ucfirst($module_name).'_Module';
-		return new $class_name();
+		$tmp = new $class_name();
+		$tmp->module_name = ucfirst($module_name);
+		$tmp->module_filespath = $CI->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR;
+		return $tmp;
 	}
 
 	/**
