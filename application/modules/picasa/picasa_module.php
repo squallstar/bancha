@@ -48,9 +48,18 @@ Class Picasa_Module extends Bancha_Module
   public function getAlbums($maxAlbums = FALSE)
   {
   	$data = getter($this->_picasaUrl.'user/'.$this->_username.'?category=album'.($maxAlbums ? '&max-results='.$maxAlbums : '').'&access=public&alt=json');
-	//var url = 'http://picasaweb.google.com/data/feed/api/user/' + pwi_username + '?category=album' + (pwi_maxalbums > 0 ? '&max-results=' + pwi_maxalbums: "") + '&access=public&alt=json';
 	$array = json_decode($data);
-	debug($array,'DATI DECODE JSON Picasa',1);
+	unset($array->feed->entry);
+	debug($array->feed,'All Feed From Picasa',1);
+	foreach ($array->feed->entry as $gallery) 
+	{
+		//echo '<h1>'.$gallery->title.'</h1>';
+		//echo '<h2>'.$gallery->summary.'</h2>';
+		
+		//echo '<small>'.$gallery->author.'</small>';
+		//debug($gallery,'Album Picasa',1);
+	}
+	
   }
   
   public function getAlbum($albumId, $newPage = FALSE, $maxAlbums = FALSE)
