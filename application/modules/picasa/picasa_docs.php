@@ -22,5 +22,5 @@
 
 <div class="sidebar_content" id="sb-intro">
 	<h3>Using the picasa module</h3>
-	<p>This module is useful to gets the sharing URL for Facebook/Twitter or to renders a sharing button.</p>
+	<p>This module is useful to gets the gallery from Picasa account.</p>
 </div>
