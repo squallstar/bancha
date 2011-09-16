@@ -214,6 +214,11 @@ $(function () {
 
 var bancha = {
 	_priority : 0,
+	load : function(url) {
+		$.get(admin_url + url, function(data) {
+			$('#content_wrapper').html(data);
+		});
+	},
 	remove : {
 		document : function(self, e) {
 			$.post(admin_url+'ajax/delete_document', {document_id : e});
@@ -226,6 +231,7 @@ var bancha = {
 	},
 	add_form_hash : function() {
 		$('form').attr('action', $('form').attr('action') + window.location.hash);
+	
 		return true;
 	},
 	sort_priority : function (event, ui) {

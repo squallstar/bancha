@@ -28,6 +28,11 @@ Class Model_hierarchies extends CI_Model {
 	 * @var array|bool contains the hierarchies
 	 */
 	public $list = FALSE;
+	
+	/**
+	 * @var array The current setted relations
+	 */
+	private $_current_relations = array();
 
  	public function __construct()
 	{
@@ -46,6 +51,28 @@ Class Model_hierarchies extends CI_Model {
 				   		   		   ->from($this->table)->get()->result();
 		}
 		return $this->list;
+  	}
+  	
+  	public function set_active_nodes($relations)
+  	{
+  		$this->_current_relations = $relations;
+  	}
+  	
+  	public function get_record_hierarchies($record_id)
+  	{
+  		$result = $this->db->select('id_hierarchy')
+  						   ->from($this->table_relations)
+  						   ->where('id_record', $record_id)
+  						   ->get()->result_array();
+  		$hierarchies = array();
+  		if (count($result))
+  		{
+  			foreach ($result as $hierarchy)
+  			{
+  				$hierarchies[]= $hierarchy['id_hierarchy'];
+  			}
+  		}
+  		return $hierarchies;
   	}
 
   	/**
@@ -101,7 +128,17 @@ Class Model_hierarchies extends CI_Model {
   			$this->db->where('id_hierarchy', $hierarchy);
   			$this->db->or_where('id_parent', $hierarchy);
   		}
-  		return $this->db->delete($this->table);
+  		$this->db->delete($this->table);
+  		
+  		//And the relations
+  		if (is_array($hierarchy))
+  		{
+  			$this->db->where_in('id_hierarchy', $hierarchy);
+  		} else if (is_numeric($hierarchy))
+  		{
+  			$this->db->where('id_hierarchy', $hierarchy);
+  		}
+  		$this->db->delete($this->table_relations);
   	}
 
   	/**
@@ -143,7 +180,7 @@ Class Model_hierarchies extends CI_Model {
 			'title' 		=> $hierarchy->name,
 			'id_parent' 	=> $hierarchy->id_parent ? $hierarchy->id_parent : '',
 			'key'			=> $hierarchy->id_hierarchy,
-			'select'		=> FALSE
+			'select'		=> in_array($hierarchy->id_hierarchy, $this->_current_relations) ? TRUE : FALSE
 		);
 		$arr['children'][] = & $tmp;
 
@@ -198,12 +235,6 @@ Class Model_hierarchies extends CI_Model {
 	 */
 	public function parse_data($get_string)
 	{
-		$selected_hierarchies = array();
-		$data = explode('&', str_replace('hierarchies=&', '', $get_string));
-		foreach ($data as $item)
-		{
-			$selected_hierarchies[] = str_replace('selNodes=', '', $item);
-		}
-		return $selected_hierarchies;
+		return explode('|', $get_string);
 	}
 }

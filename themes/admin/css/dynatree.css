@@ -3,7 +3,7 @@
  */
 ul.dynatree-container
 {
-	font-family: tahoma, arial, helvetica;
+	font-family: Sans-serif;
 	font-size: 10pt; /* font size should not be too big */
 	white-space: nowrap;
 	padding: 3px;
@@ -301,7 +301,7 @@ span.dynatree-folder a
 ul.dynatree-container a:focus,
 span.dynatree-focused a:link  /* @IE */
 {
-	background-color: #EFEBDE; /* gray */
+	/*background-color: #EFEBDE;*/
 }
 
 span.dynatree-has-children a
@@ -314,8 +314,8 @@ span.dynatree-expanded a
 
 span.dynatree-selected a
 {
-	color: green;
-	font-style: italic;
+	color: #008EE8;
+	font-weight:bold;
 }
 
 span.dynatree-active a

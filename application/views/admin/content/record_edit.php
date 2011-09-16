@@ -62,19 +62,20 @@ $has_full_textarea = FALSE;
 $p_start = '<p>';
 $p_end = '</p>';
 
+$breadcrumbs_render = '<p class="breadcrumb"><a href="<?php echo admin_url($_section); ?>">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
+						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
+						 . (!$record->id ? _('New content') : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
+
 foreach ($tipo['fieldsets'] as $fieldset)
 {
 
 	echo '<div class="sidebar_content" id="sb-'.url_title($fieldset['name']).'">';
 
-	//Messages
-	echo $this->view->get_messages();
-
-	?>
-			<p class="breadcrumb">
-				<a href="<?php echo admin_url($_section); ?>">Contenuti</a> &raquo; <a href="<?php echo admin_url($_section.'/type/'.$tipo['id'])?>"><?php echo $tipo['description']; ?></a> &raquo; <strong><?php echo !$record->id ? _('New content') : _('Edit content'); ?></strong>
-			</p>
-			<?php
+			//Breadcrumbs
+			echo $breadcrumbs_render;
+	
+			//Messages
+			echo $this->view->get_messages();
 
 			echo br(1).'<h3>'._($fieldset['name']).'</h3>'.br(1);
 
@@ -373,16 +374,17 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 	if ($tipo['has_categories']) { ?>
 	<div class="sidebar_content" id="sb_category">
-		<h3><?php echo _('Categories'); ?></h3>
-
 		<?php
 
-		if (count($categories)) {
+		//Breadcrumbs
+		echo $breadcrumbs_render;
 
-			//Messages
-			echo $this->view->get_messages();
-
-			?>
+		//Messages
+		echo $this->view->get_messages().'<br />';
+		
+		echo '<h3>'._('Categories').'</h3>';
+		
+		if (count($categories)) { ?>
 
 		<p><?php echo _('This content can be associated to these categories'); ?>:<br /></p>
 
@@ -404,7 +406,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			echo '<p>'._('This type has no categories').'.</p>';
 		}
 
-
 		?>
 
 	</div>
@@ -412,16 +413,21 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 	if ($tipo['has_hierarchies']) { ?>
 	<div class="sidebar_content" id="sb_hierarchies">
-		<h3><?php echo _('Hierarchies'); ?></h3>
 
 		<?php
+		
+		//Breadcrumbs
+		echo $breadcrumbs_render;
+		
+		//Messages
+		echo $this->view->get_messages().'<br />';
+		
+		echo '<h3>'._('Hierarchies').'</h3>';
 
 		if (count($hierarchies)) {
 
 			echo form_hidden('_hierarchies');
 
-			//Messages
-			echo $this->view->get_messages();
 			?>
 
 		<p><?php echo _('This content can be associated to these hierarchies'); ?>:<br /></p>
@@ -429,7 +435,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		<div id="hierarchies"></div>
 
 		<?php
-
 			echo br(3).$save_buttons;
 
 		} else {
@@ -477,5 +482,5 @@ $(document).ready(function() {
 		'tree_mode'		=> 2,
 		'tree'			=> $hierarchies
 	);
-	//$this->view->render('admin/hierarchies/dynatree', $data);
+	$this->view->render('admin/hierarchies/dynatree', $data);
 }

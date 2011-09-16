@@ -288,10 +288,10 @@ Class Contents extends Bancha_Controller
     	      	}
             }
 
-            //Riprendo il record aggiornato dal db
+            //We take back the record from the Database
             $record = $this->records->get($record_id);
 
-            //Aggiorno i testi alternativi delle immagini
+            //And we update all the alternative texts
             if ($this->input->post('_alt_text', FALSE)) {
                 $alt_texts = $this->input->post('_alt_text', FALSE);
                 $priorities = $this->input->post('_priority', FALSE);
@@ -308,14 +308,10 @@ Class Contents extends Bancha_Controller
             if ($new_hierarchies = $this->input->post('_hierarchies', FALSE))
             {
                 $new_hierarchies = $this->hierarchies->parse_data($new_hierarchies);
-                $done = $this->hierarchies->update_record_hierarchies($record_id, $new_hierarchies);
-                if ($done)
-                {
-                    $this->view->message('success', _('The selected hierarchies have been deleted.'));
-                }
+                $this->hierarchies->update_record_hierarchies($record_id, $new_hierarchies);
             }
 
-            //Pulisco la cache di questo tipo di albero
+            //We clear the cache of this type
             $this->tree->clear_cache($tipo['name']);
 
             //Pulisco la cache del menu di default se questo tipo ne fa parte
@@ -396,7 +392,13 @@ Class Contents extends Bancha_Controller
 
         if ($tipo['has_hierarchies'])
         {
-            $this->view->set('hierarchies', $this->hierarchies->get_tree());
+            if ($record->id)
+            {
+            	$hierarchies = $this->hierarchies->get_record_hierarchies($record->id);
+            	$this->hierarchies->set_active_nodes($hierarchies);
+            }
+        	
+        	$this->view->set('hierarchies', $this->hierarchies->get_tree());
         }
 
         if ($tipo['has_attachments'] && $record->id)
