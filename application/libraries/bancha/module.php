@@ -44,8 +44,9 @@ abstract class Bancha_Module
 
 	public function load($module_file)
 	{
-		require_once $this->module_filespath . strtolower($module_file) . '.php';
+		$name = strtolower($module_file);
+		require_once $this->module_filespath . $name . '.php';
 		$class_name = $this->module_name . '_' . ucfirst($module_file);
-		return new $class_name();
+		$this->$name = new $class_name();
 	}
 }
