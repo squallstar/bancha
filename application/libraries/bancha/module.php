@@ -21,7 +21,14 @@ abstract class Bancha_Module
 	 */
 	public $view;
 
+	/**
+	 * @var string The path of the files for this module
+	 */
 	public $module_filespath;
+
+	/**
+	 * @var string The name of the current module
+	 */
 	public $module_name;
 
 	public function __construct()
@@ -31,8 +38,8 @@ abstract class Bancha_Module
 	}
 
 	/**
-	 * Renderizza un modulo
-	 * @param string $view Nome della view da utilizzare (default = 'view')
+	 * Renders a module, using the default view
+	 * @param string $view The view template to use (default = 'view')
 	 */
 	public function render($view = 'view')
 	{
@@ -42,11 +49,18 @@ abstract class Bancha_Module
 		return $CI->load->view($module_name.DIRECTORY_SEPARATOR.$module_name.'_'.$view, $CI->view->get_data(), TRUE);
 	}
 
-	public function load($module_file)
+	/**
+	 * Loads a single class inside this module
+	 * @param string $module_file The name of the class to load: Modulename_$classname
+	 */
+	public function load($classname)
 	{
-		$name = strtolower($module_file);
-		require_once $this->module_filespath . $name . '.php';
-		$class_name = $this->module_name . '_' . ucfirst($module_file);
-		$this->$name = new $class_name();
+		$lower_name = strtolower($classname);
+
+		$file_name = strtolower($this->module_name) . '_' . $lower_name . '.php';
+		require_once $this->module_filespath . $file_name;
+
+		$compiled_name = $this->module_name . '_' . ucfirst($classname);
+		$this->$lower_name = new $compiled_name();
 	}
 }

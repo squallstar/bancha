@@ -175,7 +175,7 @@ Class Bancha_Loader extends CI_Loader {
 		$class_name = ucfirst($module_name).'_Module';
 		$tmp = new $class_name();
 		$tmp->module_name = ucfirst($module_name);
-		$tmp->module_filespath = $CI->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR.$module_name.'_';
+		$tmp->module_filespath = $CI->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR;
 		return $tmp;
 	}
 
