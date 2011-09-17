@@ -46,6 +46,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('CDATA_START',	'<![CDATA[');
 define('CDATA_END',		']]>');
 define('MEMORY_LIMIT',	'128M');
+define('CACHE', TRUE);
 
 
 /* End of file constants.php */
