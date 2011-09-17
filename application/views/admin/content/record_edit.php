@@ -424,7 +424,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		
 		echo '<h3>'._('Hierarchies').'</h3>';
 
-		if (count($hierarchies)) {
+		if (count($this->config->item('hierarchies'))) {
 
 			echo form_hidden('_hierarchies');
 
@@ -438,7 +438,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			echo br(3).$save_buttons;
 
 		} else {
-			echo '<p>'._('This type has no hierarchies').'.</p>';
+			echo '<p>'._('There are no hierarchies').'.</p>';
 		}
 
 
@@ -480,7 +480,7 @@ $(document).ready(function() {
 		'tree_id'		=> 'hierarchies',
 		'tree_form'		=> '#record_form',
 		'tree_mode'		=> 2,
-		'tree'			=> $hierarchies
+		'tree'			=> $this->config->item('hierarchies')
 	);
 	$this->view->render('admin/hierarchies/dynatree', $data);
 }

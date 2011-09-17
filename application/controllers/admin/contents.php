@@ -398,7 +398,7 @@ Class Contents extends Bancha_Controller
             	$this->hierarchies->set_active_nodes($hierarchies);
             }
         	
-        	$this->view->set('hierarchies', $this->hierarchies->get_tree());
+        	$this->config->set_item('hierarchies', $this->hierarchies->get_tree());
         }
 
         if ($tipo['has_attachments'] && $record->id)
