@@ -16,9 +16,15 @@
  *
  */
 
+if (!defined('DYNATREE')) {
 ?><link type="text/css" rel="stylesheet" href="<?php echo site_url(THEMESPATH.'admin/css/dynatree.css'); ?>" />
 <script type="text/javascript" src="<?php echo site_url(THEMESPATH.'admin/js/jquery-ui.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo site_url(THEMESPATH.'admin/js/jquery.dynatree.min.js'); ?>"></script>
+<?php
+} else { 
+	define('DYNATREE', TRUE);
+}
+?>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#<?php echo $tree_id; ?>").dynatree({
