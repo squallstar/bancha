@@ -163,7 +163,7 @@ Class Xml
     	//Allowed types of field
     	$field_usable_inputs = array(
       		'text', 'textarea', 'date', 'checkbox', 'select', 'multiselect', 'radio',
-      		'images', 'files', 'number', 'textarea_full', 'datetime', 'hidden', 'dynatree'
+      		'images', 'files', 'number', 'textarea_full', 'datetime', 'hidden', 'hierarchy'
     	);
 
     	$content = array(

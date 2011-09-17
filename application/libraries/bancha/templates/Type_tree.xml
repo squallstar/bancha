@@ -146,7 +146,7 @@
 		<field id="action_list_hierarchies">
 			<visible>false</visible>
 			<description>Hierarchies</description>
-			<type>dynatree</type>
+			<type>hierarchy</type>
 			<options>
 				<custom>$this->config->item('hierarchies')</custom>
 			</options>

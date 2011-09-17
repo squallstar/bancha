@@ -140,7 +140,7 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 	<li><strong>select</strong> - Per utilizzare un campo di scelta singola a tendina</li>
 	<li><strong>multiselect</strong> - Per utilizzare un campo di scelta multipla (due tendine con add/remove)</li>
 	<li><strong>checkbox</strong> - Per utilizzare un campo di scelta multipla in stile "checkbox"</li>
-	<li><strong>dynatree</strong> - Per utilizzare un campo di scelta multipla in stile "esplora risorse"</li>
+	<li><strong>hierarchy</strong> - Per utilizzare un campo di scelta multipla in stile "esplora risorse"</li>
 	<li><strong>files</strong> - Per utilizzare un campo di caricamento files</li>
 	<li><strong>images</strong> - Per utilizzare un campo di caricamento immagini</li>
 	<li><strong>hidden</strong> - Per utilizzare un campo di tipo hidden</li>
