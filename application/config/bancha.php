@@ -14,8 +14,9 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
 /* WEBSITE LANGUAGES
- * Configurazione delle lingue utilizzabili lato website
+ * Here goes the website languages
  */
 $config['website_languages'] = array(
 	'it' => array(
@@ -39,7 +40,7 @@ $config['website_languages'] = array(
 );
 
 /* ADMIN LANGUAGES
- * Configurazione delle lingue utilizzabili in amministrazione
+ * Here goes the admin languages
  */
 $config['admin_languages'] = array(
 	'it' => array(
@@ -59,12 +60,19 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.6.7');
+define('BANCHA_VERSION', '0.6.8');
 
 /*
  * Framework name
  */
 define('CMS', 'BANCHA');
+
+/*
+ * The Directory Separator
+ * On windows systems, will be "\"
+ * On unix-like systems, will be "/"
+ */
+$sep = DIRECTORY_SEPARATOR;
 
 /*
  * WEBSITE THEMES
@@ -85,23 +93,23 @@ $config['records_per_page'] = 10;
 /* FRAMEWORK PATH
  * The library path where Bancha classes are stored
  */
-define('FRPATH', APPPATH . 'libraries' . DIRECTORY_SEPARATOR . FRNAME . DIRECTORY_SEPARATOR);
+define('FRPATH', APPPATH . 'libraries' . $sep . FRNAME . $sep);
 
 /*
  * XML FOLDER
  * This directory contains the XML schemes of the content types
  */
-$config['xml_folder'] = APPPATH . 'xml' . DIRECTORY_SEPARATOR;
+$config['xml_folder'] = APPPATH . 'xml' . $sep;
 
 /*
  * MODULES FOLDER
  */
-$config['modules_folder'] = APPPATH . 'modules' . DIRECTORY_SEPARATOR;
+$config['modules_folder'] = APPPATH . 'modules' . $sep;
 
 /*
  * CACHE FOLDER
  */
-$config['fr_cache_folder'] = APPPATH . 'cache' . DIRECTORY_SEPARATOR . '_' . FRNAME. DIRECTORY_SEPARATOR;
+$config['fr_cache_folder'] = APPPATH . 'cache' . $sep . '_' . FRNAME. $sep;
 
 /*
  * TYPES CACHE FILE
@@ -119,19 +127,19 @@ $config['tree_cache_folder'] = $config['fr_cache_folder'] . '{name}.tree';
  * TEMPLATES DIRECTORY
  * The templates that Bancha uses to generate many kind of things
  */
-$config['templates_folder'] = FRPATH . 'templates' . DIRECTORY_SEPARATOR;
+$config['templates_folder'] = FRPATH . 'templates' . $sep;
 
 /*
 * CUSTOM CONTROLLERS DIRECTORY
 * The custom controllers (such as the triggers controller) are placed here
 */
-$config['custom_controllers_folder'] = APPPATH . 'controllers' . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR;
+$config['custom_controllers_folder'] = APPPATH . 'controllers' . $sep . 'custom' . $sep;
 
 /*
  * ATTACH MAIN DIRECTORY
  * Absolute path (internal) to the attachments directory
  */
-$config['attach_folder'] = FCPATH . 'attach' . DIRECTORY_SEPARATOR;
+$config['attach_folder'] = FCPATH . 'attach' . $sep;
 
 /*
  * ATTACH MAIN DIRECTORY
@@ -182,13 +190,13 @@ $config['view_templates_to_copy'] = array('detail', 'list');
  * VIEWS ABSOLUTE TEMPLATES FOLDER
  * Absolute path to the type templates (views).
  */
-$config['views_absolute_templates_folder'] = APPPATH . 'views' . DIRECTORY_SEPARATOR . $config['views_templates_folder'];
+$config['views_absolute_templates_folder'] = APPPATH . 'views' . $sep . $config['views_templates_folder'];
 
 /*
  * XML TRANSLATIONS PATH
  * The XML parser will save the translations here, as PHP labels
  */
-$config['xml_translations_path'] = APPPATH . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'content' . DIRECTORY_SEPARATOR . 'translations.php';
+$config['xml_translations_path'] = APPPATH . $sep . 'views' . $sep . 'admin' . $sep . 'content' . $sep . 'translations.php';
 
 /*
  * RESTRICTED FIELD NAMES
