@@ -24,6 +24,7 @@ Thumbs.db
 
 #Cache files
 *.cache
+*.tree
 /application/cache/_bancha/content.types
 /attach/cache/
 /attach/
