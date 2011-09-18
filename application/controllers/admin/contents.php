@@ -587,6 +587,10 @@ Class Contents extends Bancha_Controller
     */
     public function renew_cache()
     {
+        //Database cache
+        if (CACHE) $this->db->cache_delete_all();
+
+        //Content types cache
     	if (!$this->content->rebuild())
         {
     		show_error(_('Cannot renew the cache.'), 500, _('Error'));
