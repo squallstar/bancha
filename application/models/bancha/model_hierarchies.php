@@ -148,7 +148,7 @@ Class Model_hierarchies extends CI_Model {
   		return true;
   	}
 
-  	/**
+    /**
 	 * Updates all the hierarchies of a record
 	 * @param int $id_record
 	 * @param array $new_hierarchies

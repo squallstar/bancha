@@ -351,22 +351,20 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 			
 			case 'hierarchy':
-				if ($this->config->item('hierarchies'))
-				{
-					$dyna_name = '_dyna_'.$field_name;
-					echo $p_start.$label.br(1).'<div id="'.$dyna_name.'"></div>';
-					
-					$data = array(
-							'tree_input'	=> $field_name,
-							'tree_id'		=> $dyna_name,
-							'tree_form'		=> '#record_form',
-							'tree_mode'		=> 2,
-							'tree'			=> $this->config->item('hierarchies')
-					);
-					$this->view->render('admin/hierarchies/dynatree', $data);
-					
-					echo $p_end;
-				}
+				$dyna_name = '_dyna_'.$field_name;
+				echo $p_start.$label.br(1).'<div id="'.$dyna_name.'"></div>';
+				
+				$data = array(
+						'tree_input'	=> $field_name,
+						'tree_id'		=> $dyna_name,
+						'tree_form'		=> '#record_form',
+						'tree_mode'		=> 2,
+						'tree'			=> $field['options']
+				);
+				$this->view->render('admin/hierarchies/dynatree', $data);
+				
+				echo $p_end;
+				
 				break;
 
 		}
