@@ -234,7 +234,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 					$add .= 'onchange="'.$field['onchange'].'" ';
 					$js_onload .= trim($field['onchange'], ';').'; ';
 				}
-				$add .= 'class="multi '.($field['mandatory']?' mandatory':'');
+				$add .= 'multiple size="999" class="multi '.($field['mandatory']?' mandatory':'');
 				$add .='" ';
 				$field['options']['multiple'] = '';
 				echo $p_start.$label.br(1);
@@ -251,11 +251,11 @@ foreach ($tipo['fieldsets'] as $fieldset)
 					}
 				}
 
-				echo '<div class="multiselect multiselect_'.$field_name.'"><div class="multi_left">'.form_dropdown($field_name.'[]', $left_options, $field_value, $add);
+				echo '<div class="multiselect multiselect_'.$field_name.'"><div class="multi_left">'.form_dropdown(null, $left_options, $field_value, $add);
 				echo '<br /><input type="button" class="add button tiny" value="'._('Add').'" />'.'</div>';
 
-				echo '<div class="multi_right">'.form_dropdown('_'.$field_name, $right_options, $field_value, $add);
-				echo '<br /><input type="button" class="rem button tiny" value="'._('Remove').'" />'.'</div></div><br /><br />';
+				echo '<div class="multi_right">'.form_dropdown($field_name.'[]', $right_options, $field_value, $add);
+				echo '<br /><input type="button" class="rem button tiny" value="'._('Remove').'" />'.'</div><div class="clear"></div></div>';
 
 				$nm = 'multiselect_'.$field_name;
 

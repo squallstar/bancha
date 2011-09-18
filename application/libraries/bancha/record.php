@@ -190,7 +190,7 @@ Class Record {
 		      			$this->_data[$field_name] = $field_value;
 		      		}
 
-		      		//Converto i timestamp in date
+		      		//We convert the timestamps in dates
 		      		//TODO: mettere tutti i format date e datetime nel config per lingua (tipo d/m/Y)
 		      		$field_type = $tipo['fields'][$field_name]['type'];
 		      		if ($field_type == 'date')
@@ -198,9 +198,12 @@ Class Record {
 		      			$this->_data[$field_name] = date('d/m/Y', $this->_data[$field_name]);
 		      		} else if ($field_type == 'datetime')
 		      		{
-		      			debug($this->_data[$field_name] . ' '.$this->_data['_time_'.$field_name]);
 		      			$this->_data[$field_name] = date('d/m/Y H:i', $this->_data[$field_name] . ' '.$this->_data['_time_'.$field_name]);
 		      		}
+                    else if (in_array($field_type, array('multiselect', 'hierarchy')) && is_string($this->_data[$field_name]))
+                    {
+                        $this->_data[$field_name] = explode('||', trim($this->_data[$field_name], '|'));    
+                    }
 				}
 	      	}
 
