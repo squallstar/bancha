@@ -231,6 +231,12 @@ h3 { font-size: 1.7em; font-weight: normal; margin: 0 0 20px; }
 		.post .details .info a { color: #777; border-bottom: 1px dotted #999; padding: 3px 1px; }
 	.post .body { float: right; width: 618px; padding: 0 0 0 30px; border-left: 1px solid #ddd; }
 
+#main { clear: both; padding: 30px 10px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; margin: 0 0 40px; }
+	#main .details { float: left; width: 250px; }
+	#main .details .info { font-size: .9em; color: #999; }
+		#main .details .info a { color: #777; border-bottom: 1px dotted #999; padding: 3px 1px; }
+	#main .body { float: right; width: 618px; padding: 0 0 0 30px; border-left: 1px solid #ddd; }
+	
 .col { width: 290px; margin: 0 40px 30px 0; float: left; font-size: .9em; }
 	.col.last { margin-right: 0; }
 
