@@ -70,7 +70,7 @@ Class Xml
             			$column = $xml->addChild($field_name);
 
             			if (is_array($value))
-            			{debug($value);
+            			{
               				$value = '|'.implode('||', $value).'|';
             			}
           				$node = dom_import_simplexml($column);
