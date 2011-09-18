@@ -219,11 +219,11 @@ h1 { font-weight: normal; font-size: 2.6em; padding: 0 0 10px; margin: 0 0 15px;
 h3 { font-size: 1.7em; font-weight: normal; margin: 0 0 20px; }
 	h3 a { color: #222; }
 
-#wrapper > .menu { float: right; margin: 10px 10px 0 0; width:637px }
-#wrapper > .menu li { display: inline; list-style: none; }
-#wrapper > .menu li.open a { color: #D40000; }
-#wrapper > .menu li a { float: left; margin: 0 0 0 20px; color: #888; }
-#wrapper > .menu li a:hover { color: #555; }
+#wrapper > header nav { float: right; margin: 10px 10px 0 0; width:637px }
+#wrapper > header nav li { display: inline; list-style: none; }
+#wrapper > header nav li.open a { color: #D40000; }
+#wrapper > header nav li a { float: left; margin: 0 0 0 20px; color: #888; }
+#wrapper > header nav li a:hover { color: #555; }
 
 .post { clear: both; padding: 30px 10px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; margin: 0 0 40px; }
 	.post .details { float: left; width: 250px; }
@@ -231,16 +231,17 @@ h3 { font-size: 1.7em; font-weight: normal; margin: 0 0 20px; }
 		.post .details .info a { color: #777; border-bottom: 1px dotted #999; padding: 3px 1px; }
 	.post .body { float: right; width: 618px; padding: 0 0 0 30px; border-left: 1px solid #ddd; }
 
-#main { clear: both; padding: 30px 10px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; margin: 0 0 40px; }
+#main { clear: both; padding: 30px 10px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;}
 	#main .details { float: left; width: 250px; }
 	#main .details .info { font-size: .9em; color: #999; }
 		#main .details .info a { color: #777; border-bottom: 1px dotted #999; padding: 3px 1px; }
-	#main .body { float: right; width: 618px; padding: 0 0 0 30px; border-left: 1px solid #ddd; }
-	
-.col { width: 290px; margin: 0 40px 30px 0; float: left; font-size: .9em; }
+	#main .body { float: right; width: 618px; padding: 0 0 0 30px; margin: 0 0 20px 0; border-left: 1px solid #ddd; }
+	#main .rowtop {}
+	#main .rowbottom {border-top: 1px solid #ddd;}
+.col { width: 286px; margin: 30px 40px 0 0; float: left; font-size: .9em; }
 	.col.last { margin-right: 0; }
 
-#footer { clear: both; border-top: 1px solid #ddd; padding: 20px 0; font-size: .9em; color: #999; }
+#footer { clear: both; padding: 20px 0; font-size: .9em; color: #999; }
 
 .details ul {
 	padding:0 10px;
