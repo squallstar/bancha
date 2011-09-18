@@ -1,4 +1,4 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?><div class="post"><?php
+<?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?><div id="main" role="main"><?php
 if (isset($page) && $page->is_page()) {
 
 	$action = $page->get('action');
