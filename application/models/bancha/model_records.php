@@ -375,7 +375,7 @@ Class Model_records extends CI_Model {
 			          		{
 				        		if ($tipo['fields'][$column]['type'] == 'date')
 				          		{
-				          			//Converto la data in timestamp
+				          			//We convert the date fields into timestamps
 				          			$record->set('_'.$column, $item->$column);
 				          			$item->$column = date('d/m/Y', $item->$column);
 				          		} else if ($tipo['fields'][$column]['type'] == 'datetime')
@@ -386,6 +386,10 @@ Class Model_records extends CI_Model {
 				          				$item->$column = date('d/m/Y H:i', $item->$column);
 				          			}
 				          		}
+                                else if (in_array($tipo['fields'][$column]['type'], config_item('array_field_types')))
+                                {
+                                    $item->$column = explode('||', trim($item->$column, '|'));    
+                                }
 			          		}
 			        		$record->set($column, $item->$column);
 			          	}
@@ -406,7 +410,7 @@ Class Model_records extends CI_Model {
 			        }
 
 			    }else{
-			    	show_error('Impossibile costruire il record. (records/get)');
+			    	show_error(_('Cannot build the record.').' (records/get)');
 			    }
 		    $records[] = $record;
 	     	}
@@ -447,14 +451,14 @@ Class Model_records extends CI_Model {
 
 	      	$tipo = $this->content->type($record->_tipo);
 
-	      	//Colonne valorizzate sempre
+	      	//These columns are always populated
 	      	$data = array(
-	          'id_type'		=> $record->_tipo,
-	          'xml'			=> $record->xml,
-	          'date_update'	=> time()
+	          'id_type'      => $record->_tipo,
+	          'xml'          => $record->xml,
+	          'date_update'  => time()
 	        );
 
-	      	//Aggiungo le colonne fisiche
+	      	//And we add the physical columns
 	      	foreach ($tipo['columns'] as $column)
 	      	{
 	      		if (!isset($data[$column]))
@@ -462,7 +466,7 @@ Class Model_records extends CI_Model {
 	      			$data[$column] = $record->get($column);
 	      			if (is_array($data[$column]))
 	      			{
-	      				$data[$column] = '<value>'.implode('</value><value>', $data[$column]).'</value>';
+	      				$data[$column] = '|'.implode('||', $data[$column]).'|';
 	      			}
 	      		}
 	      	}
@@ -476,7 +480,7 @@ Class Model_records extends CI_Model {
 	        	$data['uri'] = $this->get_safe_uri($uri);
 	        }
 
-	        //This type has a parent?
+	        //This type has a parent field?
 	        if (isset($tipo['fields']['id_parent']))
 	        {
 		        $parent = $record->get('id_parent');

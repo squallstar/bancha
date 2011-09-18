@@ -140,6 +140,7 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 	<li><strong>select</strong> - Per utilizzare un campo di scelta singola a tendina</li>
 	<li><strong>multiselect</strong> - Per utilizzare un campo di scelta multipla (due tendine con add/remove)</li>
 	<li><strong>checkbox</strong> - Per utilizzare un campo di scelta multipla in stile "checkbox"</li>
+	<li><strong>hierarchy</strong> - Per utilizzare un campo di scelta multipla in stile "esplora risorse"</li>
 	<li><strong>files</strong> - Per utilizzare un campo di caricamento files</li>
 	<li><strong>images</strong> - Per utilizzare un campo di caricamento immagini</li>
 	<li><strong>hidden</strong> - Per utilizzare un campo di tipo hidden</li>
@@ -169,7 +170,7 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 	&lt;admin&gt;true&lt;/admin&gt;
 	&lt;default&gt;Senza titolo&lt;/default&gt;
 &lt;/field&gt;</code><br />
-<p>Il nodo <strong>default</strong> accetta anche codice php se viene preposto "eval", ad esempio <strong>&lt;default&gt;eval:time();&lt;/default&gt;</strong>
+<p>Il nodo <strong>default</strong> accetta anche codice php se viene preposto "eval:", ad esempio <strong>&lt;default&gt;eval:time();&lt;/default&gt;</strong>
 <p>I campi di tipo <strong>select</strong>, <strong>multiselect</strong> e <strong>checkbox</strong> inoltre, avranno a disposizione il nodo <strong>&lt;options&gt;</strong> per definire le opzioni associate a tale campo, come in questo esempio:</p>
 <code>&lt;options&gt;
 	&lt;option value="T"&gt;Si&lt;/option&gt;
@@ -438,8 +439,9 @@ In alternativa, &egrave; possibile utilizzare la funzione <strong>documents()</s
 	<li><strong>lang</strong> - rappresenta la lingua del record (se presente)</li>
 	<li><strong>priority</strong> - numero intero che indica la priorit&agrave; di una pagina nell'albero di menu</li>
 	<li><strong>published</strong> - definisce se un record &egrave; pubblicato (0 = bozza, 1 = pubblicato, 2 = differente tra sviluppo e produzione)</li>
+	<li><strong>child_count</strong> - presente solo per i record con tipo gerarchico (es. "Menu"), &egrave; un numero intero che indica il numero di record figli.</li>
 </ul>
-<div class="message info">Puoi aggiungere campi fisici ad un record (utili per le estrazioni negli alberi di menu) intervenendo sulla variabile <strong>record_columns</strong> all'interno del file di configurazione di Bancha.
+<div class="message info">Puoi aggiungere campi fisici ad un record intervenendo sull'attributo <strong>column</strong> di un qualsiasi dei campi all'interno dello schema di un tipo di contenuto.
 Dopodich&egrave;, sar&agrave; necessario anche aggiungere tale colonna alla tabella <strong>records</strong> di Bancha con un ALTER-TABLE.</div>
 		</div>
 
@@ -453,7 +455,7 @@ print_r($record->get('lista_immagini');</code><br />
 <p>In alternativa, anzich&egrave; chiamare singolarmente la funzione per ogni record, &egrave; sufficiente utilizzare la funzione <strong>documents()</strong> durante l'estrazione dei
 records per procedere alla valorizzazione automatica dei documenti:</p>
 <code>$records = $this->records->type('Menu')-><strong>documents(TRUE)</strong>->get();</code><br />
-<div class="message warning">Attenzione: quest'ultimo esempio comporta maggior carico lato database poich&egrave; per ogni record estratto, verr&egrave; effettuata una seconda query per estrarre subito i suoi allegati.</div>
+<div class="message warning">Attenzione: quest'ultimo esempio comporta maggior carico lato database poich&egrave; per ogni record estratto, verr&agrave; effettuata una seconda query per estrarre subito i suoi allegati.</div>
 <p>Bancha, mette a disposizione anche una classe di estrazione dei documenti. Per inizializzare la classe, utilizzare la seguente sintassi:</p>
 <code>$this->load->documents();</code><br />
 <p>La classe Documents presenta i seguenti metodi di estrazione (il funzionamento &egrave; simile alla classe Records):</p>
@@ -539,7 +541,7 @@ echo menu($albero);
 
 <div class="sidebar_content" id="sb-caching">
 			<h3>11. Caching</h3>
-			<p><?php echo CMS; ?> utilizza 3 tipi differenti di cache:</p>
+			<p><?php echo CMS; ?> utilizza la cache in 4 differenti modalit&agrave;:</p>
 
 
 			<h3>Cache dei tipi di contenuto</h3>
@@ -552,6 +554,11 @@ echo menu($albero);
 
 			<h3>Cache delle pagine</h3>
 			<p>I tipi di contenuto con struttura a pagine, normalmente presentano un campo xml chiamato "<strong>page_cache</strong>" nella scheda <strong>"Aspetto e azioni"</strong> che rappresenta (nella maschera di inserimento/modifica di una pagina) un campo di input numerico relativo al <strong>numero di minuti</strong> da utilizzare per tenere tale pagina in cache. Per non cacheare la pagina, &egrave; sufficiente impostare tale numero a "0" (zero). La cache di una pagina viene automaticamente svuotata quando la pagina viene modificata, pubblicata o depubblicata.<br /><strong>ATTENZIONE</strong>: la cache delle pagine &egrave; una funzionalit&agrave; estremamente <strong>potente</strong> ma <strong>pericolosa</strong>. Verr&agrave; infatti salvato l'interno rendering finale della pagina e servito all'utente come fosse una <strong>pagina statica</strong> (<em>senza passare dal framework</em>). Utilizzarlo quindi con la dovuta cautela, dato che le uniche variazioni nelle diverse richieste potranno essere solamente modifiche client-side via Javascript.</p>
+			<br />
+			
+			<h3>Cache dei preset (immagini)</h3>
+			<p>Le immagini generate attraverso i preset, vengono automaticamente cacheate sul filesystem in base al preset utilizzato, uno per file. La directory impostata come default per i preset &egrave; <strong>/attach/cache</strong>. Per svuotare la cache dei preset &egrave; sufficiente eliminare tale directory.
+		
 </div>
 
 <div class="sidebar_content" id="sb-feeds">

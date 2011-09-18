@@ -64,7 +64,7 @@
 			<admin>true</admin>
 			<list>true</list>
 			<options>
-				<custom>$this->config->item('languages_select')</custom>
+				<custom>config_item('languages_select')</custom>
 			</options>
 			<default>eval:$this->lang->current_language</default>
 		</field>
@@ -142,6 +142,14 @@
 			<visible>false</visible>
 			<description>Categories</description>
 			<type>text</type>
+		</field>
+		<field id="action_list_hierarchies">
+			<visible>false</visible>
+			<description>Hierarchies</description>
+			<type>hierarchy</type>
+			<options>
+				<custom>$this->config->item('hierarchies')</custom>
+			</options>
 		</field>
 		<field id="action_list_where">
 			<visible>false</visible>

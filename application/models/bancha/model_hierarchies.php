@@ -47,8 +47,10 @@ Class Model_hierarchies extends CI_Model {
  	{
 		if (!is_array($this->list))
 		{
+			if (CACHE) $this->db->cache_on();
  			$this->list = $this->db->select('id_hierarchy, id_parent, name')
 				   		   		   ->from($this->table)->get()->result();
+ 			if (CACHE) $this->db->cache_off();
 		}
 		return $this->list;
   	}
@@ -109,7 +111,9 @@ Class Model_hierarchies extends CI_Model {
   		{
   			$data['id_parent'] = $id_parent;
   		}
-  		return $this->db->insert($this->table, $data);
+  		$done = $this->db->insert($this->table, $data);
+  		if (CACHE) $this->db->cache_delete_all();
+  		return $done;
   	}
 
   	/**
@@ -139,9 +143,12 @@ Class Model_hierarchies extends CI_Model {
   			$this->db->where('id_hierarchy', $hierarchy);
   		}
   		$this->db->delete($this->table_relations);
+  		
+  		if (CACHE) $this->db->cache_delete_all();
+  		return true;
   	}
 
-  	/**
+    /**
 	 * Updates all the hierarchies of a record
 	 * @param int $id_record
 	 * @param array $new_hierarchies
@@ -152,7 +159,7 @@ Class Model_hierarchies extends CI_Model {
   		$this->db->where('id_record', $id_record)->delete($this->table_relations);
 
   		//And now, let's add the hierarchies
-  		if (count($new_hierarchies))
+  		if ($new_hierarchies != '' && count($new_hierarchies))
   		{
   			foreach ($new_hierarchies as $hierarchy)
   			{
@@ -226,15 +233,5 @@ Class Model_hierarchies extends CI_Model {
 			$tree = $tree['children'];
 		}
 		return $tree;
-	}
-
-	/**
-	 * Converts a GET hierarchies string to an array
-	 * @param string $get_string
-	 * @return array
-	 */
-	public function parse_data($get_string)
-	{
-		return explode('|', $get_string);
 	}
 }

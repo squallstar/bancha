@@ -47,6 +47,5 @@ define('CDATA_START',	'<![CDATA[');
 define('CDATA_END',		']]>');
 define('MEMORY_LIMIT',	'128M');
 
-
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

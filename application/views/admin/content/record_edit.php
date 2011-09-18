@@ -131,7 +131,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		}
 
 		//Localized options
-		if (isset($field['options']))
+		if (isset($field['options']) && is_array($field['options']) && $field['type'] != 'hierarchy')
 		{
 			$tmp = array();
 			foreach ($field['options'] as $opt_key => $opt_val)
@@ -234,7 +234,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 					$add .= 'onchange="'.$field['onchange'].'" ';
 					$js_onload .= trim($field['onchange'], ';').'; ';
 				}
-				$add .= 'class="multi '.($field['mandatory']?' mandatory':'');
+				$add .= 'multiple size="999" class="multi '.($field['mandatory']?' mandatory':'');
 				$add .='" ';
 				$field['options']['multiple'] = '';
 				echo $p_start.$label.br(1);
@@ -251,11 +251,11 @@ foreach ($tipo['fieldsets'] as $fieldset)
 					}
 				}
 
-				echo '<div class="multiselect multiselect_'.$field_name.'"><div class="multi_left">'.form_dropdown($field_name.'[]', $left_options, $field_value, $add);
+				echo '<div class="multiselect multiselect_'.$field_name.'"><div class="multi_left">'.form_dropdown(null, $left_options, $field_value, $add);
 				echo '<br /><input type="button" class="add button tiny" value="'._('Add').'" />'.'</div>';
 
-				echo '<div class="multi_right">'.form_dropdown('_'.$field_name, $right_options, $field_value, $add);
-				echo '<br /><input type="button" class="rem button tiny" value="'._('Remove').'" />'.'</div></div><br /><br />';
+				echo '<div class="multi_right">'.form_dropdown($field_name.'[]', $right_options, $field_value, $add);
+				echo '<br /><input type="button" class="rem button tiny" value="'._('Remove').'" />'.'</div><div class="clear"></div></div>';
 
 				$nm = 'multiselect_'.$field_name;
 
@@ -349,12 +349,29 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				}
 				echo $p_end;
 				break;
+			
+			case 'hierarchy':
+				$dyna_name = '_dyna_'.$field_name;
+				echo $p_start.$label.br(1).'<div id="'.$dyna_name.'"></div>';
+				
+				$data = array(
+						'tree_input'	=> $field_name,
+						'tree_id'		=> $dyna_name,
+						'tree_form'		=> '#record_form',
+						'tree_mode'		=> 2,
+						'tree'			=> $field['options']
+				);
+				$this->view->render('admin/hierarchies/dynatree', $data);
+				
+				echo $p_end;
+				
+				break;
 
 		}
 
 		if ($field['type'] != 'hidden')
 		{
-			echo br(1)."\n";
+			echo "<br />\n";
 		}
 
 		if (isset($field['visible'])) {
@@ -424,7 +441,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		
 		echo '<h3>'._('Hierarchies').'</h3>';
 
-		if (count($hierarchies)) {
+		if ($this->config->item('hierarchies')) {
 
 			echo form_hidden('_hierarchies');
 
@@ -438,7 +455,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			echo br(3).$save_buttons;
 
 		} else {
-			echo '<p>'._('This type has no hierarchies').'.</p>';
+			echo '<p>'._('There are no hierarchies').'.</p>';
 		}
 
 
@@ -480,7 +497,7 @@ $(document).ready(function() {
 		'tree_id'		=> 'hierarchies',
 		'tree_form'		=> '#record_form',
 		'tree_mode'		=> 2,
-		'tree'			=> $hierarchies
+		'tree'			=> $this->config->item('hierarchies')
 	);
 	$this->view->render('admin/hierarchies/dynatree', $data);
 }

@@ -71,15 +71,11 @@ Class Xml
 
             			if (is_array($value))
             			{
-              				foreach ($value as $val)
-              				{
-                				$column->addChild('value', $val);
-              				}
-            			} else {
-              				$node = dom_import_simplexml($column);
-              				$single_node = $node->ownerDocument;
-              				$node->appendChild($single_node->createCDATASection($value));
+              				$value = '|'.implode('||', $value).'|';
             			}
+          				$node = dom_import_simplexml($column);
+          				$single_node = $node->ownerDocument;
+          				$node->appendChild($single_node->createCDATASection($value));
           			}
         		}
       		}
@@ -163,7 +159,7 @@ Class Xml
     	//Allowed types of field
     	$field_usable_inputs = array(
       		'text', 'textarea', 'date', 'checkbox', 'select', 'multiselect', 'radio',
-      		'images', 'files', 'number', 'textarea_full', 'datetime', 'hidden'
+      		'images', 'files', 'number', 'textarea_full', 'datetime', 'hidden', 'hierarchy'
     	);
 
     	$content = array(
@@ -171,7 +167,7 @@ Class Xml
       		'name'			=> $safe_filename,
       		'tree'			=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
       		'has_categories'=> isset($node->has_categories) ? (strtolower((string)$node->has_categories) == 'true' ? TRUE : FALSE) : FALSE,
-          'has_hierarchies'=> isset($node->has_hierarchies) ? (strtolower((string)$node->has_hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
+            'has_hierarchies'=> isset($node->has_hierarchies) ? (strtolower((string)$node->has_hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
       		'description'	=> (string) $node->description,
       		'primary_key'	=> (string) $node->primary_key,
       		'table'			=> (string) $node->table

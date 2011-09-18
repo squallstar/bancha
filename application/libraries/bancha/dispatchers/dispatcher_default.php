@@ -2,7 +2,7 @@
 /**
  * Default Dispatcher (Library)
  *
- * Libreria per il routing generale del front-end del sito internet
+ * The default router of the website
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -24,7 +24,8 @@ Class Dispatcher_default
 		$found = FALSE;
 
 		//Segmento pagina/record attuale
-		if (isset($CI->tree)) {
+		if (isset($CI->tree))
+		{
 			$current_page = $CI->tree->current_page_uri;
 		}
 
@@ -55,7 +56,8 @@ Class Dispatcher_default
 				{
 					//Se la tabella non e' quella dei records, non ho ancora trovato nulla
 					//e non ho gia' cercato in quella determinata tabella
-					if ($single_tipo['table'] != 'records' && !$found && !(in_array($id_tipo, $tipi_ricerca))) {
+					if ($single_tipo['table'] != 'records' && !$found && !(in_array($id_tipo, $tipi_ricerca)))
+					{
 						$result = $CI->records->type($id_tipo)->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
 						if (count($result)) {
 							break;
@@ -96,7 +98,6 @@ Class Dispatcher_default
 			$record = $result[0];
 			$found = TRUE;
 		}
-
 
 		if (!$found) {
 			$CI->view->title = _('Page not found');
@@ -158,6 +159,14 @@ Class Dispatcher_default
 							$CI->records->id_in($category_record_ids);
 							$CI->db->stop_cache();
 						}
+					}
+
+					$hierarchies = $page->get('action_list_hierarchies');
+					if (is_array($hierarchies) && count($hierarchies))
+					{
+						//TODO
+						//ids = get_records_for_hierarchies
+						//records->id_in(ids)
 					}
 
 					$limit = (int)$page->get('action_list_limit');

@@ -45,7 +45,7 @@ $this->load->helper('form');
 
 			<?php if (count($hierarchies)) { ?>
 			<form action="" method="POST" class="tree">
-				<input type="hidden" name="hierarchies" />
+				
 				<div id="tree" name="selNodes"></div>
 				<br />
 				<?php echo form_submit('submit', _('Delete selected'), 'class="submit long"'); ?>
