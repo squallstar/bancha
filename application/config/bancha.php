@@ -84,6 +84,14 @@ $config['website_themes'] = array(
 	'mobile'	=> 'desktop'	//reached from: /go-mobile
 );
 
+
+/*
+* CACHE - CATEGORIES AND HIERARCHIES
+* Defines if the categories and hierarchies queries can be cached on the filesystem.
+* Feel free to disable this feature if your disk makes a lot of file read/write operations.
+*/
+define('CACHE', TRUE);
+
 /*
 * RECORDS PER PAGE
 * The number of record extracted per page in the administration
