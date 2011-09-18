@@ -159,7 +159,7 @@ Class Model_hierarchies extends CI_Model {
   		$this->db->where('id_record', $id_record)->delete($this->table_relations);
 
   		//And now, let's add the hierarchies
-  		if (count($new_hierarchies))
+  		if ($new_hierarchies != '' && count($new_hierarchies))
   		{
   			foreach ($new_hierarchies as $hierarchy)
   			{

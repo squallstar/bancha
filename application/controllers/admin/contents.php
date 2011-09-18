@@ -305,9 +305,9 @@ Class Contents extends Bancha_Controller
             }
 
             //We delete this hierarchies
-            if ($new_hierarchies = $this->input->post('_hierarchies', FALSE))
+            if ($tipo['has_hierarchies'])
             {
-                $new_hierarchies = $this->hierarchies->parse_data($new_hierarchies);
+                $new_hierarchies = $this->input->post('_hierarchies', FALSE);
                 $this->hierarchies->update_record_hierarchies($record_id, $new_hierarchies);
             }
 
