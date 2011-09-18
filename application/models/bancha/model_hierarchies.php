@@ -234,14 +234,4 @@ Class Model_hierarchies extends CI_Model {
 		}
 		return $tree;
 	}
-
-	/**
-	 * Converts a GET hierarchies string to an array
-	 * @param string $get_string
-	 * @return array
-	 */
-	public function parse_data($get_string)
-	{
-		return explode('|', $get_string);
-	}
 }
