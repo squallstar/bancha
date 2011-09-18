@@ -71,15 +71,11 @@ Class Xml
 
             			if (is_array($value))
             			{
-              				foreach ($value as $val)
-              				{
-                				$column->addChild('value', $val);
-              				}
-            			} else {
-              				$node = dom_import_simplexml($column);
-              				$single_node = $node->ownerDocument;
-              				$node->appendChild($single_node->createCDATASection($value));
+              				$value = '|'.implode('||', $value).'|';
             			}
+          				$node = dom_import_simplexml($column);
+          				$single_node = $node->ownerDocument;
+          				$node->appendChild($single_node->createCDATASection($value));
           			}
         		}
       		}
