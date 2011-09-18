@@ -200,7 +200,7 @@ Class Record {
 		      		{
 		      			$this->_data[$field_name] = date('d/m/Y H:i', $this->_data[$field_name] . ' '.$this->_data['_time_'.$field_name]);
 		      		}
-                    else if (in_array($field_type, array('multiselect', 'hierarchy')) && is_string($this->_data[$field_name]))
+                    else if (in_array($field_type, config_item('array_field_types')) && is_string($this->_data[$field_name]))
                     {
                         $this->_data[$field_name] = explode('||', trim($this->_data[$field_name], '|'));    
                     }

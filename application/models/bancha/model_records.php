@@ -386,7 +386,7 @@ Class Model_records extends CI_Model {
 				          				$item->$column = date('d/m/Y H:i', $item->$column);
 				          			}
 				          		}
-                                else if (in_array($tipo['fields'][$column]['type'], array('multiselect', 'hierarchy')))
+                                else if (in_array($tipo['fields'][$column]['type'], config_item('array_field_types')))
                                 {
                                     $item->$column = explode('||', trim($item->$column, '|'));    
                                 }

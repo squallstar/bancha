@@ -303,6 +303,12 @@ $config['tree_linear_fields'] = array('id_record', 'title', 'uri');
  */
 $config['record_select_tree_fields'] = array('id_parent');
 
+/*
+ * ARRAY FIELD TYPES
+ * These kind of fields will be store as arrays values
+ */
+$config['array_field_types'] = array('multiselect', 'hierarchy');
+
 
 /* End of file bancha.php */
 /* Location: ./application/config/bancha.php */
