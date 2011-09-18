@@ -18,9 +18,13 @@ Thumbs.db
 
 # Custom install files #
 ######################
-/application/cache/_bancha/content.types
 /application/views/website/type_templates
 /application/views/admin/content/translations.php
 /application/xml/*.xml
+
+#Cache files
+*.cache
+*.tree
+/application/cache/_bancha/content.types
 /attach/cache/
 /attach/

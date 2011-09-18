@@ -143,6 +143,14 @@
 			<description>Categories</description>
 			<type>text</type>
 		</field>
+		<field id="action_list_hierarchies">
+			<visible>false</visible>
+			<description>Hierarchies</description>
+			<type>hierarchy</type>
+			<options>
+				<custom>$this->config->item('hierarchies')</custom>
+			</options>
+		</field>
 		<field id="action_list_where">
 			<visible>false</visible>
 			<description>WHERE Condition</description>

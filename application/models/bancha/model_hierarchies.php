@@ -47,8 +47,10 @@ Class Model_hierarchies extends CI_Model {
  	{
 		if (!is_array($this->list))
 		{
+			if (CACHE) $this->db->cache_on();
  			$this->list = $this->db->select('id_hierarchy, id_parent, name')
 				   		   		   ->from($this->table)->get()->result();
+ 			if (CACHE) $this->db->cache_off();
 		}
 		return $this->list;
   	}
@@ -109,7 +111,9 @@ Class Model_hierarchies extends CI_Model {
   		{
   			$data['id_parent'] = $id_parent;
   		}
-  		return $this->db->insert($this->table, $data);
+  		$done = $this->db->insert($this->table, $data);
+  		if (CACHE) $this->db->cache_delete_all();
+  		return $done;
   	}
 
   	/**
@@ -139,6 +143,9 @@ Class Model_hierarchies extends CI_Model {
   			$this->db->where('id_hierarchy', $hierarchy);
   		}
   		$this->db->delete($this->table_relations);
+  		
+  		if (CACHE) $this->db->cache_delete_all();
+  		return true;
   	}
 
   	/**

@@ -64,8 +64,10 @@ Class Model_categories extends CI_Model {
    */
   public function get()
   {
-	$res = $this->db->select('id_category AS id, category_name AS name')
+  	if (CACHE) $this->db->cache_on();
+  	$res = $this->db->select('id_category AS id, category_name AS name')
 		   		    ->from('categories')->get();
+  	if (CACHE) $this->db->cache_off();
 	return $res->result();
   }
 
@@ -84,7 +86,9 @@ Class Model_categories extends CI_Model {
   	$done = $this->db->insert('categories', $data);
   	if ($done)
   	{
-  		return $this->db->insert_id();
+  		$done = $this->db->insert_id();
+  		if (CACHE) $this->db->cache_delete_all();
+  		return $done;
   	} else {
   		return FALSE;
   	}
@@ -120,7 +124,9 @@ Class Model_categories extends CI_Model {
   {
   		if ($cat_id != '')
   		{
-  			return $this->db->where('id_category', $cat_id)->delete('categories');
+  			$done = $this->db->where('id_category', $cat_id)->delete('categories');
+  			if (CACHE) $this->db->cache_delete_all();
+  			return $done;
   		}
   		return FALSE;
   }
@@ -225,5 +231,4 @@ Class Model_categories extends CI_Model {
 	}
 	return $ids;
   }
-
 }

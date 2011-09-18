@@ -131,7 +131,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		}
 
 		//Localized options
-		if (isset($field['options']))
+		if (isset($field['options']) && is_array($field['options']) && $field['type'] != 'hierarchy')
 		{
 			$tmp = array();
 			foreach ($field['options'] as $opt_key => $opt_val)
@@ -349,12 +349,31 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				}
 				echo $p_end;
 				break;
+			
+			case 'hierarchy':
+				if ($this->config->item('hierarchies'))
+				{
+					$dyna_name = '_dyna_'.$field_name;
+					echo $p_start.$label.br(1).'<div id="'.$dyna_name.'"></div>';
+					
+					$data = array(
+							'tree_input'	=> $field_name,
+							'tree_id'		=> $dyna_name,
+							'tree_form'		=> '#record_form',
+							'tree_mode'		=> 2,
+							'tree'			=> $this->config->item('hierarchies')
+					);
+					$this->view->render('admin/hierarchies/dynatree', $data);
+					
+					echo $p_end;
+				}
+				break;
 
 		}
 
 		if ($field['type'] != 'hidden')
 		{
-			echo br(1)."\n";
+			echo "<br />\n";
 		}
 
 		if (isset($field['visible'])) {
@@ -424,7 +443,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		
 		echo '<h3>'._('Hierarchies').'</h3>';
 
-		if (count($hierarchies)) {
+		if ($this->config->item('hierarchies')) {
 
 			echo form_hidden('_hierarchies');
 
@@ -438,7 +457,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			echo br(3).$save_buttons;
 
 		} else {
-			echo '<p>'._('This type has no hierarchies').'.</p>';
+			echo '<p>'._('There are no hierarchies').'.</p>';
 		}
 
 
@@ -480,7 +499,7 @@ $(document).ready(function() {
 		'tree_id'		=> 'hierarchies',
 		'tree_form'		=> '#record_form',
 		'tree_mode'		=> 2,
-		'tree'			=> $hierarchies
+		'tree'			=> $this->config->item('hierarchies')
 	);
 	$this->view->render('admin/hierarchies/dynatree', $data);
 }
