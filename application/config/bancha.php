@@ -190,7 +190,7 @@ $config['default_view_template'] = 'default';
 
 /*
  * VIEW TEMPLATES TO COPY
- * The .php templates that will be copied from Bencha templates to the website theme.
+ * The .php templates that will be copied from Bancha templates to the website theme.
  */
 $config['view_templates_to_copy'] = array('detail', 'list');
 
