@@ -8,6 +8,11 @@
    Twitter: @squallstar
    Location: Verona, IT
 
+   Logo Design: Michela Tannoia
+   Site: www.mint-sugar.com
+   Twitter: @mintsugar
+   Location: Verona, IT
+
    Co-Developer: Alessandro Maroldi
    Twitter: @alexmaroldi
    Location: Verona, IT
@@ -18,8 +23,8 @@
    Side-Developer: Umberto Gariggio
    Location: Verona, IT
 
-/* THANKS */
-   Michela Tannoia, Marco Solazzi
+/* THANKS TO */
+   Marco Solazzi
 
 /* SITE */
    Standards: HTML5, CSS3
