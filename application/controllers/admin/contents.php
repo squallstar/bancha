@@ -305,9 +305,9 @@ Class Contents extends Bancha_Controller
             }
 
             //We delete this hierarchies
-            if ($new_hierarchies = $this->input->post('_hierarchies', FALSE))
+            if ($tipo['has_hierarchies'])
             {
-                $new_hierarchies = $this->hierarchies->parse_data($new_hierarchies);
+                $new_hierarchies = $this->input->post('_hierarchies', FALSE);
                 $this->hierarchies->update_record_hierarchies($record_id, $new_hierarchies);
             }
 
@@ -406,11 +406,24 @@ Class Contents extends Bancha_Controller
     		$record->set_documents();
         }
 
-        //We extract the custom options (when found)
-        foreach ($tipo['fields'] as $field_name => $field_value) {
-        	if (isset($field_value['extract'])) {
+        //Additional set-ups before the page rendering
+        foreach ($tipo['fields'] as $field_name => $field_value)
+        {
+        	if (isset($field_value['extract']))
+            {
+                //We extract the custom options
     			$tipo['fields'][$field_name]['options'] = $this->records->get_field_options($field_value);
         	}
+            else if ($tipo['fields'][$field_name]['type'] == 'hierarchy')
+            {
+                //We need to extract the active hierarchies for this field
+                $val = $record->get($field_name);
+                if (is_array($val) && count($val))
+                {
+                    $this->hierarchies->set_active_nodes($val);
+                }
+                $tipo['fields'][$field_name]['options'] = $this->hierarchies->get_tree();
+            }
         }
 
         $this->view->set('tipo', $tipo);
@@ -423,6 +436,8 @@ Class Contents extends Bancha_Controller
     * Deletes a record from the DB
     * @param int|string $tipo
     * @param int $id_record
+    * @param bool $callback
+    * @return bool success (only when $callback is set to false)
     */
     public function delete_record($tipo='', $id_record='', $callback=FALSE)
     {
@@ -464,7 +479,9 @@ Class Contents extends Bancha_Controller
     			{
     				$this->session->set_flashdata('message', 'Il record ['.$id_record.'] &egrave; stato eliminato.');
     				redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
-    			}
+    			} else {
+                    return true;         
+                }
     		}
       	}else {
       		show_error('L\'id del record da eliminare non &egrave; settato.', 500, 'Errore: id non settato');
@@ -587,6 +604,10 @@ Class Contents extends Bancha_Controller
     */
     public function renew_cache()
     {
+        //Database cache
+        if (CACHE) $this->db->cache_delete_all();
+
+        //Content types cache
     	if (!$this->content->rebuild())
         {
     		show_error(_('Cannot renew the cache.'), 500, _('Error'));

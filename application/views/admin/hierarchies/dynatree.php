@@ -1,6 +1,6 @@
 <?php
 /**
- * Dynatree Javascript Activators
+ * Dynatree Javascript Activator
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -35,7 +35,6 @@ $(document).ready(function() {
       	checkbox: true,
         selectMode: <?php echo $tree_mode; ?>,
       	children: <?php echo json_encode($tree); ?>
-
     });
 
 	$("form<?php echo $tree_form; ?>").submit(function() {
@@ -47,10 +46,10 @@ $(document).ready(function() {
 			 
 			var nodeList = tree.getSelectedNodes(), arr = [];
 			for(var i=0, l=nodeList.length; i<l; i++){
-				arr.push(nodeList[i].data.key);
+				//arr.push(nodeList[i].data.key);
+				$("form<?php echo $tree_form; ?>")
+					.append('<input type="checkbox" class="hidden" checked="checked" name="<?php echo $tree_input; ?>[]" value="'+nodeList[i].data.key+'" />');
 			}
-			
-			$('input[name=<?php echo $tree_input; ?>]').val(arr.join('|'));
 		}
 
 		bancha.add_form_hash();

@@ -2,7 +2,8 @@
 /**
  * Install Controller
  *
- * Installazione sito
+ * This controller let you install the website+cms.
+ * After the installation, feel free to remove this file or add a die(); at the start!
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -30,13 +31,13 @@ Class Install extends Bancha_Controller
 		{
 			if ($this->input->post('create_tables'))
 			{
-				//Creo le tabelle
+				//First of all, let's create some tables
 				$this->installer->create_tables();
 
-				//Creo gli indici
+				//Then, let's add some indexes
 				$this->installer->create_indexes();
 
-				//Creo un utente ed i relativi permessi
+				//We create a defaut user
 				$username = 'admin';
 				$password = 'admin';
 				$this->installer->create_groups();
@@ -48,25 +49,25 @@ Class Install extends Bancha_Controller
 
 			if ($this->input->post('create_directories'))
 			{
-				//Creo le directory
+				//We create the directories
 				$this->installer->create_directories();
 			}
 
 			if ($this->input->post('create_types'))
 			{
-				//Creo i tipi predefiniti
+				//We create the default types
 				$this->installer->create_types();
 			}
 
 			if ($this->input->post('create_types') || $this->input->post('clear_cache'))
 			{
-				//Svuoto la cache
+				//We clear the content types cache
 				$this->tree->clear_cache();
 			}
 
 			if ($this->input->post('log_events'))
 			{
-				//Loggo il primo evento
+				//Let's log the first event!
 				$this->load->events();
 				$this->events->log('install', null, CMS);
 			}
@@ -76,6 +77,9 @@ Class Install extends Bancha_Controller
 			{
 				$this->installer->create_premade($premade);
 			}
+
+			//We clear the previous database cache
+			$this->db->cache_delete_all();
 
 			$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
 			$this->view->render_layout('installer/success', FALSE);

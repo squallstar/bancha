@@ -84,6 +84,14 @@ $config['website_themes'] = array(
 	'mobile'	=> 'desktop'	//reached from: /go-mobile
 );
 
+
+/*
+* CACHE - CATEGORIES AND HIERARCHIES
+* Defines if the categories and hierarchies queries can be cached on the filesystem.
+* Feel free to disable this feature if your disk makes a lot of file read/write operations.
+*/
+define('CACHE', TRUE);
+
 /*
 * RECORDS PER PAGE
 * The number of record extracted per page in the administration
@@ -224,6 +232,7 @@ $config['delete_dead_records'] = FALSE;
  * RECORD COLUMNS
  * The physical columns of the records table.
  * The website router uses it when extracts the records when it doesn't know the type.
+ * Keep it updated when you add columns that you want to extract.
  */
 $config['record_columns'] = array(
 	'id_record',
@@ -244,7 +253,7 @@ $config['record_columns'] = array(
 
 /*
  * DOCUMENTS SELECT FIELDS
- * The columns extracted from the documents table
+ * The columns that will be extracted from the documents table.
  */
 $config['documents_select_fields'] = array(
 	'id_document',
@@ -266,8 +275,8 @@ $config['documents_select_fields'] = array(
 /*
  * RECORD NOT LIVE COLUMNS
  * The columns that doesn't exists in the production tables.
- * Stage: table_stage
- * Production: table
+ * Production: <table>
+ * Stage: <table>_stage
  */
 $config['record_not_live_columns'] = array(
 	'published'
@@ -275,7 +284,7 @@ $config['record_not_live_columns'] = array(
 
 /*
  * PAGE EXTRACT COLUMNS
- * The columns extracted for the pages table
+ * The columns that will be extracted for the pages table.
  */
 $config['page_extract_columns'] = array(
 	'id_record', 'uri', 'full_uri', 'title', 'id_parent', 'show_in_menu', 'priority'
@@ -283,7 +292,7 @@ $config['page_extract_columns'] = array(
 
 /*
  * TREE LINEAR FIELDS
- * The columns extracted when building the website menu
+ * The columns that will be extracted when building the website menu
  */
 $config['tree_linear_fields'] = array('id_record', 'title', 'uri');
 
@@ -293,3 +302,13 @@ $config['tree_linear_fields'] = array('id_record', 'title', 'uri');
  * will be also extracted.
  */
 $config['record_select_tree_fields'] = array('id_parent');
+
+/*
+ * ARRAY FIELD TYPES
+ * These kind of fields will be store as arrays values
+ */
+$config['array_field_types'] = array('multiselect', 'hierarchy');
+
+
+/* End of file bancha.php */
+/* Location: ./application/config/bancha.php */

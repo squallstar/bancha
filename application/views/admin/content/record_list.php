@@ -166,6 +166,8 @@ $fields = array_keys($tipo['fields']);
 							case 'hidden':
 								$value = character_limiter(strip_tags($value), 30);
 							case 'checkbox':
+							case 'multiselect':
+							case 'hierarchy':
 								if (is_array($value)) {
 									$values = array();
 									if (isset($tipo['fields'][$field]['options'])) {

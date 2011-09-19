@@ -56,7 +56,7 @@
 			<admin>true</admin>
 			<list>true</list>
 			<options>
-				<custom>$this->config->item('languages_select')</custom>
+				<custom>config_item('languages_select')</custom>
 			</options>
 			<default>eval:$this->lang->current_language</default>
 		</field>

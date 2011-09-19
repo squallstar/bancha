@@ -148,7 +148,7 @@ Class Model_hierarchies extends CI_Model {
   		return true;
   	}
 
-  	/**
+    /**
 	 * Updates all the hierarchies of a record
 	 * @param int $id_record
 	 * @param array $new_hierarchies
@@ -159,7 +159,7 @@ Class Model_hierarchies extends CI_Model {
   		$this->db->where('id_record', $id_record)->delete($this->table_relations);
 
   		//And now, let's add the hierarchies
-  		if (count($new_hierarchies))
+  		if ($new_hierarchies != '' && count($new_hierarchies))
   		{
   			foreach ($new_hierarchies as $hierarchy)
   			{
@@ -233,15 +233,5 @@ Class Model_hierarchies extends CI_Model {
 			$tree = $tree['children'];
 		}
 		return $tree;
-	}
-
-	/**
-	 * Converts a GET hierarchies string to an array
-	 * @param string $get_string
-	 * @return array
-	 */
-	public function parse_data($get_string)
-	{
-		return explode('|', $get_string);
 	}
 }

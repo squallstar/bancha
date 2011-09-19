@@ -48,9 +48,8 @@ Class Hierarchies extends Bancha_Controller
 		}
 
 		//We delete this hierarchies
-		if ($data = $this->input->post('hierarchies'))
+		if ($elements = $this->input->post('hierarchies'))
 		{
-			$elements = $this->hierarchies->parse_data($data);
 			$done = $this->hierarchies->delete($elements);
 			if ($done)
 			{
