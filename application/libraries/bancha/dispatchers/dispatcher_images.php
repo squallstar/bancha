@@ -2,7 +2,7 @@
 /**
  * Images Dispatcher (Library)
  *
- * Libreria per la generazione e restituzione al browser di immagini
+ * This router generates the preset images and sends them to the client
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -15,18 +15,17 @@
 Class Dispatcher_Images
 {
 	/**
-	 * Genera una immagine con un preset scelto se non esiste
-	 * sul filesystem. Dopodiche' la restituisce al client
+	 * Generates an image if not exists, then the image will be
+	 * served to the client during the same request.
 	 */
 	public function retrieve($data)
 	{
-		//Istanza di Code Igniter
 		$CI = & get_instance();
 
-		//Ottengo il tipo di contenuto in questione
+		//We retrieve the content type
 		$tipo = $CI->content->type($data['type']);
 
-		//Controllo se il field richiesto e' un campo image
+		//Let's check if the request field is an image
 		if ($tipo['fields'][$data['field']]['type'] != 'images')
 		{
 			show_error('The field [' . $data['field'] . '] is not an "imagelist" field.', 400);
@@ -48,7 +47,7 @@ Class Dispatcher_Images
 		{
 			$preset = $presets_list[$data['preset']];
 		} else {
-			//Preset non trovato
+			//Preset not found
 			show_error('Preset ' . $data['preset'] . ' not found', 404);
 			return;
 		}
@@ -63,18 +62,18 @@ Class Dispatcher_Images
 		$store_path = $CI->config->item('attach_folder') . 'cache' . $sep . $path
 					. $data['preset'] . $sep;
 
-		//Uniformo il path (fix per windows)
+		//Paths will be uniformed (windows sucks at this)
 		$source_image = str_replace(DIRECTORY_SEPARATOR, '/', $source_image);
 		$store_path = str_replace(DIRECTORY_SEPARATOR, '/', $store_path);
 
-		//Controllo se il file originale esiste
+		//We check if the original file exists
 		if (!file_exists($source_image))
 		{
 			show_error('The original source image was not found.', 404);
 			return;
 		}
 
-		//Se non esista la directory (per la cache), la creo
+		//If the cache directory not exists, we will create it
 		if (!file_exists($store_path))
 		{
 			@mkdir($store_path, DIR_WRITE_MODE, TRUE);
@@ -168,12 +167,12 @@ Class Dispatcher_Images
 				log_message('error', $CI->image_lib->display_errors());
 				return;
 			}
-
 		}
 
-		//Output finale dell'immagine
+		//The final output is sent to the client
 		$CI->output->set_content_type($data['ext'])
 				   ->set_output(file_get_contents($store_path  . $file_name));
+		return;
 	}
 
 }
