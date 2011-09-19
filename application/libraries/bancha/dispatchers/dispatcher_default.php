@@ -15,7 +15,7 @@
 Class Dispatcher_default
 {
 	/**
-	 * Lancia il routing generale del sito
+	 * Starts the routing
 	 */
 	public function start()
 	{
@@ -23,39 +23,35 @@ Class Dispatcher_default
 
 		$found = FALSE;
 
-		//Segmento pagina/record attuale
 		if (isset($CI->tree))
 		{
+			//The current page/record segment
 			$current_page = $CI->tree->current_page_uri;
 		}
 
 		$current_request = $CI->uri->uri_string();
 
-		//Array con la pagina/record attuale
 		$result = array();
 		if (isset($CI->records))
 		{
+			//We extract a page based on the full request url
 			$result = $CI->records->set_type()->full_uri($current_request)->documents(FALSE)->limit(1)->get();
 		}
 
-		//Controllo se la pagina richiesta esiste
 		if (!count($result))
 		{
-			//Potrebbe essere un contenuto
+			//If not found, it could be a content
 			$result = $CI->records->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
 
 			if (!count($result))
 			{
-				//Provo a cercare il contenuto anche sulle tabelle custom dei tipi di contenuto (se ce ne sono)
-				$nomeTabelle = array();
-				// Ricavo la lista dei tipi di contenuto
+				//Let's search also on the custom tables
 				$content_types = $CI->content->types();
 
 				$tipi_ricerca = array();
 				foreach ($content_types as $id_tipo => $single_tipo)
 				{
-					//Se la tabella non e' quella dei records, non ho ancora trovato nulla
-					//e non ho gia' cercato in quella determinata tabella
+					//If the table isn't the record one and we haven't searched in this table
 					if ($single_tipo['table'] != 'records' && !$found && !(in_array($id_tipo, $tipi_ricerca)))
 					{
 						$result = $CI->records->type($id_tipo)->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
@@ -69,7 +65,7 @@ Class Dispatcher_default
 
 			if (count($result))
 			{
-				//Estraggo la pagina padre
+				//We extracted a record, so let's extract the parent page
 				$parent_page_uri = str_replace('/'.$current_page, '', $current_request);
 				$result_pages = $CI->records->full_uri($parent_page_uri)->documents(FALSE)->limit(1)->get();
 				if (count($result_pages))
@@ -81,7 +77,7 @@ Class Dispatcher_default
 						{
 							if (in_array($page->get('action'), array('list', 'single')))
 							{
-								//Controllo se il record è dello stesso tipo di quello che sto ciclando
+								//We check if the parent page is listing records of the current record type
 								if ($page->get('action_list_type') == $single_record->_tipo)
 								{
 									$found = TRUE;
@@ -94,7 +90,7 @@ Class Dispatcher_default
 				}
 			}
 		} else {
-			//Ottengo il primo record dei risultati
+			//We get the first record found
 			$record = $result[0];
 			$found = TRUE;
 		}
@@ -105,28 +101,28 @@ Class Dispatcher_default
 			return;
 		}
 
-		//Ottengo l'albero delle pagine
+		//We get the website pages tree
 		$CI->view->set('tree', $CI->tree->get_default());
 
-		//Imposto title, description e keywords
+		//Let's set the meta title, keywords and description
 		$CI->view->title = $record->get('meta_title');
 		if (!$CI->view->title)
 		{
-			//Se non c'è il meta title, uso il title
+			//If the meta title is not found, let's use the title field
 			$CI->view->title = $record->get('title');
 		}
 		$CI->view->keywords = $record->get('meta_keywords');
 		$CI->view->description = $record->get('meta_description');
 
-		//Controllo se e' una pagina
+		//Is this a page?
 		if ($record->is_page())
 		{
 			$page = $record;
 
-			//Imposto la lingua corrente in base alla pagina
+			//We set the language to be the same as the page
 			$CI->lang->set_lang($page->get('lang'));
 
-			//Imposto la cache per la pagina corrente se presente
+			//We set che cache if the page wants it
 			$cache = (int)$page->get('page_cache');
 			if ($cache > 0)
 			{
@@ -201,27 +197,26 @@ Class Dispatcher_default
 
 					if (isset($type['fields']['date_publish']))
 					{
-						//Estraggo solo record pubblicati
+						//We extract only published records
 						$CI->records->where('date_publish <= ' . time());
 					}
 
-					//Ottengo i records
 					if ($tipo)
 					{
 						$CI->records->type($tipo);
 					}
-					//Ottengo i contenuti per questa pagina
+					//Just list fields, not the detail ones
 					$CI->records->set_list(TRUE);
 					$CI->records->language();
 					$CI->db->stop_cache();
 
 					$records = $CI->records->get();
 
-					//Paginazione se impostato un limite
+					//If there's a limit, we will be a pagination
 					if ($limit)
 					{
 						$pagination = array(
-				        	'total_rows'			=> $CI->records->count(), //TODO reapply filters
+				        	'total_rows'			=> $CI->records->count(),
 				        	'per_page'				=> $limit,
 				        	'base_url'				=> current_url().'?',
 				        	'cur_tag_open'			=> '',
@@ -305,14 +300,14 @@ Class Dispatcher_default
 			$CI->view->render_template($page->get('view_template'));
 
 		}else{
-			//Visualizzazione dettaglio record singolo
+			//Single record view
 			$template = $page->get('view_template');
 
-			//Azione: singolo record
+			//Action: single record
 			$page->set('action', 'single');
 			$record->set('action', 'single');
 
-			//Controllo la data di pubblicazione
+			//Let's check the publish date
 			$date_publish = $record->get('_date_publish');
 			if ($date_publish && $date_publish > time())
 			{
@@ -325,6 +320,9 @@ Class Dispatcher_default
 						'title'	=> $record->get('title'),
 						'link'	=> uri_string().'/'
 			);
+
+			//The title will be prepended
+			$CI->view->title = $record->get('title') . ' - ' . $CI->view->title;
 
 			$CI->view->set('page', $page);
 			$CI->view->set('record', $record);
