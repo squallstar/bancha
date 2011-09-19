@@ -699,7 +699,7 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 <code>http://localhost/attach/<strong>cache</strong>/blog/images/2/<strong><u>user_profile</u></strong>/my_image.jpg</code>
 <br />
 <h3>Svuotare la cache</h3>
-<div class="message warning">Puoi facilmente svuotare la cache delle immagini eliminando la cartella relativa al campo, oppure al tipo di contenuto da azzerare. In alternativa, sentiti libero di eliminare l'intera cartella attach/cache/.</div>
+<div class="message warning">Puoi facilmente svuotare la cache delle immagini eliminando la cartella relativa al campo, oppure al tipo di contenuto da azzerare. In alternativa, sentiti libero di eliminare l'intera cartella attach/cache/ dal filesystem.</div>
 <br />
 <h3>Operazioni definibili</h3>
 <p>Una singola operazione pu&ograve; essere dei seguenti tipi:</p>
