@@ -24,6 +24,7 @@
 				<li><a href="#sb-feeds">12. Feed dei contenuti</a></li>
 				<li><a href="#sb-triggers">13. Triggers (attivatori)</a></li>
 				<li><a href="#sb-image-presets">14. Image presets</a></li>
+				<li><a href="#sb-categories">15. Categorie, Gerarchie</a></li>
 			</ul>
 			<p>Revisione: <?php echo BANCHA_VERSION; ?><br />Data: 06 Set 2011</p>
 		</div>
@@ -651,9 +652,88 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code><br />
 
 <div class="sidebar_content" id="sb-image-presets">
 			<h3>14. Image presets</h3>
-			<p></p>
-			<div class="message warning">In costruzione...</div>
+			<p><?php echo CMS; ?> include un sofisticato sistema per la gestione delle operazioni sulle immagini organizzato in <strong>presets</strong>.</p>
+			<p>Un preset, &egrave; una lista di operazioni che vengono eseguite su una immagine. Dopo queste operazioni, il file viene scritto su disco e utilizzato
+			per le successive richieste, anzich&egrave; effettuare nuovamente tutte le operazioni definite sul preset.</p>
+			<p>Questo sistema, ti permette di definire operazioni di lavorazione su immagini anche dopo averle caricate dall'amministrazione.<br />
+			I preset utilizzabili, vengono definiti nel file <strong>application/config/image_presets.php</strong> e consistono in un array di operazioni ciascuno.<br />
+			Vediamo un preset di esempio:</p>
+<code>$config['presets']['<strong>ridimensiona</strong>'] = array(
+	array(
+		'operation' => 'resize',
+		'size' => '640x?',
+		'ratio' => TRUE,
+		'quality' => 70
+	)
+);</code><br />
+<p>Il preset sopra definito, effettuer&agrave; una operazione di resize di una immagine mantenendone le proporzioni e portando la larghezza a 640px. Infine, verr&agrave; scritta
+su disco comprimendo il file ad una qualit&agrave; di 70 su 100.</p>
+<p>Ora, ammettiamo di avere un file caricato su un tipo di contenuto che abbia il seguente URL (riferendoci al file originale):</p>
+<code>http://localhost/attach/blog/images/2/my_image.jpg</code><br />
+<p>Per utilizzare il preset definito poco sopra, dovremo aggiungere al path del file la directory "cache" ed il nome del preset da applicare in questo modo:</p>
+<code>http://localhost/attach/<strong><u>cache</u></strong>/blog/images/2/<strong><u>ridimensiona</u></strong>/my_image.jpg</code>
+<br />
+<div class="message info">La cache delle immagini viene salvata con questa pattern:<br />
+attach/cache/&lt;nome_tipo_di_contenuto&gt;/&lt;nome_campo_images&gt;/&lt;id_record&gt;/&lt;preset&gt;/&lt;filename&gt;</div>
+<br />
+<h3>Preset con pi&ugrave; operazioni</h3>
+<p>Un preset pu&ograve; avere definite anche pi&ugrave; operazioni, che verranno effettuate in successione, come in questo caso:</p>
+<code>$config['presets']['<strong>user_profile</strong>'] = array(
+	array(
+		'operation' => 'resize',
+		'size' => '150x150',
+		'fixed' => TRUE,
+		'quality' => 100,
+		'ratio' => TRUE
+	),
+	array(
+		'operation' => 'crop',
+		'size' => '125x125',
+		'quality' => 80,
+		'x' => 25,
+		'y' => 25
+	)
+);</code><br />
+<p>Il preset qui sopra, ridimensiona una immagine ad una grandezza fissa e poi effettua un ritaglio di grandezza 125x125 px.<br />
+Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>user_profile</strong> differir&agrave; dal precedente esempio solo per il nome del preset applicato:</p>
+<code>http://localhost/attach/<strong>cache</strong>/blog/images/2/<strong><u>user_profile</u></strong>/my_image.jpg</code>
+<br />
+<h3>Svuotare la cache</h3>
+<div class="message warning">Puoi facilmente svuotare la cache delle immagini eliminando la cartella relativa al campo, oppure al tipo di contenuto da azzerare. In alternativa, sentiti libero di eliminare l'intera cartella attach/cache/.</div>
+<br />
+<h3>Operazioni definibili</h3>
+<p>Una singola operazione pu&ograve; essere dei seguenti tipi:</p>
+<ul>
+	<li><strong>1. resize</strong> - per ridimensionare immagini</li>
+	<li><strong>2. crop</strong> - per ritagliare immagini</li>
+</ul>
+<br />
+<h3>1. Resize (Ridimensionamento)</h3>
+<p>I parametri definibili sono:</p>
+<ul>
+	<li><strong>size</strong> - (string) per specificare la dimensione del ridimensionamento (es. 150x150, 400x?, ?x320)</li>
+	<li><strong>fixed</strong> - (bool) per specificare se le dimensioni devono sempre essere uguali o maggiori di quelle impostate</li>
+	<li><strong>quality</strong> - (int 0-100) per specificare la qualit&agrave; con cui salvare la nuova immagine generata</li>
+	<li><strong>ratio</strong> - (bool) per definire se le proporzioni devono essere rispettate</li>
+</ul>
+<br />
+<h3>2. Crop (Ritaglio)</h3>
+<p>I parametri definibili sono:</p>
+<ul>
+	<li><strong>size</strong> - (string) per specificare la dimensione del ritaglio (es. 150x150, 400x320)</li>
+	<li><strong>quality</strong> - (int 0-100) per specificare la qualit&agrave; con cui salvare la nuova immagine generata</li>
+	<li><strong>x</strong> - (bool) per definire l'origine del ritaglio lungo l'asse delle x</li>
+	<li><strong>y</strong> - (bool) per definire l'origine del ritaglio lungo l'asse delle y</li>
+</ul>
 </div>
+
+<div class="sidebar_content" id="sb-categories">
+			<h3>Categorie e Gerarchie</h3>
+			<div class="message warning">TODO!</div>
+</div>
+
+
+<!-- end -->
 
 	</div>
 
