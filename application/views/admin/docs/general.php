@@ -88,7 +88,7 @@
 
 		<div class="sidebar_content" id="sb-types-xml">
 			<h3>4. Schema XML dei tipi</h3>
-<p>Ogni tipo di contenuto &egrave; associato ad un relativo file XML presente nella directory <strong><?php echo $this->config->item('xml_folder'); ?></strong> che ne descrive i campi associati. Puoi editare tale file anche dall'amministrazione, premendo il link "<strong>Modifica schema</strong>" nella lista dei tipi di contenuto/pagine. La struttura base di un tipo di contenuto/pagina &egrave; definita in questo modo:</p>
+<p>Ogni tipo di contenuto &egrave; associato ad un relativo file XML presente nella directory <strong><?php echo $this->config->item('xml_typefolder'); ?></strong> che ne descrive i campi associati. Puoi editare tale file anche dall'amministrazione, premendo il link "<strong>Modifica schema</strong>" nella lista dei tipi di contenuto/pagine. La struttura base di un tipo di contenuto/pagina &egrave; definita in questo modo:</p>
 			<code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content>
 	&lt;id&gt;1&lt;/id&gt;
@@ -555,10 +555,10 @@ echo menu($albero);
 			<h3>Cache delle pagine</h3>
 			<p>I tipi di contenuto con struttura a pagine, normalmente presentano un campo xml chiamato "<strong>page_cache</strong>" nella scheda <strong>"Aspetto e azioni"</strong> che rappresenta (nella maschera di inserimento/modifica di una pagina) un campo di input numerico relativo al <strong>numero di minuti</strong> da utilizzare per tenere tale pagina in cache. Per non cacheare la pagina, &egrave; sufficiente impostare tale numero a "0" (zero). La cache di una pagina viene automaticamente svuotata quando la pagina viene modificata, pubblicata o depubblicata.<br /><strong>ATTENZIONE</strong>: la cache delle pagine &egrave; una funzionalit&agrave; estremamente <strong>potente</strong> ma <strong>pericolosa</strong>. Verr&agrave; infatti salvato l'interno rendering finale della pagina e servito all'utente come fosse una <strong>pagina statica</strong> (<em>senza passare dal framework</em>). Utilizzarlo quindi con la dovuta cautela, dato che le uniche variazioni nelle diverse richieste potranno essere solamente modifiche client-side via Javascript.</p>
 			<br />
-			
+
 			<h3>Cache dei preset (immagini)</h3>
 			<p>Le immagini generate attraverso i preset, vengono automaticamente cacheate sul filesystem in base al preset utilizzato, uno per file. La directory impostata come default per i preset &egrave; <strong>/attach/cache</strong>. Per svuotare la cache dei preset &egrave; sufficiente eliminare tale directory.
-		
+
 </div>
 
 <div class="sidebar_content" id="sb-feeds">
