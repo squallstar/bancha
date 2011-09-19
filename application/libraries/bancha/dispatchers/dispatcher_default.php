@@ -160,9 +160,14 @@ Class Dispatcher_default
 					$hierarchies = $page->get('action_list_hierarchies');
 					if (is_array($hierarchies) && count($hierarchies))
 					{
-						//TODO
-						//ids = get_records_for_hierarchies
-						//records->id_in(ids)
+						$CI->load->hierarchies();
+						$hierarchies_record_ids = $CI->hierarchies->get_records_for_hierarchies($hierarchies);
+						if (count($hierarchies_record_ids))
+						{
+							$CI->db->start_cache();
+							$CI->records->id_in($hierarchies_record_ids);
+							$CI->db->stop_cache();
+						}
 					}
 
 					$limit = (int)$page->get('action_list_limit');
