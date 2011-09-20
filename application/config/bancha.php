@@ -104,10 +104,10 @@ $config['records_per_page'] = 10;
 define('FRPATH', APPPATH . 'libraries' . $sep . FRNAME . $sep);
 
 /*
- * XML FOLDER
+ * XML TYPES FOLDER
  * This directory contains the XML schemes of the content types
  */
-$config['xml_folder'] = APPPATH . 'xml' . $sep;
+$config['xml_typefolder'] = APPPATH . 'xml' . $sep . 'types' . $sep;
 
 /*
  * MODULES FOLDER
@@ -190,7 +190,7 @@ $config['default_view_template'] = 'default';
 
 /*
  * VIEW TEMPLATES TO COPY
- * The .php templates that will be copied from Bencha templates to the website theme.
+ * The .php templates that will be copied from Bancha templates to the website theme.
  */
 $config['view_templates_to_copy'] = array('detail', 'list');
 

@@ -397,7 +397,7 @@ Class Contents extends Bancha_Controller
             	$hierarchies = $this->hierarchies->get_record_hierarchies($record->id);
             	$this->hierarchies->set_active_nodes($hierarchies);
             }
-        	
+
         	$this->config->set_item('hierarchies', $this->hierarchies->get_tree());
         }
 
@@ -480,7 +480,7 @@ Class Contents extends Bancha_Controller
     				$this->session->set_flashdata('message', 'Il record ['.$id_record.'] &egrave; stato eliminato.');
     				redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
     			} else {
-                    return true;         
+                    return true;
                 }
     		}
       	}else {
@@ -522,7 +522,7 @@ Class Contents extends Bancha_Controller
     public function type_edit_xml($type = '') {
   		$tipo = $this->content->type($type);
 
-  		$xml_path = $this->config->item('xml_folder').$tipo['name'].'.xml';
+  		$xml_path = $this->config->item('xml_typefolder').$tipo['name'].'.xml';
 
   		if ($this->input->post('xml')) {
 			$done = write_file($xml_path, $this->input->post('xml'));
@@ -630,7 +630,7 @@ Class Contents extends Bancha_Controller
   		    redirect('admin/contents');
   		} else if ($this->input->post('delete'))
         {
-	  		$xml_path = $this->config->item('xml_folder').$tipo['name'].'.xml';
+	  		$xml_path = $this->config->item('xml_typefolder').$tipo['name'].'.xml';
 	  		$done = file_exists($xml_path) ? @unlink($xml_path) : TRUE;
 	  		if ($done)
             {

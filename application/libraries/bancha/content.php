@@ -48,7 +48,7 @@ Class Content {
 	{
 		$this->CI = & get_instance();
 
-		$this->xml_folder	= $this->CI->config->item('xml_folder');
+		$this->xml_folder	= $this->CI->config->item('xml_typefolder');
 		$this->types_cache_folder	= $this->CI->config->item('types_cache_folder');
 
 		//We read the content types
@@ -111,7 +111,7 @@ Class Content {
 		}
 
 		//Let's check if already exists on filesystem
-		$storage_path = $this->CI->config->item('xml_folder').$type_name.'.xml';
+		$storage_path = $this->CI->config->item('xml_typefolder').$type_name.'.xml';
 		if (file_exists($storage_path) && !$delete_if_exists) {
 			show_error(
 				$this->CI->lang->_trans('A content type named %n already exists', array('n' => '['.$type_name.']')),

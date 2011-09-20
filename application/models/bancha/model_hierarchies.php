@@ -247,7 +247,7 @@ Class Model_hierarchies extends CI_Model {
   		}
   		$res = $this->db->select('id_record')
 		   		    	->from($this->table_relations)
-		   		    	->where_in('id_hierarchy', $array)
+		   		    	->where_in('id_hierarchy', $hierarchies)
 		   		    	->get();
 		$result = $res->result_array();
 		$ids = array();
