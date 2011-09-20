@@ -50,7 +50,7 @@
 	</fieldset>
 	<fieldset>
 		<name>Groups</name>
-		<field id="id_group">
+		<field id="id_group" column="true">
 			<description>User group</description>
 			<type>radio</type>
 			<sql cache="true">
