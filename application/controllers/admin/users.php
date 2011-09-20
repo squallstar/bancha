@@ -55,24 +55,41 @@ Class Users extends Bancha_Controller
 		$this->view->render_layout('users/list');
 	}
 
-	public function edit($username='')
-	{
-		if ($username != '')
+	public function edit($id_username='')
+	{		
+		//We get the Users scheme
+		$type_definition = $this->xml->parse_file($this->config->item('xml_folder') . 'Users.xml');
+
+		$user = new Record();
+		$user->set_type($type_definition);
+		
+		if ($id_username != '')
 		{
-			//Cerco lo username scelto
-			$users = $this->users->limit(1)->where('username', $username)->get();
-			if (!count($users)) {
-				show_error('L\' utente ['.$username.'] non &egrave; stato trovato.', 500, 'Utente non trovato');
+			if ($this->input->post())
+			{
+				$user->set_data($this->input->post());
+				$this->records->save($user);
+			}
+			
+			//We search for this user
+			$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
+			
+			if (!$users) {
+				show_error(_('User not found'));
 			} else {
 				$user = $users[0];
-				$this->view->set('user', $user);
 			}
 		} else {
-			//Nuovo utente
+			//New user
 			$this->view->set('user', FALSE);
 		}
+		
+		$this->view->set('tipo', $type_definition);
+		$this->view->set('_section', 'users');
+		$this->view->set('action', 'admin/users/edit/' . $user->id);
+		$this->view->set('record', $user);
 
-		$this->view->render_layout('users/edit');
+		$this->view->render_layout('content/record_edit');
 	}
 
 	/**
