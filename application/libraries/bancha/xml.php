@@ -52,8 +52,13 @@ Class Xml
   	{
     	if ($type != '')
     	{
-      		$tipo = $this->CI->content->type($type);
-
+    		if (is_array($type))
+    		{
+    			$tipo = $type;
+    		} else {
+    			$tipo = $this->CI->content->type($type);
+    		}
+    		
       		$xmlstring = read_file($this->CI->config->item('templates_folder').'Record.xml');
 
       		$xml = new SimpleXMLElement($xmlstring);
