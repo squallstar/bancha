@@ -12,8 +12,8 @@ $this->load->helper('text');
 		<h2><?php echo _('Groups and permissions'); ?></h2>
 
 		<ul>
-			<li><a href="<?php echo admin_url('users/groups/edit'); ?>"><?php echo _('Add new group'); ?></a></li>
-			<li><a href="<?php echo admin_url('users/'); ?>"><?php echo _('Back to users'); ?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url('users/groups/edit'); ?>"><?php echo _('Add new group'); ?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url('users/'); ?>"><?php echo _('Back to users'); ?></a></li>
 		</ul>
 	</div>
 

@@ -10,7 +10,7 @@ $this->load->helper('form');
 		<h2><?php echo _('Manage group'); ?></h2>
 
 		<ul>
-			<li><a href="<?php echo admin_url('users/groups')?>"><?php echo _('Back to groups list'); ?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url('users/groups')?>"><?php echo _('Back to groups list'); ?></a></li>
 		</ul>
 
 	</div>
