@@ -447,9 +447,15 @@ Class Model_records extends CI_Model {
 
 	        $id = $record->id;
 
-	      	$this->set_type($record->_tipo);
-
-	      	$tipo = $this->content->type($record->_tipo);
+	      	$this->set_type($record->_tipo);	      	
+	      	
+	      	//If type is set, let's take it!
+	      	if (!$record->_tipo_def)
+	      	{
+	      		$tipo = $this->content->type($record->_tipo);
+	      	} else {
+	      		$tipo = $record->_tipo_def;
+	      	}
 
 	      	//These columns are always populated
 	      	$data = array(
