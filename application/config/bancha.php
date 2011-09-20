@@ -104,6 +104,12 @@ $config['records_per_page'] = 10;
 define('FRPATH', APPPATH . 'libraries' . $sep . FRNAME . $sep);
 
 /*
+* XML FOLDER
+* This directory contains the general XML schemes
+*/
+$config['xml_folder'] = APPPATH . 'xml' . $sep;
+
+/*
  * XML TYPES FOLDER
  * This directory contains the XML schemes of the content types
  */
