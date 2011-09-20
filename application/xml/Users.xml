@@ -21,5 +21,42 @@
 			<admin>true</admin>
 			<list>true</list>
 		</field>
+		<field id="email" column="true">
+			<description>E-mail address</description>
+			<type>text</type>
+			<mandatory>true</mandatory>
+			<admin>true</admin>
+			<list>true</list>
+		</field>
+		<field id="password" column="true">
+			<description>Password</description>
+			<type>text</type>
+			<mandatory>true</mandatory>
+		</field>
+		<field id="name" column="true">
+			<description>Name</description>
+			<type>text</type>
+			<mandatory>true</mandatory>
+			<admin>true</admin>
+			<list>true</list>
+		</field>
+		<field id="surname" column="true">
+			<description>Surname</description>
+			<type>text</type>
+			<mandatory>true</mandatory>
+			<admin>true</admin>
+			<list>true</list>
+		</field>
+	</fieldset>
+	<fieldset>
+		<name>Groups</name>
+		<field id="id_group">
+			<description>User group</description>
+			<type>radio</type>
+			<sql cache="true">
+				<select>id_group as value, group_name as name</select>
+				<from>groups</from>
+			</sql>
+		</field>
 	</fieldset>
 </content>
