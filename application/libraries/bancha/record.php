@@ -25,9 +25,14 @@ Class Record {
 	public $id 		= FALSE;
 
 	/**
-	 * @var int Tipo di contenuto del record
+	 * @var int Record type id
 	 */
 	public $_tipo	= '';
+	
+	/**
+	* @var int Type definition
+	*/
+	public $_tipo_def	= array();
 
 	/**
 	 * @var string Stringa xml dei dati non fisici del record
@@ -46,6 +51,11 @@ Class Record {
 			$this->_tipo = $type;
 		}
   	}
+  	
+  	public function set_type($type)
+  	{
+  		$this->_tipo_def = $type;
+  	}
 
   	/**
    	* Imposta i dati del record
@@ -53,8 +63,14 @@ Class Record {
    	*/
   	public function set_data($data)
   	{
-    	$CI = & get_instance();
-    	$tipo = & $CI->content->type($this->_tipo);
+  		$CI = & get_instance();
+  		
+    	if (!$this->_tipo_def)
+    	{
+    		$tipo = & $CI->content->type($this->_tipo);
+    	} else {
+    		$tipo = $this->_tipo_def;
+    	}
 
     	foreach ($tipo['fields'] as $field_name => $field)
     	{
@@ -149,7 +165,7 @@ Class Record {
   	{
     	$CI = & get_instance();
     	if (count($this->_data)) {
-     		$this->xml = $CI->xml->get_record_xml($this->_tipo, $this->_data);
+     		$this->xml = $CI->xml->get_record_xml($this->_tipo_def ? $this->_tipo_def : $this->_tipo, $this->_data);
 
       		//Tolgo i caratteri di a capo per recuperare spazio
       		$this->xml = str_replace(array("\r\n", "\r", "\n"), "", $this->xml);
