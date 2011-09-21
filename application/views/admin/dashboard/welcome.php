@@ -41,58 +41,63 @@
 				$str_time = ($date == date('d/m/Y') ? _('Today') : $date) . ' ' . $this->lang->_trans('at %time', array('time'=>$time));
 
 				echo '<li>';
+
+				if ($event->content_type)
+				{
+					$tipo = $this->content->type($event->content_type);
+					if (isset($tipo['name']))
+					{
+						$link = admin_url('contents/edit_record/'.$tipo['name'].'/'.$event->content_id);
+					} else {
+						$tipo['name'] = _('Unknown');
+						$link = '#';
+					}
+				} else {
+					$tipo['name'] = _('Unknown');
+					$link = '#';
+				}
+
 				switch ($event->event)
 				{
 					case 'update':
-						if ($event->content_type)
-						{
-							$tipo = $this->content->type($event->content_type);
-						}
 						echo $str_time.' '.$this->lang->_trans('%u updated the content %c of type %t.', array(
 							'u'	=> $event->user_name,
-							'c'	=> '<a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$event->content_id).'">'.$event->content_name.'</a>',
-							't'	=> isset($tipo['name']) ? $tipo['name'] : _('Unknown')
-
+							'c'	=> '<a href="'.$link.'">'.$event->content_name.'</a>',
+							't'	=> $tipo['name']
 						));
 						break;
 
 					case 'insert':
-						if ($event->content_type)
-						{
-							$tipo = $this->content->type($event->content_type);
-						}
-						echo $str_time.' '.$this->lang->_trans('%u created a new content of type %t named %c.', array(
-												'u'	=> $event->user_name,
-												'c'	=> '<a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$event->content_id).'">'.$event->content_name.'</a>',
-												't'	=> isset($tipo['name']) ? $tipo['name'] : _('Unknown')
-
+						echo $str_time.' '.$this->lang->_trans('%u created a new content of type %t named %c.',
+						array(
+							'u'	=> $event->user_name,
+							'c'	=> '<a href="'.$link.'">'.$event->content_name.'</a>',
+							't'	=> $tipo['name']
 						));
 						break;
 
 					case 'publish':
-						if ($event->content_type)
-						{
-							$tipo = $this->content->type($event->content_type);
-						}
-						echo $str_time.' '.$this->lang->_trans('%u published the content %c of type %t.', array(
-																	'u'	=> $event->user_name,
-																	'c'	=> '<a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$event->content_id).'">'.$event->content_name.'</a>',
-																	't'	=> isset($tipo['name']) ? $tipo['name'] : _('Unknown')
-
+						echo $str_time.' '.$this->lang->_trans('%u published the content %c of type %t.',
+						array(
+							'u'	=> $event->user_name,
+							'c'	=> '<a href="'.$link.'">'.$event->content_name.'</a>',
+							't'	=> $tipo['name']
 						));
 						break;
 
 					case 'depublish':
-						echo $str_time.' '.$this->lang->_trans('%u depublished the content %c.', array(
-																						'u'	=> $event->user_name,
-																						'c'	=> '<strong>['.$event->content_name.']</strong>'
-
+						echo $str_time.' '.$this->lang->_trans('%u depublished the content %c.',
+						array(
+							'u'	=> $event->user_name,
+							'c'	=> '<strong>['.$event->content_name.']</strong>'
 						));
 						break;
 
 					case 'install':
-						echo $str_time.' '.$this->lang->_trans('%u installed %c.', array('u'	=> $event->user_name,
-																						 'c'	=> '<strong>['.$event->content_name.']</strong>'
+						echo $str_time.' '.$this->lang->_trans('%u installed %c.',
+						array(
+							'u'	=> $event->user_name,
+							'c'	=> '<strong>['.$event->content_name.']</strong>'
 						));
 						break;
 
