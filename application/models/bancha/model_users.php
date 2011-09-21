@@ -62,7 +62,7 @@ Class Model_users extends CI_Model {
 	 */
 	public function get($array = FALSE)
 	{
-		$query = $this->db->select('id_user, name, surname, email, username, group_name, users.id_group')
+		$query = $this->db->select('id_user, name, surname, password, email, username, group_name, users.id_group')
 						  ->from('users')
 						  ->join('groups', 'users.id_group = groups.id_group', 'left')
 						  ->get();
