@@ -51,7 +51,7 @@ $this->load->helper('form'); ?>
 
 $save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="bancha.add_form_hash();"')
 			   .form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
-			   .form_submit('_bt_publish', _('Publish'), 'class="submit"')
+			   .($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
 ;
 
 echo form_open_multipart(isset($action) ? $action : 'admin/'.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
