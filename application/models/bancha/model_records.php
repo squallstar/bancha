@@ -557,7 +557,8 @@ Class Model_records extends CI_Model {
 
 	      	} else {
 	        	//Insert
-	        	if (isset($tipo['fields']['date_insert'])){
+	        	if (isset($tipo['fields']['date_insert']))
+                {
 	          		$data['date_insert'] = time();
 	          	}
 
