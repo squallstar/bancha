@@ -2,7 +2,7 @@
 /**
  * Users Controller
  *
- * Gestione utenti (amministrazione)
+ * Users and groups management
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
