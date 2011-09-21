@@ -57,6 +57,10 @@ Class Users extends Bancha_Controller
 
 	public function edit($id_username='')
 	{		
+		$this->load->categories();
+        $this->load->hierarchies();
+        $this->load->documents();
+
 		//We get the Users scheme
 		$type_definition = $this->xml->parse_file($this->config->item('xml_folder') . 'Users.xml');
 
@@ -68,7 +72,19 @@ Class Users extends Bancha_Controller
 			if ($this->input->post())
 			{
 				$user->set_data($this->input->post());
-				$this->records->save($user);
+				$done = $this->records->save($user);
+
+				if ($done)
+				{
+					$msg = _('The user informations have been updated.');
+					if ($this->input->post('_bt_save_list'))
+            		{
+            			$this->session->set_flashdata('message', $msg);
+            			redirect('admin/users/lista');
+            		} else {
+            			$this->view->message('success', $msg);
+            		}					
+				}
 			}
 			
 			//We search for this user
