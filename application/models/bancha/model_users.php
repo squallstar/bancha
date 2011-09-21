@@ -44,7 +44,7 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Ottiene gli utenti secondo le condizioni definite
+	 * Gets the users using the filtering function defined
 	 * @param bool $array return as array or object
 	 * @return array
 	 */
@@ -64,7 +64,21 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Ottiene tutti i gruppi
+	 * Deletes a single user
+	 * @param int $id_user
+	 * @return bool
+	 */
+	public function delete($id_user='')
+	{
+		if ($id_user != '')
+		{
+			return $this->db->where('id_user', $id_user)->delete('users');
+		}
+		return FALSE;
+	}
+
+	/**
+	 * Returns all the groups
 	 * @return array
 	 */
 	public function get_groups()

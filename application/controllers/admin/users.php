@@ -55,6 +55,16 @@ Class Users extends Bancha_Controller
 		$this->view->render_layout('users/list');
 	}
 
+	public function delete($id_username='')
+	{
+		$done = $this->users->delete($id_username);
+		if ($done)
+		{
+			$this->session->set_flashdata('message', _('The user has been deleted.'));
+        	redirect('admin/users/lista');
+		}
+	}
+
 	public function edit($id_username='')
 	{		
 		$this->load->categories();
