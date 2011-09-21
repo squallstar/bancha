@@ -67,26 +67,26 @@ Class Users extends Bancha_Controller
 		$user = new Record();
 		$user->set_type($type_definition);
 		
+		if ($this->input->post())
+		{
+			$user->set_data($this->input->post());
+			$done = $this->records->save($user);
+
+			if ($done)
+			{
+				$msg = _('The user informations have been updated.');
+				if ($this->input->post('_bt_save_list'))
+        		{
+        			$this->session->set_flashdata('message', $msg);
+        			redirect('admin/users/lista');
+        		} else {
+        			$this->view->message('success', $msg);
+        		}					
+			}
+		}
+
 		if ($id_username != '')
 		{
-			if ($this->input->post())
-			{
-				$user->set_data($this->input->post());
-				$done = $this->records->save($user);
-
-				if ($done)
-				{
-					$msg = _('The user informations have been updated.');
-					if ($this->input->post('_bt_save_list'))
-            		{
-            			$this->session->set_flashdata('message', $msg);
-            			redirect('admin/users/lista');
-            		} else {
-            			$this->view->message('success', $msg);
-            		}					
-				}
-			}
-			
 			//We search for this user
 			$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
 			
