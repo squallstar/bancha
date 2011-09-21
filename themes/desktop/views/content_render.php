@@ -31,6 +31,16 @@ if (isset($page) && $page->is_page()) {
 					$record = $records[0];
 					$this->view->render_type_template($record->tipo, 'list');
 				}
+				break;
+			
+			case 'action_render':
+				$class = $page->get('_action_class');
+				if ($class)
+				{
+					$method = $page->get('action_custom_name');
+					$class->$method('content_render');
+				}
+				break;
 
 		}
 	}

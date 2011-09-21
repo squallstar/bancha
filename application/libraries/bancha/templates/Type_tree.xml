@@ -184,6 +184,16 @@
 			<description>Action name</description>
 			<type>text</type>
 		</field>
+		<field id="action_custom_mode">
+			<visible>false</visible>
+			<description>Action mode</description>
+			<type>select</type>
+			<options>
+				<option value="D">Dispatch</option>
+				<option value="C">Content render</option>
+			</options>
+			<default>D</default>
+		</field>
 		<field id="action_link_url">
 			<visible>false</visible>
 			<description>Redirect URL</description>

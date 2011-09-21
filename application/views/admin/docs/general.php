@@ -292,6 +292,13 @@ Scegliendo "Lista di contenuti", la pagina utilizzer&agrave; il template <strong
 Scegliendo <strong>azione personalizzata</strong>, la pagina invocher&agrave; l'azione da te definita anzich&egrave; seguire il suo normale percorso di routing. In questo modo potrai creare una azione ad-hoc nel controller delle azioni.<br />
 <div class="message info">Le azioni personalizzate, vanno definite nel controller: <u><?php echo $this->config->item('custom_controllers_folder'); ?>actions.php</u></div>
 <br />&Egrave; possibile configurare manualmente i comportamenti delle singole azioni agendo sul file responsabile del rendering: <strong><?php echo THEMESPATH; ?>desktop/content_render.php</strong>. Tale file, presenta uno switch-case facilmente configurabile per modificare o implementare nuovi casi per il rendering.</p>
+<p>Le azioni personalizzate possono essere di due tipi:</p>
+<ul>
+	<li><strong>Dispatch</strong> - vengono chiamate dal dispatcher, interrompendo il processo tradizionale di rendering</li>
+	<li><strong>Content render</strong> - vengono chiamate nel content_render, ovvero all'interno del corpo della pagina</li>
+</ul>
+<p>Tale comportamento pu&ograve; essere deciso dalla select sotto a quella relativa al nome dell'azione da chiamare.</p>
+<div class="message info">L'azione chiamata, ricever&agrave; come primo parametro il nome dell'oggetto chiamante, che potr&agrave; essere "dispatcher" oppure "content_render".</div>
 
 		</div>
 

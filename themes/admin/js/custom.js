@@ -264,7 +264,7 @@ var bancha = {
 			var val = $('select[name=action]').val();
 			var list_fields = '.field-action_list_type, .field-action_list_categories, .field-action_list_limit, '
 							+ '.field-action_list_order_by, .field-action_list_where, .field-action_list_has_feed, .field-action_list_hierarchies ';
-			var action_fields = '.field-action_custom_name';
+			var action_fields = '.field-action_custom_name, .field-action_custom_mode';
 			var link_fields = '.field-action_link_url';
 
 			switch (val) {

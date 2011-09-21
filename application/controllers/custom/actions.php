@@ -4,7 +4,7 @@ if ( ! defined('CUSTOM_ACTION')) exit('This controller should be called only fro
 /**
  * Website Custom Actions Controller
  *
- * Controller per le azioni custom del front-end del sito internet
+ * This controller manage the custom actions of the website
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -24,15 +24,21 @@ Class Actions
 	}
 
 	/**
-	 * Azione dimostrativa
+	 * Dummy action
 	 */
-	function helloworld()
+	function helloworld($who_calls)
 	{
-		//Estraggo il menu di default
-		//(dovrebbe comunque esserci gia, visto che questo e' un forward del router)
-		$this->CI->view->set('tree', $this->CI->tree->get_default());
+		if ($who_calls == 'dispatcher')
+		{
+			//We just render the default template
+			$this->CI->view->render_template('default');
+		}
+		else if ($who_calls == 'content_render')
+		{
+			//This will be rendered by the content_render
+			echo 'Hello world by the custom action';
+		}
 
-		//Renderizzo il template default
-		$this->CI->view->render_template('default');
+		
 	}
 }
