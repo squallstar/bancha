@@ -288,8 +288,15 @@ Class Dispatcher_default
 
 					if (is_callable(array($actions, $action_name)))
 					{
-						$actions->$action_name();
-						return;
+						$render_type = $page->get('action_custom_mode');
+						if ($render_type == 'C')
+						{
+							$page->set('action', 'action_render');
+							$page->set('_action_class', $actions);
+						} else {
+							$actions->$action_name('dispatcher');
+							return;
+						}
 					} else {
 						show_error('The custom action named "'.$action_name.'()" has not been found in '.$custom_actions_controller);
 					}
