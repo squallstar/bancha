@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="bancha-0.6.8" -->
+<content>
+	<id>0</id>
+	<name>Users</name>
+	<description>Users</description>
+	<tree>false</tree>
+	<primary_key>id_user</primary_key>
+	<table>users</table>
+	<fieldset>
+		<name>Informations</name>
+		<field id="id_user" column="true">
+			<type>hidden</type>
+			<list>true</list>
+			<admin>true</admin>
+		</field>
+		<field id="username" column="true" link="edit">
+			<description>Username</description>
+			<type>text</type>
+			<mandatory>true</mandatory>
+			<admin>true</admin>
+			<list>true</list>
+		</field>
+		<field id="email" column="true">
+			<description>E-mail address</description>
+			<type>text</type>
+			<mandatory>true</mandatory>
+			<admin>true</admin>
+			<list>true</list>
+		</field>
+		<field id="password" column="true">
+			<description>Password</description>
+			<type>text</type>
+			<mandatory>true</mandatory>
+		</field>
+		<field id="name" column="true">
+			<description>Name</description>
+			<type>text</type>
+			<mandatory>true</mandatory>
+			<admin>true</admin>
+			<list>true</list>
+		</field>
+		<field id="surname" column="true">
+			<description>Surname</description>
+			<type>text</type>
+			<mandatory>true</mandatory>
+			<admin>true</admin>
+			<list>true</list>
+		</field>
+	</fieldset>
+	<fieldset>
+		<name>Groups</name>
+		<field id="id_group" column="true">
+			<description>User group</description>
+			<type>radio</type>
+			<sql cache="true">
+				<select>id_group as value, group_name as name</select>
+				<from>groups</from>
+			</sql>
+		</field>
+	</fieldset>
+</content>

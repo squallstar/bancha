@@ -2,7 +2,7 @@
 /**
  * Record Library Class
  *
- * Gestione di un singolo record (istanza)
+ * This is the main class of every single record inside Bancha.
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -15,22 +15,27 @@
 Class Record {
 
 	/**
-	 * @var array Contiene i dati del record
+	 * @var array Contains all the data of the record
 	 */
 	private $_data	= array();
 
 	/**
-	 * @var int Chiave primaria del record
+	 * @var int Primary key
 	 */
 	public $id 		= FALSE;
 
 	/**
-	 * @var int Tipo di contenuto del record
+	 * @var int Record type id
 	 */
 	public $_tipo	= '';
+	
+	/**
+	* @var int Type definition
+	*/
+	public $_tipo_def	= array();
 
 	/**
-	 * @var string Stringa xml dei dati non fisici del record
+	 * @var string The xml string that contains some data
 	 */
   	public $xml 	= '';
 
@@ -38,7 +43,10 @@ Class Record {
   	{
   		if ($type != '')
 		{
-			if (!is_numeric($type))
+			if (is_array($type) && FALSE)
+			{
+				//Do nothing for now
+			} else if (!is_numeric($type))
 			{
 				$CI = &get_instance();
 				$type = $CI->content->type_id($type);
@@ -46,15 +54,26 @@ Class Record {
 			$this->_tipo = $type;
 		}
   	}
+  	
+  	public function set_type($type)
+  	{
+  		$this->_tipo_def = $type;
+  	}
 
   	/**
-   	* Imposta i dati del record
+   	* Sets the record data
    	* @param array $data
    	*/
   	public function set_data($data)
   	{
-    	$CI = & get_instance();
-    	$tipo = & $CI->content->type($this->_tipo);
+  		$CI = & get_instance();
+  		
+    	if (!$this->_tipo_def)
+    	{
+    		$tipo = & $CI->content->type($this->_tipo);
+    	} else {
+    		$tipo = $this->_tipo_def;
+    	}
 
     	foreach ($tipo['fields'] as $field_name => $field)
     	{
@@ -85,7 +104,7 @@ Class Record {
     		}
     	}
 
-    	//Imposto a parte il campo ID (serve per insert-update)
+    	//We set the primary key for the update queries
     	if (isset($data[$tipo['primary_key']]))
     	{
     		$this->id = $data[$tipo['primary_key']];
@@ -93,7 +112,7 @@ Class Record {
   	}
 
   	/**
-   	* Ottiene un dato del record
+   	* Returns a record value
    	* @param string $key
    	* @param string $default
    	*/
@@ -103,7 +122,7 @@ Class Record {
   	}
 
   	/**
-   	* Imposta un dato nel record
+   	* Sets a single value
    	* @param string $key
    	* @param mixed $val
    	*/
@@ -117,8 +136,8 @@ Class Record {
   	}
 
   	/**
-   	* Controlla se il record ha un parent
-   	* @return BOOL
+   	* Checks if the record has a parent
+   	* @return bool
    	*/
   	public function has_parent()
   	{
@@ -126,7 +145,7 @@ Class Record {
   	}
 
   	/**
-   	* Controlla se un record e' una pagina
+   	* Checks if the record is a page
    	* @return bool
    	*/
   	public function is_page()
@@ -142,14 +161,14 @@ Class Record {
   	}
 
   	/**
-   	* Costruisce un XML relativo al record
-   	* Necessita che siano stati popolati i campi con la funzione set_data()
+   	* Builds an XML, based on the scheme
+   	* Before using, sets the data with the set_data() function
    	*/
   	public function build_xml()
   	{
     	$CI = & get_instance();
     	if (count($this->_data)) {
-     		$this->xml = $CI->xml->get_record_xml($this->_tipo, $this->_data);
+     		$this->xml = $CI->xml->get_record_xml($this->_tipo_def ? $this->_tipo_def : $this->_tipo, $this->_data);
 
       		//Tolgo i caratteri di a capo per recuperare spazio
       		$this->xml = str_replace(array("\r\n", "\r", "\n"), "", $this->xml);
@@ -159,7 +178,7 @@ Class Record {
   	}
 
   	/**
-   	* Costruisce i dati del record dato un xml
+   	* Builds the data from an xml
    	*/
 	public function build_data()
 	{
@@ -222,7 +241,7 @@ Class Record {
   	}
 
   	/**
-  	 * Estrae i documenti del record
+  	 * Extracts the documents of this record from the database
   	 */
 	public function set_documents()
 	{

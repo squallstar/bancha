@@ -45,16 +45,17 @@ Class Model_users extends CI_Model {
 
 	/**
 	 * Ottiene gli utenti secondo le condizioni definite
+	 * @param bool $array return as array or object
 	 * @return array
 	 */
-	public function get()
+	public function get($array = FALSE)
 	{
 		$query = $this->db->select('id_user, name, surname, email, username, group_name, users.id_group')
 						  ->from('users')
 						  ->join('groups', 'users.id_group = groups.id_group', 'left')
 						  ->get();
 
-		return $query->result();
+		return $array ? $query->result_array() : $query->result();
 	}
 
 	public function add_user($data)

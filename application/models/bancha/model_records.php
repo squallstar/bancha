@@ -120,16 +120,22 @@ Class Model_records extends CI_Model {
 
   /**
    * Imposto il tipo (tabella e pkey) su cui fare le operazioni
-   * @param int|string $type
+   * @param int|string|array $type
    */
   public function set_type($type='')
   {
   	if ($type != '')
 	{
-		$tipo = $this->content->type($type);
+		if (is_array($type))
+		{
+			$tipo = $type;
+		} else {
+			$tipo = $this->content->type($type);
+		}
+		
 		$this->_single_type = $tipo;
-
-		//Imposto tutti i riferimenti
+		
+		//We set the references
 	    $this->table = $tipo['table'];
 	    $this->table_stage = $tipo['table_stage'];
 	    $this->primary_key = $tipo['primary_key'];
@@ -355,48 +361,57 @@ Class Model_records extends CI_Model {
       $results = $query->result();
       $records = array();
       foreach ($results as $item) {
+      		
+      	if (!isset($item->id_type) || !$item->id_type)
+      	{
+      		$tipo = $this->_single_type;
+      		$record = new Record();
+      		$record->set_type($tipo);
+      		$type_name = $tipo['name'];
+      	} else {
+      		$record = $this->content->make_record($item->id_type);
+      		$tipo = $this->content->type($item->id_type);
+      		$type_name = $this->content->type_name($item->id_type);
+      	}
+      	 
+      	
 
-	        if ($item->id_type)
-	        {
-		    	$record = $this->content->make_record($item->id_type);
-		    	$tipo = $this->content->type($item->id_type);
+      	if ($record instanceof Record) {
 
-		        if ($record instanceof Record) {
+      		$record->id = $item->{$tipo['primary_key']};
+      		$record->tipo = $type_name;
+      		$record->xml = $item->xml;
 
-			        $record->id = $item->{$tipo['primary_key']};
-			        $record->tipo = $this->content->type_name($item->id_type);
-			        $record->xml = $item->xml;
+      		foreach ($fields_to_select as $column)
+      		{
+      			if ($item->$column)
+      			{
+      				if (isset($tipo['fields'][$column]['type']))
+      				{
+      					if ($tipo['fields'][$column]['type'] == 'date')
+      					{
+      						//We convert the date fields into timestamps
+      						$record->set('_'.$column, $item->$column);
+      						$item->$column = date('d/m/Y', $item->$column);
+      					} else if ($tipo['fields'][$column]['type'] == 'datetime')
+      					{
+      						if ($item->$column)
+      						{
+      							$record->set('_'.$column, $item->$column);
+      							$item->$column = date('d/m/Y H:i', $item->$column);
+      						}
+      					}
+      					else if (in_array($tipo['fields'][$column]['type'], config_item('array_field_types')))
+      					{
+      						$item->$column = explode('||', trim($item->$column, '|'));
+      					}
+      				}
+      				$record->set($column, $item->$column);
+      			}
+      		}
 
-			        foreach ($fields_to_select as $column)
-			        {
-			        	if ($item->$column)
-			        	{
-			          		if (isset($tipo['fields'][$column]['type']))
-			          		{
-				        		if ($tipo['fields'][$column]['type'] == 'date')
-				          		{
-				          			//We convert the date fields into timestamps
-				          			$record->set('_'.$column, $item->$column);
-				          			$item->$column = date('d/m/Y', $item->$column);
-				          		} else if ($tipo['fields'][$column]['type'] == 'datetime')
-				          		{
-				          			if ($item->$column)
-				          			{
-				          				$record->set('_'.$column, $item->$column);
-				          				$item->$column = date('d/m/Y H:i', $item->$column);
-				          			}
-				          		}
-                                else if (in_array($tipo['fields'][$column]['type'], config_item('array_field_types')))
-                                {
-                                    $item->$column = explode('||', trim($item->$column, '|'));    
-                                }
-			          		}
-			        		$record->set($column, $item->$column);
-			          	}
-			        }
-
-			        if ($this->last_search_has_tree) {
-			        	foreach ($this->config->item('record_select_tree_fields') as $field_name)
+      		if ($this->last_search_has_tree) {
+      			foreach ($this->config->item('record_select_tree_fields') as $field_name)
 			        	{
 			            	$record->set($field_name, $item->$field_name);
 			          	}
@@ -413,7 +428,7 @@ Class Model_records extends CI_Model {
 			    	show_error(_('Cannot build the record.').' (records/get)');
 			    }
 		    $records[] = $record;
-	     	}
+	     	
       }
 
       //Reset the switchs
@@ -447,9 +462,17 @@ Class Model_records extends CI_Model {
 
 	        $id = $record->id;
 
-	      	$this->set_type($record->_tipo);
-
-	      	$tipo = $this->content->type($record->_tipo);
+	      		      	
+	      	
+	      	//If type is set, let's take it!
+	      	if (!$record->_tipo_def)
+	      	{
+	      		$this->set_type($record->_tipo);
+	      		$tipo = $this->content->type($record->_tipo);
+	      	} else {
+	      		$this->set_type($record->_tipo_def);
+	      		$tipo = $record->_tipo_def;
+	      	}
 
 	      	//These columns are always populated
 	      	$data = array(
@@ -505,9 +528,14 @@ Class Model_records extends CI_Model {
 			$action = $id ? 'update' : 'insert';
 			
 			//Title fix
-			if (!isset($data['title']))
+			if (!isset($data['title']) && isset($tipo['fields']['title']))
 			{
 				$data['title'] = $record->get($tipo['edit_link']);
+			}
+			
+			if (!isset($this->events))
+			{
+				$this->load->events();
 			}
 			
 	      	if ($id) {
@@ -522,7 +550,7 @@ Class Model_records extends CI_Model {
 	               			 ->update($this->table_stage, $data))
 	          	{
 	            	$done = $id;
-	            	$this->events->log('update', $id, $data['title'], $data['id_type']);
+	            	$this->events->log('update', $id, $data[$tipo['edit_link']], $data['id_type']);
 	          	} else {
 		            show_error('Impossibile aggiornare il record ['.$id.'].', 500, 'Aggiornamento record');
 	          	}
