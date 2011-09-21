@@ -557,7 +557,8 @@ Class Model_records extends CI_Model {
 
 	      	} else {
 	        	//Insert
-	        	if (isset($tipo['fields']['date_insert'])){
+	        	if (isset($tipo['fields']['date_insert']))
+                {
 	          		$data['date_insert'] = time();
 	          	}
 
@@ -566,7 +567,7 @@ Class Model_records extends CI_Model {
 	          	if ($this->db->insert($this->table_stage, $data))
 	          	{
 		            $done = $this->db->insert_id();
-	            	$this->events->log('insert', $done, $data['title'], $data['id_type']);
+	            	$this->events->log('insert', $done, $data[$tipo['edit_link']], $data['id_type']);
 	          	} else {
 	          		show_error('Impossibile aggiungere il record di tipo ['.$data['id_type'].'].', 500, 'Inserimento record');
 	          	}

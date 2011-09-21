@@ -15,23 +15,16 @@ $this->load->helper('form');
 
 	</div>
 
-
-
 	<div class="block_content">
 
 		<div class="sidebar">
 			<ul class="sidemenu">
 				<li><a href="#info"><?php echo _('Group informations'); ?></a></li>
 			</ul>
-
-
 			<p></p>
 		</div>
 
-
 		<div class="sidebar_content" id="info">
-
-
 
 <h3><?php echo ($group ? _('Group').': '.$group->group_name : _('New group')); ?></h3><br />
 
@@ -51,19 +44,14 @@ foreach ($acls as $acl) {
 	$data['checked'] = in_array($acl->id, $user_acls);
 	$data['value'] = $acl->id;
 
-	echo form_checkbox($data).form_label(' ' . $acl->name, 'acl[]');
+	echo form_checkbox($data).form_label(' ' . $acl->name, 'acl[]').br(1);
 }
 
 echo br(2).form_submit('submit', $group ? _('Save changes') : _('Add group'), 'class="submit long"');
 echo form_close();
 ?>
-
 		</div>
-
-
 	</div>
-
 	<div class="bendl"></div>
 	<div class="bendr"></div>
-
 </div>

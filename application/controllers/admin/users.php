@@ -2,7 +2,7 @@
 /**
  * Users Controller
  *
- * Gestione utenti (amministrazione)
+ * Users and groups management
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -55,22 +55,48 @@ Class Users extends Bancha_Controller
 		$this->view->render_layout('users/list');
 	}
 
+	public function delete($id_username='')
+	{
+		$done = $this->users->delete($id_username);
+		if ($done)
+		{
+			$this->session->set_flashdata('message', _('The user has been deleted.'));
+        	redirect('admin/users/lista');
+		}
+	}
+
 	public function edit($id_username='')
 	{		
+		$this->load->categories();
+        $this->load->hierarchies();
+        $this->load->documents();
+
 		//We get the Users scheme
 		$type_definition = $this->xml->parse_file($this->config->item('xml_folder') . 'Users.xml');
 
 		$user = new Record();
 		$user->set_type($type_definition);
 		
+		if ($this->input->post())
+		{
+			$user->set_data($this->input->post());
+			$done = $this->records->save($user);
+
+			if ($done)
+			{
+				$msg = _('The user informations have been updated.');
+				if ($this->input->post('_bt_save_list'))
+        		{
+        			$this->session->set_flashdata('message', $msg);
+        			redirect('admin/users/lista');
+        		} else {
+        			$this->view->message('success', $msg);
+        		}					
+			}
+		}
+
 		if ($id_username != '')
 		{
-			if ($this->input->post())
-			{
-				$user->set_data($this->input->post());
-				$this->records->save($user);
-			}
-			
 			//We search for this user
 			$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
 			
