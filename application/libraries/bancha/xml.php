@@ -38,7 +38,7 @@ Class Xml
   	{
    		$this->CI = & get_instance();
 
-    	$this->xml_folder	= $this->CI->config->item('xml_folder');
+    	$this->xml_folder	= $this->CI->config->item('xml_typefolder');
     	$this->types_cache_folder	= $this->CI->config->item('types_cache_folder');
   	}
 
@@ -52,8 +52,13 @@ Class Xml
   	{
     	if ($type != '')
     	{
-      		$tipo = $this->CI->content->type($type);
-
+    		if (is_array($type))
+    		{
+    			$tipo = $type;
+    		} else {
+    			$tipo = $this->CI->content->type($type);
+    		}
+    		
       		$xmlstring = read_file($this->CI->config->item('templates_folder').'Record.xml');
 
       		$xml = new SimpleXMLElement($xmlstring);
@@ -323,7 +328,7 @@ Class Xml
         		{
           			show_error($this->CI->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are:', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
         		}
-                
+
         		//Default fields for each field
         		$content_field = array(
           			'description'	=> isset($field->description) ? convert_accented_characters((string)$field->description) : '',
@@ -346,11 +351,11 @@ Class Xml
       			if ($content_field['type'] == 'images')
         		{
         			$content_field['presets'] = array();
-        			
+
           			$content_field['original'] = isset($field->original) ? (strtoupper($field->original) == 'TRUE' ? TRUE : FALSE) : FALSE;
           			$content_field['resized'] = isset($field->resized) ? (string)$field->resized : FALSE;
           			$content_field['thumbnail'] = isset($field->thumbnail) ? (string)$field->thumbnail : FALSE;
-          			
+
           			if ($content_field['thumbnail'] != FALSE && $preset = (string)$field->thumbnail->attributes()->preset)
           			{
           				$content_field['presets']['thumbnail'] = $preset;

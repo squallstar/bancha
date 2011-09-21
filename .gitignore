@@ -23,7 +23,7 @@ Thumbs.db
 ########################
 /application/views/website/type_templates
 /application/views/admin/content/translations.php
-/application/xml/*.xml
+/application/xml/types/*.xml
 
 ##############
 #Cache files #

@@ -2,7 +2,7 @@
 /**
  * Users Controller
  *
- * Gestione utenti (amministrazione)
+ * Users and groups management
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -55,24 +55,67 @@ Class Users extends Bancha_Controller
 		$this->view->render_layout('users/list');
 	}
 
-	public function edit($username='')
+	public function delete($id_username='')
 	{
-		if ($username != '')
+		$done = $this->users->delete($id_username);
+		if ($done)
 		{
-			//Cerco lo username scelto
-			$users = $this->users->limit(1)->where('username', $username)->get();
-			if (!count($users)) {
-				show_error('L\' utente ['.$username.'] non &egrave; stato trovato.', 500, 'Utente non trovato');
-			} else {
-				$user = $users[0];
-				$this->view->set('user', $user);
+			$this->session->set_flashdata('message', _('The user has been deleted.'));
+        	redirect('admin/users/lista');
+		}
+	}
+
+	public function edit($id_username='')
+	{		
+		$this->load->categories();
+        $this->load->hierarchies();
+        $this->load->documents();
+
+		//We get the Users scheme
+		$type_definition = $this->xml->parse_file($this->config->item('xml_folder') . 'Users.xml');
+
+		$user = new Record();
+		$user->set_type($type_definition);
+		
+		if ($this->input->post())
+		{
+			$user->set_data($this->input->post());
+			$done = $this->records->save($user);
+
+			if ($done)
+			{
+				$msg = _('The user informations have been updated.');
+				if ($this->input->post('_bt_save_list'))
+        		{
+        			$this->session->set_flashdata('message', $msg);
+        			redirect('admin/users/lista');
+        		} else {
+        			$this->view->message('success', $msg);
+        		}					
 			}
-		} else {
-			//Nuovo utente
-			$this->view->set('user', FALSE);
 		}
 
-		$this->view->render_layout('users/edit');
+		if ($id_username != '')
+		{
+			//We search for this user
+			$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
+			
+			if (!$users) {
+				show_error(_('User not found'));
+			} else {
+				$user = $users[0];
+			}
+		} else {
+			//New user
+			$this->view->set('user', FALSE);
+		}
+		
+		$this->view->set('tipo', $type_definition);
+		$this->view->set('_section', 'users');
+		$this->view->set('action', 'admin/users/edit/' . $user->id);
+		$this->view->set('record', $user);
+
+		$this->view->render_layout('content/record_edit');
 	}
 
 	/**

@@ -2,7 +2,7 @@
 /**
  * Users Model
  *
- * Classe per interagire con gli utenti
+ * The model that lets you to manage the users
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -20,7 +20,7 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	* Conta gli utenti
+	* Counts the users
 	* @return int
 	*/
 	public function count()
@@ -31,12 +31,24 @@ Class Model_users extends CI_Model {
 		return (int)$row->total;
 	}
 
-	public function limit($a, $b=null)
+	/**
+	 * Sets a limit condition
+	 * @param int $limit
+	 * @param int $offset
+	 * @return $this
+	 */
+	public function limit($limit, $offset=null)
 	{
-		$this->db->limit($a, $b);
+		$this->db->limit($limit, $offset);
 		return $this;
 	}
 
+	/**
+	 * Sets a where condition
+	 * @param string $key
+	 * @param string $val
+	 * @return $this
+	 */
 	public function where($key, $val=null)
 	{
 		$this->db->where($key, $val);
@@ -44,17 +56,18 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Ottiene gli utenti secondo le condizioni definite
+	 * Gets the users using the filtering function defined
+	 * @param bool $array return as array or object
 	 * @return array
 	 */
-	public function get()
+	public function get($array = FALSE)
 	{
-		$query = $this->db->select('id_user, name, surname, email, username, group_name, users.id_group')
+		$query = $this->db->select('id_user, name, surname, password, email, username, group_name, users.id_group')
 						  ->from('users')
 						  ->join('groups', 'users.id_group = groups.id_group', 'left')
 						  ->get();
 
-		return $query->result();
+		return $array ? $query->result_array() : $query->result();
 	}
 
 	public function add_user($data)
@@ -63,7 +76,21 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Ottiene tutti i gruppi
+	 * Deletes a single user
+	 * @param int $id_user
+	 * @return bool
+	 */
+	public function delete($id_user='')
+	{
+		if ($id_user != '')
+		{
+			return $this->db->where('id_user', $id_user)->delete('users');
+		}
+		return FALSE;
+	}
+
+	/**
+	 * Returns all the groups
 	 * @return array
 	 */
 	public function get_groups()
@@ -76,7 +103,7 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Aggiunge un gruppo
+	 * Adds a new group
 	 * @param string $group_name
 	 * @return int auto_increment
 	 */
@@ -87,7 +114,7 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Ottiene un gruppo
+	 * Gets a single group
 	 * @param int $id
 	 * @return array|bool
 	 */
@@ -110,7 +137,7 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Lista di tutti i permessi disponibili
+	 * Lists of all permissions
 	 * @return array
 	 */
 	public function get_acl_list()
@@ -122,7 +149,7 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Aggiunge un permesso sul DB
+	 * Adds a new permission
 	 * @param string $area
 	 * @param string $action
 	 * @param string $name
@@ -139,7 +166,7 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Elimina un permesso dal DB
+	 * Deletes a permission from the database
 	 * @param string $area
 	 * @param string $action
 	 */

@@ -12,8 +12,8 @@ $this->load->helper('text');
 		<h2><?php echo _('Users list')?></h2>
 
 		<ul>
-			<li><a href="<?php echo admin_url('users/edit/'); ?>"><?php echo _('Add new user'); ?></a></li>
-			<li><a href="<?php echo admin_url('users/groups/'); ?>"><?php echo _('Groups and permissions'); ?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url('users/edit/'); ?>"><?php echo _('Add new user'); ?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/bookmark.png'); ?>" /> <a href="<?php echo admin_url('users/groups/'); ?>"><?php echo _('Groups and permissions'); ?></a></li>
 		</ul>
 	</div>
 
@@ -51,7 +51,7 @@ $this->load->helper('text');
 			//Campi ricorrenti
 			echo '<td><input type="checkbox" /></td>';
 			echo '<td>'.$user->id_user.'</td>'
-				.'<td><a href="'.admin_url('users/edit/'.$user->username).'">'.$user->username.'</a></td>'
+				.'<td><a href="'.admin_url('users/edit/'.$user->id_user).'">'.$user->username.'</a></td>'
 				.'<td>'.$user->name.'</td>'
 				.'<td>'.$user->surname.'</td>'
 				.'<td>'.$user->email.'</td>'
