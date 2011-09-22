@@ -16,11 +16,20 @@ class Picasa_Gallery
 		$this->_CI = & get_instance();
 	} 
 	
-	public function init($JsonData, $maxAlbum = NULL)
+	public function init($jSonData, $maxAlbum = NULL)
 	{
 		if ($jSonData == NULL) {
 			
 		}
-		debug($JsonData,'INIT', TRUE);
+		
+		debug($jSonData->version,'version');
+		debug($jSonData->encoding,'encoding');		
+		
+		$id = $jSonData->feed->id->_t;
+		$updated = $jSonData->feed->updated->_t;
+		$category = $jSonData->feed->category;
+	
+		debug($jSonData->feed,'feed key',TRUE);
+		debug($jSonData->feed->entry,'feed entry',TRUE);
 	}
 }
