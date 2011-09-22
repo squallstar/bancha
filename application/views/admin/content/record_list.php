@@ -188,7 +188,7 @@ $fields = array_keys($tipo['fields']);
 					}
 					if ($tipo['edit_link'] == $field)
 					{
-						echo '<td><a href="'.admin_url($_section.'/edit_record/'.$track_str).'">'.$value.'</a></td>';
+						echo '<td><a href="'.admin_url($_section.'/edit_record/'.$track_str).'"><img src="'.site_url(THEMESPATH.'admin/widgets/icns/pencil.png').'" border="0" alt="" /> '.$value.'</a></td>';
 					} else {
 						echo '<td>'.$value.'</td>';
 					}
@@ -197,8 +197,8 @@ $fields = array_keys($tipo['fields']);
 			}
 
 			echo '<td class="delete">'
-					.($tipo['tree'] ? '<a href="'.admin_url($_section.'/add_child_record/'.$track_str).'">'._('Add child page').'</a> - ' : '')
-					.'<a href="'.admin_url($_section.'/delete_record/'.$track_str).'" onclick="return confirm(\''._('Are you sure?').'\');">'._('Delete').'</a>'
+					.($tipo['tree'] ? '<a title="'._('Add child page').'" href="'.admin_url($_section.'/add_child_record/'.$track_str).'"><img src="'.site_url(THEMESPATH.'admin/widgets/icns/node-tree.png').'" border="" alt="'._('Add child page').'" /></a>&nbsp;&nbsp;&bull;&nbsp; ' : '')
+					.'<a title="'._('Delete').'" href="'.admin_url($_section.'/delete_record/'.$track_str).'" onclick="return confirm(\''._('Are you sure?').'\');"><img src="'.site_url(THEMESPATH.'admin/widgets/icns/trash.png').'" border="0" alt="'._('Delete').'" /></a>'
 				.'</td>';
 		echo '</tr>';
 	}
