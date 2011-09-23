@@ -336,7 +336,7 @@ Class Contents extends Bancha_Controller
           		redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
 
             } else{
-          		$this->view->message('success', 'Il contenuto &egrave; stato correttamente salvato.');
+          		$this->view->message('success', _('The content has been saved.'));
             }
 
         }else if ($record_id != '') {
