@@ -328,12 +328,12 @@ Class Contents extends Bancha_Controller
                     $value = $record->get($tipo['edit_link']);
                 }
           		$this->session->set_flashdata('message', 'Il contenuto <a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$value.'</a> &egrave; stato correttamente salvato.');
-          	 	redirect('admin/contents/type/' . $tipo['name']);
+          	 	redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
 
             } else if ($this->input->post('_bt_publish')) {
           		$this->records->publish($record_id);
           		$this->session->set_flashdata('message', 'Il contenuto "<a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$record->get('title').'</a>" &egrave; stato pubblicato.');
-          		redirect('admin/contents/type/' . $tipo['name']);
+          		redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
 
             } else{
           		$this->view->message('success', 'Il contenuto &egrave; stato correttamente salvato.');
