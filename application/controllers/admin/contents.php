@@ -140,7 +140,11 @@ Class Contents extends Bancha_Controller
         				}
         				break;
                     case 'discard':
-
+                    	foreach ($records as $record)
+        				{
+        					$this->discard_record(NULL, $record, TRUE);
+        					$this->view->message('success', _('The records changes have been discarded.'));
+        				}
                         break;
             	}
         	}
@@ -329,12 +333,12 @@ Class Contents extends Bancha_Controller
                 {
                     $value = $record->get($tipo['edit_link']);
                 }
-          		$this->session->set_flashdata('message', 'Il contenuto <a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$value.'</a> &egrave; stato correttamente salvato.');
+          		$this->session->set_flashdata('message', 'Il contenuto <a href="'.admin_url(''.$this->_section.'/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$value.'</a> &egrave; stato correttamente salvato.');
           	 	redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
 
             } else if ($this->input->post('_bt_publish')) {
           		$this->records->publish($record_id);
-          		$this->session->set_flashdata('message', 'Il contenuto "<a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$record->get('title').'</a>" &egrave; stato pubblicato.');
+          		$this->session->set_flashdata('message', 'Il contenuto "<a href="'.admin_url(''.$this->_section.'/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$record->get('title').'</a>" &egrave; stato pubblicato.');
           		redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
 
             } else{
