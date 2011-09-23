@@ -519,7 +519,17 @@ Class Model_records extends CI_Model {
 	    	//We set the record as not published if the type has the stage table
         	if ($tipo['stage'])
         	{
-	        	$data['published'] = '0';
+        		switch ($record->get('published'))
+        		{
+        			case 1:
+        			case 2:
+        				$data['published'] = '2';
+        				break;
+        			
+        			default:
+        				$data['published'] = '0';
+        				break;
+        		}
         	}
 
 		  	$done = FALSE;
@@ -818,4 +828,14 @@ Class Model_records extends CI_Model {
   	}
   	return $field['options'];
   }
+
+  /**
+  	* Discards a record and takes the published one from the production table
+  	* @param int $record_id
+  	* @return bool
+  	*/
+ 	public function discard($record_id, $type = '') {
+ 		//TODO
+ 	}
+
 }
