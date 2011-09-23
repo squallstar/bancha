@@ -16,29 +16,33 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 Class Auth extends Bancha_Controller {
 
-	public function __construct() {
+	public function __construct()
+	{
 	    parent::__construct();
 	    $this->view->base = 'admin/';
 	}
 
-	function index() {
+	function index()
+	{
 		$this->login();
 	}
 
-	function login() {
-
-		if ($this->auth->is_logged()) {
+	function login()
+	{
+		if ($this->auth->is_logged())
+		{
 			redirect('admin/dashboard');
 		}
 
-		if ($this->input->post('username')) {
-
+		if ($this->input->post('username'))
+		{
 			$logged = $this->auth->login(
 				$this->input->post('username'),
 				$this->input->post('password')
 			);
 
-			if ($logged) {
+			if ($logged)
+			{
 				$this->load->events();
 				$this->events->log('login');
 				redirect('admin/dashboard');
@@ -50,7 +54,8 @@ Class Auth extends Bancha_Controller {
 		$this->view->render_layout('auth/login', FALSE);
 	}
 
-	function logout() {
+	function logout()
+	{
 		$this->auth->logout();
 
 		$this->load->events();
@@ -58,5 +63,4 @@ Class Auth extends Bancha_Controller {
 
 		redirect('admin/auth/login');
 	}
-
 }
