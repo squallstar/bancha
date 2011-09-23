@@ -312,10 +312,21 @@ Class View
 		return $tmp;
 	}
 
+	/**
+	 * Adds the live tags
+	 * @return XHTML
+	 */
 	function live_tags($field, $record)
 	{
- 		return 'data-field="'.$field.'" data-type="'.$record->_tipo
- 			  .'" data-record="'.$record->id.'"';
+ 		if ($this->_CI->output->has_profiler() && 
+ 			$this->_CI->auth->has_permission('content', $record->tipo)
+ 		)
+ 		{
+ 			return ' data-field="'.$field.'" data-type="'.$record->tipo
+ 				  .'" data-key="'.$record->id.'"';
+ 		} else {
+ 			return '';
+ 		}
  	}
 
 }
