@@ -828,4 +828,14 @@ Class Model_records extends CI_Model {
   	}
   	return $field['options'];
   }
+
+  /**
+  	* Discards a record and takes the published one from the production table
+  	* @param int $record_id
+  	* @return bool
+  	*/
+ 	public function discard($record_id, $type = '') {
+ 		//TODO
+ 	}
+
 }
