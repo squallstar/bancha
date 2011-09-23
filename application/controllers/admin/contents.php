@@ -142,8 +142,8 @@ Class Contents extends Bancha_Controller
                     case 'discard':
                     	foreach ($records as $record)
         				{
-        					$this->discard_record(NULL, $record, TRUE);
-        					$this->view->message('success', _('The records changes have been discarded.'));
+        					$this->records->discard($record);
+        					$this->view->message('success', _('The records have been rolled back to the production ones.'));
         				}
                         break;
             	}
