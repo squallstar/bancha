@@ -322,8 +322,8 @@ Class View
  			$this->_CI->auth->has_permission('content', $record->tipo)
  		)
  		{
- 			return ' data-field="'.$field.'" data-type="'.$record->tipo
- 				  .'" data-key="'.$record->id.'"';
+ 			return ' data-mode="edit" data-field="'.$field.'" data-type="'.$record->tipo
+ 				  .'" data-key="'.$record->id.'" data-fieldtype="'.$this->_CI->content->content_types[$record->_tipo]['fields'][$field]['type'].'"';
  		} else {
  			return '';
  		}
