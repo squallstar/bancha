@@ -30,7 +30,7 @@ function _show_ciprofiler()
 
 $(document).ready(function() {
 	$('*[data-mode="edit"]').click(function() {
-		_livemode.start(this);
+		_livemode.start_editor(this);
 	}).hover(function() {
 		_livemode_last_color = $(this).css('background-color');
 		$(this).css('background-color', '#fcfdef');
@@ -40,8 +40,8 @@ $(document).ready(function() {
 });
 
 var _livemode = {
-	_objects = [],
-	start : function(el) {
+	_objects : new Array(),
+	start_editor : function(el) {
 		var obj = $(el);
 
 		if (jQuery.inArray(obj.attr('data-field'), _livemode._objects)) {
