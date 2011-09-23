@@ -211,6 +211,7 @@ $fields = array_keys($tipo['fields']);
 				<option value=""><?php echo _('Actions'); ?></option>
 				<option value="publish"><?php echo _('Publish'); ?></option>
 				<option value="depublish"><?php echo _('Unpublish'); ?></option>
+				<option value="discard"><?php echo _('Discard draft'); ?></option>
 				<option value="delete"><?php echo _('Delete'); ?></option>
 			</select>
 
