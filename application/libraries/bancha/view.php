@@ -312,4 +312,10 @@ Class View
 		return $tmp;
 	}
 
+	function live_tags($field, $record)
+	{
+ 		return 'data-field="'.$field.'" data-type="'.$record->_tipo
+ 			  .'" data-record="'.$record->id.'"';
+ 	}
+
 }
