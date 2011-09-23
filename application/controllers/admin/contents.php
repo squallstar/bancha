@@ -78,7 +78,6 @@ Class Contents extends Bancha_Controller
     */
     public function type($tipo='', $page=0)
     {
-
     	$type = $this->content->type($tipo);
     	$this->records->set_type($tipo);
         $this->view->set('tipo', $type);
@@ -122,7 +121,7 @@ Class Contents extends Bancha_Controller
             			{
             				$this->records->publish($record);
             				$this->pages->publish($record);
-            				$this->view->message('success', 'I record sono stati pubblicati.');
+            				$this->view->message('success', _('The records have been published'));
             			}
             			break;
         			case 'depublish':
@@ -130,16 +129,19 @@ Class Contents extends Bancha_Controller
         				{
         					$this->records->depublish($record);
         					$this->pages->depublish($record);
-        					$this->view->message('success', 'I record sono stati depubblicati.');
+        					$this->view->message('success', _('The records have been depublished.'));
         				}
         				break;
         			case 'delete':
         				foreach ($records as $record)
         				{
         					$this->delete_record(NULL, $record, TRUE);
-        					$this->view->message('success', 'I record sono stati eliminati.');
+        					$this->view->message('success', _('The records have been deleted.'));
         				}
         				break;
+                    case 'discard':
+
+                        break;
             	}
         	}
         }
