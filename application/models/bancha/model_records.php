@@ -519,7 +519,17 @@ Class Model_records extends CI_Model {
 	    	//We set the record as not published if the type has the stage table
         	if ($tipo['stage'])
         	{
-	        	$data['published'] = '0';
+        		switch ($record->get('published'))
+        		{
+        			case 1:
+        			case 2:
+        				$data['published'] = '2';
+        				break;
+        			
+        			default:
+        				$data['published'] = '0';
+        				break;
+        		}
         	}
 
 		  	$done = FALSE;
