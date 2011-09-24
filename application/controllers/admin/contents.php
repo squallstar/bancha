@@ -343,6 +343,7 @@ Class Contents extends Bancha_Controller
 
             } else{
           		$this->view->message('success', _('The content has been saved.'));
+				redirect('admin/'.$this->_section.'/edit_record/' . $tipo['name'] . '/'.$record_id);
             }
 
         }else if ($record_id != '') {
