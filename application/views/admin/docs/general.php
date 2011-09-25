@@ -778,10 +778,51 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 </code>
 </div>
 
-<div class="sidebar_content" id="sb-dispatchers">
+	<div class="sidebar_content" id="sb-dispatchers">
 			<h3>16. Dispatchers</h3>
+			<p>Come forse avrai visto dallo schema MVC presente nella sezione <strong>1. Introduzione a BANCHA</strong>, i dispatchers sono collocati appena sotto la fase di routing dell'applicazione.</p>
+			<p>Un dispatcher, è una classe responsabile di un percorso di routing del <strong>front-end</strong> del sito internet.</p>
+			<p>Attualmente sono disponibili due dispatchers:</p>
+			<ul>
+				<li><strong>Default Dispatcher</strong> - il dispatcher generale del front-end.</li>
+				<li><strong>Image Dispatchers</strong> - responsabile di generazione e invio delle immagini con i preset.</li>
+			</ul>
 
-</div>
+			<p>Per aggiungere un dispatcher, aggiungilo alla cartella <strong>application/libraries/<?php echo FRNAME; ?>/dispatchers/</strong> chiamandolo <strong>dispatcher_&lt;nome&gt;.php</strong> ed utilizzando come nome della classe <strong>Dispatcher_&lt;nome&gt;</strong>. Dopodich&egrave;, potrai invocare un dispatcher in questo modo:</p>
+<code>$this->load->dispatcher('nome');
+
+//Ed otterrai l'oggetto:
+//$this->dispatcher</code>
+<br />
+			<h3>Default dispatcher</h3>
+			<p>&Egrave; il dispatcher generale del sito internet, ed una volta impostato l'<strong>url da visitare</strong> si preoccupa di ricercare tra le pagine ed i records del database, nonch&egrave; preparare tutto il necessario alla visualizzazione del sito, comprese le liste di contenuti ed i feed del sito.</p>
+			<p>Per modificare il comportamento generale del sito, puoi quindi agire su questo dispatcher.<br />
+			Solitamente viene chiamato dal controller <strong>Website</strong> all'azione <strong>router</strong>.</p>
+
+<code>//Il dispatcher di default, viene invocato ed usato cos&igrave;:
+$this->load->dispatcher('default');
+$this->dispatcher->start();</code><br />
+
+			<h3>Image dispatcher</h3>
+			<p>Questo dispatcher si preoccupa di generare le immagini attraverso i <strong>preset</strong>, salvarle e quindi inviarle al browser. Nel caso in cui una immagine sia gi&agrave; stata generata, questo dispatcher non verr&agrave; invocato in quanto l'immagine sar&agrave; fornita direttamente dal filesystem.</p> 
+			<p>Di seguito l'esempio di come viene invocato il dispatcher dal controller del front-end del sito internet:</p>
+<code>$this->load->dispatcher('images');
+
+//Imposto i dati relativi all'immagine da generare
+$data = array(
+	'type'		=> $type,
+	'field'		=> $field,
+	'id'		=> $id,
+	'preset'	=> $preset,
+	'filename'	=> $filename,
+	'ext'		=> $extension
+);
+
+//Lancio il dispatcher
+$this->dispatcher->retrieve($data);</code><br />
+
+<p>Per altre informazioni sui preset applicati alle immagini, leggi la relativa sezione <strong>14. Image presets</strong> nella documentazione.</p>
+	</div>
 
 
 <!-- end -->
