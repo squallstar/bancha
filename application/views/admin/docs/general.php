@@ -26,7 +26,7 @@
 				<li><a href="#sb-image-presets">14. Image presets</a></li>
 				<li><a href="#sb-categories">15. Categorie, Gerarchie</a></li>
 			</ul>
-			<p>Revisione: <?php echo BANCHA_VERSION; ?><br />Data: 06 Set 2011</p>
+			<p>Versione: <?php echo BANCHA_VERSION; ?><br />Data: 25 Set 2011</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
@@ -43,7 +43,17 @@
 				<li>Separa in maniera netta l'applicazioni dai temi e permette quindi la portabilit&agrave; di quest'ultimi</li>
 				<li>Utilizza un sistema ORM per gestire gli oggetti del database</li>
 			</ul>
-			<?php echo CMS; ?> &egrave; stato interamente sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.
+
+			<h3>Schema MVC di Bancha</h3>
+			<p>Qui sotto è rappresentato lo scheletro Model-View-Controller architetturale di Bancha.</p>
+			<img src="<?php echo site_url(THEMESPATH.'admin/widgets/mvc_scheme.png'); ?>" border="0" alt="Bancha MVC" />
+			<br />
+
+			<br />
+			<h3>Crediti</h3>
+
+			<?php echo CMS; ?> &egrave; stato interamente sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
+			Bancha &egrave; rilasciato con licenza GNU/GPL. Puoi visionare l'intera licenza dal file License.txt nella root del progetto.
 			</p>
 		</div>
 

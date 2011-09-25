@@ -32,6 +32,10 @@ The **BANCHA documentation** is available through the BANCHA administration pane
 
 5. You're done! The install script will create a content type named "Menu" which is linked to the page tree of your website.
 
+# Application MVC Scheme
+
+![MVC Scheme](http://static.squallstar.it/images/bancha_mvc_scheme.png)
+
 # Resources
 
  * [Project homepage](https://github.com/squallstar/bancha)
