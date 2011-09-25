@@ -49,4 +49,4 @@ Now you can pull the upstream updates anytime you want via these commands:
     git fetch upstream
     git merge upstream/master
 
-NOTE: we are working hard to translate the documentation in English (currently is in Italian)
+NOTE: we are working hard to translate the documentation in English (currently it's just in Italian)
