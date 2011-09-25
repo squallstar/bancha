@@ -26,11 +26,15 @@ Class Unit_tests extends Bancha_Controller
 
 	    $this->view->base = 'admin/';
 
-
 	    return;
 	}
 
-	public function index() {
+	public function index()
+	{
+		$this->view->render_layout('unit_tests/intro');
+	}
+
+	public function make_tests() {
 		$this->load->library('unit_test');
 		
 		$record = new Record('Blog');
@@ -50,5 +54,4 @@ Class Unit_tests extends Bancha_Controller
 		$this->view->set('tests', $this->unit->report());
 		$this->view->render_layout('unit_tests/results');
 	}
-
 }
