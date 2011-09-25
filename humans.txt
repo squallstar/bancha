@@ -13,7 +13,7 @@
    Twitter: @mintsugar
    Location: Verona, IT
 
-   Co-Developer: Alessandro Maroldi
+   Side-Developer: Alessandro Maroldi
    Twitter: @alexmaroldi
    Location: Verona, IT
 
