@@ -29,6 +29,7 @@ function _show_ciprofiler()
 }
 
 $(document).ready(function() {
+	/*
 	$('*[data-mode="edit"]').click(function() {
 		_livemode.start_editor(this);
 	}).hover(function() {
@@ -37,6 +38,7 @@ $(document).ready(function() {
 	}, function() {
 		$(this).css('background-color', _livemode_last_color);
 	});
+	*/
 });
 
 var _livemode = {
