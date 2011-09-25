@@ -29,7 +29,7 @@ function _show_ciprofiler()
 }
 
 $(document).ready(function() {
-	/*
+	/* (ONLY AVAILABLE IN DEVELOPMENT BRANCH)
 	$('*[data-mode="edit"]').click(function() {
 		_livemode.start_editor(this);
 	}).hover(function() {
