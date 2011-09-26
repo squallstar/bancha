@@ -66,6 +66,8 @@ $fields = array_keys($tipo['fields']);
 							{
 								case 'text':
 								case 'textarea':
+								case 'textarea_code':
+								case 'textarea_full':
 									$filter = form_input(array(
 										'class'	=> 'text filter',
 										'name'	=> 'filter['.$field.']',
@@ -161,10 +163,15 @@ $fields = array_keys($tipo['fields']);
 									}
 								}
 								break;
+
 							case 'text':
 							case 'textarea':
+							case 'textarea_code':
+							case 'textarea_full':
 							case 'hidden':
 								$value = character_limiter(strip_tags($value), 30);
+								break;
+
 							case 'checkbox':
 							case 'multiselect':
 							case 'hierarchy':
