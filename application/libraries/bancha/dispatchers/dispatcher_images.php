@@ -22,13 +22,16 @@ Class Dispatcher_Images
 	{
 		$CI = & get_instance();
 
-		//We retrieve the content type
-		$tipo = $CI->content->type($data['type']);
-
-		//Let's check if the request field is an image
-		if ($tipo['fields'][$data['field']]['type'] != 'images')
+		if ($data['type'] != 'repository')
 		{
-			show_error('The field [' . $data['field'] . '] is not an "imagelist" field.', 400);
+			//We retrieve the content type
+			$tipo = $CI->content->type($data['type']);
+
+			//Let's check if the request field is an image
+			if ($tipo['fields'][$data['field']]['type'] != 'images')
+			{
+				show_error('The field [' . $data['field'] . '] is not an "imagelist" field.', 400);
+			}
 		}
 
 		//Aumento il limite di memoria

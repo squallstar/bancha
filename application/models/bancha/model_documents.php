@@ -193,8 +193,19 @@ Class Model_Documents extends CI_Model {
 		if ($field_id == '') {
 			show_error('Nome del campo su tabella esterna non settato (documents/field)');
 		} else {
-			$this->db->where('field_id', $field_id);
+			$this->db->where('bind_field', $field_id);
 		}
+		return $this;
+	}
+
+	/**
+	 * Adds an order by
+	 * @param string $field
+	 * @param string $order (ASC|DESC)
+	 */
+	public function order_by($field, $order='ASC')
+	{
+		$this->db->order_by($field, $order);
 		return $this;
 	}
 
@@ -249,7 +260,8 @@ Class Model_Documents extends CI_Model {
 	{
 		if ($document_id != '')
 		{
-			$document = $this->db->select('path')
+			$fields = array('path', 'thumb_path', 'resized_path');
+			$document = $this->db->select(implode(', ', $fields))
 								 ->from($this->table_stage)
 								 ->where('id_document', $document_id)
 								 ->limit(1)
@@ -257,9 +269,12 @@ Class Model_Documents extends CI_Model {
 			if (count($document))
 			{
 				$document = $document[0];
-				if (file_exists($this->attach_folder . $document->path))
+				foreach ($fields as $field)
 				{
-					@unlink($this->attach_folder . $document->path);
+					if (file_exists($this->attach_folder . $document->$field))
+					{
+						unlink($this->attach_folder . $document->$field);
+					}
 				}
 				return $this->db->where('id_document', $document_id)->delete($this->table_stage);
 			}
@@ -422,6 +437,51 @@ Class Model_Documents extends CI_Model {
 			return $this->db->set('alt_text', $alt_text)
 							->set('priority', $priority)
 							->where('id_document', $document_id)->update($this->table_stage);
+		}
+	}
+
+	public function upload_to_repository($files)
+	{
+		if (count($files))
+		{
+			$files_copy = $files;
+			foreach ($files_copy as $name => $val)
+			{
+				$count = count($val['tmp_name']);
+
+				for ($i = 0; $i < $count; $i++)
+				{
+					if ($val['tmp_name'][$i] != '')
+					{
+						$single_file = array(
+							'name'		=> $val['name'][$i],
+							'type'		=> $val['type'][$i],
+							'tmp_name'	=> $val['tmp_name'][$i],
+							'size'		=> $val['size'][$i],
+						);
+
+						//Fix for handling multiple files
+						$_FILES[$name] = $single_file;
+
+						$upload_config = array(
+							'allowed_types' => '*',
+							'encrypt_name'	=> FALSE,
+							'max_size'		=> '10240', //10mb
+							'resized'		=> FALSE,
+							'thumbnail'		=> '80x?'
+						);
+
+						$this->documents->upload($name, $upload_config, array(
+							'id'	=> date('Ym'),
+							'table'	=> 'repository',
+							'field'	=> 'document',
+							'type'	=> 'repository',
+							'name'	=> $single_file['name']
+						));
+					}
+				}
+			}
+			return TRUE;
 		}
 	}
 }

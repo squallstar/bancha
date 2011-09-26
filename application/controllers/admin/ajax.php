@@ -70,10 +70,10 @@ Class Ajax extends Bancha_Controller
 
 	public function finder($id_record='undefined', $type='')
 	{
+		$this->load->documents();
+
 		if ($id_record != 'undefined')
 		{
-			$this->load->documents();
-
 			if ($type != '')
 			{
 				$tipo = $this->content->type($type);
@@ -87,10 +87,32 @@ Class Ajax extends Bancha_Controller
 										 ->get();
 
 			$this->view->set('documents', $documents);
-
-		} else {
-			show_error(_('This content has no attachments.'));
 		}
+
+		if (count($_FILES))
+		{
+			$this->documents->upload_to_repository($_FILES);
+		}
+
+		$repository = $this->documents->table('repository')
+									  ->field('document')
+									  ->limit(30)
+									  ->order_by('id_document', 'DESC')
+									  ->get();
+		
+		//Image presets
+		$this->load->config('image_presets');
+		$presets = $this->config->item('presets');
+
+		$tmp = array('' => '');
+		foreach ($presets as $key => $val)
+		{
+			$tmp[$key] = ucfirst($key);
+		}
+
+		$this->view->set('presets', $tmp);
+
+		$this->view->set('repository_files', $repository);
 
 		$this->view->render_layout('content/documents_finder');
 	}
