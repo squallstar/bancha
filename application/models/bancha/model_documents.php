@@ -67,34 +67,30 @@ Class Model_Documents extends CI_Model {
 	}
 
 	/**
-	 * Metodo per uplodare un files dall'array $_FILES di PHP.
-	 * @param string $name Chiave (nome) su $_FILES
-	 * @param array $specs specifiche di caricamento
-	 * @param array $save_params Parametri di salvataggio su DB (chiavi: id, table)
+	 * Method to upload a files and save its reference as a record on the database
+	 * @param string $name Key on $_FILES
+	 * @param array $specs Uploading specs
+	 * @param array $save_params Saving parameters (id, table, etc)
 	 */
 	public function upload($name = '', $specs = array(), $save_params = array())
 	{
 		if ($name != '' && is_array($specs) && count($specs))
 		{
-
-			//Increase limit
+			//We increase the memory limit
 			ini_set('memory_limit', MEMORY_LIMIT);
 
 			$custom_path = $save_params['type'] . DIRECTORY_SEPARATOR
-				. $save_params['field'] . DIRECTORY_SEPARATOR
-				. $save_params['id'] . DIRECTORY_SEPARATOR;
+						 . $save_params['field'] . DIRECTORY_SEPARATOR
+						 . $save_params['id'] . DIRECTORY_SEPARATOR;
 
 			//Attach folder
 			$specs['upload_path'] = $this->attach_folder . $custom_path;
 
-
 			//Create the directory if not exists
-			if (!file_exists($specs['upload_path'])) {
+			if (!file_exists($specs['upload_path']))
+			{
 				mkdir($specs['upload_path'], DIR_WRITE_MODE, TRUE);
 			}
-
-			//$count = count(get_filenames($specs['upload_path']));
-			//$specs['file_name'] = 'pic-'.($count+1);
 
 			//Sanitize del nome del file
 			$specs['filename'] = url_title(convert_accented_characters($save_params['name']), 'underscore');
