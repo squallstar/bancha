@@ -149,6 +149,8 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 <ul>
 	<li><strong>text</strong> - Per utilizzare un input testuale su riga singola senza stile</li>
 	<li><strong>textarea</strong> - Per utilizzare un input multiriga con possibilit&agrave; di inserimento stili e codice HTML</li>
+	<li><strong>textarea_full</strong> - Per utilizzare un campo di inserimento multiriga tramite editor CKEDITOR (avanzato)</li>
+	<li><strong>textarea_code</strong> - Per utilizzare un campo multiriga per inserire codice (ad esempio: css e javascript)</li>
 	<li><strong>select</strong> - Per utilizzare un campo di scelta singola a tendina</li>
 	<li><strong>multiselect</strong> - Per utilizzare un campo di scelta multipla (due tendine con add/remove)</li>
 	<li><strong>checkbox</strong> - Per utilizzare un campo di scelta multipla in stile "checkbox"</li>
@@ -804,7 +806,7 @@ $this->load->dispatcher('default');
 $this->dispatcher->start();</code><br />
 
 			<h3>Image dispatcher</h3>
-			<p>Questo dispatcher si preoccupa di generare le immagini attraverso i <strong>preset</strong>, salvarle e quindi inviarle al browser. Nel caso in cui una immagine sia gi&agrave; stata generata, questo dispatcher non verr&agrave; invocato in quanto l'immagine sar&agrave; fornita direttamente dal filesystem.</p> 
+			<p>Questo dispatcher si preoccupa di generare le immagini attraverso i <strong>preset</strong>, salvarle e quindi inviarle al browser. Nel caso in cui una immagine sia gi&agrave; stata generata, questo dispatcher non verr&agrave; invocato in quanto l'immagine sar&agrave; fornita direttamente dal filesystem.</p>
 			<p>Di seguito l'esempio di come viene invocato il dispatcher dal controller del front-end del sito internet:</p>
 <code>$this->load->dispatcher('images');
 

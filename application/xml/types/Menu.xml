@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- generator="bancha-0.7" -->
+<!-- generator="bancha-0.7.1" -->
 <content>
 	<id>1</id>
 	<name>Menu</name>
@@ -95,7 +95,7 @@
 		</field>
 	</fieldset>
 	<fieldset>
-		<name>Aspect and actions</name>
+		<name>Aspect</name>
 		<field id="view_template">
 			<description>View template</description>
 			<type>select</type>
@@ -106,6 +106,17 @@
 				<option value="default">Default</option>
 			</options>
 		</field>
+		<field id="view_css">
+			<description>CSS Stylesheet</description>
+			<type>textarea_code</type>
+		</field>
+		<field id="view_js">
+			<description>Javascript code</description>
+			<type>textarea_code</type>
+		</field>
+	</fieldset>
+	<fieldset>
+		<name>Actions</name>
 		<field id="page_cache">
 			<description>Page cache (minutes)</description>
 			<type>number</type>

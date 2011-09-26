@@ -717,6 +717,10 @@ input.small {
 
 .block form textarea.wysiwyg { width: 98%; padding: 0; }
 
+.block form textarea.code {
+	font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+}
+
 .block form input.radio,
 .block form input.checkbox {
 	vertical-align: middle;
@@ -1060,13 +1064,13 @@ input.small {
 	float: right;
 	text-align: right;
 	}
-	
+
 .multiselect .multi_left , .multiselect .multi_right {
 	width:250px;
 	float:left
 }
 .multiselect select {
-	height:100px	
+	height:100px
 }
 .multiselect input {
 	margin-top:10px;
