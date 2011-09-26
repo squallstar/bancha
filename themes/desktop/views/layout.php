@@ -32,16 +32,33 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 <?php
 	foreach ($this->view->css as $css) {
-      echo link_tag(theme_url().'css/'.$css);
+      echo "\t".link_tag(theme_url().'css/'.$css);
     }
 
 	if ($this->view->has_feed)
     {
-      echo link_tag(current_url().'/feed.xml', 'alternate', 'application/rss+xml', isset($page) ? $page->get('title').' - Feed': 'RSS Feed');
+      echo "\t".link_tag(current_url().'/feed.xml', 'alternate', 'application/rss+xml', isset($page) ? $page->get('title').' - Feed': 'RSS Feed');
     }
 ?>
 
 	<script src="<?php echo theme_url();?>js/modernizr-2.0.6.min.js"></script>
+<?php
+    if (isset($page))
+    {
+    	$css = $page->get('view_css');
+    	if ($css)
+    	{
+    		echo "\n\t".'<style type="text/css">' . $css . '</style>';
+    	}
+   		$js = $page->get('view_js');
+    	if ($js)
+    	{
+    		echo "\n\t".'<script type="text/javascript">' . $js . '</script>';
+    	}
+    }
+?>
+
+
 </head>
 <body>
     <div id="wrapper">
