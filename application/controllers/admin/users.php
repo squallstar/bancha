@@ -66,17 +66,17 @@ Class Users extends Bancha_Controller
 	}
 
 	public function edit($id_username='')
-	{		
+	{
 		$this->load->categories();
         $this->load->hierarchies();
         $this->load->documents();
 
 		//We get the Users scheme
-		$type_definition = $this->xml->parse_file($this->config->item('xml_folder') . 'Users.xml');
+		$type_definition = $this->xml->parse_scheme($this->config->item('xml_folder') . 'Users.xml');
 
 		$user = new Record();
 		$user->set_type($type_definition);
-		
+
 		if ($this->input->post())
 		{
 			$user->set_data($this->input->post());
@@ -91,7 +91,7 @@ Class Users extends Bancha_Controller
         			redirect('admin/users/lista');
         		} else {
         			$this->view->message('success', $msg);
-        		}					
+        		}
 			}
 		}
 
@@ -99,7 +99,7 @@ Class Users extends Bancha_Controller
 		{
 			//We search for this user
 			$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
-			
+
 			if (!$users) {
 				show_error(_('User not found'));
 			} else {
@@ -109,7 +109,7 @@ Class Users extends Bancha_Controller
 			//New user
 			$this->view->set('user', FALSE);
 		}
-		
+
 		$this->view->set('tipo', $type_definition);
 		$this->view->set('_section', 'users');
 		$this->view->set('action', 'admin/users/edit/' . $user->id);
@@ -119,7 +119,7 @@ Class Users extends Bancha_Controller
 	}
 
 	/**
-	 * Metodi per la gestione dei gruppi
+	 * Method to manage groups
 	 * @param string $action
 	 * @param string|int $param
 	 */
@@ -131,28 +131,46 @@ Class Users extends Bancha_Controller
 			{
 				if ($param != '')
 				{
-					//Gruppo esistente
+					//Existing group
 					$new_acls = $this->input->post('acl', FALSE);
 					$this->auth->update_permissions($new_acls, $param);
 				} else {
-					//Nuovo gruppo
+					//New group
+					$group_name = $this->input->post('name');
+
+					if ($this->users->group_exists($group_name))
+					{
+						$this->view->message('warning', _('A group with that name already exists.'));
+					} else {
+						$id_group = $this->users->add_group($group_name);
+
+						if ($id_group){
+							$acls = $this->input->post('acl');
+							if (count($acls))
+							{
+								$this->auth->update_permissions($acls, $id_group);
+							}
+							$this->view->message('success', _('The group has been created.'));
+						}
+					}
+
 				}
 
 				if ($param == $this->auth->user('group_id'))
 				{
-					//Se ho aggiornato il mio gruppo, aggiorno i permessi
+					//If I updated my group, let's update also my session permissions
 					$this->auth->cache_permissions();
 				}
 
 			}
 
-			//Ottengo il gruppo
+			//Let's get the group
 			$group = $this->users->get_group($param);
 			if (!$group)
 			{
 				if ($param)
 				{
-					show_error('Il gruppo con ID ['.$param.'] non &egrave; stato trovato.');
+					show_error(_('The requested group has not been found.'));
 				} else {
 					$group = FALSE;
 				}
@@ -172,6 +190,21 @@ Class Users extends Bancha_Controller
 		}
 		$this->view->set('groups', $this->users->get_groups());
 		$this->view->render_layout('users/groups/list');
+	}
+
+	/**
+	 * Removes a group
+	 * @param int $group_id
+	 */
+	public function group_delete($group_id = '')
+	{
+		$done = $this->users->delete_group($group_id);
+
+		if ($done)
+		{
+			$this->session->set_flashdata('message', _('The group has been deleted.'));
+		}
+		redirect('admin/groups/list');
 	}
 
 }

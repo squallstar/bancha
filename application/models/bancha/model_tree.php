@@ -314,6 +314,38 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
+	 * Returns the paths of all the cache files of a type,
+	 * one for each language and one for the stage mode
+	 * @param int|string $type
+	 */
+	public function get_type_cachepaths($type = '')
+	{
+		if ($type == '')
+		{
+			$name = implode('.', $this->config->item('default_tree_types'));
+		} else {
+			if (is_numeric($type))
+			{
+				$name = $this->content->type_name($type);
+			} else {
+				$name = $type;
+			}
+		}
+		$languages = array_keys($this->lang->languages);
+		$this->_use_lang = $this->lang->current_language;
+		
+		$source_name = $this->config->item('tree_cache_folder');
+		$tmp = array();
+		foreach ($languages as $lang)
+		{
+			$tmp[] = str_replace('{name}', $lang.'-'.$name, $source_name);
+			$tmp[] = str_replace('{name}', $this->stage_prefix.$lang.'-'.$name, $source_name);
+		}
+		return $tmp;
+
+	}
+
+	/**
 	 * Gets the default tree of a website, using the content types defined in the config file
 	 * @return array
 	 */
@@ -521,10 +553,14 @@ Class Model_tree extends CI_Model {
 	 */
 	public function clear_cache($tipo='')
 	{
-		$path = $this->get_type_cachepath($tipo);
-		if (file_exists($path))
+		$paths = $this->get_type_cachepaths($tipo);
+
+		foreach ($paths as $path)
 		{
-			@unlink($path);
+			if (file_exists($path))
+			{
+				unlink($path);
+			}
 		}
 	}
 

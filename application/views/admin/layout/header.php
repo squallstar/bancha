@@ -75,6 +75,7 @@ foreach ($this->content->types() as $tipo) {
 				</li>
 				<li><a href="<?php echo admin_url('hierarchies'); ?>"><?php echo _('Hierarchies'); ?></a></li>
 				<li><a href="<?php echo admin_url('import'); ?>"><?php echo _('Import/export data'); ?></a></li>
+				<li><a href="<?php echo admin_url('unit_tests'); ?>"><?php echo _('Unit tests'); ?></a></li>
 				<li><a href="<?php echo admin_url('contents/renew_cache'); ?>"><?php echo _('Clear cache'); ?></a></li>
 
 			</ul>

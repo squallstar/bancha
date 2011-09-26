@@ -1,5 +1,5 @@
 /* The humans responsible & colophon */
-/* humanstxt.org */
+/* humanstxt.org  */
 
 
 /* TEAM */
@@ -13,14 +13,14 @@
    Twitter: @mintsugar
    Location: Verona, IT
 
-   Co-Developer: Alessandro Maroldi
+   Contributor (Developer): Alessandro Maroldi
    Twitter: @alexmaroldi
    Location: Verona, IT
 
-   Front-end Developer: Matteo Gildone
+   Contributor (Front-end): Matteo Gildone
    Location: Verona, IT
 
-   Side-Developer: Umberto Gariggio
+   Contributor (Developer): Umberto Gariggio
    Location: Verona, IT
 
 /* THANKS TO */

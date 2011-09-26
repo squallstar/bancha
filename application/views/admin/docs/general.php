@@ -1,4 +1,4 @@
-<div class="block withsidebar code_format">
+<div class="block withsidebar code_format docs">
 
 	<div class="block_head">
 		<div class="bheadl"></div>
@@ -25,8 +25,9 @@
 				<li><a href="#sb-triggers">13. Triggers (attivatori)</a></li>
 				<li><a href="#sb-image-presets">14. Image presets</a></li>
 				<li><a href="#sb-categories">15. Categorie, Gerarchie</a></li>
+				<li><a href="#sb-dispatchers">16. Dispatchers</a></li>
 			</ul>
-			<p>Revisione: <?php echo BANCHA_VERSION; ?><br />Data: 06 Set 2011</p>
+			<p>Versione: <?php echo BANCHA_VERSION; ?><br />Data: 25 Set 2011</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
@@ -43,7 +44,17 @@
 				<li>Separa in maniera netta l'applicazioni dai temi e permette quindi la portabilit&agrave; di quest'ultimi</li>
 				<li>Utilizza un sistema ORM per gestire gli oggetti del database</li>
 			</ul>
-			<?php echo CMS; ?> &egrave; stato interamente sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.
+
+			<h3>Schema MVC di Bancha</h3>
+			<p>Qui sotto è rappresentato lo scheletro Model-View-Controller architetturale di Bancha.</p>
+			<img src="<?php echo site_url(THEMESPATH.'admin/widgets/mvc_scheme.png'); ?>" border="0" alt="Bancha MVC" />
+			<br />
+
+			<br />
+			<h3>Crediti</h3>
+
+			<?php echo CMS; ?> &egrave; stato interamente sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
+			Bancha &egrave; rilasciato con licenza GNU/GPL. Puoi visionare l'intera licenza dal file License.txt nella root del progetto.
 			</p>
 		</div>
 
@@ -75,7 +86,7 @@
 				<li><strong>Ad albero</strong> (per contenuti strutturabili gerarchicamente, come le pagine di un sito internet)</li>
 			</ul>
 			Come avrai intuito, anche le pagine stesse di un sito internet sono a loro volta un tipo di contenuto. &Egrave; proprio per questo che
-			dovr&agrave; essere definito almeno un tipo di contenuto associato all'albero delle pagine del sito. Tale associazione viene impostata nel file di configurazione di Bancha alla voce "<strong>DEFAULT TREE TYPE</strong>".
+			dovr&agrave; essere definito almeno un tipo di contenuto associato all'albero delle pagine del sito. Tale associazione viene impostata nel file di configurazione di Bancha alla voce <strong>DEFAULT TREE TYPE</strong>.
 			<br /><br />
 			Aggiungendo un nuovo tipo di contenuto, verranno <strong>automaticamente creati</strong> i seguenti files:<br /><br />
 			<ul>
@@ -89,7 +100,7 @@
 
 		<div class="sidebar_content" id="sb-types-xml">
 			<h3>4. Schema XML dei tipi</h3>
-<p>Ogni tipo di contenuto &egrave; associato ad un relativo file XML presente nella directory <strong><?php echo $this->config->item('xml_typefolder'); ?></strong> che ne descrive i campi associati. Puoi editare tale file anche dall'amministrazione, premendo il link "<strong>Modifica schema</strong>" nella lista dei tipi di contenuto/pagine. La struttura base di un tipo di contenuto/pagina &egrave; definita in questo modo:</p>
+<p>Ogni tipo di contenuto &egrave; associato ad un relativo file XML presente nella directory <strong><?php echo $this->config->item('xml_typefolder'); ?></strong> che ne descrive i campi associati. Puoi editare tale file anche dall'amministrazione, premendo il link <strong>Modifica schema</strong> nella lista dei tipi di contenuto/pagine. La struttura base di un tipo di contenuto/pagina &egrave; definita in questo modo:</p>
 			<code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content>
 	&lt;id&gt;1&lt;/id&gt;
@@ -138,6 +149,8 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 <ul>
 	<li><strong>text</strong> - Per utilizzare un input testuale su riga singola senza stile</li>
 	<li><strong>textarea</strong> - Per utilizzare un input multiriga con possibilit&agrave; di inserimento stili e codice HTML</li>
+	<li><strong>textarea_full</strong> - Per utilizzare un campo di inserimento multiriga tramite editor CKEDITOR (avanzato)</li>
+	<li><strong>textarea_code</strong> - Per utilizzare un campo multiriga per inserire codice (ad esempio: css e javascript)</li>
 	<li><strong>select</strong> - Per utilizzare un campo di scelta singola a tendina</li>
 	<li><strong>multiselect</strong> - Per utilizzare un campo di scelta multipla (due tendine con add/remove)</li>
 	<li><strong>checkbox</strong> - Per utilizzare un campo di scelta multipla in stile "checkbox"</li>
@@ -208,7 +221,7 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 &lt;max&gt;5&lt;/max&gt;</code>
 <br />
 <p>Rispettivamente, definiscono la dimensione massima dei files caricati in Kb, i mime-types accettati e il numero massimo di files caricabili in questo campo.
-Il campo <strong>&lt;mimes&gt;</strong> accetta anche il valore "<strong>*</strong>" come segnaposto per accettare tutti i mimes.</p>
+Il campo <strong>&lt;mimes&gt;</strong> accetta anche il valore <strong>*</strong> come segnaposto per accettare tutti i mimes.</p>
 
 <p>I campi di tipo <strong>images</strong> avranno a disposizione le propriet&agrave; dei campi files ed anche le seguenti propriet&agrave;:</p>
 <code>&lt;original&gt;true&lt;/original&gt;
@@ -561,7 +574,7 @@ echo menu($albero);
 			<br />
 
 			<h3>Cache delle pagine</h3>
-			<p>I tipi di contenuto con struttura a pagine, normalmente presentano un campo xml chiamato "<strong>page_cache</strong>" nella scheda <strong>"Aspetto e azioni"</strong> che rappresenta (nella maschera di inserimento/modifica di una pagina) un campo di input numerico relativo al <strong>numero di minuti</strong> da utilizzare per tenere tale pagina in cache. Per non cacheare la pagina, &egrave; sufficiente impostare tale numero a "0" (zero). La cache di una pagina viene automaticamente svuotata quando la pagina viene modificata, pubblicata o depubblicata.<br /><strong>ATTENZIONE</strong>: la cache delle pagine &egrave; una funzionalit&agrave; estremamente <strong>potente</strong> ma <strong>pericolosa</strong>. Verr&agrave; infatti salvato l'interno rendering finale della pagina e servito all'utente come fosse una <strong>pagina statica</strong> (<em>senza passare dal framework</em>). Utilizzarlo quindi con la dovuta cautela, dato che le uniche variazioni nelle diverse richieste potranno essere solamente modifiche client-side via Javascript.</p>
+			<p>I tipi di contenuto con struttura a pagine, normalmente presentano un campo xml chiamato <strong>page_cache</strong> nella scheda <strong>"Aspetto e azioni"</strong> che rappresenta (nella maschera di inserimento/modifica di una pagina) un campo di input numerico relativo al <strong>numero di minuti</strong> da utilizzare per tenere tale pagina in cache. Per non cacheare la pagina, &egrave; sufficiente impostare tale numero a "0" (zero). La cache di una pagina viene automaticamente svuotata quando la pagina viene modificata, pubblicata o depubblicata.<br /><strong>ATTENZIONE</strong>: la cache delle pagine &egrave; una funzionalit&agrave; estremamente <strong>potente</strong> ma <strong>pericolosa</strong>. Verr&agrave; infatti salvato l'interno rendering finale della pagina e servito all'utente come fosse una <strong>pagina statica</strong> (<em>senza passare dal framework</em>). Utilizzarlo quindi con la dovuta cautela, dato che le uniche variazioni nelle diverse richieste potranno essere solamente modifiche client-side via Javascript.</p>
 			<br />
 
 			<h3>Cache dei preset (immagini)</h3>
@@ -572,22 +585,22 @@ echo menu($albero);
 <div class="sidebar_content" id="sb-feeds">
 			<h3>12. Feed dei contenuti</h3>
 			<p>
-Le pagine configurate come "<strong>lista di contenuti</strong>" presentano due utili esportazioni predefinite: una <strong>xml rss 2.0</strong> ed una di tipo <strong>json</strong>.
+Le pagine configurate come <strong>lista di contenuti</strong> presentano due utili esportazioni predefinite: una <strong>xml rss 2.0</strong> ed una di tipo <strong>json</strong>.
 			</p>
 			<br />
 			<h3>feed.xml</h3>
-			<p>Aggiungendo al path di una pagina di tipo lista di contenuti il parametro "/feed.xml", verr&agrave; visualizzato il relativo feed RSS 2.0. Ad esempio:</p>
+			<p>Aggiungendo al path di una pagina di tipo lista di contenuti il parametro <strong>/feed.xml</strong>, verr&agrave; visualizzato il relativo feed RSS 2.0. Ad esempio:</p>
 <code>//Pagina lista di contenuti:
 http://localhost/lista-articoli
 
 //Relativo feed rss:
 http://localhost/lista-articoli/feed.xml</code><br />
-<p>Per il popolamento dei campi, vengono usati i parametri title, contenuto e date_update/date_insert dei contenuti. &Egrave; possibile variare tale comportamento agendo nel router di default del sito (controllers/website.php:routing())</p>
+<p>Per il popolamento dei campi, vengono usati i parametri title, contenuto e date_update/date_insert dei contenuti. &Egrave; possibile variare tale comportamento agendo nel dispatcher di default del sito (<strong>controllers/libraries/bancha/dispatchers/dispatcher_default.php)</strong>)</p>
 
 <div class="message info">Puoi disattivare la funzionalit&agrave; di esportazione feed di una pagina intervenendo sulla voce "Esportazione feed" presente nella maschera "Aspetto e azioni" di tale pagina. Il campo &egrave; definito nello schema xml dei tipi di contenuto ad albero ed &egrave; chiamato "action_list_has_feed".</div>
 <br />
 <h3>feed.json</h3>
-			<p>In maniera simile a quanto avviene per il feed rss, aggiungendo al path di una pagina di tipo lista di contenuti il parametro "/feed.json", verr&agrave; visualizzata la relativa esportazione dati in formato JSON. Ad esempio:</p>
+			<p>In maniera simile a quanto avviene per il feed rss, aggiungendo al path di una pagina di tipo lista di contenuti il parametro <strong>/feed.json</strong>, verr&agrave; visualizzata la relativa esportazione dati in formato JSON. Ad esempio:</p>
 <code>//Pagina lista di contenuti:
 http://localhost/lista-articoli/ultimi-post
 
@@ -735,9 +748,83 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 </div>
 
 <div class="sidebar_content" id="sb-categories">
-			<h3>Categorie e Gerarchie</h3>
-			<div class="message warning">TODO!</div>
+			<h3>15. Categorie e Gerarchie</h3>
+			<p>Bancha offre principalmente due metodi di differenziazione per i record che fanno parte dello stesso tipo di contenuti: <strong>Categorie</strong> e <strong>Gerarchie</strong>.<br />
+			Le categorie appartengono ad uno specifico tipo di conenuto, mentre le gerarchie sono globali e condivise da tutti i tipi di contenuto.</p>
+
+			<div class="message warning">Per abilitare categorie e gerarchie su un tipo di contenuto, è necessario impostare rispettivamente i suoi nodi <u>has_categories</u> e <u>has_hierarchies</u> a <strong>"true"</strong> dal suo schema XML.</div><br />
+
+			<h3>Categorie</h3>
+			<p>Ogni tipo di contenuto, pu&ograve; definire infinite categorie a cui i suoi record potranno appartenere.<br />
+			Per accedere alla gestione delle categorie di un tipo di contenuto, premi sul link <strong>Gestione categorie</strong> dalla vista dei record di un singolo tipo di contenuto.</p>
+			<p>Una volta inserite le categorie, esse possono essere associate ad uno o più record:<br />
+			Dalla maschera di modifica di un record, premi sulla sezione <strong>Categorie</strong> sulla sinistra, e successivamente imposta le categorie del record.</p>
+			<p>Infine, recati nella maschera di modifica di una pagina avente come azione <strong>Lista di contenuti</strong>, e troverai tra i campi disponibili il campo testuale <strong>Categoria</strong>. In tale campo, puoi inserire tutte le categorie che desideri separate da una virgola ed uno spazio (<strong>, </strong>) in questo modo:</p>
+			<code>Web, Photo, Illustrations</code><br />
+
+			<h3>Gerarchie</h3>
+			<p>A differenza delle categorie, le gerarchie sono definibili globalmente all'interno di <?php echo CMS; ?> e quindi sono utilizzabili da tutti i tipi di contenuti indistintamente. Per iniziare, recati nella pagina <strong>Gestione &gt; Gerarchie</strong>. Qui, potrai inserire tutte le gerarchie che vorrai e, a differenza delle categorie, organizzarle <strong>gerarchicamente</strong>. Ogni gerarchia quindi, pu&ograve; essere "figlia" di un'altra gerarchia.</p>
+			<p>In maniera simile a quanto avviene per le categorie, in ogni record sulla parte sinistra troverai la sezione <strong>Gerarchie</strong> che ti consentir&agrave; di associare il record a tutte le gerarchie che desideri.</p>
+
+			<p>Infine, recati nella maschera di modifica di una pagina avente come azione <strong>Lista di contenuti</strong>, e troverai tra i campi disponibili un campo relativo alle gerarchie: potrai quindi selezionare tutte le gerarchie da estrarre durante la lista di contenuti di tale pagina.</p>
+			<p>Ecco un esempio di come puoi organizzare le gerarchie del tuo sito internet:</p>
+<code>- Prodotti
+	- Collezione 2011
+		- Magliette
+			- Mezza manica
+			- Maniche lunghe
+		- Pantaloni
+			- Jeans
+	- Collezione 2010
+		...
+</code>
 </div>
+
+	<div class="sidebar_content" id="sb-dispatchers">
+			<h3>16. Dispatchers</h3>
+			<p>Come forse avrai visto dallo schema MVC presente nella sezione <strong>1. Introduzione a BANCHA</strong>, i dispatchers sono collocati appena sotto la fase di routing dell'applicazione.</p>
+			<p>Un dispatcher, è una classe responsabile di un percorso di routing del <strong>front-end</strong> del sito internet.</p>
+			<p>Attualmente sono disponibili due dispatchers:</p>
+			<ul>
+				<li><strong>Default Dispatcher</strong> - il dispatcher generale del front-end.</li>
+				<li><strong>Image Dispatchers</strong> - responsabile di generazione e invio delle immagini con i preset.</li>
+			</ul>
+
+			<p>Per aggiungere un dispatcher, aggiungilo alla cartella <strong>application/libraries/<?php echo FRNAME; ?>/dispatchers/</strong> chiamandolo <strong>dispatcher_&lt;nome&gt;.php</strong> ed utilizzando come nome della classe <strong>Dispatcher_&lt;nome&gt;</strong>. Dopodich&egrave;, potrai invocare un dispatcher in questo modo:</p>
+<code>$this->load->dispatcher('nome');
+
+//Ed otterrai l'oggetto:
+//$this->dispatcher</code>
+<br />
+			<h3>Default dispatcher</h3>
+			<p>&Egrave; il dispatcher generale del sito internet, ed una volta impostato l'<strong>url da visitare</strong> si preoccupa di ricercare tra le pagine ed i records del database, nonch&egrave; preparare tutto il necessario alla visualizzazione del sito, comprese le liste di contenuti ed i feed del sito.</p>
+			<p>Per modificare il comportamento generale del sito, puoi quindi agire su questo dispatcher.<br />
+			Solitamente viene chiamato dal controller <strong>Website</strong> all'azione <strong>router</strong>.</p>
+
+<code>//Il dispatcher di default, viene invocato ed usato cos&igrave;:
+$this->load->dispatcher('default');
+$this->dispatcher->start();</code><br />
+
+			<h3>Image dispatcher</h3>
+			<p>Questo dispatcher si preoccupa di generare le immagini attraverso i <strong>preset</strong>, salvarle e quindi inviarle al browser. Nel caso in cui una immagine sia gi&agrave; stata generata, questo dispatcher non verr&agrave; invocato in quanto l'immagine sar&agrave; fornita direttamente dal filesystem.</p>
+			<p>Di seguito l'esempio di come viene invocato il dispatcher dal controller del front-end del sito internet:</p>
+<code>$this->load->dispatcher('images');
+
+//Imposto i dati relativi all'immagine da generare
+$data = array(
+	'type'		=> $type,
+	'field'		=> $field,
+	'id'		=> $id,
+	'preset'	=> $preset,
+	'filename'	=> $filename,
+	'ext'		=> $extension
+);
+
+//Lancio il dispatcher
+$this->dispatcher->retrieve($data);</code><br />
+
+<p>Per altre informazioni sui preset applicati alle immagini, leggi la relativa sezione <strong>14. Image presets</strong> nella documentazione.</p>
+	</div>
 
 
 <!-- end -->

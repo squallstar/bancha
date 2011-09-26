@@ -30,12 +30,6 @@ $config['website_languages'] = array(
 		'locale'		=> 'en_US',
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
-	),
-	'es' => array(
-		'name'			=> 'spanish',
-		'locale'		=> 'es_ES',
-		'description'	=> 'Español',
-		'date_format'	=> 'd/m/Y'
 	)
 );
 
@@ -60,7 +54,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.7');
+define('BANCHA_VERSION', '0.7.2');
 
 /*
  * Framework name

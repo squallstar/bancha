@@ -17,11 +17,25 @@ body {
 	text-align: left;
 	display: block;
 	overflow: auto;
-	font: 500 1em/1.5em 'Lucida Console', 'Courier New', Monospace;
+	font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
 	border: 1px solid #F0F0F0;
 	background: #F8F8F8;
 	color: #555;
 	white-space: pre;
+}
+.code_format.docs p strong {
+	 background-color: #FFF6A9;
+	 padding:0 3px 0 3px;
+	 border-radius: 3px 3px 3px 3px;
+	 font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+	 border: 1px solid #eee593;
+}
+.code_format.docs ul li strong {
+	 background-color: #EEE;
+	 padding:0 3px 0 3px;
+	 border-radius: 3px 3px 3px 3px;
+	 font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+	 border: 1px solid #DDD;
 }
 
 :focus { -moz-outline-style: none; }
@@ -703,6 +717,10 @@ input.small {
 
 .block form textarea.wysiwyg { width: 98%; padding: 0; }
 
+.block form textarea.code {
+	font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+}
+
 .block form input.radio,
 .block form input.checkbox {
 	vertical-align: middle;
@@ -1046,13 +1064,13 @@ input.small {
 	float: right;
 	text-align: right;
 	}
-	
+
 .multiselect .multi_left , .multiselect .multi_right {
 	width:250px;
 	float:left
 }
 .multiselect select {
-	height:100px	
+	height:100px
 }
 .multiselect input {
 	margin-top:10px;

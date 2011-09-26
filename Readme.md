@@ -1,11 +1,11 @@
-# BANCHA CMS
+# BANCHA - The CMS you were waiting for
 
 BANCHA is a Content Management System made with PHP5 and Code Igniter, a light and powerful PHP framework.
-It is capable to manage medium and big projects/websites specially when they have many different types of contents.
-
+It is capable to manage any kind of project/website, specially when it have many different types of contents.
 
 BANCHA bases its power on some pillars that make it different from other CMS:
 It allows you to handle any type of content: pages, news, photo galleries, products, etc ... through XML schemas.
+In 10 minutes, you can configure a website to manage, list and view any kind of thing you want.
 
  * It doesn't sacrifice the performance of a static site, because under the hood it uses many different caching systems.
  * It's modular, so it can be extended with different types of modules that you can develop yourself.
@@ -26,11 +26,15 @@ The **BANCHA documentation** is available through the BANCHA administration pane
 
 3. Go through your browser to this URL: http://yourwebsitename/admin/install
 
-4. Choose your install type between "Default" and "Blog". The Blog one, will create and configures the "Blog" and "Comments" content types for you.
+4. Choose your install type between "Default" and "Blog". The Blog one, will create and configures the "Blog" and "Comments" content types for you (the Default will create only the website menu)
 
 4. When install is done, place a die(); at the start of this file: application/controllers/admin/install.php (alternately you can also delete it!)
 
 5. You're done! The install script will create a content type named "Menu" which is linked to the page tree of your website.
+
+# Application MVC Scheme
+
+![MVC Scheme](http://static.squallstar.it/images/bancha_mvc_scheme.png)
 
 # Resources
 
@@ -48,3 +52,5 @@ Now you can pull the upstream updates anytime you want via these commands:
 
     git fetch upstream
     git merge upstream/master
+
+NOTE: we are working hard to translate the documentation in English (currently it's just in Italian)
