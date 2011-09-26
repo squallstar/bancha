@@ -29,7 +29,7 @@ function _show_ciprofiler()
 }
 
 $(document).ready(function() {
-	/* (ONLY AVAILABLE IN DEVELOPMENT BRANCH)
+	/* CURRENTLY DISABLED
 	$('*[data-mode="edit"]').click(function() {
 		_livemode.start_editor(this);
 	}).hover(function() {
@@ -60,6 +60,7 @@ var _livemode = {
 				break;
 			case 'textarea':
 			case 'textarea_full':
+			case 'textarea_code':
 				input_type = 'textarea';
 				break;
 		}
