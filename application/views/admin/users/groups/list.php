@@ -34,7 +34,6 @@ $this->load->helper('text');
 				<tr>
 					<th>ID</th>
 					<th><?php echo _('Group name'); ?></th>
-					<th><?php echo _('Permissions'); ?></th>
 					<td>&nbsp;</td>
 				</tr>
 			</thead>
@@ -47,9 +46,8 @@ $this->load->helper('text');
 			//Campi ricorrenti
 			echo '<td>'.$group->id_group.'</td>'
 				.'<td><a href="'.admin_url('users/groups/edit/'.$group->id_group).'">'.$group->group_name.'</a></td>';
-			echo '<td></td>';
 			echo '<td class="delete">'
-					.'<a href="'.admin_url('users/group_delete/'.$group->id_group).'" onclick="return confirm(\''._('Do you want to delete this group?').'\');">'._('Delete').'</a>'
+					.'<a href="'.admin_url('users/group_delete/'.$group->id_group).'" onclick="return confirm(\''._('Do you want to delete this group?').'\');">'._('Delete group').'</a>'
 				.'</td>';
 		echo '</tr>';
 	}
