@@ -40,7 +40,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
       echo "\t".link_tag(current_url().'/feed.xml', 'alternate', 'application/rss+xml', isset($page) ? $page->get('title').' - Feed': 'RSS Feed');
     }
 ?>
-
 	<script src="<?php echo theme_url();?>js/modernizr-2.0.6.min.js"></script>
 <?php
     if (isset($page))
@@ -49,11 +48,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     	if ($css)
     	{
     		echo "\n\t".'<style type="text/css">' . $css . '</style>';
-    	}
-   		$js = $page->get('view_js');
-    	if ($js)
-    	{
-    		echo "\n\t".'<script type="text/javascript">' . $js . '</script>';
     	}
     }
 ?>
@@ -67,11 +61,18 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<?php echo theme_url();?>js/jquery.js"><\/script>')</script>
-
-<!-- scripts concatenated and minified via ant build script-->
 <script src="<?php echo theme_url();?>js/plugins.js"></script>
 <script src="<?php echo theme_url();?>js/application.js"></script>
-<!-- end scripts-->
+<?php
+if (isset($page))
+{
+	$js = $page->get('view_js');
+   	if ($js)
+   	{
+   		echo "\n\t".'<script type="text/javascript">' . $js . '</script>';
+   	}
+}
+?>
 
 <script>
 	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
