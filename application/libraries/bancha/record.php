@@ -28,7 +28,7 @@ Class Record {
 	 * @var int Record type id
 	 */
 	public $_tipo	= '';
-	
+
 	/**
 	* @var int Type definition
 	*/
@@ -54,7 +54,7 @@ Class Record {
 			$this->_tipo = $type;
 		}
   	}
-  	
+
   	public function set_type($type)
   	{
   		$this->_tipo_def = $type;
@@ -67,7 +67,7 @@ Class Record {
   	public function set_data($data)
   	{
   		$CI = & get_instance();
-  		
+
     	if (!$this->_tipo_def)
     	{
     		$tipo = & $CI->content->type($this->_tipo);
@@ -78,7 +78,7 @@ Class Record {
     	foreach ($tipo['fields'] as $field_name => $field)
     	{
     		$value = isset($data[$field_name]) ? $data[$field_name] : '';
-    		if ($CI->config->item('strip_website_url') && $field['type'] == 'textarea' || $field['type'] == 'textarea_full')
+    		if ($CI->config->item('strip_website_url') && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
     		{
     			//Elimino il percorso del sito dalle textarea
     			$value = str_replace(site_url(), '/', $value);
@@ -221,7 +221,7 @@ Class Record {
 		      		}
                     else if (in_array($field_type, config_item('array_field_types')) && is_string($this->_data[$field_name]))
                     {
-                        $this->_data[$field_name] = explode('||', trim($this->_data[$field_name], '|'));    
+                        $this->_data[$field_name] = explode('||', trim($this->_data[$field_name], '|'));
                     }
 				}
 	      	}
