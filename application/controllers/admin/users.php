@@ -66,17 +66,17 @@ Class Users extends Bancha_Controller
 	}
 
 	public function edit($id_username='')
-	{		
+	{
 		$this->load->categories();
         $this->load->hierarchies();
         $this->load->documents();
 
 		//We get the Users scheme
-		$type_definition = $this->xml->parse_file($this->config->item('xml_folder') . 'Users.xml');
+		$type_definition = $this->xml->parse_scheme($this->config->item('xml_folder') . 'Users.xml');
 
 		$user = new Record();
 		$user->set_type($type_definition);
-		
+
 		if ($this->input->post())
 		{
 			$user->set_data($this->input->post());
@@ -91,7 +91,7 @@ Class Users extends Bancha_Controller
         			redirect('admin/users/lista');
         		} else {
         			$this->view->message('success', $msg);
-        		}					
+        		}
 			}
 		}
 
@@ -99,7 +99,7 @@ Class Users extends Bancha_Controller
 		{
 			//We search for this user
 			$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
-			
+
 			if (!$users) {
 				show_error(_('User not found'));
 			} else {
@@ -109,7 +109,7 @@ Class Users extends Bancha_Controller
 			//New user
 			$this->view->set('user', FALSE);
 		}
-		
+
 		$this->view->set('tipo', $type_definition);
 		$this->view->set('_section', 'users');
 		$this->view->set('action', 'admin/users/edit/' . $user->id);

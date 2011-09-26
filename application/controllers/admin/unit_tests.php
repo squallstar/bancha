@@ -41,7 +41,7 @@ Class Unit_tests extends Bancha_Controller
 	 */
 	public function make_tests() {
 		$this->load->library('unit_test');
-		
+
 		//We tests saving a new record
 		$default_types = $this->config->item('default_tree_types');
 		$record = new Record($default_types[0]);
@@ -58,7 +58,7 @@ Class Unit_tests extends Bancha_Controller
 		$this->unit->run($this->records->delete_by_id($id), TRUE, 'Delete a record', 'We tried to delete the record with id ['.$id.'].');
 
 		//Now we tests the XML parser on the users
-		$parser = $this->xml->parse_file($this->config->item('xml_folder') . 'Users.xml');
+		$parser = $this->xml->parse_scheme($this->config->item('xml_folder') . 'Users.xml');
 		$this->unit->run($parser, 'is_array', 'Parsing an XML file to a content type', 'We tried to parse the Users.xml scheme.');
 
 

@@ -58,7 +58,7 @@ Class Xml
     		} else {
     			$tipo = $this->CI->content->type($type);
     		}
-    		
+
       		$xmlstring = read_file($this->CI->config->item('templates_folder').'Record.xml');
 
       		$xml = new SimpleXMLElement($xmlstring);
@@ -141,7 +141,7 @@ Class Xml
   	 * It is one of the most important functions of the framework and the content types cache uses it
    	 * @param string $filepath
    	 */
-  	function parse_file($filepath)
+  	function parse_scheme($filepath)
   	{
     	$node = simplexml_load_file($filepath);
     	if (!$node)
@@ -164,7 +164,7 @@ Class Xml
     	//Allowed types of field
     	$field_usable_inputs = array(
       		'text', 'textarea', 'date', 'checkbox', 'select', 'multiselect', 'radio',
-      		'images', 'files', 'number', 'textarea_full', 'datetime', 'hidden', 'hierarchy'
+      		'images', 'files', 'number', 'textarea_full', 'textarea_code', 'datetime', 'hidden', 'hierarchy'
     	);
 
     	$content = array(

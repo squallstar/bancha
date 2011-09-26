@@ -314,7 +314,7 @@ Class Content {
 
 		foreach ($filenames as $filename)
 		{
-			$content = $this->CI->xml->parse_file($this->xml_folder . $filename);
+			$content = $this->CI->xml->parse_scheme($this->xml_folder . $filename);
 
 			$all_types_id[] = $content['id'];
 			$all_types = $content['name'];
