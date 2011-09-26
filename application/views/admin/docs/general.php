@@ -26,8 +26,9 @@
 				<li><a href="#sb-image-presets">14. Image presets</a></li>
 				<li><a href="#sb-categories">15. Categorie, Gerarchie</a></li>
 				<li><a href="#sb-dispatchers">16. Dispatchers</a></li>
+				<li><a href="#sb-modules">17. Moduli</a></li>
 			</ul>
-			<p>Versione: <?php echo BANCHA_VERSION; ?><br />Data: 25 Set 2011</p>
+			<p>Versione: <?php echo BANCHA_VERSION; ?><br />Data: 26 Set 2011</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
@@ -826,6 +827,12 @@ $this->dispatcher->retrieve($data);</code><br />
 <p>Per altre informazioni sui preset applicati alle immagini, leggi la relativa sezione <strong>14. Image presets</strong> nella documentazione.</p>
 	</div>
 
+	<div class="sidebar_content" id="sb-modules">
+			<h3>17. Moduli</h3>
+			<p>
+			<div class="message warning">TODO</div>
+			</p>
+	</div>
 
 <!-- end -->
 
