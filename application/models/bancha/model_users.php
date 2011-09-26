@@ -2,7 +2,11 @@
 /**
  * Users Model
  *
+<<<<<<< HEAD
  * The model that lets you to manage the users
+=======
+ * This class is used to manage users, groups and their permissions
+>>>>>>> development
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -32,7 +36,7 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Sets a limit condition
+	 * Adds a limit condition
 	 * @param int $limit
 	 * @param int $offset
 	 * @return $this
@@ -44,9 +48,9 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Sets a where condition
+	 * Adds a where condition
 	 * @param string $key
-	 * @param string $val
+	 * @param int|string $val
 	 * @return $this
 	 */
 	public function where($key, $val=null)
@@ -70,9 +74,18 @@ Class Model_users extends CI_Model {
 		return $array ? $query->result_array() : $query->result();
 	}
 
+	/**
+	 * Adds an user to the database
+	 * @param array $data
+	 * @return int|false the insert id (or false when fails)
+	 */
 	public function add_user($data)
 	{
-		return $this->db->insert('users', $data);
+		if ($this->db->insert('users', $data))
+		{
+			return $this->db->insert_id();
+		}
+		return FALSE;
 	}
 
 	/**
@@ -105,16 +118,19 @@ Class Model_users extends CI_Model {
 	/**
 	 * Adds a new group
 	 * @param string $group_name
-	 * @return int auto_increment
+	 * @return int|false the insert id (or false when fails)
 	 */
 	public function add_group($group_name)
 	{
-		$this->db->insert('groups', array('group_name' => $group_name));
-		return $this->db->insert_id();
+		if ($this->db->insert('groups', array('group_name' => $group_name)))
+		{
+			return $this->db->insert_id();
+		}
+		return FALSE;
 	}
 
 	/**
-	 * Gets a single group
+	 * Returns a single group
 	 * @param int $id
 	 * @return array|bool
 	 */
@@ -137,7 +153,29 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Lists of all permissions
+	 * Checks if a group exists, given its name
+	 * @param string $group_name
+	 * @return bool
+	 */
+	public function group_exists($group_name = '')
+	{
+		if ($group_name != '')
+		{
+			$query = $this->db->select('id_group')
+							  ->from('groups')
+							  ->where('group_name', $group_name)
+							  ->get();
+			$result = $query->result();
+			if (count($result) == 0)
+			{
+				return FALSE;
+			}
+		}
+		return TRUE;
+	}
+
+	/**
+	 * Lists all the permissions
 	 * @return array
 	 */
 	public function get_acl_list()
@@ -149,7 +187,7 @@ Class Model_users extends CI_Model {
 	}
 
 	/**
-	 * Adds a new permission
+	 * Adds a permission on the database
 	 * @param string $area
 	 * @param string $action
 	 * @param string $name
@@ -184,6 +222,24 @@ Class Model_users extends CI_Model {
 			$this->db->where('acl_id', $acl_id)->delete('groups_acl');
 		}
 		return TRUE;
+	}
+
+	/**
+	 * Deletes a groups and its acl relations
+	 * @param int $id_group
+	 * @return bool success
+	 */
+	public function delete_group($id_group = '')
+	{
+		if ($id_group == '') return FALSE;
+
+		$done = $this->db->where('id_group', $id_group)
+						 ->delete('groups');
+
+		$done_2 = $this->db->where('group_id', $id_group)
+						   ->delete('groups_acl');
+
+		return $done && $done_2;
 	}
 
 }
