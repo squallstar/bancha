@@ -26,9 +26,12 @@ $this->load->helper('form');
 
 		<div class="sidebar_content" id="info">
 
-<h3><?php echo ($group ? _('Group').': '.$group->group_name : _('New group')); ?></h3><br />
+<h3><?php echo ($group ? _('Group').': '.$group->group_name : _('New group')); ?></h3>
 
+<?php echo $this->view->get_messages(); ?>
+<br />
 <?php
+
 echo form_open();
 
 echo form_label(_('Group name'), 'name') . br(1);
