@@ -21,7 +21,7 @@ Thumbs.db
 ########################
 # Custom install files #
 ########################
-/application/views/website/type_templates
+/application/views/type_templates
 /application/views/admin/content/translations.php
 /application/xml/types/*.xml
 

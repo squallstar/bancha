@@ -74,7 +74,7 @@ $sep = DIRECTORY_SEPARATOR;
  * and their values refers to the theme that will be used.
  */
 $config['website_themes'] = array(
-	'desktop'	=> 'desktop',	//reached from: /go-desktop
+	'desktop'	=> 'default',	//reached from: /go-desktop
 	'mobile'	=> 'desktop'	//reached from: /go-mobile
 );
 
@@ -169,16 +169,10 @@ $config['strip_website_url'] = TRUE;
 $config['feed_uri'] = array('feed.xml', 'feed.json');
 
 /*
- * WEBSITE VIEWS FOLDER
- * Contained in application/views/
- */
-$config['website_views_folder'] = 'website/';
-
-/*
  * VIEWS TEMPLATES FOLDER
  * This directory contains the views of the content types (detail, list, etc..)
  */
-$config['views_templates_folder'] = $config['website_views_folder'] . 'type_templates/';
+$config['views_templates_folder'] = 'type_templates/';
 
 /*
  * DEFAULT VIEW TEMPLATE
