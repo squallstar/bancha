@@ -292,20 +292,19 @@ Class Model_tree extends CI_Model {
 	 */
 	public function get_type_cachepath($type = '')
 	{
+		$name = $this->lang->current_language . '-';
 		if ($type == '')
 		{
-			$name = ($this->content->is_stage ? $this->stage_prefix : '') . implode('.', $this->config->item('default_tree_types'));
+			$name = ($this->content->is_stage ? $this->stage_prefix : '') . $name . implode('.', $this->config->item('default_tree_types'));
 		} else {
 			if (is_numeric($type))
 			{
-				$name = $this->content->type_name($type);
+				$name = $name . $this->content->type_name($type);
 			} else {
-				$name = $type;
+				$name = $name . $type;
 			}
 		}
 
-		//Sets the language to be added to the path
-		$name = $this->lang->current_language . '-' . $name;
 		$this->_use_lang = $this->lang->current_language;
 
 		return str_replace('{name}', $name, $this->config->item('tree_cache_folder'));
