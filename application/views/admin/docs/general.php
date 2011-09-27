@@ -441,8 +441,9 @@ In alternativa, &egrave; possibile utilizzare la funzione <strong>documents()</s
 </ul>
 <p>E per estrarre i records:</p>
 <ul>
-	<li><strong>get()</strong> - per estrarre i records con le condizioni scelte</li>
+	<li><strong>get()</strong> - per estrarre i records con le condizioni scelte. Passando come primo parametro un ID, ritorna solamente il record con tale ID anzich&erave; un array di records.</li>
 	<li><strong>count()</strong> - per ottenere solo il numero dei records aventi tali condizioni</li>
+	<li><strong>get_first()</strong> - per estrarre solamente un record (ritorna direttamente un oggetto <strong>Record</strong>)</li>
 </ul>
 <p>Vediamo un altro esempio di estrazione:</p>
 <code>$num_notizie = $this->records->type('News')
@@ -467,7 +468,22 @@ In alternativa, &egrave; possibile utilizzare la funzione <strong>documents()</s
 </ul>
 <div class="message info">Puoi aggiungere campi fisici ad un record intervenendo sull'attributo <strong>column</strong> di un qualsiasi dei campi all'interno dello schema di un tipo di contenuto.
 Dopodich&egrave;, sar&agrave; necessario anche aggiungere tale colonna alla tabella <strong>records</strong> di Bancha con un ALTER-TABLE.</div>
-		</div>
+<br />
+<h3>Creare e salvare records</h3>
+<p>&Egrave; possibile creare, aggiornare ed eliminare records anche in maniera manuale. Di seguito un'esempio:</p>
+<code>//Creiamo un nuovo record di tipo Blog e ne impostiamo titolo e autore
+$post = new Record('Blog');
+$post-&gt;('title', 'My first post');
+$post-&gt;('author', 'Nicholas');
+
+//Salviamo sul database il post
+$id = $this-&gt;records-&gt;save($post);
+
+//Pubblichiamo il nostro post
+$this-&gt;records-&gt;type('Blog')-&gt;publish($id);</code>
+<br />
+
+</div>
 
 		<div class="sidebar_content" id="sb-documents">
 			<h3>9. Documenti (files e immagini)</h3>
