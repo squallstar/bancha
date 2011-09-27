@@ -274,6 +274,17 @@ Class Installer
 		$this->dbforge->add_field($record_hierarchies_fields);
 		$this->dbforge->create_table('record_hierarchies');
 
+		//Settings table
+		$settings_fields = array(
+			'name'		=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 64),
+			'value'		=> array('type'	=> 'VARCHAR', 'null' => TRUE),
+			'module'	=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 64)
+		);
+
+		$this->dbforge->drop_table('settings');
+		$this->dbforge->add_field($settings_fields);
+		$this->dbforge->create_table('settings');
+
 		return TRUE;
 	}
 
