@@ -83,7 +83,7 @@ function preset_url($path, $preset, $append_siteurl = TRUE) {
 		//Prototype: attach/cache/type/field/id/preset/name.ext
 		$tmp = explode(array('/', '\\'), trim($obj, '/'));
 		$i = count($tmp)-1;
-		$path = config_item('attach_out_folder') . '/cache/' . $tmp[$-3] . '/' . $tmp[$-2] . '/' . $tmp[$i-1] . '/' . $preset . '/' . $tmp[$i];
+		$path = config_item('attach_out_folder') . '/cache/' . $tmp[$i-3] . '/' . $tmp[$i-2] . '/' . $tmp[$i-1] . '/' . $preset . '/' . $tmp[$i];
 		return $append_siteurl ? site_url($path) : $path;
 	}
 	return '';
