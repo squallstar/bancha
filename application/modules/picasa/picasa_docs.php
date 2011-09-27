@@ -21,6 +21,6 @@
 </div>
 
 <div class="sidebar_content" id="sb-intro">
-	<h3>Using the picasa module</h3>
-	<p>This module is useful to gets the gallery from Picasa account.</p>
+	<h3>Picasa Module</h3>
+	<div class="message warning">Currently under development</div>
 </div>

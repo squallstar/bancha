@@ -26,8 +26,12 @@ $this->view->render('header');
 		$sharer = $this->load->module('sharer');
 		echo $sharer->type('facebook')->render();
 		
-		$picasa = $this->load->module('picasa');
+		$config_picasa = array ('_username' => 'kikkovolley');
+		$picasa = $this->load->module('picasa', $config_picasa);
 		echo $picasa->getAlbums()->render();
+		
+		$config = array( 	'action' => 'email', 'from' => 'noreply@example.org', 'to' => 'alexmaroldi@gmail.com', 'subject' => 'New request received' ); 
+		echo $this->load->module('contact_form', $config)->render();
 		?>
 	
 		</div>

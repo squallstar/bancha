@@ -70,7 +70,7 @@
 		</field>
 		<field id="contenuto">
 			<description>Content</description>
-			<type>textarea</type>
+			<type>textarea_full</type>
 			<list>true</list>
 		</field>
 		<field id="show_in_menu" column="true">
