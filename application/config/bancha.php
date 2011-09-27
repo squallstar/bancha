@@ -123,13 +123,13 @@ $config['fr_cache_folder'] = APPPATH . 'cache' . $sep . '_' . FRNAME. $sep;
  * TYPES CACHE FILE
  * This file contains all the XML schemes parsed and cached into a serialized php array
  */
-$config['types_cache_folder'] = $config['fr_cache_folder'] . 'content.types';
+$config['types_cache_folder'] = $config['fr_cache_folder'] . 'content.tmp';
 
 /*
 * TYPES CACHE FILE
 * Every page tree (one per content type) will be cached here
 */
-$config['tree_cache_folder'] = $config['fr_cache_folder'] . '{name}.tree';
+$config['tree_cache_folder'] = $config['fr_cache_folder'] . 'tree-{name}.tmp';
 
 /*
  * TEMPLATES DIRECTORY
