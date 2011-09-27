@@ -37,8 +37,14 @@ Class Modules extends Bancha_Controller
 		$this->view->render_layout('modules/list');
 	}
 
-	public function docs($module)
+	public function docs($module = '')
 	{
+		if ($module == '')
+		{
+			$this->index();
+			return;
+		}
+
 		$folder = $this->config->item('modules_folder') . $module;
 		$doc_file = $folder . '/' . $module . '_docs'.EXT;
 

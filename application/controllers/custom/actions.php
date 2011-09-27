@@ -24,9 +24,9 @@ Class Actions
 	}
 
 	/**
-	 * Dummy action
+	 * Demo action. Feel free to remove it!
 	 */
-	function helloworld($who_calls)
+	public function helloworld($who_calls)
 	{
 		if ($who_calls == 'dispatcher')
 		{
@@ -35,10 +35,24 @@ Class Actions
 		}
 		else if ($who_calls == 'content_render')
 		{
-			//This will be rendered by the content_render
+			//This will be rendered inside the content_render
 			echo 'Hello world by the custom action';
-		}
+		}		
+	}
 
-		
+	/**
+	 * Renders a contact form using the "contact_form" module.
+	 * Remember to use the "content_render" action mode when calling this action.
+	 */
+	public function contact_form()
+	{
+		$config = array(
+			'action'	=> 'email',
+			'from'		=> 'noreply@example.org',
+			'to'		=> 'support@example.org',
+			'subject'	=> 'New request received'
+		);
+
+		echo $this->CI->load->module('contact_form', $config)->render();
 	}
 }

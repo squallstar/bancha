@@ -252,17 +252,18 @@ Class Contents extends Bancha_Controller
 	      		   $this->categories->set_record_categories($record->id, $this->input->post('categories'));
 	      	    }
 
-    	      	if ($tipo['has_attachments'] && count($_FILES)) {
-
+    	      	if ($tipo['has_attachments'] && count($_FILES))
+                {
     	      		$files_copy = $_FILES;
 
-    				foreach ($files_copy as $name => $val) {
-
+    				foreach ($files_copy as $name => $val)
+                    {
     					$count = count($val['tmp_name']);
 
     					for ($i = 0; $i < $count; $i++)
     					{
-    						if ($val['tmp_name'][$i] != '') {
+    						if ($val['tmp_name'][$i] != '')
+                            {
     							$upload_config = array(
     								'allowed_types' => $tipo['fields'][$name]['mimes'],
     								'encrypt_name'	=> $tipo['fields'][$name]['encrypt_name'],

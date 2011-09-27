@@ -134,6 +134,7 @@ Class Users extends Bancha_Controller
 					//Existing group
 					$new_acls = $this->input->post('acl', FALSE);
 					$this->auth->update_permissions($new_acls, $param);
+					$this->view->message('success', _('The group has been updated.'));
 				} else {
 					//New group
 					$group_name = $this->input->post('name');
@@ -145,6 +146,7 @@ Class Users extends Bancha_Controller
 						$id_group = $this->users->add_group($group_name);
 
 						if ($id_group){
+							$param = $id_group;
 							$acls = $this->input->post('acl');
 							if (count($acls))
 							{
@@ -202,9 +204,9 @@ Class Users extends Bancha_Controller
 
 		if ($done)
 		{
-			$this->session->set_flashdata('message', _('The group has been deleted.'));
+			$this->view->message('success', _('The group has been deleted.'));
 		}
-		redirect('admin/groups/list');
+		$this->groups();
 	}
 
 }

@@ -21,7 +21,7 @@ Class Website extends Bancha_Controller
 		parent::__construct();
 
 		//If the user is logged in, we set the stage to true
-		//so he/she can surf on the stage pages/records
+		//so he/she can surf on the stage pages and records
 		if ($this->auth->is_logged()) {
 			$this->content->set_stage(TRUE);
 			//We add also the preview bar

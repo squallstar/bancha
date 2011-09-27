@@ -161,7 +161,7 @@ Class Model_auth extends CI_Model {
 	public function update_permissions($permissions, $group_id='')
 	{
 		$this->db->where('group_id', $group_id)->delete('groups_acl');
-		if (count($permissions))
+		if (is_array($permissions) && count($permissions))
 		{
 			foreach ($permissions as $acl)
 			{
