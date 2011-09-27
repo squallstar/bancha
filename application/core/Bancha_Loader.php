@@ -158,8 +158,9 @@ Class Bancha_Loader extends CI_Loader {
 	/**
 	 * Carica un modulo esterno
 	 * @param string $module_name
+	 * @param array $properties (config)
 	 */
-	function module($module_name)
+	function module($module_name, $params = array())
 	{
 		if (!count($this->_loaded_modules))
 		{
@@ -174,8 +175,19 @@ Class Bancha_Loader extends CI_Loader {
 		}
 		$class_name = ucfirst($module_name).'_Module';
 		$tmp = new $class_name();
+
+		//We add the config variables
+		if (count($params) && is_array($params))
+		{
+			foreach ($params as $key => $val)
+			{
+				$tmp->_set_var($key,$val);
+			}
+		}
+
 		$tmp->module_name = ucfirst($module_name);
 		$tmp->module_filespath = $CI->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR;
+				
 		return $tmp;
 	}
 

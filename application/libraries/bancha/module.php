@@ -31,10 +31,22 @@ abstract class Bancha_Module
 	 */
 	public $module_name;
 
+	private $_view_path_added = FALSE;
+
 	public function __construct()
 	{
 		$CI = & get_instance();
 		$this->view = & $CI->view;
+	}
+
+	/**
+	 * Sets a variable as a class property
+	 * @param string $key
+	 * @param mixed $val
+	 */
+	public function _set_var($key, $val)
+	{
+		$this->$key = $val;
 	}
 
 	/**
@@ -45,7 +57,11 @@ abstract class Bancha_Module
 	{
 		$CI = & get_instance();
 		$module_name = strtolower(str_replace('_Module', '', get_class($this)));
-		$CI->load->add_view_path($CI->config->item('modules_folder'));
+		if (!$this->_view_path_added)
+		{
+			$this->_view_path_added = TRUE;
+			$CI->load->add_view_path($CI->config->item('modules_folder'));
+		}
 		return $CI->load->view($module_name.DIRECTORY_SEPARATOR.$module_name.'_'.$view, $CI->view->get_data(), TRUE);
 	}
 

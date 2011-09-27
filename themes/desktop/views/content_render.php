@@ -1,4 +1,4 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?><div class="post"><?php
+<?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?><div id="main" role="main"><?php
 if (isset($page) && $page->is_page()) {
 
 	$action = $page->get('action');
@@ -13,7 +13,7 @@ if (isset($page) && $page->is_page()) {
 				echo '<div class="details"><h1>'.$page->get('title').'</h1>'.
 					 '<p class="info">'.menu($this->tree->get_current_branch()).'</p>'.
 					 '</div>';
-				echo '<div class="body">'.$page->get('contenuto').'</div><div class="clear"></div>';
+				echo '<div class="body"'.$this->view->live_tags('contenuto', $page).'>'.$page->get('contenuto').'</div><div class="clear"></div>';
 				break;
 
 			case 'single':
@@ -31,6 +31,16 @@ if (isset($page) && $page->is_page()) {
 					$record = $records[0];
 					$this->view->render_type_template($record->tipo, 'list');
 				}
+				break;
+			
+			case 'action_render':
+				$class = $page->get('_action_class');
+				if ($class)
+				{
+					$method = $page->get('action_custom_name');
+					$class->$method('content_render');
+				}
+				break;
 
 		}
 	}

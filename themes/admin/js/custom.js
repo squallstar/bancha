@@ -231,7 +231,7 @@ var bancha = {
 	},
 	add_form_hash : function() {
 		$('form').attr('action', $('form').attr('action') + window.location.hash);
-	
+
 		return true;
 	},
 	sort_priority : function (event, ui) {
@@ -259,12 +259,29 @@ var bancha = {
 			}
 		}
 	},
+	tab_textarea : function(selector) {
+		$(selector).keypress(function (e) {
+		    if (e.keyCode == 9) {
+		        var myValue = "\t";
+		        var startPos = this.selectionStart;
+		        var endPos = this.selectionEnd;
+		        var scrollTop = this.scrollTop;
+		        this.value = this.value.substring(0, startPos) + myValue + this.value.substring(endPos,this.value.length);
+		        this.focus();
+		        this.selectionStart = startPos + myValue.length;
+		        this.selectionEnd = startPos + myValue.length;
+		        this.scrollTop = scrollTop;
+
+		        e.preventDefault();
+		    }
+		});
+	},
 	actions : {
 		record_act : function() {
 			var val = $('select[name=action]').val();
 			var list_fields = '.field-action_list_type, .field-action_list_categories, .field-action_list_limit, '
 							+ '.field-action_list_order_by, .field-action_list_where, .field-action_list_has_feed, .field-action_list_hierarchies ';
-			var action_fields = '.field-action_custom_name';
+			var action_fields = '.field-action_custom_name, .field-action_custom_mode';
 			var link_fields = '.field-action_link_url';
 
 			switch (val) {

@@ -51,10 +51,10 @@ $this->load->helper('form'); ?>
 
 $save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="bancha.add_form_hash();"')
 			   .form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
-			   .form_submit('_bt_publish', _('Publish'), 'class="submit"')
+			   .($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
 ;
 
-echo form_open_multipart('admin/'.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
+echo form_open_multipart(isset($action) ? $action : 'admin/'.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
 
 $js_onload = '';
 $first_lap = TRUE;
@@ -73,7 +73,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 			//Breadcrumbs
 			echo $breadcrumbs_render;
-	
+
 			//Messages
 			echo $this->view->get_messages();
 
@@ -159,6 +159,15 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'wysiwyg'.($field['mandatory']?' mandatory':'');
 				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				break;
+
+			case 'textarea_code':
+				$attributes['name'] = $field_name;
+				$attributes['value'] = $field_value;
+				$attributes['class'] = 'code'.($field['mandatory']?' mandatory':'');
+				$attributes['id'] = 'texteditor_'.$field_name;
+				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				$js_onload.= "bancha.tab_textarea('#".$attributes['id']."');";
 				break;
 
 			case 'textarea_full':
@@ -349,24 +358,22 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				}
 				echo $p_end;
 				break;
-			
+
 			case 'hierarchy':
-				if ($this->config->item('hierarchies'))
-				{
-					$dyna_name = '_dyna_'.$field_name;
-					echo $p_start.$label.br(1).'<div id="'.$dyna_name.'"></div>';
-					
-					$data = array(
-							'tree_input'	=> $field_name,
-							'tree_id'		=> $dyna_name,
-							'tree_form'		=> '#record_form',
-							'tree_mode'		=> 2,
-							'tree'			=> $this->config->item('hierarchies')
-					);
-					$this->view->render('admin/hierarchies/dynatree', $data);
-					
-					echo $p_end;
-				}
+				$dyna_name = '_dyna_'.$field_name;
+				echo $p_start.$label.br(1).'<div id="'.$dyna_name.'"></div>';
+
+				$data = array(
+						'tree_input'	=> $field_name,
+						'tree_id'		=> $dyna_name,
+						'tree_form'		=> '#record_form',
+						'tree_mode'		=> 2,
+						'tree'			=> $field['options']
+				);
+				$this->view->render('admin/hierarchies/dynatree', $data);
+
+				echo $p_end;
+
 				break;
 
 		}
@@ -400,9 +407,9 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		//Messages
 		echo $this->view->get_messages().'<br />';
-		
+
 		echo '<h3>'._('Categories').'</h3>';
-		
+
 		if (count($categories)) { ?>
 
 		<p><?php echo _('This content can be associated to these categories'); ?>:<br /></p>
@@ -434,13 +441,13 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	<div class="sidebar_content" id="sb_hierarchies">
 
 		<?php
-		
+
 		//Breadcrumbs
 		echo $breadcrumbs_render;
-		
+
 		//Messages
 		echo $this->view->get_messages().'<br />';
-		
+
 		echo '<h3>'._('Hierarchies').'</h3>';
 
 		if ($this->config->item('hierarchies')) {
@@ -493,7 +500,7 @@ $(document).ready(function() {
 });
 </script>
 
-<?php if ($tipo['has_hierarchies']) { 
+<?php if ($tipo['has_hierarchies']) {
 	$data = array(
 		'tree_input'	=> '_hierarchies',
 		'tree_id'		=> 'hierarchies',

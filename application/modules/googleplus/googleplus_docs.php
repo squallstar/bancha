@@ -2,7 +2,6 @@
 /**
  * GooglePlus Module Documentation
  *
- *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @copyright	Copyright (c) 2011, Squallstar

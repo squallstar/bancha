@@ -2,7 +2,7 @@
 /**
  * Website Main Controller
  *
- * Controller base del front-end del sito internet
+ * The base front-end controller of the website
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -20,9 +20,11 @@ Class Website extends Bancha_Controller
 	{
 		parent::__construct();
 
-		//Se l'utente è loggato, imposto lo stage come attivo
+		//If the user is logged in, we set the stage to true
+		//so he/she can surf on the stage pages and records
 		if ($this->auth->is_logged()) {
 			$this->content->set_stage(TRUE);
+			//We add also the preview bar
 			$this->output->enable_profiler();
 		} else {
 			$this->content->set_stage(FALSE);
@@ -36,19 +38,18 @@ Class Website extends Bancha_Controller
 	 */
 	function home()
 	{
-		//Estraggo il menu di default
+		//We need the default tree
 		$this->view->set('tree', $this->tree->get_default());
 
 		$this->view->javascript = array('jquery.js', 'application.js');
 		$this->view->css = array('style.css');
 
-		//Renderizzo il template home
 		$this->view->render_template('home');
 	}
 
 	/**
-	 * Cambia il theme del sito
-	 * Invocata da: /go-{theme}
+	 * Changes the website theme
+	 * Called by: /go-{theme}
 	 * @param string $new_language
 	 */
 	function change_theme($new_theme)
@@ -58,8 +59,8 @@ Class Website extends Bancha_Controller
 	}
 
 	/**
-	 * Cambia la lingua del sito
-	 * Invocata da: /change-language/{lang}
+	 * Changes the website language
+	 * Called by: /change-language/{lang}
 	 * @param string $new_language
 	 */
 	function change_language($new_language)
@@ -70,8 +71,8 @@ Class Website extends Bancha_Controller
 	}
 
 	/**
-	 * Website Routing
-	 * Metodo per il routing generale del front-end
+	 * Website routing
+	 * The default requests go here!
 	 */
 	function router()
 	{
@@ -83,7 +84,7 @@ Class Website extends Bancha_Controller
 	}
 
 	/**
-	 * Route per le immagini con preset
+	 * Image routing
 	 */
 	function image_router($type, $field, $id, $preset, $filename, $ext)
 	{

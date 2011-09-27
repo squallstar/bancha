@@ -30,12 +30,6 @@ $config['website_languages'] = array(
 		'locale'		=> 'en_US',
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
-	),
-	'es' => array(
-		'name'			=> 'spanish',
-		'locale'		=> 'es_ES',
-		'description'	=> 'Español',
-		'date_format'	=> 'd/m/Y'
 	)
 );
 
@@ -60,7 +54,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.6.8');
+define('BANCHA_VERSION', '0.7.2');
 
 /*
  * Framework name
@@ -104,10 +98,16 @@ $config['records_per_page'] = 10;
 define('FRPATH', APPPATH . 'libraries' . $sep . FRNAME . $sep);
 
 /*
- * XML FOLDER
+* XML FOLDER
+* This directory contains the general XML schemes
+*/
+$config['xml_folder'] = APPPATH . 'xml' . $sep;
+
+/*
+ * XML TYPES FOLDER
  * This directory contains the XML schemes of the content types
  */
-$config['xml_folder'] = APPPATH . 'xml' . $sep;
+$config['xml_typefolder'] = APPPATH . 'xml' . $sep . 'types' . $sep;
 
 /*
  * MODULES FOLDER
@@ -190,7 +190,7 @@ $config['default_view_template'] = 'default';
 
 /*
  * VIEW TEMPLATES TO COPY
- * The .php templates that will be copied from Bencha templates to the website theme.
+ * The .php templates that will be copied from Bancha templates to the website theme.
  */
 $config['view_templates_to_copy'] = array('detail', 'list');
 
@@ -302,6 +302,12 @@ $config['tree_linear_fields'] = array('id_record', 'title', 'uri');
  * will be also extracted.
  */
 $config['record_select_tree_fields'] = array('id_parent');
+
+/*
+ * ARRAY FIELD TYPES
+ * These kind of fields will be store as arrays values
+ */
+$config['array_field_types'] = array('multiselect', 'hierarchy');
 
 
 /* End of file bancha.php */

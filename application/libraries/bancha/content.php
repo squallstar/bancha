@@ -17,7 +17,7 @@ Class Content {
 	/**
 	 * @var array Content types list
 	 */
-	private $_content_types;
+	public $content_types;
 
 	/**
 	 * @var array List of all content types names
@@ -48,7 +48,7 @@ Class Content {
 	{
 		$this->CI = & get_instance();
 
-		$this->xml_folder	= $this->CI->config->item('xml_folder');
+		$this->xml_folder	= $this->CI->config->item('xml_typefolder');
 		$this->types_cache_folder	= $this->CI->config->item('types_cache_folder');
 
 		//We read the content types
@@ -83,8 +83,8 @@ Class Content {
 			@mkdir($this->CI->config->item('fr_cache_folder'), DIR_WRITE_MODE, TRUE);
 			$this->rebuild();
 		}
-		$this->_content_types = unserialize(file_get_contents($this->types_cache_folder));
-		foreach ($this->_content_types as $key => $val)
+		$this->content_types = unserialize(file_get_contents($this->types_cache_folder));
+		foreach ($this->content_types as $key => $val)
 		{
 			$this->_string_types[$val['name']] = $key;
 		}
@@ -111,7 +111,7 @@ Class Content {
 		}
 
 		//Let's check if already exists on filesystem
-		$storage_path = $this->CI->config->item('xml_folder').$type_name.'.xml';
+		$storage_path = $this->CI->config->item('xml_typefolder').$type_name.'.xml';
 		if (file_exists($storage_path) && !$delete_if_exists) {
 			show_error(
 				$this->CI->lang->_trans('A content type named %n already exists', array('n' => '['.$type_name.']')),
@@ -230,16 +230,16 @@ Class Content {
 			//Controllo se mi viene richiesto il tipo da un numero o stringa
 			if (!is_numeric($type))
 			{
-				foreach ($this->_content_types as $key => $val)
+				foreach ($this->content_types as $key => $val)
 				{
 					if ($val['name'] == $type) {
-						return $this->_content_types[$key];
+						return $this->content_types[$key];
 					}
 				}
 			} else {
-				if (isset($this->_content_types[$type]))
+				if (isset($this->content_types[$type]))
 				{
-					return $this->_content_types[$type];
+					return $this->content_types[$type];
 				}
 			}
 
@@ -269,9 +269,9 @@ Class Content {
 	 */
 	public function type_name($type_id)
 	{
-		if (isset($this->_content_types[$type_id]))
+		if (isset($this->content_types[$type_id]))
 		{
-			$tipo = & $this->_content_types[$type_id];
+			$tipo = & $this->content_types[$type_id];
 			return $tipo['name'];
 		} else {
 			show_error('Tipo ['.$type_id.'] non trovato. (content/type_name)', 500, 'Tipo non trovato');
@@ -284,7 +284,7 @@ Class Content {
 	 */
 	public function types()
 	{
-		return $this->_content_types;
+		return $this->content_types;
 	}
 
 	/**
@@ -314,7 +314,7 @@ Class Content {
 
 		foreach ($filenames as $filename)
 		{
-			$content = $this->CI->xml->parse_file($this->xml_folder . $filename);
+			$content = $this->CI->xml->parse_scheme($this->xml_folder . $filename);
 
 			$all_types_id[] = $content['id'];
 			$all_types = $content['name'];

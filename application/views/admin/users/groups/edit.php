@@ -10,12 +10,10 @@ $this->load->helper('form');
 		<h2><?php echo _('Manage group'); ?></h2>
 
 		<ul>
-			<li><a href="<?php echo admin_url('users/groups')?>"><?php echo _('Back to groups list'); ?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url('users/groups')?>"><?php echo _('Back to groups list'); ?></a></li>
 		</ul>
 
 	</div>
-
-
 
 	<div class="block_content">
 
@@ -23,19 +21,17 @@ $this->load->helper('form');
 			<ul class="sidemenu">
 				<li><a href="#info"><?php echo _('Group informations'); ?></a></li>
 			</ul>
-
-
 			<p></p>
 		</div>
 
-
 		<div class="sidebar_content" id="info">
 
+<h3><?php echo ($group ? _('Group').': '.$group->group_name : _('New group')); ?></h3>
 
-
-<h3><?php echo ($group ? _('Group').': '.$group->group_name : _('New group')); ?></h3><br />
-
+<?php echo $this->view->get_messages(); ?>
+<br />
 <?php
+
 echo form_open();
 
 echo form_label(_('Group name'), 'name') . br(1);
@@ -51,19 +47,14 @@ foreach ($acls as $acl) {
 	$data['checked'] = in_array($acl->id, $user_acls);
 	$data['value'] = $acl->id;
 
-	echo form_checkbox($data).form_label(' ' . $acl->name, 'acl[]');
+	echo form_checkbox($data).form_label(' ' . $acl->name, 'acl[]').br(1);
 }
 
 echo br(2).form_submit('submit', $group ? _('Save changes') : _('Add group'), 'class="submit long"');
 echo form_close();
 ?>
-
 		</div>
-
-
 	</div>
-
 	<div class="bendl"></div>
 	<div class="bendr"></div>
-
 </div>

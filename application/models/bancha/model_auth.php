@@ -20,7 +20,7 @@ Class Model_auth extends CI_Model {
 	private $_str_loggedin = 'logged_in';
 
 	/**
-	 * @var array ACL dell'utente attuale
+	 * @var array Current user acls
 	 */
 	private $_acl;
 
@@ -31,7 +31,8 @@ Class Model_auth extends CI_Model {
 	}
 
 	/**
-	 * Controlla se un utente e' loggato, altrimenti lo reindirizza al login
+	 * First it checks if an user is logged in. Then, if not,
+	 * the user will be redirect to the login page
 	 */
 	public function needs_login()
 	{
@@ -42,7 +43,7 @@ Class Model_auth extends CI_Model {
 	}
 
 	/**
-	 * Controlla se un utente e' loggato
+	 * Checks whether an user is logged in
 	 * @return bool
 	 */
 	public function is_logged()
@@ -51,10 +52,10 @@ Class Model_auth extends CI_Model {
 	}
 
 	/**
-	 * Prova ad effettuare il login per un utente
+	 * Tries to do a user login
 	 * @param string $username
 	 * @param string $password
-	 * @return bool
+	 * @return bool success
 	 */
 	public function login($username, $password)
 	{
@@ -84,7 +85,7 @@ Class Model_auth extends CI_Model {
 	}
 
 	/**
-	 * Distrugge la sessione ed effettua il logout
+	 * Destroys the user session
 	 * @return bool
 	 */
 	public function logout()
@@ -94,10 +95,9 @@ Class Model_auth extends CI_Model {
 	}
 
 	/**
-	 * Ottiene un valore dalla sessione, o ne imposta uno
-	 * se viene passato il valore come secondo parametro
-	 * @param string $key
-	 * @param string|int $val
+	 * Gets or sets a param into the user session
+	 * @param string $key the key to search in
+	 * @param string|int $val the value to set
 	 * @return mixed
 	 */
 	public function user($key, $val='')
@@ -117,7 +117,7 @@ Class Model_auth extends CI_Model {
 	 */
 	function add_permission($acl_id)
 	{
-		//Prima controllo se esiste già
+		//We first check if already exists
 		$result = $this->db->select('acl_id')
 		->from('groups_acl')
 		->where('acl_id', $acl_id)
@@ -134,8 +134,8 @@ Class Model_auth extends CI_Model {
 	}
 
 	/**
-	 * Ottiene tutti gli id dei permessi del gruppo
-	 * @param int $group_id se non fornito usa il gruppo dell'utente
+	 * Gets all the acl ids of a single group
+	 * @param int $group_id if not used, the user group will be used instead
 	 * @return array
 	 */
 	function get_permissions_id($group_id = '')
@@ -153,7 +153,7 @@ Class Model_auth extends CI_Model {
 	}
 
 	/**
-	* Aggiorna i permessi di un gruppo
+	* Updates the user permissions
 	* @param array $permissions
 	* @param int $user_id
 	* @return bool
@@ -161,7 +161,7 @@ Class Model_auth extends CI_Model {
 	public function update_permissions($permissions, $group_id='')
 	{
 		$this->db->where('group_id', $group_id)->delete('groups_acl');
-		if (count($permissions))
+		if (is_array($permissions) && count($permissions))
 		{
 			foreach ($permissions as $acl)
 			{
@@ -177,7 +177,7 @@ Class Model_auth extends CI_Model {
 	}
 
 	/**
-	 * Mette in sessione i permessi dell'utente
+	 * Caches the user permissions into the session
 	 */
 	public function cache_permissions()
 	{
@@ -189,20 +189,20 @@ Class Model_auth extends CI_Model {
 		$permissions = '';
 		foreach ($result as $permission)
 		{
-			$permissions.= '||'.$permission->area.'|'.$permission->action;
+			$permissions.= '<'.$permission->area.'|'.$permission->action.'>';
 		}
 		$this->user('acl', $permissions);
 		$this->_acl = $permissions;
 	}
 
 	/**
-	 * Controlla se un utente ha dei permessi
+	 * Checks whether an users has a permission
 	 * @param string $area
 	 * @param string $action
 	 */
 	public function has_permission($area, $action)
 	{
-		return strpos($this->_acl, '||'.$area.'|'.$action) == 0 ? FALSE : TRUE;
+		return strpos($this->_acl, '<'.$area.'|'.$action.'>') == 0 ? FALSE : TRUE;
 	}
 
 }

@@ -28,7 +28,7 @@ Class Model_hierarchies extends CI_Model {
 	 * @var array|bool contains the hierarchies
 	 */
 	public $list = FALSE;
-	
+
 	/**
 	 * @var array The current setted relations
 	 */
@@ -54,12 +54,12 @@ Class Model_hierarchies extends CI_Model {
 		}
 		return $this->list;
   	}
-  	
+
   	public function set_active_nodes($relations)
   	{
   		$this->_current_relations = $relations;
   	}
-  	
+
   	public function get_record_hierarchies($record_id)
   	{
   		$result = $this->db->select('id_hierarchy')
@@ -133,7 +133,7 @@ Class Model_hierarchies extends CI_Model {
   			$this->db->or_where('id_parent', $hierarchy);
   		}
   		$this->db->delete($this->table);
-  		
+
   		//And the relations
   		if (is_array($hierarchy))
   		{
@@ -143,12 +143,12 @@ Class Model_hierarchies extends CI_Model {
   			$this->db->where('id_hierarchy', $hierarchy);
   		}
   		$this->db->delete($this->table_relations);
-  		
+
   		if (CACHE) $this->db->cache_delete_all();
   		return true;
   	}
 
-  	/**
+    /**
 	 * Updates all the hierarchies of a record
 	 * @param int $id_record
 	 * @param array $new_hierarchies
@@ -159,7 +159,7 @@ Class Model_hierarchies extends CI_Model {
   		$this->db->where('id_record', $id_record)->delete($this->table_relations);
 
   		//And now, let's add the hierarchies
-  		if (count($new_hierarchies))
+  		if ($new_hierarchies != '' && count($new_hierarchies))
   		{
   			foreach ($new_hierarchies as $hierarchy)
   			{
@@ -236,12 +236,25 @@ Class Model_hierarchies extends CI_Model {
 	}
 
 	/**
-	 * Converts a GET hierarchies string to an array
-	 * @param string $get_string
-	 * @return array
+	 * Returns the records that are in one or more hierarchies
+	 * @param array $hierarchies
 	 */
-	public function parse_data($get_string)
-	{
-		return explode('|', $get_string);
-	}
+	public function get_records_for_hierarchies($hierarchies)
+  	{
+  		if (is_string($hierarchies))
+  		{
+  			$hierarchies = array($hierarchies);
+  		}
+  		$res = $this->db->select('id_record')
+		   		    	->from($this->table_relations)
+		   		    	->where_in('id_hierarchy', $hierarchies)
+		   		    	->get();
+		$result = $res->result_array();
+		$ids = array();
+		foreach ($result as $record)
+		{
+			$ids[] = (int)$record['id_record'];
+		}
+		return $ids;
+  	}
 }

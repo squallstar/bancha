@@ -32,7 +32,7 @@ Class Picasa_Module extends Bancha_Module
   /**
    * @var string Username of Picasa account
    */
-  private $_username = 'kikkovolley';
+  protected $_username = NULL;
   
   /**
    * @var string Container of for Picasa gallery

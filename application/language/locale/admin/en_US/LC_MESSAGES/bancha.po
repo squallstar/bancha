@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-12 18:06+0100\n"
-"PO-Revision-Date: 2011-09-12 18:06+0100\n"
-"Last-Translator: Nicholas <nicholas@intesys.it>\n"
+"POT-Creation-Date: 2011-09-25 12:51+0100\n"
+"PO-Revision-Date: 2011-09-25 12:51+0100\n"
+"Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,55 +22,121 @@ msgstr ""
 msgid "This content has no attachments."
 msgstr ""
 
-#: controllers/admin/auth.php:46
+#: controllers/admin/auth.php:50
 msgid "Username/password wrong."
 msgstr ""
 
-#: controllers/admin/contents.php:349
+#: controllers/admin/contents.php:124
+msgid "The records have been published."
+msgstr ""
+
+#: controllers/admin/contents.php:132
+msgid "The records have been depublished."
+msgstr ""
+
+#: controllers/admin/contents.php:139
+msgid "The records have been deleted."
+msgstr ""
+
+#: controllers/admin/contents.php:146
+msgid "The records have been rolled back to the production ones."
+msgstr ""
+
+#: controllers/admin/contents.php:334
+msgid "The content %n has been saved."
+msgstr ""
+
+#: controllers/admin/contents.php:340
+msgid "The content %n has been published."
+msgstr ""
+
+#: controllers/admin/contents.php:345
+msgid "The content has been saved."
+msgstr ""
+
+#: controllers/admin/contents.php:359
+msgid "Something went wrong..."
+msgstr ""
+
+#: controllers/admin/contents.php:374
 msgid "First level"
 msgstr ""
 
-#: controllers/admin/contents.php:467
-msgid "Please insert a name for this type."
+#: controllers/admin/contents.php:466
+msgid "Cannot delete the record %r of type %t"
+msgstr ""
+
+#: controllers/admin/contents.php:466
+#: controllers/admin/contents.php:495
+#: controllers/admin/contents.php:622
+msgid "Error"
 msgstr ""
 
 #: controllers/admin/contents.php:495
+msgid "The record ID was not set."
+msgstr ""
+
+#: controllers/admin/contents.php:520
+msgid "Please insert a name for this type."
+msgstr ""
+
+#: controllers/admin/contents.php:540
+msgid "The xml scheme of the content type %n has been updated"
+msgstr ""
+
+#: controllers/admin/contents.php:546
+msgid "Cannot save that XML scheme."
+msgstr ""
+
+#: controllers/admin/contents.php:546
+msgid "Saving error"
+msgstr ""
+
+#: controllers/admin/contents.php:550
 msgid "Cannot read the XML file."
 msgstr ""
 
-#: controllers/admin/contents.php:519
+#: controllers/admin/contents.php:574
 msgid "The category %n has been added."
 msgstr ""
 
-#: controllers/admin/contents.php:521
+#: controllers/admin/contents.php:576
 msgid "Cannot insert the category %n."
 msgstr ""
 
-#: controllers/admin/contents.php:524
+#: controllers/admin/contents.php:579
 msgid "A category named %n already exists."
 msgstr ""
 
-#: controllers/admin/contents.php:547
+#: controllers/admin/contents.php:603
 msgid "The category %n has been deleted."
 msgstr ""
 
-#: controllers/admin/contents.php:566
+#: controllers/admin/contents.php:622
+msgid "Cannot renew the cache."
+msgstr ""
+
+#: controllers/admin/contents.php:624
 msgid "The cache has been cleared."
 msgstr ""
 
-#: controllers/admin/contents.php:608
+#: controllers/admin/contents.php:672
 msgid "The type named %n has been removed."
 msgstr ""
 
-#: controllers/admin/hierarchies.php:47
+#: controllers/admin/hierarchies.php:46
 msgid "The hierarchy %n has been added."
+msgstr ""
+
+#: controllers/admin/hierarchies.php:56
+msgid "The selected hierarchies have been deleted."
 msgstr ""
 
 #: controllers/admin/import.php:36
 msgid "Choose one..."
 msgstr ""
 
-#: controllers/admin/install.php:80
+#: controllers/admin/install.php:84
 msgid "%n has been installed!"
 msgstr ""
 
@@ -78,108 +144,119 @@ msgstr ""
 msgid "The module %m has no documentation or not exists."
 msgstr ""
 
-#: libraries/Milk_Profiler.php:80
+#: controllers/admin/users.php:63
+msgid "The user has been deleted."
+msgstr ""
+
+#: controllers/admin/users.php:87
+msgid "The user informations have been updated."
+msgstr ""
+
+#: controllers/admin/users.php:104
+msgid "User not found"
+msgstr ""
+
+#: libraries/Bancha_Profiler.php:80
 msgid "Preview"
 msgstr ""
 
-#: libraries/Milk_Profiler.php:82
+#: libraries/Bancha_Profiler.php:82
 msgid "Back to admin"
 msgstr ""
 
-#: libraries/Milk_Profiler.php:83
+#: libraries/Bancha_Profiler.php:83
 msgid "Open profiler"
 msgstr ""
 
-#: libraries/milk/content.php:109
+#: libraries/bancha/content.php:110
 msgid "You cannot create a content type named [cache]."
 msgstr ""
 
-#: libraries/milk/content.php:109
+#: libraries/bancha/content.php:110
 msgid "Name reserved"
 msgstr ""
 
-#: libraries/milk/content.php:116
+#: libraries/bancha/content.php:117
 msgid "A content type named %n already exists"
 msgstr ""
 
-#: libraries/milk/content.php:117
+#: libraries/bancha/content.php:118
 msgid "Cannot create that type"
 msgstr ""
 
-#: libraries/milk/content.php:128
+#: libraries/bancha/content.php:129
 msgid "Cannot insert that content type."
 msgstr ""
 
-#: libraries/milk/content.php:128
-#: libraries/milk/content.php:174
-msgid "Error"
-msgstr ""
-
-#: libraries/milk/content.php:173
+#: libraries/bancha/content.php:174
 msgid "Cannot delete the template view directory for the content type %n."
 msgstr ""
 
-#: libraries/milk/installer.php:318
+#: libraries/bancha/installer.php:334
 msgid "Default content type not defined"
 msgstr ""
 
-#: libraries/milk/installer.php:431
+#: libraries/bancha/installer.php:455
 msgid "My first post"
 msgstr ""
 
-#: libraries/milk/installer.php:432
-#: libraries/milk/installer.php:458
+#: libraries/bancha/installer.php:456
+#: libraries/bancha/installer.php:482
 msgid "Hello world"
 msgstr ""
 
-#: libraries/milk/xml.php:83
+#: libraries/bancha/xml.php:89
 msgid "Type not set."
 msgstr ""
 
-#: libraries/milk/xml.php:190
+#: libraries/bancha/xml.php:199
 msgid "Primary key or table not defined for the content type %n."
 msgstr ""
 
-#: libraries/milk/xml.php:190
-#: libraries/milk/xml.php:273
-#: libraries/milk/xml.php:275
-#: libraries/milk/xml.php:286
-#: libraries/milk/xml.php:312
-#: libraries/milk/xml.php:317
+#: libraries/bancha/xml.php:199
+#: libraries/bancha/xml.php:285
+#: libraries/bancha/xml.php:287
+#: libraries/bancha/xml.php:298
+#: libraries/bancha/xml.php:324
+#: libraries/bancha/xml.php:329
 msgid "XML parser: Error"
 msgstr ""
 
-#: libraries/milk/xml.php:269
+#: libraries/bancha/xml.php:278
 msgid "Untitled"
 msgstr ""
 
-#: libraries/milk/xml.php:273
+#: libraries/bancha/xml.php:285
 msgid "One of the fieldsets of type %n does not have the node <name> (mandatory)."
 msgstr ""
 
-#: libraries/milk/xml.php:275
+#: libraries/bancha/xml.php:287
 msgid "The type %t has more than one fieldset named %n."
 msgstr ""
 
-#: libraries/milk/xml.php:286
+#: libraries/bancha/xml.php:298
 msgid "One of the fields of type %t does not have a name."
 msgstr ""
 
-#: libraries/milk/xml.php:312
+#: libraries/bancha/xml.php:324
 msgid "The field name %n is reserved (Type: %t) and needs to be changed!"
 msgstr ""
 
-#: libraries/milk/xml.php:317
+#: libraries/bancha/xml.php:329
 msgid "The value of the node named type (field: %n, type %t) does not exists. Allowed values are:"
 msgstr ""
 
-#: libraries/milk/dispatchers/dispatcher_default.php:102
-#: libraries/milk/dispatchers/dispatcher_default.php:310
+#: libraries/bancha/dispatchers/dispatcher_default.php:99
+#: libraries/bancha/dispatchers/dispatcher_default.php:326
 msgid "Page not found"
 msgstr ""
 
-#: models/milk/model_hierarchies.php:71
+#: models/bancha/model_hierarchies.php:105
 msgid "You cannot create a hierarchy without a name."
+msgstr ""
+
+#: models/bancha/model_records.php:428
+msgid "Cannot build the record."
 msgstr ""
 
 #: views/admin/auth/login.php:7
@@ -215,12 +292,10 @@ msgid "Close window"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:24
-#: views/admin/content/record_edit.php:304
 msgid "Original"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:24
-#: views/admin/content/record_edit.php:304
 msgid "Resized"
 msgstr ""
 
@@ -229,15 +304,11 @@ msgid "Thumbnail"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:24
-#: views/admin/content/record_edit.php:304
-#: views/admin/content/record_edit.php:342
 msgid "Alternative text"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:30
 #: views/admin/content/documents_finder.php:31
-#: views/admin/content/record_edit.php:314
-#: views/admin/content/record_edit.php:315
 msgid "View"
 msgstr ""
 
@@ -248,7 +319,6 @@ msgid "Choose"
 msgstr ""
 
 #: views/admin/content/documents_finder.php:34
-#: views/admin/content/record_edit.php:318
 msgid "Delete image"
 msgstr ""
 
@@ -256,99 +326,123 @@ msgstr ""
 msgid "No attachments found for this record."
 msgstr ""
 
-#: views/admin/content/record_edit.php:23
-#: views/admin/content/record_edit.php:87
+#: views/admin/content/record_edit.php:21
+#: views/admin/content/record_edit.php:67
 msgid "New content"
 msgstr ""
 
-#: views/admin/content/record_edit.php:23
-#: views/admin/content/record_edit.php:87
+#: views/admin/content/record_edit.php:21
+#: views/admin/content/record_edit.php:67
 msgid "Edit content"
 msgstr ""
 
-#: views/admin/content/record_edit.php:26
+#: views/admin/content/record_edit.php:24
 msgid "Back to list"
 msgstr ""
 
-#: views/admin/content/record_edit.php:41
-#: views/admin/content/record_edit.php:380
+#: views/admin/content/record_edit.php:39
+#: views/admin/content/record_edit.php:402
+#: views/admin/content/translations.php:44
+#: views/admin/content/type_categories.php:8
 msgid "Categories"
 msgstr ""
 
+#: views/admin/content/record_edit.php:42
+#: views/admin/content/record_edit.php:442
+#: views/admin/content/translations.php:45
+msgid "Hierarchies"
+msgstr ""
+
 # Bottone salva
-#: views/admin/content/record_edit.php:51
+#: views/admin/content/record_edit.php:52
 msgid "Save"
 msgstr ""
 
-#: views/admin/content/record_edit.php:52
+#: views/admin/content/record_edit.php:53
 msgid "Save and go to list"
 msgstr ""
 
-#: views/admin/content/record_edit.php:53
-#: views/admin/content/record_list.php:207
+#: views/admin/content/record_edit.php:54
+#: views/admin/content/record_list.php:212
 msgid "Publish"
 msgstr ""
 
-#: views/admin/content/record_edit.php:103
-msgid "The address of this page is:"
-msgstr ""
-
-#: views/admin/content/record_edit.php:258
-msgid "Add"
-msgstr ""
-
-#: views/admin/content/record_edit.php:261
-msgid "Remove"
-msgstr ""
-
-#: views/admin/content/record_edit.php:297
-#: views/admin/content/record_edit.php:300
-msgid "You can attach up to %n images"
-msgstr ""
-
-#: views/admin/content/record_edit.php:299
-msgid "Number of uploadable images excedeed."
-msgstr ""
-
-#: views/admin/content/record_edit.php:304
-msgid "Order"
-msgstr ""
-
-#: views/admin/content/record_edit.php:335
-#: views/admin/content/record_edit.php:338
-msgid "You can attach up to %n files"
-msgstr ""
-
-#: views/admin/content/record_edit.php:337
-msgid "File limit exceeded."
-msgstr ""
-
-#: views/admin/content/record_edit.php:342
-msgid "File name"
-msgstr ""
-
-#: views/admin/content/record_edit.php:342
-msgid "File type"
-msgstr ""
-
-#: views/admin/content/record_edit.php:348
-msgid "Delete file"
-msgstr ""
-
-#: views/admin/content/record_edit.php:386
-msgid "This content can be associated to these categories"
-msgstr ""
-
-#: views/admin/content/record_edit.php:403
-msgid "This type has no categories"
-msgstr ""
-
+#: views/admin/content/record_edit.php:65
 #: views/admin/content/record_list.php:13
+#: views/admin/content/type_edit_xml.php:20
+#: views/admin/content/type_list.php:7
+msgid "Contents"
+msgstr ""
+
+#: views/admin/content/record_edit.php:65
+#: views/admin/content/record_list.php:13
+#: views/admin/content/type_list.php:7
 msgid "Pages"
 msgstr ""
 
-#: views/admin/content/record_list.php:13
-msgid "Contents"
+#: views/admin/content/record_edit.php:92
+msgid "The address of this page is:"
+msgstr ""
+
+#: views/admin/content/record_edit.php:255
+#: views/admin/content/type_add.php:75
+#: views/admin/content/type_categories.php:74
+#: views/admin/hierarchies/list.php:78
+msgid "Add"
+msgstr ""
+
+#: views/admin/content/record_edit.php:258
+msgid "Remove"
+msgstr ""
+
+#: views/admin/content/record_edit.php:294
+#: views/admin/content/record_edit.php:297
+msgid "You can attach up to %n images"
+msgstr ""
+
+#: views/admin/content/record_edit.php:296
+msgid "Number of uploadable images excedeed."
+msgstr ""
+
+#: views/admin/content/record_edit.php:301
+msgid "Order"
+msgstr ""
+
+#: views/admin/content/record_edit.php:332
+#: views/admin/content/record_edit.php:335
+msgid "You can attach up to %n files"
+msgstr ""
+
+#: views/admin/content/record_edit.php:334
+msgid "File limit exceeded."
+msgstr ""
+
+#: views/admin/content/record_edit.php:339
+msgid "File name"
+msgstr ""
+
+#: views/admin/content/record_edit.php:339
+msgid "File type"
+msgstr ""
+
+#: views/admin/content/record_edit.php:345
+msgid "Delete file"
+msgstr ""
+
+#: views/admin/content/record_edit.php:406
+msgid "This content can be associated to these categories"
+msgstr ""
+
+#: views/admin/content/record_edit.php:423
+msgid "This type has no categories"
+msgstr ""
+
+#: views/admin/content/record_edit.php:450
+msgid "This content can be associated to these hierarchies"
+msgstr ""
+
+#: views/admin/content/record_edit.php:458
+msgid "There are no hierarchies"
 msgstr ""
 
 #: views/admin/content/record_list.php:16
@@ -360,6 +454,7 @@ msgid "Insert new page"
 msgstr ""
 
 #: views/admin/content/record_list.php:17
+#: views/admin/content/type_list.php:40
 msgid "Manage categories"
 msgstr ""
 
@@ -368,17 +463,17 @@ msgid "Status"
 msgstr ""
 
 #: views/admin/content/record_list.php:57
-#: views/admin/content/record_list.php:131
+#: views/admin/content/record_list.php:132
 msgid "Draft"
 msgstr ""
 
 #: views/admin/content/record_list.php:57
-#: views/admin/content/record_list.php:140
+#: views/admin/content/record_list.php:141
 msgid "Published"
 msgstr ""
 
 #: views/admin/content/record_list.php:57
-#: views/admin/content/record_list.php:134
+#: views/admin/content/record_list.php:135
 msgid "Different"
 msgstr ""
 
@@ -386,54 +481,291 @@ msgstr ""
 msgid "Apply filters"
 msgstr ""
 
-#: views/admin/content/record_list.php:137
+#: views/admin/content/record_list.php:138
 msgid "Programmed"
 msgstr ""
 
-#: views/admin/content/record_list.php:195
+#: views/admin/content/record_list.php:200
 msgid "Add child page"
 msgstr ""
 
-#: views/admin/content/record_list.php:196
-msgid "Are you sure?"
-msgstr ""
-
-#: views/admin/content/record_list.php:196
-#: views/admin/content/record_list.php:209
+#: views/admin/content/record_list.php:201
+#: views/admin/content/record_list.php:215
+#: views/admin/content/type_list.php:42
 msgid "Delete"
 msgstr ""
 
-#: views/admin/content/record_list.php:206
+#: views/admin/content/record_list.php:201
+msgid "Are you sure?"
+msgstr ""
+
+#: views/admin/content/record_list.php:211
 msgid "Actions"
 msgstr ""
 
-#: views/admin/content/record_list.php:208
+#: views/admin/content/record_list.php:213
 msgid "Unpublish"
 msgstr ""
 
-#: views/admin/content/record_list.php:212
+#: views/admin/content/record_list.php:214
+msgid "Discard draft"
+msgstr ""
+
+#: views/admin/content/record_list.php:218
 msgid "Apply to selected"
 msgstr ""
 
-#: views/admin/content/record_list.php:214
+#: views/admin/content/record_list.php:220
 msgid "There is"
 msgstr ""
 
-#: views/admin/content/record_list.php:214
+#: views/admin/content/record_list.php:220
 msgid "There are"
 msgstr ""
 
-#: views/admin/content/record_list.php:221
+#: views/admin/content/record_list.php:227
+#: views/admin/content/type_list.php:54
 msgid "add a new one"
 msgstr ""
 
-#: views/admin/content/record_list.php:220
+#: views/admin/content/record_list.php:226
 msgid "There are no contents/pages for this type. To start, %a."
 msgstr ""
 
-#: views/admin/content/renewed.php:7
-#: views/admin/layout/header.php:78
+#: views/admin/content/renewed.php:5
 msgid "Clear cache"
+msgstr ""
+
+#: views/admin/content/translations.php:3
+msgid "Blog posts"
+msgstr ""
+
+#: views/admin/content/translations.php:4
+msgid "Post content"
+msgstr ""
+
+#: views/admin/content/translations.php:5
+msgid "Title"
+msgstr ""
+
+#: views/admin/content/translations.php:6
+msgid "Visibility date"
+msgstr ""
+
+#: views/admin/content/translations.php:7
+msgid "Friendly URL"
+msgstr ""
+
+#: views/admin/content/translations.php:8
+msgid "Language"
+msgstr ""
+
+#: views/admin/content/translations.php:9
+msgid "Content"
+msgstr ""
+
+#: views/admin/content/translations.php:10
+msgid "Comments no."
+msgstr ""
+
+#: views/admin/content/translations.php:11
+msgid "Images and files"
+msgstr ""
+
+#: views/admin/content/translations.php:12
+msgid "Images"
+msgstr ""
+
+#: views/admin/content/translations.php:13
+msgid "Files"
+msgstr ""
+
+#: views/admin/content/translations.php:14
+msgid "Meta tags"
+msgstr ""
+
+#: views/admin/content/translations.php:15
+#: views/admin/content/type_list.php:25
+msgid "Description"
+msgstr ""
+
+#: views/admin/content/translations.php:16
+msgid "Keywords"
+msgstr ""
+
+#: views/admin/content/translations.php:17
+msgid "Comments"
+msgstr ""
+
+#: views/admin/content/translations.php:18
+msgid "Author info"
+msgstr ""
+
+#: views/admin/content/translations.php:19
+#: views/admin/content/type_list.php:24
+msgid "Name"
+msgstr ""
+
+#: views/admin/content/translations.php:20
+msgid "Website"
+msgstr ""
+
+#: views/admin/content/translations.php:21
+msgid "E-mail address"
+msgstr ""
+
+#: views/admin/content/translations.php:22
+msgid "Message"
+msgstr ""
+
+#: views/admin/content/translations.php:23
+msgid "Linked post"
+msgstr ""
+
+#: views/admin/content/translations.php:24
+msgid "Menu"
+msgstr ""
+
+#: views/admin/content/translations.php:25
+msgid "General informations"
+msgstr ""
+
+#: views/admin/content/translations.php:26
+msgid "Parent page"
+msgstr ""
+
+#: views/admin/content/translations.php:27
+msgid "Page URL"
+msgstr ""
+
+#: views/admin/content/translations.php:28
+msgid "Show in menu"
+msgstr ""
+
+#: views/admin/content/translations.php:29
+msgid "Main menu"
+msgstr ""
+
+#: views/admin/content/translations.php:30
+msgid "Sitemap"
+msgstr ""
+
+#: views/admin/content/translations.php:31
+msgid "Don't show"
+msgstr ""
+
+#: views/admin/content/translations.php:32
+msgid "Child no."
+msgstr ""
+
+#: views/admin/content/translations.php:33
+msgid "Aspect and actions"
+msgstr ""
+
+#: views/admin/content/translations.php:34
+msgid "View template"
+msgstr ""
+
+#: views/admin/content/translations.php:35
+#: views/admin/installer/request.php:28
+msgid "Default"
+msgstr ""
+
+#: views/admin/content/translations.php:36
+msgid "Page cache (minutes)"
+msgstr ""
+
+#: views/admin/content/translations.php:37
+msgid "Priority"
+msgstr ""
+
+#: views/admin/content/translations.php:38
+msgid "Page action"
+msgstr ""
+
+#: views/admin/content/translations.php:39
+msgid "Single text"
+msgstr ""
+
+#: views/admin/content/translations.php:40
+msgid "Content list"
+msgstr ""
+
+#: views/admin/content/translations.php:41
+msgid "Custom action"
+msgstr ""
+
+#: views/admin/content/translations.php:42
+msgid "External link"
+msgstr ""
+
+#: views/admin/content/translations.php:43
+#: views/admin/import/records.php:28
+msgid "Content type"
+msgstr ""
+
+#: views/admin/content/translations.php:46
+msgid "WHERE Condition"
+msgstr ""
+
+#: views/admin/content/translations.php:47
+msgid "Results per page"
+msgstr ""
+
+#: views/admin/content/translations.php:48
+msgid "Results order"
+msgstr ""
+
+#: views/admin/content/translations.php:49
+msgid "ID record (DESC)"
+msgstr ""
+
+#: views/admin/content/translations.php:50
+msgid "ID record (ASC)"
+msgstr ""
+
+#: views/admin/content/translations.php:51
+msgid "Publish date (DESC)"
+msgstr ""
+
+#: views/admin/content/translations.php:52
+msgid "Publish date (ASC)"
+msgstr ""
+
+#: views/admin/content/translations.php:53
+msgid "RSS Feed"
+msgstr ""
+
+#: views/admin/content/translations.php:54
+msgid "Yes"
+msgstr ""
+
+#: views/admin/content/translations.php:55
+msgid "No"
+msgstr ""
+
+#: views/admin/content/translations.php:56
+msgid "Action name"
+msgstr ""
+
+#: views/admin/content/translations.php:57
+msgid "Action mode"
+msgstr ""
+
+#: views/admin/content/translations.php:58
+msgid "Dispatch"
+msgstr ""
+
+#: views/admin/content/translations.php:59
+msgid "Content render"
+msgstr ""
+
+#: views/admin/content/translations.php:60
+msgid "Redirect URL"
+msgstr ""
+
+#: views/admin/content/translations.php:61
+msgid "Attachments"
 msgstr ""
 
 #: views/admin/content/type_add.php:10
@@ -570,14 +902,6 @@ msgstr ""
 msgid "Save scheme"
 msgstr ""
 
-#: views/admin/content/type_list.php:24
-msgid "Name"
-msgstr ""
-
-#: views/admin/content/type_list.php:25
-msgid "Description"
-msgstr ""
-
 #: views/admin/content/type_list.php:26
 msgid "Structure type"
 msgstr ""
@@ -611,80 +935,78 @@ msgstr ""
 msgid "at %time"
 msgstr ""
 
-#: views/admin/dashboard/welcome.php:54
-#: views/admin/dashboard/welcome.php:67
-#: views/admin/dashboard/welcome.php:80
+#: views/admin/dashboard/welcome.php:52
+#: views/admin/dashboard/welcome.php:56
 msgid "Unknown"
 msgstr ""
 
-#: views/admin/dashboard/welcome.php:51
+#: views/admin/dashboard/welcome.php:63
 msgid "%u updated the content %c of type %t."
 msgstr ""
 
-#: views/admin/dashboard/welcome.php:64
+#: views/admin/dashboard/welcome.php:71
 msgid "%u created a new content of type %t named %c."
 msgstr ""
 
-#: views/admin/dashboard/welcome.php:77
+#: views/admin/dashboard/welcome.php:80
 msgid "%u published the content %c of type %t."
 msgstr ""
 
-#: views/admin/dashboard/welcome.php:86
+#: views/admin/dashboard/welcome.php:89
 #, php-format
 msgid "%u depublished the content %c."
 msgstr ""
 
-#: views/admin/dashboard/welcome.php:94
+#: views/admin/dashboard/welcome.php:97
 #, php-format
 msgid "%u installed %c."
 msgstr ""
 
-#: views/admin/dashboard/welcome.php:100
+#: views/admin/dashboard/welcome.php:105
 #, php-format
 msgid "%u login."
 msgstr ""
 
-#: views/admin/dashboard/welcome.php:104
+#: views/admin/dashboard/welcome.php:109
 #, php-format
 msgid "%u logout."
 msgstr ""
 
-#: views/admin/hierarchies/list.php:10
+#: views/admin/hierarchies/list.php:21
 msgid "Manage hierarchies"
 msgstr ""
 
-#: views/admin/hierarchies/list.php:23
-#: views/admin/hierarchies/list.php:30
+#: views/admin/hierarchies/list.php:34
+#: views/admin/hierarchies/list.php:41
 msgid "Hierarchies list"
 msgstr ""
 
-#: views/admin/hierarchies/list.php:24
-#: views/admin/hierarchies/list.php:59
+#: views/admin/hierarchies/list.php:35
+#: views/admin/hierarchies/list.php:66
 msgid "Add hierarchy"
 msgstr ""
 
-#: views/admin/hierarchies/list.php:31
+#: views/admin/hierarchies/list.php:42
 msgid "Here you will find the inserted hierarchies."
 msgstr ""
 
-#: views/admin/hierarchies/list.php:39
+#: views/admin/hierarchies/list.php:51
 msgid "Delete selected"
 msgstr ""
 
-#: views/admin/hierarchies/list.php:50
+#: views/admin/hierarchies/list.php:57
 msgid "There are no hierarchies."
 msgstr ""
 
-#: views/admin/hierarchies/list.php:65
+#: views/admin/hierarchies/list.php:72
 msgid "Hierarchy name"
 msgstr ""
 
-#: views/admin/hierarchies/list.php:68
+#: views/admin/hierarchies/list.php:75
 msgid "Parent hierarchy"
 msgstr ""
 
 #: views/admin/import/records.php:7
-#: views/admin/layout/header.php:77
 msgid "Import/export data"
 msgstr ""
 
@@ -702,10 +1024,6 @@ msgstr ""
 #: views/admin/import/records.php:22
 #: views/admin/import/records.php:45
 msgid "This function is under construction!"
-msgstr ""
-
-#: views/admin/import/records.php:28
-msgid "Content type"
 msgstr ""
 
 #: views/admin/import/records.php:31
@@ -745,10 +1063,6 @@ msgstr ""
 msgid "Install type"
 msgstr ""
 
-#: views/admin/installer/request.php:28
-msgid "Default"
-msgstr ""
-
 #: views/admin/installer/request.php:29
 msgid "Blog"
 msgstr ""
@@ -761,7 +1075,7 @@ msgstr ""
 msgid "Install"
 msgstr ""
 
-#: views/admin/layout/footer.php:17
+#: views/admin/layout/footer.php:25
 msgid "Page rendered in %n seconds using %m of memory."
 msgstr ""
 
@@ -770,18 +1084,24 @@ msgid "Dashboard"
 msgstr ""
 
 #: views/admin/layout/header.php:60
+#: views/admin/users/list.php:22
 msgid "Users"
 msgstr ""
 
 #: views/admin/layout/header.php:62
+#: views/admin/users/list.php:15
 msgid "Add new user"
 msgstr ""
 
 #: views/admin/layout/header.php:63
+#: views/admin/users/list.php:12
 msgid "Users list"
 msgstr ""
 
 #: views/admin/layout/header.php:64
+#: views/admin/users/list.php:16
+#: views/admin/users/groups/list.php:12
+#: views/admin/users/groups/list.php:22
 msgid "Groups and permissions"
 msgstr ""
 
@@ -794,14 +1114,16 @@ msgid "Manage"
 msgstr ""
 
 #: views/admin/layout/header.php:74
+#: views/admin/modules/list.php:23
 msgid "Documentation"
 msgstr ""
 
-#: views/admin/layout/header.php:76
-msgid "Hierarchies"
+#: views/admin/layout/header.php:78
+#: views/admin/unit_tests/intro.php:5
+msgid "Unit tests"
 msgstr ""
 
-#: views/admin/layout/header.php:84
+#: views/admin/layout/header.php:85
 msgid "Logout"
 msgstr ""
 
@@ -821,6 +1143,18 @@ msgstr ""
 msgid "There are no modules installed."
 msgstr ""
 
+#: views/admin/unit_tests/intro.php:11
+msgid "Press the button below to start the automatic unit tests."
+msgstr ""
+
+#: views/admin/unit_tests/intro.php:15
+msgid "Start tests"
+msgstr ""
+
+#: views/admin/unit_tests/results.php:5
+msgid "Unit tests results"
+msgstr ""
+
 #: views/admin/users/list.php:22
 #: views/admin/users/groups/list.php:22
 msgid "List"
@@ -835,7 +1169,7 @@ msgid "Email address"
 msgstr ""
 
 #: views/admin/users/list.php:41
-#: views/admin/users/groups/edit.php:36
+#: views/admin/users/groups/edit.php:29
 msgid "Group"
 msgstr ""
 
@@ -855,29 +1189,29 @@ msgstr ""
 msgid "Back to groups list"
 msgstr ""
 
-#: views/admin/users/groups/edit.php:24
+#: views/admin/users/groups/edit.php:22
 msgid "Group informations"
 msgstr ""
 
-#: views/admin/users/groups/edit.php:36
+#: views/admin/users/groups/edit.php:29
 msgid "New group"
 msgstr ""
 
-#: views/admin/users/groups/edit.php:41
+#: views/admin/users/groups/edit.php:34
 #: views/admin/users/groups/list.php:36
 msgid "Group name"
 msgstr ""
 
-#: views/admin/users/groups/edit.php:44
+#: views/admin/users/groups/edit.php:37
 #: views/admin/users/groups/list.php:37
 msgid "Permissions"
 msgstr ""
 
-#: views/admin/users/groups/edit.php:57
+#: views/admin/users/groups/edit.php:50
 msgid "Save changes"
 msgstr ""
 
-#: views/admin/users/groups/edit.php:57
+#: views/admin/users/groups/edit.php:50
 msgid "Add group"
 msgstr ""
 

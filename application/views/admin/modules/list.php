@@ -27,7 +27,7 @@
 					<?php foreach ($modules as $module) {
 						?>
 					<tr>
-						<td><?php echo ucfirst($module); ?></td>
+						<td><?php echo ucfirst(str_replace('_', ' ', $module)); ?></td>
 						<td><a href="<?php echo admin_url('modules/docs/'.$module); ?>"><?php echo _('View'); ?></a></td>
 
 					</tr>

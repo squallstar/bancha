@@ -131,6 +131,9 @@ Class Installer
 		//Users table
 		$user_fields = array(
 		    'id_user'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
+			'date_update'	=> array('type'	=> 'INT'),
+            'id_type'		=> array('type'	=> 'INT', 'null' => TRUE),
+            'xml'			=> array('type'	=> 'TEXT', 'null' => TRUE),
 		    'id_group'	=> array('type'	=> 'INT', 'unsigned'	=> TRUE, 'constraint' => 3, 'null' => FALSE),
 		    'username'	=> array('type'	=> 'VARCHAR', 'constraint'	=> 64, 'null' => FALSE),
 		    'password'	=> array('type'	=> 'VARCHAR', 'constraint'	=> 64, 'null' => FALSE),
@@ -385,16 +388,17 @@ Class Installer
 	{
 		$directories = array(
 			$this->CI->config->item('attach_folder'),					//Attachs directory
-			$this->CI->config->item('xml_folder'),						//XML Types schemes
-			$this->CI->config->item('views_absolute_templates_folder'),	//XML Views,
-			$this->CI->config->item('fr_cache_folder')					//Cache files
+			$this->CI->config->item('xml_typefolder'),					//XML Types schemes
+			$this->CI->config->item('views_absolute_templates_folder'),	//Content type Views,
+			$this->CI->config->item('fr_cache_folder'),					//Bancha Cache files,
+			$this->CI->config->item('cache_path')						//CI Cache folder
 		);
 
 		foreach ($directories as $dir)
 		{
 			delete_directory($dir);
 			@mkdir($dir, DIR_WRITE_MODE, TRUE);
-			if ($dir != $this->CI->config->item('xml_folder'))
+			if ($dir != $this->CI->config->item('xml_typefolder'))
 			{
 				write_file($dir.'index.html', CMS.' does not allow directory listing.');
 			}
@@ -503,7 +507,7 @@ Class Installer
 		          'version'		=> BANCHA_VERSION
 		),TRUE);
 
-		$storage_path = $this->CI->config->item('xml_folder').$type_name.'.xml';
+		$storage_path = $this->CI->config->item('xml_typefolder').$type_name.'.xml';
 		return write_file($storage_path, $xml);
 	}
 }

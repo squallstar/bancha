@@ -1,4 +1,4 @@
-<div class="block withsidebar code_format">
+<div class="block withsidebar code_format docs">
 
 	<div class="block_head">
 		<div class="bheadl"></div>

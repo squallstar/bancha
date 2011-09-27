@@ -78,7 +78,6 @@ Class Contents extends Bancha_Controller
     */
     public function type($tipo='', $page=0)
     {
-
     	$type = $this->content->type($tipo);
     	$this->records->set_type($tipo);
         $this->view->set('tipo', $type);
@@ -122,7 +121,7 @@ Class Contents extends Bancha_Controller
             			{
             				$this->records->publish($record);
             				$this->pages->publish($record);
-            				$this->view->message('success', 'I record sono stati pubblicati.');
+            				$this->view->message('success', _('The records have been published.'));
             			}
             			break;
         			case 'depublish':
@@ -130,16 +129,23 @@ Class Contents extends Bancha_Controller
         				{
         					$this->records->depublish($record);
         					$this->pages->depublish($record);
-        					$this->view->message('success', 'I record sono stati depubblicati.');
+        					$this->view->message('success', _('The records have been depublished.'));
         				}
         				break;
         			case 'delete':
         				foreach ($records as $record)
         				{
         					$this->delete_record(NULL, $record, TRUE);
-        					$this->view->message('success', 'I record sono stati eliminati.');
+        					$this->view->message('success', _('The records have been deleted.'));
         				}
         				break;
+                    case 'discard':
+                    	foreach ($records as $record)
+        				{
+        					$this->records->discard($record);
+        					$this->view->message('success', _('The records have been rolled back to the production ones.'));
+        				}
+                        break;
             	}
         	}
         }
@@ -238,25 +244,26 @@ Class Contents extends Bancha_Controller
           	$record = $this->content->make_record($id_type, $this->input->post(NULL, FALSE));
 
             //We save the record
-            $record_id = $this->records->save($record);
+            $record->id = $this->records->save($record);
 
-            if ($record_id) {
+            if ($record->id) {
 	      	    if ($tipo['has_categories']) {
 	      		   //Aggiorno le categorie associate a questo record
-	      		   $this->categories->set_record_categories($record_id, $this->input->post('categories'));
+	      		   $this->categories->set_record_categories($record->id, $this->input->post('categories'));
 	      	    }
 
-    	      	if ($tipo['has_attachments'] && count($_FILES)) {
-
+    	      	if ($tipo['has_attachments'] && count($_FILES))
+                {
     	      		$files_copy = $_FILES;
 
-    				foreach ($files_copy as $name => $val) {
-
+    				foreach ($files_copy as $name => $val)
+                    {
     					$count = count($val['tmp_name']);
 
     					for ($i = 0; $i < $count; $i++)
     					{
-    						if ($val['tmp_name'][$i] != '') {
+    						if ($val['tmp_name'][$i] != '')
+                            {
     							$upload_config = array(
     								'allowed_types' => $tipo['fields'][$name]['mimes'],
     								'encrypt_name'	=> $tipo['fields'][$name]['encrypt_name'],
@@ -276,7 +283,7 @@ Class Contents extends Bancha_Controller
     							$_FILES[$name] = $single_file;
 
     							$this->documents->upload($name, $upload_config, array(
-    								'id'	=> $record_id,
+    								'id'	=> $record->id,
     								'table'	=> $tipo['table'],
     								'field'	=> $name,
     								'type'	=> $tipo['name'],
@@ -288,60 +295,62 @@ Class Contents extends Bancha_Controller
     	      	}
             }
 
-            //We take back the record from the Database
-            $record = $this->records->get($record_id);
-
-            //And we update all the alternative texts
+            //We update all the alternative texts
             if ($this->input->post('_alt_text', FALSE)) {
                 $alt_texts = $this->input->post('_alt_text', FALSE);
                 $priorities = $this->input->post('_priority', FALSE);
                 foreach ($alt_texts as $document_id => $new_text) {
                     if (isset($priorities[$document_id]))
                     {
-                        //TODO: capire quando la chiave $priorities[$document_id] non è settata
+                        //TODO: Sometimes the key $priorities[$document_id] is not set...
                         $this->documents->update_alt_text($document_id, $new_text, $priorities[$document_id]);
                     }
                 }
             }
 
             //We delete this hierarchies
-            if ($new_hierarchies = $this->input->post('_hierarchies', FALSE))
+            if ($tipo['has_hierarchies'])
             {
-                $new_hierarchies = $this->hierarchies->parse_data($new_hierarchies);
-                $this->hierarchies->update_record_hierarchies($record_id, $new_hierarchies);
+                $new_hierarchies = $this->input->post('_hierarchies', FALSE);
+                $this->hierarchies->update_record_hierarchies($record->id, $new_hierarchies);
             }
 
             //We clear the cache of this type
             $this->tree->clear_cache($tipo['name']);
-
-            //Pulisco la cache del menu di default se questo tipo ne fa parte
             if (in_array($tipo['name'], $this->config->item('default_tree_types')))
             {
             	$this->tree->clear_cache();
             }
 
-            if ($this->input->post('_bt_save_list'))
+            $value = $record->get('title');
+            if (!$value || $value == '')
             {
-                $value = $record->get('title');
-                if (!$value || $value == '')
-                {
-                    $value = $record->get($tipo['edit_link']);
-                }
-          		$this->session->set_flashdata('message', 'Il contenuto <a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$value.'</a> &egrave; stato correttamente salvato.');
-          	 	redirect('admin/contents/type/' . $tipo['name']);
-
-            } else if ($this->input->post('_bt_publish')) {
-          		$this->records->publish($record_id);
-          		$this->session->set_flashdata('message', 'Il contenuto "<a href="'.admin_url('contents/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$record->get('title').'</a>" &egrave; stato pubblicato.');
-          		redirect('admin/contents/type/' . $tipo['name']);
-
-            } else{
-          		$this->view->message('success', 'Il contenuto &egrave; stato correttamente salvato.');
+                $value = $record->get($tipo['edit_link']);
             }
 
-        }else if ($record_id != '') {
+            $content_edit_link = '<a href="'.admin_url(''.$this->_section.'/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$value.'</a>';
+
+            if ($this->input->post('_bt_save_list'))
+            { 
+                $msg = $this->lang->_trans('The content %n has been saved.', array('n' => $content_edit_link));
+          		$this->session->set_flashdata('message', $msg);
+                redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
+            } else if ($this->input->post('_bt_publish')) {
+
+          		$this->records->publish($record->id);
+                $msg = $this->lang->_trans('The content %n has been published.', array('n' => $content_edit_link));
+                $this->session->set_flashdata('message', $msg);
+                redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
+            } else {
+
+          		$this->view->message('success', _('The content has been saved.'));
+                redirect('admin/'.$this->_section.'/edit_record/' . $tipo['name'] . '/' . $record->id);
+            }
+
+        } else if ($record_id != '') {
+            //Edit record
             $record = $this->records->get($record_id);
-        }else {
+        } else {
         	//New record
     		$record = $this->content->make_record($tipo['id']);
         }
@@ -361,6 +370,7 @@ Class Contents extends Bancha_Controller
 
     		$this->view->set('tree', $tree);
 
+            //The first option value
     		$parent_tree = array(
     			'' => '--- '._('First level').' ---'
     		);
@@ -371,7 +381,7 @@ Class Contents extends Bancha_Controller
     		}
     		$this->view->set('parent_tree', $parent_tree);
 
-    		//Yes, i have a parent page
+    		//If it has a parent page
     		if ($child_id != '')
             {
     			$record->set('id_parent', $child_id);
@@ -397,7 +407,6 @@ Class Contents extends Bancha_Controller
             	$hierarchies = $this->hierarchies->get_record_hierarchies($record->id);
             	$this->hierarchies->set_active_nodes($hierarchies);
             }
-        	
         	$this->config->set_item('hierarchies', $this->hierarchies->get_tree());
         }
 
@@ -406,11 +415,24 @@ Class Contents extends Bancha_Controller
     		$record->set_documents();
         }
 
-        //We extract the custom options (when found)
-        foreach ($tipo['fields'] as $field_name => $field_value) {
-        	if (isset($field_value['extract'])) {
+        //Additional set-ups before the page rendering
+        foreach ($tipo['fields'] as $field_name => $field_value)
+        {
+        	if (isset($field_value['extract']))
+            {
+                //We extract the custom options
     			$tipo['fields'][$field_name]['options'] = $this->records->get_field_options($field_value);
         	}
+            else if ($tipo['fields'][$field_name]['type'] == 'hierarchy')
+            {
+                //We need to extract the active hierarchies for this field
+                $val = $record->get($field_name);
+                if (is_array($val) && count($val))
+                {
+                    $this->hierarchies->set_active_nodes($val);
+                }
+                $tipo['fields'][$field_name]['options'] = $this->hierarchies->get_tree();
+            }
         }
 
         $this->view->set('tipo', $tipo);
@@ -423,6 +445,8 @@ Class Contents extends Bancha_Controller
     * Deletes a record from the DB
     * @param int|string $tipo
     * @param int $id_record
+    * @param bool $callback
+    * @return bool success (only when $callback is set to false)
     */
     public function delete_record($tipo='', $id_record='', $callback=FALSE)
     {
@@ -464,10 +488,12 @@ Class Contents extends Bancha_Controller
     			{
     				$this->session->set_flashdata('message', 'Il record ['.$id_record.'] &egrave; stato eliminato.');
     				redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
-    			}
+    			} else {
+                    return true;
+                }
     		}
       	}else {
-      		show_error('L\'id del record da eliminare non &egrave; settato.', 500, 'Errore: id non settato');
+      		show_error(_('The record ID was not set.'), 500, _('Error'));
       	}
     }
 
@@ -505,14 +531,15 @@ Class Contents extends Bancha_Controller
     public function type_edit_xml($type = '') {
   		$tipo = $this->content->type($type);
 
-  		$xml_path = $this->config->item('xml_folder').$tipo['name'].'.xml';
+  		$xml_path = $this->config->item('xml_typefolder').$tipo['name'].'.xml';
 
   		if ($this->input->post('xml')) {
 			$done = write_file($xml_path, $this->input->post('xml'));
 			if ($done) {
 
-				$link = '<a href="'.admin_url('contents/type_edit_xml/'.$tipo['name']).'">'.$tipo['name'].'</a>';
-				$this->session->set_flashdata('message', 'La struttura del tipo di contenuto '.$link.' &egrave; stato aggiornata.');
+				$link = '<a href="'.admin_url('contents/type/'.$tipo['name']).'">'.$tipo['name'].'</a>';
+                $msg = $this->lang->_trans('The xml scheme of the content type %n has been updated', array('n' => $link));
+				$this->session->set_flashdata('message', $msg);
 
 				$this->content->rebuild();
 				redirect('admin/contents/');
@@ -587,6 +614,10 @@ Class Contents extends Bancha_Controller
     */
     public function renew_cache()
     {
+        //Database cache
+        if (CACHE) $this->db->cache_delete_all();
+
+        //Content types cache
     	if (!$this->content->rebuild())
         {
     		show_error(_('Cannot renew the cache.'), 500, _('Error'));
@@ -609,7 +640,7 @@ Class Contents extends Bancha_Controller
   		    redirect('admin/contents');
   		} else if ($this->input->post('delete'))
         {
-	  		$xml_path = $this->config->item('xml_folder').$tipo['name'].'.xml';
+	  		$xml_path = $this->config->item('xml_typefolder').$tipo['name'].'.xml';
 	  		$done = file_exists($xml_path) ? @unlink($xml_path) : TRUE;
 	  		if ($done)
             {

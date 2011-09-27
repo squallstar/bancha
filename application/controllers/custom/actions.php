@@ -4,7 +4,7 @@ if ( ! defined('CUSTOM_ACTION')) exit('This controller should be called only fro
 /**
  * Website Custom Actions Controller
  *
- * Controller per le azioni custom del front-end del sito internet
+ * This controller manage the custom actions of the website
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -24,15 +24,35 @@ Class Actions
 	}
 
 	/**
-	 * Azione dimostrativa
+	 * Demo action. Feel free to remove it!
 	 */
-	function helloworld()
+	public function helloworld($who_calls)
 	{
-		//Estraggo il menu di default
-		//(dovrebbe comunque esserci gia, visto che questo e' un forward del router)
-		$this->CI->view->set('tree', $this->CI->tree->get_default());
+		if ($who_calls == 'dispatcher')
+		{
+			//We just render the default template
+			$this->CI->view->render_template('default');
+		}
+		else if ($who_calls == 'content_render')
+		{
+			//This will be rendered inside the content_render
+			echo 'Hello world by the custom action';
+		}		
+	}
 
-		//Renderizzo il template default
-		$this->CI->view->render_template('default');
+	/**
+	 * Renders a contact form using the "contact_form" module.
+	 * Remember to use the "content_render" action mode when calling this action.
+	 */
+	public function contact_form()
+	{
+		$config = array(
+			'action'	=> 'email',
+			'from'		=> 'noreply@example.org',
+			'to'		=> 'support@example.org',
+			'subject'	=> 'New request received'
+		);
+
+		echo $this->CI->load->module('contact_form', $config)->render();
 	}
 }
