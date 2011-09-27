@@ -32,7 +32,7 @@ Class Settings extends Bancha_Controller
 
 	public function index()
 	{
-		
+		$this->view->render_layout('settings/list');
 	}
 
 
