@@ -55,8 +55,10 @@
 			<br />
 			<h3>Crediti</h3>
 
-			<?php echo CMS; ?> &egrave; stato interamente sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
-			Bancha &egrave; rilasciato con licenza GNU/GPL. Puoi visionare l'intera licenza dal file License.txt nella root del progetto.
+			<?php echo CMS; ?> &egrave; stato sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
+			Bancha &egrave; rilasciato con licenza GNU/GPL. Puoi visionare l'intera licenza dal file License.txt nella root del progetto.<br />
+			<br />
+			Copyright <a href="http://www.squallstar.it/">Squallstar Studio</a> &copy;2011 
 			</p>
 		</div>
 
@@ -320,7 +322,7 @@ Scegliendo <strong>azione personalizzata</strong>, la pagina invocher&agrave; l'
 		<div class="sidebar_content" id="sb-template-layout">
 			<h3>6. Template e Layout</h3>
 			<p>Bancha utilizza un sistema di viste composto da un elemento principale (<strong>template</strong>) che a sua volta renderizza altre sotto viste, tra cui <strong>header</strong>, <strong>footer</strong> e <strong>content_render</strong>.<br /><br />
-Questo vuol dire che un sito potrebbe avere anche 10 template diversi per le varie sezioni del sito internet.<br /><br />Ogni pagina, presenta un campo chiamato <strong>view_template</strong> che definisce il template da renderizzare per tale pagina. L'elenco dei templates &egrave; contenuto nella cartella <strong><?php echo THEMESPATH; ?>/nometema/views/templates</strong> e di base presenta questi templates:</p>
+Questo vuol dire che un sito potrebbe avere anche 10 template diversi per le varie sezioni del sito internet.<br /><br />Ogni pagina, presenta un campo chiamato <strong>view_template</strong> che definisce il template da renderizzare per tale pagina. L'elenco dei templates &egrave; contenuto nella cartella <strong><?php echo THEMESPATH; ?>nometema/views/templates</strong> e di base presenta questi templates:</p>
 <ul>
 	<li><strong><?php echo THEMESPATH; ?>nometema/views/templates/default.php</strong> - utilizzato di default per le pagine</li>
 	<li><strong><?php echo THEMESPATH; ?>nometema/views/templates/home.php</strong> - utilizzato dalla homepage del sito</li>
@@ -330,7 +332,7 @@ Questo vuol dire che un sito potrebbe avere anche 10 template diversi per le var
 &lt;?php $this->load->view('content_render'); ?&gt;
 &lt;?php $this->load->view('footer'); ?&gt;</code>
 <br />
-<div class="message info">La parte di layout relativa alle dichiarazioni <strong>html, head, body</strong> &egrave; contenuta nel file <?php echo THEMESPATH; ?>/desktop/views/layout.php</div>
+<div class="message info">La parte di layout relativa alle dichiarazioni <strong>html, head, body</strong> &egrave; contenuta nel file <?php echo THEMESPATH; ?>desktop/views/layout.php</div>
 <p>Quando definisci altri template, ricorda di inserire una nuova option nel campo <strong>view_template</strong> all'interno del tipo di contenuto (solitamente "Pagine") di modo che venga visualizzato il nuovo template nell'area amministrativa.<br /><br />
 Templates e views, dispongono gi&agrave; degli helper <strong>url</strong> e <strong>html</strong> di Code Igniter caricati, quindi potrai gi&agrave; utilizzarli.<br /><br />
 Anche i tipi di contenuto semplici (non strutturabili ad albero) presentano delle view per la loro visualizzazione:</p>
@@ -339,7 +341,7 @@ Anche i tipi di contenuto semplici (non strutturabili ad albero) presentano dell
 	<li><strong>application/views/type_templates/{NomeTipo}/list.php</strong> - utilizzata nel rendering di lista di pi&ugrave; contenuti di un singolo tipo.</li>
 </ul>
 <p>Senza toccare i template originali, puoi duplicare tali files all'interno del tuo tema e verrano utilizzati automaticamente se disponibili.<br />
-Ad esempio uno dei due files sopra elencati potr&agrave; essere duplicato nella seguente directory: <strong><?php echo THEMESPATH; ?>/desktop/type_templates</strong>.</p>
+Ad esempio uno dei due files sopra elencati potr&agrave; essere duplicato nella seguente directory: <strong><?php echo THEMESPATH; ?>desktop/type_templates</strong>.</p>
 <p>Nulla ti vieta di definire altri templates per i tipi e utilizzarli in maniere da te definite nel <strong>content_render.php</strong> (contenuto in ogni tema).</p>
 
 		</div>
@@ -357,7 +359,7 @@ Il metodo base per settare un oggetto nella view, &egrave; il <strong>set()</str
 <p>Dalla view, sar&agrave; possibile accedere agli oggetti impostati utilizzando le variabili semplici di PHP con la chiave impostata.
 Nel nostro esempio sopra, dalla view sar&agrave; disponibile la variabile in questo modo:</p>
 <code>echo $nome_oggetto;</code><br />
-<p>Nel caso fosse necessario eliminare una variabile prima del rendering della view, &egrave; possibile utilizzare il metodo <strong>remove()</strong> che accetta un singolo parametro (la chiave/nome dell'oggetto da eliminare).<br /><br />
+<p>Nel caso fosse necessario eliminare una variabile prima del rendering della view, &egrave; possibile utilizzare il metodo <strong>remove()</strong> che accetta come singolo parametro la chiave dell'oggetto da eliminare.<br /><br />
 Di seguito, le funzioni utili a renderizzare view, o templates.</p><br />
 
 <p>La classe view, presenta anche delle propriet&agrave; utili al layout quali:</p>
@@ -370,11 +372,11 @@ Di seguito, le funzioni utili a renderizzare view, o templates.</p><br />
 </ul>
 
 <h3>render_template($template_file, $layout = true)</h3>
-<p>Renderizza un template presenta nella directory dei templates, utilizzando lo skin in uso (solitamente <strong>application/views/website/desktop/templates/</strong>).
+<p>Renderizza un template presenta nella directory dei templates, utilizzando lo skin in uso (solitamente <strong><?php echo THEMESPATH; ?>nometema/templates/</strong>).
 &Egrave; il metodo di rendering pi&ugrave; utilizzato, e viene utilizzata soprattutto dal motore di routing generale del sito per renderizzare la struttura base delle pagine.<br />
 Nel caso non si volesse passare per il layout, passare come secondo parametro "false" e verr&agrave; renderizzato solo il template scelto.</p>
 <code>$this->render_template('default');
-//Renderizza il file application/views/website/desktop/templates/default.php
+//Renderizza il file <?php echo THEMESPATH; ?>nometema/templates/default.php
 
 $this->render_template('home');
 //Renderizza la homepage del sito, ovvero il file <?php echo THEMESPATH; ?>desktop/templates/home.php
@@ -397,7 +399,7 @@ $this->view->render_type_template('Gallerie', 'detail');
 //Renderizzer&agrave; il file application/views/type_templates/Gallerie/detail.php</code><br />
 
 <h3>render_layout($view_file)</h3>
-<p>Metodo che renderizza un layout utilizzando il path base settato precedentemente. Viene attualmente usato <strong>solamente dall'amministrazione</strong> utilizzando come base "admin/" in modo da renderizzare automaticamente solo le viste figlie di tale path.</p>
+<p>Metodo che renderizza un layout utilizzando il path base settato precedentemente.<br />Viene attualmente usato <strong>solamente dall'amministrazione</strong> utilizzando come base "admin/" in modo da renderizzare automaticamente solo le viste figlie di tale path.</p>
 <code>$this->view->base = 'admin/';
 $this->view->render_layout('docs/general');
 //Verr&agrave; renderizzato il file application/views/admin/layout/layout.php
@@ -853,32 +855,32 @@ $this->dispatcher->retrieve($data);</code><br />
 			<h3>site_url($path_to_append)</h3>
 			<p>Ritorna il path pubblico del sito, aggiungendone il path passato come parametro (opzionale).</p>
 <code>echo site_url('hello/world');
-// <?php echo site_url('hello/world'); ?></code><br />
+// <?php echo site_url('hello/world'); ?></code><br /><br />
 
 			<h3>theme_url($path_to_append)</h3>
 			<p>Ritorna il path pubblico del tema attualmente in uso, aggiungendone il path passato come parametro (opzionale).</p>
 <code>echo theme_url('css/style.css');
-// <?php echo theme_url('css/style.css'); ?></code><br />
+// <?php echo theme_url('css/style.css'); ?></code><br /><br />
 
 			<h3>attach_url($file_path)</h3>
 			<p>Ritorna il path pubblico di un allegato.</p>
 <code>echo attach_url('path/to/file.ext');
-// <?php echo attach_url('path/to/file.ext'); ?></code><br />
+// <?php echo attach_url('path/to/file.ext'); ?></code><br /><br />
 
 			<h3>preset_url($image_path, $preset, $append_siteurl)</h3>
 			<p>Ritorna il path del preset di una immagine, dato il suo percorso relativo e il preset scelto.<br />
 Come terzo parametro booleano, viene scelto se prependere il path del sito (<strong>site_url</strong>) e di default &egrave; impostato a TRUE.</p>
 <code>echo preset_url('attach/blog/images/1/file.jpg', 'user_profile);
-// <?php echo preset_url('attach/blog/images/1/file.jpg', 'user_profile'); ?></code><br />
+// <?php echo preset_url('attach/blog/images/1/file.jpg', 'user_profile'); ?></code><br /><br />
 
 			<h3>getter($url)</h3>
 			<p>Effettua una chiamata tramite <strong>cURL</strong> ad un webservice esterno e ritorna il responso.</p>
-<code>$result = getter('http://getbancha.com/');</code><br />
+<code>$result = getter('http://getbancha.com/');</code><br /><br />
 
 			<h3>breadcrumbs($array)</h3>
 			<p>Stampa le breadcrumbs, dato un array. Necessita di caricare l'helper <strong>breadcrumbs</strong> prima dell'utilizzo.</p>
 <code>$this->load->helper('breadcrumbs');
-echo breadcrumbs($this->tree->breadcrumbs);</code>
+echo breadcrumbs($this->tree->breadcrumbs);</code><br /><br />
 
 			<h3>menu($tree, $max_depth, $current_level, $show_in_menu)</h3>
 			<p>Stampa la struttura di un albero di menu. Il secondo parametro decide il massimo livello di iterazione, ed il terzo parametro il livello corrente di iterazione.</p>
