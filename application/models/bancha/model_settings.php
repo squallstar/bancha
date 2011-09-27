@@ -17,7 +17,7 @@ Class Model_settings extends CI_Model
 	/**
 	 * @var string The cache files
 	 */
-	private $_cachefile;
+	private $_cachefile = 'settings.tmp';
 
 	/**
 	 * @var string The database table
@@ -32,7 +32,7 @@ Class Model_settings extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
-		$this->_cachefile = $this->config->item('fr_cache_folder') . 'settings.cache';
+		$this->_cachefile = $this->config->item('fr_cache_folder') . $this->_cachefile;
 
 		if (file_exists($this->_cachefile))
 		{
@@ -69,6 +69,10 @@ Class Model_settings extends CI_Model
 		return FALSE;
 	}
 
+	/**
+	 * Clears the settings cache
+	 * The settings cache file will be generated during the next request!
+	 */
 	public function clear_cache()
 	{
 		if (file_exists($this->_cachefile))
@@ -77,6 +81,10 @@ Class Model_settings extends CI_Model
 		}
 	}
 
+	/**
+	 * Rebuild the settings cache, writes the file and returns the settings
+	 * @return array
+	 */
 	public function build_cache()
 	{
 		$contents = array();
