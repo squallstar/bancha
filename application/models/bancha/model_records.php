@@ -2,7 +2,7 @@
 /**
  * Records Model Class
  *
- * Classe per lavorare con i records del db
+ * A class to work with the records
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -35,32 +35,32 @@ Class Model_records extends CI_Model {
   	private $_single_type = FALSE;
 
   	/**
-  	* @var bool Definisce se siamo in stage
+  	* @var bool Are we in stage?
   	*/
   	private $_is_stage = FALSE;
 
   	/**
-  	* @var string Tabella di produzione
+  	* @var string Production table
   	*/
   	public $table;
 
   	/**
-  	* @var string Tabella di sviluppo
+  	* @var string Stage table
   	*/
  	public $table_stage;
 
  	/**
- 	* @var string Tabella corrente per le operazioni
+ 	* @var string The table we are currently working on
  	*/
  	public $table_current;
 
  	/**
- 	* @var string Chiave primaria delle tabelle correnti
+ 	* @var string Primary key of the current type
  	*/
   	public $primary_key;
 
   	/**
-  	* @var array Colonne da estrarre nelle SELECT di questo tipo
+  	* @var array Columns to extract during the select queries
   	*/
   	public $columns;
 
@@ -68,19 +68,19 @@ Class Model_records extends CI_Model {
   	{
     	parent::__construct();
 
-    	//Imposto il tipo predefinito "records"
+    	//We set the default type to be "records"
     	$this->set_type();
   	}
 
   	public function set_stage($bool)
   	{
-  		//Imposto la tabella su cui fare query
+  		//We set the current table
    	 	$this->table_current = $bool ? $this->table_stage : $this->table;
    	 	$this->_is_stage = $bool;
   	}
 
   	/**
-   	* Imposto se estrarre solo le colonne estraibili in modalità lista
+   	* Defines is we have to extract only the "list" fields or also the "details" ones
    	* @param bool $extract
    	*/
   	public function set_list($extract=TRUE)
@@ -90,7 +90,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-   	* Imposta un filtro where sul tipo
+   	* Sets a where filter on the content type
    	* @param int|string $type
    	*/
   	public function type($type='')
@@ -118,51 +118,51 @@ Class Model_records extends CI_Model {
     	return $this;
   	}
 
-  /**
-   * Imposto il tipo (tabella e pkey) su cui fare le operazioni
-   * @param int|string|array $type
-   */
-  public function set_type($type='')
-  {
-  	if ($type != '')
-	{
-		if (is_array($type))
+ 	/**
+  	* We set the type for the current extractions
+	* @param int|string|array $type
+  	*/
+	public function set_type($type='')
+ 	{
+		if ($type != '')
 		{
-			$tipo = $type;
+			if (is_array($type))
+			{
+				$tipo = $type;
+			} else {
+				$tipo = $this->content->type($type);
+			}
+
+			$this->_single_type = $tipo;
+
+			//We set the references
+		    $this->table = $tipo['table'];
+		    $this->table_stage = $tipo['table_stage'];
+		    $this->primary_key = $tipo['primary_key'];
+		    $this->columns = $tipo['columns'];
 		} else {
-			$tipo = $this->content->type($type);
+			$this->table = 'records';
+			$this->table_stage = 'records_stage';
+			$this->primary_key = 'id_record';
+		   $this->columns = $this->config->item('record_columns');
 		}
-
-		$this->_single_type = $tipo;
-
-		//We set the references
-	    $this->table = $tipo['table'];
-	    $this->table_stage = $tipo['table_stage'];
-	    $this->primary_key = $tipo['primary_key'];
-	    $this->columns = $tipo['columns'];
-	} else {
-		$this->table = 'records';
-		$this->table_stage = 'records_stage';
-		$this->primary_key = 'id_record';
-   		$this->columns = $this->config->item('record_columns');
+		$this->table_current = $this->_is_stage ? $this->table_stage : $this->table;
+		return $this;
 	}
-	$this->table_current = $this->_is_stage ? $this->table_stage : $this->table;
-	return $this;
-  }
 
 
-  /**
-   * Imposta un filtro sulla lingua se il tipo lo prevede
-   * @param string $language se non passato, utilizza la lingua corrente
-   */
-  public function language($language = '')
-  {
-  	if (isset($this->_single_type['fields']['lang']))
-  	{
-  		$this->db->where('lang', $language != '' ? $language : $this->lang->current_language);
-  	}
-  	return $this;
-  }
+	/**
+  	* Imposta un filtro sulla lingua se il tipo lo prevede
+	* @param string $language se non passato, utilizza la lingua corrente
+	*/
+	public function language($language = '')
+ 	{
+		if (isset($this->_single_type['fields']['lang']))
+ 		{
+			$this->db->where('lang', $language != '' ? $language : $this->lang->current_language);
+  		}
+  		return $this;
+	}
 
 	/**
    	* Imposta se prendere anche i documenti dei record durante le estrazioni
@@ -174,40 +174,40 @@ Class Model_records extends CI_Model {
     	return $this;
   	}
 
-  /**
-   * Imposta un filtro where (anche sui campi xml del record)
-   * @param string $field
-   * @param int|string $value
-   */
-  public function where($field='', $value=null)
-  {
-  	if ($value == null)
-	{
-		$this->db->where($field);
-	} else if ($field != '')
-	{
-	    if ($field == 'id' || $field == $this->primary_key)
-	    {
-	      $this->db->where($this->table_current.'.'.$this->primary_key, $value);
-	      $this->db->limit(1);
-	    }
-	    else if ($field == 'id_type' || $field == 'type' || $field == 'id_tipo' || $field == 'tipo')
-	    {
-	      $this->type($value);
-	    }
-	    else if (in_array($field, $this->columns))
-	    {
-	      $this->db->where($this->table_current.'.'.$field, $value);
-	    } else{
-	      //Xml search by tag content
-	      $this->db->like($this->table_current.'.xml', '%<'.$field.'>'.CDATA_START.$value.CDATA_END.'</'.$field.'>%');
-	    }
-    }
-    return $this;
-  }
+  	/**
+  	 * Imposta un filtro where (anche sui campi xml del record)
+  	 * @param string $field
+  	 * @param int|string $value
+  	 */
+  	public function where($field='', $value=null)
+  	{
+  		if ($value == null)
+  		{
+  			$this->db->where($field);
+  		} else if ($field != '')
+  		{
+  			if ($field == 'id' || $field == $this->primary_key)
+  			{
+				$this->db->where($this->table_current.'.'.$this->primary_key, $value);
+				$this->db->limit(1);
+  			}
+  			else if ($field == 'id_type' || $field == 'type' || $field == 'id_tipo' || $field == 'tipo')
+  			{
+				$this->type($value);
+  			}
+  			else if (in_array($field, $this->columns))
+  			{
+				$this->db->where($this->table_current.'.'.$field, $value);
+  			} else {
+				//Xml search by tag content
+				$this->db->like($this->table_current.'.xml', '%<'.$field.'>'.CDATA_START.$value.CDATA_END.'</'.$field.'>%');
+  			}
+    	}
+    	return $this;
+  	}
 
   	/**
-   	* Imposta una condizione WHERE IN sull'id_record
+   	* Sets a "where in" condition for the primary key
    	* @param array $record_ids
    	*/
   	public function id_in($record_ids)
@@ -216,38 +216,36 @@ Class Model_records extends CI_Model {
     	return $this;
   	}
 
-  /**
-   * Imposta una JOIN con la tabella delle pagine ricercando l'URI richiesto
-   * @param string $string
-   * //TODO forse meglio spezzare e ricercare sulla tabella pages l'id e cercare qua senza join!
-   */
-  public function full_uri($string) {
-	//$this->db->select('full_uri');
-  	$this->db->join($this->pages->table_current,
-  					$this->pages->table_current.'.id_record = '.$this->table_current.'.'.$this->primary_key,
-  					'inner')
-  			 ->where('full_uri', $string);
-  	return $this;
-  }
+  	/**
+  	 * Sets a JOIN query on the pages tables and adds a search condition on the full_uri
+  	 * @param string $string
+  	 */
+  	public function full_uri($string) {
+  		$this->db->join($this->pages->table_current,
+  		$this->pages->table_current.'.id_record = '.$this->table_current.'.'.$this->primary_key,
+  					'inner')->where('full_uri', $string);
+  		return $this;
+  	}
 
-  /**
-   * Imposta un filtro like (anche sui campi xml del record)
-   * @param string $field
-   * @param int|string $value
-   */
-  public function like($field='', $value='')
-  {
-      if ($field != '') {
-        if (in_array($field, $this->_single_type['columns']))
-        {
-       		$this->db->like($field, $value);
-      	} else {
-        	//Xml search by tag content
-        	$this->db->like($this->table_current.'.xml', '<'.$field.'>'.CDATA_START.'%'.$value.'%'.CDATA_END.'</'.$field.'>');
-      	}
-      }
-      return $this;
-  }
+  	/**
+  	 * Sets a like search condition
+  	 * @param string $field
+  	 * @param int|string $value
+  	 */
+  	public function like($field='', $value='')
+  	{
+  		if ($field != '')
+  		{
+  			if (in_array($field, $this->_single_type['columns']))
+  			{
+  				$this->db->like($field, $value);
+  			} else {
+  				//Xml search by tag content
+  				$this->db->like($this->table_current.'.xml', '<'.$field.'>'.CDATA_START.'%'.$value.'%'.CDATA_END.'</'.$field.'>');
+  			}
+  		}
+  		return $this;
+  	}
 
   /**
    * Imposta un limite sui risultati
@@ -713,7 +711,7 @@ Class Model_records extends CI_Model {
   public function publish($id = '')
   {
       if ($id == '') {
-        show_error('ID del contenuto da pubblicare non specificato. (records/publish)');
+        show_error('ID not specified. (records/publish)');
       }
     $record = $this->db->from($this->table_stage)
                		   ->where($this->primary_key, $id)
@@ -751,10 +749,10 @@ Class Model_records extends CI_Model {
       }
       if ($done)
       {
-      	//Aggiorno gli allegati
+      	//We update the attachments
       	$this->load->documents();
       	$this->documents->put_live_documents($this->table, $id);
-      	//Aggiorno il record in stage
+      	//And we update the state of the staged record
         return $this->db->where($this->primary_key, $id)
                   		->update($this->table_stage, array('published' => 1, 'date_publish' => $stage_record['date_publish']));
       }
@@ -763,7 +761,7 @@ Class Model_records extends CI_Model {
   }
 
   /**
-   * Depubblico un record
+   * Depublishes a record
    * @param $id
    * @return bool
    */
@@ -779,28 +777,30 @@ Class Model_records extends CI_Model {
     {
       $this->events->log('depublish', $id, $id);
 
-      //Elimino gli allegati in produzione
+      //We delete the attachments
       $this->load->documents();
       $this->documents->delete_records_by_binds($this->table, $id, TRUE);
 
-      //Aggiorno lo stato del record di sviluppo
+      //And we update the staged record status
       return $this->db->where($this->primary_key, $id)
               ->update($this->table_stage, array('published' => 0));
     }
   }
 
   /**
-   * Estrazione delle options di un tipo
+   * Extracts the custom options of a content type
    * @param string (id) $field
    * @return array
    */
   public function get_field_options($field)
   {
-  	if (isset($field['extract'])) {
+  	if (isset($field['extract']))
+  	{
   		$options = array();
 
-  		switch ($field['extract']) {
-  			//Estrazione di una query non cacheata
+  		switch ($field['extract'])
+  		{
+  			//Non-cached query
   			case 'query':
   				$sql = $field['options'];
   				//Stage tables
@@ -812,14 +812,16 @@ Class Model_records extends CI_Model {
   						  'FROM '.$this->db->dbprefix.$this->table_current)
   						  , $sql);
   				$result = $this->db->query($sql)->result();
-  				if (count($result)) {
-  					foreach ($result as $option) {
+  				if (count($result))
+  				{
+  					foreach ($result as $option)
+  					{
   						$options[$option->value] = $option->name;
   					}
   				}
   				break;
 
-  				//Valori interni al framework/tipo
+  			//Framework internal references
   			case 'custom':
   				eval('$options = ' . $field['options'].';');
   				break;
