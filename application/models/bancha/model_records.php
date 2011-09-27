@@ -247,203 +247,202 @@ Class Model_records extends CI_Model {
   		return $this;
   	}
 
-  /**
-   * Imposta un limite sui risultati
-   * @param start $a start
-   * @param string $b howmany
-   */
-  public function limit($a, $b=0)
-  {
-      $this->db->limit($a, $b);
-      return $this;
-  }
-
-  /**
-   * Imposta l'ordine dei risultati
-   * @param string $a field name
-   * @param string $b ASC|DESC
-   */
-  public function order_by($a, $b=null)
-  {
-    $this->db->order_by($a, $b);
-    return $this;
-  }
-
-  /**
-   * Conta i records anziché estrarli
-   * @return int
-   */
-  public function count()
-  {
-      $query = $this->db->select('COUNT('.$this->db->dbprefix.$this->table_current.'.'.$this->primary_key.') as total')
-                ->from($this->table_current)->get()->result();
-      $row = $query[0];
-      return (int)$row->total;
-  }
-
-  /**
-   * Imposta se estrarre solo record pubblicati o depubblicati
-   * @param bool $published
-   */
-  public function published($published = TRUE)
-  {
-      $this->db->where($this->table_current.'.published', $bool ? 1 : 0);
-      return $this;
-  }
-
-  /**
-   * Gets the records
-   * @param int $id parametro opzionale per ricevere un singolo record
-   * se impostato l'id, ritorna il record richiesto anzichè un array di records
-   */
-  public function get($id='')
-  {
-  	$stage = $this->content->is_stage;
-  	$this->set_stage($stage);
-
-  	$fields_to_select = array();
-  	$record_columns = $this->columns;
-
-  	//We check if we're searching for a list (not detail), and just for one type
-  	if ($this->_is_list && $this->_single_type)
+  	/**
+  	 * Imposta un limite sui risultati
+  	 * @param start $a start
+  	 * @param string $b howmany
+  	 */
+  	public function limit($a, $b=0)
   	{
-  		foreach ($record_columns as $single_field)
+  		$this->db->limit($a, $b);
+  		return $this;
+  	}
+
+  	/**
+  	 * Imposta l'ordine dei risultati
+  	 * @param string $a field name
+  	 * @param string $b ASC|DESC
+  	 */
+  	public function order_by($a, $b=null)
+  	{
+		$this->db->order_by($a, $b);
+		return $this;
+  	}
+
+  	/**
+  	 * Conta i records anziché estrarli
+  	 * @return int
+  	 */
+  	public function count()
+  	{
+		$query = $this->db->select('COUNT('.$this->db->dbprefix.$this->table_current.'.'.$this->primary_key.') as total')
+  						  ->from($this->table_current)
+  						  ->get()
+  						  ->result();
+  		$row = $query[0];
+  		return (int)$row->total;
+  	}
+
+  	/**
+  	 * Imposta se estrarre solo record pubblicati o depubblicati
+  	 * @param bool $published
+  	 */
+  	public function published($published = TRUE)
+  	{
+  		$this->db->where($this->table_current.'.published', $bool ? 1 : 0);
+  		return $this;
+  	}
+
+  	/**
+  	 * Gets the records
+  	 * @param int $id optional parameter to get just a record instead the array
+  	 */
+  	public function get($id='')
+  	{
+  		$stage = $this->content->is_stage;
+  		$this->set_stage($stage);
+
+  		$fields_to_select = array();
+  		$record_columns = $this->columns;
+
+  		//We check if we're searching for a list (not detail), and just for one type
+  		if ($this->_is_list && $this->_single_type)
   		{
-			//If we are in list mode, we check if we have to extract this field (only physical columns)
-	 		if (isset($this->_single_type['fields'][$single_field]))
-	  		{
-	  			if ($this->_single_type['fields'][$single_field]['list'] === TRUE
-	  				//&& !in_array($single_field, $not_selectable)
-	  				//TODO: da fixare o comunque controllare!
-	  				)
-		  			{
-		  				$fields_to_select[] = $single_field;
-		  			}
-	  		} else {
-	  			$fields_to_select[] = $single_field;
-	  		}
+  			foreach ($record_columns as $single_field)
+  			{
+  				//If we are in list mode, we check if we have to extract this field (only physical columns)
+  				if (isset($this->_single_type['fields'][$single_field]))
+  				{
+  					if ($this->_single_type['fields'][$single_field]['list'] === TRUE
+  					//&& !in_array($single_field, $not_selectable)
+  					//TODO: fix and check
+  					)
+  					{
+  						$fields_to_select[] = $single_field;
+  					}
+  				} else {
+  					$fields_to_select[] = $single_field;
+  				}
+  			}
+  		} else {
+  			//Standard SELECT extraction
+  			$fields_to_select = $record_columns;
   		}
-  	} else {
-  		//Standard SELECT extraction
-		$fields_to_select = $record_columns;
+
+  		//Columns not available in the production table
+  		if ($this->table == $this->table_current)
+  		{
+  			$not_selectable = $this->config->item('record_not_live_columns');
+  			$fields_to_select = array_diff($fields_to_select, $not_selectable);
+  		}
+
+  		if (is_numeric($id))
+  		{
+  			//Single record
+  			$this->db->where($this->table_current.'.'.$this->primary_key, $id);
+  			$this->db->limit(1);
+  		}
+
+  		//Additional fields for the tree type
+  		if ($this->last_search_has_tree)
+  		{
+  			$this->db->select(
+  				  $this->table_current . '.'
+  				. implode(', '.$this->table_current.'.', $this->config->item('record_select_tree_fields'))
+  			);
+  		}
+
+  		$query = $this->db->select(
+  				$this->table_current.'.'.implode(', '.$this->table_current.'.', $fields_to_select)
+  			)->from($this->table_current)->get();
+
+  		if ($query->num_rows())
+  		{
+  			$results = $query->result();
+  			$records = array();
+  			foreach ($results as $item) {
+
+  				if (!isset($item->id_type) || !$item->id_type)
+  				{
+  					$tipo = $this->_single_type;
+  					$record = new Record();
+  					$record->set_type($tipo);
+  					$type_name = $tipo['name'];
+  				} else {
+  					$record = $this->content->make_record($item->id_type);
+  					$tipo = $this->content->type($item->id_type);
+  					$type_name = $this->content->type_name($item->id_type);
+  				}
+
+  				if ($record instanceof Record) {
+
+  					$record->id = $item->{$tipo['primary_key']};
+  					$record->tipo = $type_name;
+  					$record->xml = $item->xml;
+
+  					foreach ($fields_to_select as $column)
+  					{
+  						if ($item->$column)
+  						{
+  							if (isset($tipo['fields'][$column]['type']))
+  							{
+  								if ($tipo['fields'][$column]['type'] == 'date')
+  								{
+  									//We convert the date fields into timestamps
+  									$record->set('_'.$column, $item->$column);
+  									$item->$column = date('d/m/Y', $item->$column);
+  								} else if ($tipo['fields'][$column]['type'] == 'datetime')
+  								{
+  									if ($item->$column)
+  									{
+  										$record->set('_'.$column, $item->$column);
+  										$item->$column = date('d/m/Y H:i', $item->$column);
+  									}
+  								}
+  								else if (in_array($tipo['fields'][$column]['type'], config_item('array_field_types')))
+  								{
+  									$item->$column = explode('||', trim($item->$column, '|'));
+  								}
+  							}
+  							$record->set($column, $item->$column);
+  						}
+  					}
+
+  					if ($this->last_search_has_tree) {
+  						foreach ($this->config->item('record_select_tree_fields') as $field_name)
+  						{
+  							$record->set($field_name, $item->$field_name);
+  						}
+  					}
+
+  					$record->build_data();
+
+  					if ($this->_get_documents)
+  					{
+  						$record->set_documents();
+  					}
+
+  				}else{
+  					show_error(_('Cannot build the record.').' (records/get)');
+  				}
+  				$records[] = $record;
+
+  			}
+
+  			//Reset the switchs
+  			$this->last_search_has_tree = FALSE;
+  			$this->_get_documents = FALSE;
+
+  			if (is_numeric($id))
+  			{
+  				return $records[0];
+  			} else {
+  				return $records;
+  			}
+  		} else {
+  			return array();
+  		}
   	}
-
-  	//Columns not available in the production table
-  	if ($this->table == $this->table_current)
-  	{
-  		$not_selectable = $this->config->item('record_not_live_columns');
-  		$fields_to_select = array_diff($fields_to_select, $not_selectable);
-  	}
-
-    if (is_numeric($id))
-    {
-      //Single record
-      $this->db->where($this->table_current.'.'.$this->primary_key, $id);
-      $this->db->limit(1);
-    }
-
-    //Additional fields for the tree type
-    if ($this->last_search_has_tree)
-    {
-      $this->db->select(
-      	$this->table_current.'.'.implode(', '.$this->table_current.'.', $this->config->item('record_select_tree_fields'))
-      );
-    }
-
-    $query = $this->db->select($this->table_current.'.'.implode(', '.$this->table_current.'.', $fields_to_select))
-                      ->from($this->table_current)
-                      ->get();
-
-    if ($query->num_rows())
-    {
-      $results = $query->result();
-      $records = array();
-      foreach ($results as $item) {
-
-      	if (!isset($item->id_type) || !$item->id_type)
-      	{
-      		$tipo = $this->_single_type;
-      		$record = new Record();
-      		$record->set_type($tipo);
-      		$type_name = $tipo['name'];
-      	} else {
-      		$record = $this->content->make_record($item->id_type);
-      		$tipo = $this->content->type($item->id_type);
-      		$type_name = $this->content->type_name($item->id_type);
-      	}
-
-
-
-      	if ($record instanceof Record) {
-
-      		$record->id = $item->{$tipo['primary_key']};
-      		$record->tipo = $type_name;
-      		$record->xml = $item->xml;
-
-      		foreach ($fields_to_select as $column)
-      		{
-      			if ($item->$column)
-      			{
-      				if (isset($tipo['fields'][$column]['type']))
-      				{
-      					if ($tipo['fields'][$column]['type'] == 'date')
-      					{
-      						//We convert the date fields into timestamps
-      						$record->set('_'.$column, $item->$column);
-      						$item->$column = date('d/m/Y', $item->$column);
-      					} else if ($tipo['fields'][$column]['type'] == 'datetime')
-      					{
-      						if ($item->$column)
-      						{
-      							$record->set('_'.$column, $item->$column);
-      							$item->$column = date('d/m/Y H:i', $item->$column);
-      						}
-      					}
-      					else if (in_array($tipo['fields'][$column]['type'], config_item('array_field_types')))
-      					{
-      						$item->$column = explode('||', trim($item->$column, '|'));
-      					}
-      				}
-      				$record->set($column, $item->$column);
-      			}
-      		}
-
-      		if ($this->last_search_has_tree) {
-      			foreach ($this->config->item('record_select_tree_fields') as $field_name)
-			        	{
-			            	$record->set($field_name, $item->$field_name);
-			          	}
-			        }
-
-			        $record->build_data();
-
-			        if ($this->_get_documents)
-			        {
-			        	$record->set_documents();
-			        }
-
-			    }else{
-			    	show_error(_('Cannot build the record.').' (records/get)');
-			    }
-		    $records[] = $record;
-
-      }
-
-      //Reset the switchs
-      $this->last_search_has_tree = FALSE;
-      $this->_get_documents = FALSE;
-
-      if (is_numeric($id))
-      {
-        return $records[0];
-      }else{
-        return $records;
-      }
-
-    }else{
-      return array();
-    }
-  }
 
 	/**
    	* Insert or updates a Record into DB
@@ -454,13 +453,10 @@ Class Model_records extends CI_Model {
   	{
 	    if ($record instanceof Record)
 	    {
-
 			//We build the record xml
 	        $record->build_xml();
 
 	        $id = $record->id;
-
-
 
 	      	//If type is set, let's take it!
 	      	if (!$record->_tipo_def)
@@ -546,10 +542,8 @@ Class Model_records extends CI_Model {
 				$this->load->events();
 			}
 
-	      	if ($id) {
-	      		//Let's check if the id is published >> useless????
-	       		//$is_published = $this->id_is_published($id);
-
+	      	if ($id)
+	      	{
 		        //The primary key will be used as update where clause
 	         	unset($data[$tipo['primary_key']]);
 
@@ -611,8 +605,8 @@ Class Model_records extends CI_Model {
   	* @param int $record_id
   	* @return bool
   	*/
- 	public function delete_by_id($record_id, $type = '') {
-
+ 	public function delete_by_id($record_id, $type = '')
+ 	{
   		if ($type != '')
   		{
   			$this->set_type($type);
