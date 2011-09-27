@@ -16,7 +16,7 @@
 				<li><a href="#sb-types-xml">4. Schema XML dei tipi</a></li>
 				<li><a href="#sb-page-actions">5. Azioni delle pagine</a></li>
 				<li><a href="#sb-template-layout">6. Template e Layout</a></li>
-				<li><a href="#sb-views">7. View e rendering</a></li>
+				<li><a href="#sb-views">7. Temi, view e rendering</a></li>
 				<li><a href="#sb-extract-records">8. Estrazione di contenuti</a></li>
 				<li><a href="#sb-documents">9. Documenti (files)</a>
 				<li><a href="#sb-trees">10. Alberi di menu</a></li>
@@ -319,33 +319,35 @@ Scegliendo <strong>azione personalizzata</strong>, la pagina invocher&agrave; l'
 		<div class="sidebar_content" id="sb-template-layout">
 			<h3>6. Template e Layout</h3>
 			<p>Bancha utilizza un sistema di viste composto da un elemento principale (<strong>template</strong>) che a sua volta renderizza altre sotto viste, tra cui <strong>header</strong>, <strong>footer</strong> e <strong>content_render</strong>.<br /><br />
-Questo vuol dire che un sito potrebbe avere anche 10 template diversi per le varie sezioni del sito internet.<br /><br />Ogni pagina, presenta un campo chiamato <strong>view_template</strong> che definisce il template da renderizzare per tale pagina. L'elenco dei templates &egrave; contenuto nella cartella <strong>application/views/layout/templates</strong> e di base presenta questi templates:</p>
+Questo vuol dire che un sito potrebbe avere anche 10 template diversi per le varie sezioni del sito internet.<br /><br />Ogni pagina, presenta un campo chiamato <strong>view_template</strong> che definisce il template da renderizzare per tale pagina. L'elenco dei templates &egrave; contenuto nella cartella <strong><?php echo THEMESPATH; ?>/nometema/views/templates</strong> e di base presenta questi templates:</p>
 <ul>
-	<li><strong><?php echo THEMESPATH; ?>desktop/templates/default.php</strong> - utilizzato di default per le pagine</li>
-	<li><strong><?php echo THEMESPATH; ?>desktop/templates/home.php</strong> - utilizzato dalla homepage del sito</li>
+	<li><strong><?php echo THEMESPATH; ?>nometema/views/templates/default.php</strong> - utilizzato di default per le pagine</li>
+	<li><strong><?php echo THEMESPATH; ?>nometema/views/templates/home.php</strong> - utilizzato dalla homepage del sito</li>
 </ul>
 <p>Come potrai vedere, ognuno di questi template contiene del codice HTML dichiarativo e a sua volta sceglie quali altre view renderizzare. Per renderizzare altre view, &egrave; sufficiente utilizzare la funzione nativa <strong>load->view</strong> di Code Igniter. Ecco un esempio di template:</p>
 <code>&lt;?php $this->load->view('header'); ?&gt;
 &lt;?php $this->load->view('content_render'); ?&gt;
 &lt;?php $this->load->view('footer'); ?&gt;</code>
 <br />
-<div class="message info">La parte di layout relativa alle dichiarazioni <strong>html, head, body</strong> &egrave; contenuta nel file ../views/website/desktop/layout.php</div>
+<div class="message info">La parte di layout relativa alle dichiarazioni <strong>html, head, body</strong> &egrave; contenuta nel file <?php echo THEMESPATH; ?>/desktop/views/layout.php</div>
 <p>Quando definisci altri template, ricorda di inserire una nuova option nel campo <strong>view_template</strong> all'interno del tipo di contenuto (solitamente "Pagine") di modo che venga visualizzato il nuovo template nell'area amministrativa.<br /><br />
 Templates e views, dispongono gi&agrave; degli helper <strong>url</strong> e <strong>html</strong> di Code Igniter caricati, quindi potrai gi&agrave; utilizzarli.<br /><br />
 Anche i tipi di contenuto semplici (non strutturabili ad albero) presentano delle view per la loro visualizzazione:</p>
 <ul>
-	<li><strong>application/views/website/type_templates/{NomeTipo}/detail.php</strong> - utilizzata nel rendering di dettaglio di un singolo contenuto</li>
-	<li><strong>application/views/website/type_templates/{NomeTipo}/list.php</strong> - utilizzata nel rendering di lista di pi&ugrave; contenuti di un singolo tipo.</li>
+	<li><strong>application/views/type_templates/{NomeTipo}/detail.php</strong> - utilizzata nel rendering di dettaglio di un singolo contenuto</li>
+	<li><strong>application/views/type_templates/{NomeTipo}/list.php</strong> - utilizzata nel rendering di lista di pi&ugrave; contenuti di un singolo tipo.</li>
 </ul>
-<p>Nulla ti vieta di definire altri templates per i tipi e utilizzarli in maniere da te definite nel <strong>content_render.php</strong> (contenuto in <?php echo THEMESPATH; ?>desktop/).</p>
+<p>Senza toccare i template originali, puoi duplicare tali files all'interno del tuo tema e verrano utilizzati automaticamente se disponibili.<br />
+Ad esempio uno dei due files sopra elencati potr&agrave; essere duplicato nella seguente directory: <strong><?php echo THEMESPATH; ?>/desktop/type_templates</strong>.</p>
+<p>Nulla ti vieta di definire altri templates per i tipi e utilizzarli in maniere da te definite nel <strong>content_render.php</strong> (contenuto in ogni tema).</p>
 
 		</div>
 
 		<div class="sidebar_content" id="sb-views">
-			<h3>7. View e rendering</h3>
+			<h3>7. Temi, view e rendering</h3>
 			<p>NOTA: il front-end del sito, pu&ograve; utilizzare pi&ugrave; temi per differenziare ad esempio il sito <strong>desktop</strong> dalla versone <strong>mobile</strong>.
 Tale configurazione &egrave; disponibile nel file di configurazione di Bancha alla voce "WEBSITE THEMES", e si riferiscono al nome della directory
-presente nella directory <?php echo THEMESPATH; ?>. Per default, la skin utilizzata &egrave; la "desktop", e nel caso sia presente la skin mobile
+presente nella directory <strong><?php echo THEMESPATH; ?></strong>. Per default, la skin utilizzata &egrave; la "desktop", e nel caso sia presente la skin mobile
 verr&agrave; effettuato lo switch in automatico nel caso che il sito venga visitato da un device mobile.</p>
 			<p>Bancha utilizza la classe <strong>View</strong> per settare degli oggetti nelle viste e renderizzarle.<br />
 L'oggetto view, &egrave; presente globalmente accedendo alla variabile "view" di Code Igniter in questo modo: <strong>$this->view</strong>.<br /><br />
