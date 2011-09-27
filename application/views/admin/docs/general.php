@@ -533,7 +533,7 @@ $documenti = $this->documents->table('records')->id(12)->limit(10)->get();
 			<p>
 			Per ottenere alberi di menu (solo contenuti di tipo pagina), &egrave; disponibile la seguente classe:</p>
 <code>$this->tree</code><br />
-<p>Il tipo di contenuto da utilizzare come default per la creazione dell'albero del sito, va definito nel file di configurazione di <?php echo CMS; ?> alla voce <strong>DEFAULT TREE TYPE</strong>. Per estrarre l'albero generale del sito, utilizzare la funzione "get_default()" come segue:</p>
+<p>Il tipo di contenuto da utilizzare come default per la creazione dell'albero del sito, va definito nel file di configurazione di <?php echo CMS; ?> alla voce <strong>DEFAULT TREE TYPE</strong>. Per estrarre l'albero generale del sito, utilizzare la funzione <strong>get_default()</strong> come segue:</p>
 <code>//Estraggo l'albero generale delle pagine
 $this->tree-><strong>get_default()</strong>;</code>
 <br />
@@ -543,6 +543,9 @@ $this->tree-><strong>get_default()</strong>;</code>
 $this->load->helper('menu');
 echo <strong>menu</strong>($albero);</code>
 <br /><p>L'helper provveder&agrave; in automatico a "flaggare" i vari stati sulle pagine aperte, o eventuali sotto pagine selezionate con le classi "open" e "selected".</p>
+<p>Nel caso in cui volessi visualizzare solamente pagine figlie di quella attuale, utilizza la funzione <strong>get_current_branch()</strong> come segue:</p>
+<code>echo menu($this->tree->get_current_branch());</code>
+<br />
 <div class="message info"><?php echo CMS; ?> provvede gi&agrave; ad estrarre il tipo di contenuto <strong>"<?php echo implode(', ', $this->config->item('default_tree_types')); ?>"</strong> come albero generale del sito internet.</div>
 <p>Puoi anche estrarre diversi alberi di menu secondo le tue esigenze. La classe Tree contiene metodi simili a quanto gi&agrave; visto con la classe Records. Ecco alcuni dei metodi utilizzabili per rifinire le estrazioni:</p>
 <ul>
