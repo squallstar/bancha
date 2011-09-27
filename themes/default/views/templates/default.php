@@ -27,7 +27,7 @@ $this->view->render('header');
 			<?php 
 			$branch = $this->tree->get_current_branch();
 			if ($branch) {
-				echo menu();
+				echo menu($branch);
 				echo '<div class="hr dotted clearfix">&nbsp;</div>';
 			}
 			 ?>
