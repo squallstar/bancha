@@ -27,6 +27,12 @@ Class Settings extends Bancha_Controller
 
 	    $this->auth->needs_login();
 
+	    $this->load->settings();
+	}
+
+	public function index()
+	{
+		
 	}
 
 
