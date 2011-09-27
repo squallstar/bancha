@@ -53,7 +53,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 <script type="text/javascript" src="<?php echo theme_url(); ?>js/jquery.roundabout-1.0.min.js"></script> 
 <script type="text/javascript" src="<?php echo theme_url(); ?>js/jquery.easing.1.3.js"></script> 
 
-
 <?php
 if (isset($page))
 {

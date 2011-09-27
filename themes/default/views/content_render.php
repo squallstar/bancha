@@ -8,8 +8,7 @@ if (isset($page) && $page->is_page()) {
 
 			case 'text':
 				echo '<h1 class="page_title">'.$page->get('title').'</h1>'.
-					 '<div class="hr dotted clearfix">&nbsp;</div>'.
-					 '<p class="info">'.menu($this->tree->get_current_branch()).'</p>';
+					 '<div class="hr dotted clearfix">&nbsp;</div>';
 				echo '<div class="body"'.$this->view->live_tags('contenuto', $page).'>'.$page->get('contenuto').'</div><div class="clear"></div>';
 				break;
 

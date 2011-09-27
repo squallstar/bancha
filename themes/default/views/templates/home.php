@@ -52,7 +52,7 @@ $this->view->render('header');
 <div class="hr grid_12 clearfix">&nbsp;</div>
 	
 <!-- Caption Line -->
-<h2 class="grid_12 caption clearfix">Welcome! This is the <span>homepage</span>, of your website!</h2>
+<h2 class="grid_12 caption clearfix">Welcome! This is the <span>homepage</span> of your website!</h2>
 
 <div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 <div id="quicknav" class="grid_12">
