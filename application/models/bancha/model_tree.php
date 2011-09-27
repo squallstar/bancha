@@ -22,6 +22,7 @@ Class Model_tree extends CI_Model {
 	private $_show_invisibles = FALSE;
 	private $_uri_segments = array();
 	private $_use_lang = FALSE;
+	private $_current_branch = FALSE;
 
 	public $current_page_uri = '';
 	public $parent_page_uri = false;
@@ -426,19 +427,25 @@ Class Model_tree extends CI_Model {
 	 */
 	public function get_current_branch()
 	{
-		$id = FALSE;
-		$record = $this->view->get('record');
-		if (!$record)
+		//Prevent to be called twice during the same request
+		if (!$this->_current_branch)
 		{
-			$page = $this->view->get('page');
-			if ($page)
+
+			$id = FALSE;
+			$record = $this->view->get('record');
+			if (!$record)
 			{
-				$id = $page->id;
+				$page = $this->view->get('page');
+				if ($page)
+				{
+					$id = $page->id;
+				}
+			} else {
+				$id = $record->id;
 			}
-		} else {
-			$id = $record->id;
+			$this->_current_branch = $this->get_default_branch($id);
 		}
-		return $this->get_default_branch($id);
+		return $this->_current_branch;
 	}
 
 	/**
