@@ -480,7 +480,7 @@ $post-&gt;('author', 'Nicholas');
 $id = $this-&gt;records-&gt;save($post);
 
 //Pubblichiamo il nostro post
-$this-&gt;records-&gt;type('Blog')-&gt;publish($id);</code>
+$this-&gt;records-&gt;set_type('Blog')-&gt;publish($id);</code>
 <br />
 
 </div>
