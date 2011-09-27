@@ -132,9 +132,9 @@ Class Model_records extends CI_Model {
 		} else {
 			$tipo = $this->content->type($type);
 		}
-		
+
 		$this->_single_type = $tipo;
-		
+
 		//We set the references
 	    $this->table = $tipo['table'];
 	    $this->table_stage = $tipo['table_stage'];
@@ -361,7 +361,7 @@ Class Model_records extends CI_Model {
       $results = $query->result();
       $records = array();
       foreach ($results as $item) {
-      		
+
       	if (!isset($item->id_type) || !$item->id_type)
       	{
       		$tipo = $this->_single_type;
@@ -373,8 +373,8 @@ Class Model_records extends CI_Model {
       		$tipo = $this->content->type($item->id_type);
       		$type_name = $this->content->type_name($item->id_type);
       	}
-      	 
-      	
+
+
 
       	if ($record instanceof Record) {
 
@@ -428,7 +428,7 @@ Class Model_records extends CI_Model {
 			    	show_error(_('Cannot build the record.').' (records/get)');
 			    }
 		    $records[] = $record;
-	     	
+
       }
 
       //Reset the switchs
@@ -462,8 +462,8 @@ Class Model_records extends CI_Model {
 
 	        $id = $record->id;
 
-	      		      	
-	      	
+
+
 	      	//If type is set, let's take it!
 	      	if (!$record->_tipo_def)
 	      	{
@@ -525,7 +525,7 @@ Class Model_records extends CI_Model {
         			case 2:
         				$data['published'] = '2';
         				break;
-        			
+
         			default:
         				$data['published'] = '0';
         				break;
@@ -536,18 +536,18 @@ Class Model_records extends CI_Model {
 
 		  	//Trigger action
 			$action = $id ? 'update' : 'insert';
-			
+
 			//Title fix
 			if (!isset($data['title']) && isset($tipo['fields']['title']))
 			{
 				$data['title'] = $record->get($tipo['edit_link']);
 			}
-			
+
 			if (!isset($this->events))
 			{
 				$this->load->events();
 			}
-			
+
 	      	if ($id) {
 	      		//Let's check if the id is published >> useless????
 	       		//$is_published = $this->id_is_published($id);
@@ -829,13 +829,38 @@ Class Model_records extends CI_Model {
   	return $field['options'];
   }
 
-  /**
+  	/**
+  	 * Gets the first record. This function is identical to the get function,
+  	 * but returns just a single record instead the array of records
+  	 * @return Record
+  	 */
+  	public function get_first() {
+  		$this->limit(1);
+  		$records = $this->get();
+  		if (is_array($records) && count($records))
+  		{
+  			return $records[0];
+  		}
+  		return FALSE;
+  	}
+
+  	/**
   	* Discards a record and takes the published one from the production table
   	* @param int $record_id
-  	* @return bool
+  	* @param int|string $type
+  	* @return bool success
   	*/
- 	public function discard($record_id, $type = '') {
- 		//TODO
+ 	public function discard($record_id, $type = '')
+ 	{
+ 		$this->set_stage(FALSE);
+ 		if ($type != '')
+ 		{
+ 			$this->type($type);
+ 		}
+ 		$record = $this->get($record_id);
+
+ 		$this->set_stage(TRUE);
+ 		return $this->save($record);
  	}
 
 }
