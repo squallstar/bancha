@@ -103,11 +103,11 @@ DESCRIPTION: A premium business and portfolio theme.
 
 /* Site Navigation */
 
-	ul.menu								{text-transform:uppercase;display:inline; float:left; position:relative; margin-left:20px; margin-right:20px;}
-	ul.menu	li 							{float:right; display:inline; margin : 0 0 0 50px;}
-	ul.menu	li a						{font-family:arial, sans-serif !important; display:block; padding:44px 0 0; text-decoration:none; color:#000000; font-size:14px; font-weight:bold;}
-	ul.menu	li a:hover,
-	ul.menu	li a.current				{background:url(../widgets/triangle.gif) no-repeat center top;}
+	#menu ul.menu								{text-transform:uppercase;display:inline; float:left; position:relative; margin-left:20px; margin-right:20px;}
+	#menu ul.menu	li 							{float:right; display:inline; margin : 0 0 0 50px;}
+	#menu ul.menu	li a						{font-family:arial, sans-serif !important; display:block; padding:44px 0 0; text-decoration:none; color:#000000; font-size:14px; font-weight:bold;}
+	#menu ul.menu	li a:hover,
+	#menu ul.menu	li a.current				{background:url(../widgets/triangle.gif) no-repeat center top;}
 
 /* Footer */
 
@@ -244,3 +244,7 @@ DESCRIPTION: A premium business and portfolio theme.
 
 
 h1.page_title {font-size:19px;}
+
+.breadcrumbs {
+	margin-bottom:20px;
+}

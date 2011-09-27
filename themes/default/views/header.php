@@ -1,10 +1,12 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <!-- Text Logo -->
-<h1 id="logo" class="grid_4">Name</h1>
+<h1 id="logo" class="grid_4"><a href="<?php echo site_url(); ?>">My Website</a></h1>
 
 <!-- Navigation Menu -->
+<div id="menu">
 <?php echo menu($tree, 1); ?>
+</div>
 
 <div class="hr grid_12 clearfix">&nbsp;</div>
 

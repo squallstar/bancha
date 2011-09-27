@@ -24,7 +24,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	<link rel="stylesheet" href="<?php echo theme_url(); ?>css/reset.css" />
 	<link rel="stylesheet" href="<?php echo theme_url(); ?>css/styles.css" />
 
-
 	<meta name="description" content="<?php echo $this->view->description; ?>">
 	<meta name="keywords" content="<?php echo $this->view->keywords; ?>">
 	<meta name="author" content="<?php echo $this->view->author; ?>">
@@ -44,13 +43,16 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     	}
     }
 ?>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 </head>
 <body>
     <div id="wrapper" class="container_12 clearfix">
 		<?php $this->view->render($_template_file); ?>
     </div>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo theme_url(); ?>js/jquery.roundabout-1.0.min.js"></script> 
+<script type="text/javascript" src="<?php echo theme_url(); ?>js/jquery.easing.1.3.js"></script> 
+
 
 <?php
 if (isset($page))

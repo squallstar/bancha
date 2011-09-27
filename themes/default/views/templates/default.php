@@ -15,9 +15,31 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $this->view->render('header');
 
 ?>
-<div class="grid_12">
+<div class="grid_8">
 	<?php $this->view->render('content_render'); ?>
 </div>
+
+<div class="grid_4">
+		
+			<h4>And...</h4>
+			<div class="hr dotted clearfix">&nbsp;</div>
+
+			<?php 
+			$branch = $this->tree->get_current_branch();
+			if ($branch) {
+				echo menu();
+				echo '<div class="hr dotted clearfix">&nbsp;</div>';
+			}
+			 ?>
+
+			
+
+			<dl class="history"> 
+				<dt>2010</dt> 
+				<dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel diam id mauris accumsan egestas. Sed sed lorem. Integer id mi vel sapien fermentum vehicula. Pellentesque vitae lacus a sem posuere fringilla. Vestibulum dolor.</dd> 
+			</dl>
+		</div>
+
 <div class="hr grid_12 clearfix">&nbsp;</div>
 <?php
 $this->view->render('footer');
