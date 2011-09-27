@@ -26,7 +26,8 @@
 				<li><a href="#sb-image-presets">14. Image presets</a></li>
 				<li><a href="#sb-categories">15. Categorie, Gerarchie</a></li>
 				<li><a href="#sb-dispatchers">16. Dispatchers</a></li>
-				<li><a href="#sb-modules">17. Moduli</a></li>
+				<li><a href="#sb-helpers">17. Helpers</a></li>
+				<li><a href="#sb-modules">18. Moduli</a></li>
 			</ul>
 			<p>Versione: <?php echo BANCHA_VERSION; ?><br />Data: 26 Set 2011</p>
 		</div>
@@ -845,8 +846,48 @@ $this->dispatcher->retrieve($data);</code><br />
 <p>Per altre informazioni sui preset applicati alle immagini, leggi la relativa sezione <strong>14. Image presets</strong> nella documentazione.</p>
 	</div>
 
+	<div class="sidebar_content" id="sb-helpers">
+			<h3>17. Helpers</h3>
+			<p>Globalmente nell'applicazione sono disponibili diversi helpers, descritti qui di seguito.</p>
+
+			<h3>site_url($path_to_append)</h3>
+			<p>Ritorna il path pubblico del sito, aggiungendone il path passato come parametro (opzionale).</p>
+<code>echo site_url('hello/world');
+// <?php echo site_url('hello/world'); ?></code><br />
+
+			<h3>theme_url($path_to_append)</h3>
+			<p>Ritorna il path pubblico del tema attualmente in uso, aggiungendone il path passato come parametro (opzionale).</p>
+<code>echo theme_url('css/style.css');
+// <?php echo theme_url('css/style.css'); ?></code><br />
+
+			<h3>attach_url($file_path)</h3>
+			<p>Ritorna il path pubblico di un allegato.</p>
+<code>echo attach_url('path/to/file.ext');
+// <?php echo attach_url('path/to/file.ext'); ?></code><br />
+
+			<h3>preset_url($image_path, $preset, $append_siteurl)</h3>
+			<p>Ritorna il path del preset di una immagine, dato il suo percorso relativo e il preset scelto.<br />
+Come terzo parametro booleano, viene scelto se prependere il path del sito (<strong>site_url</strong>) e di default &egrave; impostato a TRUE.</p>
+<code>echo preset_url('attach/blog/images/1/file.jpg', 'user_profile);
+// <?php echo preset_url('attach/blog/images/1/file.jpg', 'user_profile'); ?></code><br />
+
+			<h3>getter($url)</h3>
+			<p>Effettua una chiamata tramite <strong>cURL</strong> ad un webservice esterno e ritorna il responso.</p>
+<code>$result = getter('http://getbancha.com/');</code><br />
+
+			<h3>breadcrumbs($array)</h3>
+			<p>Stampa le breadcrumbs, dato un array. Necessita di caricare l'helper <strong>breadcrumbs</strong> prima dell'utilizzo.</p>
+<code>$this->load->helper('breadcrumbs');
+echo breadcrumbs($this->tree->breadcrumbs);</code>
+
+			<h3>menu($tree, $max_depth, $current_level, $show_in_menu)</h3>
+			<p>Stampa la struttura di un albero di menu. Il secondo parametro decide il massimo livello di iterazione, ed il terzo parametro il livello corrente di iterazione.</p>
+<code>echo menu($this->tree->get_default());</code><br />
+
+	</div>
+
 	<div class="sidebar_content" id="sb-modules">
-			<h3>17. Moduli</h3>
+			<h3>18. Moduli</h3>
 			<p>
 			<div class="message warning">TODO</div>
 			</p>
