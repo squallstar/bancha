@@ -2,7 +2,7 @@
 /**
  * Bancha_Loader
  *
- * Classe per il caricamento di altre classi
+ * An extension of the original CodeIgniter Loader
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -15,47 +15,41 @@
 Class Bancha_Loader extends CI_Loader {
 
 	/**
-	 * @var array Elenco dei moduli caricati
+	 * @var array Loaded modules
 	 */
 	private $_loaded_modules = array();
 
 	/**
-	 * Funzione che precarica ciò che serve normalmente in Bancha
+	 * This function loads the Bancha environment
 	 */
 	function bancha()
 	{
-		//Librerie standard
+		//Standard Bancha Libraries
 		$this->library(
 			array(
 				FRNAME . '/content', FRNAME . '/xml', FRNAME . '/view'
 			)
 		);
 
-		//Classe che gestisce i records
+		//Class that create instances of records
 		require_once(FRPATH . 'record.php');
 
-		//Helper generici
+		//Generic helpers
 		$this->helper(
 			array(
 				'file', 'website', 'text'
 			)
 		);
 
-		//Loads the authentication model
+		//Loads some models that we use everywhere
 		$this->auth();
-
-		//Loads the record model
 		$this->records();
-
-		//Loads the pages model
 		$this->pages();
-
-		//Loads the tree model
 		$this->tree();
 	}
 
 	/**
-	 * Carica un model del framework di Bancha
+	 * Loads a model inside Bancha framework
 	 * @param string $model
 	 * @param string $name
 	 * @param bool $db_conn
@@ -66,7 +60,7 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica una libreria dal framework di Bancha
+	 * Loads a library inside Bancha framework
 	 * @param string $library
 	 * @param string $name
 	 */
@@ -76,7 +70,7 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica il model dei records
+	 * Loads the records model
 	 */
 	function records()
 	{
@@ -84,7 +78,7 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica il model degli alberi di menu
+	 * Loads the tree model
 	 */
 	function tree()
 	{
@@ -92,7 +86,7 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica il model dei documenti
+	 * Loads the documents model
 	 */
 	function documents()
 	{
@@ -100,7 +94,7 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica il model delle categorie
+	 * Loads the categories model
 	 */
 	function categories()
 	{
@@ -108,7 +102,7 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica il model che gestisce le ACL utenti
+	 * Loads the users ACLs
 	 */
 	function auth()
 	{
@@ -116,7 +110,7 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica il model degli utenti
+	 * Loads the users model
 	 */
 	function users()
 	{
@@ -124,7 +118,7 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica il model delle pagine
+	 * Loads the pages model
 	 */
 	function pages()
 	{
@@ -132,7 +126,7 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica il model degli eventi
+	 * Loads the events model
 	 */
 	function events()
 	{
@@ -140,7 +134,7 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica il model degli attivatori
+	 * Loads the triggers model
 	 */
 	function triggers()
 	{
@@ -156,7 +150,15 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica un modulo esterno
+	 * Loads the settings model
+	 */
+	function settings()
+	{
+		$this->model(FRNAME.'/model_settings', 'settings');
+	}
+
+	/**
+	 * Loads an external module
 	 * @param string $module_name
 	 * @param array $properties (config)
 	 */
@@ -192,26 +194,27 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Carica un dispatcher
+	 * Loads a dispatcher
 	 * @param string $name
 	 */
 	function dispatcher($name = 'default')
 	{
 		$this->library(FRNAME.'/dispatchers/dispatcher_'.$name, NULL, 'dispatcher');
-
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
-	 * Loader
+	 * Bancha View Loader
 	 *
 	 * This function is used to load views and files.
 	 * Variables are prefixed with _ci_ to avoid symbol collision with
 	 * variables made available to view files
 	 *
-	 * @param	array
-	 * @return	void
+	 * This method has been updated with the rendered view profiler section
+	 *
+	 * @param array $_ci_data
+	 * @return void
 	 */
 	protected function _ci_load($_ci_data)
 	{
@@ -341,12 +344,12 @@ Class Bancha_Loader extends CI_Loader {
 	}
 
 	/**
-	 * Aggiunge un path come caricamento delle view
+	 * Adds a path to the view paths
 	 * @param string $path
 	 */
 	public function add_view_path($path)
 	{
-		// La path aggiunta sta sempre in fondo
+		//Added path will be placed as first element of the array
 		$this->_ci_view_paths = array_reverse($this->_ci_view_paths);
 		$this->_ci_view_paths[$path] = TRUE;
 		$this->_ci_view_paths = array_reverse($this->_ci_view_paths);

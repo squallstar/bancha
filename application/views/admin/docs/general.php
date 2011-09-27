@@ -16,7 +16,7 @@
 				<li><a href="#sb-types-xml">4. Schema XML dei tipi</a></li>
 				<li><a href="#sb-page-actions">5. Azioni delle pagine</a></li>
 				<li><a href="#sb-template-layout">6. Template e Layout</a></li>
-				<li><a href="#sb-views">7. View e rendering</a></li>
+				<li><a href="#sb-views">7. Temi, view e rendering</a></li>
 				<li><a href="#sb-extract-records">8. Estrazione di contenuti</a></li>
 				<li><a href="#sb-documents">9. Documenti (files)</a>
 				<li><a href="#sb-trees">10. Alberi di menu</a></li>
@@ -26,7 +26,8 @@
 				<li><a href="#sb-image-presets">14. Image presets</a></li>
 				<li><a href="#sb-categories">15. Categorie, Gerarchie</a></li>
 				<li><a href="#sb-dispatchers">16. Dispatchers</a></li>
-				<li><a href="#sb-modules">17. Moduli</a></li>
+				<li><a href="#sb-helpers">17. Helpers</a></li>
+				<li><a href="#sb-modules">18. Moduli</a></li>
 			</ul>
 			<p>Versione: <?php echo BANCHA_VERSION; ?><br />Data: 26 Set 2011</p>
 		</div>
@@ -54,8 +55,10 @@
 			<br />
 			<h3>Crediti</h3>
 
-			<?php echo CMS; ?> &egrave; stato interamente sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
-			Bancha &egrave; rilasciato con licenza GNU/GPL. Puoi visionare l'intera licenza dal file License.txt nella root del progetto.
+			<?php echo CMS; ?> &egrave; stato sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
+			Bancha &egrave; rilasciato con licenza GNU/GPL. Puoi visionare l'intera licenza dal file License.txt nella root del progetto.<br />
+			<br />
+			Copyright <a href="http://www.squallstar.it/">Squallstar Studio</a> &copy;2011 
 			</p>
 		</div>
 
@@ -319,33 +322,35 @@ Scegliendo <strong>azione personalizzata</strong>, la pagina invocher&agrave; l'
 		<div class="sidebar_content" id="sb-template-layout">
 			<h3>6. Template e Layout</h3>
 			<p>Bancha utilizza un sistema di viste composto da un elemento principale (<strong>template</strong>) che a sua volta renderizza altre sotto viste, tra cui <strong>header</strong>, <strong>footer</strong> e <strong>content_render</strong>.<br /><br />
-Questo vuol dire che un sito potrebbe avere anche 10 template diversi per le varie sezioni del sito internet.<br /><br />Ogni pagina, presenta un campo chiamato <strong>view_template</strong> che definisce il template da renderizzare per tale pagina. L'elenco dei templates &egrave; contenuto nella cartella <strong>application/views/layout/templates</strong> e di base presenta questi templates:</p>
+Questo vuol dire che un sito potrebbe avere anche 10 template diversi per le varie sezioni del sito internet.<br /><br />Ogni pagina, presenta un campo chiamato <strong>view_template</strong> che definisce il template da renderizzare per tale pagina. L'elenco dei templates &egrave; contenuto nella cartella <strong><?php echo THEMESPATH; ?>nometema/views/templates</strong> e di base presenta questi templates:</p>
 <ul>
-	<li><strong><?php echo THEMESPATH; ?>desktop/templates/default.php</strong> - utilizzato di default per le pagine</li>
-	<li><strong><?php echo THEMESPATH; ?>desktop/templates/home.php</strong> - utilizzato dalla homepage del sito</li>
+	<li><strong><?php echo THEMESPATH; ?>nometema/views/templates/default.php</strong> - utilizzato di default per le pagine</li>
+	<li><strong><?php echo THEMESPATH; ?>nometema/views/templates/home.php</strong> - utilizzato dalla homepage del sito</li>
 </ul>
 <p>Come potrai vedere, ognuno di questi template contiene del codice HTML dichiarativo e a sua volta sceglie quali altre view renderizzare. Per renderizzare altre view, &egrave; sufficiente utilizzare la funzione nativa <strong>load->view</strong> di Code Igniter. Ecco un esempio di template:</p>
 <code>&lt;?php $this->load->view('header'); ?&gt;
 &lt;?php $this->load->view('content_render'); ?&gt;
 &lt;?php $this->load->view('footer'); ?&gt;</code>
 <br />
-<div class="message info">La parte di layout relativa alle dichiarazioni <strong>html, head, body</strong> &egrave; contenuta nel file ../views/website/desktop/layout.php</div>
+<div class="message info">La parte di layout relativa alle dichiarazioni <strong>html, head, body</strong> &egrave; contenuta nel file <?php echo THEMESPATH; ?>desktop/views/layout.php</div>
 <p>Quando definisci altri template, ricorda di inserire una nuova option nel campo <strong>view_template</strong> all'interno del tipo di contenuto (solitamente "Pagine") di modo che venga visualizzato il nuovo template nell'area amministrativa.<br /><br />
 Templates e views, dispongono gi&agrave; degli helper <strong>url</strong> e <strong>html</strong> di Code Igniter caricati, quindi potrai gi&agrave; utilizzarli.<br /><br />
 Anche i tipi di contenuto semplici (non strutturabili ad albero) presentano delle view per la loro visualizzazione:</p>
 <ul>
-	<li><strong>application/views/website/type_templates/{NomeTipo}/detail.php</strong> - utilizzata nel rendering di dettaglio di un singolo contenuto</li>
-	<li><strong>application/views/website/type_templates/{NomeTipo}/list.php</strong> - utilizzata nel rendering di lista di pi&ugrave; contenuti di un singolo tipo.</li>
+	<li><strong>application/views/type_templates/{NomeTipo}/detail.php</strong> - utilizzata nel rendering di dettaglio di un singolo contenuto</li>
+	<li><strong>application/views/type_templates/{NomeTipo}/list.php</strong> - utilizzata nel rendering di lista di pi&ugrave; contenuti di un singolo tipo.</li>
 </ul>
-<p>Nulla ti vieta di definire altri templates per i tipi e utilizzarli in maniere da te definite nel <strong>content_render.php</strong> (contenuto in <?php echo THEMESPATH; ?>desktop/).</p>
+<p>Senza toccare i template originali, puoi duplicare tali files all'interno del tuo tema e verrano utilizzati automaticamente se disponibili.<br />
+Ad esempio uno dei due files sopra elencati potr&agrave; essere duplicato nella seguente directory: <strong><?php echo THEMESPATH; ?>desktop/type_templates</strong>.</p>
+<p>Nulla ti vieta di definire altri templates per i tipi e utilizzarli in maniere da te definite nel <strong>content_render.php</strong> (contenuto in ogni tema).</p>
 
 		</div>
 
 		<div class="sidebar_content" id="sb-views">
-			<h3>7. View e rendering</h3>
+			<h3>7. Temi, view e rendering</h3>
 			<p>NOTA: il front-end del sito, pu&ograve; utilizzare pi&ugrave; temi per differenziare ad esempio il sito <strong>desktop</strong> dalla versone <strong>mobile</strong>.
 Tale configurazione &egrave; disponibile nel file di configurazione di Bancha alla voce "WEBSITE THEMES", e si riferiscono al nome della directory
-presente nella directory <?php echo THEMESPATH; ?>. Per default, la skin utilizzata &egrave; la "desktop", e nel caso sia presente la skin mobile
+presente nella directory <strong><?php echo THEMESPATH; ?></strong>. Per default, la skin utilizzata &egrave; la "desktop", e nel caso sia presente la skin mobile
 verr&agrave; effettuato lo switch in automatico nel caso che il sito venga visitato da un device mobile.</p>
 			<p>Bancha utilizza la classe <strong>View</strong> per settare degli oggetti nelle viste e renderizzarle.<br />
 L'oggetto view, &egrave; presente globalmente accedendo alla variabile "view" di Code Igniter in questo modo: <strong>$this->view</strong>.<br /><br />
@@ -354,7 +359,7 @@ Il metodo base per settare un oggetto nella view, &egrave; il <strong>set()</str
 <p>Dalla view, sar&agrave; possibile accedere agli oggetti impostati utilizzando le variabili semplici di PHP con la chiave impostata.
 Nel nostro esempio sopra, dalla view sar&agrave; disponibile la variabile in questo modo:</p>
 <code>echo $nome_oggetto;</code><br />
-<p>Nel caso fosse necessario eliminare una variabile prima del rendering della view, &egrave; possibile utilizzare il metodo <strong>remove()</strong> che accetta un singolo parametro (la chiave/nome dell'oggetto da eliminare).<br /><br />
+<p>Nel caso fosse necessario eliminare una variabile prima del rendering della view, &egrave; possibile utilizzare il metodo <strong>remove()</strong> che accetta come singolo parametro la chiave dell'oggetto da eliminare.<br /><br />
 Di seguito, le funzioni utili a renderizzare view, o templates.</p><br />
 
 <p>La classe view, presenta anche delle propriet&agrave; utili al layout quali:</p>
@@ -367,11 +372,11 @@ Di seguito, le funzioni utili a renderizzare view, o templates.</p><br />
 </ul>
 
 <h3>render_template($template_file, $layout = true)</h3>
-<p>Renderizza un template presenta nella directory dei templates, utilizzando lo skin in uso (solitamente <strong>application/views/website/desktop/templates/</strong>).
+<p>Renderizza un template presenta nella directory dei templates, utilizzando lo skin in uso (solitamente <strong><?php echo THEMESPATH; ?>nometema/templates/</strong>).
 &Egrave; il metodo di rendering pi&ugrave; utilizzato, e viene utilizzata soprattutto dal motore di routing generale del sito per renderizzare la struttura base delle pagine.<br />
 Nel caso non si volesse passare per il layout, passare come secondo parametro "false" e verr&agrave; renderizzato solo il template scelto.</p>
 <code>$this->render_template('default');
-//Renderizza il file application/views/website/desktop/templates/default.php
+//Renderizza il file <?php echo THEMESPATH; ?>nometema/templates/default.php
 
 $this->render_template('home');
 //Renderizza la homepage del sito, ovvero il file <?php echo THEMESPATH; ?>desktop/templates/home.php
@@ -394,7 +399,7 @@ $this->view->render_type_template('Gallerie', 'detail');
 //Renderizzer&agrave; il file application/views/type_templates/Gallerie/detail.php</code><br />
 
 <h3>render_layout($view_file)</h3>
-<p>Metodo che renderizza un layout utilizzando il path base settato precedentemente. Viene attualmente usato <strong>solamente dall'amministrazione</strong> utilizzando come base "admin/" in modo da renderizzare automaticamente solo le viste figlie di tale path.</p>
+<p>Metodo che renderizza un layout utilizzando il path base settato precedentemente.<br />Viene attualmente usato <strong>solamente dall'amministrazione</strong> utilizzando come base "admin/" in modo da renderizzare automaticamente solo le viste figlie di tale path.</p>
 <code>$this->view->base = 'admin/';
 $this->view->render_layout('docs/general');
 //Verr&agrave; renderizzato il file application/views/admin/layout/layout.php
@@ -439,8 +444,9 @@ In alternativa, &egrave; possibile utilizzare la funzione <strong>documents()</s
 </ul>
 <p>E per estrarre i records:</p>
 <ul>
-	<li><strong>get()</strong> - per estrarre i records con le condizioni scelte</li>
+	<li><strong>get()</strong> - per estrarre i records con le condizioni scelte. Passando come primo parametro un ID, ritorna solamente il record con tale ID anzich&erave; un array di records.</li>
 	<li><strong>count()</strong> - per ottenere solo il numero dei records aventi tali condizioni</li>
+	<li><strong>get_first()</strong> - per estrarre solamente un record (ritorna direttamente un oggetto <strong>Record</strong>)</li>
 </ul>
 <p>Vediamo un altro esempio di estrazione:</p>
 <code>$num_notizie = $this->records->type('News')
@@ -465,7 +471,22 @@ In alternativa, &egrave; possibile utilizzare la funzione <strong>documents()</s
 </ul>
 <div class="message info">Puoi aggiungere campi fisici ad un record intervenendo sull'attributo <strong>column</strong> di un qualsiasi dei campi all'interno dello schema di un tipo di contenuto.
 Dopodich&egrave;, sar&agrave; necessario anche aggiungere tale colonna alla tabella <strong>records</strong> di Bancha con un ALTER-TABLE.</div>
-		</div>
+<br />
+<h3>Creare e salvare records</h3>
+<p>&Egrave; possibile creare, aggiornare ed eliminare records anche in maniera manuale. Di seguito un'esempio:</p>
+<code>//Creiamo un nuovo record di tipo Blog e ne impostiamo titolo e autore
+$post = new Record('Blog');
+$post-&gt;('title', 'My first post');
+$post-&gt;('author', 'Nicholas');
+
+//Salviamo sul database il post
+$id = $this-&gt;records-&gt;save($post);
+
+//Pubblichiamo il nostro post
+$this-&gt;records-&gt;set_type('Blog')-&gt;publish($id);</code>
+<br />
+
+</div>
 
 		<div class="sidebar_content" id="sb-documents">
 			<h3>9. Documenti (files e immagini)</h3>
@@ -512,7 +533,7 @@ $documenti = $this->documents->table('records')->id(12)->limit(10)->get();
 			<p>
 			Per ottenere alberi di menu (solo contenuti di tipo pagina), &egrave; disponibile la seguente classe:</p>
 <code>$this->tree</code><br />
-<p>Il tipo di contenuto da utilizzare come default per la creazione dell'albero del sito, va definito nel file di configurazione di <?php echo CMS; ?> alla voce <strong>DEFAULT TREE TYPE</strong>. Per estrarre l'albero generale del sito, utilizzare la funzione "get_default()" come segue:</p>
+<p>Il tipo di contenuto da utilizzare come default per la creazione dell'albero del sito, va definito nel file di configurazione di <?php echo CMS; ?> alla voce <strong>DEFAULT TREE TYPE</strong>. Per estrarre l'albero generale del sito, utilizzare la funzione <strong>get_default()</strong> come segue:</p>
 <code>//Estraggo l'albero generale delle pagine
 $this->tree-><strong>get_default()</strong>;</code>
 <br />
@@ -522,6 +543,9 @@ $this->tree-><strong>get_default()</strong>;</code>
 $this->load->helper('menu');
 echo <strong>menu</strong>($albero);</code>
 <br /><p>L'helper provveder&agrave; in automatico a "flaggare" i vari stati sulle pagine aperte, o eventuali sotto pagine selezionate con le classi "open" e "selected".</p>
+<p>Nel caso in cui volessi visualizzare solamente pagine figlie di quella attuale, utilizza la funzione <strong>get_current_branch()</strong> come segue:</p>
+<code>echo menu($this->tree->get_current_branch());</code>
+<br />
 <div class="message info"><?php echo CMS; ?> provvede gi&agrave; ad estrarre il tipo di contenuto <strong>"<?php echo implode(', ', $this->config->item('default_tree_types')); ?>"</strong> come albero generale del sito internet.</div>
 <p>Puoi anche estrarre diversi alberi di menu secondo le tue esigenze. La classe Tree contiene metodi simili a quanto gi&agrave; visto con la classe Records. Ecco alcuni dei metodi utilizzabili per rifinire le estrazioni:</p>
 <ul>
@@ -827,8 +851,48 @@ $this->dispatcher->retrieve($data);</code><br />
 <p>Per altre informazioni sui preset applicati alle immagini, leggi la relativa sezione <strong>14. Image presets</strong> nella documentazione.</p>
 	</div>
 
+	<div class="sidebar_content" id="sb-helpers">
+			<h3>17. Helpers</h3>
+			<p>Globalmente nell'applicazione sono disponibili diversi helpers, descritti qui di seguito.</p>
+
+			<h3>site_url($path_to_append)</h3>
+			<p>Ritorna il path pubblico del sito, aggiungendone il path passato come parametro (opzionale).</p>
+<code>echo site_url('hello/world');
+// <?php echo site_url('hello/world'); ?></code><br /><br />
+
+			<h3>theme_url($path_to_append)</h3>
+			<p>Ritorna il path pubblico del tema attualmente in uso, aggiungendone il path passato come parametro (opzionale).</p>
+<code>echo theme_url('css/style.css');
+// <?php echo theme_url('css/style.css'); ?></code><br /><br />
+
+			<h3>attach_url($file_path)</h3>
+			<p>Ritorna il path pubblico di un allegato.</p>
+<code>echo attach_url('path/to/file.ext');
+// <?php echo attach_url('path/to/file.ext'); ?></code><br /><br />
+
+			<h3>preset_url($image_path, $preset, $append_siteurl)</h3>
+			<p>Ritorna il path del preset di una immagine, dato il suo percorso relativo e il preset scelto.<br />
+Come terzo parametro booleano, viene scelto se prependere il path del sito (<strong>site_url</strong>) e di default &egrave; impostato a TRUE.</p>
+<code>echo preset_url('attach/blog/images/1/file.jpg', 'user_profile);
+// <?php echo preset_url('attach/blog/images/1/file.jpg', 'user_profile'); ?></code><br /><br />
+
+			<h3>getter($url)</h3>
+			<p>Effettua una chiamata tramite <strong>cURL</strong> ad un webservice esterno e ritorna il responso.</p>
+<code>$result = getter('http://getbancha.com/');</code><br /><br />
+
+			<h3>breadcrumbs($array)</h3>
+			<p>Stampa le breadcrumbs, dato un array. Necessita di caricare l'helper <strong>breadcrumbs</strong> prima dell'utilizzo.</p>
+<code>$this->load->helper('breadcrumbs');
+echo breadcrumbs($this->tree->breadcrumbs);</code><br /><br />
+
+			<h3>menu($tree, $max_depth, $current_level, $show_in_menu)</h3>
+			<p>Stampa la struttura di un albero di menu. Il secondo parametro decide il massimo livello di iterazione, ed il terzo parametro il livello corrente di iterazione.</p>
+<code>echo menu($this->tree->get_default());</code><br />
+
+	</div>
+
 	<div class="sidebar_content" id="sb-modules">
-			<h3>17. Moduli</h3>
+			<h3>18. Moduli</h3>
 			<p>
 			<div class="message warning">TODO</div>
 			</p>

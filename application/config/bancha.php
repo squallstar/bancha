@@ -54,7 +54,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.7.2');
+define('BANCHA_VERSION', '0.7.3');
 
 /*
  * Framework name
@@ -74,7 +74,7 @@ $sep = DIRECTORY_SEPARATOR;
  * and their values refers to the theme that will be used.
  */
 $config['website_themes'] = array(
-	'desktop'	=> 'desktop',	//reached from: /go-desktop
+	'desktop'	=> 'default',	//reached from: /go-desktop
 	'mobile'	=> 'desktop'	//reached from: /go-mobile
 );
 
@@ -123,13 +123,13 @@ $config['fr_cache_folder'] = APPPATH . 'cache' . $sep . '_' . FRNAME. $sep;
  * TYPES CACHE FILE
  * This file contains all the XML schemes parsed and cached into a serialized php array
  */
-$config['types_cache_folder'] = $config['fr_cache_folder'] . 'content.types';
+$config['types_cache_folder'] = $config['fr_cache_folder'] . 'content.tmp';
 
 /*
 * TYPES CACHE FILE
 * Every page tree (one per content type) will be cached here
 */
-$config['tree_cache_folder'] = $config['fr_cache_folder'] . '{name}.tree';
+$config['tree_cache_folder'] = $config['fr_cache_folder'] . 'tree-{name}.tmp';
 
 /*
  * TEMPLATES DIRECTORY
@@ -169,16 +169,10 @@ $config['strip_website_url'] = TRUE;
 $config['feed_uri'] = array('feed.xml', 'feed.json');
 
 /*
- * WEBSITE VIEWS FOLDER
- * Contained in application/views/
- */
-$config['website_views_folder'] = 'website/';
-
-/*
  * VIEWS TEMPLATES FOLDER
  * This directory contains the views of the content types (detail, list, etc..)
  */
-$config['views_templates_folder'] = $config['website_views_folder'] . 'type_templates/';
+$config['views_templates_folder'] = 'type_templates/';
 
 /*
  * DEFAULT VIEW TEMPLATE

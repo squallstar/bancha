@@ -219,6 +219,16 @@ var bancha = {
 			$('#content_wrapper').html(data);
 		});
 	},
+	preset_url : function(path, preset, append) {
+		//Prototype: attach/cache/type/field/id/preset/name.ext
+		if (!append || append === 'undefined') {
+			append = false;
+		}
+		var tmp = path.split('/');
+		var i = tmp.length-1;
+		path = 'attach/cache/' + tmp[i-3] + '/' + tmp[i-2] + '/' + tmp[i-1] + '/' + preset + '/' + tmp[i];
+		return (append ? site_url : '') + path;
+	},
 	remove : {
 		document : function(self, e) {
 			$.post(admin_url+'ajax/delete_document', {document_id : e});

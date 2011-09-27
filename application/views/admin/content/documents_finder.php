@@ -84,7 +84,7 @@ $this->load->helper('form');
 				</thead>
 				<tbody>
 				<?php foreach ($repository_files as $file) { ?>
-					<tr data-id="<?php echo $file->bind_id; ?>" data-filename="<?php echo $file->name; ?>">
+					<tr data-path="<?php echo $file->path; ?>">
 						<td><?php
 						if (in_array($file->mime, array('png', 'jpg', 'gif', 'jpeg')))
 						{
@@ -133,8 +133,8 @@ function getUrlParam(paramName) {
 function getPresetPath(el) {
 	var preset = el.val();
 	var _tr = el.parent('td').parent('tr');
-	var url = '<?php echo attach_url(); ?>/cache/repository/document/' + _tr.attr('data-id') + '/' + preset + '/' + _tr.attr('data-filename');
-	_tr.children('.choose').attr('onclick', 'finder_choose(\''+url+'\');');
+	var url = 'attach/' + _tr.attr('data-path');
+	_tr.children('.choose').attr('onclick', 'finder_choose(\''+bancha.preset_url(url, preset)+'\');');
 }
 $(document).ready(function() {
 	$('.repository select').change(function() {

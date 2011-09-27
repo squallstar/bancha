@@ -12,8 +12,8 @@
  *
  */
 
-Class Model_Documents extends CI_Model {
-
+Class Model_Documents extends CI_Model
+{
 	/**
 	 * @var string Directory che contiene gli allegati
 	 */

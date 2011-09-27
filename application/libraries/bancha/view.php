@@ -26,11 +26,6 @@ Class View
 	private $_data = array();
 
 	/**
-	 * @var string The directory appended to rendering path
-	 */
-	private $_prepend_dir;
-
-	/**
 	 * @var string The theme templates directory
 	 */
 	private $_template_dir = 'templates/';
@@ -114,7 +109,6 @@ Class View
 	{
 		$this->_CI = & get_instance();
 		$this->themes = $this->_CI->config->item('website_themes');
-		$this->_prepend_dir = $this->_CI->config->item('website_views_folder');
 		$this->load_theme();
 	}
 
@@ -264,7 +258,7 @@ Class View
 	{
 		if ($type_name == '' || $view_file == '')
 		{
-			show_error('Tipo o nome view non settato (view/render_type_template');
+			show_error('Content type or view name not set (view/render_type_template');
 		}
 		$view_path = $this->_CI->config->item('views_templates_folder') . $type_name . '/' . $view_file;
 
@@ -318,7 +312,7 @@ Class View
 	 */
 	function live_tags($field, $record)
 	{
- 		if ($this->_CI->output->has_profiler() && 
+ 		if ($this->_CI->output->has_profiler() &&
  			$this->_CI->auth->has_permission('content', $record->tipo)
  		)
  		{

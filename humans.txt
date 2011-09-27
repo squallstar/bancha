@@ -3,9 +3,10 @@
 
 
 /* TEAM */
-   Lead Developer: Nicholas Valbusa
+   Main Developer: Nicholas Valbusa
    Site: www.squallstar.it
    Twitter: @squallstar
+   Github: @squallstar
    Location: Verona, IT
 
    Logo Design: Michela Tannoia
@@ -15,12 +16,15 @@
 
    Contributor (Developer): Alessandro Maroldi
    Twitter: @alexmaroldi
+   Github: @alexmaroldi
    Location: Verona, IT
 
    Contributor (Front-end): Matteo Gildone
+   Github: @dombender
    Location: Verona, IT
 
    Contributor (Developer): Umberto Gariggio
+   Github: @gariggio
    Location: Verona, IT
 
 /* THANKS TO */
