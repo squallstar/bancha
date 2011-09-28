@@ -33,14 +33,37 @@ Class Settings extends Bancha_Controller
 	public function index()
 	{
 		//We get the Users scheme
-		$type_definition = $this->xml->parse_scheme($this->config->item('xml_folder') . 'Settings.xml');
+		$tipo = $this->xml->parse_scheme($this->config->item('xml_folder') . 'Settings.xml');
 
 		$data = $this->input->post();
-		if (is_array($data) && count($data)) {
+
+		if (is_array($data) && count($data))
+		{
 			//Update
+			foreach ($data as $key => $val)
+			{
+				if (is_array($val))
+				{
+					foreach ($val as $module => $value)
+					{
+						$this->settings->set($key, $value, $module);
+					}
+				}
+			}
+			$this->settings->build_cache();
 		}
 
-		$this->view->set('tipo', $type_definition);
+		//Additional set-ups before the page rendering
+        foreach ($tipo['fields'] as $field_name => $field_value)
+        {
+        	if (isset($field_value['extract']))
+            {
+                //We extract the custom options
+    			$tipo['fields'][$field_name]['options'] = $this->records->get_field_options($field_value);
+        	}
+        }
+
+		$this->view->set('tipo', $tipo);
 		$this->view->render_layout('content/settings_edit');
 	}
 }
