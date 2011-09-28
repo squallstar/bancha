@@ -617,6 +617,10 @@ Class Contents extends Bancha_Controller
         //Database cache
         if (CACHE) $this->db->cache_delete_all();
 
+        //Settings cache
+        $this->load->settings();
+        $this->settings->clear_cache();
+
         //Content types cache
     	if (!$this->content->rebuild())
         {
