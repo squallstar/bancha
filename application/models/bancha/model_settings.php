@@ -50,11 +50,20 @@ Class Model_settings extends CI_Model
 	 * @param mixed $val
 	 * @param string $module
 	 */
-	public function set($key, $val, $module = 'default')
+	public function set($key, $val, $module = 'general')
 	{
+		$module = strtolower($module);
+
 		//Does this setting already exists?
 		$exists = isset($this->_items[$module][$key]);
 
+		//If the value is not change, we don't do anything
+		if ($exists && $this->_items[$module][$key] == $val)
+		{
+			return;
+		}
+
+		//Elsewhere, let's update the value
 		$this->_items[$module][$key] = $val;
 
 		//And let's save that record also into the database
@@ -75,8 +84,9 @@ Class Model_settings extends CI_Model
 	 * @param string $key
 	 * @param string $module
 	 */
-	public function get($key, $module = 'default')
+	public function get($key, $module = 'general')
 	{
+		$module = strtolower($module);
 		if (isset($this->_items[$module][$key]))
 		{
 			return $this->_items[$module][$key];
