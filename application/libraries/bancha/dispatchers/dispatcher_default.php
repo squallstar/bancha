@@ -305,7 +305,6 @@ Class Dispatcher_default
 				case 'link':
 					$link = $page->get('action_link_url');
 					redirect($link);
-					exit;
 			}
 
 			$CI->view->set('page', $page);
