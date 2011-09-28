@@ -41,6 +41,6 @@ Class Settings extends Bancha_Controller
 		}
 
 		$this->view->set('tipo', $type_definition);
-		$this->view->render_layout('content/plain_edit');
+		$this->view->render_layout('content/settings_edit');
 	}
 }
