@@ -55,6 +55,11 @@ Class Install extends Bancha_Controller
 				$this->auth->login($username, $password);
 				$this->view->set('username', $username);
 				$this->view->set('password', $password);
+
+				//And some hierarchies
+				$this->load->hierarchies();
+				$id = $this->hierarchies->add('Father');
+				$this->hierarchies->add('Child', $id);
 			}
 
 			if ($this->input->post('create_directories'))
@@ -95,6 +100,7 @@ Class Install extends Bancha_Controller
 			$this->settings->set('is_installed', 'T');
 
 			$this->settings->set('website_name', 'My website');
+			$this->settings->set('website_claim', 'This is my first website!');
 
 			$available_themes = array_keys($this->config->item('installed_themes'));
 			$this->settings->set('website_desktop_theme', $available_themes[0]);
