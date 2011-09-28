@@ -937,6 +937,12 @@ echo $this->settings->set('username', '@squallstar', twitter');
 
 //Svuoto la cache delle impostazioni
 $this->settings->clear_cache();</code><br />
+
+<h3>delete($key, $module)</h3>
+	<p>Elimina una variabile dalle impostazioni.</p>
+<code>//Elimino una variabile dal modulo di twitter
+echo $this->settings->delete('username', 'twitter');</code><br />
+
 <h3>clear_cache()</h3>
 <p>Nonostante vengano salvate come record fisici su database, le impostazioni vengono cacheate attraverso un file su filesystem. Una volta aggiornate delle chiavi, &egrave; necessario svuotare la cache con questo metodo.
 

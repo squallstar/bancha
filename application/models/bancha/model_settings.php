@@ -45,7 +45,7 @@ Class Model_settings extends CI_Model
 	}
 
 	/**
-	 * Sets a value and saves it to the database
+	 * Create/updates a key to the settings and saves it to the database
 	 * @param string $key
 	 * @param mixed $val
 	 * @param string $module
@@ -80,9 +80,10 @@ Class Model_settings extends CI_Model
 	}
 
 	/**
-	 * Returns a pre-setted value from the view
+	 * Returns a single value from the settings
 	 * @param string $key
 	 * @param string $module
+	 * @return mixed value
 	 */
 	public function get($key, $module = 'general')
 	{
@@ -92,6 +93,18 @@ Class Model_settings extends CI_Model
 			return $this->_items[$module][$key];
 		}
 		return FALSE;
+	}
+
+	/**
+	 * Deletes a value from the settings table
+	 * @param string $key
+	 * @param string $module
+	 * @return bool success
+	 */
+	public function delete($key, $module = 'general')
+	{
+		$module = strtolower($module);
+		return $this->db->where('name', $name)->where('module', $module)->delete($this->table);
 	}
 
 	/**
