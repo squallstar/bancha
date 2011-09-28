@@ -22,6 +22,7 @@ Class Model_tree extends CI_Model {
 	private $_show_invisibles = FALSE;
 	private $_uri_segments = array();
 	private $_use_lang = FALSE;
+	private $_current_branch = FALSE;
 
 	public $current_page_uri = '';
 	public $parent_page_uri = false;
@@ -294,20 +295,19 @@ Class Model_tree extends CI_Model {
 	 */
 	public function get_type_cachepath($type = '')
 	{
+		$name = $this->lang->current_language . '-';
 		if ($type == '')
 		{
-			$name = ($this->content->is_stage ? $this->stage_prefix : '') . implode('.', $this->config->item('default_tree_types'));
+			$name = ($this->content->is_stage ? $this->stage_prefix : '') . $name . implode('.', $this->config->item('default_tree_types'));
 		} else {
 			if (is_numeric($type))
 			{
-				$name = $this->content->type_name($type);
+				$name = $name . $this->content->type_name($type);
 			} else {
-				$name = $type;
+				$name = $name . $type;
 			}
 		}
 
-		//Sets the language to be added to the path
-		$name = $this->lang->current_language . '-' . $name;
 		$this->_use_lang = $this->lang->current_language;
 
 		return str_replace('{name}', $name, $this->config->item('tree_cache_folder'));
@@ -429,19 +429,25 @@ Class Model_tree extends CI_Model {
 	 */
 	public function get_current_branch()
 	{
-		$id = FALSE;
-		$record = $this->view->get('record');
-		if (!$record)
+		//Prevent to be called twice during the same request
+		if (!$this->_current_branch)
 		{
-			$page = $this->view->get('page');
-			if ($page)
+
+			$id = FALSE;
+			$record = $this->view->get('record');
+			if (!$record)
 			{
-				$id = $page->id;
+				$page = $this->view->get('page');
+				if ($page)
+				{
+					$id = $page->id;
+				}
+			} else {
+				$id = $record->id;
 			}
-		} else {
-			$id = $record->id;
+			$this->_current_branch = $this->get_default_branch($id);
 		}
-		return $this->get_default_branch($id);
+		return $this->_current_branch;
 	}
 
 
