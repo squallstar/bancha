@@ -9,9 +9,7 @@
  *
  * //Renders the sharing button
  * echo $picasa->type('facebook')
- * 		 	   ->url('http://example.org')
- * 		  	   ->title('Share on Facebook')
- * 		  	   ->render();
+ * 		 	   ->render();
  *
  *
  * @package		Bancha
@@ -45,7 +43,7 @@ Class Picasa_Module extends Bancha_Module
   }
   
   
-  public function getAlbums($maxAlbums = FALSE)
+  public function getGallery($maxAlbums = FALSE)
   {
   	$this->load('gallery');
 	$data = json_decode(str_replace('$', '_',getter($this->_picasaUrl.'user/'.$this->_username.'?category=album'.($maxAlbums ? '&max-results='.$maxAlbums : '').'&access=public&alt=json')));
