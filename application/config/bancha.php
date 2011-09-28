@@ -69,13 +69,13 @@ define('CMS', 'BANCHA');
 $sep = DIRECTORY_SEPARATOR;
 
 /*
- * WEBSITE THEMES
- * Here you can set the themes to use. The main two defined keys are "desktop" and "mobile",
- * and their values refers to the theme that will be used.
+ * WEBSITE INSTALLED THEMES
+ * Here you can set the themes to use.
+ * To activate them, go to the settings section under "Manage".
  */
-$config['website_themes'] = array(
-	'desktop'	=> 'default',	//reached from: /go-desktop
-	'mobile'	=> 'desktop'	//reached from: /go-mobile
+$config['installed_themes'] = array(
+	'default' => 'Default theme',
+	'minimal' => 'A minimal theme'
 );
 
 
