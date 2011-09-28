@@ -11,6 +11,10 @@
 			<description>Website name</description>
 			<type>text</type>
 		</field>
+		<field id="website_claim">
+			<description>Website claim</description>
+			<type>text</type>
+		</field>
 		<field id="website_desktop_theme">
 			<type>radio</type>
 			<description>Website desktop theme</description>
