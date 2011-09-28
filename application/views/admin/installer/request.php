@@ -26,8 +26,8 @@
 					<br />
 					<?php echo _('Install type'); ?><br />
 					<select class="styled" name="premade">
-						<option value="default"><?php echo _('Default'); ?></option>
 						<option value="blog"><?php echo _('Blog'); ?></option>
+						<option value="default"><?php echo _('Default'); ?></option>
 					</select><br />
 			  	</div>
 
