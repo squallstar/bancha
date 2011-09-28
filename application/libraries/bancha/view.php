@@ -108,7 +108,6 @@ Class View
 	public function __construct()
 	{
 		$this->_CI = & get_instance();
-		$this->themes = $this->_CI->config->item('website_themes');
 		$this->load_theme();
 	}
 
@@ -121,12 +120,15 @@ Class View
 		if (!$this->theme)
 		{
 			$this->_CI->load->library('user_agent');
-			if ($this->_CI->agent->is_mobile() && isset($this->themes['mobile']))
+			$this->_CI->load->settings();
+
+			if ($this->_CI->agent->is_mobile())
 			{
-				$this->theme = $this->themes['mobile'];
+				$this->theme = $this->_CI->settings->get('website_mobile_theme');
 			} else {
-				$this->theme = $this->themes['desktop'];
+				$this->theme = $this->_CI->settings->get('website_desktop_theme');
 			}
+			
 			$this->store_theme();
 		}
 		$this->update_ci_path();
@@ -138,13 +140,20 @@ Class View
 	 */
 	public function set_theme($new_theme)
 	{
-		if (isset($this->themes[$new_theme]))
+		$this->_CI->load->settings();
+
+		switch ($new_theme)
 		{
-			$this->theme = $this->themes[$new_theme];
-			$this->store_theme();
-			return TRUE;
+			case 'desktop':
+			case 'tablet':
+				$this->theme = $this->_CI->settings->get('website_desktop_theme');
+				break;
+			case 'mobile':
+				$this->theme = $this->_CI->settings->get('website_mobile_theme');
+				break;
 		}
-		return FALSE;
+
+		return $this->store_theme();
 	}
 
 	/**
@@ -153,7 +162,7 @@ Class View
 	public function store_theme()
 	{
 		$this->_CI->session->set_userdata('_website_theme', $this->theme);
-		$this->update_ci_path();
+		return $this->update_ci_path();
 	}
 
 	/**
@@ -169,6 +178,7 @@ Class View
 		{
 			define('THEME_PUB_PATH', $this->theme_path);
 		}
+		return TRUE;
 	}
 
 	/**
