@@ -32,6 +32,7 @@ $this->load->helper('form'); ?>
 			<ul class="sidemenu">
 				<?php foreach ($tipo['fieldsets'] as $fieldset) { ?>
 				<li><a href="#sb-<?php echo url_title($fieldset['name']); ?>"><?php echo _($fieldset['name']); ?></a></li>
+				<?php } ?>
 			</ul>
 			<p></p>
 		</div>
@@ -51,10 +52,10 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 	echo '<div class="sidebar_content" id="sb-'.url_title($fieldset['name']).'">';
 
-			//Messages
-			echo $this->view->get_messages();
+	//Messages
+	echo $this->view->get_messages();
 
-			echo br(1).'<h3>'._($fieldset['name']).'</h3>'.br(1);
+	echo br(1).'<h3>'._($fieldset['name']).'</h3>'.br(1);
 
 	foreach ($fieldset['fields'] as $field_name)
 	{
@@ -264,14 +265,14 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			echo "<br />\n";
 		}
 
-		if (isset($field['visible'])) {
-			if ($field['visible'] === false) {
+		if (isset($field['visible']))
+		{
+			if ($field['visible'] === false)
+			{
 				echo '</div>';
 			}
 		}
-
 	}
-
 
 	echo $save_buttons;
 
@@ -291,7 +292,7 @@ echo form_close() . br(2);
 <?php if ($has_full_textarea) { ?>
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/ckeditor/adapters/jquery.js"></script>
-<?php }
+<?php } ?>
 
 <script type="text/javascript">
 $(document).ready(function() {
