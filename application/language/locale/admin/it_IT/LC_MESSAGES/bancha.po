@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-28 23:55+0100\n"
-"PO-Revision-Date: 2011-09-28 23:55+0100\n"
+"POT-Creation-Date: 2011-09-29 00:17+0100\n"
+"PO-Revision-Date: 2011-09-29 00:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -132,7 +132,7 @@ msgstr "La gerarchia selezionarta è stata eliminata."
 msgid "Choose one..."
 msgstr "Seleziona uno..."
 
-#: controllers/admin/install.php:103
+#: controllers/admin/install.php:109
 msgid "%n has been installed!"
 msgstr "%n è stato correttamente installato!"
 
@@ -788,6 +788,71 @@ msgstr "Descrizione"
 msgid "Keywords"
 msgstr "Parole chiave"
 
+#: views/admin/content/translations.php:51
+msgid "Blog"
+msgstr "Blog"
+
+#: views/admin/content/translations.php:52
+msgid "Visibility date"
+msgstr "Data di visibilità"
+
+#: views/admin/content/translations.php:53
+msgid "Blog posts"
+msgstr "Post del blog"
+
+#: views/admin/content/translations.php:54
+msgid "Post content"
+msgstr "Contenuto del post"
+
+#: views/admin/content/translations.php:55
+msgid "Friendly URL"
+msgstr "Parte finale URL"
+
+#: views/admin/content/translations.php:56
+msgid "Comments no."
+msgstr "N. commenti"
+
+#: views/admin/content/translations.php:57
+msgid "Images and files"
+msgstr "Immagini e files"
+
+#: views/admin/content/translations.php:58
+msgid "Files"
+msgstr "Files"
+
+#: views/admin/content/translations.php:59
+msgid "Commenti"
+msgstr "Commenti"
+
+#: views/admin/content/translations.php:60
+msgid "Comments"
+msgstr "Commenti"
+
+#: views/admin/content/translations.php:61
+msgid "Author info"
+msgstr "Informazioni autore"
+
+#: views/admin/content/translations.php:62
+#: views/admin/content/type_list.php:24
+msgid "Name"
+msgstr "Nome"
+
+#: views/admin/content/translations.php:63
+msgid "Website"
+msgstr "Sito internet"
+
+#: views/admin/content/translations.php:64
+msgid "E-mail address"
+msgstr "Indirizzo email"
+
+#: views/admin/content/translations.php:65
+msgid "Message"
+msgstr "Messaggio"
+
+#: views/admin/content/translations.php:66
+msgid "Linked post"
+msgstr "Post collegato"
+
 #: views/admin/content/type_add.php:10
 #: views/admin/content/type_add.php:59
 msgid "Add new content type"
@@ -918,10 +983,6 @@ msgstr "Struttura XML"
 #: views/admin/content/type_edit_xml.php:43
 msgid "Save scheme"
 msgstr "Salva schema"
-
-#: views/admin/content/type_list.php:24
-msgid "Name"
-msgstr "Nome"
 
 #: views/admin/content/type_list.php:26
 msgid "Structure type"
@@ -1062,8 +1123,8 @@ msgid "Bancha is already installed on this database!"
 msgstr "Bancha è già installato su questo database!"
 
 #: views/admin/installer/request.php:11
-msgid "To reinstall Bancha, you need to set the \"is_installed\" key on the \"settings\" table to \"F\"."
-msgstr "Per reinstallare Bancha, devi impostare la chiave \"is_installed\" della tabella \"settings\" ad \"F\"."
+msgid "To reinstall Bancha, you need to delete the \"is_installed\" key on the \"settings\" table."
+msgstr "Per reinstallare Bancha, devi eliminare la chiave \"is_installed\" della tabella \"settings\"."
 
 #: views/admin/installer/request.php:16
 msgid "Select the operations you want to perform"
@@ -1092,10 +1153,6 @@ msgstr "Abilita logging degli eventi"
 #: views/admin/installer/request.php:27
 msgid "Install type"
 msgstr "Tipo di installazione"
-
-#: views/admin/installer/request.php:30
-msgid "Blog"
-msgstr "Blog"
 
 #: views/admin/installer/request.php:34
 msgid "Install"
@@ -1260,47 +1317,8 @@ msgstr "Vuoi eliminare questo gruppo?"
 msgid "Delete group"
 msgstr "Elimina gruppo"
 
-#~ msgid "Website"
-#~ msgstr "Sito internet"
-
 #~ msgid "This content has no attachments."
 #~ msgstr "Questo contenuto non ha allegati."
-
-#~ msgid "Blog posts"
-#~ msgstr "Post del blog"
-
-#~ msgid "Post content"
-#~ msgstr "Contenuto del post"
-
-#~ msgid "Visibility date"
-#~ msgstr "Data di visibilità"
-
-#~ msgid "Friendly URL"
-#~ msgstr "Parte finale URL"
-
-#~ msgid "Comments no."
-#~ msgstr "N. commenti"
-
-#~ msgid "Images and files"
-#~ msgstr "Immagini e files"
-
-#~ msgid "Files"
-#~ msgstr "Files"
-
-#~ msgid "Comments"
-#~ msgstr "Commenti"
-
-#~ msgid "Author info"
-#~ msgstr "Informazioni autore"
-
-#~ msgid "E-mail address"
-#~ msgstr "Indirizzo email"
-
-#~ msgid "Message"
-#~ msgstr "Messaggio"
-
-#~ msgid "Linked post"
-#~ msgstr "Post collegato"
 
 #~ msgid "Aspect and actions"
 #~ msgstr "Aspetto e azioni"

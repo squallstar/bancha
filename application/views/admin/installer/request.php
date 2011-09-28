@@ -8,7 +8,7 @@
 
 <?php if ($already_installed) { ?>
 		<div class="warning message"><?php echo _('WARNING').': '._('Bancha is already installed on this database!'); ?></div>
-		<p><br /><?php echo _('To reinstall Bancha, you need to set the "is_installed" key on the "settings" table to "F".'); ?></p>
+		<p><br /><?php echo _('To reinstall Bancha, you need to delete the "is_installed" key on the "settings" table.'); ?></p>
 <?php } else { ?>
 
           <?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
