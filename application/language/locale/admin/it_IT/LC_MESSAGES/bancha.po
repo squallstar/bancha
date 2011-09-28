@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-28 09:59+0100\n"
-"PO-Revision-Date: 2011-09-28 10:01+0100\n"
-"Last-Translator: Nicholas <nicholas@intesys.it>\n"
+"POT-Creation-Date: 2011-09-28 23:55+0100\n"
+"PO-Revision-Date: 2011-09-28 23:55+0100\n"
+"Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,7 +64,7 @@ msgstr "Impossibile eliminare il record %r di tipo %t."
 
 #: controllers/admin/contents.php:467
 #: controllers/admin/contents.php:496
-#: controllers/admin/contents.php:623
+#: controllers/admin/contents.php:627
 msgid "Error"
 msgstr "Errore"
 
@@ -108,15 +108,15 @@ msgstr "Esiste già una categoria chiamata %n."
 msgid "The category %n has been deleted."
 msgstr "La categoria %n è stata eliminata."
 
-#: controllers/admin/contents.php:623
+#: controllers/admin/contents.php:627
 msgid "Cannot renew the cache."
 msgstr "Impossibile rigenerare la cache."
 
-#: controllers/admin/contents.php:625
+#: controllers/admin/contents.php:629
 msgid "The cache has been cleared."
 msgstr "La cache è stata ricreata correttamente."
 
-#: controllers/admin/contents.php:673
+#: controllers/admin/contents.php:677
 msgid "The type named %n has been removed."
 msgstr "Il tipo %n è stato rimosso."
 
@@ -132,7 +132,7 @@ msgstr "La gerarchia selezionarta è stata eliminata."
 msgid "Choose one..."
 msgstr "Seleziona uno..."
 
-#: controllers/admin/install.php:96
+#: controllers/admin/install.php:103
 msgid "%n has been installed!"
 msgstr "%n è stato correttamente installato!"
 
@@ -263,7 +263,7 @@ msgid "The value of the node named type (field: %n, type %t) does not exists. Al
 msgstr "Il valore inserito nel nodo type del campo %n di tipo %t non è ammesso. I valori consentiti sono:"
 
 #: libraries/bancha/dispatchers/dispatcher_default.php:99
-#: libraries/bancha/dispatchers/dispatcher_default.php:326
+#: libraries/bancha/dispatchers/dispatcher_default.php:325
 msgid "Page not found"
 msgstr "Pagina non trovata"
 
@@ -454,6 +454,7 @@ msgid "The address of this page is:"
 msgstr "L'indirizzo di questa pagina è:"
 
 #: views/admin/content/record_edit.php:264
+#: views/admin/content/settings_edit.php:233
 #: views/admin/content/type_add.php:75
 #: views/admin/content/type_categories.php:74
 #: views/admin/hierarchies/list.php:78
@@ -461,6 +462,7 @@ msgid "Add"
 msgstr "Aggiungi"
 
 #: views/admin/content/record_edit.php:267
+#: views/admin/content/settings_edit.php:236
 msgid "Remove"
 msgstr "Rimuovi"
 
@@ -597,6 +599,14 @@ msgstr "Non ci sono contenuti/pagine inserite per questo tipo. Per iniziare, %a.
 msgid "Clear cache"
 msgstr "Svuota cache"
 
+#: views/admin/content/settings_edit.php:26
+msgid "Manage settings"
+msgstr "Gestione impostazioni"
+
+#: views/admin/content/settings_edit.php:40
+msgid "Update settings"
+msgstr "Aggiorna impostazioni"
+
 #: views/admin/content/translations.php:3
 msgid "Menu"
 msgstr "Menu"
@@ -694,7 +704,6 @@ msgid "External link"
 msgstr "Link esterno"
 
 #: views/admin/content/translations.php:28
-#: views/admin/import/records.php:28
 msgid "Content type"
 msgstr "Tipo di contenuto"
 
@@ -800,8 +809,6 @@ msgstr "Aggiungi nuovo tipo"
 #: views/admin/content/type_add.php:61
 #: views/admin/content/type_delete.php:30
 #: views/admin/content/type_edit_xml.php:22
-#: views/admin/import/records.php:22
-#: views/admin/import/records.php:45
 msgid "WARNING"
 msgstr "ATTENZIONE"
 
@@ -1021,6 +1028,7 @@ msgid "Parent hierarchy"
 msgstr "Gerarchia padre"
 
 #: views/admin/import/records.php:7
+#: views/admin/layout/header.php:78
 msgid "Import/export data"
 msgstr "Importaz./esportaz. dati"
 
@@ -1165,15 +1173,6 @@ msgstr "Di seguito l'elenco dei moduli correntemente installati. Per installare 
 msgid "There are no modules installed."
 msgstr "Non ci sono moduli installati."
 
-#: views/admin/settings/list.php:7
-msgid "Manage settings"
-msgstr "Gestione impostazioni"
-
-#: views/admin/settings/list.php:14
-#: views/admin/settings/list.php:19
-msgid "Website"
-msgstr "Sito internet"
-
 #: views/admin/unit_tests/intro.php:11
 msgid "Press the button below to start the automatic unit tests."
 msgstr "Premi il pulsanti per iniziare gli unit tests automatici."
@@ -1260,6 +1259,9 @@ msgstr "Vuoi eliminare questo gruppo?"
 #: views/admin/users/groups/list.php:50
 msgid "Delete group"
 msgstr "Elimina gruppo"
+
+#~ msgid "Website"
+#~ msgstr "Sito internet"
 
 #~ msgid "This content has no attachments."
 #~ msgstr "Questo contenuto non ha allegati."
