@@ -2,7 +2,7 @@
 /**
  * Settings Model
  *
- * Model to work with the cms settings
+ * Model to work with the settings
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
