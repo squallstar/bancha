@@ -27,7 +27,17 @@ Class Install extends Bancha_Controller
 	{
 		$this->load->frlibrary('installer');
 
-		if ($this->input->post('install'))
+		$this->load->settings();
+		$this->settings->build_cache();
+
+		$db_is_installed = $this->installer->is_already_installed();
+		if (!$db_is_installed)
+		{
+			$this->settings->set('is_installed', 'F');
+		}
+		$is_installed = $this->settings->get('is_installed');
+
+		if ($this->input->post('install') && $is_installed != 'T')
 		{
 			if ($this->input->post('create_tables'))
 			{
@@ -81,18 +91,15 @@ Class Install extends Bancha_Controller
 			//We clear the previous database cache
 			$this->db->cache_delete_all();
 
+			$this->settings->set('is_installed', 'T', 'default');
+
 			$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
 			$this->view->render_layout('installer/success', FALSE);
 			return;
 
 		} else {
-			$this->view->set('already_installed', $this->installer->is_already_installed());
+			$this->view->set('already_installed', $is_installed);
 			$this->view->render_layout('installer/request', FALSE);
 		}
-
-
-
-
-
 	}
 }

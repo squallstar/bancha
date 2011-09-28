@@ -12,8 +12,8 @@
  *
  */
 
-Class Model_tree extends CI_Model {
-
+Class Model_tree extends CI_Model
+{
 	private $_tipo = '';
 	private $_records;
 	private $_fetched = FALSE;
@@ -281,7 +281,7 @@ Class Model_tree extends CI_Model {
 		if ($record instanceof Record && $record->is_page())
 		{
 			$parent = $record->get('id_parent');
-			
+
 			//TODO: !!!!!!!!!!!!!!!!!!
 		}
 	}
@@ -331,7 +331,7 @@ Class Model_tree extends CI_Model {
 		}
 		$languages = array_keys($this->lang->languages);
 		$this->_use_lang = $this->lang->current_language;
-		
+
 		$source_name = $this->config->item('tree_cache_folder');
 		$tmp = array();
 		foreach ($languages as $lang)
@@ -354,7 +354,7 @@ Class Model_tree extends CI_Model {
 	}
 
 	/**
-	 * This will caches a tree, or will create it if not exists (and then, caches it!) 
+	 * This will caches a tree, or will create it if not exists (and then, caches it!)
 	 * @param string $file path cache
 	 */
 	private function _cache_tree($file)

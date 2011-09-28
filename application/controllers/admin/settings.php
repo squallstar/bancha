@@ -32,8 +32,15 @@ Class Settings extends Bancha_Controller
 
 	public function index()
 	{
-		$this->view->render_layout('settings/list');
+		//We get the Users scheme
+		$type_definition = $this->xml->parse_scheme($this->config->item('xml_folder') . 'Settings.xml');
+
+		$data = $this->input->post();
+		if (is_array($data) && count($data)) {
+			//Update
+		}
+
+		$this->view->set('tipo', $type_definition);
+		$this->view->render_layout('content/plain_edit');
 	}
-
-
 }
