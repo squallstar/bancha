@@ -37,7 +37,7 @@ $this->load->helper('form'); ?>
 			<p></p>
 		</div>
 <?php
-$save_buttons = form_submit('_bt_save', _('Update'), 'class="submit" onclick="bancha.add_form_hash();"');
+$save_buttons = form_submit('_bt_save', _('Update settings'), 'class="submit long" onclick="bancha.add_form_hash();"');
 
 echo form_open(null, array('id' => 'record_form', 'name' => 'record_form'));
 
@@ -73,7 +73,8 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		}
 
 		//The default value will be set when no stored value is found
-		$field_value = $this->settings->get($field_name, $fieldset['name']);
+		$module = $fieldset['name'];
+		$field_value = $this->settings->get($field_name, $module);
 
 		if (!$field_value)
 		{
@@ -116,21 +117,21 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'text':
-				$attributes['name'] = $field_name;
+				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'text'.($field['mandatory']?' mandatory':'');
 				echo $p_start.$label.br(1).form_input($attributes).$p_end;
 				break;
 
 			case 'textarea':
-				$attributes['name'] = $field_name;
+				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'wysiwyg'.($field['mandatory']?' mandatory':'');
 				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
 				break;
 
 			case 'textarea_code':
-				$attributes['name'] = $field_name;
+				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'code'.($field['mandatory']?' mandatory':'');
 				$attributes['id'] = 'texteditor_'.$field_name;
@@ -139,7 +140,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'textarea_full':
-				$attributes['name'] = $field_name;
+				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = ''.($field['mandatory']?' mandatory':'');
 				$attributes['id'] = 'ckeditor_'.$field_name;
@@ -149,7 +150,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'date':
-				$attributes['name'] = $field_name;
+				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
 				echo $p_start.$label.br(1).form_input($attributes).$p_end;
@@ -157,12 +158,12 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 			case 'datetime':
 				$tmp = explode(' ', $field_value);
-				$attributes['name'] = $field_name;
+				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['value'] = $tmp[0] ? $tmp[0] : date('d/m/Y');
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
 				echo $p_start.$label.br(1).form_input($attributes);
 
-				$attributes['name'] = '_time_'.$field_name;
+				$attributes['name'] = '_time_'.$field_name.'['.$module.']';
 				$attributes['value'] = isset($tmp[1]) ? $tmp[1] : date('H:i');
 				$attributes['class'] = 'time_picker text small';
 				$attributes['type'] = 'time';
@@ -171,7 +172,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'number':
-				$attributes['name'] = $field_name;
+				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['type'] = 'number';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'number text small'.($field['mandatory']?' mandatory':'');
@@ -186,7 +187,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				}
 				$add .= 'class="styled'.($field['mandatory']?' mandatory':'');
 				$add .='" ';
-				echo $p_start.$label.br(1).form_dropdown($field_name, $field['options'], $field_value, $add).$p_end;
+				echo $p_start.$label.br(1).form_dropdown($field_name.'['.$module.']', $field['options'], $field_value, $add).$p_end;
 				break;
 
 			case 'checkbox':
@@ -194,7 +195,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				foreach ($field['options'] as $opt_key => $opt_val) {
 					$checked = is_array($field_value) ? (in_array($opt_key, $field_value) ? 'checked' : '') : '';
 					$data = array(
-					    'name'        => $field_name.'[]',
+					    'name'        => $field_name.'['.$module.'][]]',
 					    'value'       => $opt_key,
 					    'checked'     => $checked,
 					    'class'       => 'checkbox',
@@ -231,7 +232,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				echo '<div class="multiselect multiselect_'.$field_name.'"><div class="multi_left">'.form_dropdown(null, $left_options, $field_value, $add);
 				echo '<br /><input type="button" class="add button tiny" value="'._('Add').'" />'.'</div>';
 
-				echo '<div class="multi_right">'.form_dropdown($field_name.'[]', $right_options, $field_value, $add);
+				echo '<div class="multi_right">'.form_dropdown($field_name.'['.$module.'][]', $right_options, $field_value, $add);
 				echo '<br /><input type="button" class="rem button tiny" value="'._('Remove').'" />'.'</div><div class="clear"></div></div>';
 
 				$nm = 'multiselect_'.$field_name;
@@ -248,7 +249,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				echo $p_start.$label.br(1);
 				foreach ($field['options'] as $opt_key => $opt_val) {
 					$data = array(
-					    'name'        => $field_name,
+					    'name'        => $field_name.'['.$module.']',
 					    'value'       => $opt_key,
 					    'checked'     => $opt_key == $field_value ? 'checked' : '',
 					    'class'       => 'radio',
