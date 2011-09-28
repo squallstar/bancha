@@ -348,10 +348,14 @@ Ad esempio uno dei due files sopra elencati potr&agrave; essere duplicato nella 
 
 		<div class="sidebar_content" id="sb-views">
 			<h3>7. Temi, view e rendering</h3>
-			<p>NOTA: il front-end del sito, pu&ograve; utilizzare pi&ugrave; temi per differenziare ad esempio il sito <strong>desktop</strong> dalla versone <strong>mobile</strong>.
-Tale configurazione &egrave; disponibile nel file di configurazione di Bancha alla voce "WEBSITE THEMES", e si riferiscono al nome della directory
-presente nella directory <strong><?php echo THEMESPATH; ?></strong>. Per default, la skin utilizzata &egrave; la "desktop", e nel caso sia presente la skin mobile
-verr&agrave; effettuato lo switch in automatico nel caso che il sito venga visitato da un device mobile.</p>
+			<p>Il front-end del sito internet, pu&ograve; utilizzare pi&ugrave; temi per differenziare ad esempio il sito <strong>desktop</strong> dalla versone <strong>mobile</strong>.
+Nel menu <strong>Gestione >> Impostazioni</strong> troverai la configurazione per scegliere i temi da attivare per entrambe le versioni. Per aggiungere un nuovo tema, dopo averlo posizionato nella directory <strong><?php echo THEMESPATH; ?></strong>, aggiungilo anche alla variabile <strong>WEBSITE INSTALLED THEMES</strong> nel file di configurazione di <?php echo CMS; ?>.<br />
+NOTA: Lo switch al tema mobile, verr&agrave; effettuato in automatico nel caso in cui il sito venga visitato da un device mobile.</p>
+<p>Per forzare lo switch da un tema all'altro, puoi utilizzare le route speciali <strong>go-desktop</strong> e <strong>go-mobile</strong> in questo modo:</p>
+<code><?php echo site_url('go-desktop'); ?>
+
+<?php echo site_url('go-mobile'); ?>
+</code><br />
 			<p>Bancha utilizza la classe <strong>View</strong> per settare degli oggetti nelle viste e renderizzarle.<br />
 L'oggetto view, &egrave; presente globalmente accedendo alla variabile "view" di Code Igniter in questo modo: <strong>$this->view</strong>.<br /><br />
 Il metodo base per settare un oggetto nella view, &egrave; il <strong>set()</strong>, e va utilizzato in questa maniera:</p>
