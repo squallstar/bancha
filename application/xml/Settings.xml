@@ -11,5 +11,19 @@
 			<description>Website name</description>
 			<type>text</type>
 		</field>
+		<field id="website_desktop_theme">
+			<type>radio</type>
+			<description>Website desktop theme</description>
+			<options>
+				<custom>config_item('installed_themes');</custom>
+			</options>
+		</field>
+		<field id="website_mobile_theme">
+			<type>radio</type>
+			<description>Website mobile theme</description>
+			<options>
+				<custom>config_item('installed_themes');</custom>
+			</options>
+		</field>
 	</fieldset>
 </content>
