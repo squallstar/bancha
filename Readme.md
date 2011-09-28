@@ -28,8 +28,6 @@ The **BANCHA documentation** is available through the BANCHA administration pane
 
 4. Choose your install type between "Default" and "Blog". The Blog one, will create and configures the "Blog" and "Comments" content types for you (the Default will create only the website menu)
 
-4. When install is done, place a die(); at the start of this file: application/controllers/admin/install.php (alternately you can also delete it!)
-
 5. You're done! The install script will create a content type named "Menu" which is linked to the page tree of your website.
 
 # Application MVC Scheme
