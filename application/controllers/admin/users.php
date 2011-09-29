@@ -31,6 +31,11 @@ Class Users extends Bancha_Controller
 		$this->lista();
 	}
 
+	public function type() {
+		//Legacy: breadcrumbs in edit_user will use this route to go back to list
+		$this->lista();
+	}
+
 	public function lista($page=0)
 	{
 		//Paginazione
@@ -67,6 +72,8 @@ Class Users extends Bancha_Controller
 
 	public function edit($id_username='')
 	{
+		$this->auth->check_permission('users', 'list');
+
 		$this->load->categories();
         $this->load->hierarchies();
         $this->load->documents();
