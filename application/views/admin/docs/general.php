@@ -59,7 +59,7 @@
 			<?php echo CMS; ?> &egrave; stato sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
 			Bancha &egrave; rilasciato con licenza GNU/GPL. Puoi visionare l'intera licenza dal file License.txt nella root del progetto.<br />
 			<br />
-			Copyright <a href="http://www.squallstar.it/">Squallstar Studio</a> &copy;2011 
+			Copyright <a href="http://www.squallstar.it/">Squallstar Studio</a> &copy;2011
 			</p>
 		</div>
 
@@ -93,7 +93,7 @@
 			<p>
 			Come avrai intuito, anche le pagine stesse di un sito internet sono a loro volta un tipo di contenuto. &Egrave; proprio per questo che
 			dovr&agrave; essere definito almeno un tipo di contenuto associato all'albero delle pagine del sito. Tale associazione viene impostata nel file di configurazione di Bancha alla voce <strong>DEFAULT TREE TYPE</strong>.</p>
-			
+
 			<p>Aggiungendo un nuovo tipo di contenuto, verranno <strong>automaticamente creati</strong> i seguenti files:</p>
 			<ul>
 				<li><strong>/application/xml/Nome_contenuto.xml</strong> che conterr&agrave; la struttura dei campi gestibili,</li>
@@ -107,7 +107,7 @@
 		<div class="sidebar_content" id="sb-types-xml">
 			<h3>4. Schema XML dei tipi</h3>
 <p>Ogni tipo di contenuto &egrave; associato ad un relativo file XML presente nella directory <strong><?php echo $this->config->item('xml_typefolder'); ?></strong> che ne descrive i campi associati. Puoi editare tale file anche dall'amministrazione, premendo il link <strong>Modifica schema</strong> nella lista dei tipi di contenuto/pagine. La struttura base di un tipo di contenuto/pagina &egrave; definita in questo modo:</p>
-			<code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+			<pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content>
 	&lt;id&gt;1&lt;/id&gt;
 	&lt;name&gt;pagine&lt;/name&gt;
@@ -122,7 +122,7 @@
 	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
 	&lt;fieldset&gt;
 	&lt;/fieldset&gt;
-&lt;/content&gt;</code><br />
+&lt;/content&gt;</code></pre><br />
 <p>Il nodo <strong>&lt;id&gt;</strong> verr&agrave; popolato automaticamente da Bancha quando verr&agrave; creato il tipo di contenuto, cos&igrave; come i nodi <strong>&lt;name&gt;</strong> e <strong>&lt;description&gt;</strong> che definiscono rispettivamente il nome utilizzato internamente come chiave, e quello visualizzato all'utente nel pannello.<br />
 Il nodo <strong>&lt;tree&gt;</strong> &egrave; un booleano che descrive se il contenuto &egrave; strutturato ad albero o lineare/semplice (vedi la sezione <strong>3. Tipi di contenuto</strong> per maggiori informazioni).<br /><br />
 Il nodo <strong>&lt;parent_types&gt;</strong> &egrave; obbligatorio per i contenuti ad albero, e descrive i nomi di tutti i tipi di contenuto da utilizzare come riferimento per le pagine padre. Di default, viene impostato con il tipo di contenuto stesso.
@@ -134,7 +134,7 @@ Il nodo <strong>&lt;has_categories&gt;</strong> &egrave; sempre un booleano, e d
 <h3>Fieldsets</h3>
 <p>Ogni tipo di contenuto pu&ograve; contiene infiniti fieldsets. Ogni fieldset, visivamente sar&agrave; una sotto-sezione e potr&agrave; contenere infiniti field (campi di inserimento). Ogni fieldset dovr&agrave; avere un nome unico tra quelli dello stesso tipo di contenuto (definito attraverso il nodo <strong>&lt;name&gt;</strong>) e conterr&agrave; uno o pi&ugrave; nodi di tipo <strong>&lt;field&gt;</strong>.</p>
 <div class="message info">Strutturare i tuoi campi in fieldset ordinati semanticamente, aiuter&agrave; gli utilizzatori durante l'inserimento dati.</div>
-<code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+<pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content>
 	...
 	&lt;fieldset&gt;
@@ -147,7 +147,7 @@ Il nodo <strong>&lt;has_categories&gt;</strong> &egrave; sempre un booleano, e d
 		&lt;field id="campo_3"&gt;...&lt;/field&gt;
 		&lt;field id="campo_4"&gt;...&lt;/field&gt;
 	&lt;/fieldset&gt;
-&lt;/content&gt;</code><br />
+&lt;/content&gt;</code></pre><br />
 
 <h3>Fields</h3>
 <p>I nodi di tipo fields all'interno di un nodo fieldset, sono utilizzati per descrivere un singolo campo di input per tale di tipo di contenuto.
@@ -183,22 +183,22 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 <div class="message warning">Ogni field che dovr&agrave; essere salvato su una colonna fisica della propria tabella, necessita dell'attributo <strong>"column"</strong> impostato a "true".</div>
 
 <p>Ecco un esempio di definizione di un campo di testo normale:</p>
-<code>&lt;field <strong>id="title" column="true"</strong>&gt;
+<pre class="prettyprint"><code>&lt;field <strong>id="title" column="true"</strong>&gt;
 	&lt;description&gt;Titolo&lt;/description&gt;
 	<strong>&lt;type&gt;text&lt;/type&gt;</strong>
 	&lt;mandatory&gt;true&lt;/mandatory&gt;
 	&lt;admin&gt;true&lt;/admin&gt;
 	&lt;default&gt;Senza titolo&lt;/default&gt;
-&lt;/field&gt;</code><br />
+&lt;/field&gt;</code></pre><br />
 <p>Il nodo <strong>default</strong> accetta anche codice php se viene preposto "eval:", ad esempio <strong>&lt;default&gt;eval:time();&lt;/default&gt;</strong>
 <p>I campi di tipo <strong>select</strong>, <strong>multiselect</strong> e <strong>checkbox</strong> inoltre, avranno a disposizione il nodo <strong>&lt;options&gt;</strong> per definire le opzioni associate a tale campo, come in questo esempio:</p>
-<code>&lt;options&gt;
+<pre class="prettyprint"><code>&lt;options&gt;
 	&lt;option value="T"&gt;Si&lt;/option&gt;
 	&lt;option value="F"&gt;No&lt;/option&gt;
-&lt;/options&gt;</code>
+&lt;/options&gt;</code></pre>
 <br />
 <p>In alternativa, &egrave; possibile anche estrarre dinamicamente le options tramite query SQL. Di seguito un esempio:</p>
-<code>&lt;field id="galleria"&gt;
+<pre class="prettyprint"><code>&lt;field id="galleria"&gt;
 	&lt;description&gt;Galleria collegata&lt;/description&gt;
 	&lt;type&gt;select&lt;/type&gt;
 	<strong>&lt;sql cache="false"&gt;</strong>
@@ -208,32 +208,32 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 		&lt;where&gt;published = 1&lt;/where&gt;
 		&lt;order_by&gt;name ASC&lt;/order_by&gt;
 	<strong>&lt;/sql&gt;</strong>
-&lt;/field&gt;</code><br />
+&lt;/field&gt;</code></pre><br />
 <div class="message info">Impostando la cache attiva, la query verr&agrave; cacheata fino a che non verr&agrave; svuotata la cache dei tipi.</div>
 <p>Nota: qui, le clausole WHERE sono utilizzabili solamente su campi fisici della tabella selezionata e non sui campi XML.</p>
 
 <p>&Egrave; possibile anche estrarre le options tramite <strong>eval</strong>, utilizzando il nodo <strong>&lt;custom&gt;</strong>:</p>
-<code>&lt;field id="lang"&gt;
+<pre class="prettyprint"><code>&lt;field id="lang"&gt;
 	&lt;description&gt;Lingua del contenuto&lt;/description&gt;
 	&lt;type&gt;select&lt;/type&gt;
 	&lt;options&gt;
 		<strong>&lt;custom&gt;$this->config->item('languages_select');&lt;/custom&gt;</strong>
 	&lt;/options&gt;
-&lt;/field&gt;</code><br />
+&lt;/field&gt;</code></pre><br />
 
 <p>I campi di tipo <strong>files</strong> e <strong>images</strong> avranno a disposizione anche le seguenti propriet&agrave;:</p>
-<code>&lt;size&gt;2048&lt;/size&gt;
+<pre class="prettyprint"><code>&lt;size&gt;2048&lt;/size&gt;
 &lt;mimes&gt;jpg|png|gif&lt;/mimes&gt;
-&lt;max&gt;5&lt;/max&gt;</code>
+&lt;max&gt;5&lt;/max&gt;</code></pre>
 <br />
 <p>Rispettivamente, definiscono la dimensione massima dei files caricati in Kb, i mime-types accettati e il numero massimo di files caricabili in questo campo.
 Il campo <strong>&lt;mimes&gt;</strong> accetta anche il valore <strong>*</strong> come segnaposto per accettare tutti i mimes.</p>
 
 <p>I campi di tipo <strong>images</strong> avranno a disposizione le propriet&agrave; dei campi files ed anche le seguenti propriet&agrave;:</p>
-<code>&lt;original&gt;true&lt;/original&gt;
+<pre class="prettyprint"><code>&lt;original&gt;true&lt;/original&gt;
 &lt;encrypt_name&gt;true&lt;/encrypt_name&gt;
 &lt;resized&gt;640x?&lt;/resized&gt;
-&lt;thumbnail&gt;150x100&lt;/thumbnail&gt;</code>
+&lt;thumbnail&gt;150x100&lt;/thumbnail&gt;</code></pre>
 <br />
 <p>Il campo <strong>&lt;original&gt;</strong> imposta se salvare l'immagine originale. Il campo <strong>&lt;encrypt_name&gt;</strong> definisce se il nome del file salvato deve essere mantenuto tale.<br />
 I campi <strong>&lt;resized&gt;</strong> e <strong>&lt;thumbnail&gt;</strong> impostano le dimensioni dell'immagine da ridimensionare per le due nuove rispettive immagini.<br />
@@ -241,7 +241,7 @@ Il campo thumbnail accetta anche l'attributo <strong>preset</strong> relativo al
 Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura automatica per mantenere le proporzioni della misura definita.</p>
 
 <p>Di seguito un esempio completo di struttura per definire un tipo di contenuto con un campo di testo, una select ed un campo di caricamento per una singola immagine:</p>
-<code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+<pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content>
 	&lt;id&gt;1&lt;/id&gt;
 	&lt;name&gt;pagine&lt;/name&gt;
@@ -290,7 +290,7 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 		&lt;/field&gt;
 
 	&lt;/fieldset&gt;
-&lt;/content&gt;</code><br />
+&lt;/content&gt;</code></pre><br />
 <p>Alla creazione di un nuovo tipo di contenuto, lo schema XML associato conterr&agrave; gi&agrave; una struttura di base con alcuni campi dimostrativi, tra cui quelli relativi ai <strong>Meta tags</strong>.</p>
 
 		</div>
@@ -330,9 +330,9 @@ Questo vuol dire che un sito potrebbe avere anche 10 template diversi per le var
 	<li><strong><?php echo THEMESPATH; ?>nometema/views/templates/home.php</strong> - utilizzato dalla homepage del sito</li>
 </ul>
 <p>Come potrai vedere, ognuno di questi template contiene del codice HTML dichiarativo e a sua volta sceglie quali altre view renderizzare. Per renderizzare altre view, &egrave; sufficiente utilizzare la funzione nativa <strong>load->view</strong> di Code Igniter. Ecco un esempio di template:</p>
-<code>&lt;?php $this->load->view('header'); ?&gt;
+<pre class="prettyprint"><code>&lt;?php $this->load->view('header'); ?&gt;
 &lt;?php $this->load->view('content_render'); ?&gt;
-&lt;?php $this->load->view('footer'); ?&gt;</code>
+&lt;?php $this->load->view('footer'); ?&gt;</code></pre>
 <br />
 <div class="message info">La parte di layout relativa alle dichiarazioni <strong>html, head, body</strong> &egrave; contenuta nel file <?php echo THEMESPATH; ?>desktop/views/layout.php</div>
 <p>Quando definisci altri template, ricorda di inserire una nuova option nel campo <strong>view_template</strong> all'interno del tipo di contenuto (solitamente "Pagine") di modo che venga visualizzato il nuovo template nell'area amministrativa.<br /><br />
@@ -354,17 +354,17 @@ Ad esempio uno dei due files sopra elencati potr&agrave; essere duplicato nella 
 Nel menu <strong>Gestione >> Impostazioni</strong> troverai la configurazione per scegliere i temi da attivare per entrambe le versioni. Per aggiungere un nuovo tema, dopo averlo posizionato nella directory <strong><?php echo THEMESPATH; ?></strong>, aggiungilo anche alla variabile <strong>WEBSITE INSTALLED THEMES</strong> nel file di configurazione di <?php echo CMS; ?>.<br />
 NOTA: Lo switch al tema mobile, verr&agrave; effettuato in automatico nel caso in cui il sito venga visitato da un device mobile.</p>
 <p>Per forzare lo switch da un tema all'altro, puoi utilizzare le route speciali <strong>go-desktop</strong> e <strong>go-mobile</strong> in questo modo:</p>
-<code><?php echo site_url('go-desktop'); ?>
+<pre class="prettyprint"><code><?php echo site_url('go-desktop'); ?>
 
 <?php echo site_url('go-mobile'); ?>
-</code><br />
+</code></pre><br />
 			<p>Bancha utilizza la classe <strong>View</strong> per settare degli oggetti nelle viste e renderizzarle.<br />
 L'oggetto view, &egrave; presente globalmente accedendo alla variabile "view" di Code Igniter in questo modo: <strong>$this->view</strong>.<br /><br />
 Il metodo base per settare un oggetto nella view, &egrave; il <strong>set()</strong>, e va utilizzato in questa maniera:</p>
-<code>$this->view->set('nome_oggetto', $valore);</code><br />
+<pre class="prettyprint"><code>$this->view->set('nome_oggetto', $valore);</code></pre><br />
 <p>Dalla view, sar&agrave; possibile accedere agli oggetti impostati utilizzando le variabili semplici di PHP con la chiave impostata.
 Nel nostro esempio sopra, dalla view sar&agrave; disponibile la variabile in questo modo:</p>
-<code>echo $nome_oggetto;</code><br />
+<pre class="prettyprint"><code>echo $nome_oggetto;</code></pre><br />
 <p>Nel caso fosse necessario eliminare una variabile prima del rendering della view, &egrave; possibile utilizzare il metodo <strong>remove()</strong> che accetta come singolo parametro la chiave dell'oggetto da eliminare.<br /><br />
 Di seguito, le funzioni utili a renderizzare view, o templates.</p><br />
 
@@ -381,60 +381,60 @@ Di seguito, le funzioni utili a renderizzare view, o templates.</p><br />
 <p>Renderizza un template presenta nella directory dei templates, utilizzando lo skin in uso (solitamente <strong><?php echo THEMESPATH; ?>nometema/templates/</strong>).
 &Egrave; il metodo di rendering pi&ugrave; utilizzato, e viene utilizzata soprattutto dal motore di routing generale del sito per renderizzare la struttura base delle pagine.<br />
 Nel caso non si volesse passare per il layout, passare come secondo parametro "false" e verr&agrave; renderizzato solo il template scelto.</p>
-<code>$this->render_template('default');
+<pre class="prettyprint"><code>$this->render_template('default');
 //Renderizza il file <?php echo THEMESPATH; ?>nometema/templates/default.php
 
 $this->render_template('home');
 //Renderizza la homepage del sito, ovvero il file <?php echo THEMESPATH; ?>desktop/templates/home.php
-//passando per il layout: <?php echo THEMESPATH; ?>desktop/layout.php</code><br />
+//passando per il layout: <?php echo THEMESPATH; ?>desktop/layout.php</code></pre><br />
 
 <h3>render($view_file)</h3>
 <p>Metodo base per il rendering di una singola vista lato front-end. Utilizza il path relativo allo skin in uso:</p>
-<code>$this->view->render('pagina');
+<pre class="prettyprint"><code>$this->view->render('pagina');
 //Renderizzer&agrave; il file <?php echo THEMESPATH; ?>desktop/pagina.php
 
 $this->view->render('demo/prova');
-//Renderizzer&agrave; il file <?php echo THEMESPATH; ?>desktop/demo/prova.php</code><br />
+//Renderizzer&agrave; il file <?php echo THEMESPATH; ?>desktop/demo/prova.php</code></pre><br />
 
 <h3>render_type_template($type_name, $view_file)</h3>
 <p>Metodo per renderizzare una vista specifica di un tipo di contenuto. Principalmente viene usata dal <strong>content_render</strong> (views/layout/content_render.php) per renderizzare automaticamente le viste dei tipi di contenuti, ma nulla ci vieta di usarlo a nostro piacimento come segue:</p>
-<code>$this->view->render_type_template('Prodotti', 'list');
+<pre class="prettyprint"><code>$this->view->render_type_template('Prodotti', 'list');
 //Renderizzer&agrave; il file application/views/type_templates/Prodotti/list.php
 
 $this->view->render_type_template('Gallerie', 'detail');
-//Renderizzer&agrave; il file application/views/type_templates/Gallerie/detail.php</code><br />
+//Renderizzer&agrave; il file application/views/type_templates/Gallerie/detail.php</code></pre><br />
 
 <h3>render_layout($view_file)</h3>
 <p>Metodo che renderizza un layout utilizzando il path base settato precedentemente.<br />Viene attualmente usato <strong>solamente dall'amministrazione</strong> utilizzando come base "admin/" in modo da renderizzare automaticamente solo le viste figlie di tale path.</p>
-<code>$this->view->base = 'admin/';
+<pre class="prettyprint"><code>$this->view->base = 'admin/';
 $this->view->render_layout('docs/general');
 //Verr&agrave; renderizzato il file application/views/admin/layout/layout.php
 //e verranno valorizzate le variabili $view e $content, rispettivamente con
-//il nome della view da renderizzare, e i dati impostati con il metodo set().</code>
+//il nome della view da renderizzare, e i dati impostati con il metodo set().</code></pre>
 
 		</div>
 
 		<div class="sidebar_content" id="sb-extract-records">
 			<h3>8. Estrazione di contenuti</h3>
 			<p>Utilizzando azioni personalizzate per il rendering delle pagine, potrebbe essere necessario che tu debba estrarre manualmente dei contenuti. Bancha porta avanti la filosofia di Code Igniter, e ti mette a disposizione la classe "Records" per le estrazioni dei record. Tale classe &egrave; gi&agrave; disponibile in qualsiasi punto della tua applicazione, facendo riferimento all'oggetto <strong>$this</strong> di Code Igniter in questo modo:</p>
-<code>$this->records</code><br />
+<pre class="prettyprint"><code>$this->records</code></pre><br />
 <p>I metodi a disposizione della classe Records sono molto semplici da utilizzare. Ad esempio, se tu volessi estrarre gli ultimi 20 contenuti di tipo "News", potrai procedere come di seguito:</p>
-<code>$notizie = $this->records->type('News')->limit(10)->get();</code>
+<pre class="prettyprint"><code>$notizie = $this->records->type('News')->limit(10)->get();</code></pre>
 <br />
 <p>Riceverai un array di oggetti di tipo <strong>Record</strong> che potrai utilizzare per estrarre le informazioni contenute in base allo schema XML del tipo di contenuto estratto.<br />Ad esempio, stampiamo a video il titolo delle notizie estratte:</p>
-<code>foreach ($notizie as $notizia)
+<pre class="prettyprint"><code>foreach ($notizie as $notizia)
 {
 	echo $notizia-><strong>get('title')</strong> . br(1);
-}</code><br />
+}</code></pre><br />
 <p>Come avrai visto, i records dispongono della funzione "get" per ottenere uno qualsiasi dei loro valori. Nel caso la chiave da te seleziona non esista, ti verr&agrave; ritornato il valore booleano FALSE anzich&egrave; generare errori.<br />Per ottenere il nome/id del tipo di appartenenza di un record e del record stesso, procedi come segue:</p>
-<code>echo $record->tipo;
+<pre class="prettyprint"><code>echo $record->tipo;
 //Mostra: "News"
 
 echo $record->_tipo;
 //Mostra: 1
 
 echo $record->id;
-//Mostra l'id del record</code><br />
+//Mostra l'id del record</code></pre><br />
 <div class="message info">Per estrarre i documenti associati ad un record, &egrave; sufficiente lanciare la sua funzione <strong>set_documents()</strong> per valorizzare i relativi campi.
 In alternativa, &egrave; possibile utilizzare la funzione <strong>documents()</strong> documentata qui sotto per estrarre i documenti al momento dell'estrazione dei records.</div>
 <p>La classe records, dispone dei seguenti metodi raffinare le estrazioni:</p>
@@ -455,12 +455,12 @@ In alternativa, &egrave; possibile utilizzare la funzione <strong>documents()</s
 	<li><strong>get_first()</strong> - per estrarre solamente un record (ritorna direttamente un oggetto <strong>Record</strong>)</li>
 </ul>
 <p>Vediamo un altro esempio di estrazione:</p>
-<code>$num_notizie = $this->records->type('News')
+<pre class="prettyprint"><code>$num_notizie = $this->records->type('News')
 	->like('anno', '%2011')
 	->limit(40, 10)
 	->published(true)
 	->order_by('id_record', 'DESC')
-	->count();</code><br />
+	->count();</code></pre><br />
 <p>I records presentano alcuni campi fisici preimpostati utilizzati nelle clausole delle query di estrazione, e visualizzabili tramite la funzione "get":</p>
 <ul>
 	<li><strong>id_record</strong> - rappresenta l'id interno univoco del record</li>
@@ -480,7 +480,7 @@ Dopodich&egrave;, sar&agrave; necessario anche aggiungere tale colonna alla tabe
 <br />
 <h3>Creare e salvare records</h3>
 <p>&Egrave; possibile creare, aggiornare ed eliminare records anche in maniera manuale. Di seguito un'esempio:</p>
-<code>//Creiamo un nuovo record di tipo Blog e ne impostiamo titolo e autore
+<pre class="prettyprint"><code>//Creiamo un nuovo record di tipo Blog e ne impostiamo titolo e autore
 $post = new Record('Blog');
 $post-&gt;('title', 'My first post');
 $post-&gt;('author', 'Nicholas');
@@ -489,7 +489,7 @@ $post-&gt;('author', 'Nicholas');
 $id = $this-&gt;records-&gt;save($post);
 
 //Pubblichiamo il nostro post
-$this-&gt;records-&gt;set_type('Blog')-&gt;publish($id);</code>
+$this-&gt;records-&gt;set_type('Blog')-&gt;publish($id);</code></pre>
 <br />
 
 </div>
@@ -499,14 +499,14 @@ $this-&gt;records-&gt;set_type('Blog')-&gt;publish($id);</code>
 			<p>Tramite lo schema XML di un tipo di contenuto, &egrave; possibile impostare dei campi di tipo "files" o "images", utili per poter caricare appunto files generici e immagini.
 			La differenza sostanziale tra questi due tipi risiede nel fatto che le immagini prevedono delle opzioni di ridimensionamento oltre al mero caricamento del file.</p>
 			<p>Per estrarre i documenti di un record, &egrave; sufficiente invocare la sua funzione set_documents() in questa maniera:</p>
-<code>$record-><strong>set_documents();</strong>
-print_r($record->get('lista_immagini');</code><br />
+<pre class="prettyprint"><code>$record-><strong>set_documents();</strong>
+print_r($record->get('lista_immagini');</code></pre><br />
 <p>In alternativa, anzich&egrave; chiamare singolarmente la funzione per ogni record, &egrave; sufficiente utilizzare la funzione <strong>documents()</strong> durante l'estrazione dei
 records per procedere alla valorizzazione automatica dei documenti:</p>
-<code>$records = $this->records->type('Menu')-><strong>documents(TRUE)</strong>->get();</code><br />
+<pre class="prettyprint"><code>$records = $this->records->type('Menu')-><strong>documents(TRUE)</strong>->get();</code></pre><br />
 <div class="message warning">Attenzione: quest'ultimo esempio comporta maggior carico lato database poich&egrave; per ogni record estratto, verr&agrave; effettuata una seconda query per estrarre subito i suoi allegati.</div>
 <p>Bancha, mette a disposizione anche una classe di estrazione dei documenti. Per inizializzare la classe, utilizzare la seguente sintassi:</p>
-<code>$this->load->documents();</code><br />
+<pre class="prettyprint"><code>$this->load->documents();</code></pre><br />
 <p>La classe Documents presenta i seguenti metodi di estrazione (il funzionamento &egrave; simile alla classe Records):</p>
 <ul>
 	<li><strong>table($table_name)</strong> - definisce la tabella su cui ricercare (solitamente, "records")</li>
@@ -517,12 +517,12 @@ records per procedere alla valorizzazione automatica dei documenti:</p>
 	<li><strong>get()</strong> - estrae i documenti seguendo le condizioni impostate</li>
 </ul>
 <p>Ecco un esempio di estrazione:</p>
-<code>//Carico la classe documents
+<pre class="prettyprint"><code>//Carico la classe documents
 $this->load->documents();
 
 //Estraggo 10 documenti dal record con id 12 della tabella records
 $documenti = $this->documents->table('records')->id(12)->limit(10)->get();
-</code><br />
+</code></pre><br />
 <p>&Egrave; possibile anche utilizzare i metodi interni della classe Documents per salvare/eliminare files:</p>
 <ul>
 	<li><strong>upload($name, $specs, $save_params)</strong> - salva un file (dalla $_FILES) su file system</li>
@@ -538,19 +538,19 @@ $documenti = $this->documents->table('records')->id(12)->limit(10)->get();
 			<h3>10. Alberi di menu</h3>
 			<p>
 			Per ottenere alberi di menu (solo contenuti di tipo pagina), &egrave; disponibile la seguente classe:</p>
-<code>$this->tree</code><br />
+<pre class="prettyprint"><code>$this->tree</code></pre><br />
 <p>Il tipo di contenuto da utilizzare come default per la creazione dell'albero del sito, va definito nel file di configurazione di <?php echo CMS; ?> alla voce <strong>DEFAULT TREE TYPE</strong>. Per estrarre l'albero generale del sito, utilizzare la funzione <strong>get_default()</strong> come segue:</p>
-<code>//Estraggo l'albero generale delle pagine
-$this->tree-><strong>get_default()</strong>;</code>
+<pre class="prettyprint"><code>//Estraggo l'albero generale delle pagine
+$this->tree-><strong>get_default()</strong>;</code></pre>
 <br />
 <p>Per stampare l'albero ottenuto, &egrave; sufficiente richiamare l'helper menu in questo modo:</p>
-<code>$albero = $this->tree->get_default();
+<pre class="prettyprint"><code>$albero = $this->tree->get_default();
 
 $this->load->helper('menu');
-echo <strong>menu</strong>($albero);</code>
+echo <strong>menu</strong>($albero);</code></pre>
 <br /><p>L'helper provveder&agrave; in automatico a "flaggare" i vari stati sulle pagine aperte, o eventuali sotto pagine selezionate con le classi "open" e "selected".</p>
 <p>Nel caso in cui volessi visualizzare solamente pagine figlie di quella attuale, utilizza la funzione <strong>get_current_branch()</strong> come segue:</p>
-<code>echo menu($this->tree->get_current_branch());</code>
+<pre class="prettyprint"><code>echo menu($this->tree->get_current_branch());</code></pre>
 <br />
 <div class="message info"><?php echo CMS; ?> provvede gi&agrave; ad estrarre il tipo di contenuto <strong>"<?php echo implode(', ', $this->config->item('default_tree_types')); ?>"</strong> come albero generale del sito internet.</div>
 <p>Puoi anche estrarre diversi alberi di menu secondo le tue esigenze. La classe Tree contiene metodi simili a quanto gi&agrave; visto con la classe Records. Ecco alcuni dei metodi utilizzabili per rifinire le estrazioni:</p>
@@ -571,13 +571,13 @@ echo <strong>menu</strong>($albero);</code>
 	<li><strong>get_linear_dropdown()</strong> - ottiene un albero lineare come array associativo (utile per le select)</li>
 </ul>
 <p>Esempio di estrazione di un albero di pagine:</p>
-<code>$albero = $this->tree->type('Menu')
+<pre class="prettyprint"><code>$albero = $this->tree->type('Menu')
 		     ->where('lang', 'it')
 		     ->exclude_parent(123)
 		     ->get();
 
 echo menu($albero);
-</code><br />
+</code></pre><br />
 <p>Infine, alcuni metodi di utilit&agrave; generale:</p>
 <ul>
 	<li><strong>get_default_branch($starting_id)</strong> - ritorna un ramo dell'albero di menu principale, partendo dalla pagina con id scelto</li>
@@ -621,22 +621,22 @@ Le pagine configurate come <strong>lista di contenuti</strong> presentano due ut
 			<br />
 			<h3>feed.xml</h3>
 			<p>Aggiungendo al path di una pagina di tipo lista di contenuti il parametro <strong>/feed.xml</strong>, verr&agrave; visualizzato il relativo feed RSS 2.0. Ad esempio:</p>
-<code>//Pagina lista di contenuti:
+<pre class="prettyprint"><code>//Pagina lista di contenuti:
 http://localhost/lista-articoli
 
 //Relativo feed rss:
-http://localhost/lista-articoli/feed.xml</code><br />
+http://localhost/lista-articoli/feed.xml</code></pre><br />
 <p>Per il popolamento dei campi, vengono usati i parametri title, contenuto e date_update/date_insert dei contenuti. &Egrave; possibile variare tale comportamento agendo nel dispatcher di default del sito (<strong>controllers/libraries/bancha/dispatchers/dispatcher_default.php)</strong>)</p>
 
 <div class="message info">Puoi disattivare la funzionalit&agrave; di esportazione feed di una pagina intervenendo sulla voce "Esportazione feed" presente nella maschera "Aspetto e azioni" di tale pagina. Il campo &egrave; definito nello schema xml dei tipi di contenuto ad albero ed &egrave; chiamato "action_list_has_feed".</div>
 <br />
 <h3>feed.json</h3>
 			<p>In maniera simile a quanto avviene per il feed rss, aggiungendo al path di una pagina di tipo lista di contenuti il parametro <strong>/feed.json</strong>, verr&agrave; visualizzata la relativa esportazione dati in formato JSON. Ad esempio:</p>
-<code>//Pagina lista di contenuti:
+<pre class="prettyprint"><code>//Pagina lista di contenuti:
 http://localhost/lista-articoli/ultimi-post
 
 //Esportazione dati in formato JSON:
-http://localhost/lista-articoli/ultimi-post/feed.json</code><br />
+http://localhost/lista-articoli/ultimi-post/feed.json</code></pre><br />
 
 </div>
 
@@ -649,14 +649,14 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code><br />
 			<br />
 			<h3>Definizione di un trigger</h3>
 			<p>Attraverso lo schema di un tipo di contenuto, puoi definire dei trigger come segue:</p>
-<code>&lt;triggers&gt;
+<pre class="prettyprint"><code>&lt;triggers&gt;
 	&lt;trigger on="insert, update, delete" field="id_parent"&gt;
 		&lt;sql action="recount" type="Menu" target="child_count" /&gt;
 	&lt;/trigger&gt;
 	&lt;trigger on="insert"&gt;
 		&lt;call action="demotrigger" /&gt;
 	&lt;/trigger&gt;
-&lt;/triggers&gt;</code><br />
+&lt;/triggers&gt;</code></pre><br />
 <p>Qui sopra sono stati definiti due trigger:</p>
 <ul>
 	<li>Il primo trigger, esegue una query sql all'inserimento, aggiornamento ed eliminazione di un record di questo tipo di contenuto. L'azione, sar&agrave; "recount", ovvero conter&agrave; i contenuti del tipo appartenente che hanno come campo "id_parent" il valore inserito. Dopodich&egrave; effettuer&agrave; la query di aggiornamento utilizzando come target la colonna "child_count" del tipo di contenuto "Menu".</li>
@@ -678,14 +678,14 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code><br />
 	<li><strong>escape</strong> - (opzionale - <strong>bool</strong>, default "true") definisce se usare il carattere di escape per il valore del record in questione</li>
 </ul>
 <p>Esempio:</p>
-<code>&lt;trigger on="insert" field="id_parent"&gt;
+<pre class="prettyprint"><code>&lt;trigger on="insert" field="id_parent"&gt;
 	&lt;sql action="update" type="Blog" target="num_commenti" value="num_commenti+1" escape="false"/&gt;
-&lt;/trigger&gt;</code>
+&lt;/trigger&gt;</code></pre>
 <br />
 <p>Per le <strong>relazioni 1-n</strong>, ad esempio tra i post di un blog ed i suoi commenti, aggiungere un trigger così definito nello schema xml dei commenti:</p>
-<code>&lt;trigger on="insert, update, delete" field="post_id"&gt;
+<pre class="prettyprint"><code>&lt;trigger on="insert, update, delete" field="post_id"&gt;
 	&lt;sql action="recount" type="Blog" target="child_count" /&gt;
-&lt;/trigger&gt;</code><br />
+&lt;/trigger&gt;</code></pre><br />
 <h3>Attivatori con chiamata esterna</h3>
 <p>I trigger di tipo <strong>"call"</strong>, accettano i seguenti attributi nel nodo "trigger":</p>
 <ul>
@@ -696,9 +696,9 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code><br />
 	<li><strong>action</strong> - nome del metodo da chiamare. Il metodo deve essere stato definito nel file <strong><?php echo $this->config->item('custom_controllers_folder'); ?>triggers.php</strong> e riceverà come primo parametro il record che esegue la chiamata.</li>
 </ul>
 <p>Esempio:</p>
-<code>&lt;trigger on="insert"&gt;
+<pre class="prettyprint"><code>&lt;trigger on="insert"&gt;
 	&lt;call action="publish_on_twitter" /&gt;
-&lt;/trigger&gt;</code>
+&lt;/trigger&gt;</code></pre>
 </div>
 
 <div class="sidebar_content" id="sb-image-presets">
@@ -709,27 +709,27 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code><br />
 			<p>Questo sistema, ti permette di definire operazioni di lavorazione su immagini anche dopo averle caricate dall'amministrazione.<br />
 			I preset utilizzabili, vengono definiti nel file <strong>application/config/image_presets.php</strong> e consistono in un array di operazioni ciascuno.<br />
 			Vediamo un preset di esempio:</p>
-<code>$config['presets']['<strong>ridimensiona</strong>'] = array(
+<pre class="prettyprint"><code>$config['presets']['<strong>ridimensiona</strong>'] = array(
 	array(
 		'operation' => 'resize',
 		'size' => '640x?',
 		'ratio' => TRUE,
 		'quality' => 70
 	)
-);</code><br />
+);</code></pre><br />
 <p>Il preset sopra definito, effettuer&agrave; una operazione di resize di una immagine mantenendone le proporzioni e portando la larghezza a 640px. Infine, verr&agrave; scritta
 su disco comprimendo il file ad una qualit&agrave; di 70 su 100.</p>
 <p>Ora, ammettiamo di avere un file caricato su un tipo di contenuto che abbia il seguente URL (riferendoci al file originale):</p>
-<code>http://localhost/attach/blog/images/2/my_image.jpg</code><br />
+<pre class="prettyprint"><code>http://localhost/attach/blog/images/2/my_image.jpg</code></pre><br />
 <p>Per utilizzare il preset definito poco sopra, dovremo aggiungere al path del file la directory "cache" ed il nome del preset da applicare in questo modo:</p>
-<code>http://localhost/attach/<strong><u>cache</u></strong>/blog/images/2/<strong><u>ridimensiona</u></strong>/my_image.jpg</code>
+<pre class="prettyprint"><code>http://localhost/attach/<strong><u>cache</u></strong>/blog/images/2/<strong><u>ridimensiona</u></strong>/my_image.jpg</code></pre>
 <br />
 <div class="message info">La cache delle immagini viene salvata con questa pattern:<br />
 attach/cache/&lt;nome_tipo_di_contenuto&gt;/&lt;nome_campo_images&gt;/&lt;id_record&gt;/&lt;preset&gt;/&lt;filename&gt;</div>
 <br />
 <h3>Preset con pi&ugrave; operazioni</h3>
 <p>Un preset pu&ograve; avere definite anche pi&ugrave; operazioni, che verranno effettuate in successione, come in questo caso:</p>
-<code>$config['presets']['<strong>user_profile</strong>'] = array(
+<pre class="prettyprint"><code>$config['presets']['<strong>user_profile</strong>'] = array(
 	array(
 		'operation' => 'resize',
 		'size' => '150x150',
@@ -744,10 +744,10 @@ attach/cache/&lt;nome_tipo_di_contenuto&gt;/&lt;nome_campo_images&gt;/&lt;id_rec
 		'x' => 25,
 		'y' => 25
 	)
-);</code><br />
+);</code></pre><br />
 <p>Il preset qui sopra, ridimensiona una immagine ad una grandezza fissa e poi effettua un ritaglio di grandezza 125x125 px.<br />
 Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>user_profile</strong> differir&agrave; dal precedente esempio solo per il nome del preset applicato:</p>
-<code>http://localhost/attach/<strong>cache</strong>/blog/images/2/<strong><u>user_profile</u></strong>/my_image.jpg</code>
+<pre class="prettyprint"><code>http://localhost/attach/<strong>cache</strong>/blog/images/2/<strong><u>user_profile</u></strong>/my_image.jpg</code></pre>
 <br />
 <h3>Svuotare la cache</h3>
 <div class="message warning">Puoi facilmente svuotare la cache delle immagini eliminando la cartella relativa al campo, oppure al tipo di contenuto da azzerare. In alternativa, sentiti libero di eliminare l'intera cartella attach/cache/ dal filesystem.</div>
@@ -791,7 +791,7 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 			<p>Una volta inserite le categorie, esse possono essere associate ad uno o più record:<br />
 			Dalla maschera di modifica di un record, premi sulla sezione <strong>Categorie</strong> sulla sinistra, e successivamente imposta le categorie del record.</p>
 			<p>Infine, recati nella maschera di modifica di una pagina avente come azione <strong>Lista di contenuti</strong>, e troverai tra i campi disponibili il campo testuale <strong>Categoria</strong>. In tale campo, puoi inserire tutte le categorie che desideri separate da una virgola ed uno spazio (<strong>, </strong>) in questo modo:</p>
-			<code>Web, Photo, Illustrations</code><br />
+			<pre class="prettyprint"><code>Web, Photo, Illustrations</code></pre><br />
 
 			<h3>Gerarchie</h3>
 			<p>A differenza delle categorie, le gerarchie sono definibili globalmente all'interno di <?php echo CMS; ?> e quindi sono utilizzabili da tutti i tipi di contenuti indistintamente. Per iniziare, recati nella pagina <strong>Gestione &gt; Gerarchie</strong>. Qui, potrai inserire tutte le gerarchie che vorrai e, a differenza delle categorie, organizzarle <strong>gerarchicamente</strong>. Ogni gerarchia quindi, pu&ograve; essere "figlia" di un'altra gerarchia.</p>
@@ -799,7 +799,7 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 
 			<p>Infine, recati nella maschera di modifica di una pagina avente come azione <strong>Lista di contenuti</strong>, e troverai tra i campi disponibili un campo relativo alle gerarchie: potrai quindi selezionare tutte le gerarchie da estrarre durante la lista di contenuti di tale pagina.</p>
 			<p>Ecco un esempio di come puoi organizzare le gerarchie del tuo sito internet:</p>
-<code>- Prodotti
+<pre class="prettyprint"><code>- Prodotti
 	- Collezione 2011
 		- Magliette
 			- Mezza manica
@@ -808,7 +808,7 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 			- Jeans
 	- Collezione 2010
 		...
-</code>
+</code></pre>
 </div>
 
 	<div class="sidebar_content" id="sb-dispatchers">
@@ -822,24 +822,24 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 			</ul>
 
 			<p>Per aggiungere un dispatcher, aggiungilo alla cartella <strong>application/libraries/<?php echo FRNAME; ?>/dispatchers/</strong> chiamandolo <strong>dispatcher_&lt;nome&gt;.php</strong> ed utilizzando come nome della classe <strong>Dispatcher_&lt;nome&gt;</strong>. Dopodich&egrave;, potrai invocare un dispatcher in questo modo:</p>
-<code>$this->load->dispatcher('nome');
+<pre class="prettyprint"><code>$this->load->dispatcher('nome');
 
 //Ed otterrai l'oggetto:
-//$this->dispatcher</code>
+//$this->dispatcher</code></pre>
 <br />
 			<h3>Default dispatcher</h3>
 			<p>&Egrave; il dispatcher generale del sito internet, ed una volta impostato l'<strong>url da visitare</strong> si preoccupa di ricercare tra le pagine ed i records del database, nonch&egrave; preparare tutto il necessario alla visualizzazione del sito, comprese le liste di contenuti ed i feed del sito.</p>
 			<p>Per modificare il comportamento generale del sito, puoi quindi agire su questo dispatcher.<br />
 			Solitamente viene chiamato dal controller <strong>Website</strong> all'azione <strong>router</strong>.</p>
 
-<code>//Il dispatcher di default, viene invocato ed usato cos&igrave;:
+<pre class="prettyprint"><code>//Il dispatcher di default, viene invocato ed usato cos&igrave;:
 $this->load->dispatcher('default');
-$this->dispatcher->start();</code><br />
+$this->dispatcher->start();</code></pre><br />
 
 			<h3>Image dispatcher</h3>
 			<p>Questo dispatcher si preoccupa di generare le immagini attraverso i <strong>preset</strong>, salvarle e quindi inviarle al browser. Nel caso in cui una immagine sia gi&agrave; stata generata, questo dispatcher non verr&agrave; invocato in quanto l'immagine sar&agrave; fornita direttamente dal filesystem.</p>
 			<p>Di seguito l'esempio di come viene invocato il dispatcher dal controller del front-end del sito internet:</p>
-<code>$this->load->dispatcher('images');
+<pre class="prettyprint"><code>$this->load->dispatcher('images');
 
 //Imposto i dati relativi all'immagine da generare
 $data = array(
@@ -852,7 +852,7 @@ $data = array(
 );
 
 //Lancio il dispatcher
-$this->dispatcher->retrieve($data);</code><br />
+$this->dispatcher->retrieve($data);</code></pre><br />
 
 <p>Per altre informazioni sui preset applicati alle immagini, leggi la relativa sezione <strong>14. Image presets</strong> nella documentazione.</p>
 	</div>
@@ -863,37 +863,37 @@ $this->dispatcher->retrieve($data);</code><br />
 
 			<h3>site_url($path_to_append)</h3>
 			<p>Ritorna il path pubblico del sito, aggiungendone il path passato come parametro (opzionale).</p>
-<code>echo site_url('hello/world');
-// <?php echo site_url('hello/world'); ?></code><br /><br />
+<pre class="prettyprint"><code>echo site_url('hello/world');
+// <?php echo site_url('hello/world'); ?></code></pre><br /><br />
 
 			<h3>theme_url($path_to_append)</h3>
 			<p>Ritorna il path pubblico del tema attualmente in uso, aggiungendone il path passato come parametro (opzionale).</p>
-<code>echo theme_url('css/style.css');
-// <?php echo theme_url('css/style.css'); ?></code><br /><br />
+<pre class="prettyprint"><code>echo theme_url('css/style.css');
+// <?php echo theme_url('css/style.css'); ?></code></pre><br /><br />
 
 			<h3>attach_url($file_path)</h3>
 			<p>Ritorna il path pubblico di un allegato.</p>
-<code>echo attach_url('path/to/file.ext');
-// <?php echo attach_url('path/to/file.ext'); ?></code><br /><br />
+<pre class="prettyprint"><code>echo attach_url('path/to/file.ext');
+// <?php echo attach_url('path/to/file.ext'); ?></code></pre><br /><br />
 
 			<h3>preset_url($image_path, $preset, $append_siteurl)</h3>
 			<p>Ritorna il path del preset di una immagine, dato il suo percorso relativo e il preset scelto.<br />
 Come terzo parametro booleano, viene scelto se prependere il path del sito (<strong>site_url</strong>) e di default &egrave; impostato a TRUE.</p>
-<code>echo preset_url('attach/blog/images/1/file.jpg', 'user_profile);
-// <?php echo preset_url('attach/blog/images/1/file.jpg', 'user_profile'); ?></code><br /><br />
+<pre class="prettyprint"><code>echo preset_url('attach/blog/images/1/file.jpg', 'user_profile);
+// <?php echo preset_url('attach/blog/images/1/file.jpg', 'user_profile'); ?></code></pre><br /><br />
 
 			<h3>getter($url)</h3>
 			<p>Effettua una chiamata tramite <strong>cURL</strong> ad un webservice esterno e ritorna il responso.</p>
-<code>$result = getter('http://getbancha.com/');</code><br /><br />
+<pre class="prettyprint"><code>$result = getter('http://getbancha.com/');</code></pre><br /><br />
 
 			<h3>breadcrumbs($array)</h3>
 			<p>Stampa le breadcrumbs, dato un array. Necessita di caricare l'helper <strong>breadcrumbs</strong> prima dell'utilizzo.</p>
-<code>$this->load->helper('breadcrumbs');
-echo breadcrumbs($this->tree->breadcrumbs);</code><br /><br />
+<pre class="prettyprint"><code>$this->load->helper('breadcrumbs');
+echo breadcrumbs($this->tree->breadcrumbs);</code></pre><br /><br />
 
 			<h3>menu($tree, $max_depth, $current_level, $show_in_menu)</h3>
 			<p>Stampa la struttura di un albero di menu. Il secondo parametro decide il massimo livello di iterazione, ed il terzo parametro il livello corrente di iterazione.</p>
-<code>echo menu($this->tree->get_default());</code><br />
+<pre class="prettyprint"><code>echo menu($this->tree->get_default());</code></pre><br />
 
 	</div>
 
@@ -909,11 +909,11 @@ echo breadcrumbs($this->tree->breadcrumbs);</code><br /><br />
 			<p>Attraverso il menu <strong>Gestione >> Impostazioni</strong> puoi trovare diversi settaggi da applicare al tuo sito internet.</p>
 			<p>Tali settaggi possono essere ampliati intervenendo sullo schema del file <strong><?php echo $this->config->item('xml_folder'); ?>Settings.xml</strong> e la modalit&agrave; di definizione &egrave; identica a quella di definizione degli schemi dei <strong>tipi di contenuto</strong>. L'unica eccezione &egrave; la mancanza di poter definire i campi files, images e hierarchies.</p>
 			<p>Puoi accedere alle impostazioni (settings) da qualsiasi punto dell'MVC di <?php echo CMS; ?> in questo modo:</p>
-<code>//Carico la classe settings
+<pre class="prettyprint"><code>//Carico la classe settings
 $this->load->settings();
 
 //Leggo un valore dalle impostazioni
-echo $this->settings->get('website_name');</code><br />
+echo $this->settings->get('website_name');</code></pre><br />
 	<p>La funzione <strong>get()</strong> accetta come secondo parametro opzionale il nome del modulo da cui "prelevare" la chiave. Il sito internet usa come chiave predefinita <strong>general</strong>, ma nulla vieta di utilizzare altre chiavi.</p>
 	<p>I moduli esterni al core dell'applicazione, possono utilizzare la classe settings per salvare le loro impostazioni utilizzando il proprio nome come modulo e cos&igrave; evitare conflitti con le variabili interne dell'applicazione.</p>
 
@@ -921,27 +921,27 @@ echo $this->settings->get('website_name');</code><br />
 
 	<h3>get($key, $module)</h3>
 	<p>Legge una variabile dalle impostazioni, utilizzando il modulo richiesto.</p>
-<code>//Leggo un valore dalle impostazioni del modulo 'general'
+<pre class="prettyprint"><code>//Leggo un valore dalle impostazioni del modulo 'general'
 echo $this->settings->get('website_name');
 
 //Ed ora, dal modulo di twitter
-echo $this->settings->get('username', 'twitter');</code><br />
+echo $this->settings->get('username', 'twitter');</code></pre><br />
 
 <h3>set($key, $value, $module)</h3>
 	<p>Scrive un valore nelle impostazioni, abbinandolo al modulo impostato come terzo parametro.</p>
-<code>//Scrivo un valore nel modulo 'general'
+<pre class="prettyprint"><code>//Scrivo un valore nel modulo 'general'
 echo $this->settings->set('website_name', 'My cool website');
 
 //Ed ora, aggiorno un valore nel modulo di twitter
 echo $this->settings->set('username', '@squallstar', twitter');
 
 //Svuoto la cache delle impostazioni
-$this->settings->clear_cache();</code><br />
+$this->settings->clear_cache();</code></pre><br />
 
 <h3>delete($key, $module)</h3>
 	<p>Elimina una variabile dalle impostazioni.</p>
-<code>//Elimino una variabile dal modulo di twitter
-echo $this->settings->delete('username', 'twitter');</code><br />
+<pre class="prettyprint"><code>//Elimino una variabile dal modulo di twitter
+echo $this->settings->delete('username', 'twitter');</code></pre><br />
 
 <h3>clear_cache()</h3>
 <p>Nonostante vengano salvate come record fisici su database, le impostazioni vengono cacheate attraverso un file su filesystem. Una volta aggiornate delle chiavi, &egrave; necessario svuotare la cache con questo metodo.
@@ -959,3 +959,11 @@ echo $this->settings->delete('username', 'twitter');</code><br />
 	<div class="bendr"></div>
 
 </div>
+
+<link href="<?php echo site_url(THEMESPATH); ?>/admin/css/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo site_url(THEMESPATH); ?>/admin/js/prettify.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	prettyPrint();
+});
+</script>
