@@ -107,6 +107,7 @@ Class Install extends Bancha_Controller
 			$available_themes = array_keys($this->config->item('installed_themes'));
 			$this->settings->set('website_desktop_theme', $available_themes[0]);
 			$this->settings->set('website_mobile_theme', $available_themes[0]);
+			$this->settings->clear_cache();
 
 			$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
 			$this->view->render_layout('installer/success', FALSE);
