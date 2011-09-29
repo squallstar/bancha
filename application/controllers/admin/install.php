@@ -33,6 +33,7 @@ Class Install extends Bancha_Controller
 			$is_installed = 'F';
 		} else {
 			//We can load settings only if the database is already installed!
+			$is_installed = 'F';
 			$this->load->settings();
 			$this->settings->build_cache();
 			$is_installed = $this->settings->get('is_installed');
