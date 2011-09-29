@@ -115,5 +115,4 @@ Class Install extends Bancha_Controller
 			$this->view->render_layout('installer/request', FALSE);
 		}
 	}
->>>>>>> upstream/master
 }
