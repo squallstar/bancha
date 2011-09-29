@@ -164,6 +164,8 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 	<li><strong>files</strong> - Per utilizzare un campo di caricamento files</li>
 	<li><strong>images</strong> - Per utilizzare un campo di caricamento immagini</li>
 	<li><strong>hidden</strong> - Per utilizzare un campo di tipo hidden</li>
+	<li><strong>date</strong> - Per utilizzare un campo di tipo data</li>
+	<li><strong>datetime</strong> - Per utilizzare un campo di tipo data e ora</li>
 </ul>
 <p>Il nodo field pu&ograve; avere anche associato l'attributo <strong>column</strong> (booleano) che definisce se la colonna &egrave; fisica sul database. Se non definito, verr&agrave; usato l'xml per lo storage del campo.<br /></p>
 <div class="message warning">Ogni field dovr&agrave; sempre specificare il tipo di campo di appartenenza (tra quelli sopra descritti) attraverso il nodo <strong>&lt;type&gt;</strong></div>
@@ -478,6 +480,15 @@ In alternativa, &egrave; possibile utilizzare la funzione <strong>documents()</s
 	<li><strong>published</strong> - definisce se un record &egrave; pubblicato (0 = bozza, 1 = pubblicato, 2 = differente tra sviluppo e produzione)</li>
 	<li><strong>child_count</strong> - presente solo per i record con tipo gerarchico (es. "Menu"), &egrave; un numero intero che indica il numero di record figli.</li>
 </ul>
+<p>I campi di tipo <strong>date</strong> e <strong>datetime</strong> vengono automaticamente salvati come <strong>timestamps</strong>. Ci&ograve; nonostante, puoi accedere alla data/ora nel formato locale semplicemente aggiungendo un underscore davanti al nome della chiave da ricercare:</p>
+<pre class="prettyprint"><code>$record->get('date_publish');
+//Mostra: 1237138738
+
+$record->get('_date_publish');
+//Mostra '15/06/1987 16:30:00'</code></pre><br />
+<p>Durante le estrazioni, come impostazione predefinita verranno selezionati tutti i campi del record.<br />
+Per estrarre solamente i campi che nello schema XML hanno attributo <strong>&lt;list&gt;</strong>, utilizza la funzione <strong>set_list()</strong> come segue:</p>
+<pre class="prettyprint"><code>$post = $this->records->type('Blog')->set_list(TRUE)->limit(10)->get();</code></pre><br />
 <div class="message info">Puoi aggiungere campi fisici ad un record intervenendo sull'attributo <strong>column</strong> di un qualsiasi dei campi all'interno dello schema di un tipo di contenuto.
 Dopodich&egrave;, sar&agrave; necessario anche aggiungere tale colonna alla tabella <strong>records</strong> di Bancha con un ALTER-TABLE.</div>
 <br />
@@ -492,9 +503,12 @@ $post-&gt;('author', 'Nicholas');
 $id = $this-&gt;records-&gt;save($post);
 
 //Pubblichiamo il nostro post
+$this-&gt;records-&gt;publish($id, 'Blog');
+
+//In alternativa alla riga sopra, possiamo utilizzare la funzione set_type()
 $this-&gt;records-&gt;set_type('Blog')-&gt;publish($id);</code></pre>
 <br />
-
+<div class="warning message">La funzione <strong>set_type()</strong> usata nell'esempio sopra, forza la classe records a utilizzare tabelle e chiavi inerenti al tipo di contenuto passato come parametro.</div>
 </div>
 
 		<div class="sidebar_content" id="sb-documents">
