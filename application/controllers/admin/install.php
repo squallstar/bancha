@@ -97,17 +97,8 @@ Class Install extends Bancha_Controller
 			//We clear the previous database cache
 			$this->db->cache_delete_all();
 
-			//Prevent this script to be called again
-			$this->load->settings();
-			$this->settings->set('is_installed', 'T');
-
-			$this->settings->set('website_name', 'My website');
-			$this->settings->set('website_claim', 'This is my first website!');
-
-			$available_themes = array_keys($this->config->item('installed_themes'));
-			$this->settings->set('website_desktop_theme', $available_themes[0]);
-			$this->settings->set('website_mobile_theme', $available_themes[0]);
-			$this->settings->clear_cache();
+			//We also set the default settings
+			$this->installer->populate_settings();
 
 			$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
 			$this->view->render_layout('installer/success', FALSE);
