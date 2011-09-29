@@ -724,6 +724,12 @@ su disco comprimendo il file ad una qualit&agrave; di 70 su 100.</p>
 <p>Per utilizzare il preset definito poco sopra, dovremo aggiungere al path del file la directory "cache" ed il nome del preset da applicare in questo modo:</p>
 <pre class="prettyprint"><code>http://localhost/attach/<strong><u>cache</u></strong>/blog/images/2/<strong><u>ridimensiona</u></strong>/my_image.jpg</code></pre>
 <br />
+<p>Per costruire in automatico il path di un preset partendo dall'indirizzo originale del file, utilizza il seguente helper:</p>
+<h3>preset_url($image_path, $preset, $append_siteurl)</h3>
+			<p>Ritorna il path del preset di una immagine, dato il suo percorso relativo e il preset scelto.<br />
+Come terzo parametro booleano, viene scelto se prependere il path del sito (<strong>site_url</strong>) e di default &egrave; impostato a TRUE.</p>
+<pre class="prettyprint"><code>echo preset_url('attach/blog/images/1/file.jpg', 'user_profile');
+// <?php echo preset_url('attach/blog/images/1/file.jpg', 'user_profile'); ?></code></pre><br />
 <div class="message info">La cache delle immagini viene salvata con questa pattern:<br />
 attach/cache/&lt;nome_tipo_di_contenuto&gt;/&lt;nome_campo_images&gt;/&lt;id_record&gt;/&lt;preset&gt;/&lt;filename&gt;</div>
 <br />
@@ -879,7 +885,7 @@ $this->dispatcher->retrieve($data);</code></pre><br />
 			<h3>preset_url($image_path, $preset, $append_siteurl)</h3>
 			<p>Ritorna il path del preset di una immagine, dato il suo percorso relativo e il preset scelto.<br />
 Come terzo parametro booleano, viene scelto se prependere il path del sito (<strong>site_url</strong>) e di default &egrave; impostato a TRUE.</p>
-<pre class="prettyprint"><code>echo preset_url('attach/blog/images/1/file.jpg', 'user_profile);
+<pre class="prettyprint"><code>echo preset_url('attach/blog/images/1/file.jpg', 'user_profile');
 // <?php echo preset_url('attach/blog/images/1/file.jpg', 'user_profile'); ?></code></pre><br /><br />
 
 			<h3>getter($url)</h3>
