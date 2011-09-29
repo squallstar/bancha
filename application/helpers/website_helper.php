@@ -28,6 +28,11 @@ function debug($obj, $title='*DEBUG*', $kill = FALSE)
 	if ($kill) die($kill);
 }
 
+function show_400()
+{
+	show_error(_('You have no rights to access this page.'), 400);
+}
+
 /**
  * Makes a simple GET cURL call to a webservice
  * @param string $url
