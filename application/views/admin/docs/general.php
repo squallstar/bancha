@@ -83,9 +83,9 @@
 			<p>Bancha ti permette di definire diversi contenuti per il tuo sito internet.
 			Ogni contenuto, &egrave; basato su un file XML che ne descrive tutti i campi gestibili.
 			In questo modo, puoi creare centinaia di schemi per amministrare i vari contenuti del tuo sito internet.
-			Ad esempio, un tipo di contenuto potrebbero essere i <strong>Prodotti</strong>, oppure delle <strong>Gallerie immagini</strong>.
-			<br /><br />
-			Un tipo di contenuto deve sempre essere uno tra i seguenti tipi:
+			Ad esempio, un tipo di contenuto potrebbero essere i <strong>Prodotti</strong>, oppure delle <strong>Gallerie immagini</strong>.</p>
+			<p>
+			Un tipo di contenuto deve sempre essere uno tra i seguenti tipi:</p>
 			<ul>
 				<li><strong>Semplice</strong> (per contenuti lineari, senza gerarchia)</li>
 				<li><strong>Ad albero</strong> (per contenuti strutturabili gerarchicamente, come le pagine di un sito internet)</li>
@@ -99,9 +99,8 @@
 				<li><strong>/application/xml/Nome_contenuto.xml</strong> che conterr&agrave; la struttura dei campi gestibili,</li>
 				<li><strong>/application/views/website/type_templates/Nome_contenuto/list.php</strong> ovvero il template xhtml per la visualizzazione come lista dei contenuti,</li>
 				<li><strong>/application/views/website/type_templates/Nome_contenuto/detail.php</strong> rispettivo template per la visualizzazione di dettaglio.</li>
-
 			</ul>
-			</p>
+			<p>Bene, ora sei pronto per imparare a configurare un tipo di contenuto!<br />Prosegui con la prossima sezione della documentazione: <strong>4. Schema XML dei tipi</strong>.
 		</div>
 
 		<div class="sidebar_content" id="sb-types-xml">
@@ -110,13 +109,14 @@
 			<pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content>
 	&lt;id&gt;1&lt;/id&gt;
-	&lt;name&gt;pagine&lt;/name&gt;
-	&lt;description&gt;Pagine generiche&lt;/description&gt;
+	&lt;name&gt;Prodotti&lt;/name&gt;
+	&lt;description&gt;Prodotti E-commerce&lt;/description&gt;
 	&lt;tree&gt;true&lt;/tree&gt;
 	&lt;parent_types&gt;
 		&lt;type&gt;pagine&lt;/type&gt;
 	&lt;/parent_types&gt;
 	&lt;has_categories&gt;true&lt;/has_categories&gt;
+	&lt;has_hierarchies&gt;false&lt;/has_hierarchies&gt;
 	&lt;primary_key&gt;id_record&lt;/primary_key&gt;
 	&lt;table&gt;records&lt;/table&gt;
 	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
@@ -250,8 +250,11 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 	&lt;parent_types&gt;
 		&lt;type&gt;pagine&lt;/type&gt;
 	&lt;/parent_types&gt;
-	&lt;has_uri&gt;true&lt;/has_uri&gt;
 	&lt;has_categories&gt;true&lt;/has_categories&gt;
+	&lt;has_hierarchies&gt;false&lt;/has_hierarchies&gt;
+	&lt;primary_key&gt;id_record&lt;/primary_key&gt;
+	&lt;table&gt;records&lt;/table&gt;
+	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
 
 	&lt;fieldset&gt;
 		&lt;name&gt;Informazioni&lt;/name&gt;
