@@ -199,10 +199,21 @@ Class Model_auth extends CI_Model {
 	 * Checks whether an users has a permission
 	 * @param string $area
 	 * @param string $action
+	 * @return bool
 	 */
 	public function has_permission($area, $action)
 	{
-		return strpos($this->_acl, '<'.$area.'|'.$action.'>') == 0 ? FALSE : TRUE;
+		return strpos($this->_acl, '<'.$area.'|'.$action.'>') === FALSE ? FALSE : TRUE;
+	}
+
+	/**
+	 * Same as has_permission(), but when fails the user will be redirected to a "Forbidden 400" page
+	 * @param string $area
+	 * @param string $action
+	 */
+	public function check_permission($area, $action)
+	{
+		if (!$this->has_permission($area, $action)) show_400();
 	}
 
 }
