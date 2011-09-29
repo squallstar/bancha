@@ -33,7 +33,8 @@ Class Settings extends Bancha_Controller
 	public function index()
 	{
 		//We get the Users scheme
-		$tipo = $this->xml->parse_scheme($this->config->item('xml_folder') . 'Settings.xml');
+		$scheme_name = 'Settings.xml';
+		$tipo = $this->xml->parse_scheme($this->config->item('xml_folder') . $scheme_name);
 
 		$data = $this->input->post();
 
@@ -65,6 +66,7 @@ Class Settings extends Bancha_Controller
         }
 
 		$this->view->set('tipo', $tipo);
+		$this->view->set('scheme_name', $scheme_name);
 		$this->view->render_layout('content/settings_edit');
 	}
 }
