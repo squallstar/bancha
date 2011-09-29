@@ -51,6 +51,7 @@ Class Settings extends Bancha_Controller
 				}
 			}
 			$this->settings->build_cache();
+			$this->view->message('success', _('The settings has been updated'));
 		}
 
 		//Additional set-ups before the page rendering
