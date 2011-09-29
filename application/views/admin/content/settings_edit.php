@@ -34,7 +34,7 @@ $this->load->helper('form'); ?>
 				<li><a href="#sb-<?php echo url_title($fieldset['name']); ?>"><?php echo _($fieldset['name']); ?></a></li>
 				<?php } ?>
 			</ul>
-			<p></p>
+			<p><?php echo _('Scheme'); ?>: <strong>Settings.xml</strong></p>
 		</div>
 <?php
 $save_buttons = form_submit('_bt_save', _('Update settings'), 'class="submit long" onclick="bancha.add_form_hash();"');
