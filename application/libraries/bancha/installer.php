@@ -98,7 +98,7 @@ Class Installer
 		    'id_record'		=> array('type'	=> 'INT', 'unsigned' => TRUE),
 		    'date_publish'	=> array('type'	=> 'INT'),
 		    'id_type'		=> array('type'	=> 'INT', 'null' => FALSE),
-            'lang'			=> array('type' => 'VARCHAR', 'null' => TRUE, 'constraint' => '2'),
+            'lang'			=> array('type' => 'VARCHAR', 'null' => TRUE, 'constraint' => 2),
 		    'uri'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
 		    'full_uri'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
 		    'id_parent'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned'	=> TRUE),
@@ -277,7 +277,7 @@ Class Installer
 		//Settings table
 		$settings_fields = array(
 			'name'		=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 64),
-			'value'		=> array('type'	=> 'VARCHAR', 'null' => TRUE),
+			'value'		=> array('type'	=> 'VARCHAR', 'null' => TRUE, 'constraint' => 255),
 			'module'	=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 64)
 		);
 
