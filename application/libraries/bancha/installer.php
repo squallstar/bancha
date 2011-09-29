@@ -293,16 +293,22 @@ Class Installer
 	 */
 	public function create_groups()
 	{
-		//Inserisco le ACL di default
+		//We insert the default ACLs
 		$acls = array();
 		$acls[]= $this->users->add_acl('users', 'list', 'Users list');
 		$acls[]= $this->users->add_acl('users', 'add', 'Create users');
+		$acls[]= $this->users->add_acl('users', 'groups', 'Manage groups and permissions');
 		$acls[]= $this->users->add_acl('types', 'add', 'Add content types');
 		$acls[]= $this->users->add_acl('types', 'manage', 'Edit XML schemes');
 		$acls[]= $this->users->add_acl('types', 'delete', 'Delete content types');
+		$acls[]= $this->users->add_acl('settings', 'manage', 'Manage settings');
+		$acls[]= $this->users->add_acl('hierarchies', 'manage', 'Manage hierarchies');
 
 		$this->group_id = $this->users->add_group('Administrators');
 		$this->users->add_group('Editors');
+
+		//These strings are here just for translations
+		$dummy = _('Administrators') . _('Editors');
 
 		$this->CI->auth->update_permissions($acls, $this->group_id);
 
