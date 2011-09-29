@@ -51,7 +51,7 @@ Class Installer
 
 	public function is_already_installed()
 	{
-		return $this->CI->db->table_exists('records');
+		return $this->CI->db->table_exists('settings');
 	}
 
 	/**

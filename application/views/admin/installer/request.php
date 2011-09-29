@@ -6,7 +6,7 @@
         </div>
 		<div class="block_content">
 
-<?php if ($already_installed) { ?>
+<?php if ($already_installed === 'T') { ?>
 		<div class="warning message"><?php echo _('WARNING').': '._('Bancha is already installed on this database!'); ?></div>
 		<p><br /><?php echo _('To reinstall Bancha, you need to delete the "is_installed" key on the "settings" table.'); ?></p>
 <?php } else { ?>
