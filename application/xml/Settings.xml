@@ -29,5 +29,12 @@
 				<custom>config_item('installed_themes');</custom>
 			</options>
 		</field>
+		<field id="website_active_languages">
+			<type>checkbox</type>
+			<description>Website active languages</description>
+			<options>
+				<custom>config_item('languages_select');</custom>
+			</options>
+		</field>
 	</fieldset>
 </content>
