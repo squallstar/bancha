@@ -66,6 +66,10 @@ Class Model_settings extends CI_Model
 		//Elsewhere, let's update the value
 		$this->_items[$module][$key] = $val;
 
+		if (is_array($val)) {
+			$val = serialize($val);
+		}
+
 		//And let's save that record also into the database
 		if ($exists)
 		{
@@ -131,7 +135,12 @@ Class Model_settings extends CI_Model
 		{
 			foreach ($res as $row)
 			{
-				$this->_items[ strlen($row->module) ? $row->module : 'default' ][$row->name] = $row->value;
+				$value = @unserialize($row->value);
+				if ($value === false)
+				{
+					$value = $row->value;
+				}
+				$this->_items[ strlen($row->module) ? $row->module : 'default' ][$row->name] = $value;
 			}
 		}
 		$this->load->helper('file');
