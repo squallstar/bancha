@@ -26,12 +26,13 @@ foreach ($this->content->types() as $tipo) {
 	<div class="hdrl"></div>
 	<div class="hdrr"></div>
 
-	<h1><a href="<?php echo admin_url(); ?>"><?php echo CMS; ?></a></h1>
+	<h1><a href="<?php echo admin_url(); ?>"><?php echo CMS . ' RC1'; ?></a></h1>
 
 	<ul id="nav">
 		<li class="<?php echo $this->uri->segment(2) == 'dashboard' ? 'active' : ''; ?>">
 			<a href="<?php echo admin_url('dashboard/'); ?>"><?php echo _('Dashboard'); ?></a>
 		</li>
+
 		<li class="<?php echo $this->uri->segment(2) == 'contents' ? 'active' : ''; ?>">
 			<a href="<?php echo admin_url('contents/'); ?>"><?php echo _('Contents'); ?></a>
 			<ul>
@@ -44,6 +45,7 @@ foreach ($this->content->types() as $tipo) {
 				} ?>
 			</ul>
 		</li>
+
 		<li class="<?php echo $this->uri->segment(2) == 'pages' ? 'active' : ''; ?>">
 			<a href="<?php echo admin_url('pages/'); ?>"><?php echo _('Pages'); ?></a>
 			<ul>
@@ -56,14 +58,22 @@ foreach ($this->content->types() as $tipo) {
 				} ?>
 			</ul>
 		</li>
+
+		<?php if ($this->auth->has_permission('users', 'list')) { ?>
 		<li class="<?php echo $this->uri->segment(2) == 'users' ? 'active' : ''; ?>">
 			<a href="<?php echo admin_url('users/'); ?>"><?php echo _('Users'); ?></a>
 			<ul>
+				<?php if ($this->auth->has_permission('users', 'add')) { ?>
 				<li><a href="<?php echo admin_url('users/edit'); ?>"><?php echo _('Add new user'); ?></a></li>
+				<?php } ?>
 				<li><a href="<?php echo admin_url('users/lista'); ?>"><?php echo _('Users list'); ?></a></li>
+				<?php if ($this->auth->has_permission('users', 'groups')) { ?>
 				<li><a href="<?php echo admin_url('users/groups'); ?>"><?php echo _('Groups and permissions'); ?></a></li>
+				<?php } ?>
 			</ul>
 		</li>
+		<?php } ?>
+
 		<li class="<?php echo $this->uri->segment(2) == 'modules' ? 'active' : ''; ?>">
 			<a href="<?php echo admin_url('modules'); ?>"><?php echo _('Modules'); ?></a>
 		</li>
