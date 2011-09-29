@@ -78,7 +78,16 @@ Class Contents extends Bancha_Controller
     */
     public function type($tipo='', $page=0)
     {
-    	$type = $this->content->type($tipo);
+        if ($tipo == '')
+        {
+            $this->index();
+            return;    
+        }
+        $type = $this->content->type($tipo);
+
+        //ACL Check
+        $this->auth->check_permission('content', $type['name']);
+
     	$this->records->set_type($tipo);
         $this->view->set('tipo', $type);
 
@@ -235,6 +244,9 @@ Class Contents extends Bancha_Controller
 
         $tipo = $this->content->type($type);
         $this->records->set_type($type);
+
+        //ACL Check
+        $this->auth->check_permission('content', $tipo['name']);
 
         //Aggiunta-Modifica record
         if ($this->input->post('id_type', FALSE)) {
@@ -460,6 +472,9 @@ Class Contents extends Bancha_Controller
     			$tipo = $this->content->type($record->_tipo);
     		}
 
+            //ACL Check
+            $this->auth->check_permission('content', $tipo['name']);
+
     		$done = $this->records->delete_by_id($id_record, $tipo['id']);
 
     		if (!$done)
@@ -500,7 +515,10 @@ Class Contents extends Bancha_Controller
     /**
     * Forms to insert a new content type
     */
-    public function add_type() {
+    public function add_type()
+    {
+        //ACL Check
+        $this->auth->check_permission('types', 'manage');
 
         if ($this->input->post()) {
             $type_name = $this->input->post('type_name');
@@ -530,6 +548,10 @@ Class Contents extends Bancha_Controller
     */
     public function type_edit_xml($type = '') {
   		$tipo = $this->content->type($type);
+
+        //ACL Check
+        $this->auth->check_permission('types', 'manage');
+        $this->auth->check_permission('content', $tipo['name']);
 
   		$xml_path = $this->config->item('xml_typefolder').$tipo['name'].'.xml';
 
@@ -562,6 +584,9 @@ Class Contents extends Bancha_Controller
 		$this->load->categories();
 
 		$tipo = $this->content->type($type);
+
+        //ACL Check
+        $this->auth->check_permission('content', $tipo['name']);
 
 		$category_name = $this->input->post('category_name');
 
@@ -638,6 +663,10 @@ Class Contents extends Bancha_Controller
     public function type_delete($type='')
     {
   		$tipo = $this->content->type($type);
+
+        //ACL Check
+        $this->auth->check_permission('types', 'delete');
+        $this->auth->check_permission('content', $tipo['name']);
 
   		if ($this->input->post('cancel'))
         {
