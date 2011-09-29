@@ -138,12 +138,12 @@ Il nodo <strong>&lt;has_categories&gt;</strong> &egrave; sempre un booleano, e d
 &lt;content>
 	...
 	&lt;fieldset&gt;
-		&lt;name&gt;<strong>Campi generali</strong>&lt;/name&gt;
+		&lt;name&gt;Campi generali&lt;/name&gt;
 		&lt;field id="campo_1"&gt;...&lt;/field&gt;
 		&lt;field id="campo_2"&gt;...&lt;/field&gt;
 	&lt;/fieldset&gt;
 	&lt;fieldset&gt;
-		&lt;name&gt;<strong>Campi secondari</strong>&lt;/name&gt;
+		&lt;name&gt;Campi secondari&lt;/name&gt;
 		&lt;field id="campo_3"&gt;...&lt;/field&gt;
 		&lt;field id="campo_4"&gt;...&lt;/field&gt;
 	&lt;/fieldset&gt;
@@ -180,12 +180,12 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 	<li><strong>&lt;onchange&gt;</strong> (string) - per definire del codice Javascript da eseguire al change del valore (solo per i campi di tipo select)</li>
 </ul>
 
-<div class="message warning">Ogni field che dovr&agrave; essere salvato su una colonna fisica della propria tabella, necessita dell'attributo <strong>"column"</strong> impostato a "true".</div>
+<div class="message warning">Ogni campo che dovr&agrave; essere salvato su una colonna fisica della propria tabella, necessita dell'attributo <strong>"column"</strong> impostato a "true".</div>
 
-<p>Ecco un esempio di definizione di un campo di testo normale:</p>
-<pre class="prettyprint"><code>&lt;field <strong>id="title" column="true"</strong>&gt;
+<p>Ecco un esempio di definizione di un campo di testo semplice:</p>
+<pre class="prettyprint"><code>&lt;field id="title" column="true"&gt;
 	&lt;description&gt;Titolo&lt;/description&gt;
-	<strong>&lt;type&gt;text&lt;/type&gt;</strong>
+	&lt;type&gt;text&lt;/type&gt;
 	&lt;mandatory&gt;true&lt;/mandatory&gt;
 	&lt;admin&gt;true&lt;/admin&gt;
 	&lt;default&gt;Senza titolo&lt;/default&gt;
@@ -201,13 +201,13 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 <pre class="prettyprint"><code>&lt;field id="galleria"&gt;
 	&lt;description&gt;Galleria collegata&lt;/description&gt;
 	&lt;type&gt;select&lt;/type&gt;
-	<strong>&lt;sql cache="false"&gt;</strong>
+	&lt;sql cache="false"&gt;
 		&lt;select&gt;id_record AS value, title AS name&lt;/select&gt;
 		&lt;from&gt;records&lt;/from&gt;
 		&lt;type&gt;Gallerie&lt;/type&gt;
 		&lt;where&gt;published = 1&lt;/where&gt;
 		&lt;order_by&gt;name ASC&lt;/order_by&gt;
-	<strong>&lt;/sql&gt;</strong>
+	&lt;/sql&gt;
 &lt;/field&gt;</code></pre><br />
 <div class="message info">Impostando la cache attiva, la query verr&agrave; cacheata fino a che non verr&agrave; svuotata la cache dei tipi.</div>
 <p>Nota: qui, le clausole WHERE sono utilizzabili solamente su campi fisici della tabella selezionata e non sui campi XML.</p>
@@ -217,7 +217,7 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 	&lt;description&gt;Lingua del contenuto&lt;/description&gt;
 	&lt;type&gt;select&lt;/type&gt;
 	&lt;options&gt;
-		<strong>&lt;custom&gt;$this->config->item('languages_select');&lt;/custom&gt;</strong>
+		&lt;custom&gt;config_item('languages_select');&lt;/custom&gt;
 	&lt;/options&gt;
 &lt;/field&gt;</code></pre><br />
 

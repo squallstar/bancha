@@ -18,10 +18,20 @@ body {
 	display: block;
 	overflow: auto;
 	font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
-	border: 1px solid #F0F0F0;
-	background: #F8F8F8;
 	color: #555;
+	line-height: 18px;
+	font-size: 12px;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	background: #fefbf3;
+	padding: 9px;
+	border: 1px solid rgba(0,0,0,.2);
 }
 .code_format.docs p strong {
 	 background-color: #FFF6A9;
