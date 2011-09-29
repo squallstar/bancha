@@ -134,6 +134,7 @@ Class Model_settings extends CI_Model
 				$this->_items[ strlen($row->module) ? $row->module : 'default' ][$row->name] = $row->value;
 			}
 		}
+		$this->load->helper('file');
 		write_file($this->_cachefile, serialize($this->_items));
 		return $this->_items;
 	}
