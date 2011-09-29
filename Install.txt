@@ -1,7 +1,7 @@
 **************************************
 * @package		Bancha
 * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
-* @copyright	Copyright (C) 2011, Squallstar
+* @copyright		Copyright (C) 2011, Squallstar
 * @license		GNU/GPL (General Public License)
 * @link			http://squallstar.it
 **************************************
@@ -13,7 +13,7 @@ HOW TO INSTALL BANCHA
  1. Before all, sets your current environment in the /index.php file
     The default environment is "sqlite" (to use the Sqlite Database)
     but you are encouraged to use "development" or "production"
- 
+
  2. Sets the database configuration parameters here: application/config/database.php
 
  3. Go through your browser to this URL: http://<yourwebsitename>/admin/install
@@ -21,10 +21,6 @@ HOW TO INSTALL BANCHA
  4. Choose your install type between "Default" and "Blog".
  	The Blog one, will create and configures the "Blog" and "Comments" content types for you.
 
- 4. When install is done, place a die(); at the start of this file:
- 	application/controllers/admin/install.php
- 	Alternately you can also delete it!
- 
  5. You're done! The install script will create a content type named "Menu" which is
  	linked to the page tree of your website.
 
@@ -32,10 +28,5 @@ HOW TO INSTALL BANCHA
 
 BANCHA DOCUMENTATION
  - Just go to the "Documentation" page of the administration under the "Manage" section
-
-**************************************
-
-UTILIZZO DI MILK
- - L'utilizzo del CMS Milk
 
 **************************************

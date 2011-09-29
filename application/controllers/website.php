@@ -22,7 +22,8 @@ Class Website extends Bancha_Controller
 
 		//If the user is logged in, we set the stage to true
 		//so he/she can surf on the stage pages and records
-		if ($this->auth->is_logged()) {
+		if ($this->auth->is_logged())
+		{
 			$this->content->set_stage(TRUE);
 			//We add also the preview bar
 			$this->output->enable_profiler();
@@ -31,6 +32,9 @@ Class Website extends Bancha_Controller
 		}
 
 		$this->load->helper('menu');
+
+		//We load the settings
+		$this->load->settings();
 	}
 
 	/**

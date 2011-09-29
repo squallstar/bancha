@@ -27,7 +27,17 @@ Class Install extends Bancha_Controller
 	{
 		$this->load->frlibrary('installer');
 
-		if ($this->input->post('install'))
+		$this->load->settings();
+		$this->settings->build_cache();
+
+		$db_is_installed = $this->installer->is_already_installed();
+		if (!$db_is_installed)
+		{
+			$this->settings->set('is_installed', 'F');
+		}
+		$is_installed = $this->settings->get('is_installed');
+
+		if ($this->input->post('install') && $is_installed != 'T')
 		{
 			if ($this->input->post('create_tables'))
 			{
@@ -45,6 +55,11 @@ Class Install extends Bancha_Controller
 				$this->auth->login($username, $password);
 				$this->view->set('username', $username);
 				$this->view->set('password', $password);
+
+				//And some hierarchies
+				$this->load->hierarchies();
+				$id = $this->hierarchies->add('Father');
+				$this->hierarchies->add('Child', $id);
 			}
 
 			if ($this->input->post('create_directories'))
@@ -81,18 +96,24 @@ Class Install extends Bancha_Controller
 			//We clear the previous database cache
 			$this->db->cache_delete_all();
 
+			//Prevent this script to be called again
+			$this->settings->set('is_installed', 'T');
+
+			$this->settings->set('website_name', 'My website');
+			$this->settings->set('website_claim', 'This is my first website!');
+
+			$available_themes = array_keys($this->config->item('installed_themes'));
+			$this->settings->set('website_desktop_theme', $available_themes[0]);
+			$this->settings->set('website_mobile_theme', $available_themes[0]);
+
 			$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
 			$this->view->render_layout('installer/success', FALSE);
 			return;
 
 		} else {
-			$this->view->set('already_installed', $this->installer->is_already_installed());
+			$this->view->set('already_installed', $is_installed);
 			$this->view->render_layout('installer/request', FALSE);
 		}
-
-
-
-
-
 	}
+>>>>>>> upstream/master
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="bancha-0.7.4" -->
+<content>
+	<name>Settings</name>
+	<description>Settings</description>
+	<primary_key>null</primary_key>
+	<table>null</table>
+	<fieldset>
+		<name>General</name>
+		<field id="website_name">
+			<description>Website name</description>
+			<type>text</type>
+		</field>
+		<field id="website_claim">
+			<description>Website claim</description>
+			<type>text</type>
+		</field>
+		<field id="website_desktop_theme">
+			<type>radio</type>
+			<description>Website desktop theme</description>
+			<options>
+				<custom>config_item('installed_themes');</custom>
+			</options>
+		</field>
+		<field id="website_mobile_theme">
+			<type>radio</type>
+			<description>Website mobile theme</description>
+			<options>
+				<custom>config_item('installed_themes');</custom>
+			</options>
+		</field>
+	</fieldset>
+</content>

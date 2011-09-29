@@ -1,7 +1,7 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <!-- Text Logo -->
-<h1 id="logo" class="grid_4"><a href="<?php echo site_url(); ?>">My Website</a></h1>
+<h1 id="logo" class="grid_4"><a href="<?php echo site_url(); ?>"><?php echo $this->settings->get('website_name'); ?></a></h1>
 
 <!-- Navigation Menu -->
 <div id="menu">

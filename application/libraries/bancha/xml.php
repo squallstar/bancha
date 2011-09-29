@@ -159,7 +159,7 @@ Class Xml
     	//The type name
     	$name = (string) $node->name;
 
-    	$type_id = (int) $node->id;
+    	$type_id = isset($node->id) ? (int)$node->id : 0;
 
     	//Allowed types of field
     	$field_usable_inputs = array(
@@ -174,8 +174,8 @@ Class Xml
       		'has_categories'=> isset($node->has_categories) ? (strtolower((string)$node->has_categories) == 'true' ? TRUE : FALSE) : FALSE,
             'has_hierarchies'=> isset($node->has_hierarchies) ? (strtolower((string)$node->has_hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
       		'description'	=> (string) $node->description,
-      		'primary_key'	=> (string) $node->primary_key,
-      		'table'			=> (string) $node->table
+      		'primary_key'	=> (string) (isset($node->primary_key) ? $node->primary_key : ''),
+      		'table'			=> (string) (isset($node->table) ? $node->table : '')
     	);
 
         $this->_translations[$content['description']] = TRUE;

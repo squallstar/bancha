@@ -28,8 +28,9 @@
 				<li><a href="#sb-dispatchers">16. Dispatchers</a></li>
 				<li><a href="#sb-helpers">17. Helpers</a></li>
 				<li><a href="#sb-modules">18. Moduli</a></li>
+				<li><a href="#sb-settings">19. Impostazioni</a></li>
 			</ul>
-			<p>Versione: <?php echo BANCHA_VERSION; ?><br />Data: 26 Set 2011</p>
+			<p>Versione: <?php echo BANCHA_VERSION; ?><br />Data: 29 Set 2011</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
@@ -65,13 +66,13 @@
 		<div class="sidebar_content" id="sb-install">
 			<h3>2. Installazione</h3>
 
-			<p>Prossimamente la procedura di installazione diventer&agrave; pi&ugrave; dettagliata, per ora seguire questa:</p>
+			<p>La procedura dettagliata di installazione (in lingua inglese) &egrave; riportata nel file <strong>Readme.MD</strong> presente nella root di installazione.</p>
+			<p>La procedura rapida &egrave; la seguente:</p>
 
 			<ul>
 				<li>Settare l'environment nel file index.php</li>
 				<li>Configurare i parametri di connessione al database nel file application/config/database.php</li>
 				<li>Lanciare dal browser l'indirizzo <strong>http://{nomehost}/admin/install</strong></li>
-				<li>A fine installazione, eliminare il file application/controllers/admin/install.php</li>
 				<li>Il tipo di contenuto predefinito per l'albero di menu del sito &egrave; "Menu", e viene creato in automatico dall'installer</li>
 			</ul>
 
@@ -89,10 +90,11 @@
 				<li><strong>Semplice</strong> (per contenuti lineari, senza gerarchia)</li>
 				<li><strong>Ad albero</strong> (per contenuti strutturabili gerarchicamente, come le pagine di un sito internet)</li>
 			</ul>
+			<p>
 			Come avrai intuito, anche le pagine stesse di un sito internet sono a loro volta un tipo di contenuto. &Egrave; proprio per questo che
-			dovr&agrave; essere definito almeno un tipo di contenuto associato all'albero delle pagine del sito. Tale associazione viene impostata nel file di configurazione di Bancha alla voce <strong>DEFAULT TREE TYPE</strong>.
-			<br /><br />
-			Aggiungendo un nuovo tipo di contenuto, verranno <strong>automaticamente creati</strong> i seguenti files:<br /><br />
+			dovr&agrave; essere definito almeno un tipo di contenuto associato all'albero delle pagine del sito. Tale associazione viene impostata nel file di configurazione di Bancha alla voce <strong>DEFAULT TREE TYPE</strong>.</p>
+			
+			<p>Aggiungendo un nuovo tipo di contenuto, verranno <strong>automaticamente creati</strong> i seguenti files:</p>
 			<ul>
 				<li><strong>/application/xml/Nome_contenuto.xml</strong> che conterr&agrave; la struttura dei campi gestibili,</li>
 				<li><strong>/application/views/website/type_templates/Nome_contenuto/list.php</strong> ovvero il template xhtml per la visualizzazione come lista dei contenuti,</li>
@@ -348,10 +350,14 @@ Ad esempio uno dei due files sopra elencati potr&agrave; essere duplicato nella 
 
 		<div class="sidebar_content" id="sb-views">
 			<h3>7. Temi, view e rendering</h3>
-			<p>NOTA: il front-end del sito, pu&ograve; utilizzare pi&ugrave; temi per differenziare ad esempio il sito <strong>desktop</strong> dalla versone <strong>mobile</strong>.
-Tale configurazione &egrave; disponibile nel file di configurazione di Bancha alla voce "WEBSITE THEMES", e si riferiscono al nome della directory
-presente nella directory <strong><?php echo THEMESPATH; ?></strong>. Per default, la skin utilizzata &egrave; la "desktop", e nel caso sia presente la skin mobile
-verr&agrave; effettuato lo switch in automatico nel caso che il sito venga visitato da un device mobile.</p>
+			<p>Il front-end del sito internet, pu&ograve; utilizzare pi&ugrave; temi per differenziare ad esempio il sito <strong>desktop</strong> dalla versone <strong>mobile</strong>.
+Nel menu <strong>Gestione >> Impostazioni</strong> troverai la configurazione per scegliere i temi da attivare per entrambe le versioni. Per aggiungere un nuovo tema, dopo averlo posizionato nella directory <strong><?php echo THEMESPATH; ?></strong>, aggiungilo anche alla variabile <strong>WEBSITE INSTALLED THEMES</strong> nel file di configurazione di <?php echo CMS; ?>.<br />
+NOTA: Lo switch al tema mobile, verr&agrave; effettuato in automatico nel caso in cui il sito venga visitato da un device mobile.</p>
+<p>Per forzare lo switch da un tema all'altro, puoi utilizzare le route speciali <strong>go-desktop</strong> e <strong>go-mobile</strong> in questo modo:</p>
+<code><?php echo site_url('go-desktop'); ?>
+
+<?php echo site_url('go-mobile'); ?>
+</code><br />
 			<p>Bancha utilizza la classe <strong>View</strong> per settare degli oggetti nelle viste e renderizzarle.<br />
 L'oggetto view, &egrave; presente globalmente accedendo alla variabile "view" di Code Igniter in questo modo: <strong>$this->view</strong>.<br /><br />
 Il metodo base per settare un oggetto nella view, &egrave; il <strong>set()</strong>, e va utilizzato in questa maniera:</p>
@@ -896,6 +902,53 @@ echo breadcrumbs($this->tree->breadcrumbs);</code><br /><br />
 			<p>
 			<div class="message warning">TODO</div>
 			</p>
+	</div>
+
+	<div class="sidebar_content" id="sb-settings">
+			<h3>19. Impostazioni</h3>
+			<p>Attraverso il menu <strong>Gestione >> Impostazioni</strong> puoi trovare diversi settaggi da applicare al tuo sito internet.</p>
+			<p>Tali settaggi possono essere ampliati intervenendo sullo schema del file <strong><?php echo $this->config->item('xml_folder'); ?>Settings.xml</strong> e la modalit&agrave; di definizione &egrave; identica a quella di definizione degli schemi dei <strong>tipi di contenuto</strong>. L'unica eccezione &egrave; la mancanza di poter definire i campi files, images e hierarchies.</p>
+			<p>Puoi accedere alle impostazioni (settings) da qualsiasi punto dell'MVC di <?php echo CMS; ?> in questo modo:</p>
+<code>//Carico la classe settings
+$this->load->settings();
+
+//Leggo un valore dalle impostazioni
+echo $this->settings->get('website_name');</code><br />
+	<p>La funzione <strong>get()</strong> accetta come secondo parametro opzionale il nome del modulo da cui "prelevare" la chiave. Il sito internet usa come chiave predefinita <strong>general</strong>, ma nulla vieta di utilizzare altre chiavi.</p>
+	<p>I moduli esterni al core dell'applicazione, possono utilizzare la classe settings per salvare le loro impostazioni utilizzando il proprio nome come modulo e cos&igrave; evitare conflitti con le variabili interne dell'applicazione.</p>
+
+	<div class="message info">NOTA: Lato front-end, la classe settings viene gi&agrave; caricata in automatico dal sistema.</div><br />
+
+	<h3>get($key, $module)</h3>
+	<p>Legge una variabile dalle impostazioni, utilizzando il modulo richiesto.</p>
+<code>//Leggo un valore dalle impostazioni del modulo 'general'
+echo $this->settings->get('website_name');
+
+//Ed ora, dal modulo di twitter
+echo $this->settings->get('username', 'twitter');</code><br />
+
+<h3>set($key, $value, $module)</h3>
+	<p>Scrive un valore nelle impostazioni, abbinandolo al modulo impostato come terzo parametro.</p>
+<code>//Scrivo un valore nel modulo 'general'
+echo $this->settings->set('website_name', 'My cool website');
+
+//Ed ora, aggiorno un valore nel modulo di twitter
+echo $this->settings->set('username', '@squallstar', twitter');
+
+//Svuoto la cache delle impostazioni
+$this->settings->clear_cache();</code><br />
+
+<h3>delete($key, $module)</h3>
+	<p>Elimina una variabile dalle impostazioni.</p>
+<code>//Elimino una variabile dal modulo di twitter
+echo $this->settings->delete('username', 'twitter');</code><br />
+
+<h3>clear_cache()</h3>
+<p>Nonostante vengano salvate come record fisici su database, le impostazioni vengono cacheate attraverso un file su filesystem. Una volta aggiornate delle chiavi, &egrave; necessario svuotare la cache con questo metodo.
+
+<h3>build_cache();</h3>
+<p>Funzione usata internamente dal sistema quando il file di cache non &egrave; presente, provvede a rigenerarlo.</p>
+
 	</div>
 
 <!-- end -->
