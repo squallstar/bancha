@@ -341,6 +341,11 @@ Class Xml
           			'default'		=> isset($field->default) ? (string)$field->default : ''
         		);
 
+        		if (isset($field->rules))
+        		{
+        			$content_field['rules'] = (string) $field->rules;
+        		}
+
                 $this->_translations[$content_field['description']] = TRUE;
 
         		if ($content_field['type'] == 'files' || $content_field['type'] == 'images')

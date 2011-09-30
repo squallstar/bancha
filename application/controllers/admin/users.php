@@ -31,9 +31,16 @@ Class Users extends Bancha_Controller
 		$this->lista();
 	}
 
+	public function type() {
+		//Legacy: breadcrumbs in edit_user will use this route to go back to list
+		$this->lista();
+	}
+
 	public function lista($page=0)
 	{
-		//Paginazione
+		$this->auth->check_permission('users', 'list');
+
+		//Pagination
 		$pagination = array(
 		    	'total_rows'	=> $this->users->count(),
 		    	'per_page'		=> $this->config->item('records_per_page'),
@@ -57,6 +64,7 @@ Class Users extends Bancha_Controller
 
 	public function delete($id_username='')
 	{
+		$this->auth->check_permission('users', 'add');
 		$done = $this->users->delete($id_username);
 		if ($done)
 		{
@@ -67,6 +75,8 @@ Class Users extends Bancha_Controller
 
 	public function edit($id_username='')
 	{
+		$this->auth->check_permission('users', 'list');
+
 		$this->load->categories();
         $this->load->hierarchies();
         $this->load->documents();
@@ -100,7 +110,8 @@ Class Users extends Bancha_Controller
 			//We search for this user
 			$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
 
-			if (!$users) {
+			if (!$users)
+			{
 				show_error(_('User not found'));
 			} else {
 				$user = $users[0];
@@ -125,6 +136,8 @@ Class Users extends Bancha_Controller
 	 */
 	public function groups($action='', $param='')
 	{
+		$this->auth->check_permission('groups', 'manage');
+
 		if ($action == 'edit')
 		{
 			if ($this->input->post('submit', FALSE))
@@ -155,7 +168,6 @@ Class Users extends Bancha_Controller
 							$this->view->message('success', _('The group has been created.'));
 						}
 					}
-
 				}
 
 				if ($param == $this->auth->user('group_id'))
@@ -178,10 +190,10 @@ Class Users extends Bancha_Controller
 				}
 			}
 
-			//Ottengo tutti i permessi impostabili
+			//We get all ACLs
 			$acl = $this->users->get_acl_list();
 
-			//Ottengo i permessi dell'utente
+			//And the user permissions
 			$user_acls = $this->auth->get_permissions_id($param);
 
 			$this->view->set('group', $group);

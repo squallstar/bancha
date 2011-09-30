@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-29 00:17+0100\n"
-"PO-Revision-Date: 2011-09-29 00:17+0100\n"
+"POT-Creation-Date: 2011-09-30 00:33+0100\n"
+"PO-Revision-Date: 2011-09-30 00:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -22,101 +22,101 @@ msgstr ""
 msgid "Username/password wrong."
 msgstr "Username e/o password errati."
 
-#: controllers/admin/contents.php:124
+#: controllers/admin/contents.php:133
 msgid "The records have been published."
 msgstr "I records sono stati pubblicati."
 
-#: controllers/admin/contents.php:132
+#: controllers/admin/contents.php:141
 msgid "The records have been depublished."
 msgstr "I records sono stati depubblicati."
 
-#: controllers/admin/contents.php:139
+#: controllers/admin/contents.php:148
 msgid "The records have been deleted."
 msgstr "I records sono stati eliminati."
 
-#: controllers/admin/contents.php:146
+#: controllers/admin/contents.php:155
 msgid "The records have been rolled back to the production ones."
 msgstr "I records selezionati sono stati scartati e sono stati ripristinati quelli di produzione."
 
-#: controllers/admin/contents.php:335
+#: controllers/admin/contents.php:347
 msgid "The content %n has been saved."
 msgstr "Il contenuto %n è stato salvato"
 
-#: controllers/admin/contents.php:341
+#: controllers/admin/contents.php:353
 msgid "The content %n has been published."
 msgstr "Il contenuto %n è stato pubblicato."
 
-#: controllers/admin/contents.php:346
+#: controllers/admin/contents.php:358
 msgid "The content has been saved."
 msgstr "Il contenuto è stato salvato."
 
-#: controllers/admin/contents.php:360
+#: controllers/admin/contents.php:372
 msgid "Something went wrong..."
 msgstr "Qualcosa è andato storto..."
 
-#: controllers/admin/contents.php:375
+#: controllers/admin/contents.php:387
 msgid "First level"
 msgstr "Primo livello"
 
-#: controllers/admin/contents.php:467
+#: controllers/admin/contents.php:482
 msgid "Cannot delete the record %r of type %t"
 msgstr "Impossibile eliminare il record %r di tipo %t."
 
-#: controllers/admin/contents.php:467
-#: controllers/admin/contents.php:496
-#: controllers/admin/contents.php:627
+#: controllers/admin/contents.php:482
+#: controllers/admin/contents.php:511
+#: controllers/admin/contents.php:652
 msgid "Error"
 msgstr "Errore"
 
-#: controllers/admin/contents.php:496
+#: controllers/admin/contents.php:511
 msgid "The record ID was not set."
 msgstr "L'id del record non è stato settato."
 
-#: controllers/admin/contents.php:521
+#: controllers/admin/contents.php:539
 msgid "Please insert a name for this type."
 msgstr "Inserisci un nome per il tipo."
 
-#: controllers/admin/contents.php:541
+#: controllers/admin/contents.php:563
 msgid "The xml scheme of the content type %n has been updated"
 msgstr "Lo schema XML del tipo di contenuto %n è stato aggiornato."
 
-#: controllers/admin/contents.php:547
+#: controllers/admin/contents.php:569
 msgid "Cannot save that XML scheme."
 msgstr "Impossibile salvare lo schema XML."
 
-#: controllers/admin/contents.php:547
+#: controllers/admin/contents.php:569
 msgid "Saving error"
 msgstr "Errore di salvataggio"
 
-#: controllers/admin/contents.php:551
+#: controllers/admin/contents.php:573
 msgid "Cannot read the XML file."
 msgstr "Impossibile leggere il file XML."
 
-#: controllers/admin/contents.php:575
+#: controllers/admin/contents.php:600
 msgid "The category %n has been added."
 msgstr "La categoria %n è stata aggiunta."
 
-#: controllers/admin/contents.php:577
+#: controllers/admin/contents.php:602
 msgid "Cannot insert the category %n."
 msgstr "Impossibile inserire la categoria %n."
 
-#: controllers/admin/contents.php:580
+#: controllers/admin/contents.php:605
 msgid "A category named %n already exists."
 msgstr "Esiste già una categoria chiamata %n."
 
-#: controllers/admin/contents.php:604
+#: controllers/admin/contents.php:629
 msgid "The category %n has been deleted."
 msgstr "La categoria %n è stata eliminata."
 
-#: controllers/admin/contents.php:627
+#: controllers/admin/contents.php:652
 msgid "Cannot renew the cache."
 msgstr "Impossibile rigenerare la cache."
 
-#: controllers/admin/contents.php:629
+#: controllers/admin/contents.php:654
 msgid "The cache has been cleared."
 msgstr "La cache è stata ricreata correttamente."
 
-#: controllers/admin/contents.php:677
+#: controllers/admin/contents.php:706
 msgid "The type named %n has been removed."
 msgstr "Il tipo %n è stato rimosso."
 
@@ -132,13 +132,17 @@ msgstr "La gerarchia selezionarta è stata eliminata."
 msgid "Choose one..."
 msgstr "Seleziona uno..."
 
-#: controllers/admin/install.php:109
+#: controllers/admin/install.php:103
 msgid "%n has been installed!"
 msgstr "%n è stato correttamente installato!"
 
 #: controllers/admin/modules.php:58
 msgid "The module %m has no documentation or not exists."
 msgstr "Il modulo %n non contiene alcuna documentazione."
+
+#: controllers/admin/settings.php:54
+msgid "The settings has been updated"
+msgstr "Le impostazioni sono state aggiornate."
 
 #: controllers/admin/users.php:63
 msgid "The user has been deleted."
@@ -208,16 +212,24 @@ msgstr "Impossibile inserire questo tipo di contenuto."
 msgid "Cannot delete the template view directory for the content type %n."
 msgstr "Impossibile eliminare la directory delle view di template per il tipo di contenuto %n."
 
-#: libraries/bancha/installer.php:345
+#: libraries/bancha/installer.php:311
+msgid "Administrators"
+msgstr "Amministratore"
+
+#: libraries/bancha/installer.php:311
+msgid "Editors"
+msgstr "Editor"
+
+#: libraries/bancha/installer.php:351
 msgid "Default content type not defined"
 msgstr "Tipo predefinito non definito."
 
-#: libraries/bancha/installer.php:466
+#: libraries/bancha/installer.php:490
 msgid "My first post"
 msgstr "Il mio primo post"
 
-#: libraries/bancha/installer.php:467
-#: libraries/bancha/installer.php:493
+#: libraries/bancha/installer.php:491
+#: libraries/bancha/installer.php:517
 msgid "Hello world"
 msgstr "Ciao mondo"
 
@@ -438,6 +450,7 @@ msgstr "Pubblica"
 
 #: views/admin/content/record_edit.php:65
 #: views/admin/content/record_list.php:13
+#: views/admin/content/type_delete.php:20
 #: views/admin/content/type_edit_xml.php:20
 #: views/admin/content/type_list.php:7
 msgid "Contents"
@@ -521,7 +534,7 @@ msgid "Insert new page"
 msgstr "Inserisci nuova pagina"
 
 #: views/admin/content/record_list.php:17
-#: views/admin/content/type_list.php:40
+#: views/admin/content/type_list.php:42
 msgid "Manage categories"
 msgstr "Gestione categorie"
 
@@ -558,7 +571,7 @@ msgstr "Aggiungi pagina figlia"
 
 #: views/admin/content/record_list.php:208
 #: views/admin/content/record_list.php:222
-#: views/admin/content/type_list.php:42
+#: views/admin/content/type_list.php:51
 msgid "Delete"
 msgstr "Elimina"
 
@@ -587,7 +600,7 @@ msgid "There are"
 msgstr "Ci sono"
 
 #: views/admin/content/record_list.php:234
-#: views/admin/content/type_list.php:54
+#: views/admin/content/type_list.php:65
 msgid "add a new one"
 msgstr "aggiungine uno"
 
@@ -602,6 +615,10 @@ msgstr "Svuota cache"
 #: views/admin/content/settings_edit.php:26
 msgid "Manage settings"
 msgstr "Gestione impostazioni"
+
+#: views/admin/content/settings_edit.php:37
+msgid "Scheme"
+msgstr "Schema"
 
 #: views/admin/content/settings_edit.php:40
 msgid "Update settings"
@@ -780,7 +797,7 @@ msgid "Meta tags"
 msgstr "Meta tags"
 
 #: views/admin/content/translations.php:49
-#: views/admin/content/type_list.php:25
+#: views/admin/content/type_list.php:27
 msgid "Description"
 msgstr "Descrizione"
 
@@ -833,7 +850,7 @@ msgid "Author info"
 msgstr "Informazioni autore"
 
 #: views/admin/content/translations.php:62
-#: views/admin/content/type_list.php:24
+#: views/admin/content/type_list.php:26
 msgid "Name"
 msgstr "Nome"
 
@@ -867,7 +884,7 @@ msgid "Intro"
 msgstr "Introduzione"
 
 #: views/admin/content/type_add.php:25
-#: views/admin/content/type_list.php:10
+#: views/admin/content/type_list.php:11
 msgid "Add new type"
 msgstr "Aggiungi nuovo tipo"
 
@@ -946,25 +963,46 @@ msgid "Type delete"
 msgstr "Eliminazione tipo"
 
 #: views/admin/content/type_delete.php:12
-#: views/admin/content/type_delete.php:38
+#: views/admin/content/type_delete.php:40
 msgid "Cancel"
 msgstr "Annulla"
+
+#: views/admin/content/type_delete.php:20
+msgid "Content type delete"
+msgstr "Eliminazione tipo di contenuto"
+
+#: views/admin/content/type_delete.php:22
+msgid "If you delete the content type %n, will be also deleted from the filesystem these files:"
+msgstr "Se elimini il tipo di contenuto %n, verranno eliminati anche i seguenti files dal filesystem:"
+
+#: views/admin/content/type_delete.php:25
+msgid "Content type scheme definition"
+msgstr "Schema di definizione del tipo di contenuto"
+
+#: views/admin/content/type_delete.php:26
+msgid "View files related to list/detail actions of this content type (php templates)."
+msgstr "Viste di lista e dettaglio di questo tipo di contenuto (templates .php)"
 
 #: views/admin/content/type_delete.php:30
 msgid "All contents associated to this type will be deleted."
 msgstr "Tutti i contenuti associati a questo tipo verranno eliminati."
 
 #: views/admin/content/type_delete.php:30
-msgid "You can disable this function through the variabile \"DEAD RECORDS\" in the config file."
-msgstr "Puoi disabilitare questa funzionalità intervenendo sulla variabile \"DEAD RECORDS\" nel file di configurazione."
+#: views/admin/content/type_delete.php:33
+msgid "You can enable/disable this function through the variabile \"DEAD RECORDS\" in the config file."
+msgstr "Puoi abilitare o disabilitare questa funzionalità intervenendo sulla variabile \"DEAD RECORDS\" nel file di configurazione."
 
-#: views/admin/content/type_delete.php:37
-msgid "Confirm deletion"
-msgstr "Conferma eliminazione"
+#: views/admin/content/type_delete.php:33
+msgid "All contents associated to this type will NOT be deleted."
+msgstr "Tutti i contenuti associati a questo tipo NON verranno eliminati."
+
+#: views/admin/content/type_delete.php:39
+msgid "Delete type"
+msgstr "Elimina tipo"
 
 #: views/admin/content/type_edit_xml.php:9
 #: views/admin/content/type_edit_xml.php:20
-#: views/admin/content/type_list.php:41
+#: views/admin/content/type_list.php:46
 msgid "Edit scheme"
 msgstr "Modifica schema"
 
@@ -976,27 +1014,27 @@ msgstr "Scarta tutto"
 msgid "A wrong compilation of the XML tree could cause a malfunction of the website."
 msgstr "Una compilazione errata dello schema XML potrebbe causare un malfunzionamento del sito internet."
 
-#: views/admin/content/type_edit_xml.php:40
+#: views/admin/content/type_edit_xml.php:41
 msgid "XML Structure"
 msgstr "Struttura XML"
 
-#: views/admin/content/type_edit_xml.php:43
+#: views/admin/content/type_edit_xml.php:44
 msgid "Save scheme"
 msgstr "Salva schema"
 
-#: views/admin/content/type_list.php:26
+#: views/admin/content/type_list.php:28
 msgid "Structure type"
 msgstr "Tipo struttura"
 
-#: views/admin/content/type_list.php:38
+#: views/admin/content/type_list.php:40
 msgid "Tree"
 msgstr "Ad albero"
 
-#: views/admin/content/type_list.php:38
+#: views/admin/content/type_list.php:40
 msgid "Simple"
 msgstr "Semplice"
 
-#: views/admin/content/type_list.php:53
+#: views/admin/content/type_list.php:64
 msgid "No type of contents found. To start, %link."
 msgstr "Nessun tipo di contenuto trovato. Per iniziare, %link."
 
@@ -1089,7 +1127,7 @@ msgid "Parent hierarchy"
 msgstr "Gerarchia padre"
 
 #: views/admin/import/records.php:7
-#: views/admin/layout/header.php:78
+#: views/admin/layout/header.php:88
 msgid "Import/export data"
 msgstr "Importaz./esportaz. dati"
 
@@ -1166,51 +1204,51 @@ msgstr "La pagina è stata generata in %n secondi utilizzando %m di memoria."
 msgid "Dashboard"
 msgstr "Panoramica"
 
-#: views/admin/layout/header.php:60
+#: views/admin/layout/header.php:64
 #: views/admin/users/list.php:22
 msgid "Users"
 msgstr "Utenti"
 
-#: views/admin/layout/header.php:62
+#: views/admin/layout/header.php:67
 #: views/admin/users/list.php:15
 msgid "Add new user"
 msgstr "Aggiungi nuovo utente"
 
-#: views/admin/layout/header.php:63
+#: views/admin/layout/header.php:69
 #: views/admin/users/list.php:12
 msgid "Users list"
 msgstr "Lista utenti"
 
-#: views/admin/layout/header.php:64
+#: views/admin/layout/header.php:71
 #: views/admin/users/list.php:16
 #: views/admin/users/groups/list.php:12
 #: views/admin/users/groups/list.php:22
 msgid "Groups and permissions"
 msgstr "Gruppi e permessi"
 
-#: views/admin/layout/header.php:68
+#: views/admin/layout/header.php:78
 msgid "Modules"
 msgstr "Moduli"
 
-#: views/admin/layout/header.php:71
+#: views/admin/layout/header.php:81
 msgid "Manage"
 msgstr "Gestione"
 
-#: views/admin/layout/header.php:73
+#: views/admin/layout/header.php:83
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: views/admin/layout/header.php:75
+#: views/admin/layout/header.php:85
 #: views/admin/modules/list.php:23
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: views/admin/layout/header.php:79
+#: views/admin/layout/header.php:89
 #: views/admin/unit_tests/intro.php:5
 msgid "Unit tests"
 msgstr "Unit tests"
 
-#: views/admin/layout/header.php:86
+#: views/admin/layout/header.php:96
 msgid "Logout"
 msgstr "Esci"
 
@@ -1316,6 +1354,9 @@ msgstr "Vuoi eliminare questo gruppo?"
 #: views/admin/users/groups/list.php:50
 msgid "Delete group"
 msgstr "Elimina gruppo"
+
+#~ msgid "Confirm deletion"
+#~ msgstr "Conferma eliminazione"
 
 #~ msgid "This content has no attachments."
 #~ msgstr "Questo contenuto non ha allegati."

@@ -698,88 +698,99 @@ Class Model_records extends CI_Model {
   		return FALSE;
   }
 
-  /**
-   * Pubblica un record e i suoi allegati
-   * @param int $id
-   */
-  public function publish($id = '')
-  {
-      if ($id == '') {
-        show_error('ID not specified. (records/publish)');
-      }
-    $record = $this->db->from($this->table_stage)
-               		   ->where($this->primary_key, $id)
-               		   ->limit(1)
-               		   ->select('*')
-               		   ->get();
-    if ($record->num_rows())
-    {
-      $record = $record->result_array();
-      $stage_record = $record[0];
-      if ($stage_record['date_publish'] < time())
-      {
-      		$stage_record['date_publish'] = time();
-      }
+	/**
+	* Pubblica un record e i suoi allegati
+	* @param int $id
+	*/
+	public function publish($id = '', $type = '')
+ 	{
+		if ($type != '')
+		{
+			$this->set_type($type);
+		}
+		if ($id == '')
+		{
+			show_error('ID not specified. (records/publish)');
+		}
 
-      $this->events->log('publish', $stage_record[$this->primary_key], $stage_record['title'], $stage_record['id_type']);
+		$record = $this->db->from($this->table_stage)
+						   ->where($this->primary_key, $id)
+						   ->limit(1)
+						   ->select('*')
+						   ->get();
 
-      $published_record = $this->db->from($this->table)
-			                       ->where($this->primary_key, $id)
-			                       ->limit(1)
-			                       ->select($this->primary_key)
-			                       ->get();
-      $done = FALSE;
-      if ($published_record->num_rows())
-      {
-        //Update
-        unset($stage_record[$this->primary_key]);
-        unset($stage_record['published']);
-        $done = $this->db->where($this->primary_key, $id)
-                     	 ->update($this->table, $stage_record);
-      } else {
-        //Insert
-        unset($stage_record['published']);
-        $done = $this->db->insert($this->table, $stage_record);
-      }
-      if ($done)
-      {
-      	//We update the attachments
-      	$this->load->documents();
-      	$this->documents->put_live_documents($this->table, $id);
-      	//And we update the state of the staged record
-        return $this->db->where($this->primary_key, $id)
-                  		->update($this->table_stage, array('published' => 1, 'date_publish' => $stage_record['date_publish']));
-      }
-    }
-    return FALSE;
-  }
+		if ($record->num_rows())
+		{
+			$record = $record->result_array();
+			$stage_record = $record[0];
+			if ($stage_record['date_publish'] < time())
+			{
+				$stage_record['date_publish'] = time();
+			}
 
-  /**
-   * Depublishes a record
-   * @param $id
-   * @return bool
-   */
-  public function depublish($id = '')
-  {
-      if ($id == '')
-      {
-        show_error('ID del contenuto da depubblicare non specificato. (records/depublish)');
-      }
-    $done = $this->db->where($this->primary_key, $id)
-             ->delete($this->table);
-    if ($done)
-    {
-      $this->events->log('depublish', $id, $id);
+			$this->events->log('publish', $stage_record[$this->primary_key], $stage_record['title'], $stage_record['id_type']);
 
-      //We delete the attachments
-      $this->load->documents();
-      $this->documents->delete_records_by_binds($this->table, $id, TRUE);
+			$published_record = $this->db->from($this->table)
+										 ->where($this->primary_key, $id)
+										 ->limit(1)
+										 ->select($this->primary_key)
+										 ->get();
+			$done = FALSE;
+			if ($published_record->num_rows())
+			{
+				//Update
+				unset($stage_record[$this->primary_key]);
+				unset($stage_record['published']);
+				$done = $this->db->where($this->primary_key, $id)
+								 ->update($this->table, $stage_record);
+			} else {
+				//Insert
+				unset($stage_record['published']);
+				$done = $this->db->insert($this->table, $stage_record);
+			}
+			if ($done)
+			{
+				//We update the attachments
+				$this->load->documents();
+				$this->documents->put_live_documents($this->table, $id);
+				//And we update the state of the staged record
+				return $this->db->where($this->primary_key, $id)
+								->update($this->table_stage, array('published' => 1, 'date_publish' => $stage_record['date_publish']));
+			}
+		}
+		return FALSE;
+	}
 
-      //And we update the staged record status
-      return $this->db->where($this->primary_key, $id)
-              ->update($this->table_stage, array('published' => 0));
-    }
-  }
+	/**
+	* Depublishes a record
+	* @param $id
+	* @return bool
+	*/
+	public function depublish($id = '', $type = '')
+	{
+		if ($type != '')
+		{
+			$this->set_type($type);
+		}
+		if ($id == '')
+		{
+			show_error('ID del contenuto da depubblicare non specificato. (records/depublish)');
+		}
+			$done = $this->db->where($this->primary_key, $id)
+							 ->delete($this->table);
+		if ($done)
+		{
+			$this->events->log('depublish', $id, $id);
+
+			//We delete the attachments
+			$this->load->documents();
+			$this->documents->delete_records_by_binds($this->table, $id, TRUE);
+
+			//And we update the staged record status
+			return $this->db->where($this->primary_key, $id)
+							->update($this->table_stage, array('published' => 0));
+		}
+	}
 
   /**
    * Extracts the custom options of a content type

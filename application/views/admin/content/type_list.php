@@ -7,7 +7,9 @@
 		<h2><?php echo $_section == 'contents' ? _('Contents') : _('Pages'); ?></h2>
 
 		<ul>
+			<?php if ($this->auth->has_permission('types', 'manage')) { ?>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url($_section.'/add_type/'); ?>"><?php echo _('Add new type'); ?></a></li>
+			<?php } ?>
 		</ul>
 	</div>
 
@@ -37,9 +39,18 @@
 						<td><?php echo $content['description']; ?></td>
 						<td><?php echo $content['tree'] ? _('Tree') : _('Simple'); ?></td>
 						<td class="delete">
-							<a href="<?php echo admin_url($_section.'/type_categories/'.$content['name']); ?>"><?php echo _('Manage categories'); ?></a> -&nbsp;
-							<a href="<?php echo admin_url($_section.'/type_edit_xml/'.$content['name']); ?>"><?php echo _('Edit scheme'); ?></a> -&nbsp;
+							<a href="<?php echo admin_url($_section.'/type_categories/'.$content['name']); ?>"><?php echo _('Manage categories'); ?></a> 
+
+							<?php if ($this->auth->has_permission('types', 'manage')) { ?>
+							-&nbsp;
+							<a href="<?php echo admin_url($_section.'/type_edit_xml/'.$content['name']); ?>"><?php echo _('Edit scheme'); ?></a>
+							<?php } ?>
+
+							<?php if ($this->auth->has_permission('types', 'delete')) { ?>
+							-&nbsp;
 							<a onclick="return confirm('Sei sicuro di voler eliminare questo tipo?');" href="<?php echo admin_url($_section.'/type_delete/'.$content['name']); ?>"><?php echo _('Delete'); ?></a>
+							<?php } ?>
+
 						</td>
 					</tr>
 					<?php }
