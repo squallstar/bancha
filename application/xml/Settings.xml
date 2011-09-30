@@ -5,8 +5,7 @@
 	<description>Settings</description>
 	<primary_key>null</primary_key>
 	<table>null</table>
-	<fieldset>
-		<name>General</name>
+	<fieldset name="General" icon="legend">
 		<field id="website_name">
 			<description>Website name</description>
 			<type>text</type>

@@ -7,8 +7,7 @@
 	<tree>false</tree>
 	<primary_key>id_user</primary_key>
 	<table>users</table>
-	<fieldset>
-		<name>Informations</name>
+	<fieldset name="Informations" icon="layout">
 		<field id="id_user" column="true">
 			<type>hidden</type>
 			<list>true</list>
@@ -48,8 +47,7 @@
 			<list>true</list>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Groups</name>
+	<fieldset name="Groups" icon="lock">
 		<field id="id_group" column="true">
 			<description>User group</description>
 			<type>radio</type>
