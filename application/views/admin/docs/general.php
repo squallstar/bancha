@@ -10,8 +10,8 @@
 
 		<div class="sidebar">
 			<ul class="sidemenu">
-				<li><a href="#sb-intro">1. Introduzione a <?php echo CMS; ?></a></li>
-				<li><a href="#sb-install">2. Installazione</a></li>
+				<li><a href="#sb-intro">1. Introduction to Bancha</a></li>
+				<li><a href="#sb-install">2. How to install</a></li>
 				<li><a href="#sb-content-types">3. Tipi di contenuto</a></li>
 				<li><a href="#sb-types-xml">4. Schema XML dei tipi</a></li>
 				<li><a href="#sb-page-actions">5. Azioni delle pagine</a></li>
@@ -34,47 +34,48 @@
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
-			<h3>1. Introduzione a <?php echo CMS; ?></h3>
-			<p><?php echo CMS; ?> &egrave; un Content Management System per PHP5 sviluppato in Code Igniter, un potente e veloce framework PHP.<br />
-			&Egrave; rivolto principalmente a sviluppatori che devono gestire siti di media-grande dimensione, e che prevedono contenuti di diverso tipo.<br /><br />
-			<?php echo CMS; ?> basa la sua potenza su alcuni pilastri che lo rendono differente da altri CMS:
-			<ul>
-				<li>Permette di gestire qualsiasi tipo di contenuto (pagine, news, gallerie fotografiche, prodotti, etc...) attraverso schemi XML.</li>
-				<li>Non sacrifica le prestazioni di un sito statico, perch&egrave; utilizza svariati sistemi di caching interno.</li>
-				<li>&Egrave; modulare, ovvero pu&ograve; essere esteso con diverse tipologie di moduli che potrai sviluppare tu stesso.</li>
-				<li>&Egrave; open-source (puoi scaricarlo direttamente da <a href="https://getbancha.com" target="_blank">qui</a>).</li>
-				<li>&Egrave; facile da installare e da mantenere. Non necessita di infrastrutture particolari e/o avanzate.</li>
-				<li>Separa in maniera netta l'applicazioni dai temi e permette quindi la portabilit&agrave; di quest'ultimi</li>
-				<li>Utilizza un sistema ORM per gestire gli oggetti del database</li>
-			</ul>
+			<h3>1. Introduction to Bancha</h3>
 
-			<h3>Schema MVC di Bancha</h3>
-			<p>Qui sotto è rappresentato lo scheletro Model-View-Controller architetturale di Bancha.</p>
+<p>BANCHA is a Content Management System made with <strong>PHP5</strong> and <strong>Code Igniter</strong>, a light and powerful PHP framework.<br />
+It is capable to manage any kind of project/website, specially when it have many different types of contents.</p>
+
+<p>BANCHA bases its power on some pillars that make it different from other CMS:</p>
+<ul>
+	<li>It allows you to handle any type of content: pages, news, photo galleries, products, etc ... through XML schemas.</li>
+	<li>In 10 minutes, you can configure a website to manage, list and view any kind of thing you want.</li>
+	<li>It doesn't sacrifice the performance of a static site, because under the hood it uses many different caching systems.</li>
+	<li>It's modular, so it can be extended with different types of modules that you can develop yourself.</li>
+	<li>It's totally open-source (you can download the source from http://getbancha.com).</li>
+	<li>It's easy to install and to maintain. It doesnt't need any complicated or advanced infrastructure: just PHP5, some extensions and a DB server.</li>
+	<li>It totally separates the application framework (MVC) from the website themes, so it's easy to use for web developers as well as web designers.</li>
+	<li>It use a wonderful ORM system to "play" with the database objects without the needs to write a single query.</li>
+</ul>
+
+			<h3>Bancha MVC architecture</h3>
+			<p>Here below you can see the Bancha Model-View-Controller architecture.</p>
 			<img src="<?php echo site_url(THEMESPATH.'admin/widgets/mvc_scheme.png'); ?>" border="0" alt="Bancha MVC" />
 			<br />
 
 			<br />
-			<h3>Crediti</h3>
+			<h3>Credits</h3>
 
-			<?php echo CMS; ?> &egrave; stato sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
-			Bancha &egrave; rilasciato con licenza GNU/GPL. Puoi visionare l'intera licenza dal file License.txt nella root del progetto.<br />
+			Bancha has been developed (and is currently mantained) by <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
+			Bancha is released under GNU/GPL license. You can read the entire license from the License.txt file in the project root directory.<br />
 			<br />
 			Copyright <a href="http://www.squallstar.it/">Squallstar Studio</a> &copy;2011
 			</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-install">
-			<h3>2. Installazione</h3>
+			<h3>2. How to install</h3>
 
-			<p>La procedura dettagliata di installazione (in lingua inglese) &egrave; riportata nel file <strong>Readme.MD</strong> presente nella root di installazione.</p>
-			<p>La procedura rapida &egrave; la seguente:</p>
-
-			<ul>
-				<li>Settare l'environment nel file index.php</li>
-				<li>Configurare i parametri di connessione al database nel file application/config/database.php</li>
-				<li>Lanciare dal browser l'indirizzo <strong>http://{nomehost}/admin/install</strong></li>
-				<li>Il tipo di contenuto predefinito per l'albero di menu del sito &egrave; "Menu", e viene creato in automatico dall'installer</li>
-			</ul>
+<p>1. Before all, sets your current environment in the <strong>/index.php</strong> file.<br />
+The default environment is "sqlite" (while developing is very useful) but you are encouraged to use <strong>development</strong> or production as environment type, and run the database on a real server.</p>
+<p>2. Sets the database connecting parameters here: <strong>application/config/database.php</strong> (or sqlite/database.php under sqlite environments)</p>
+<p>3. Go through your browser to this URL: http://yourwebsitename/admin/install</p>
+<p>4. Choose your install type between "Default" and "Blog".<br />
+The Blog one, will create and configures the "Blog" and "Comments" content types for you (the Default will create only the website menu)</p>
+<p>5. You're done! The install script will create a content type named "Menu" which is linked to the page tree of your website.</p>
 
 		</div>
 
