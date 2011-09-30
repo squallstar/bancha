@@ -136,7 +136,7 @@ Class Users extends Bancha_Controller
 	 */
 	public function groups($action='', $param='')
 	{
-		$this->auth->check_permission('groups', 'manage');
+		$this->auth->check_permission('users', 'groups');
 
 		if ($action == 'edit')
 		{
