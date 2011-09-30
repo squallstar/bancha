@@ -355,8 +355,15 @@ Class Contents extends Bancha_Controller
                 redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
             } else {
 
-          		$this->view->message('success', _('The content has been saved.'));
-                redirect('admin/'.$this->_section.'/edit_record/' . $tipo['name'] . '/' . $record->id);
+          		
+                if ($record_id == '')
+                {
+                    //If it's a new record, we redirect to the same page (F5 refresh fix for duplicate records)
+                    $this->session->set_flashdata('message', _('The content has been saved.'));
+                    redirect('admin/'.$this->_section.'/edit_record/' . $tipo['name'] . '/' . $record->id);
+                } else {
+                    $this->view->message('success', _('The content has been saved.'));
+                }
             }
 
         } else if ($record_id != '') {
@@ -445,6 +452,11 @@ Class Contents extends Bancha_Controller
                 }
                 $tipo['fields'][$field_name]['options'] = $this->hierarchies->get_tree();
             }
+        }
+
+        if ($this->session->flashdata('message'))
+        {
+            $this->view->message('success', $this->session->flashdata('message'));
         }
 
         $this->view->set('tipo', $tipo);
