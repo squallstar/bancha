@@ -17,7 +17,7 @@ if (isset($page) && $page->is_page()) {
 				break;
 
 			case 'single':
-				//Singolo record
+				//Single record
 				if (isset($record) && $record instanceof Record) {
 					$this->view->render_type_template($record->tipo, 'detail');
 				}
@@ -27,7 +27,7 @@ if (isset($page) && $page->is_page()) {
 				$records = & $page->get('records');
 
 				if ($records && count($records)) {
-					//Ottengo il tipo del primo record
+					//We use the content type of the first record as template
 					$record = $records[0];
 					$this->view->render_type_template($record->tipo, 'list');
 				}

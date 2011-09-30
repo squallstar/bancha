@@ -135,9 +135,8 @@ Class Dispatcher_default
 
 		//The title will be prepended
 		$this->_CI->view->title = $record->get('title') . ' - ' . $this->_CI->view->title;
-		$this->_CI->view->set('record', $record);
 		$parent_page->set('view_template', $template);
-		$parent_page->set('_record', $record);
+		$this->_CI->view->set('record', $record);
 
 		return $parent_page;
 	}
