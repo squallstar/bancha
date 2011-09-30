@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="bancha-{version}" -->
-<content>
-	<id>{id}</id>
+<content id="{id}">
 	<name>Comments</name>
 	<description>Comments</description>
 	<tree>false</tree>
@@ -14,8 +13,7 @@
 			<sql action="recount" type="Blog" target="child_count" />
 		</trigger>
 	</triggers>
-	<fieldset>
-		<name>Author info</name>
+	<fieldset name="Author info">
 		<field id="id_record" column="true">
 			<type>hidden</type>
 			<list>true</list>
@@ -53,7 +51,7 @@
 			<list>true</list>
 			<admin>true</admin>
 		</field>
-		<field id="contenuto">
+		<field id="content">
 			<description>Message</description>
 			<type>textarea</type>
 			<list>true</list>
@@ -69,8 +67,7 @@
 			<default>it</default>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Linked post</name>
+	<fieldset name="Linked post">
 		<field id="post_id" column="true">
 			<description>Linked post</description>
 			<type>select</type>
