@@ -26,6 +26,7 @@ Class Settings extends Bancha_Controller
 	    $this->view->base = 'admin/';
 
 	    $this->auth->needs_login();
+	    $this->auth->check_permission('settings', 'manage');
 
 	    $this->load->settings();
 	}
