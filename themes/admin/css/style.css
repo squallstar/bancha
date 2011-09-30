@@ -962,6 +962,10 @@ input.small {
 	border: 0;
 	}
 
+
+.block.withsidebar .block_content .sidebar ul.sidemenu img {
+	vertical-align: text-top;
+}
 .block.withsidebar .block_content .sidebar_content {
 	padding: 15px 20px 15px 210px;
 	}
