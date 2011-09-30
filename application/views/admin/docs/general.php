@@ -108,23 +108,23 @@ The Blog one, will create and configures the "Blog" and "Comments" content types
 			<h3>4. Schema XML dei tipi</h3>
 <p>Ogni tipo di contenuto &egrave; associato ad un relativo file XML presente nella directory <strong><?php echo $this->config->item('xml_typefolder'); ?></strong> che ne descrive i campi associati. Puoi editare tale file anche dall'amministrazione, premendo il link <strong>Modifica schema</strong> nella lista dei tipi di contenuto/pagine. La struttura base di un tipo di contenuto/pagina &egrave; definita in questo modo:</p>
 			<pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content>
-	&lt;id&gt;1&lt;/id&gt;
-	&lt;name&gt;Prodotti&lt;/name&gt;
-	&lt;description&gt;Prodotti E-commerce&lt;/description&gt;
+&lt;content id="1">
+	&lt;name&gt;Pages&lt;/name&gt;
+	&lt;description&gt;Website pages&lt;/description&gt;
 	&lt;tree&gt;true&lt;/tree&gt;
 	&lt;parent_types&gt;
-		&lt;type&gt;pagine&lt;/type&gt;
+		&lt;type&gt;Pages&lt;/type&gt;
 	&lt;/parent_types&gt;
 	&lt;has_categories&gt;true&lt;/has_categories&gt;
 	&lt;has_hierarchies&gt;false&lt;/has_hierarchies&gt;
 	&lt;primary_key&gt;id_record&lt;/primary_key&gt;
 	&lt;table&gt;records&lt;/table&gt;
 	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
-	&lt;fieldset&gt;
+	&lt;fieldset name="Sample fields"&gt;
+	...
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code></pre><br />
-<p>Il nodo <strong>&lt;id&gt;</strong> verr&agrave; popolato automaticamente da Bancha quando verr&agrave; creato il tipo di contenuto, cos&igrave; come i nodi <strong>&lt;name&gt;</strong> e <strong>&lt;description&gt;</strong> che definiscono rispettivamente il nome utilizzato internamente come chiave, e quello visualizzato all'utente nel pannello.<br />
+<p>L'attributo <strong>id</strong> verr&agrave; popolato automaticamente da Bancha quando verr&agrave; creato il tipo di contenuto, cos&igrave; come i nodi <strong>&lt;name&gt;</strong> e <strong>&lt;description&gt;</strong> che definiscono rispettivamente il nome utilizzato internamente come chiave, e quello visualizzato all'utente nel pannello.<br />
 Il nodo <strong>&lt;tree&gt;</strong> &egrave; un booleano che descrive se il contenuto &egrave; strutturato ad albero o lineare/semplice (vedi la sezione <strong>3. Tipi di contenuto</strong> per maggiori informazioni).<br /><br />
 Il nodo <strong>&lt;parent_types&gt;</strong> &egrave; obbligatorio per i contenuti ad albero, e descrive i nomi di tutti i tipi di contenuto da utilizzare come riferimento per le pagine padre. Di default, viene impostato con il tipo di contenuto stesso.
 <br /><br />
@@ -133,18 +133,16 @@ Sentiti libero di creare ulteriori tabelle oltre alla tabella records nel caso n
 Il nodo <strong>&lt;has_categories&gt;</strong> &egrave; sempre un booleano, e definisce se il tipo di contenuto deve presentare la sezione <strong>Categorie</strong>, che permette di raggruppare i contenuti di quel tipo in diverse categorie amministrabili dal pannello.</p>
 
 <h3>Fieldsets</h3>
-<p>Ogni tipo di contenuto pu&ograve; contiene infiniti fieldsets. Ogni fieldset, visivamente sar&agrave; una sotto-sezione e potr&agrave; contenere infiniti field (campi di inserimento). Ogni fieldset dovr&agrave; avere un nome unico tra quelli dello stesso tipo di contenuto (definito attraverso il nodo <strong>&lt;name&gt;</strong>) e conterr&agrave; uno o pi&ugrave; nodi di tipo <strong>&lt;field&gt;</strong>.</p>
+<p>Ogni tipo di contenuto pu&ograve; contiene infiniti fieldsets. Ogni fieldset, visivamente sar&agrave; una sotto-sezione e potr&agrave; contenere infiniti field (campi di inserimento). Ogni fieldset dovr&agrave; avere un nome unico tra quelli dello stesso tipo di contenuto (definito attraverso l'attributo <strong>&lt;name&gt;</strong>) e conterr&agrave; uno o pi&ugrave; nodi di tipo <strong>&lt;field&gt;</strong>.</p>
 <div class="message info">Strutturare i tuoi campi in fieldset ordinati semanticamente, aiuter&agrave; gli utilizzatori durante l'inserimento dati.</div>
 <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content>
+&lt;content id="1">
 	...
-	&lt;fieldset&gt;
-		&lt;name&gt;Campi generali&lt;/name&gt;
+	&lt;fieldset name="Generic fields"&gt;
 		&lt;field id="campo_1"&gt;...&lt;/field&gt;
 		&lt;field id="campo_2"&gt;...&lt;/field&gt;
 	&lt;/fieldset&gt;
-	&lt;fieldset&gt;
-		&lt;name&gt;Campi secondari&lt;/name&gt;
+	&lt;fieldset name="Additional fields"&gt;
 		&lt;field id="campo_3"&gt;...&lt;/field&gt;
 		&lt;field id="campo_4"&gt;...&lt;/field&gt;
 	&lt;/fieldset&gt;
@@ -245,13 +243,12 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 
 <p>Di seguito un esempio completo di struttura per definire un tipo di contenuto con un campo di testo, una select ed un campo di caricamento per una singola immagine:</p>
 <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content>
-	&lt;id&gt;1&lt;/id&gt;
-	&lt;name&gt;pagine&lt;/name&gt;
-	&lt;description&gt;Pagine generiche&lt;/description&gt;
+&lt;content id="2">
+	&lt;name&gt;products&lt;/name&gt;
+	&lt;description&gt;Products&lt;/description&gt;
 	&lt;tree&gt;true&lt;/tree&gt;
 	&lt;parent_types&gt;
-		&lt;type&gt;pagine&lt;/type&gt;
+		&lt;type&gt;products&lt;/type&gt;
 	&lt;/parent_types&gt;
 	&lt;has_categories&gt;true&lt;/has_categories&gt;
 	&lt;has_hierarchies&gt;false&lt;/has_hierarchies&gt;
@@ -259,8 +256,7 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 	&lt;table&gt;records&lt;/table&gt;
 	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
 
-	&lt;fieldset&gt;
-		&lt;name&gt;Informazioni&lt;/name&gt;
+	&lt;fieldset name="Informazioni"&gt;
 
 		&lt;field id="nome_utente" column="true"&gt;
 			&lt;description&gt;Il tuo nome&lt;/description&gt;

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="bancha-{version}" -->
-<content>
-	<id>{id}</id>
+<content id="{id}">
 	<name>{name}</name>
 	<description>{description}</description>
 	<tree>false</tree>
@@ -10,8 +9,7 @@
 	<table_stage>records_stage</table_stage>
 	<has_categories>true</has_categories>
 	<has_hierarchies>true</has_hierarchies>
-	<fieldset>
-		<name>General informations</name>
+	<fieldset name="General informations">
 		<field id="id_record" column="true">
 			<type>hidden</type>
 			<list>true</list>
@@ -60,14 +58,13 @@
 			</options>
 			<default>eval:$this->lang->current_language</default>
 		</field>
-		<field id="contenuto">
+		<field id="content">
 			<description>Content</description>
 			<type>textarea</type>
 			<list>true</list>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Attachments</name>
+	<fieldset name="Attachments">
 		<field id="images">
 			<description>Images</description>
 			<type>images</type>
@@ -81,8 +78,7 @@
 			<list>true</list>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Meta tags</name>
+	<fieldset name="Meta tags">
 		<field id="meta_title">
 			<description>Title</description>
 			<type>text</type>

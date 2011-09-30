@@ -159,13 +159,16 @@ Class Xml
     	//The type name
     	$name = (string) $node->name;
 
-    	$type_id = isset($node->id) ? (int)$node->id : 0;
+    	
 
     	//Allowed types of field
     	$field_usable_inputs = array(
       		'text', 'textarea', 'date', 'checkbox', 'select', 'multiselect', 'radio',
       		'images', 'files', 'number', 'textarea_full', 'textarea_code', 'datetime', 'hidden', 'hierarchy'
     	);
+
+        $attr = $node->attributes();
+        $type_id = isset($attr->id) ? (int)$attr->id : 0;
 
     	$content = array(
       		'id'			=> $type_id,
@@ -275,14 +278,15 @@ Class Xml
 
     	foreach ($node->fieldset as $fieldset_node)
     	{
-      		$fieldset_name = isset($fieldset_node->name) ? convert_accented_characters((string)$fieldset_node->name) : _('Untitled');
+      		$fieldset_attr = $fieldset_node->attributes();
+            $fieldset_name = isset($fieldset_attr->name) ? convert_accented_characters(trim((string)$fieldset_attr->name)) : _('Untitled');
 
           $this->_translations[$fieldset_name] = TRUE;
 
 
       		if ($fieldset_name == '')
       		{
-        		show_error($this->CI->_trans('One of the fieldsets of type %n does not have the node <name> (mandatory).', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
+        		show_error($this->CI->_trans('One of the fieldsets of type %n does not have the name attribute (mandatory).', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
       		} else if (array_key_exists($fieldset_name, $content['fieldsets'])) {
         		show_error($this->CI->_trans('The type %t has more than one fieldset named %n.', array('t' => '['.$safe_filename.']', 'n' => '['.$fieldset_name.']')), 500, _('XML parser: Error'));
       		}
