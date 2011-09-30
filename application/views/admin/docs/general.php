@@ -106,7 +106,10 @@ The Blog one, will create and configures the "Blog" and "Comments" content types
 
 		<div class="sidebar_content" id="sb-types-xml">
 			<h3>4. Schema XML dei tipi</h3>
-<p>Ogni tipo di contenuto &egrave; associato ad un relativo file XML presente nella directory <strong><?php echo $this->config->item('xml_typefolder'); ?></strong> che ne descrive i campi associati. Puoi editare tale file anche dall'amministrazione, premendo il link <strong>Modifica schema</strong> nella lista dei tipi di contenuto/pagine. La struttura base di un tipo di contenuto/pagina &egrave; definita in questo modo:</p>
+<p>Ogni tipo di contenuto &egrave; associato ad un relativo file XML presente nella directory <strong><?php echo $this->config->item('xml_typefolder'); ?></strong> che ne descrive i campi associati.</p>
+<p>Alla creazione di un nuovo tipo di contenuto, lo schema XML associato conterr&agrave; gi&agrave; una struttura di base con alcuni campi dimostrativi funzionali per un normale utilizzo.<br />
+Lo schema utilizzato per i tipi di contenuto <strong>Ad albero</strong> &egrave; <u>leggermente differente</u> da quello dei contenuti semplici, poich&egrave; include diverse opzioni relative alla visualizzazione e alle azioni di estrazione.</p>
+<p>Puoi editare tale file anche dall'amministrazione, premendo il link <strong>Modifica schema</strong> nella lista dei tipi di contenuto/pagine. La struttura base di un tipo di contenuto/pagina &egrave; definita in questo modo:</p>
 			<pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content id="1">
 	&lt;name&gt;Pages&lt;/name&gt;
@@ -134,15 +137,16 @@ Il nodo <strong>&lt;has_categories&gt;</strong> &egrave; sempre un booleano, e d
 
 <h3>Fieldsets</h3>
 <p>Ogni tipo di contenuto pu&ograve; contiene infiniti fieldsets. Ogni fieldset, visivamente sar&agrave; una sotto-sezione e potr&agrave; contenere infiniti field (campi di inserimento). Ogni fieldset dovr&agrave; avere un nome unico tra quelli dello stesso tipo di contenuto (definito attraverso l'attributo <strong>&lt;name&gt;</strong>) e conterr&agrave; uno o pi&ugrave; nodi di tipo <strong>&lt;field&gt;</strong>.</p>
+<p>I fieldset possono includere anche un'icona di 16x16 px attraverso l'attributo <strong>icon</strong>.<br />Le icone verranno disponibili sono elencate nella directory <strong><?php echo THEMESPATH; ?>admin/widgets/schemes_icons/</strong>.</p>
 <div class="message info">Strutturare i tuoi campi in fieldset ordinati semanticamente, aiuter&agrave; gli utilizzatori durante l'inserimento dati.</div>
 <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content id="1">
 	...
-	&lt;fieldset name="Generic fields"&gt;
+	&lt;fieldset name="Generic fields" icon="page"&gt;
 		&lt;field id="campo_1"&gt;...&lt;/field&gt;
 		&lt;field id="campo_2"&gt;...&lt;/field&gt;
 	&lt;/fieldset&gt;
-	&lt;fieldset name="Additional fields"&gt;
+	&lt;fieldset name="Additional fields" icon="layout"&gt;
 		&lt;field id="campo_3"&gt;...&lt;/field&gt;
 		&lt;field id="campo_4"&gt;...&lt;/field&gt;
 	&lt;/fieldset&gt;
@@ -256,7 +260,7 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 	&lt;table&gt;records&lt;/table&gt;
 	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
 
-	&lt;fieldset name="Informazioni"&gt;
+	&lt;fieldset name="Informazioni" icon="page"&gt;
 
 		&lt;field id="nome_utente" column="true"&gt;
 			&lt;description&gt;Il tuo nome&lt;/description&gt;
@@ -293,7 +297,6 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code></pre><br />
-<p>Alla creazione di un nuovo tipo di contenuto, lo schema XML associato conterr&agrave; gi&agrave; una struttura di base con alcuni campi dimostrativi, tra cui quelli relativi ai <strong>Meta tags</strong>.</p>
 
 		</div>
 
@@ -855,6 +858,16 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 <pre class="prettyprint"><code>//Il dispatcher di default, viene invocato ed usato cos&igrave;:
 $this->load->dispatcher('default');
 $this->dispatcher->start();</code></pre><br />
+
+<pre class="prettyprint"><code>//Potrei usare il dispatcher anche solo per farmi ritornare il record relativo all'URI corrente in questo modo:
+$page = $this->dispatcher->get_current_record();
+
+//E chiamare l'azione custom di un record cos&igrave;:
+$this->dispatcher->call_action($page);
+
+//Oppure, potremmo estrarre la lista di contenuti del record in questo modo:
+$page = $this->dispatcher->set_recordlist($page);
+</code></pre><br />
 
 			<h3>Image dispatcher</h3>
 			<p>Questo dispatcher si preoccupa di generare le immagini attraverso i <strong>preset</strong>, salvarle e quindi inviarle al browser. Nel caso in cui una immagine sia gi&agrave; stata generata, questo dispatcher non verr&agrave; invocato in quanto l'immagine sar&agrave; fornita direttamente dal filesystem.</p>
