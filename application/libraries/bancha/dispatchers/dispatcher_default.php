@@ -256,7 +256,7 @@ Class Dispatcher_default
 			$this->_CI->load->frlibrary('feed');
 			$feed_header = array(
 				'title' 		=> $page->get('title'),
-				'description'	=> $page->get('contenuto')
+				'description'	=> $page->get('content')
 			);
 			$this->_CI->feed->create_new($feed_header, $this->_CI->view->is_feed);
 
@@ -274,7 +274,7 @@ Class Dispatcher_default
 						'link'			=> current_url().'/'.$record->get('uri'),
 						'guid'			=> current_url().'/'.$record->get('uri'),
 						'pubDate'		=> date(DATE_RFC822, (int)$date_pub),
-						'description'	=> $record->get('contenuto')
+						'description'	=> $record->get('content')
 					);
 					$this->_CI->feed->add_item($item);
 				}
