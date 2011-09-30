@@ -279,11 +279,19 @@ Class Xml
     	foreach ($node->fieldset as $fieldset_node)
     	{
       		$fieldset_attr = $fieldset_node->attributes();
-            $fieldset_name = isset($fieldset_attr->name) ? convert_accented_characters(trim((string)$fieldset_attr->name)) : _('Untitled');
 
-          $this->_translations[$fieldset_name] = TRUE;
+            if (isset($fieldset_attr->name))
+            {
+                $fieldset_name = convert_accented_characters(trim((string)$fieldset_attr->name));
+            } else {
+                $fieldset_name = _('Untitled');
+            }
 
+            //We add the fieldset name to the localized labels
+            $this->_translations[$fieldset_name] = TRUE;
 
+            
+            //Fieldset name is needed
       		if ($fieldset_name == '')
       		{
         		show_error($this->CI->_trans('One of the fieldsets of type %n does not have the name attribute (mandatory).', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
@@ -292,6 +300,11 @@ Class Xml
       		}
 
       		$fieldset = array('name' => $fieldset_name, 'fields' => array());
+
+            if (isset($fieldset_attr->icon))
+            {
+                $fieldset['icon'] = (string)$fieldset_attr->icon;
+            }
 
       		foreach ($fieldset_node->field as $field)
       		{

@@ -17,7 +17,7 @@
 			<sql action="recount" type="{name}" target="child_count" />
 		</trigger>
 	</triggers>
-	<fieldset name="General informations">
+	<fieldset name="General informations" icon="page">
 		<field id="id_record" column="true">
 			<type>hidden</type>
 			<list>true</list>
@@ -26,7 +26,7 @@
 		<field id="id_type" column="true">
 			<type>hidden</type>
 			<list>true</list>
-			<default>{id}</default>
+			<default>1</default>
 		</field>
 		<field id="published" column="true">
 			<type>hidden</type>
@@ -93,7 +93,7 @@
 			<admin>true</admin>
 		</field>
 	</fieldset>
-	<fieldset name="Aspect">
+	<fieldset name="Aspect" icon="code">
 		<field id="view_template">
 			<description>View template</description>
 			<type>select</type>
@@ -113,7 +113,7 @@
 			<type>textarea_code</type>
 		</field>
 	</fieldset>
-	<fieldset name="Actions">
+	<fieldset name="Actions" icon="lightning">
 		<field id="page_cache">
 			<description>Page cache (minutes)</description>
 			<type>number</type>
@@ -208,7 +208,7 @@
 			<type>text</type>
 		</field>
 	</fieldset>
-	<fieldset name="Attachments">
+	<fieldset name="Attachments" icon="images">
 		<field id="images">
 			<description>Images</description>
 			<type>images</type>
@@ -222,7 +222,7 @@
 			<list>true</list>
 		</field>
 	</fieldset>
-	<fieldset name="Meta tags">
+	<fieldset name="Meta tags" icon="tag">
 		<field id="meta_title">
 			<description>Title</description>
 			<type>text</type>

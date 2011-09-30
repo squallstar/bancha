@@ -9,7 +9,7 @@
 	<table_stage>records_stage</table_stage>
 	<has_categories>true</has_categories>
 	<has_hierarchies>true</has_hierarchies>
-	<fieldset name="General informations">
+	<fieldset name="General informations" icon="page">
 		<field id="id_record" column="true">
 			<type>hidden</type>
 			<list>true</list>
@@ -64,7 +64,7 @@
 			<list>true</list>
 		</field>
 	</fieldset>
-	<fieldset name="Attachments">
+	<fieldset name="Attachments" icon="images">
 		<field id="images">
 			<description>Images</description>
 			<type>images</type>
@@ -78,7 +78,7 @@
 			<list>true</list>
 		</field>
 	</fieldset>
-	<fieldset name="Meta tags">
+	<fieldset name="Meta tags" icon="tag">
 		<field id="meta_title">
 			<description>Title</description>
 			<type>text</type>
