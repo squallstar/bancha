@@ -128,7 +128,7 @@ Class View
 			} else {
 				$this->theme = $this->_CI->settings->get('website_desktop_theme');
 			}
-			
+
 			$this->store_theme();
 		}
 		$this->update_ci_path();
@@ -242,6 +242,10 @@ Class View
 	 */
 	public function render_template($template_file, $layout = TRUE, $code = '')
 	{
+		if ($template_file == '')
+		{
+			$template_file = 'default';
+		}
 		if (is_numeric($code))
 		{
 			$this->_CI->output->set_status_header($code);

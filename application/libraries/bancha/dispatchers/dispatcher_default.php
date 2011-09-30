@@ -30,10 +30,8 @@ Class Dispatcher_default
 	 */
 	public function start($record = '')
 	{
-		if ($record != '' && $record instanceof Record)
+		if ($record == '' || !($record instanceof Record))
 		{
-			//Record has been passed!
-		} else {
 			//Auto-routing
 			$record = $this->get_current_record();
 
@@ -87,23 +85,29 @@ Class Dispatcher_default
 					$link = $page->get('action_link_url');
 					redirect($link);
 			}
-
-			$this->_CI->view->set('page', $page);
 		} else {
 			//Single record view
 			$page = $this->set_singleview($record);
 		}
-		$this->_CI->view->render_template($page->get('view_template'));
+
+		//Last check before dispatching
+		if ($page instanceof Record)
+		{
+			$this->_CI->view->set('page', $page);
+			$this->_CI->view->render_template($page->get('view_template'));
+		}
 	}
 
-	protected function set_singleview($record, $parent_page) {
-		//Single record view
-		$template = $record->get('view_template');
-
+	protected function set_singleview($record, $parent_page = '')
+	{
 		if (!$parent_page)
 		{
 			$parent_page = $record->get('_parentpage');
+			$record->set('_parentpage', NULL);
 		}
+
+		//Single record view
+		$template = $parent_page->get('view_template');
 
 		if (! ($record instanceof Record))
 		{
@@ -134,8 +138,8 @@ Class Dispatcher_default
 		$this->_CI->view->set('record', $record);
 		$parent_page->set('view_template', $template);
 		$parent_page->set('_record', $record);
-		debug($parent_page);die;
-		return $page;
+
+		return $parent_page;
 	}
 
 	protected function set_recordlist($page)
@@ -378,8 +382,6 @@ Class Dispatcher_default
 							{
 								$single_record->set('_parentpage', $page);
 								return $single_record;
-								$page->set('_record', $single_record);
-								return $page;
 							}
 						}
 					}
