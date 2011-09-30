@@ -13,7 +13,7 @@ if (isset($page) && $page->is_page()) {
 				echo '<div class="details"><h1>'.$page->get('title').'</h1>'.
 					 '<p class="info">'.menu($this->tree->get_current_branch()).'</p>'.
 					 '</div>';
-				echo '<div class="body"'.$this->view->live_tags('contenuto', $page).'>'.$page->get('contenuto').'</div><div class="clear"></div>';
+				echo '<div class="body"'.$this->view->live_tags('content', $page).'>'.$page->get('content').'</div><div class="clear"></div>';
 				break;
 
 			case 'single':

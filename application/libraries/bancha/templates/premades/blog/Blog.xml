@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="bancha-{version}" -->
-<content>
-	<id>{id}</id>
+<content id="{id}">
 	<name>Blog</name>
 	<description>Blog posts</description>
 	<tree>false</tree>
@@ -10,8 +9,7 @@
 	<table_stage>records_stage</table_stage>
 	<has_categories>true</has_categories>
 	<has_hierarchies>true</has_hierarchies>
-	<fieldset>
-		<name>Post content</name>
+	<fieldset name="Post content">
 		<field id="id_record" column="true">
 			<type>hidden</type>
 			<list>true</list>
@@ -60,7 +58,7 @@
 			</options>
 			<default>it</default>
 		</field>
-		<field id="contenuto">
+		<field id="content">
 			<description>Content</description>
 			<type>textarea_full</type>
 			<list>true</list>
@@ -73,8 +71,7 @@
 			<admin>true</admin>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Images and files</name>
+	<fieldset name="Image and files">
 		<field id="images">
 			<description>Images</description>
 			<type>images</type>
@@ -97,8 +94,7 @@
 			<list>true</list>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Meta tags</name>
+	<fieldset name="Meta tags">
 		<field id="meta_title">
 			<description>Title</description>
 			<type>text</type>

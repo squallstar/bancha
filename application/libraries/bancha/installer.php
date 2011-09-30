@@ -488,7 +488,7 @@ Class Installer
 				//Then, we create a dummy post
 				$post = new Record('Blog');
 				$post->set('title', _('My first post'))
-					 ->set('contenuto', _('Hello world'))
+					 ->set('content', _('Hello world'))
 					 ->set('lang', $this->CI->lang->current_language)
 					 ->set('date_publish', time())
 				;
@@ -514,7 +514,7 @@ Class Installer
 				->set('lang', $this->CI->lang->current_language)
 				->set('show_in_menu', 'T')
 				->set('child_count', 0)
-				->set('contenuto', _('Hello world'))
+				->set('content', _('Hello world'))
 				;
 				$this->CI->records->save($page);
 
