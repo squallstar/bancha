@@ -1,9 +1,8 @@
 <?php
 /**
- * Plain Edit View
+ * Settings Edit View
  *
- * A standard view to edit a content type.
- * Mainly used by the Settings and the Modules.
+ * A standard view to edit the settings view.
  *
  * It doesn't features external fields such as images, files and hierarchies
  *
@@ -15,7 +14,10 @@
  *
  */
 
-$this->load->helper('form'); ?>
+$this->load->helper('form');
+$this->load->frlibrary('form_renderer');
+$CI = & get_instance();
+?>
 
 <div class="block withsidebar">
 
@@ -30,9 +32,7 @@ $this->load->helper('form'); ?>
 
 		<div class="sidebar">
 			<ul class="sidemenu">
-				<?php foreach ($tipo['fieldsets'] as $fieldset) { ?>
-				<li><a href="#sb-<?php echo url_title($fieldset['name']); ?>"><?php echo _($fieldset['name']); ?></a></li>
-				<?php } ?>
+				<?php echo $CI->form_renderer->get_sidebar($tipo); ?>
 			</ul>
 			<p><?php echo _('Scheme'); ?>: <strong><?php echo $scheme_name; ?></strong></p>
 		</div>

@@ -10,7 +10,11 @@
  *
  */
 
-$this->load->helper('form'); ?>
+$this->load->helper('form'); 
+$this->load->frlibrary('form_renderer');
+$CI = & get_instance();
+
+?>
 
 <div class="block withsidebar">
 
@@ -32,15 +36,7 @@ $this->load->helper('form'); ?>
 
 		<div class="sidebar">
 			<ul class="sidemenu">
-				<?php foreach ($tipo['fieldsets'] as $fieldset) { ?>
-				<li><a href="#sb-<?php echo url_title($fieldset['name']); ?>"><?php echo _($fieldset['name']); ?></a></li>
-				<?php }
-				if ($tipo['has_categories']) { ?>
-				<li><a href="#sb_category"><?php echo _('Categories'); ?></a>
-				<?php }
-				if ($tipo['has_hierarchies']) { ?>
-				<li><a href="#sb_hierarchies"><?php echo _('Hierarchies'); ?></a>
-				<?php } ?>
+				<?php echo $CI->form_renderer->get_sidebar($tipo); ?>
 			</ul>
 			<p></p>
 		</div>
@@ -82,10 +78,8 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	if ($first_lap == true)
 	{
 		$first_lap = false;
-
-		//TODO: move into xml
-		if ($tipo['tree']) {
-
+		if ($tipo['tree'])
+		{
 			if ($record->id && isset($page_url))
 			{
 				$url = site_url($page_url);
@@ -390,7 +384,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		}
 
 	}
-
 
 	echo $save_buttons;
 
