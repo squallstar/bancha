@@ -142,6 +142,12 @@ Class Users extends Bancha_Controller
 		{
 			if ($this->input->post('submit', FALSE))
 			{
+				$group_id = $this->input->post('id_group');
+				if ($group_id)
+				{
+					$param = $group_id;
+				}
+
 				if ($param != '')
 				{
 					//Existing group
