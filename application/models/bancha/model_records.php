@@ -552,7 +552,10 @@ Class Model_records extends CI_Model {
 	               			 ->update($this->table_stage, $data))
 	          	{
 	            	$done = $id;
-	            	$this->events->log('update', $id, $data[$tipo['edit_link']], $data['id_type']);
+                    if (isset($data[$tipo['edit_link']]))
+                    {
+	            	  $this->events->log('update', $id, $data[$tipo['edit_link']], $data['id_type']);
+                    }
 	          	} else {
 		            show_error('Impossibile aggiornare il record ['.$id.'].', 500, 'Aggiornamento record');
 	          	}
@@ -569,7 +572,10 @@ Class Model_records extends CI_Model {
 	          	if ($this->db->insert($this->table_stage, $data))
 	          	{
 		            $done = $this->db->insert_id();
-	            	$this->events->log('insert', $done, $data[$tipo['edit_link']], $data['id_type']);
+                    if (isset($data[$tipo['edit_link']]))
+                    {
+    	            	  $this->events->log('insert', $done, $data[$tipo['edit_link']], $data['id_type']);
+                    }
 	          	} else {
 	          		show_error('Impossibile aggiungere il record di tipo ['.$data['id_type'].'].', 500, 'Inserimento record');
 	          	}
