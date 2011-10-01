@@ -232,7 +232,7 @@ $fields = array_keys($tipo['fields']);
 
 			<input type="submit" class="submit tiny" value="<?php echo _('Apply to selected'); ?>" />
 
-			&nbsp;<?php echo $total_records == 1 ? _('There is'):_('There are'); ?> <strong><?php echo $total_records; ?></strong> <?php echo strtolower($tipo['name']); ?>.
+			&nbsp;<?php echo _('There are'); ?> <strong><?php echo $total_records; ?></strong> <?php echo strtolower(_($tipo['description'])); ?>.
 
 		</div>
 
