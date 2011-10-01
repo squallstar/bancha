@@ -345,7 +345,7 @@ Class Installer
 		{
 			foreach ($default as $type)
 			{
-				$this->CI->content->add_type($type, $type, 'true', TRUE);
+				$this->CI->content->add_type($type, $type, 'true', TRUE, $type == 'Menu' ? 'New page' : 'New ' . $type);
 			}
 		} else {
 			show_error(_('Default content type not defined'));
