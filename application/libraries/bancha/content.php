@@ -97,7 +97,7 @@ Class Content {
 	 * @param bool $type_structure True when pages, False when contents
 	 * @return int Type id (autoincrement)
 	 */
-	public function add_type($type_name, $type_description, $type_structure, $delete_if_exists=FALSE)
+	public function add_type($type_name, $type_description, $type_structure, $delete_if_exists=FALSE, $type_label_new='')
 	{
 		$this->CI->load->library('parser');
 
@@ -150,6 +150,7 @@ Class Content {
 		          'id'			=> $type_id,
 		          'name'		=> $type_name,
 		          'description'	=> $type_description,
+		          'label_new'	=> $type_label_new,
 		          'version'		=> BANCHA_VERSION
 		),TRUE);
 
