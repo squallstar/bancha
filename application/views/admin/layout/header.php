@@ -26,7 +26,7 @@ foreach ($this->content->types() as $tipo) {
 	<div class="hdrl"></div>
 	<div class="hdrr"></div>
 
-	<h1><a href="<?php echo admin_url(); ?>"><?php echo CMS . ' RC1'; ?></a></h1>
+	<h1><a href="<?php echo admin_url(); ?>">BANCHA</a></h1>
 
 	<ul id="nav">
 		<li class="<?php echo $this->uri->segment(2) == 'dashboard' ? 'active' : ''; ?>">
