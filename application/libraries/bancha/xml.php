@@ -170,18 +170,22 @@ Class Xml
         $attr = $node->attributes();
         $type_id = isset($attr->id) ? (int)$attr->id : 0;
 
+        $descr_attr = $node->descriptions->attributes();
+
     	$content = array(
-      		'id'			=> $type_id,
-      		'name'			=> $safe_filename,
-      		'tree'			=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
-      		'has_categories'=> isset($node->has_categories) ? (strtolower((string)$node->has_categories) == 'true' ? TRUE : FALSE) : FALSE,
-            'has_hierarchies'=> isset($node->has_hierarchies) ? (strtolower((string)$node->has_hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
-      		'description'	=> (string) $node->description,
-      		'primary_key'	=> (string) (isset($node->primary_key) ? $node->primary_key : ''),
-      		'table'			=> (string) (isset($node->table) ? $node->table : '')
+      		'id'				=> $type_id,
+      		'name'				=> $safe_filename,
+      		'tree'				=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
+      		'has_categories'	=> isset($node->has_categories) ? (strtolower((string)$node->has_categories) == 'true' ? TRUE : FALSE) : FALSE,
+            'has_hierarchies'	=> isset($node->has_hierarchies) ? (strtolower((string)$node->has_hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
+      		'description'		=> (string) $descr_attr->label,
+      		'label_new'			=> (string) $descr_attr->new,
+      		'primary_key'		=> (string) (isset($node->primary_key) ? $node->primary_key : ''),
+      		'table'				=> (string) (isset($node->table) ? $node->table : '')
     	);
 
         $this->_translations[$content['description']] = TRUE;
+        $this->_translations[$content['label_new']] = TRUE;
 
     	if (isset($node->table_stage))
     	{
