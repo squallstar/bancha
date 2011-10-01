@@ -17,27 +17,27 @@ Class Record {
 	/**
 	 * @var array Contains all the data of the record
 	 */
-	private $_data	= array();
+	private $_data= array();
 
 	/**
 	 * @var int Primary key
 	 */
-	public $id 		= FALSE;
+	public $id = FALSE;
 
 	/**
 	 * @var int Record type id
 	 */
-	public $_tipo	= '';
+	public $_tipo = '';
 
 	/**
 	* @var int Type definition
 	*/
-	public $_tipo_def	= array();
+	public $_tipo_def = array();
 
 	/**
 	 * @var string The xml string that contains some data
 	 */
-  	public $xml 	= '';
+  	public $xml = '';
 
   	public function __construct($type='')
   	{
