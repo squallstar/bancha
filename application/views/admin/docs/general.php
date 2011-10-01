@@ -670,8 +670,8 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code></pre><br />
 	&lt;trigger on="insert, update, delete" field="id_parent"&gt;
 		&lt;sql action="recount" type="Menu" target="child_count" /&gt;
 	&lt;/trigger&gt;
-	&lt;trigger on="insert"&gt;
-		&lt;call action="demotrigger" /&gt;
+	&lt;trigger on="publish"&gt;
+		&lt;call action="send_to_twitter" /&gt;
 	&lt;/trigger&gt;
 &lt;/triggers&gt;</code></pre><br />
 <p>Qui sopra sono stati definiti due trigger:</p>
@@ -683,7 +683,7 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code></pre><br />
 <h3>Attivatori SQL</h3>
 <p>I trigger di tipo <strong>"sql"</strong>, accettano i seguenti attributi nel nodo "trigger":</p>
 <ul>
-	<li><strong>on</strong> - bind della chiamata (insert, update, delete, ...)</li>
+	<li><strong>on</strong> - event listener della chiamata (insert, update, delete, publish, depublish)</li>
 	<li><strong>field</strong> - il campo (e valore) da utilizzare per la query del trigger</li>
 </ul>
 <p>Ed all'interno, contengono un nodo "sql" con tali attributi:</p>
@@ -706,15 +706,15 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code></pre><br />
 <h3>Attivatori con chiamata esterna</h3>
 <p>I trigger di tipo <strong>"call"</strong>, accettano i seguenti attributi nel nodo "trigger":</p>
 <ul>
-	<li><strong>on</strong> - bind della chiamata (insert, update, delete, ...)</li>
+	<li><strong>on</strong> - event listener della chiamata (insert, update, delete, publish, depublish)</li>
 </ul>
 <p>Ed all'interno, contengono un nodo "call" con tali attributi:</p>
 <ul>
 	<li><strong>action</strong> - nome del metodo da chiamare. Il metodo deve essere stato definito nel file <strong><?php echo $this->config->item('custom_controllers_folder'); ?>triggers.php</strong> e riceverà come primo parametro il record che esegue la chiamata.</li>
 </ul>
 <p>Esempio:</p>
-<pre class="prettyprint"><code>&lt;trigger on="insert"&gt;
-	&lt;call action="publish_on_twitter" /&gt;
+<pre class="prettyprint"><code>&lt;trigger on="publish"&gt;
+	&lt;call action="publish_on_tumblr" /&gt;
 &lt;/trigger&gt;</code></pre>
 </div>
 
