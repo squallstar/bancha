@@ -738,7 +738,7 @@ Class Model_records extends CI_Model {
 	  		if (isset($this->_single_type['triggers']['publish']))
 	  		{
 	  			$this->load->triggers();
-	  			$this->triggers->delegate($stage_record)
+	  			$this->triggers->delegate($this->get($stage_record[$this->primary_key]))
 	  						   ->operation('publish')
 	  						   ->add($this->_single_type['triggers']['publish'])
 	  						   ->fire();
