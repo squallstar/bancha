@@ -2,7 +2,7 @@
 <!-- generator="bancha-{version}" -->
 <content id="{id}">
 	<name>Comments</name>
-	<description>Comments</description>
+	<descriptions label="Comments" new="New comment"/>
 	<tree>false</tree>
 	<primary_key>id_record</primary_key>
 	<table>records</table>
