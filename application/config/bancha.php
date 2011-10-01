@@ -54,7 +54,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.7.6');
+define('BANCHA_VERSION', '0.7.7');
 
 /*
  * Framework name
@@ -62,9 +62,10 @@ define('BANCHA_VERSION', '0.7.6');
 define('CMS', 'BANCHA');
 
 /*
- * The Directory Separator
- * On windows systems, will be "\"
- * On unix-like systems, will be "/"
+ * Operative system directory separator
+ * - On windows systems, will be "\"
+ * - On unix-like systems, will be "/"
+ * This variabile will be used just in this file
  */
 $sep = DIRECTORY_SEPARATOR;
 
