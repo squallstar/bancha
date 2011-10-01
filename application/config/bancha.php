@@ -79,6 +79,14 @@ $config['installed_themes'] = array(
 	'minimal' => 'A minimal theme'
 );
 
+/*
+ * ADMINISTRATION PUBLIC PATH
+ * This will be the admin public path. You can change this to anything you want, but remember
+ * to change also the admin controllers folder name from "admin" to the same name.
+ * You need also to update the admin routes on the config/route.php file.
+ */
+define('ADMIN_PUB_PATH', 'admin/');
+
 
 /*
 * CACHE - CATEGORIES AND HIERARCHIES
