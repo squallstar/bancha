@@ -113,7 +113,7 @@ Lo schema utilizzato per i tipi di contenuto <strong>Ad albero</strong> &egrave;
 			<pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content id="1">
 	&lt;name&gt;Pages&lt;/name&gt;
-	&lt;description&gt;Website pages&lt;/description&gt;
+	&lt;descriptions label="Website pages" new="New page" /&gt;
 	&lt;tree&gt;true&lt;/tree&gt;
 	&lt;parent_types&gt;
 		&lt;type&gt;Pages&lt;/type&gt;
@@ -127,7 +127,7 @@ Lo schema utilizzato per i tipi di contenuto <strong>Ad albero</strong> &egrave;
 	...
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code></pre><br />
-<p>L'attributo <strong>id</strong> verr&agrave; popolato automaticamente da Bancha quando verr&agrave; creato il tipo di contenuto, cos&igrave; come i nodi <strong>&lt;name&gt;</strong> e <strong>&lt;description&gt;</strong> che definiscono rispettivamente il nome utilizzato internamente come chiave, e quello visualizzato all'utente nel pannello.<br />
+<p>L'attributo <strong>id</strong> verr&agrave; popolato automaticamente da Bancha quando verr&agrave; creato il tipo di contenuto, cos&igrave; come i nodi <strong>&lt;name&gt;</strong> e <strong>&lt;description&gt;</strong> che definiscono rispettivamente il nome utilizzato internamente come chiave, e quello visualizzato all'utente nel pannello (l'attributo label indica il nome visualizzato, mentre l'attributo <strong>new</strong> indica l'etichetta/link per l'inserimento di un nuovo contenuto di questo tipo).<br />
 Il nodo <strong>&lt;tree&gt;</strong> &egrave; un booleano che descrive se il contenuto &egrave; strutturato ad albero o lineare/semplice (vedi la sezione <strong>3. Tipi di contenuto</strong> per maggiori informazioni).<br /><br />
 Il nodo <strong>&lt;parent_types&gt;</strong> &egrave; obbligatorio per i contenuti ad albero, e descrive i nomi di tutti i tipi di contenuto da utilizzare come riferimento per le pagine padre. Di default, viene impostato con il tipo di contenuto stesso.
 <br /><br />
@@ -249,7 +249,7 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content id="2">
 	&lt;name&gt;products&lt;/name&gt;
-	&lt;description&gt;Products&lt;/description&gt;
+	&lt;descriptions label="My products" new="New product" /&gt;
 	&lt;tree&gt;true&lt;/tree&gt;
 	&lt;parent_types&gt;
 		&lt;type&gt;products&lt;/type&gt;
