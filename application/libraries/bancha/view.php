@@ -296,10 +296,8 @@ Class View
 	public function message($type, $message = '')
 	{
 		if ($message != '')
-			{$this->messages[] = array(
-				'type' 	=> $type,
-				'text'	=> $message
-			);
+		{
+			$this->messages[$type] = $message;
 		}
 	}
 
@@ -312,9 +310,9 @@ Class View
 		$tmp = '';
 		if (count($this->messages))
 		{
-			foreach ($this->messages as $message)
+			foreach ($this->messages as $type => $message)
 			{
-				$tmp.= '<div class="message '.$message['type'].'"><p>'.$message['text'].'</p></div>';
+				$tmp.= '<div class="message '.$type.'"><p>'.$message.'</p></div>';
 			}
 		}
 		return $tmp;
