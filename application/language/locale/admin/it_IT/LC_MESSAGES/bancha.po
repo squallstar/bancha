@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-01 16:11+0100\n"
-"PO-Revision-Date: 2011-10-01 16:11+0100\n"
+"POT-Creation-Date: 2011-10-01 16:37+0100\n"
+"PO-Revision-Date: 2011-10-01 16:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -22,102 +22,102 @@ msgstr ""
 msgid "Username/password wrong."
 msgstr "Username e/o password errati."
 
-#: controllers/admin/contents.php:133
+#: controllers/admin/contents.php:144
 msgid "The records have been published."
 msgstr "I records sono stati pubblicati."
 
-#: controllers/admin/contents.php:141
+#: controllers/admin/contents.php:152
 msgid "The records have been depublished."
 msgstr "I records sono stati depubblicati."
 
-#: controllers/admin/contents.php:148
+#: controllers/admin/contents.php:159
 msgid "The records have been deleted."
 msgstr "I records sono stati eliminati."
 
-#: controllers/admin/contents.php:155
+#: controllers/admin/contents.php:166
 msgid "The records have been rolled back to the production ones."
 msgstr "I records selezionati sono stati scartati e sono stati ripristinati quelli di produzione."
 
-#: controllers/admin/contents.php:347
+#: controllers/admin/contents.php:364
 msgid "The content %n has been saved."
 msgstr "Il contenuto %n è stato salvato"
 
-#: controllers/admin/contents.php:353
+#: controllers/admin/contents.php:370
 msgid "The content %n has been published."
 msgstr "Il contenuto %n è stato pubblicato."
 
-#: controllers/admin/contents.php:362
-#: controllers/admin/contents.php:365
+#: controllers/admin/contents.php:379
+#: controllers/admin/contents.php:382
 msgid "The content has been saved."
 msgstr "Il contenuto è stato salvato."
 
-#: controllers/admin/contents.php:379
+#: controllers/admin/contents.php:396
 msgid "Something went wrong..."
 msgstr "Qualcosa è andato storto..."
 
-#: controllers/admin/contents.php:394
+#: controllers/admin/contents.php:411
 msgid "First level"
 msgstr "Primo livello"
 
-#: controllers/admin/contents.php:494
+#: controllers/admin/contents.php:511
 msgid "Cannot delete the record %r of type %t"
 msgstr "Impossibile eliminare il record %r di tipo %t."
 
-#: controllers/admin/contents.php:494
-#: controllers/admin/contents.php:523
-#: controllers/admin/contents.php:666
+#: controllers/admin/contents.php:511
+#: controllers/admin/contents.php:540
+#: controllers/admin/contents.php:683
 msgid "Error"
 msgstr "Errore"
 
-#: controllers/admin/contents.php:523
+#: controllers/admin/contents.php:540
 msgid "The record ID was not set."
 msgstr "L'id del record non è stato settato."
 
-#: controllers/admin/contents.php:553
+#: controllers/admin/contents.php:570
 msgid "Please insert a name for this type."
 msgstr "Inserisci un nome per il tipo."
 
-#: controllers/admin/contents.php:577
+#: controllers/admin/contents.php:594
 msgid "The xml scheme of the content type %n has been updated"
 msgstr "Lo schema XML del tipo di contenuto %n è stato aggiornato."
 
-#: controllers/admin/contents.php:583
+#: controllers/admin/contents.php:600
 msgid "Cannot save that XML scheme."
 msgstr "Impossibile salvare lo schema XML."
 
-#: controllers/admin/contents.php:583
+#: controllers/admin/contents.php:600
 msgid "Saving error"
 msgstr "Errore di salvataggio"
 
-#: controllers/admin/contents.php:587
+#: controllers/admin/contents.php:604
 msgid "Cannot read the XML file."
 msgstr "Impossibile leggere il file XML."
 
-#: controllers/admin/contents.php:614
+#: controllers/admin/contents.php:631
 msgid "The category %n has been added."
 msgstr "La categoria %n è stata aggiunta."
 
-#: controllers/admin/contents.php:616
+#: controllers/admin/contents.php:633
 msgid "Cannot insert the category %n."
 msgstr "Impossibile inserire la categoria %n."
 
-#: controllers/admin/contents.php:619
+#: controllers/admin/contents.php:636
 msgid "A category named %n already exists."
 msgstr "Esiste già una categoria chiamata %n."
 
-#: controllers/admin/contents.php:643
+#: controllers/admin/contents.php:660
 msgid "The category %n has been deleted."
 msgstr "La categoria %n è stata eliminata."
 
-#: controllers/admin/contents.php:666
+#: controllers/admin/contents.php:683
 msgid "Cannot renew the cache."
 msgstr "Impossibile rigenerare la cache."
 
-#: controllers/admin/contents.php:668
+#: controllers/admin/contents.php:685
 msgid "The cache has been cleared."
 msgstr "La cache è stata ricreata correttamente."
 
-#: controllers/admin/contents.php:720
+#: controllers/admin/contents.php:737
 msgid "The type named %n has been removed."
 msgstr "Il tipo %n è stato rimosso."
 
@@ -415,7 +415,7 @@ msgid "Preset"
 msgstr "Preset"
 
 #: views/admin/content/documents_finder.php:82
-#: views/admin/content/record_list.php:218
+#: views/admin/content/record_list.php:226
 #: views/admin/content/translations.php:21
 msgid "Actions"
 msgstr "Azioni"
@@ -448,7 +448,7 @@ msgid "Save and go to list"
 msgstr "Salva e vai alla lista"
 
 #: views/admin/content/record_edit.php:50
-#: views/admin/content/record_list.php:219
+#: views/admin/content/record_list.php:227
 msgid "Publish"
 msgstr "Pubblica"
 
@@ -560,46 +560,50 @@ msgstr "Applica filtri"
 msgid "Programmed"
 msgstr "Programmato"
 
-#: views/admin/content/record_list.php:207
+#: views/admin/content/record_list.php:210
 msgid "Add child page"
 msgstr "Aggiungi pagina figlia"
 
-#: views/admin/content/record_list.php:208
-#: views/admin/content/record_list.php:222
+#: views/admin/content/record_list.php:212
+msgid "View children pages"
+msgstr "Visualizza pagine figlie"
+
+#: views/admin/content/record_list.php:215
+#: views/admin/content/record_list.php:230
 #: views/admin/content/type_list.php:53
 msgid "Delete"
 msgstr "Elimina"
 
-#: views/admin/content/record_list.php:208
-msgid "Are you sure?"
-msgstr "Sei sicuro?"
+#: views/admin/content/record_list.php:215
+msgid "Do you really want to delete this content?"
+msgstr "Vuoi veramente eliminare questo contenuto?"
 
-#: views/admin/content/record_list.php:220
+#: views/admin/content/record_list.php:228
 msgid "Unpublish"
 msgstr "Depubblica"
 
-#: views/admin/content/record_list.php:221
+#: views/admin/content/record_list.php:229
 msgid "Discard draft"
 msgstr "Scarta bozza"
 
-#: views/admin/content/record_list.php:225
+#: views/admin/content/record_list.php:233
 msgid "Apply to selected"
 msgstr "Applica ai selez."
 
-#: views/admin/content/record_list.php:227
+#: views/admin/content/record_list.php:235
 msgid "There is"
 msgstr "C'è"
 
-#: views/admin/content/record_list.php:227
+#: views/admin/content/record_list.php:235
 msgid "There are"
 msgstr "Ci sono"
 
-#: views/admin/content/record_list.php:234
+#: views/admin/content/record_list.php:242
 #: views/admin/content/type_list.php:67
 msgid "add a new one"
 msgstr "aggiungine uno"
 
-#: views/admin/content/record_list.php:233
+#: views/admin/content/record_list.php:241
 msgid "There are no contents/pages for this type. To start, %a."
 msgstr "Non ci sono contenuti/pagine inserite per questo tipo. Per iniziare, %a."
 
@@ -1363,26 +1367,3 @@ msgstr "Vuoi eliminare questo gruppo?"
 msgid "Delete group"
 msgstr "Elimina gruppo"
 
-#~ msgid "Insert new content"
-#~ msgstr "Inserisci nuovo contenuto"
-
-#~ msgid "Insert new page"
-#~ msgstr "Inserisci nuova pagina"
-
-#~ msgid "Commenti"
-#~ msgstr "Commenti"
-
-#~ msgid "Intro"
-#~ msgstr "Introduzione"
-
-#~ msgid "Confirm deletion"
-#~ msgstr "Conferma eliminazione"
-
-#~ msgid "This content has no attachments."
-#~ msgstr "Questo contenuto non ha allegati."
-
-#~ msgid "Aspect and actions"
-#~ msgstr "Aspetto e azioni"
-
-#~ msgid "This type has no hierarchies"
-#~ msgstr "Questo tipo non ha gerarchie"

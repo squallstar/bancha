@@ -73,10 +73,21 @@ Class Contents extends Bancha_Controller
     }
 
     /**
-    * A record list of a single content type
+    * Legacy name of the record_list function
     * @param int|string $tipo
+    * @param int $page
     */
     public function type($tipo='', $page=0)
+    {
+    	$this->record_list($tipo, $page);
+    }
+
+    /**
+    * A record list of a single content type
+    * @param int|string $tipo
+    * @param int $page
+    */
+    public function record_list($tipo='', $page=0)
     {
         if ($tipo == '')
         {
@@ -170,6 +181,12 @@ Class Contents extends Bancha_Controller
         				$this->records->like($field, $filters[$field]);
         			}
         	}
+        }
+
+        $parent_id = $this->input->get('parent');
+        if (is_numeric($parent_id))
+        {
+        	$this->records->where('id_parent', $parent_id);
         }
 
         //Filtri manuali
