@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-01 15:19+0100\n"
-"PO-Revision-Date: 2011-10-01 15:19+0100\n"
+"POT-Creation-Date: 2011-10-01 16:11+0100\n"
+"PO-Revision-Date: 2011-10-01 16:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -177,15 +177,23 @@ msgstr "Il gruppo richiesto non è stato trovato."
 msgid "The group has been deleted."
 msgstr "Il gruppo è stato eliminato."
 
-#: libraries/Bancha_Profiler.php:80
+#: libraries/Bancha_Profiler.php:84
+msgid "Edit this content"
+msgstr "Modifica questo contenuto"
+
+#: libraries/Bancha_Profiler.php:91
+msgid "Edit this page"
+msgstr "Modifica questa pagina"
+
+#: libraries/Bancha_Profiler.php:97
 msgid "Preview"
 msgstr "Anteprima"
 
-#: libraries/Bancha_Profiler.php:82
+#: libraries/Bancha_Profiler.php:99
 msgid "Back to admin"
 msgstr "Torna all'amministrazione"
 
-#: libraries/Bancha_Profiler.php:83
+#: libraries/Bancha_Profiler.php:101
 msgid "Open profiler"
 msgstr "Apri profiler"
 
