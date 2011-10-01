@@ -17,7 +17,7 @@ Class Model_records extends CI_Model {
 	/**
 	 * @var bool Definisce se il tipo ricercato e' di tipo albero
 	 */
-  	public $last_search_has_tree = FALSE;
+  	public $last_search_has_tree = FALSE; 
 
   	/**
   	* @var bool Imposta se estrarre i documenti dalla prossima ricerca
@@ -710,10 +710,8 @@ Class Model_records extends CI_Model {
 	*/
 	public function publish($id = '', $type = '')
  	{
-		if ($type != '')
-		{
-			$this->set_type($type);
-		}
+		$this->set_type($type);
+
 		if ($id == '')
 		{
 			show_error('ID not specified. (records/publish)');
@@ -735,6 +733,16 @@ Class Model_records extends CI_Model {
 			}
 
 			$this->events->log('publish', $stage_record[$this->primary_key], $stage_record['title'], $stage_record['id_type']);
+
+			//Publishing triggers
+	  		if (isset($this->_single_type['triggers']['publish']))
+	  		{
+	  			$this->load->triggers();
+	  			$this->triggers->delegate($stage_record)
+	  						   ->operation('publish')
+	  						   ->add($this->_single_type['triggers']['publish'])
+	  						   ->fire();
+	  		}
 
 			$published_record = $this->db->from($this->table)
 										 ->where($this->primary_key, $id)
@@ -774,10 +782,8 @@ Class Model_records extends CI_Model {
 	*/
 	public function depublish($id = '', $type = '')
 	{
-		if ($type != '')
-		{
-			$this->set_type($type);
-		}
+		$this->set_type($type);
+
 		if ($id == '')
 		{
 			show_error('ID del contenuto da depubblicare non specificato. (records/depublish)');
@@ -787,6 +793,16 @@ Class Model_records extends CI_Model {
 		if ($done)
 		{
 			$this->events->log('depublish', $id, $id);
+
+			//Depublishing triggers
+	  		if (isset($this->_single_type['triggers']['depublish']))
+	  		{
+	  			$this->load->triggers();
+	  			$this->triggers->delegate($this->get($id))
+	  						   ->operation('publish')
+	  						   ->add($this->_single_type['triggers']['depublish'])
+	  						   ->fire();
+	  		}
 
 			//We delete the attachments
 			$this->load->documents();
