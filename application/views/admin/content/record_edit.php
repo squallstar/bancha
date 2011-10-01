@@ -22,7 +22,7 @@ $CI = & get_instance();
 		<div class="bheadl"></div>
 		<div class="bheadr"></div>
 
-		<h2><?php echo (!$record->id ? _('New content') : _('Edit content') ) . ': ' . $tipo['description']; ?></h2>
+		<h2><?php echo (!$record->id ? _($tipo['label_new']) : _('Edit content') ) . ': ' . $tipo['description']; ?></h2>
 
 		<ul>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url($_section.'/type/'.$tipo['id'])?>"><?php echo _('Back to list'); ?></a></li>
@@ -60,7 +60,7 @@ $p_end = '</p>';
 
 $breadcrumbs_render = '<p class="breadcrumb"><a href="<?php echo admin_url($_section); ?>">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
 						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
-						 . (!$record->id ? _('New content') : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
+						 . (!$record->id ? _($tipo['label_new']) : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
 
 foreach ($tipo['fieldsets'] as $fieldset)
 {
