@@ -530,7 +530,7 @@ Class Contents extends Bancha_Controller
     public function add_type()
     {
         //ACL Check
-        $this->auth->check_permission('types', 'manage');
+        $this->auth->check_permission('types', 'add');
 
         if ($this->input->post()) {
             $type_name = $this->input->post('type_name');
@@ -539,7 +539,9 @@ Class Contents extends Bancha_Controller
             	$done = $this->content->add_type(
             		$type_name,
             		$this->input->post('type_description'),
-            		$this->input->post('type_tree')
+            		$this->input->post('type_tree'),
+            		FALSE,
+            		$this->input->post('type_label_new')
             	);
 
                 if ($done)
