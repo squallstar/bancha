@@ -2,7 +2,7 @@
 <!-- generator="bancha-0.7.7" -->
 <content>
 	<name>Settings</name>
-	<description>Settings</description>
+	<descriptions label="Settings" new="New setting"/>
 	<primary_key>null</primary_key>
 	<table>null</table>
 	<fieldset name="General" icon="legend">
