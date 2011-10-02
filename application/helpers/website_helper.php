@@ -55,7 +55,7 @@ function getter($url)
  */
 function admin_url($str='')
 {
-	return site_url(ADMIN_PUB_PATH.$str);
+	return site_url(ADMIN_PUB_PATH.$str, FALSE);
 }
 
 /**
@@ -89,7 +89,7 @@ function preset_url($path, $preset, $append_siteurl = TRUE) {
 		$tmp = explode('/', trim(str_replace('\\', '/', $path), '/'));
 		$i = count($tmp)-1;
 		$path = config_item('attach_out_folder') . 'cache/' . $tmp[$i-3] . '/' . $tmp[$i-2] . '/' . $tmp[$i-1] . '/' . $preset . '/' . $tmp[$i];
-		return $append_siteurl ? site_url($path) : $path;
+		return $append_siteurl ? site_url($path, FALSE) : $path;
 	}
 	return '';
 }

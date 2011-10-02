@@ -52,6 +52,12 @@ $config['admin_languages'] = array(
 );
 
 /*
+ * PREPEND URI LANGUAGE
+ * When set to true, current language will be prepended to the URIs
+ */
+ $config['prepend_uri_language'] = TRUE;
+
+/*
  * Framework version
  */
 define('BANCHA_VERSION', '0.7.7');

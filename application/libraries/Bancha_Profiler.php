@@ -92,8 +92,8 @@ class Bancha_Profiler extends CI_Profiler {
 			}
 		}
 
-		$output = link_tag(site_url(THEMESPATH . 'admin/css/profiler.css')).
-			'<script type="text/javascript" src="'.site_url(THEMESPATH . 'admin/js/profiler.js').'"></script>'.
+		$output = link_tag(site_url(THEMESPATH . 'admin/css/profiler.css', FALSE)).
+			'<script type="text/javascript" src="'.site_url(THEMESPATH . 'admin/js/profiler.js', FALSE).'"></script>'.
 			'<a id="bancha_profiler_preview" onclick="_show_profiler();" href="#">'._('Preview').'</a>'.
 			'<div id="bancha_profiler"><div id="bancha_profiler_content">'.
 			'BANCHA&nbsp; &nbsp; <a href="'.admin_url().'">'._('Back to admin').'</a> - '.

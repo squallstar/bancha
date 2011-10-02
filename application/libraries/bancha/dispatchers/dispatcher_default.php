@@ -336,7 +336,11 @@ Class Dispatcher_default
 		if (isset($this->_CI->records))
 		{
 			//We extract a page based on the full request url
-			$result = $this->_CI->records->set_type()->full_uri($current_request)->documents(FALSE)->limit(1)->get();
+			$result = $this->_CI->records->set_type()
+										 ->full_uri($current_request)
+										 ->documents(FALSE)
+										 ->where('lang', $this->_CI->lang->current_language)
+										 ->limit(1)->get();
 		}
 
 		if (!count($result))

@@ -1,4 +1,16 @@
-<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+/**
+ * Bancha Langyage Class
+ *
+ * An extension of the original Code Igniter Language class
+ *
+ * @package		Bancha
+ * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
+ * @copyright	Copyright (c) 2011, Squallstar
+ * @license		GNU/GPL (General Public License)
+ * @link		http://squallstar.it
+ *
+ */
 
 class Bancha_Lang extends CI_Lang {
 
@@ -13,16 +25,14 @@ class Bancha_Lang extends CI_Lang {
     function __construct()
     {
         parent::__construct();
-        $this->gettext_path = APPPATH.'language/locale';
-		//$this->_CI = & get_instance();
+        $this->gettext_path = APPPATH . 'language' . DIRECTORY_SEPARATOR . 'locale';
     }
 
 	/**
      * Sets the language context (i.e.: 'website', 'admin')
-	 * 
 	 * @param string $new_language_context
      */
-    function set_new_language_context($new_language_context)
+    public function set_new_language_context($new_language_context)
     {
     	if ($new_language_context && $new_language_context != $this->language_context)
     	{
@@ -37,7 +47,6 @@ class Bancha_Lang extends CI_Lang {
      */
     private function _load_languages()
     {
-    	$this->_CI = & get_instance();
         $this->languages = $this->_CI->config->item($this->language_context.'_languages');
         
         $select = array();
@@ -68,6 +77,7 @@ class Bancha_Lang extends CI_Lang {
 		{
 			$this->gettext_language = $this->languages[$lang]['locale'];
 			$this->current_language = $lang;
+			
 			if ($load_gettext)
 			{
 				$this->load_gettext();
@@ -75,6 +85,12 @@ class Bancha_Lang extends CI_Lang {
 		} else {
 			//Loads the first defined language
 			$this->set_default($load_gettext);
+		}
+
+		//If there was another language to prepend, let's update it
+		if ($this->_CI->config->prepend_language)
+		{
+			$this->_CI->config->prepend_language = $lang;
 		}
 
 		//Update CI config
@@ -108,6 +124,8 @@ class Bancha_Lang extends CI_Lang {
      */
     function check($new_language_context = NULL)
     {
+    	$this->_CI = & get_instance();
+
     	$this->set_new_language_context($new_language_context);
     	
     	$folder = $this->language_context;
@@ -117,11 +135,33 @@ class Bancha_Lang extends CI_Lang {
 			$this->_load_languages();
 		}
 
-		if (!isset($this->_CI->session))
+		if ($this->_CI->config->item('prepend_uri_language'))
 		{
-			$current_lang = FALSE;
-		} else {
-			$current_lang = $this->_CI->session->userdata('current_' . $this->language_context);
+			$uri = $this->_CI->uri->segments;
+
+	    	if (count($uri) && strlen($uri[1]) == 2)
+	    	{
+	    		//First segment is a language
+	    		$current_lang = $uri[1];
+
+	    		if (isset($this->languages[$current_lang]))
+	    		{
+	    			unset($this->_CI->uri->segments[1]);
+	    			$this->_CI->uri->_reindex_segments();
+	    			$this->_CI->uri->uri_string = ltrim($this->_CI->uri->uri_string, $current_lang.'/');
+	    			$this->_CI->config->prepend_language = $current_lang;
+	    		}
+	    	}
+   		}
+
+   		if (!isset($current_lang))
+   		{
+			if (!isset($this->_CI->session))
+			{
+				$current_lang = FALSE;
+			} else {
+				$current_lang = $this->_CI->session->userdata('current_' . $this->language_context);
+			}
 		}
 		
     	if (!$current_lang)

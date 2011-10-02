@@ -25,6 +25,7 @@ Class Website extends Bancha_Controller
 		if ($this->auth->is_logged())
 		{
 			$this->content->set_stage(TRUE);
+
 			//We add also the preview bar
 			$this->output->enable_profiler();
 		} else {
@@ -71,7 +72,7 @@ Class Website extends Bancha_Controller
 	{
 		$this->lang->set_lang($new_language);
 		$this->lang->set_cookie();
-		redirect('/');
+		redirect(site_url());
 	}
 
 	/**
