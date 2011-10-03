@@ -17,7 +17,7 @@ Class Model_records extends CI_Model {
 	/**
 	 * @var bool Definisce se il tipo ricercato e' di tipo albero
 	 */
-  	public $last_search_has_tree = FALSE; 
+  	public $last_search_has_tree = FALSE;
 
   	/**
   	* @var bool Imposta se estrarre i documenti dalla prossima ricerca
@@ -705,8 +705,9 @@ Class Model_records extends CI_Model {
   }
 
 	/**
-	* Pubblica un record e i suoi allegati
-	* @param int $id
+	* Publishes a record and its attachments
+	* @param int $id Record id
+	* @param string $type (optional) The content type
 	*/
 	public function publish($id = '', $type = '')
  	{
