@@ -48,7 +48,7 @@ class Bancha_Lang extends CI_Lang {
     private function _load_languages()
     {
         $this->languages = $this->_CI->config->item($this->language_context.'_languages');
-        
+
         $select = array();
         foreach ($this->languages as $lang => $val)
         {
@@ -66,7 +66,7 @@ class Bancha_Lang extends CI_Lang {
     function set_lang($lang, $load_gettext = true, $new_language_context = NULL)
     {
     	$this->set_new_language_context($new_language_context);
-		
+
 		if (!$this->languages)
 		{
 			$this->_load_languages();
@@ -77,7 +77,7 @@ class Bancha_Lang extends CI_Lang {
 		{
 			$this->gettext_language = $this->languages[$lang]['locale'];
 			$this->current_language = $lang;
-			
+
 			if ($load_gettext)
 			{
 				$this->load_gettext();
@@ -127,7 +127,7 @@ class Bancha_Lang extends CI_Lang {
     	$this->_CI = & get_instance();
 
     	$this->set_new_language_context($new_language_context);
-    	
+
     	$folder = $this->language_context;
     	$this->gettext_path = $this->gettext_path . '/' . trim($folder, '/');
     	if (!$this->languages)
@@ -151,7 +151,20 @@ class Bancha_Lang extends CI_Lang {
 	    			$this->_CI->uri->uri_string = ltrim($this->_CI->uri->uri_string, $current_lang.'/');
 	    			$this->_CI->config->prepend_language = $current_lang;
 	    		}
+	    	} else if (!count($uri))
+	    	{
+	    		//Case: homepage
+		    	$browser_languages = $this->get_browser_languages();
+				foreach ($browser_languages as $current_lang)
+				{
+					if (isset($this->languages[$current_lang]))
+					{
+						break;
+					}
+				}
+	    		$this->_CI->config->prepend_language = $current_lang;
 	    	}
+
    		}
 
    		if (!isset($current_lang))
@@ -163,7 +176,7 @@ class Bancha_Lang extends CI_Lang {
 				$current_lang = $this->_CI->session->userdata('current_' . $this->language_context);
 			}
 		}
-		
+
     	if (!$current_lang)
     	{
     		$browser_languages = $this->get_browser_languages();
@@ -200,7 +213,7 @@ class Bancha_Lang extends CI_Lang {
                 {
                     $q = 1;
                 }
-                
+
                 $l_tmp = explode('-', $pref, 2);
                 $lang_code = $l_tmp[0];
                 $nation = isset($l_tmp[1]) ? $l_tmp[1] : '';
@@ -210,7 +223,7 @@ class Bancha_Lang extends CI_Lang {
                     $nation = strtoupper($nation);
                     if ($nation == '' || $nation == '*')
                     {
-                        $langs[$lang_code] = $q;    
+                        $langs[$lang_code] = $q;
                     } else {
                         $langs[$lang_code."_".$nation] = $q;
                         if (!isset($langs[$lang_code]))
@@ -225,7 +238,7 @@ class Bancha_Lang extends CI_Lang {
         } else {
             return array(substr($accepted_languages, 0, 2));
         }
-		
+
 	}
 
 
