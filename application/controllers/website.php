@@ -72,7 +72,7 @@ Class Website extends Bancha_Controller
 	{
 		$this->lang->set_lang($new_language);
 		$this->lang->set_cookie();
-		redirect(site_url());
+		$this->home();
 	}
 
 	/**
