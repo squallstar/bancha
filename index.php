@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright		Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -17,12 +17,12 @@
  * BANCHA APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
  *
- * sqlite	: will use the sqlite internal database	(application/config/sqlite/database.php)
+ * sqlite		: will use the sqlite internal database	(application/config/sqlite/database.php)
  * development	: the default one			(application/config/database.php)
  * production	: errors will not be displayed
  *
  */
-	define('ENVIRONMENT', 'sqlite');
+	define('ENVIRONMENT', 'development');
 /*
  */
 

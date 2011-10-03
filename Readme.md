@@ -18,9 +18,8 @@ The **BANCHA documentation** is available through the BANCHA administration pane
 
 # How to install
 
-1. Before all, sets your current environment in the **/index.php** file
-    The default environment is "sqlite" (while developing is very useful)
-    but you are encouraged to use "development" or "production" as environment, and run the database on a real server.
+1. Before all, check your current environment in the **/index.php** file
+   The default environment is "development", so the standard config files will be used
 
 2. Sets the database configuration parameters here: application/config/database.php
 
@@ -29,6 +28,8 @@ The **BANCHA documentation** is available through the BANCHA administration pane
 4. Choose your install type between "Default" and "Blog". The Blog one, will create and configures the "Blog" and "Comments" content types for you (the Default will create only the website menu)
 
 5. You're done! The install script will create a content type named "Menu" which is linked to the page tree of your website.
+
+Need to reinstall? Just remove the **settings** table from the database (or just the "is_installed" row)
 
 # Application MVC Scheme
 
