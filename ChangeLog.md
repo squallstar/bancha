@@ -1,4 +1,4 @@
-## Bancha ChangLog file ##
+## Bancha Change Log file ##
 
 **v 0.7.8** (2011-10-03)
 
