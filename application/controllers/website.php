@@ -46,7 +46,7 @@ Class Website extends Bancha_Controller
 		$home = $this->settings->get('website_homepage_' . $this->lang->current_language);
 		if ($home)
 		{
-			$this->lang->prepend_language = $this->lang->current_language;
+			$this->config->prepend_language = $this->lang->current_language;
 			redirect(site_url($home), 'location', 301);
 		} else {
 			show_error(_('The default homepage has not been set. Please go to the settings and update the website homepage.'));
