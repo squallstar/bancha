@@ -337,6 +337,7 @@ Class Dispatcher_default
 		{
 			//We extract a page based on the full request url
 			$result = $this->_CI->records->set_type()
+										 ->set_list(FALSE)
 										 ->full_uri($current_request)
 										 ->documents(FALSE)
 										 ->where('lang', $this->_CI->lang->current_language)
