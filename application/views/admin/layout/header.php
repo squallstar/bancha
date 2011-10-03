@@ -82,6 +82,7 @@ foreach ($this->content->types() as $tipo) {
 			<ul>
 				<?php if ($this->auth->has_permission('settings', 'manage')) { ?>
 				<li><a href="<?php echo admin_url('settings'); ?>"><?php echo _('Settings'); ?></a></li>
+				<li><a href="<?php echo admin_url('themes'); ?>"><?php echo _('Themes'); ?></a></li>
 				<?php } ?>
 				<li class="<?php echo $this->uri->segment(2) == 'docs' ? 'active' : ''; ?>">
 					<a href="<?php echo admin_url('docs'); ?>"><?php echo _('Documentation'); ?></a>

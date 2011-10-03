@@ -2,7 +2,7 @@
 /**
  * Settings Controller
  *
- * Generic Configutations
+ * Generic Configurations
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
