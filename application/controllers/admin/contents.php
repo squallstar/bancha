@@ -73,10 +73,21 @@ Class Contents extends Bancha_Controller
     }
 
     /**
-    * A record list of a single content type
+    * Legacy name of the record_list function
     * @param int|string $tipo
+    * @param int $page
     */
     public function type($tipo='', $page=0)
+    {
+    	$this->record_list($tipo, $page);
+    }
+
+    /**
+    * A record list of a single content type
+    * @param int|string $tipo
+    * @param int $page
+    */
+    public function record_list($tipo='', $page=0)
     {
         if ($tipo == '')
         {
@@ -170,6 +181,12 @@ Class Contents extends Bancha_Controller
         				$this->records->like($field, $filters[$field]);
         			}
         	}
+        }
+
+        $parent_id = $this->input->get('parent');
+        if (is_numeric($parent_id))
+        {
+        	$this->records->where('id_parent', $parent_id);
         }
 
         //Filtri manuali
@@ -355,8 +372,15 @@ Class Contents extends Bancha_Controller
                 redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
             } else {
 
-          		$this->view->message('success', _('The content has been saved.'));
-                redirect('admin/'.$this->_section.'/edit_record/' . $tipo['name'] . '/' . $record->id);
+          		
+                if ($record_id == '')
+                {
+                    //If it's a new record, we redirect to the same page (F5 refresh fix for duplicate records)
+                    $this->session->set_flashdata('message', _('The content has been saved.'));
+                    redirect('admin/'.$this->_section.'/edit_record/' . $tipo['name'] . '/' . $record->id);
+                } else {
+                    $this->view->message('success', _('The content has been saved.'));
+                }
             }
 
         } else if ($record_id != '') {
@@ -447,6 +471,11 @@ Class Contents extends Bancha_Controller
             }
         }
 
+        if ($this->session->flashdata('message'))
+        {
+            $this->view->message('success', $this->session->flashdata('message'));
+        }
+
         $this->view->set('tipo', $tipo);
         $this->view->set('record', $record);
 
@@ -518,7 +547,7 @@ Class Contents extends Bancha_Controller
     public function add_type()
     {
         //ACL Check
-        $this->auth->check_permission('types', 'manage');
+        $this->auth->check_permission('types', 'add');
 
         if ($this->input->post()) {
             $type_name = $this->input->post('type_name');
@@ -527,7 +556,9 @@ Class Contents extends Bancha_Controller
             	$done = $this->content->add_type(
             		$type_name,
             		$this->input->post('type_description'),
-            		$this->input->post('type_tree')
+            		$this->input->post('type_tree'),
+            		FALSE,
+            		$this->input->post('type_label_new')
             	);
 
                 if ($done)

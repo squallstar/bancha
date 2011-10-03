@@ -301,7 +301,7 @@ Class Installer
 		$acls[]= $this->users->add_acl('types', 'add', 'Add content types');
 		$acls[]= $this->users->add_acl('types', 'manage', 'Edit XML schemes');
 		$acls[]= $this->users->add_acl('types', 'delete', 'Delete content types');
-		$acls[]= $this->users->add_acl('settings', 'manage', 'Manage settings');
+		$acls[]= $this->users->add_acl('settings', 'manage', 'Manage website settings');
 		$acls[]= $this->users->add_acl('hierarchies', 'manage', 'Manage hierarchies');
 
 		$this->group_id = $this->users->add_group('Administrators');
@@ -345,7 +345,7 @@ Class Installer
 		{
 			foreach ($default as $type)
 			{
-				$this->CI->content->add_type($type, $type, 'true', TRUE);
+				$this->CI->content->add_type($type, $type, 'true', TRUE, $type == 'Menu' ? 'New page' : 'New ' . $type);
 			}
 		} else {
 			show_error(_('Default content type not defined'));
@@ -488,11 +488,19 @@ Class Installer
 				//Then, we create a dummy post
 				$post = new Record('Blog');
 				$post->set('title', _('My first post'))
-					 ->set('contenuto', _('Hello world'))
+					 ->set('content', _('Hello world'))
 					 ->set('lang', $this->CI->lang->current_language)
 					 ->set('date_publish', time())
 				;
-				$this->CI->records->save($post);
+				$post_id = $this->CI->records->save($post);
+
+				//A sample comment linked to this post
+				$comment = new Record('Comments');
+				$comment->set('name', 'Nicholas')
+						->set('www', 'http://getbancha.com')
+						->set('post_id', $post_id)
+				;
+				$this->CI->records->set_type('Comments')->save($comment);
 
 				//And a simple page that lists the posts
 				$page = new Record('Menu');
@@ -514,7 +522,7 @@ Class Installer
 				->set('lang', $this->CI->lang->current_language)
 				->set('show_in_menu', 'T')
 				->set('child_count', 0)
-				->set('contenuto', _('Hello world'))
+				->set('content', _('Hello world'))
 				;
 				$this->CI->records->save($page);
 

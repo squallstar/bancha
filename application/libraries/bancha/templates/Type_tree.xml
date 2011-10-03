@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="bancha-{version}" -->
-<content>
-	<id>{id}</id>
+<content id="{id}">
 	<name>{name}</name>
-	<description>{description}</description>
+	<descriptions label="{description}" new="{label_new}"/>
 	<tree>true</tree>
 	<primary_key>id_record</primary_key>
 	<table>records</table>
@@ -12,13 +11,13 @@
 		<type>{name}</type>
 	</parent_types>
 	<has_categories>true</has_categories>
+	<has_hierarchies>false</has_hierarchies>
 	<triggers>
 		<trigger on="insert, update, delete" field="id_parent">
 			<sql action="recount" type="{name}" target="child_count" />
 		</trigger>
 	</triggers>
-	<fieldset>
-		<name>General informations</name>
+	<fieldset name="General informations" icon="page">
 		<field id="id_record" column="true">
 			<type>hidden</type>
 			<list>true</list>
@@ -27,7 +26,7 @@
 		<field id="id_type" column="true">
 			<type>hidden</type>
 			<list>true</list>
-			<default>{id}</default>
+			<default>1</default>
 		</field>
 		<field id="published" column="true">
 			<type>hidden</type>
@@ -68,7 +67,7 @@
 			</options>
 			<default>eval:$this->lang->current_language</default>
 		</field>
-		<field id="contenuto">
+		<field id="content">
 			<description>Content</description>
 			<type>textarea</type>
 			<list>true</list>
@@ -94,8 +93,7 @@
 			<admin>true</admin>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Aspect</name>
+	<fieldset name="Aspect" icon="code">
 		<field id="view_template">
 			<description>View template</description>
 			<type>select</type>
@@ -115,8 +113,7 @@
 			<type>textarea_code</type>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Actions</name>
+	<fieldset name="Actions" icon="lightning">
 		<field id="page_cache">
 			<description>Page cache (minutes)</description>
 			<type>number</type>
@@ -211,8 +208,7 @@
 			<type>text</type>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Attachments</name>
+	<fieldset name="Attachments" icon="images">
 		<field id="images">
 			<description>Images</description>
 			<type>images</type>
@@ -226,8 +222,7 @@
 			<list>true</list>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Meta tags</name>
+	<fieldset name="Meta tags" icon="tag">
 		<field id="meta_title">
 			<description>Title</description>
 			<type>text</type>

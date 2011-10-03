@@ -240,8 +240,8 @@ var bancha = {
 		}
 	},
 	add_form_hash : function() {
-		$('form').attr('action', $('form').attr('action') + window.location.hash);
-
+		var attr = $('form').attr('action').split('#');
+		$('form').attr('action', attr[0] + window.location.hash);
 		return true;
 	},
 	sort_priority : function (event, ui) {

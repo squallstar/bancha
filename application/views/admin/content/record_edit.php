@@ -10,7 +10,11 @@
  *
  */
 
-$this->load->helper('form'); ?>
+$this->load->helper('form'); 
+$this->load->frlibrary('form_renderer');
+$CI = & get_instance();
+
+?>
 
 <div class="block withsidebar">
 
@@ -18,7 +22,7 @@ $this->load->helper('form'); ?>
 		<div class="bheadl"></div>
 		<div class="bheadr"></div>
 
-		<h2><?php echo (!$record->id ? _('New content') : _('Edit content') ) . ': ' . $tipo['description']; ?></h2>
+		<h2><?php echo (!$record->id ? _($tipo['label_new']) : _('Edit content') ) . ': ' . $tipo['description']; ?></h2>
 
 		<ul>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url($_section.'/type/'.$tipo['id'])?>"><?php echo _('Back to list'); ?></a></li>
@@ -32,15 +36,7 @@ $this->load->helper('form'); ?>
 
 		<div class="sidebar">
 			<ul class="sidemenu">
-				<?php foreach ($tipo['fieldsets'] as $fieldset) { ?>
-				<li><a href="#sb-<?php echo url_title($fieldset['name']); ?>"><?php echo _($fieldset['name']); ?></a></li>
-				<?php }
-				if ($tipo['has_categories']) { ?>
-				<li><a href="#sb_category"><?php echo _('Categories'); ?></a>
-				<?php }
-				if ($tipo['has_hierarchies']) { ?>
-				<li><a href="#sb_hierarchies"><?php echo _('Hierarchies'); ?></a>
-				<?php } ?>
+				<?php echo $CI->form_renderer->get_sidebar($tipo); ?>
 			</ul>
 			<p></p>
 		</div>
@@ -64,7 +60,7 @@ $p_end = '</p>';
 
 $breadcrumbs_render = '<p class="breadcrumb"><a href="<?php echo admin_url($_section); ?>">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
 						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
-						 . (!$record->id ? _('New content') : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
+						 . (!$record->id ? _($tipo['label_new']) : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
 
 foreach ($tipo['fieldsets'] as $fieldset)
 {
@@ -82,10 +78,8 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	if ($first_lap == true)
 	{
 		$first_lap = false;
-
-		//TODO: move into xml
-		if ($tipo['tree']) {
-
+		if ($tipo['tree'])
+		{
 			if ($record->id && isset($page_url))
 			{
 				$url = site_url($page_url);
@@ -390,7 +384,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		}
 
 	}
-
 
 	echo $save_buttons;
 

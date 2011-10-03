@@ -161,7 +161,9 @@ Class Model_triggers extends CI_Model {
 					if (is_callable(array($trigger_class, $method_name)))
 					{
 						$trigger_class->$method_name(isset($this->_delegate) ? $this->_delegate : NULL);
-					}				
+					} else {
+						show_error('Someone triggered an action named ' . $method_name . '() that doesn\'t exists in the class ' . get_class($trigger_class) . '.');
+					}			
 					break;
 									
 			} //end-switch

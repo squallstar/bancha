@@ -26,7 +26,7 @@ foreach ($this->content->types() as $tipo) {
 	<div class="hdrl"></div>
 	<div class="hdrr"></div>
 
-	<h1><a href="<?php echo admin_url(); ?>"><?php echo CMS . ' RC1'; ?></a></h1>
+	<h1><a href="<?php echo admin_url(); ?>">BANCHA</a></h1>
 
 	<ul id="nav">
 		<li class="<?php echo $this->uri->segment(2) == 'dashboard' ? 'active' : ''; ?>">
@@ -80,7 +80,9 @@ foreach ($this->content->types() as $tipo) {
 		<li class="<?php echo $this->uri->segment(2) == 'manage' ? 'active' : ''; ?>">
 			<a href="#" style="cursor:default"><?php echo _('Manage'); ?></a>
 			<ul>
+				<?php if ($this->auth->has_permission('settings', 'manage')) { ?>
 				<li><a href="<?php echo admin_url('settings'); ?>"><?php echo _('Settings'); ?></a></li>
+				<?php } ?>
 				<li class="<?php echo $this->uri->segment(2) == 'docs' ? 'active' : ''; ?>">
 					<a href="<?php echo admin_url('docs'); ?>"><?php echo _('Documentation'); ?></a>
 				</li>

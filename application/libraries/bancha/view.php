@@ -128,7 +128,7 @@ Class View
 			} else {
 				$this->theme = $this->_CI->settings->get('website_desktop_theme');
 			}
-			
+
 			$this->store_theme();
 		}
 		$this->update_ci_path();
@@ -242,6 +242,10 @@ Class View
 	 */
 	public function render_template($template_file, $layout = TRUE, $code = '')
 	{
+		if ($template_file == '')
+		{
+			$template_file = 'default';
+		}
 		if (is_numeric($code))
 		{
 			$this->_CI->output->set_status_header($code);
@@ -292,10 +296,8 @@ Class View
 	public function message($type, $message = '')
 	{
 		if ($message != '')
-			{$this->messages[] = array(
-				'type' 	=> $type,
-				'text'	=> $message
-			);
+		{
+			$this->messages[$type] = $message;
 		}
 	}
 
@@ -308,9 +310,9 @@ Class View
 		$tmp = '';
 		if (count($this->messages))
 		{
-			foreach ($this->messages as $message)
+			foreach ($this->messages as $type => $message)
 			{
-				$tmp.= '<div class="message '.$message['type'].'"><p>'.$message['text'].'</p></div>';
+				$tmp.= '<div class="message '.$type.'"><p>'.$message.'</p></div>';
 			}
 		}
 		return $tmp;

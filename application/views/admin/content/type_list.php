@@ -7,7 +7,7 @@
 		<h2><?php echo $_section == 'contents' ? _('Contents') : _('Pages'); ?></h2>
 
 		<ul>
-			<?php if ($this->auth->has_permission('types', 'manage')) { ?>
+			<?php if ($this->auth->has_permission('types', 'add')) { ?>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url($_section.'/add_type/'); ?>"><?php echo _('Add new type'); ?></a></li>
 			<?php } ?>
 		</ul>
@@ -25,6 +25,7 @@
 					<th>ID</th>
 					<th><?php echo _('Name'); ?></th>
 					<th><?php echo _('Description'); ?></th>
+					<th><?php echo _('New item label'); ?></th>
 					<th><?php echo _('Structure type'); ?></th>
 					<th>&nbsp;</th>
 				</tr>
@@ -37,6 +38,7 @@
 						<td><?php echo $content['id']; ?></td>
 						<td><a href="<?php echo admin_url($_section.'/type/'.$content['name']); ?>"><?php echo $content['name']; ?></a></td>
 						<td><?php echo $content['description']; ?></td>
+						<td><?php echo $content['label_new']; ?></td>
 						<td><?php echo $content['tree'] ? _('Tree') : _('Simple'); ?></td>
 						<td class="delete">
 							<a href="<?php echo admin_url($_section.'/type_categories/'.$content['name']); ?>"><?php echo _('Manage categories'); ?></a> 

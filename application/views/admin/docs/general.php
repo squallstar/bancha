@@ -10,8 +10,8 @@
 
 		<div class="sidebar">
 			<ul class="sidemenu">
-				<li><a href="#sb-intro">1. Introduzione a <?php echo CMS; ?></a></li>
-				<li><a href="#sb-install">2. Installazione</a></li>
+				<li><a href="#sb-intro">1. Introduction to Bancha</a></li>
+				<li><a href="#sb-install">2. How to install</a></li>
 				<li><a href="#sb-content-types">3. Tipi di contenuto</a></li>
 				<li><a href="#sb-types-xml">4. Schema XML dei tipi</a></li>
 				<li><a href="#sb-page-actions">5. Azioni delle pagine</a></li>
@@ -34,47 +34,48 @@
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
-			<h3>1. Introduzione a <?php echo CMS; ?></h3>
-			<p><?php echo CMS; ?> &egrave; un Content Management System per PHP5 sviluppato in Code Igniter, un potente e veloce framework PHP.<br />
-			&Egrave; rivolto principalmente a sviluppatori che devono gestire siti di media-grande dimensione, e che prevedono contenuti di diverso tipo.<br /><br />
-			<?php echo CMS; ?> basa la sua potenza su alcuni pilastri che lo rendono differente da altri CMS:
-			<ul>
-				<li>Permette di gestire qualsiasi tipo di contenuto (pagine, news, gallerie fotografiche, prodotti, etc...) attraverso schemi XML.</li>
-				<li>Non sacrifica le prestazioni di un sito statico, perch&egrave; utilizza svariati sistemi di caching interno.</li>
-				<li>&Egrave; modulare, ovvero pu&ograve; essere esteso con diverse tipologie di moduli che potrai sviluppare tu stesso.</li>
-				<li>&Egrave; open-source (puoi scaricarlo direttamente da <a href="https://getbancha.com" target="_blank">qui</a>).</li>
-				<li>&Egrave; facile da installare e da mantenere. Non necessita di infrastrutture particolari e/o avanzate.</li>
-				<li>Separa in maniera netta l'applicazioni dai temi e permette quindi la portabilit&agrave; di quest'ultimi</li>
-				<li>Utilizza un sistema ORM per gestire gli oggetti del database</li>
-			</ul>
+			<h3>1. Introduction to Bancha</h3>
 
-			<h3>Schema MVC di Bancha</h3>
-			<p>Qui sotto è rappresentato lo scheletro Model-View-Controller architetturale di Bancha.</p>
+<p>BANCHA is a Content Management System made with <strong>PHP5</strong> and <strong>Code Igniter</strong>, a light and powerful PHP framework.<br />
+It is capable to manage any kind of project/website, specially when it have many different types of contents.</p>
+
+<p>BANCHA bases its power on some pillars that make it different from other CMS:</p>
+<ul>
+	<li>It allows you to handle any type of content: pages, news, photo galleries, products, etc ... through XML schemas.</li>
+	<li>In 10 minutes, you can configure a website to manage, list and view any kind of thing you want.</li>
+	<li>It doesn't sacrifice the performance of a static site, because under the hood it uses many different caching systems.</li>
+	<li>It's modular, so it can be extended with different types of modules that you can develop yourself.</li>
+	<li>It's totally open-source (you can download the source from http://getbancha.com).</li>
+	<li>It's easy to install and to maintain. It doesnt't need any complicated or advanced infrastructure: just PHP5, some extensions and a DB server.</li>
+	<li>It totally separates the application framework (MVC) from the website themes, so it's easy to use for web developers as well as web designers.</li>
+	<li>It use a wonderful ORM system to "play" with the database objects without the needs to write a single query.</li>
+</ul>
+
+			<h3>Bancha MVC architecture</h3>
+			<p>Here below you can see the Bancha Model-View-Controller architecture.</p>
 			<img src="<?php echo site_url(THEMESPATH.'admin/widgets/mvc_scheme.png'); ?>" border="0" alt="Bancha MVC" />
 			<br />
 
 			<br />
-			<h3>Crediti</h3>
+			<h3>Credits</h3>
 
-			<?php echo CMS; ?> &egrave; stato sviluppato (ed &egrave; attualmente mantenuto) da <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
-			Bancha &egrave; rilasciato con licenza GNU/GPL. Puoi visionare l'intera licenza dal file License.txt nella root del progetto.<br />
+			Bancha has been developed (and is currently mantained) by <a href="http://www.squallstar.it">Nicholas Valbusa</a>.<br />
+			Bancha is released under GNU/GPL license. You can read the entire license from the License.txt file in the project root directory.<br />
 			<br />
 			Copyright <a href="http://www.squallstar.it/">Squallstar Studio</a> &copy;2011
 			</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-install">
-			<h3>2. Installazione</h3>
+			<h3>2. How to install</h3>
 
-			<p>La procedura dettagliata di installazione (in lingua inglese) &egrave; riportata nel file <strong>Readme.MD</strong> presente nella root di installazione.</p>
-			<p>La procedura rapida &egrave; la seguente:</p>
-
-			<ul>
-				<li>Settare l'environment nel file index.php</li>
-				<li>Configurare i parametri di connessione al database nel file application/config/database.php</li>
-				<li>Lanciare dal browser l'indirizzo <strong>http://{nomehost}/admin/install</strong></li>
-				<li>Il tipo di contenuto predefinito per l'albero di menu del sito &egrave; "Menu", e viene creato in automatico dall'installer</li>
-			</ul>
+<p>1. Before all, sets your current environment in the <strong>/index.php</strong> file.<br />
+The default environment is "sqlite" (while developing is very useful) but you are encouraged to use <strong>development</strong> or production as environment type, and run the database on a real server.</p>
+<p>2. Sets the database connecting parameters here: <strong>application/config/database.php</strong> (or sqlite/database.php under sqlite environments)</p>
+<p>3. Go through your browser to this URL: http://yourwebsitename/admin/install</p>
+<p>4. Choose your install type between "Default" and "Blog".<br />
+The Blog one, will create and configures the "Blog" and "Comments" content types for you (the Default will create only the website menu)</p>
+<p>5. You're done! The install script will create a content type named "Menu" which is linked to the page tree of your website.</p>
 
 		</div>
 
@@ -105,25 +106,28 @@
 
 		<div class="sidebar_content" id="sb-types-xml">
 			<h3>4. Schema XML dei tipi</h3>
-<p>Ogni tipo di contenuto &egrave; associato ad un relativo file XML presente nella directory <strong><?php echo $this->config->item('xml_typefolder'); ?></strong> che ne descrive i campi associati. Puoi editare tale file anche dall'amministrazione, premendo il link <strong>Modifica schema</strong> nella lista dei tipi di contenuto/pagine. La struttura base di un tipo di contenuto/pagina &egrave; definita in questo modo:</p>
+<p>Ogni tipo di contenuto &egrave; associato ad un relativo file XML presente nella directory <strong><?php echo $this->config->item('xml_typefolder'); ?></strong> che ne descrive i campi associati.</p>
+<p>Alla creazione di un nuovo tipo di contenuto, lo schema XML associato conterr&agrave; gi&agrave; una struttura di base con alcuni campi dimostrativi funzionali per un normale utilizzo.<br />
+Lo schema utilizzato per i tipi di contenuto <strong>Ad albero</strong> &egrave; <u>leggermente differente</u> da quello dei contenuti semplici, poich&egrave; include diverse opzioni relative alla visualizzazione e alle azioni di estrazione.</p>
+<p>Puoi editare tale file anche dall'amministrazione, premendo il link <strong>Modifica schema</strong> nella lista dei tipi di contenuto/pagine. La struttura base di un tipo di contenuto/pagina &egrave; definita in questo modo:</p>
 			<pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content>
-	&lt;id&gt;1&lt;/id&gt;
-	&lt;name&gt;Prodotti&lt;/name&gt;
-	&lt;description&gt;Prodotti E-commerce&lt;/description&gt;
+&lt;content id="1">
+	&lt;name&gt;Pages&lt;/name&gt;
+	&lt;descriptions label="Website pages" new="New page" /&gt;
 	&lt;tree&gt;true&lt;/tree&gt;
 	&lt;parent_types&gt;
-		&lt;type&gt;pagine&lt;/type&gt;
+		&lt;type&gt;Pages&lt;/type&gt;
 	&lt;/parent_types&gt;
 	&lt;has_categories&gt;true&lt;/has_categories&gt;
 	&lt;has_hierarchies&gt;false&lt;/has_hierarchies&gt;
 	&lt;primary_key&gt;id_record&lt;/primary_key&gt;
 	&lt;table&gt;records&lt;/table&gt;
 	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
-	&lt;fieldset&gt;
+	&lt;fieldset name="Sample fields"&gt;
+	...
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code></pre><br />
-<p>Il nodo <strong>&lt;id&gt;</strong> verr&agrave; popolato automaticamente da Bancha quando verr&agrave; creato il tipo di contenuto, cos&igrave; come i nodi <strong>&lt;name&gt;</strong> e <strong>&lt;description&gt;</strong> che definiscono rispettivamente il nome utilizzato internamente come chiave, e quello visualizzato all'utente nel pannello.<br />
+<p>L'attributo <strong>id</strong> verr&agrave; popolato automaticamente da Bancha quando verr&agrave; creato il tipo di contenuto, cos&igrave; come i nodi <strong>&lt;name&gt;</strong> e <strong>&lt;description&gt;</strong> che definiscono rispettivamente il nome utilizzato internamente come chiave, e quello visualizzato all'utente nel pannello (l'attributo label indica il nome visualizzato, mentre l'attributo <strong>new</strong> indica l'etichetta/link per l'inserimento di un nuovo contenuto di questo tipo).<br />
 Il nodo <strong>&lt;tree&gt;</strong> &egrave; un booleano che descrive se il contenuto &egrave; strutturato ad albero o lineare/semplice (vedi la sezione <strong>3. Tipi di contenuto</strong> per maggiori informazioni).<br /><br />
 Il nodo <strong>&lt;parent_types&gt;</strong> &egrave; obbligatorio per i contenuti ad albero, e descrive i nomi di tutti i tipi di contenuto da utilizzare come riferimento per le pagine padre. Di default, viene impostato con il tipo di contenuto stesso.
 <br /><br />
@@ -132,18 +136,17 @@ Sentiti libero di creare ulteriori tabelle oltre alla tabella records nel caso n
 Il nodo <strong>&lt;has_categories&gt;</strong> &egrave; sempre un booleano, e definisce se il tipo di contenuto deve presentare la sezione <strong>Categorie</strong>, che permette di raggruppare i contenuti di quel tipo in diverse categorie amministrabili dal pannello.</p>
 
 <h3>Fieldsets</h3>
-<p>Ogni tipo di contenuto pu&ograve; contiene infiniti fieldsets. Ogni fieldset, visivamente sar&agrave; una sotto-sezione e potr&agrave; contenere infiniti field (campi di inserimento). Ogni fieldset dovr&agrave; avere un nome unico tra quelli dello stesso tipo di contenuto (definito attraverso il nodo <strong>&lt;name&gt;</strong>) e conterr&agrave; uno o pi&ugrave; nodi di tipo <strong>&lt;field&gt;</strong>.</p>
+<p>Ogni tipo di contenuto pu&ograve; contiene infiniti fieldsets. Ogni fieldset, visivamente sar&agrave; una sotto-sezione e potr&agrave; contenere infiniti field (campi di inserimento). Ogni fieldset dovr&agrave; avere un nome unico tra quelli dello stesso tipo di contenuto (definito attraverso l'attributo <strong>&lt;name&gt;</strong>) e conterr&agrave; uno o pi&ugrave; nodi di tipo <strong>&lt;field&gt;</strong>.</p>
+<p>I fieldset possono includere anche un'icona di 16x16 px attraverso l'attributo <strong>icon</strong>.<br />Le icone verranno disponibili sono elencate nella directory <strong><?php echo THEMESPATH; ?>admin/widgets/schemes_icons/</strong>.</p>
 <div class="message info">Strutturare i tuoi campi in fieldset ordinati semanticamente, aiuter&agrave; gli utilizzatori durante l'inserimento dati.</div>
 <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content>
+&lt;content id="1">
 	...
-	&lt;fieldset&gt;
-		&lt;name&gt;Campi generali&lt;/name&gt;
+	&lt;fieldset name="Generic fields" icon="page"&gt;
 		&lt;field id="campo_1"&gt;...&lt;/field&gt;
 		&lt;field id="campo_2"&gt;...&lt;/field&gt;
 	&lt;/fieldset&gt;
-	&lt;fieldset&gt;
-		&lt;name&gt;Campi secondari&lt;/name&gt;
+	&lt;fieldset name="Additional fields" icon="layout"&gt;
 		&lt;field id="campo_3"&gt;...&lt;/field&gt;
 		&lt;field id="campo_4"&gt;...&lt;/field&gt;
 	&lt;/fieldset&gt;
@@ -244,13 +247,12 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 
 <p>Di seguito un esempio completo di struttura per definire un tipo di contenuto con un campo di testo, una select ed un campo di caricamento per una singola immagine:</p>
 <pre class="prettyprint"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content>
-	&lt;id&gt;1&lt;/id&gt;
-	&lt;name&gt;pagine&lt;/name&gt;
-	&lt;description&gt;Pagine generiche&lt;/description&gt;
+&lt;content id="2">
+	&lt;name&gt;products&lt;/name&gt;
+	&lt;descriptions label="My products" new="New product" /&gt;
 	&lt;tree&gt;true&lt;/tree&gt;
 	&lt;parent_types&gt;
-		&lt;type&gt;pagine&lt;/type&gt;
+		&lt;type&gt;products&lt;/type&gt;
 	&lt;/parent_types&gt;
 	&lt;has_categories&gt;true&lt;/has_categories&gt;
 	&lt;has_hierarchies&gt;false&lt;/has_hierarchies&gt;
@@ -258,8 +260,7 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 	&lt;table&gt;records&lt;/table&gt;
 	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
 
-	&lt;fieldset&gt;
-		&lt;name&gt;Informazioni&lt;/name&gt;
+	&lt;fieldset name="Informazioni" icon="page"&gt;
 
 		&lt;field id="nome_utente" column="true"&gt;
 			&lt;description&gt;Il tuo nome&lt;/description&gt;
@@ -296,7 +297,6 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code></pre><br />
-<p>Alla creazione di un nuovo tipo di contenuto, lo schema XML associato conterr&agrave; gi&agrave; una struttura di base con alcuni campi dimostrativi, tra cui quelli relativi ai <strong>Meta tags</strong>.</p>
 
 		</div>
 
@@ -670,8 +670,8 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code></pre><br />
 	&lt;trigger on="insert, update, delete" field="id_parent"&gt;
 		&lt;sql action="recount" type="Menu" target="child_count" /&gt;
 	&lt;/trigger&gt;
-	&lt;trigger on="insert"&gt;
-		&lt;call action="demotrigger" /&gt;
+	&lt;trigger on="publish"&gt;
+		&lt;call action="send_to_twitter" /&gt;
 	&lt;/trigger&gt;
 &lt;/triggers&gt;</code></pre><br />
 <p>Qui sopra sono stati definiti due trigger:</p>
@@ -683,7 +683,7 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code></pre><br />
 <h3>Attivatori SQL</h3>
 <p>I trigger di tipo <strong>"sql"</strong>, accettano i seguenti attributi nel nodo "trigger":</p>
 <ul>
-	<li><strong>on</strong> - bind della chiamata (insert, update, delete, ...)</li>
+	<li><strong>on</strong> - event listener della chiamata (insert, update, delete, publish, depublish)</li>
 	<li><strong>field</strong> - il campo (e valore) da utilizzare per la query del trigger</li>
 </ul>
 <p>Ed all'interno, contengono un nodo "sql" con tali attributi:</p>
@@ -706,15 +706,15 @@ http://localhost/lista-articoli/ultimi-post/feed.json</code></pre><br />
 <h3>Attivatori con chiamata esterna</h3>
 <p>I trigger di tipo <strong>"call"</strong>, accettano i seguenti attributi nel nodo "trigger":</p>
 <ul>
-	<li><strong>on</strong> - bind della chiamata (insert, update, delete, ...)</li>
+	<li><strong>on</strong> - event listener della chiamata (insert, update, delete, publish, depublish)</li>
 </ul>
 <p>Ed all'interno, contengono un nodo "call" con tali attributi:</p>
 <ul>
 	<li><strong>action</strong> - nome del metodo da chiamare. Il metodo deve essere stato definito nel file <strong><?php echo $this->config->item('custom_controllers_folder'); ?>triggers.php</strong> e riceverà come primo parametro il record che esegue la chiamata.</li>
 </ul>
 <p>Esempio:</p>
-<pre class="prettyprint"><code>&lt;trigger on="insert"&gt;
-	&lt;call action="publish_on_twitter" /&gt;
+<pre class="prettyprint"><code>&lt;trigger on="publish"&gt;
+	&lt;call action="publish_on_tumblr" /&gt;
 &lt;/trigger&gt;</code></pre>
 </div>
 
@@ -858,6 +858,16 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 <pre class="prettyprint"><code>//Il dispatcher di default, viene invocato ed usato cos&igrave;:
 $this->load->dispatcher('default');
 $this->dispatcher->start();</code></pre><br />
+
+<pre class="prettyprint"><code>//Potrei usare il dispatcher anche solo per farmi ritornare il record relativo all'URI corrente in questo modo:
+$page = $this->dispatcher->get_current_record();
+
+//E chiamare l'azione custom di un record cos&igrave;:
+$this->dispatcher->call_action($page);
+
+//Oppure, potremmo estrarre la lista di contenuti del record in questo modo:
+$page = $this->dispatcher->set_recordlist($page);
+</code></pre><br />
 
 			<h3>Image dispatcher</h3>
 			<p>Questo dispatcher si preoccupa di generare le immagini attraverso i <strong>preset</strong>, salvarle e quindi inviarle al browser. Nel caso in cui una immagine sia gi&agrave; stata generata, questo dispatcher non verr&agrave; invocato in quanto l'immagine sar&agrave; fornita direttamente dal filesystem.</p>

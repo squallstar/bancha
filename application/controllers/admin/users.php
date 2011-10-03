@@ -136,12 +136,18 @@ Class Users extends Bancha_Controller
 	 */
 	public function groups($action='', $param='')
 	{
-		$this->auth->check_permission('groups', 'manage');
+		$this->auth->check_permission('users', 'groups');
 
 		if ($action == 'edit')
 		{
 			if ($this->input->post('submit', FALSE))
 			{
+				$group_id = $this->input->post('id_group');
+				if ($group_id)
+				{
+					$param = $group_id;
+				}
+
 				if ($param != '')
 				{
 					//Existing group

@@ -55,7 +55,7 @@ function getter($url)
  */
 function admin_url($str='')
 {
-	return site_url('admin/'.$str);
+	return site_url(ADMIN_PUB_PATH.$str);
 }
 
 /**

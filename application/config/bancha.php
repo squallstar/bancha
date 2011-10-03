@@ -54,7 +54,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.7.5');
+define('BANCHA_VERSION', '0.7.7');
 
 /*
  * Framework name
@@ -62,9 +62,10 @@ define('BANCHA_VERSION', '0.7.5');
 define('CMS', 'BANCHA');
 
 /*
- * The Directory Separator
- * On windows systems, will be "\"
- * On unix-like systems, will be "/"
+ * Operative system directory separator
+ * - On windows systems, will be "\"
+ * - On unix-like systems, will be "/"
+ * This variabile will be used just in this file
  */
 $sep = DIRECTORY_SEPARATOR;
 
@@ -77,6 +78,14 @@ $config['installed_themes'] = array(
 	'default' => 'Default theme',
 	'minimal' => 'A minimal theme'
 );
+
+/*
+ * ADMINISTRATION PUBLIC PATH
+ * This will be the admin public path. You can change this to anything you want, but remember
+ * to change also the admin controllers folder name from "admin" to the same name.
+ * You need also to update the admin routes on the config/route.php file.
+ */
+define('ADMIN_PUB_PATH', 'admin/');
 
 
 /*
