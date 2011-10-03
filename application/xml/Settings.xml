@@ -2,7 +2,7 @@
 <!-- generator="bancha-0.7.7" -->
 <content>
 	<name>Settings</name>
-	<descriptions label="Settings" new="New setting"/>
+	<descriptions label="Settings" new=""/>
 	<primary_key>null</primary_key>
 	<table>null</table>
 	<fieldset name="General" icon="legend">
@@ -34,6 +34,26 @@
 			<options>
 				<custom>config_item('languages_select');</custom>
 			</options>
+		</field>
+		<field id="website_homepage_en">
+			<type>select</type>
+			<description>Website homepage (English)</description>
+			<sql cache="false">
+				<select>full_uri as name, full_uri as value</select>
+				<from>pages</from>
+				<where>lang = 'en'</where>
+				<order_by>full_uri ASC</order_by>
+			</sql>
+		</field>
+		<field id="website_homepage_it">
+			<type>select</type>
+			<description>Website homepage (Italian)</description>
+			<sql cache="false">
+				<select>full_uri as name, full_uri as value</select>
+				<from>pages</from>
+				<where>lang = 'it'</where>
+				<order_by>full_uri ASC</order_by>
+			</sql>
 		</field>
 	</fieldset>
 </content>
