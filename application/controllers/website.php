@@ -39,14 +39,14 @@ Class Website extends Bancha_Controller
 	}
 
 	/**
-	 * Website homepage
+	 * Website homepage routing
 	 */
 	function home()
 	{
 		$home = $this->settings->get('website_homepage_' . $this->lang->current_language);
 		if ($home)
 		{
-			redirect(site_url($home));
+			redirect(site_url($home), 'location', 301);
 		} else {
 			show_error(_('The default homepage has not been set. Please go to the settings and update the website homepage.'));
 		}
