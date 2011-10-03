@@ -43,13 +43,13 @@ Class Website extends Bancha_Controller
 	 */
 	function home()
 	{
-		//We need the default tree
-		$this->view->set('tree', $this->tree->get_default());
-
-		$this->view->javascript = array('jquery.js', 'application.js');
-		$this->view->css = array('style.css');
-
-		$this->view->render_template('home');
+		$home = $this->settings->get('website_homepage_' . $this->lang->current_language);
+		if ($home)
+		{
+			redirect(site_url($home));
+		} else {
+			show_error(_('The default homepage has not been set. Please go to the settings and update the website homepage.'));
+		}
 	}
 
 	/**
