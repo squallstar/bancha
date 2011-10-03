@@ -102,7 +102,9 @@
 			<list>true</list>
 			<options>
 				<option value="default">Default</option>
+				<option value="home">Homepage</option>
 			</options>
+			<default>default</default>
 		</field>
 		<field id="view_css">
 			<description>CSS Stylesheet</description>
