@@ -895,10 +895,14 @@ $this->dispatcher->retrieve($data);</code></pre><br />
 			<h3>17. Helpers</h3>
 			<p>Globalmente nell'applicazione sono disponibili diversi helpers, descritti qui di seguito.</p>
 
-			<h3>site_url($path_to_append)</h3>
+			<h3>site_url($path_to_append, $prepend_language)</h3>
 			<p>Ritorna il path pubblico del sito, aggiungendone il path passato come parametro (opzionale).</p>
+			<p>Il secondo parametro definisce se verrà preposta la lingua corrente del sito all'url generato.</p>
 <pre class="prettyprint"><code>echo site_url('hello/world');
-// <?php echo site_url('hello/world'); ?></code></pre><br /><br />
+// http://example.org/en/hello/world
+
+echo site_url('hello/world', FALSE);
+// http://example.org/hello/world</code></pre><br /><br />
 
 			<h3>theme_url($path_to_append)</h3>
 			<p>Ritorna il path pubblico del tema attualmente in uso, aggiungendone il path passato come parametro (opzionale).</p>

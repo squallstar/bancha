@@ -46,7 +46,7 @@ Class Website extends Bancha_Controller
 		$home = $this->settings->get('website_homepage_' . $this->lang->current_language);
 		if ($home)
 		{
-			$this->land->prepend_language = $this->lang->current_language;
+			$this->lang->prepend_language = $this->lang->current_language;
 			redirect(site_url($home), 'location', 301);
 		} else {
 			show_error(_('The default homepage has not been set. Please go to the settings and update the website homepage.'));
@@ -82,9 +82,11 @@ Class Website extends Bancha_Controller
 	 */
 	function router()
 	{
-		$this->view->javascript = array('jquery.js', 'application.js');
-		$this->view->css = array('style.css');
-
+		if (!(count($this->uri->segments)))
+		{
+			$this->home;
+			return;
+		}
 		$this->load->dispatcher('default');
 		$this->dispatcher->start();
 	}
