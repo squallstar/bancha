@@ -497,12 +497,19 @@ Class Model_records extends CI_Model {
 	        	$data['uri'] = $this->get_safe_uri($uri);
 	        }
 
+	        //We ensure that a language will be always set if the content type supports it
+	        if (isset($tipo['fields']['lang']) && (!isset($data['lang']) || !$data['lang']))
+	        {
+	        	$data['lang'] = $this->lang->current_language;
+	        }
+
 	        //This type has a parent field?
 	        if (isset($tipo['fields']['id_parent']))
 	        {
 		        $parent = $record->get('id_parent');
 		        if ($parent || $parent === '') {
 		          if ($parent === '') {
+		          	//Hard column reset on the database
 		            $data['id_parent'] = null;
 		          } else {
 		            $data['id_parent'] = $parent;
@@ -517,10 +524,12 @@ Class Model_records extends CI_Model {
         		{
         			case 1:
         			case 2:
+        				//2 means that the record is different between the environments
         				$data['published'] = '2';
         				break;
 
         			default:
+        				//0 means that the record exists just in stage
         				$data['published'] = '0';
         				break;
         		}
@@ -528,7 +537,7 @@ Class Model_records extends CI_Model {
 
 		  	$done = FALSE;
 
-		  	//Trigger action
+		  	//We choose an action for the triggers
 			$action = $id ? 'update' : 'insert';
 
 			//Title fix
@@ -557,7 +566,7 @@ Class Model_records extends CI_Model {
 	            	  $this->events->log('update', $id, $data[$tipo['edit_link']], $data['id_type']);
                     }
 	          	} else {
-		            show_error('Impossibile aggiornare il record ['.$id.'].', 500, 'Aggiornamento record');
+		            show_error('Cannot update the record ['.$id.'].', 500);
 	          	}
 
 	      	} else {
@@ -577,7 +586,7 @@ Class Model_records extends CI_Model {
     	            	  $this->events->log('insert', $done, $data[$tipo['edit_link']], $data['id_type']);
                     }
 	          	} else {
-	          		show_error('Impossibile aggiungere il record di tipo ['.$data['id_type'].'].', 500, 'Inserimento record');
+	          		show_error('Cannot create a new record of type ['.$data['id_type'].'].', 500);
 	          	}
 	      	}
 
@@ -602,7 +611,7 @@ Class Model_records extends CI_Model {
 	      	}
 	      	return $done;
 	  	} else {
-	    	show_error('Impossibile salvare un oggetto di tipo NON record.', 500);
+	    	show_error('Cannot save a non Record object.', 500);
 	  	}
 	}
 
@@ -683,7 +692,7 @@ Class Model_records extends CI_Model {
   }
 
   /**
-   * Controlla se un record è pubblicato, dato il suo ID
+   * Checks if a record is published given the id
    * @param int $id
    * @return bool
    */
