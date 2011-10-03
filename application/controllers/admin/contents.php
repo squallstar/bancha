@@ -222,6 +222,7 @@ Class Contents extends Bancha_Controller
 
         //Ottengo i records
         $records = $this->records->type($tipo)
+        						 ->set_adminlist(TRUE)
         						 ->order_by('date_update', 'DESC')
         						 ->limit($pagination['per_page'], $page)
         						 ->get();
