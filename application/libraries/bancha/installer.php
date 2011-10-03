@@ -440,6 +440,35 @@ Class Installer
 		$this->CI->settings->clear_cache();
 	}
 
+	public function create_homepages()
+	{
+		if (!isset($this->CI->settings))
+		{
+			$this->CI->load->settings();
+		}
+
+		$languages = array_keys($this->CI->lang->languages);
+
+		foreach ($languages as $lang)
+		{
+			$page = new Record('Menu');
+			$page->set('title', 'Homepage')
+				 ->set('uri', 'home')
+				 ->set('lang', $lang)
+				 ->set('action', 'text')
+				 ->set('view_template', 'home')
+			;
+			$page_id = $this->CI->records->save($page);
+			$this->CI->records->publish($page_id, 'Menu');
+			$this->CI->pages->publish($page_id);
+			$this->CI->settings->set('website_homepage_' . $lang, 'home');
+		}
+
+
+
+
+	}
+
 	/**
 	 * Create a custom installation (example: for a Blog)
 	 * @param string $type Premade name
@@ -493,6 +522,7 @@ Class Installer
 					 ->set('date_publish', time())
 				;
 				$post_id = $this->CI->records->save($post);
+				$this->CI->records->publish($post_id, 'Blog');
 
 				//A sample comment linked to this post
 				$comment = new Record('Comments');
@@ -505,12 +535,15 @@ Class Installer
 				//And a simple page that lists the posts
 				$page = new Record('Menu');
 				$page->set('title', 'Blog')
+					 ->set('uri', 'blog')
 					 ->set('action', 'list')
 					 ->set('lang', $this->CI->lang->current_language)
 					 ->set('show_in_menu', 'T')
 					 ->set('action_list_type', $this->CI->content->type_id('Blog'))
 				;
-				$this->CI->records->save($page);
+				$page_id = $this->CI->records->save($page);
+				$this->CI->records->publish($page_id, 'Menu');
+				$this->CI->pages->publish($page_id);
 
 				break;
 
