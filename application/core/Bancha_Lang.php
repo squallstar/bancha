@@ -173,7 +173,7 @@ class Bancha_Lang extends CI_Lang {
 			{
 				$current_lang = FALSE;
 			} else {
-				$current_lang = $this->_CI->session->userdata('current_' . $this->language_context);
+				$current_lang = $this->_CI->session->userdata('language_' . $this->language_context);
 			}
 		}
 
@@ -249,7 +249,7 @@ class Bancha_Lang extends CI_Lang {
     {
     	if (isset($this->_CI->session))
 		{
-			$this->_CI->session->set_userdata('current_'.$this->language_context, $this->current_language);
+			$this->_CI->session->set_userdata('language_'.$this->language_context, $this->current_language);
 		}
     }
 

@@ -6,7 +6,7 @@
 		<?php
 		foreach ($this->settings->get('website_active_languages') as $_lang)
 		{
-			echo '<a href="'.site_url('change-language/'.$_lang).'">'.$this->lang->languages[$_lang]['description'].'</a>&nbsp; ';
+			echo '<a href="'.site_url('change-language/'.$_lang, FALSE).'">'.$this->lang->languages[$_lang]['description'].'</a>&nbsp; ';
 		}
 		?>	
 		</p>
