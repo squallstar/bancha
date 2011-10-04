@@ -94,7 +94,15 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		$attributes = array();
 
-		$label = form_label(_($field['description']), $field_name, $attributes);
+		$field_note = '';
+		$mandatory = '';
+		if ($field['mandatory'] == TRUE)
+		{
+			$field_note = '<span class="note">*' . _('Mandatory') . '</span>';
+			$mandatory = '*';
+		}
+
+		$label = form_label(_($field['description']) . $mandatory, $field_name, $attributes);
 
 		//We evaluates the evals
 		if ($field['default'] && substr($field['default'], 0, 5) == 'eval:')
@@ -145,7 +153,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'text'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$p_end;
+				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'textarea':
@@ -178,7 +186,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$p_end;
+				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'datetime':
@@ -192,8 +200,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['value'] = isset($tmp[1]) ? $tmp[1] : date('H:i');
 				$attributes['class'] = 'time_picker text small';
 				$attributes['type'] = 'time';
-				echo '&nbsp;'.form_input($attributes);
-				echo $p_end;
+				echo '&nbsp;'.form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'number':
@@ -201,7 +208,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['type'] = 'number';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'number text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$p_end;
+				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'select':
@@ -212,7 +219,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				}
 				$add .= 'class="styled'.($field['mandatory']?' mandatory':'');
 				$add .='" ';
-				echo $p_start.$label.br(1).form_dropdown($field_name, $field['options'], $field_value, $add).$p_end;
+				echo $p_start.$label.br(1).form_dropdown($field_name, $field['options'], $field_value, $add).$field_note.$p_end;
 				break;
 
 			case 'checkbox':
@@ -267,7 +274,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$js_onload.= "$('.".$nm." .rem').click(function(){ ".
 					 "return !$('.".$nm." .multi_right select option:selected').remove().appendTo('.".$nm." .multi_left select'); });";
 
-				echo $p_end;
+				echo $field_note.$p_end;
 				break;
 
 			case 'radio':
@@ -282,7 +289,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 					echo form_radio($data).form_label(' '.$opt_val, $field_name);
 				}
-				echo $p_end;
+				echo $field_note.$p_end;
 				break;
 
 			case 'images':

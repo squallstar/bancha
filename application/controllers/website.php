@@ -25,6 +25,7 @@ Class Website extends Bancha_Controller
 		if ($this->auth->is_logged())
 		{
 			$this->content->set_stage(TRUE);
+
 			//We add also the preview bar
 			$this->output->enable_profiler();
 		} else {
@@ -38,17 +39,18 @@ Class Website extends Bancha_Controller
 	}
 
 	/**
-	 * Website homepage
+	 * Website homepage routing
 	 */
 	function home()
 	{
-		//We need the default tree
-		$this->view->set('tree', $this->tree->get_default());
-
-		$this->view->javascript = array('jquery.js', 'application.js');
-		$this->view->css = array('style.css');
-
-		$this->view->render_template('home');
+		$home = $this->settings->get('website_homepage_' . $this->lang->current_language);
+		if ($home)
+		{
+			$this->config->prepend_language = $this->lang->current_language;
+			redirect(site_url($home), 'location', 301);
+		} else {
+			show_error(_('The default homepage has not been set. Please go to the settings and update the website homepage.'));
+		}
 	}
 
 	/**
@@ -71,7 +73,7 @@ Class Website extends Bancha_Controller
 	{
 		$this->lang->set_lang($new_language);
 		$this->lang->set_cookie();
-		redirect('/');
+		$this->home();
 	}
 
 	/**
@@ -80,9 +82,11 @@ Class Website extends Bancha_Controller
 	 */
 	function router()
 	{
-		$this->view->javascript = array('jquery.js', 'application.js');
-		$this->view->css = array('style.css');
-
+		if (!(count($this->uri->segments)))
+		{
+			$this->home;
+			return;
+		}
 		$this->load->dispatcher('default');
 		$this->dispatcher->start();
 	}

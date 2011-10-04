@@ -15,19 +15,24 @@
 Class Model_records extends CI_Model {
 
 	/**
-	 * @var bool Definisce se il tipo ricercato e' di tipo albero
+	 * @var bool Defines if we searched a simple or structured type
 	 */
-  	public $last_search_has_tree = FALSE; 
+  	public $last_search_has_tree = FALSE;
 
   	/**
-  	* @var bool Imposta se estrarre i documenti dalla prossima ricerca
+  	* @var bool Sets if we have to extract documents during the next search
   	*/
   	private $_get_documents = FALSE;
 
   	/**
-  	* @var bool Definisce se e' una ricerca di tipo lista o dettaglio
+  	* @var bool Defines whether a search is a list or a detail
   	*/
  	private $_is_list = FALSE;
+
+ 	/**
+  	* @var bool Defines whether an admin search is a list or a detail
+  	*/
+ 	private $_is_adminlist = FALSE;
 
  	/**
  	* @var bool|array Il tipo su cui si sta effettuando la ricerca
@@ -86,6 +91,16 @@ Class Model_records extends CI_Model {
   	public function set_list($extract=TRUE)
   	{
   		$this->_is_list = $extract;
+  		return $this;
+  	}
+
+  	/**
+   	* In the administration, defines is we have to extract only the "list" fields or also the "details" ones
+   	* @param bool $extract
+   	*/
+  	public function set_adminlist($extract=TRUE)
+  	{
+  		$this->_is_adminlist = $extract;
   		return $this;
   	}
 
@@ -306,7 +321,7 @@ Class Model_records extends CI_Model {
   		$record_columns = $this->columns;
 
   		//We check if we're searching for a list (not detail), and just for one type
-  		if ($this->_is_list && $this->_single_type)
+  		if (($this->_is_list || $this->_is_adminlist) && $this->_single_type)
   		{
   			foreach ($record_columns as $single_field)
   			{
@@ -314,8 +329,8 @@ Class Model_records extends CI_Model {
   				if (isset($this->_single_type['fields'][$single_field]))
   				{
   					if ($this->_single_type['fields'][$single_field]['list'] === TRUE
-  					//&& !in_array($single_field, $not_selectable)
-  					//TODO: fix and check
+  					    || ($this->_single_type['fields'][$single_field]['admin'] === TRUE && $this->_is_adminlist)
+  					
   					)
   					{
   						$fields_to_select[] = $single_field;
@@ -429,7 +444,7 @@ Class Model_records extends CI_Model {
 
   			}
 
-  			//Reset the switchs
+  			//Reset the switches
   			$this->last_search_has_tree = FALSE;
   			$this->_get_documents = FALSE;
 
@@ -497,12 +512,19 @@ Class Model_records extends CI_Model {
 	        	$data['uri'] = $this->get_safe_uri($uri);
 	        }
 
+	        //We ensure that a language will be always set if the content type supports it
+	        if (isset($tipo['fields']['lang']) && (!isset($data['lang']) || !$data['lang']))
+	        {
+	        	$data['lang'] = $this->lang->current_language;
+	        }
+
 	        //This type has a parent field?
 	        if (isset($tipo['fields']['id_parent']))
 	        {
 		        $parent = $record->get('id_parent');
 		        if ($parent || $parent === '') {
 		          if ($parent === '') {
+		          	//Hard column reset on the database
 		            $data['id_parent'] = null;
 		          } else {
 		            $data['id_parent'] = $parent;
@@ -517,10 +539,12 @@ Class Model_records extends CI_Model {
         		{
         			case 1:
         			case 2:
+        				//2 means that the record is different between the environments
         				$data['published'] = '2';
         				break;
 
         			default:
+        				//0 means that the record exists just in stage
         				$data['published'] = '0';
         				break;
         		}
@@ -528,7 +552,7 @@ Class Model_records extends CI_Model {
 
 		  	$done = FALSE;
 
-		  	//Trigger action
+		  	//We choose an action for the triggers
 			$action = $id ? 'update' : 'insert';
 
 			//Title fix
@@ -557,7 +581,7 @@ Class Model_records extends CI_Model {
 	            	  $this->events->log('update', $id, $data[$tipo['edit_link']], $data['id_type']);
                     }
 	          	} else {
-		            show_error('Impossibile aggiornare il record ['.$id.'].', 500, 'Aggiornamento record');
+		            show_error('Cannot update the record ['.$id.'].', 500);
 	          	}
 
 	      	} else {
@@ -577,7 +601,7 @@ Class Model_records extends CI_Model {
     	            	  $this->events->log('insert', $done, $data[$tipo['edit_link']], $data['id_type']);
                     }
 	          	} else {
-	          		show_error('Impossibile aggiungere il record di tipo ['.$data['id_type'].'].', 500, 'Inserimento record');
+	          		show_error('Cannot create a new record of type ['.$data['id_type'].'].', 500);
 	          	}
 	      	}
 
@@ -602,7 +626,7 @@ Class Model_records extends CI_Model {
 	      	}
 	      	return $done;
 	  	} else {
-	    	show_error('Impossibile salvare un oggetto di tipo NON record.', 500);
+	    	show_error('Cannot save a non Record object.', 500);
 	  	}
 	}
 
@@ -654,7 +678,7 @@ Class Model_records extends CI_Model {
   	}
 
   /**
-   * Ottiene un URI sicuro da utilizzare
+   * Gets a safe web uri
    * @param string $uri
    * @return string
    */
@@ -664,9 +688,9 @@ Class Model_records extends CI_Model {
   }
 
   /**
-   * Controlla se un URI è stato utilizzato
-   * Se utilizzato, ritorna il record relativo
+   * Checks whether a URI is used, and returns the id of that record
    * @param string $uri
+   * @return bool|int
    */
   public function uri_is_used($uri='')
   {
@@ -683,7 +707,7 @@ Class Model_records extends CI_Model {
   }
 
   /**
-   * Controlla se un record è pubblicato, dato il suo ID
+   * Checks if a record is published given the id
    * @param int $id
    * @return bool
    */
@@ -705,8 +729,9 @@ Class Model_records extends CI_Model {
   }
 
 	/**
-	* Pubblica un record e i suoi allegati
-	* @param int $id
+	* Publishes a record and its attachments
+	* @param int $id Record id
+	* @param string $type (optional) The content type
 	*/
 	public function publish($id = '', $type = '')
  	{
@@ -777,7 +802,8 @@ Class Model_records extends CI_Model {
 
 	/**
 	* Depublishes a record
-	* @param $id
+	* @param $id Record id
+	* @param $type (optional) The content type
 	* @return bool
 	*/
 	public function depublish($id = '', $type = '')

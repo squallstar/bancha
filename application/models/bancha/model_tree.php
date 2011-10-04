@@ -23,6 +23,7 @@ Class Model_tree extends CI_Model
 	private $_uri_segments = array();
 	private $_use_lang = FALSE;
 	private $_current_branch = FALSE;
+	private $_lang_segment = FALSE;
 
 	public $current_page_uri = '';
 	public $parent_page_uri = false;
@@ -35,6 +36,7 @@ Class Model_tree extends CI_Model
 		parent::__construct();
 
 		$this->_menu_type = $this->config->item('default_tree_types');
+		$this->_lang_segment = $this->config->item('prepend_uri_language');
 
 		if (!count($this->_menu_type))
 		{

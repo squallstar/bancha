@@ -171,7 +171,7 @@ Class View
 	public function update_ci_path()
 	{
 		$theme_path = THEMESPATH . $this->theme . '/';
-		$this->theme_path = site_url() . $theme_path;
+		$this->theme_path = site_url(null, FALSE) . $theme_path;
 		$this->_CI->load->add_view_path($theme_path . 'views/');
 
 		if (!defined('THEME_PUB_PATH'))

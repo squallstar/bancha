@@ -29,8 +29,9 @@
 				<li><a href="#sb-helpers">17. Helpers</a></li>
 				<li><a href="#sb-modules">18. Moduli</a></li>
 				<li><a href="#sb-settings">19. Impostazioni</a></li>
+				<li><a href="#sb-languages">20. Languages</a></li>
 			</ul>
-			<p>Versione: <?php echo BANCHA_VERSION; ?><br />Data: 29 Set 2011</p>
+			<p>Version: <?php echo BANCHA_VERSION; ?><br />Last update: Oct 2, 2011</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
@@ -894,10 +895,14 @@ $this->dispatcher->retrieve($data);</code></pre><br />
 			<h3>17. Helpers</h3>
 			<p>Globalmente nell'applicazione sono disponibili diversi helpers, descritti qui di seguito.</p>
 
-			<h3>site_url($path_to_append)</h3>
+			<h3>site_url($path_to_append, $prepend_language)</h3>
 			<p>Ritorna il path pubblico del sito, aggiungendone il path passato come parametro (opzionale).</p>
+			<p>Il secondo parametro definisce se verrà preposta la lingua corrente del sito all'url generato.</p>
 <pre class="prettyprint"><code>echo site_url('hello/world');
-// <?php echo site_url('hello/world'); ?></code></pre><br /><br />
+// http://example.org/en/hello/world
+
+echo site_url('hello/world', FALSE);
+// http://example.org/hello/world</code></pre><br /><br />
 
 			<h3>theme_url($path_to_append)</h3>
 			<p>Ritorna il path pubblico del tema attualmente in uso, aggiungendone il path passato come parametro (opzionale).</p>
@@ -981,6 +986,45 @@ echo $this->settings->delete('username', 'twitter');</code></pre><br />
 
 <h3>build_cache();</h3>
 <p>Funzione usata internamente dal sistema quando il file di cache non &egrave; presente, provvede a rigenerarlo.</p>
+
+	</div>
+
+	<div class="sidebar_content" id="sb-languages">
+			<h3>20. Languages</h3>
+			<p>BANCHA is multi-languages ready: it can manage any number of languages on a single website, so you can create different (and localizated) websites under the same application.<br />
+			All content types schemes, have a <strong>lang</strong> field that decides the language of each record you create. When extracting records, Bancha will automatically gets the records regarding of the current language, so this process is totally hidden and automatized.</p>
+			<p>Each language, has also an homepage: basically it's a page record, with the view template set to <strong>home</strong>. You can decide the homepage of each language by the <strong>Manage >> settings</strong> view.</p>
+			<br />
+			<h3>Adding a new language</h3>
+			<p>To add a language, first of all locate the <strong>website_languages</strong> under the <strong>config/bancha.php</strong> config variables, and add a new language as in the example below:</p>
+
+<pre class="prettyprint"><code>$config['website_languages'] = array(
+	'en' => array(
+		'name'			=> 'english',
+		'locale'		=> 'en_US',
+		'description'	=> 'English',
+		'date_format'	=> 'Y-m-d'
+	),
+	//New language here
+);</code></pre><br />
+<p>Now, duplicate one of the "website_homepage_xx" fields in the <strong>Settings.xml</strong> scheme, using the language shortname, such as <strong>website_homepage_it</strong>.<br />
+Finally, create a page with that language, and go to the settings view to set it as the homepage for that language. You're done!</p>
+
+<h3>Internationalization and .PO files</h3>
+<p>Bancha uses the <strong>gettext</strong> system as default for translating the labels of the website (and also the administration).</p>
+<p>For example, the translated labels for the italian language are located here: <strong>application/languages/locale/it_IT</strong>.<br />
+When you create a new language, just copy one of these folders changing the name to the new locale (es. <strong>en_GB</strong>) and that locale will be automatically used.</p>
+<p>On your theme view files, when a label that needs to be translated just use the default gettext function <strong>_('text')</strong> as follows:</p>
+<pre class="prettyprint"><code>echo _('Hello');
+//Now, the .PO files will find this label!</code></pre><br />
+<p>You can also use placeholders using the <strong>$this->lang->_trans()</strong> function like this:</p>
+
+<pre class="prettyprint"><code>$this->lang->_trans('Welcome back, %u! Today it is %d', array(
+	'u' => 'Nicholas',
+	'd' => date('l')
+));
+
+//The .PO files will now find the "Welcome back, %u! Today it is %d" label.</code></pre><br />
 
 	</div>
 

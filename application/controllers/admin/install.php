@@ -57,7 +57,7 @@ Class Install extends Bancha_Controller
 				$this->view->set('username', $username);
 				$this->view->set('password', $password);
 
-				//And some hierarchies
+				//And some dummy hierarchies
 				$this->load->hierarchies();
 				$id = $this->hierarchies->add('Father');
 				$this->hierarchies->add('Child', $id);
@@ -99,6 +99,9 @@ Class Install extends Bancha_Controller
 
 			//We also set the default settings
 			$this->installer->populate_settings();
+
+			//We create the default homepages
+			$this->installer->create_homepages();
 
 			$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
 			$this->view->render_layout('installer/success', FALSE);

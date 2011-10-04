@@ -6,7 +6,7 @@
 	<tree>true</tree>
 	<primary_key>id_record</primary_key>
 	<table>records</table>
-	<table_stage>true</table_stage>
+	<table_stage>records_stage</table_stage>
 	<parent_types>
 		<type>{name}</type>
 	</parent_types>
@@ -69,7 +69,7 @@
 		</field>
 		<field id="content">
 			<description>Content</description>
-			<type>textarea</type>
+			<type>textarea_full</type>
 			<list>true</list>
 		</field>
 		<field id="show_in_menu" column="true">
@@ -102,7 +102,9 @@
 			<list>true</list>
 			<options>
 				<option value="default">Default</option>
+				<option value="home">Homepage</option>
 			</options>
+			<default>default</default>
 		</field>
 		<field id="view_css">
 			<description>CSS Stylesheet</description>

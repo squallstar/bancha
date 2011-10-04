@@ -19,42 +19,49 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  * Here goes the website languages
  */
 $config['website_languages'] = array(
-	'it' => array(
-		'name'			=> 'italian',
-		'locale'		=> 'it_IT',
-		'description'	=> 'Italiano',
-		'date_format'	=> 'd/m/Y'
-	),
 	'en' => array(
 		'name'			=> 'english',
 		'locale'		=> 'en_US',
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
+	),
+	'it' => array(
+		'name'			=> 'italian',
+		'locale'		=> 'it_IT',
+		'description'	=> 'Italiano',
+		'date_format'	=> 'd/m/Y'
 	)
+
 );
 
 /* ADMIN LANGUAGES
  * Here goes the admin languages
  */
 $config['admin_languages'] = array(
-	'it' => array(
-		'name'			=> 'italian',
-		'locale'		=> 'it_IT',
-		'description'	=> 'Italiano',
-		'date_format'	=> 'd/m/Y'
-	),
 	'en' => array(
 		'name'			=> 'english',
 		'locale'		=> 'en_US',
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
+	),
+	'it' => array(
+		'name'			=> 'italian',
+		'locale'		=> 'it_IT',
+		'description'	=> 'Italiano',
+		'date_format'	=> 'd/m/Y'
 	)
 );
 
 /*
+ * PREPEND URI LANGUAGE
+ * When set to true, current language will be prepended to the URIs
+ */
+ $config['prepend_uri_language'] = TRUE;
+
+/*
  * Framework version
  */
-define('BANCHA_VERSION', '0.7.7');
+define('BANCHA_VERSION', '0.7.8');
 
 /*
  * Framework name

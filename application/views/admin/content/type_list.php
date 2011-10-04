@@ -66,8 +66,6 @@
 				echo '<p>'.$this->lang->_trans('No type of contents found. To start, %link.', array(
 					'link'	=> '<a href="'.admin_url($_section.'/add_type').'">'._('add a new one').'</a>'
 				)).'</p>';
-			} else {
-
 			}
 			?>
 			<?php } ?>
