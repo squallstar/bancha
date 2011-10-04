@@ -38,7 +38,7 @@ Class Blocks
 	{
 		$pattern = '\$this->blocks->load\(\'([A-Za-z0-9]+)\'\)';
 		$matches = array();
-		preg_match($pattern, $string, $matches);
-		return $matches;
+		$found = preg_match($pattern, $string, $matches);
+		return $found ? $matches : FALSE;
 	}
 }

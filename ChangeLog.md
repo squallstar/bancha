@@ -2,7 +2,9 @@
 
 **v 0.7.9** (2011-10-04)
 
+- Experimental use of "block templates"
 - Fixed a bug on the "published" field of the content types
+- Image dispatcher routes now allows uppercase extensions
 
 
 **v 0.7.8** (2011-10-03)
