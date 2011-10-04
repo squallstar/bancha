@@ -66,7 +66,17 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function frlibrary($library, $name = NULL)
 	{
-		$this->library(FRNAME.'/'.$library, NULL, $name );
+		$this->library(FRNAME.'/'.$library, NULL, $name);
+	}
+
+	/**
+	 * Loads an external library
+	 * @param string $library
+	 * @param string $name
+	 */
+	function extlibrary($library, $name = NULL)
+	{
+		$this->library('external/'.$library, NULL, $name);
 	}
 
 	/**
@@ -189,7 +199,7 @@ Class Bancha_Loader extends CI_Loader {
 
 		$tmp->module_name = ucfirst($module_name);
 		$tmp->module_filespath = $CI->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR;
-				
+
 		return $tmp;
 	}
 
