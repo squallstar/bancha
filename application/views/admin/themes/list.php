@@ -35,7 +35,7 @@
 						<td><?php echo $description; ?></td>
 						<td align="center"><?php echo form_radio('desktop_theme', $name, $desktop_theme == $name ? TRUE : FALSE); ?></td>
 						<td align="center"><?php echo form_radio('mobile_theme', $name, $mobile_theme == $name ? TRUE : FALSE); ?></td>
-						<td class="delete"><a href="#"><?php echo _('Manage templates'); ?></a></td>
+						<td class="delete"><a href="<?php echo admin_url('themes/theme/' . $name); ?>"><?php echo _('Manage templates'); ?></a></td>
 					</tr>
 					<?php } ?>
 			</tbody>
