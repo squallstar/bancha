@@ -72,7 +72,7 @@ Class Themes extends Bancha_Controller
 		if (isset($this->themes[$name]))
 		{
 			$theme_path = THEMESPATH . $name;
-			$theme_templates_path = $theme_path . DIRECTORY_SEPARATOR . 'templates';
+			$theme_templates_path = $theme_path . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'templates';
 			if (file_exists($theme_templates_path))
 			{
 				$this->load->helper(array('file', 'text'));
@@ -81,6 +81,8 @@ Class Themes extends Bancha_Controller
 				if ($filename == '')
 				{
 					//Theme view
+					$this->view->set('theme', $name);
+					$this->view->set('theme_description', $this->themes[$name]);
 					$this->view->set('files', $files);
 					$this->view->render_layout('themes/theme');
 					return;
@@ -95,12 +97,12 @@ Class Themes extends Bancha_Controller
 				}
 
 			} else {
-				show_error($this->label->_trans('The folder %d has not been found on the filesystem.'),
+				show_error($this->lang->_trans('The folder %d has not been found on the filesystem.',
 					array('d' => $theme_templates_path)
-				);
+				));
 			}
 		} else {
-			show_error($this->label->_trans('The theme %n does not exists.', array('n' => $name)));
+			show_error($this->lang->_trans('The theme %n does not exists.', array('n' => $name)));
 		}
 	}
 }

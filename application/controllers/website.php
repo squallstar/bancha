@@ -34,8 +34,9 @@ Class Website extends Bancha_Controller
 
 		$this->load->helper('menu');
 
-		//We load the settings
+		//We load the settings and the blocks
 		$this->load->settings();
+		$this->load->frlibrary('blocks');
 	}
 
 	/**
@@ -49,7 +50,12 @@ Class Website extends Bancha_Controller
 			$this->config->prepend_language = $this->lang->current_language;
 			redirect(site_url($home), 'location', 301);
 		} else {
-			show_error(_('The default homepage has not been set. Please go to the settings and update the website homepage.'));
+			if (!$this->settings->get('is_installed'))
+			{
+				redirect(admin_url('install'));
+			} else {
+				show_error(_('The default homepage has not been set. Please go to the settings and update the website homepage.'));
+			}
 		}
 	}
 

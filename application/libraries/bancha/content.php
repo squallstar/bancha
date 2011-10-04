@@ -12,8 +12,8 @@
  *
  */
 
-Class Content {
-
+Class Content
+{
 	/**
 	 * @var array Content types list
 	 */
