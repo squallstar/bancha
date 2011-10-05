@@ -36,7 +36,7 @@
 
 		<?php } ?>
 
-			<a href="#" class="add_section" onclick="bancha.blocks.add_section(this);"><?php echo _('Add section'); ?></a>
+			<a href="#" class="add_section" onclick="bancha.blocks.set_section('<?php echo $block_name; ?>');"><?php echo _('Add section'); ?></a>
 
 		</div>
 

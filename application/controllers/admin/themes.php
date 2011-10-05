@@ -130,4 +130,10 @@ Class Themes extends Bancha_Controller
 			show_error($this->lang->_trans('The theme %n does not exists.', array('n' => $name)));
 		}
 	}
+
+	public function add_section()
+	{
+		$block = $this->input->post('block');
+
+	}
 }

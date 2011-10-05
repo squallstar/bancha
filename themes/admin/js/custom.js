@@ -327,8 +327,16 @@ var bancha = {
 	},
 	blocks : {
 		_last_section : false,
+		set_section : function(which) {
+			bancha.blocks._last_section = which;	
+		},
 		save_section : function(el) {
-			
+			$(el + ' form').append('<input type="hidden" name="block" value ="'+bancha.blocks._last_section+'" />');
+			var values = $(el + ' form').serialize();
+			$('#cboxClose').click();
+			$.post(admin_url + 'themes/add_section', values, function(data) {
+				
+			});
 		}
 	}
 }
