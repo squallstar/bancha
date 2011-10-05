@@ -84,7 +84,7 @@ Class Website extends Bancha_Controller
 	{
 		if (!(count($this->uri->segments)))
 		{
-			$this->home;
+			$this->home();
 			return;
 		}
 		$this->load->dispatcher('default');
