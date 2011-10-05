@@ -22,7 +22,7 @@
  * production	: errors will not be displayed
  *
  */
-	define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', 'ale');
 /*
  */
 
@@ -30,6 +30,7 @@ if (defined('ENVIRONMENT'))
 {
 	switch (ENVIRONMENT)
 	{
+		case 'ale':
 		case 'sqlite':
 		case 'development':
 			error_reporting(E_ALL);
