@@ -84,6 +84,30 @@ Class Model_settings extends CI_Model
 	}
 
 	/**
+	 * Create/updates a blocks of a theme template
+	 * @param string $key
+	 * @param mixed $val
+	 * @param string $theme
+	 * @param string $template
+	 */
+	public function set_block($key, $val, $theme, $template = 'default')
+	{
+		return $this->set($key, $val, '_blocks_' . $theme . '_' . $template);
+	}
+
+	/**
+	 * Returns a single block of a theme template
+	 * @param string $key
+	 * @param string $theme
+	 * @param string $template
+	 * @return mixed value
+	 */
+	public function get_block($key, $theme, $template = 'default')
+	{
+		return $this->get($key, '_blocks_' . $theme . '_' . $template);
+	}
+
+	/**
 	 * Returns a single value from the settings
 	 * @param string $key
 	 * @param string $module

@@ -2,11 +2,7 @@
 /**
  * Users Model
  *
-<<<<<<< HEAD
- * The model that lets you to manage the users
-=======
  * This class is used to manage users, groups and their permissions
->>>>>>> development
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar

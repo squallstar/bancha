@@ -19,14 +19,14 @@ Class Blocks
 	 */
 	private $CI;
 
-	public function load($block_id)
+	public function __construct()
 	{
-		if (!isset($this->CI))
-		{
-			$this->CI = & get_instance();
-		}
+		$this->_CI = & get_instance();
+	}
 
-		$page = & $this->CI->view->get('page');
+	public function load($block_id = '')
+	{
+		$page = & $this->_CI->view->get('page');
 		if ($page instanceof Record)
 		{
 			
@@ -34,11 +34,25 @@ Class Blocks
 		return '';
 	}
 
-	public function parse_blocks($string)
+	public function search_blocks($string)
 	{
-		$pattern = '\$this->blocks->load\(\'([A-Za-z0-9]+)\'\)';
+		$pattern = '/\$this->blocks->load\(\'([A-Za-z0-9]+)\'\)/';
 		$matches = array();
-		$found = preg_match($pattern, $string, $matches);
-		return $found ? $matches : FALSE;
+		$found = preg_match_all($pattern, $string, $matches);
+		return $found && isset($matches[1]) ? $matches[1] : FALSE;
+	}
+
+	public function fill_blocks($blocks, $theme, $template = 'default')
+	{
+		if (is_array($blocks) && count($blocks))
+		{
+			$tmp = array();
+			foreach ($blocks as $block_name)
+			{
+				$tmp[$block_name] = $this->_CI->settings->get($block_name, $theme, $template);
+			}
+			return $tmp;
+		}
+		return FALSE;
 	}
 }

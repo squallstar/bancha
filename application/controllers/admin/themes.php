@@ -72,25 +72,50 @@ Class Themes extends Bancha_Controller
 		if (isset($this->themes[$name]))
 		{
 			$theme_path = THEMESPATH . $name;
-			$theme_templates_path = $theme_path . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'templates';
+			$theme_templates_path = $theme_path . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
 			if (file_exists($theme_templates_path))
 			{
 				$this->load->helper(array('file', 'text'));
 				$files = get_filenames($theme_templates_path, TRUE, FALSE);
 
+				$this->view->set('theme', $name);
+				$this->view->set('theme_description', $this->themes[$name]);
+
 				if ($filename == '')
 				{
+					$templates = array();
+					$other_files = array();
+					foreach ($files as $file) {
+						if (strpos($file, '.php') !== FALSE)
+						{
+							$tmp = explode($theme_templates_path, $file);
+
+							if (strpos($tmp[1], 'templates/') === 0)
+							{
+								$templates[] = $tmp[1];
+							} else {
+								$other_files[] = $tmp[1];
+							}
+						}
+					}
+
 					//Theme view
-					$this->view->set('theme', $name);
-					$this->view->set('theme_description', $this->themes[$name]);
-					$this->view->set('files', $files);
+					$this->view->set('templates', $templates);
+					$this->view->set('files', $other_files);
 					$this->view->render_layout('themes/theme');
 					return;
 				} else {
 					//Edit a single template
-					$filename = urldecode($filename);
+					$filename = str_replace('|', '/', urldecode($filename)) . '.php';
 					$content = file_get_contents($theme_templates_path . $filename);
 
+					$this->load->frlibrary('blocks');
+					$blocks = $this->blocks->search_blocks($content);
+
+					$filled_blocks = $this->blocks->fill_blocks($blocks, $name, $filename);
+
+					$this->view->set('blocks', $filled_blocks);
+					$this->view->set('template', $filename);
 					$this->view->set('content', $content);
 					$this->view->render_layout('themes/template_edit');
 					return;
