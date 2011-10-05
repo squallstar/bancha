@@ -320,7 +320,8 @@ Class Bancha_Loader extends CI_Loader {
 		{
 			$this->view->rendered_views[] = $_ci_path;
 			$tmp = explode('/', $_ci_path);
-			$this->view->current_view = $tmp[count($tmp-1)];
+			$this->view->current_view = $tmp[count($tmp)-1];
+			
 			include($_ci_path); // include() vs include_once() allows for multiple views with the same name
 		}
 

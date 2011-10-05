@@ -37,7 +37,7 @@ Class Blocks
     	{
       		$view_template = $this->_CI->view->current_view;
       		$theme = $this->_CI->view->theme;
-			if ($view && $theme)
+			if ($view_template && $theme)
       		{
         		$block = $this->fill_block($block_id, $theme, $view_template);
 				if (is_array($block) && count($block))
@@ -45,6 +45,7 @@ Class Blocks
 					foreach ($block as $single_widget)
           			{
 						//Renders a block
+						return 'i am a block';
 					}
 				}
 			}
