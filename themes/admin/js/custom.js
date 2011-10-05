@@ -324,6 +324,14 @@ var bancha = {
 					break;
 			}
 		}
+	},
+	blocks : {
+		_last_section : false,
+		add_section : function(el) {
+			bancha.blocks._last_section = $(this).parent('.theme_block');
+			var el_name = bancha.blocks._last_section.attr('data-name');
+			//TODO: open the popup
+		}
 	}
 }
 
