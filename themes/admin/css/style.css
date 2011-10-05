@@ -1098,3 +1098,11 @@ input.small {
 table.sortable td img {
 	vertical-align:middle;
 }
+
+/* Theme template composer */
+.theme_block {
+	background: #f6f6f6;
+	padding:13px 20px;
+	margin:20px 0;
+	border:1px solid #f0f0f0;
+}

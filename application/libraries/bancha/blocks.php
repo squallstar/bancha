@@ -32,6 +32,7 @@ Class Blocks
 	*/
 	public function load($block_id = '')
 	{
+    	$block_id = strtolower($block_id);
     	$page = & $this->_CI->view->get('page');
     	if ($page instanceof Record && $block_id)
     	{

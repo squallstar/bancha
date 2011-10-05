@@ -5,6 +5,7 @@
 - Experimental use of "block templates"
 - Fixed a bug on the "published" field of the content types
 - Image dispatcher routes now allows uppercase extensions
+- Fixed a bug on the route action (website controller)
 
 
 **v 0.7.8** (2011-10-03)
