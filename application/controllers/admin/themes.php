@@ -138,12 +138,13 @@ Class Themes extends Bancha_Controller
 	{
 		if ($this->input->is_ajax_request())
 		{
+			$this->load->frlibrary('blocks');
 			$block_name = $this->input->post('block');
 			$theme = $this->input->post('theme');
 			$template = $this->input->post('template');
 
 			$block = $this->settings->get_block($block_name, $theme, $template);
-			if (!$block)
+			if (!is_array($block))
 			{
 				$block = array();
 				$pos = 0;
@@ -151,6 +152,7 @@ Class Themes extends Bancha_Controller
 				$pos = count($block);
 			}
 
+			$response = '';
 			switch ($this->input->post('section_type'))
 			{
 				case 'html':
@@ -161,12 +163,14 @@ Class Themes extends Bancha_Controller
 							'type'	=> 'html',
 							'data'	=> $html
 						);
+						$response = $this->blocks->get_section_preview($block[$pos], $pos);
 					}
 					break;
 			}
-			echo $block_name . '#';debug($block);
-			$this->settings->set_block($block_name, $block, $theme, $template);
+			$done = $this->settings->set_block($block_name, $block, $theme, $template);
 			$this->settings->clear_cache();
+			if ($done) echo $response;
+			return;
 		}
 	}
 }

@@ -79,6 +79,7 @@ Class Model_settings extends CI_Model
 						array('name' => $key, 'value' => $val, 'module' => $module)
 				   );
 		}
+		return FALSE;
 	}
 
 	/**

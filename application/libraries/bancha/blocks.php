@@ -97,7 +97,18 @@ Class Blocks
   	 */
 	public function fill_block($block, $theme, $template = 'default')
 	{
-		return $this->_CI->settings->get($block, $theme, $template);
+		return $this->_CI->settings->get_block($block, $theme, $template);
+	}
+
+	public function get_section_preview($section, $pos = 0)
+	{
+		switch ($section['type'])
+		{
+			case 'html':
+				$response = '<div class="section html" data-pos="'.$pos.'"><h4>HTML</h4><div class="content_section">'.$section['data'].'</div></div>';
+				break;
+		}
+		return $response;
 	}
 
 }

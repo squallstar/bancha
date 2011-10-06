@@ -331,12 +331,13 @@ var bancha = {
 			bancha.blocks._last_section = which;	
 		},
 		save_section : function(el) {
-			$(el + ' form').append('<input type="hidden" name="block" value ="'+bancha.blocks._last_section+'" />');
+			var this_block = bancha.blocks._last_section;
+			$(el + ' form').append('<input type="hidden" name="block" value ="'+this_block+'" />');
 			var values = $(el + ' form').serialize();
 			values = values + '&theme=' + $('#add_section').attr('data-theme') + '&template=' + $('#add_section').attr('data-template');
 			$('#cboxClose').click();
 			$.post(admin_url + 'themes/add_section', values, function(data) {
-				
+				$('.theme_block[data-name="'+this_block+'"]').children().last().prev().append(data);
 			});
 		}
 	}

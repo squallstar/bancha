@@ -28,9 +28,9 @@
 		<div class="theme_block" data-name="<?php echo $block_name; ?>"><h3><?php echo ucfirst($block_name); ?></h3>
 
 		<?php if (is_array($sections) && count($sections)) {
-				foreach ($sections as $section) {
+				foreach ($sections as $pos => $section) {
 					//Do something
-					debug($section);
+					echo $this->blocks->get_section_preview($section, $pos);
 				}
 			?>
 
