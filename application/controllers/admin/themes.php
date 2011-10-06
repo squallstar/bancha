@@ -131,9 +131,45 @@ Class Themes extends Bancha_Controller
 		}
 	}
 
+	/**
+	 * Method to add a new section (via an ajax request)
+	 */
 	public function add_section()
 	{
-		$block = $this->input->post('block');
+		if ($this->input->is_ajax_request())
+		{
+			$block_name = $this->input->post('block');
+			$theme = $this->input->post('theme');
+			$template = $this->input->post('template');
 
+			$block = $this->settings->get_block($block_name, $theme, $template);
+			if (!$block)
+			{
+				$block = array();
+				$pos = 0;
+			} else {
+				$pos = count($block);
+			}
+
+			switch ($this->input->post('section_type'))
+			{
+				case 'html':
+					$html = $this->input->post('html');
+					if (strlen($html))
+					{
+						$block[$pos] = array(
+							'type'	=> 'html',
+							'data'	=> $html
+						);
+					}
+					break;
+			}
+			echo $block_name . '#';debug($block);
+			$this->settings->set_block($block_name, $block, $theme, $template);
+			$this->settings->clear_cache();
+		}
 	}
 }
+
+
+

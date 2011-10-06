@@ -52,8 +52,6 @@ Class Model_settings extends CI_Model
 	 */
 	public function set($key, $val, $module = 'general')
 	{
-		$module = strtolower($module);
-
 		//Does this setting already exists?
 		$exists = isset($this->_items[$module][$key]);
 
@@ -92,7 +90,7 @@ Class Model_settings extends CI_Model
 	 */
 	public function set_block($key, $val, $theme, $template = 'default')
 	{
-		return $this->set($key, $val, '_blocks_' . $theme . '_' . $template);
+		return $this->set($key, $val, 'blocks-' . $theme . '-' . $template);
 	}
 
 	/**
@@ -104,7 +102,7 @@ Class Model_settings extends CI_Model
 	 */
 	public function get_block($key, $theme, $template = 'default')
 	{
-		return $this->get($key, '_blocks_' . $theme . '_' . $template);
+		return $this->get($key, 'blocks-' . $theme . '-' . $template);
 	}
 
 	/**
@@ -115,7 +113,6 @@ Class Model_settings extends CI_Model
 	 */
 	public function get($key, $module = 'general')
 	{
-		$module = strtolower($module);
 		if (isset($this->_items[$module][$key]))
 		{
 			return $this->_items[$module][$key];

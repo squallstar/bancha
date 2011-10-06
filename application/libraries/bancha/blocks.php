@@ -99,4 +99,5 @@ Class Blocks
 	{
 		return $this->_CI->settings->get($block, $theme, $template);
 	}
+
 }

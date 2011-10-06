@@ -27,6 +27,7 @@
 			<h3><?php echo _('Add HTML'); ?></h3>
 
 			<?php echo form_open('', array('onsubmit' => 'return false;')); 
+			echo form_hidden('section_type', 'html');
 			
 			echo form_textarea(array('name' => 'html', 'class' => 'code')).br(2);
 			echo form_submit(array('name' => 'html-submit', 'class' => 'submit mid', 'onclick' => "bancha.blocks.save_section('#code');"), 'Add');

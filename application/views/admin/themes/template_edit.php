@@ -62,7 +62,7 @@
 </div>
 
 <div class="hidden">
-		<div id="add_section">
+		<div id="add_section" data-theme="<?php echo $theme; ?>" data-template="<?php echo $template; ?>">
 		
 			<?php echo $this->view->render('admin/themes/section_composer'); ?>
 
