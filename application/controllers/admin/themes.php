@@ -88,7 +88,9 @@ Class Themes extends Bancha_Controller
 					foreach ($files as $file) {
 						if (strpos($file, '.php') !== FALSE)
 						{
-							$tmp = explode($theme_templates_path, $file);
+							$tmp = explode($name . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR, $file);
+
+							$tmp[1] = str_replace('\\', '/', $tmp[1]);
 
 							if (strpos($tmp[1], 'templates/') === 0)
 							{

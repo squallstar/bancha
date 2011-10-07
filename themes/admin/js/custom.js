@@ -328,7 +328,7 @@ var bancha = {
 	blocks : {
 		_last_section : false,
 		set_section : function(which) {
-			bancha.blocks._last_section = which;	
+			bancha.blocks._last_section = which;
 		},
 		save_section : function(el) {
 			var this_block = bancha.blocks._last_section;
@@ -337,16 +337,31 @@ var bancha = {
 			values = values + '&theme=' + $('#add_section').attr('data-theme') + '&template=' + $('#add_section').attr('data-template');
 			$('#cboxClose').click();
 			$.post(admin_url + 'themes/add_section', values, function(data) {
-				$('.theme_block[data-name="'+this_block+'"]').children().last().prev().append(data);
+
+				$(data).insertBefore($('.theme_block[data-name="'+this_block+'"]').children().last());
+
+				$('#add_section input[type=text], #add_section select').val('');
+				$('form input[name=block]').remove();
+				bancha.blocks.load_sortable();
 			});
+		},
+		load_sortable : function() {
+			$('.theme_block .section').sortable({
+				stop: function(event, ui) {
+					bancha.blocks.sorted(event, ui);
+				}
+			});
+		},
+		sorted : function(event, ui) {
+
 		}
 	}
 }
 
 jQuery.extend(DateInput.DEFAULT_OPTS, {
-	  month_names: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+	  /*month_names: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
 	  short_month_names: ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
-	  short_day_names: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
+	  short_day_names: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],*/
 	  stringToDate: function(string) {
 		    var matches;
 		    if (matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/)) {

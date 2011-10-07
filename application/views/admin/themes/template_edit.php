@@ -53,7 +53,7 @@
 		echo form_close();
 		?>
 		<br />
-		
+
 
 	</div>
 
@@ -63,7 +63,7 @@
 
 <div class="hidden">
 		<div id="add_section" data-theme="<?php echo $theme; ?>" data-template="<?php echo $template; ?>">
-		
+
 			<?php echo $this->view->render('admin/themes/section_composer'); ?>
 
 
@@ -72,8 +72,10 @@
 
 <link type="text/css" rel="stylesheet" href="<?php echo site_url(THEMESPATH.'admin/css/colorbox.css'); ?>" />
 <script type="text/javascript" src="<?php echo site_url(THEMESPATH.'admin/js/jquery.colorbox.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$(".add_section").colorbox({width:"65%", inline:true, href:"#add_section"});
+	bancha.blocks.load_sortable();
 });
 </script>
