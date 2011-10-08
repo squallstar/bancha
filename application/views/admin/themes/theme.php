@@ -30,7 +30,7 @@
 					<?php foreach ($templates as $filename) { ?>
 					<tr>
 						<td><?php echo $filename; ?></td>
-						<td class="delete"><a href="#"><?php echo _('Duplicate template'); ?></a> - <a href="<?php echo admin_url('themes/theme/' . $theme . '/' . urlencode(str_replace('.php', '', str_replace('/', '|', $filename)))); ?>"><?php echo _('Edit blocks'); ?></a></td>
+						<td class="delete"><!--<a href="#"><?php echo _('Duplicate template'); ?></a> - --><a href="<?php echo admin_url('themes/theme/' . $theme . '/' . urlencode(str_replace('.php', '', str_replace('/', '|', $filename)))); ?>"><?php echo _('Edit blocks'); ?></a></td>
 					</tr>
 					<?php } ?>
 			</tbody>

@@ -318,12 +318,23 @@ Class Bancha_Loader extends CI_Loader {
 		}
 		else
 		{
-			$this->view->rendered_views[] = $_ci_path;
+			$_ci_CI->view->rendered_views[] = $_ci_path;
+
+			//We set the current view
 			$tmp = explode('/', $_ci_path);
-			$this->view->current_view = $tmp[count($tmp)-1];
+
+			//We set the current view
+			$previous_view = $this->view->current_view;
+			$_ci_CI->view->current_view = $_ci_path;
 			
 			include($_ci_path); // include() vs include_once() allows for multiple views with the same name
+
+			//And we set back the current view to the previous one
+			$_ci_CI->view->current_view = $previous_view;
+
 		}
+
+		
 
 		log_message('debug', 'File loaded: '.$_ci_path);
 

@@ -114,7 +114,30 @@ Class Themes extends Bancha_Controller
 					$this->load->frlibrary('blocks');
 					$blocks = $this->blocks->search_blocks($content);
 
+					
+
 					$filled_blocks = $this->blocks->fill_blocks($blocks, $name, $filename);
+
+					$delete_section = $this->input->get('delete_section');
+					if ($delete_section !== FALSE)
+					{
+						$block_name = $this->input->get('block');
+						if (isset($filled_blocks[$block_name]))
+						{
+							unset($filled_blocks[$block_name][$delete_section]);
+							if (!count($filled_blocks[$block_name]))
+							{
+								$filled_blocks[$block_name] = array();
+							}
+							$this->settings->set_block($block_name, $filled_blocks, $name, $filename);
+							$this->settings->clear_cache();
+
+							//Force the redirect to prevent another the URI with the GET parameters
+							redirect(current_url());
+						}
+					}
+
+
 
 					$this->view->set('blocks', $filled_blocks);
 					$this->view->set('template', $filename);
@@ -163,7 +186,20 @@ Class Themes extends Bancha_Controller
 					{
 						$block[$pos] = array(
 							'type'	=> 'html',
-							'data'	=> $html
+							'data'	=> $html,
+							'block'	=> $block_name
+						);
+						$response = $this->blocks->get_section_preview($block[$pos], $pos);
+					}
+					break;
+				case 'code':
+					$code = $this->input->post('code');
+					if (strlen($code))
+					{
+						$block[$pos] = array(
+							'type'	=> 'code',
+							'data'	=> $code,
+							'block'	=> $block_name
 						);
 						$response = $this->blocks->get_section_preview($block[$pos], $pos);
 					}
@@ -174,6 +210,37 @@ Class Themes extends Bancha_Controller
 			if ($done) echo $response;
 			return;
 		}
+	}
+
+	public function reorder_block()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$this->load->frlibrary('blocks');
+			$block_name = $this->input->post('block');
+			$theme = $this->input->post('theme');
+			$template = $this->input->post('template');
+
+			$block = $this->settings->get_block($block_name, $theme, $template);
+			$new_block = array();
+			$reordered_blocks = array();
+			foreach ($block as $pos => $section)
+			{
+				$new_pos = $this->input->post($pos);
+				$new_block[$new_pos] = $section;
+			}
+
+			for ($i=0; $i < count($new_block); $i++) { 
+				$reordered_blocks[$i] = $new_block[$i];
+			}
+
+			$done = $this->settings->set_block($block_name, $reordered_blocks, $theme, $template);
+			$this->settings->clear_cache();
+			if ($done) echo 1;
+			return;
+			
+		}
+
 	}
 }
 

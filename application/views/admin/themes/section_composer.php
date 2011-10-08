@@ -18,22 +18,34 @@
 		<div class="sidebar">
 			<ul class="sidemenu">
 				<!--<li><a href="#module"><?php echo _('Add module'); ?></a></li>-->
-				<li><a href="#code"><?php echo _('Add HTML'); ?></a></li>
+				<li><a href="#html"><?php echo _('Add HTML'); ?></a></li>
+				<li><a href="#code"><?php echo _('Add PHP code'); ?></a></li>
 			</ul>
 			<p>This section is purely experimental!</p>
 		</div>
 
-		<div class="sidebar_content" id="code">
+		<div class="sidebar_content" id="html">
 			<h3><?php echo _('Add HTML'); ?></h3>
 
 			<?php echo form_open('', array('onsubmit' => 'return false;')); 
 			echo form_hidden('section_type', 'html');
 			
 			echo form_textarea(array('name' => 'html', 'class' => 'code')).br(2);
-			echo form_submit(array('name' => 'html-submit', 'class' => 'submit mid', 'onclick' => "bancha.blocks.save_section('#code');"), 'Add');
+			echo form_submit(array('name' => 'html-submit', 'class' => 'submit mid', 'onclick' => "bancha.blocks.save_section('#html');"), 'Add');
 			echo form_close();
 			?>
+		</div>
 
+		<div class="sidebar_content" id="code">
+			<h3><?php echo _('Add PHP code'); ?></h3>
+
+			<?php echo form_open('', array('onsubmit' => 'return false;')); 
+			echo form_hidden('section_type', 'code');
+			
+			echo form_textarea(array('name' => 'code', 'class' => 'code'), '<?php  ?>').br(2);
+			echo form_submit(array('name' => 'code-submit', 'class' => 'submit mid', 'onclick' => "bancha.blocks.save_section('#code');"), 'Add');
+			echo form_close();
+			?>
 		</div>
 
 		<div class="sidebar_content" id="module">
