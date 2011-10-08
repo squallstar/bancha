@@ -140,8 +140,6 @@ Class Dispatcher_default
 					'link'	=> uri_string().'/'
 		);
 
-		//The title will be prepended
-		$this->_CI->view->title = $record->get('title') . ' - ' . $this->_CI->view->title;
 		$parent_page->set('view_template', $template);
 		$this->_CI->view->set('record', $record);
 
