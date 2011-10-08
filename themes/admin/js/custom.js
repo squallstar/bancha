@@ -324,13 +324,63 @@ var bancha = {
 					break;
 			}
 		}
+	},
+	blocks : {
+		_last_section : false,
+		set_section : function(which) {
+			bancha.blocks._last_section = which;
+		},
+		save_section : function(el) {
+			var this_block = bancha.blocks._last_section;
+			$(el + ' form').append('<input type="hidden" name="block" value ="'+this_block+'" />');
+			var values = $(el + ' form').serialize();
+			values = values + '&theme=' + $('#add_section').attr('data-theme') + '&template='
+				   + $('#add_section').attr('data-template');
+			$('#cboxClose').click();
+			$.post(admin_url + 'themes/add_section', values, function(data) {
+
+				$(data).insertBefore($('.theme_block[data-name="'+this_block+'"]').children().last());
+
+				$('#add_section input[type=text], #add_section select, #add_section textarea').val('');
+				$('form input[name=block]').remove();
+				bancha.blocks.load_sortable();
+			});
+		},
+		delete_section : function(which) {
+			var pos = $(which).parent('.section').attr('data-pos');
+			var block = $(which).parent('.section').parent('.theme_block').attr('data-name');
+			window.location.href = current_url + '?delete_section=' + pos + '&block=' + block;
+		},
+		load_sortable : function() {
+			$('.theme_block').sortable({
+				stop: function(event, ui) {
+					bancha.blocks.sorted(event, ui);
+				}
+			});
+		},
+		sorted : function(event, ui) {
+			var block = ui.item.parent('.theme_block');
+			var block_name = block.attr('data-name');
+			var str = '&theme=' + $('#add_section').attr('data-theme') + '&template='
+					+ $('#add_section').attr('data-template'); + '&block=' + block;
+
+			var str = '&theme=' + $('#add_section').attr('data-theme') + '&template='
+				   + $('#add_section').attr('data-template') + '&block=' + block_name;
+
+			$('.section', block).each(function(index) {
+				str = str + '&' + index + '=' + $(this).attr('data-pos');
+			});
+			$.post(admin_url + 'themes/reorder_block', str, function(data) {
+				
+			});
+		}
 	}
 }
 
 jQuery.extend(DateInput.DEFAULT_OPTS, {
-	  month_names: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+	  /*month_names: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
 	  short_month_names: ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
-	  short_day_names: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
+	  short_day_names: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],*/
 	  stringToDate: function(string) {
 		    var matches;
 		    if (matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/)) {

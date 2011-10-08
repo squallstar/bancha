@@ -1,5 +1,13 @@
 ## Bancha Change Log file ##
 
+**v 0.7.9** (2011-10-04)
+
+- Experimental use of "block templates"
+- Fixed a bug on the "published" field of the content types
+- Image dispatcher routes now allows uppercase extensions
+- Fixed a bug on the route action (website controller)
+
+
 **v 0.7.8** (2011-10-03)
 
 - Multilanguage URI support (issue #51)
@@ -7,6 +15,7 @@
 - Some fixes on the footer of the front-end themes
 - Language will be also included on new records if the content type supports it
 - New administration panel: themes
+
 
 **v 0.7.7** (2011-10-01)
 
