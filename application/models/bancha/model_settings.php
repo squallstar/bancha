@@ -50,7 +50,7 @@ Class Model_settings extends CI_Model
 	 * @param mixed $val
 	 * @param string $module
 	 */
-	public function set($key, $val, $module = 'general')
+	public function set($key, $val, $module = 'General')
 	{
 		//Does this setting already exists?
 		$exists = isset($this->_items[$module][$key]);
@@ -112,7 +112,7 @@ Class Model_settings extends CI_Model
 	 * @param string $module
 	 * @return mixed value
 	 */
-	public function get($key, $module = 'general')
+	public function get($key, $module = 'General')
 	{
 		if (isset($this->_items[$module][$key]))
 		{
@@ -127,7 +127,7 @@ Class Model_settings extends CI_Model
 	 * @param string $module
 	 * @return bool success
 	 */
-	public function delete($key, $module = 'general')
+	public function delete($key, $module = 'General')
 	{
 		$module = strtolower($module);
 		return $this->db->where('name', $name)->where('module', $module)->delete($this->table);

@@ -1,5 +1,12 @@
 ## Bancha Change Log file ##
 
+**v 0.7.10** (2011-10-08)
+
+- View blocks and sections are live! (experimental)
+- Automatic meta description implementation
+- Users got a "admin_lang" field with the language used in the administration
+- Little refactors of the Settings model
+
 **v 0.7.9** (2011-10-04)
 
 - Experimental use of "block templates"
