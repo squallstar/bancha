@@ -30,8 +30,9 @@
 				<li><a href="#sb-modules">18. Moduli</a></li>
 				<li><a href="#sb-settings">19. Impostazioni</a></li>
 				<li><a href="#sb-languages">20. Languages</a></li>
+				<li><a href="#sb-blocks">21. Blocks and sections</a></li>
 			</ul>
-			<p>Version: <?php echo BANCHA_VERSION; ?><br />Last update: Oct 2, 2011</p>
+			<p>Version: <?php echo BANCHA_VERSION; ?><br />Last update: Oct 8, 2011</p>
 		</div>
 
 		<div class="sidebar_content" id="sb-intro">
@@ -959,7 +960,7 @@ echo $this->settings->get('website_name');</code></pre><br />
 
 	<h3>get($key, $module)</h3>
 	<p>Legge una variabile dalle impostazioni, utilizzando il modulo richiesto.</p>
-<pre class="prettyprint"><code>//Leggo un valore dalle impostazioni del modulo 'general'
+<pre class="prettyprint"><code>//Leggo un valore dalle impostazioni del modulo 'General'
 echo $this->settings->get('website_name');
 
 //Ed ora, dal modulo di twitter
@@ -967,7 +968,7 @@ echo $this->settings->get('username', 'twitter');</code></pre><br />
 
 <h3>set($key, $value, $module)</h3>
 	<p>Scrive un valore nelle impostazioni, abbinandolo al modulo impostato come terzo parametro.</p>
-<pre class="prettyprint"><code>//Scrivo un valore nel modulo 'general'
+<pre class="prettyprint"><code>//Scrivo un valore nel modulo 'General'
 echo $this->settings->set('website_name', 'My cool website');
 
 //Ed ora, aggiorno un valore nel modulo di twitter
@@ -1026,6 +1027,13 @@ When you create a new language, just copy one of these folders changing the name
 
 //The .PO files will now find the "Welcome back, %u! Today it is %d" label.</code></pre><br />
 
+	</div>
+
+	<div class="sidebar_content" id="sb-blocks">
+			<h3>18. Moduli</h3>
+			<p>
+			<div class="message warning">TODO</div>
+			</p>
 	</div>
 
 <!-- end -->
