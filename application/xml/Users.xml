@@ -44,6 +44,16 @@
 			<admin>true</admin>
 			<list>true</list>
 		</field>
+		<field id="admin_lang" column="true">
+			<description>Admin language</description>
+			<type>select</type>
+			<admin>true</admin>
+			<list>true</list>
+			<options>
+				<custom>config_item('languages_select')</custom>
+			</options>
+			<default>eval:$this->lang->current_language</default>
+		</field>
 	</fieldset>
 	<fieldset name="Groups" icon="lock">
 		<field id="id_group" column="true">

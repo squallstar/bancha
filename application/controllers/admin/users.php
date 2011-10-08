@@ -121,6 +121,16 @@ Class Users extends Bancha_Controller
 			$this->view->set('user', FALSE);
 		}
 
+		//Additional set-ups before the page rendering
+        foreach ($type_definition['fields'] as $field_name => $field_value)
+        {
+        	if (isset($field_value['extract']))
+            {
+                //We extract the custom options
+    			$type_definition['fields'][$field_name]['options'] = $this->records->get_field_options($field_value);
+        	}
+        }
+
 		$this->view->set('tipo', $type_definition);
 		$this->view->set('_section', 'users');
 		$this->view->set('action', 'admin/users/edit/' . $user->id);

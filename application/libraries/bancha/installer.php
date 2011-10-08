@@ -139,7 +139,8 @@ Class Installer
 		    'password'	=> array('type'	=> 'VARCHAR', 'constraint'	=> 64, 'null' => FALSE),
 		    'name'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 64),
 		    'surname'	=> array('type'	=> 'VARCHAR', 'constraint'	=> 64),
-		    'email'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 255)
+		    'email'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
+		    'admin_lang' => array('type' => 'VARCHAR', 'constraint' => 2, 'null', TRUE)
 		);
 
 		$this->dbforge->drop_table('users');
@@ -330,7 +331,8 @@ Class Installer
 			'email' => $email,
 			'username' => $username,
 			'password' => $password,
-			'id_group' => $this->group_id
+			'id_group' => $this->group_id,
+			'admin_lang' => $this->CI->lang->current_language
 		);
 		return $this->users->add_user($data);
 	}
