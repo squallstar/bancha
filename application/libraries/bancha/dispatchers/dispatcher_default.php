@@ -295,6 +295,11 @@ Class Dispatcher_default
 		return $page;
 	}
 
+	/**
+	 * Calls the action of a page
+	 * Works only if the action_custom_name is set
+	 * @param Record $page
+	 */
 	protected function call_action($page)
 	{
 		$folder = $this->_CI->config->item('custom_controllers_folder');
