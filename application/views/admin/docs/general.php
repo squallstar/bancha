@@ -1030,7 +1030,7 @@ When you create a new language, just copy one of these folders changing the name
 	</div>
 
 	<div class="sidebar_content" id="sb-blocks">
-			<h3>18. Moduli</h3>
+			<h3>18. Blocks and sections</h3>
 			<p>
 			<div class="message warning">TODO</div>
 			</p>
