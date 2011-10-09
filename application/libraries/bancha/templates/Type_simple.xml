@@ -72,7 +72,7 @@
 			<size>4096</size>
 			<mimes>jpg|gif|png|jpeg</mimes>
 			<original>true</original>
-			<encrypt_name>false</encrypt_name>
+			<encrypt_name>true</encrypt_name>
 			<resized>640x?</resized>
 			<thumbnail>60x?</thumbnail>
 			<max>3</max>
