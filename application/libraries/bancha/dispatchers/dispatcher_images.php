@@ -137,9 +137,21 @@ Class Dispatcher_Images
 					list($img_w, $img_h) = getimagesize($config['source_image']);
 					if ($img_h <= $img_w && $config['height'] != '?')
 					{
-						$config['width'] = round($config['height']*$img_w/$img_h);
-					} else if ($config['width'] != '?') {
-						$config['height'] = round($config['width']*$img_h/$img_w);
+						$new_width = round($config['height']*$img_w/$img_h);
+						if ($new_width >= $config['width'])
+						{
+							$config['width'] = $new_width;
+						} else {
+							$config['height'] = round($config['width']*$img_h/$img_w);
+						}
+					} else if ($img_w < $img_h && $config['width'] != '?') {
+						$new_height = round($config['width']*$img_h/$img_w);
+						if ($new_height >= $config['height'])
+						{
+							$config['height'] = $new_height;
+						} else {
+							$config['width'] = round($config['width']*$img_w/$img_h);
+						}
 					}
 				}
 			}
