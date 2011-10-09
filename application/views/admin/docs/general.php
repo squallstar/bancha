@@ -523,7 +523,7 @@ print_r($record->get('lista_immagini');</code></pre><br />
 <p>In alternativa, anzich&egrave; chiamare singolarmente la funzione per ogni record, &egrave; sufficiente utilizzare la funzione <strong>documents()</strong> durante l'estrazione dei
 records per procedere alla valorizzazione automatica dei documenti:</p>
 <pre class="prettyprint"><code>$records = $this->records->type('Menu')-><strong>documents(TRUE)</strong>->get();</code></pre><br />
-<div class="message warning">Attenzione: quest'ultimo esempio comporta maggior carico lato database poich&egrave; per ogni record estratto, verr&agrave; effettuata una seconda query per estrarre subito i suoi allegati.</div>
+<div class="message warning">Attenzione: quest'ultimo esempio è più performante rispetto alla singola estrazione dei documenti dei records, poiché verrà eseguita una singola query cercando tutti gli allegati dei records estratti.</div>
 <p>Bancha, mette a disposizione anche una classe di estrazione dei documenti. Per inizializzare la classe, utilizzare la seguente sintassi:</p>
 <pre class="prettyprint"><code>$this->load->documents();</code></pre><br />
 <p>La classe Documents presenta i seguenti metodi di estrazione (il funzionamento &egrave; simile alla classe Records):</p>
