@@ -11,7 +11,7 @@ $admin_path = rtrim(ADMIN_PUB_PATH, '/');
 $route['^' . $admin_path .'$'] = "admin/auth/login";
 $route['^' . $admin_path .'/pages$'] = "admin/contents";
 $route['^' . $admin_path .'/pages/(.+)$'] = "admin/contents/$1";
-$route['^' . ADMIN_PUB_PATH] = "admin/$1";
+$route['^' . ADMIN_PUB_PATH . '(.+)$'] = "admin/$1";
 
 /*
 | -------------------------------------------------------------------------
