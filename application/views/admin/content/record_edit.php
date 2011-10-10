@@ -10,7 +10,7 @@
  *
  */
 
-$this->load->helper('form'); 
+$this->load->helper('form');
 $this->load->frlibrary('form_renderer');
 $CI = & get_instance();
 
@@ -50,7 +50,7 @@ $save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="banc
 			   .($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
 ;
 
-echo form_open_multipart(isset($action) ? $action : 'admin/'.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
+echo form_open_multipart(isset($action) ? $action : ADMIN_PUB_PATH.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
 
 $js_onload = '';
 $first_lap = TRUE;

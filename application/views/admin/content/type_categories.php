@@ -66,7 +66,7 @@
 			<br />
 			<p><?php echo _('Categories permits your contents to be more differents each other.'); ?><br /><?php echo _('They can be useful to make different extractions and use them such as tags.'); ?></p>
 			<?php
-			echo form_open('admin/'.$_section.'/type_categories/'.$tipo['name']);
+			echo form_open(ADMIN_PUB_PATH.$_section.'/type_categories/'.$tipo['name']);
 
 			echo form_label(_('Category name'), 'category_name') . br(1);
 			echo form_input(array('name' => 'category_name', 'class' => 'text')) . br(2);

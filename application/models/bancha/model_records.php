@@ -375,6 +375,7 @@ Class Model_records extends CI_Model {
   		{
   			$results = $query->result();
   			$records = array();
+            $record_ids = array();
   			foreach ($results as $item) {
 
   				if (!isset($item->id_type) || !$item->id_type)
@@ -392,6 +393,7 @@ Class Model_records extends CI_Model {
   				if ($record instanceof Record) {
 
   					$record->id = $item->{$tipo['primary_key']};
+                    $record_ids[] = $record->id;
   					$record->tipo = $type_name;
   					$record->xml = $item->xml;
 
@@ -429,20 +431,39 @@ Class Model_records extends CI_Model {
   							$record->set($field_name, $item->$field_name);
   						}
   					}
-
   					$record->build_data();
-
-  					if ($this->_get_documents)
-  					{
-  						$record->set_documents();
-  					}
-
-  				}else{
+  				} else {
   					show_error(_('Cannot build the record.').' (records/get)');
   				}
   				$records[] = $record;
 
   			}
+
+            //We extract all the attachments, using the record IDS (single query = WOW!)
+            if ($this->_get_documents && count($record_ids))
+            {
+                $this->load->documents();
+                $docs = array();
+                $all_attachs = $this->documents->table($tipo['table'])->where_in('bind_id', $record_ids)->get();
+                if (count($all_attachs))
+                {
+                    foreach ($all_attachs as $attachment)
+                    {
+                        $docs[$attachment->bind_id][$attachment->bind_field][] = $attachment;
+                    }
+                    foreach ($records as & $record)
+                    {
+                        if (isset($docs[$record->id]))
+                        {
+                            $attachments = $docs[$record->id];
+                            foreach ($attachments as $field_name => $attachs)
+                            {
+                                $record->set($field_name, $attachs);   
+                            }
+                        }
+                    }
+                }
+            }
 
   			//Reset the switches
   			$this->last_search_has_tree = FALSE;

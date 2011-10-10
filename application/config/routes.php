@@ -5,13 +5,13 @@
 | -------------------------------------------------------------------------
 */
 
-//Internal routing systems for administration
-$route['^admin$'] = "admin/auth/login";
-$route['^admin/pages$'] = "admin/contents";
-$route['^admin/pages/(.+)$'] = "admin/contents/$1";
+$admin_path = rtrim(ADMIN_PUB_PATH, '/');
 
-//The default routing method used for the website
-$route['404_override'] = 'website/router';
+//Internal routing systems for administration
+$route['^' . $admin_path .'$'] = "admin/auth/login";
+$route['^' . $admin_path .'/pages$'] = "admin/contents";
+$route['^' . $admin_path .'/pages/(.+)$'] = "admin/contents/$1";
+$route['^' . ADMIN_PUB_PATH . '(.+)$'] = "admin/$1";
 
 /*
 | -------------------------------------------------------------------------
@@ -19,7 +19,10 @@ $route['404_override'] = 'website/router';
 | -------------------------------------------------------------------------
 */
 
-//Website homepage
+//The default routing method used for the website
+$route['404_override'] = 'website/router';
+
+//The action called as the homepage
 $route['default_controller'] = "website/home";
 
 //This route let you switch between the website themes
