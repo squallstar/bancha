@@ -31,7 +31,7 @@ Class Auth extends Bancha_Controller {
 	{
 		if ($this->auth->is_logged())
 		{
-			redirect('admin/dashboard');
+			redirect(ADMIN_PUB_PATH.'dashboard');
 		}
 
 		if ($this->input->post('username'))
@@ -45,7 +45,7 @@ Class Auth extends Bancha_Controller {
 			{
 				$this->load->events();
 				$this->events->log('login');
-				redirect('admin/dashboard');
+				redirect(ADMIN_PUB_PATH.'dashboard');
 			} else {
 				$this->view->set('message', _('Username/password wrong.'));
 			}
@@ -61,6 +61,6 @@ Class Auth extends Bancha_Controller {
 		$this->load->events();
 		$this->events->log('logout');
 
-		redirect('admin/auth/login');
+		redirect(ADMIN_PUB_PATH.'auth/login');
 	}
 }

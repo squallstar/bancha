@@ -1137,7 +1137,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 							{
 								action : 'Browse',
 								target: 'Link:txtUrl',
-								url: site_url + 'admin/ajax/finder/' + $('input[name=id]').val()
+								url: admin_url + 'ajax/finder/' + $('input[name=id]').val()
 							},
 							style : 'float:right',
 							hidden : false,

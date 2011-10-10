@@ -93,6 +93,15 @@ if (defined('ENVIRONMENT'))
 	$themes_folder = 'themes';
 
 
+/*
+ *---------------------------------------------------------------
+ * ADMIN PUBLIC PATH
+ *---------------------------------------------------------------
+ *
+ */
+	$admin_path = 'admin/';
+
+
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
 // --------------------------------------------------------------------
@@ -142,6 +151,9 @@ if (defined('ENVIRONMENT'))
 
 	// Name of the "system folder"
 	define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
+
+	//The administration public path
+	define('ADMIN_PUB_PATH', $admin_path);
 
 
 	// The path to the "application" folder

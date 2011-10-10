@@ -92,7 +92,7 @@ Class Contents extends Bancha_Controller
         if ($tipo == '')
         {
             $this->index();
-            return;    
+            return;
         }
         $type = $this->content->type($tipo);
 
@@ -361,24 +361,24 @@ Class Contents extends Bancha_Controller
             $content_edit_link = '<a href="'.admin_url(''.$this->_section.'/edit_record/'.$tipo['name'].'/'.$record->id).'">'.$value.'</a>';
 
             if ($this->input->post('_bt_save_list'))
-            { 
+            {
                 $msg = $this->lang->_trans('The content %n has been saved.', array('n' => $content_edit_link));
           		$this->session->set_flashdata('message', $msg);
-                redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
+                redirect(ADMIN_PUB_PATH.$this->_section.'/type/' . $tipo['name']);
             } else if ($this->input->post('_bt_publish')) {
 
           		$this->records->publish($record->id);
                 $msg = $this->lang->_trans('The content %n has been published.', array('n' => $content_edit_link));
                 $this->session->set_flashdata('message', $msg);
-                redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
+                redirect(ADMIN_PUB_PATH.$this->_section.'/type/' . $tipo['name']);
             } else {
 
-          		
+
                 if ($record_id == '')
                 {
                     //If it's a new record, we redirect to the same page (F5 refresh fix for duplicate records)
                     $this->session->set_flashdata('message', _('The content has been saved.'));
-                    redirect('admin/'.$this->_section.'/edit_record/' . $tipo['name'] . '/' . $record->id);
+                    redirect(ADMIN_PUB_PATH.$this->_section.'/edit_record/' . $tipo['name'] . '/' . $record->id);
                 } else {
                     $this->view->message('success', _('The content has been saved.'));
                 }
@@ -532,7 +532,7 @@ Class Contents extends Bancha_Controller
     			if (!$callback)
     			{
     				$this->session->set_flashdata('message', 'Il record ['.$id_record.'] &egrave; stato eliminato.');
-    				redirect('admin/'.$this->_section.'/type/' . $tipo['name']);
+    				redirect(ADMIN_PUB_PATH.$this->_section.'/type/' . $tipo['name']);
     			} else {
                     return true;
                 }
@@ -564,7 +564,7 @@ Class Contents extends Bancha_Controller
 
                 if ($done)
                 {
-                	redirect('admin/' . ($this->input->post('type_tree') == 'true' ? 'pages' : 'contents'));
+                	redirect(ADMIN_PUB_PATH . ($this->input->post('type_tree') == 'true' ? 'pages' : 'contents'));
                 }
 
             } else {
@@ -596,7 +596,7 @@ Class Contents extends Bancha_Controller
 				$this->session->set_flashdata('message', $msg);
 
 				$this->content->rebuild();
-				redirect('admin/contents/');
+				redirect(ADMIN_PUB_PATH.'contents/');
 			} else {
 				show_error(_('Cannot save that XML scheme.'), 500, _('Saving error'));
 			}
@@ -702,7 +702,7 @@ Class Contents extends Bancha_Controller
 
   		if ($this->input->post('cancel'))
         {
-  		    redirect('admin/contents');
+  		    redirect(ADMIN_PUB_PATH.'contents');
   		} else if ($this->input->post('delete'))
         {
 	  		$xml_path = $this->config->item('xml_typefolder').$tipo['name'].'.xml';
@@ -736,7 +736,7 @@ Class Contents extends Bancha_Controller
 	  			$this->content->rebuild();
 
 	  			$this->session->set_flashdata('message', $this->lang->_trans('The type named %n has been removed.', array('n'=>'['.$tipo['name'].']')));
-	  			redirect('admin/contents');
+	  			redirect(ADMIN_PUB_PATH.'contents');
 	  		}
   		} else {
   			$this->view->set('tipo', $tipo);

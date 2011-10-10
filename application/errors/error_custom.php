@@ -6,7 +6,7 @@ if (!function_exists('site_url')) {
 }
 if (!function_exists('admin_url')) {
 	function admin_url() {
-		return '/admin/';
+		return '/'.ADMIN_PUB_PATH;
 	}
 }
 ?><!DOCTYPE html>

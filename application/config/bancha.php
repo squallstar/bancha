@@ -87,15 +87,6 @@ $config['installed_themes'] = array(
 );
 
 /*
- * ADMINISTRATION PUBLIC PATH
- * This will be the admin public path. You can change this to anything you want, but remember
- * to change also the admin controllers folder name from "admin" to the same name.
- * You need also to update the admin routes on the config/route.php file.
- */
-define('ADMIN_PUB_PATH', 'admin/');
-
-
-/*
 * CACHE - CATEGORIES AND HIERARCHIES
 * Defines if the categories and hierarchies queries can be cached on the filesystem.
 * Feel free to disable this feature if your disk makes a lot of file read/write operations.
