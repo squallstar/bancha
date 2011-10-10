@@ -452,6 +452,7 @@ In alternativa, &egrave; possibile utilizzare la funzione <strong>documents()</s
 	<li><strong>documents($bool)</strong> - definisce se estrarre subito anche i documenti collegati anzich&egrave; usare la funzione <strong>set_documents()</strong> sui singoli record.</li>
 	<li><strong>where($field, $value)</strong> - definisce una condizione where (anche su campi non fisici - xml)</li>
 	<li><strong>like($field, $value)</strong> - definisce una condizione like (anche su campi non fisici - xml)</li>
+	<li><strong>or_like($field, $value)</strong> - definisce una condizione or_like (anche su campi non fisici - xml)</li>
 	<li><strong>limit($limit, $offset)</strong> - definisce una condizione limit</li>
 	<li><strong>order_by($field, $order)</strong> - definisce una condizione di order by</li>
 </ul>

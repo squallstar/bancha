@@ -219,6 +219,13 @@ Class Dispatcher_default
 		if ($tipo)
 		{
 			$this->_CI->records->type($tipo);
+
+			$search_query = $this->_CI->input->get('search');
+			if ($search_query)
+			{
+				$this->_CI->records->like('title', $search_query);
+				$this->_CI->records->or_like('content', $search_query);
+			}
 		}
 		//Just list fields, not the detail ones
 		$this->_CI->records->set_list(TRUE);

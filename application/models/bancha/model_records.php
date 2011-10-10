@@ -263,6 +263,26 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
+  	 * Sets an or-like search condition
+  	 * @param string $field
+  	 * @param int|string $value
+  	 */
+  	public function or_like($field='', $value='')
+  	{
+  		if ($field != '')
+  		{
+  			if (in_array($field, $this->_single_type['columns']))
+  			{
+  				$this->db->or_like($field, $value);
+  			} else {
+  				//Xml search by tag content
+  				$this->db->or_like($this->table_current.'.xml', '<'.$field.'>'.CDATA_START.'%'.$value.'%'.CDATA_END.'</'.$field.'>');
+  			}
+  		}
+  		return $this;
+  	}
+
+  	/**
   	 * Imposta un limite sui risultati
   	 * @param start $a start
   	 * @param string $b howmany
