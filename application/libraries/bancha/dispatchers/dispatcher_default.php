@@ -167,9 +167,7 @@ Class Dispatcher_default
 			$category_record_ids = $this->_CI->categories->get_records_for_categories($cat_ids);
 			if (count($category_record_ids))
 			{
-				$this->_CI->db->start_cache();
 				$this->_CI->records->id_in($category_record_ids);
-				$this->_CI->db->stop_cache();
 			}
 		}
 
@@ -180,9 +178,7 @@ Class Dispatcher_default
 			$hierarchies_record_ids = $this->_CI->hierarchies->get_records_for_hierarchies($hierarchies);
 			if (count($hierarchies_record_ids))
 			{
-				$this->_CI->db->start_cache();
 				$this->_CI->records->id_in($hierarchies_record_ids);
-				$this->_CI->db->stop_cache();
 			}
 		}
 
@@ -209,8 +205,6 @@ Class Dispatcher_default
 			$this->_CI->records->order_by($order_by);
 		}
 
-		$this->_CI->db->start_cache();
-
 		$sql_where = $page->get('action_list_where');
 		if ($sql_where) {
 			$this->_CI->records->where($sql_where);
@@ -229,15 +223,37 @@ Class Dispatcher_default
 		//Just list fields, not the detail ones
 		$this->_CI->records->set_list(TRUE);
 		$this->_CI->records->language();
-		$this->_CI->db->stop_cache();
 
 		$records = $this->_CI->records->documents(TRUE)->get();
 
-		//If there's a limit, we will be a pagination
+		//If there's a limit, we will make a pagination
 		if ($limit)
 		{
+			if ($tipo)
+			{
+				$this->_CI->records->type($tipo);
+			}
+			if (isset($type['fields']['date_publish']))
+			{
+				//We can extract only published records
+				$this->_CI->records->where('date_publish <= ' . time());
+			}
+			if ($sql_where) {
+				$this->_CI->records->where($sql_where);
+			}
+			if (isset($category_record_ids))
+			{
+				$this->_CI->records->id_in($category_record_ids);
+			}
+			if (isset($hierarchies_record_ids))
+			{
+				$this->_CI->records->id_in($hierarchies_record_ids);
+			}
+
+			$count = $this->_CI->records->documents(FALSE)->set_list(TRUE)->language()->count();
+
 			$pagination = array(
-	        	'total_rows'			=> $this->_CI->records->count(),
+	        	'total_rows'			=> $count,
 	        	'per_page'				=> $limit,
 	        	'base_url'				=> current_url().'?',
 	        	'cur_tag_open'			=> '',
