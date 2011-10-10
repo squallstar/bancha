@@ -1,5 +1,11 @@
 ## Bancha Change Log file ##
 
+**v 0.7.11** (2011-10-09)
+
+- Now is possible to change the administration public path (check the index.php bootstrap file)
+- Documents will be extracted using a single query for all the records (big speed improvement)
+- Filenames now will be encrypted by default when uploaded
+
 **v 0.7.10** (2011-10-08)
 
 - View blocks and sections are live! (experimental)
