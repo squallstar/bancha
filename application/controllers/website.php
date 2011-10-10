@@ -47,7 +47,10 @@ Class Website extends Bancha_Controller
 		$home = $this->settings->get('website_homepage_' . $this->lang->current_language);
 		if ($home)
 		{
-			$this->config->prepend_language = $this->lang->current_language;
+			if ($this->config->item('prepend_uri_language'))
+			{
+				$this->config->prepend_language = $this->lang->current_language;
+			}
 			redirect(site_url($home), 'location', 301);
 		} else {
 			if (!$this->settings->get('is_installed'))
