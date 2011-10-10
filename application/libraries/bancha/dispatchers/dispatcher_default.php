@@ -54,7 +54,14 @@ Class Dispatcher_default
 			$this->_CI->view->title = $record->get('title');
 		}
 		$this->_CI->view->keywords = $record->get('meta_keywords');
+
 		$this->_CI->view->description = $record->get('meta_description');
+		if (!$this->_CI->view->description)
+		{
+			//If the meta description is not found, let's use the content field
+			$this->_CI->load->helper('text');
+			$this->_CI->view->description = character_limiter($record->get('content'), 150, '...');
+		}
 
 		//Is this a page?
 		if ($record->is_page())
@@ -133,8 +140,6 @@ Class Dispatcher_default
 					'link'	=> uri_string().'/'
 		);
 
-		//The title will be prepended
-		$this->_CI->view->title = $record->get('title') . ' - ' . $this->_CI->view->title;
 		$parent_page->set('view_template', $template);
 		$this->_CI->view->set('record', $record);
 
@@ -290,6 +295,11 @@ Class Dispatcher_default
 		return $page;
 	}
 
+	/**
+	 * Calls the action of a page
+	 * Works only if the action_custom_name is set
+	 * @param Record $page
+	 */
 	protected function call_action($page)
 	{
 		$folder = $this->_CI->config->item('custom_controllers_folder');

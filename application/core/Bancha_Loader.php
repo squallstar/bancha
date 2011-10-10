@@ -66,7 +66,17 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function frlibrary($library, $name = NULL)
 	{
-		$this->library(FRNAME.'/'.$library, NULL, $name );
+		$this->library(FRNAME.'/'.$library, NULL, $name);
+	}
+
+	/**
+	 * Loads an external library
+	 * @param string $library
+	 * @param string $name
+	 */
+	function extlibrary($library, $name = NULL)
+	{
+		$this->library('external/'.$library, NULL, $name);
 	}
 
 	/**
@@ -189,7 +199,7 @@ Class Bancha_Loader extends CI_Loader {
 
 		$tmp->module_name = ucfirst($module_name);
 		$tmp->module_filespath = $CI->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR;
-				
+
 		return $tmp;
 	}
 
@@ -308,9 +318,23 @@ Class Bancha_Loader extends CI_Loader {
 		}
 		else
 		{
-			$this->view->rendered_views[] = $_ci_path;
+			$_ci_CI->view->rendered_views[] = $_ci_path;
+
+			//We set the current view
+			$tmp = explode('/', $_ci_path);
+
+			//We set the current view
+			$previous_view = $this->view->current_view;
+			$_ci_CI->view->current_view = $_ci_path;
+			
 			include($_ci_path); // include() vs include_once() allows for multiple views with the same name
+
+			//And we set back the current view to the previous one
+			$_ci_CI->view->current_view = $previous_view;
+
 		}
+
+		
 
 		log_message('debug', 'File loaded: '.$_ci_path);
 

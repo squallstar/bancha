@@ -59,7 +59,7 @@ Class Model_auth extends CI_Model {
 	 */
 	public function login($username, $password)
 	{
-		$result = $this->db->select('id_user, name, surname, id_group')
+		$result = $this->db->select('id_user, name, surname, id_group, admin_lang')
 					   	    ->from('users')
 					        ->where('username', $username)
 					        ->where('password', $password)
@@ -74,6 +74,9 @@ Class Model_auth extends CI_Model {
 			$this->user('full_name', $user->name . ' ' . $user->surname);
 			$this->user('id', $user->id_user);
 			$this->user('group_id', $user->id_group);
+
+			$this->lang->set_lang($user->admin_lang);
+			$this->lang->set_cookie();
 
 			//Carico i permessi dell'utente
 			$this->cache_permissions();

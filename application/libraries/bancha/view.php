@@ -41,6 +41,16 @@ Class View
 	public $rendered_views = array();
 
 	/**
+	 * @var string The previous rendered view
+	 */
+	public $previous_view = '';
+
+	/**
+	 * @var string The current view (changes during rendering)
+	 */
+	public $current_view = '';
+
+	/**
 	 * @var string The views base_path
 	 */
 	public $base = '';

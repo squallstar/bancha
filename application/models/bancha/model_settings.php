@@ -50,10 +50,8 @@ Class Model_settings extends CI_Model
 	 * @param mixed $val
 	 * @param string $module
 	 */
-	public function set($key, $val, $module = 'general')
+	public function set($key, $val, $module = 'General')
 	{
-		$module = strtolower($module);
-
 		//Does this setting already exists?
 		$exists = isset($this->_items[$module][$key]);
 
@@ -81,6 +79,31 @@ Class Model_settings extends CI_Model
 						array('name' => $key, 'value' => $val, 'module' => $module)
 				   );
 		}
+		return FALSE;
+	}
+
+	/**
+	 * Create/updates a blocks of a theme template
+	 * @param string $key
+	 * @param mixed $val
+	 * @param string $theme
+	 * @param string $template
+	 */
+	public function set_block($key, $val, $theme, $template = 'default')
+	{
+		return $this->set($key, $val, 'blocks-' . $theme . '-' . $template);
+	}
+
+	/**
+	 * Returns a single block of a theme template
+	 * @param string $key
+	 * @param string $theme
+	 * @param string $template
+	 * @return mixed value
+	 */
+	public function get_block($key, $theme, $template = 'default')
+	{
+		return $this->get($key, 'blocks-' . $theme . '-' . $template);
 	}
 
 	/**
@@ -89,9 +112,8 @@ Class Model_settings extends CI_Model
 	 * @param string $module
 	 * @return mixed value
 	 */
-	public function get($key, $module = 'general')
+	public function get($key, $module = 'General')
 	{
-		$module = strtolower($module);
 		if (isset($this->_items[$module][$key]))
 		{
 			return $this->_items[$module][$key];
@@ -105,7 +127,7 @@ Class Model_settings extends CI_Model
 	 * @param string $module
 	 * @return bool success
 	 */
-	public function delete($key, $module = 'general')
+	public function delete($key, $module = 'General')
 	{
 		$module = strtolower($module);
 		return $this->db->where('name', $name)->where('module', $module)->delete($this->table);

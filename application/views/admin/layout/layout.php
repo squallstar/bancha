@@ -22,7 +22,7 @@ if ($this->input->is_ajax_request())
 } else {
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->lang->current_language; ?>">
 	<head>
 		<title><?php echo $title != '' ? $title . ' &bull; ' : ''; ?>Bancha</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
@@ -47,6 +47,7 @@ if ($this->input->is_ajax_request())
 		<script type="text/javascript">
 		var site_url = '<?php echo site_url(); ?>';
 		var admin_url = '<?php echo admin_url(); ?>/';
+		var current_url = '<?php echo current_url(); ?>';
 		</script>
 		<!--[if IE]><script type="text/javascript" src="<?php echo $js_url; ?>excanvas.js"></script><![endif]-->
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.img.preload.js"></script>

@@ -61,7 +61,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.7.8');
+define('BANCHA_VERSION', '0.7.10');
 
 /*
  * Framework name
@@ -242,7 +242,7 @@ $config['delete_dead_records'] = FALSE;
  * RECORD COLUMNS
  * The physical columns of the records table.
  * The website router uses it when extracts the records when it doesn't know the type.
- * Keep it updated when you add columns that you want to extract.
+ * Keep it updated when you add columns that you want to extract without knowing the content type.
  */
 $config['record_columns'] = array(
 	'id_record',
