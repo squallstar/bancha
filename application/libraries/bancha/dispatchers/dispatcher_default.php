@@ -231,7 +231,7 @@ Class Dispatcher_default
 		$this->_CI->records->language();
 		$this->_CI->db->stop_cache();
 
-		$records = $this->_CI->records->get();
+		$records = $this->_CI->records->documents(TRUE)->get();
 
 		//If there's a limit, we will be a pagination
 		if ($limit)

@@ -444,6 +444,7 @@ Class Model_records extends CI_Model {
             {
                 $this->load->documents();
                 $docs = array();
+                $this->db->flush_cache();
                 $all_attachs = $this->documents->table($tipo['table'])->where_in('bind_id', $record_ids)->get();
                 if (count($all_attachs))
                 {
