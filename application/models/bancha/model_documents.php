@@ -241,6 +241,17 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
+	 * Imposta una clausola di "where in" nelle estrazioni
+	 * @param string $column colonna
+	 * @param string $value valore
+	 */
+	public function where_in($column, $values = array())
+	{
+		$this->db->where_in($column, $values);
+		return $this;
+	}	
+
+	/**
 	 * Imposta la clausola di limit nelle estrazioni
 	 * @param int $a numero di record da estrarre
 	 * @param int $b offset
