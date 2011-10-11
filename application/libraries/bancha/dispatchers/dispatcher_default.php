@@ -239,6 +239,11 @@ Class Dispatcher_default
 			if ($tipo)
 			{
 				$this->_CI->records->type($tipo);
+				if ($search_query)
+				{
+					$this->_CI->records->like('title', $search_query);
+					$this->_CI->records->or_like('content', $search_query);
+				}
 			}
 			if (isset($type['fields']['date_publish']))
 			{
