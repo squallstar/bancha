@@ -55,12 +55,12 @@ Class Dispatcher_default
 		}
 		$this->_CI->view->keywords = $record->get('meta_keywords');
 
-		$this->_CI->view->description = $record->get('meta_description');
+		$this->_CI->view->description = strip_tags($record->get('meta_description'));
 		if (!$this->_CI->view->description)
 		{
 			//If the meta description is not found, let's use the content field
 			$this->_CI->load->helper('text');
-			$this->_CI->view->description = character_limiter($record->get('content'), 150, '...');
+			$this->_CI->view->description = character_limiter(strip_tags($record->get('content')), 150, '...');
 		}
 
 		//Is this a page?
