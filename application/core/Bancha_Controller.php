@@ -23,7 +23,7 @@ Class Bancha_Controller extends CI_Controller
 
 		//Loads the current language and .mo files
 		$section = $this->uri->segment(1);
-		$this->lang->check($section == 'admin' ? 'admin' : 'website');
+		$this->lang->check($section == rtrim(ADMIN_PUB_PATH, '/') ? 'admin' : 'website');
 
 		//Loads the framework :)
 		$this->load->bancha();

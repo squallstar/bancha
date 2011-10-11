@@ -1,5 +1,11 @@
 ## Bancha Change Log file ##
 
+**v 0.7.12** (2011-10-10)
+
+- Dispatcher limit count speed have been improved
+- Adding a "search" GET param now let you filter through a content list
+- Added a "or_like" function on the Records model
+
 **v 0.7.11** (2011-10-09)
 
 - Now is possible to change the administration public path (check the index.php bootstrap file)
