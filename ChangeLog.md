@@ -3,6 +3,7 @@
 **v 0.7.13** (2011-10-11)
 
 - Output class now include the GET request when making and retrieving cache files
+- Date publish will not be updated when a record will be published
 
 
 **v 0.7.12** (2011-10-10)

@@ -794,10 +794,6 @@ Class Model_records extends CI_Model {
 		{
 			$record = $record->result_array();
 			$stage_record = $record[0];
-			if ($stage_record['date_publish'] < time())
-			{
-				$stage_record['date_publish'] = time();
-			}
 
 			$this->events->log('publish', $stage_record[$this->primary_key], $stage_record['title'], $stage_record['id_type']);
 
