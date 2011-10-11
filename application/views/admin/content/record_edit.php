@@ -190,6 +190,10 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'datetime':
+				if (is_numeric($field_value))
+				{
+					$field_value = date('d/m/Y H:i', $field_value);
+				}
 				$tmp = explode(' ', $field_value);
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $tmp[0] ? $tmp[0] : date('d/m/Y');
