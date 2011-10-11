@@ -1,5 +1,10 @@
 ## Bancha Change Log file ##
 
+**v 0.7.13** (2011-10-11)
+
+- Output class now include the GET request when making and retrieving cache files
+
+
 **v 0.7.12** (2011-10-10)
 
 - Dispatcher limit count speed have been improved
