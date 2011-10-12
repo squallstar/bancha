@@ -1,5 +1,9 @@
 ## Bancha Change Log file ##
 
+**v 0.7.14** (2011-10-12)
+
+- Bug fix corrected on the installer (some people were getting stuck) - thx Marco Solazzi
+
 **v 0.7.13** (2011-10-11)
 
 - Output class now include the GET request when making and retrieving cache files

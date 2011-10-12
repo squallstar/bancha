@@ -313,15 +313,18 @@ Class Content
 			$this->CI->load->frlibrary('xml');
 		}
 
-		foreach ($filenames as $filename)
+		if (count($filenames) && is_array($filenames))
 		{
-			$content = $this->CI->xml->parse_scheme($this->xml_folder . $filename);
+			foreach ($filenames as $filename)
+			{
+				$content = $this->CI->xml->parse_scheme($this->xml_folder . $filename);
 
-			$all_types_id[] = $content['id'];
-			$all_types = $content['name'];
+				$all_types_id[] = $content['id'];
+				$all_types = $content['name'];
 
-			//Aggiungo il tipo
-			$contents[$content['id']] = $content;
+				//Aggiungo il tipo
+				$contents[$content['id']] = $content;
+			}
 		}
 
 		if ($this->CI->config->item('delete_dead_records') == TRUE)
