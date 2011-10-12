@@ -127,7 +127,7 @@ Class View
 	 */
 	public function load_theme() {
 		$this->theme = $this->_CI->session->userdata('_website_theme');
-		if (!$this->theme)
+		if (!$this->theme && !defined('DISABLE_SETTINGS'))
 		{
 			$this->_CI->load->library('user_agent');
 			$this->_CI->load->settings();

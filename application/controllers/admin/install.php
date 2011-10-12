@@ -19,6 +19,7 @@ Class Install extends Bancha_Controller
 {
 	public function __construct()
 	{
+	    define('DISABLE_SETTINGS', TRUE);
 	    parent::__construct();
 	    $this->view->base = 'admin/';
 	}
