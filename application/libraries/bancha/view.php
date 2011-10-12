@@ -249,8 +249,9 @@ Class View
 	 * @param string $template_file
 	 * @param bool $layout
 	 * @param int $code HTTP code
+	 * @param bool $return Whether the view needs to be returned or echoed
 	 */
-	public function render_template($template_file, $layout = TRUE, $code = '')
+	public function render_template($template_file, $layout = TRUE, $code = '', $return = FALSE)
 	{
 		if ($template_file == '')
 		{
@@ -267,9 +268,9 @@ Class View
 		if ($layout)
 		{
 			$this->set('_template_file', $this->_template_dir.$template_file);
-			$this->_CI->load->view('layout', $this->_data);
+			return $this->_CI->load->view('layout', $this->_data, $return);
 		} else {
-			$this->_CI->load->view($this->_template_dir.$template_file, $this->_data);
+			return $this->_CI->load->view($this->_template_dir.$template_file, $this->_data, $return);
 		}
 	}
 

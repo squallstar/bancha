@@ -384,7 +384,7 @@ Di seguito, le funzioni utili a renderizzare view, o templates.</p><br />
 	<li><strong>description</strong> - stringa</li>
 </ul>
 
-<h3>render_template($template_file, $layout = true)</h3>
+<h3>render_template($template_file, $layout = TRUE, $code = '', $return = FALSE)</h3>
 <p>Renderizza un template presenta nella directory dei templates, utilizzando lo skin in uso (solitamente <strong><?php echo THEMESPATH; ?>nometema/templates/</strong>).
 &Egrave; il metodo di rendering pi&ugrave; utilizzato, e viene utilizzata soprattutto dal motore di routing generale del sito per renderizzare la struttura base delle pagine.<br />
 Nel caso non si volesse passare per il layout, passare come secondo parametro "false" e verr&agrave; renderizzato solo il template scelto.</p>

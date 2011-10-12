@@ -100,8 +100,14 @@ Class Dispatcher_default
 		//Last check before dispatching
 		if ($page instanceof Record)
 		{
-			$this->_CI->view->set('page', $page);
-			$this->_CI->view->render_template($page->get('view_template'));
+			if ($this->_CI->view->is_feed == 'pdf')
+			{
+				$dispatcher_print = $this->_CI->load->dispatcher('print', 'dispatcher_print');
+				$dispatcher_print->render($page);
+			} else {
+				$this->_CI->view->set('page', $page);
+				$this->_CI->view->render_template($page->get('view_template'));
+			}
 		}
 	}
 
@@ -283,7 +289,7 @@ Class Dispatcher_default
 
 		$this->_CI->db->flush_cache();
 
-		if ($this->_CI->view->is_feed)
+		if ($this->_CI->view->is_feed && $this->_CI->view->is_feed != 'pdf')
 		{
 			$this->_CI->load->frlibrary('feed');
 			$feed_header = array(
