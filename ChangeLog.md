@@ -4,6 +4,7 @@
 
 - New setting: Maintenance mode (useful for closing temporary the website)
 - You can choose between "require login" and "maintenance message"
+- Corrected a bug on the datetime fields (only affects the XML columns)
 
 
 **v 0.7.15** (2011-10-12)
