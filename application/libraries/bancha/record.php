@@ -209,8 +209,13 @@ Class Record {
 		      			$this->_data[$field_name] = $field_value;
 		      		}
 
-		      		//We convert the timestamps in dates
+		      		
 		      		//TODO: mettere tutti i format date e datetime nel config per lingua (tipo d/m/Y)
+		      		if (!isset($tipo['fields'][$field_name]['type']))
+		      		{
+		      			continue;
+		      		}
+		      		//We convert the timestamps in dates
 		      		$field_type = $tipo['fields'][$field_name]['type'];
 		      		if ($field_type == 'date')
 		      		{
