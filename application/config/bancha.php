@@ -173,7 +173,7 @@ $config['strip_website_url'] = TRUE;
  * FEED URI
  * The segments that can be added to the URL to reach the feed of a page
  */
-$config['feed_uri'] = array('feed.xml', 'feed.json');
+$config['feed_uri'] = array('feed.xml', 'feed.json', 'print.pdf');
 
 /*
  * VIEWS TEMPLATES FOLDER

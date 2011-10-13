@@ -99,6 +99,14 @@ Class Website extends Bancha_Controller
 		$this->load->dispatcher('default');
 		$this->dispatcher->start();
 	}
+	
+	function demo ()
+	{
+		$html = '<h1 id="logo" class="grid_4"><a href="http://bancha.localhost/it/">My website</a></h1>';
+		$this->load->dispatcher('print');
+		$contenuto = $this->dispatcher->render($html, TRUE);
+		file_put_contents('ciccio.pdf', $contenuto);
+	}
 
 	/**
 	 * Image routing
