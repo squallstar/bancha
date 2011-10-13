@@ -14,6 +14,16 @@
 			<description>Website claim</description>
 			<type>text</type>
 		</field>
+		<field id="website_maintenance">
+			<description>Maintenance mode</description>
+			<type>radio</type>
+			<options>
+				<option value="F">Disabled</option>
+				<option value="T">Show maintenance message</option>	
+				<option value="L">Require login</option>
+			</options>
+			<default>F</default>
+		</field>
 		<field id="website_desktop_theme">
 			<type>radio</type>
 			<description>Website desktop theme</description>

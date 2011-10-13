@@ -19,6 +19,7 @@ Class Website extends Bancha_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->settings();
 
 		//If the user is logged in, we set the stage to true
 		//so he/she can surf on the stage pages and records
@@ -30,13 +31,24 @@ Class Website extends Bancha_Controller
 			$this->output->enable_profiler();
 		} else {
 			$this->content->set_stage(FALSE);
+
+			//If is not logged in, let's check if the website is under maintenance
+			$maintenance = $this->settings->get('website_maintenance');
+			if ($maintenance)
+			{
+				switch ($maintenance)
+				{
+					case 'T':
+						show_error(_('The website is currently under maintenance. Please try later.'));
+						break;
+					case 'L':
+						redirect(admin_url());
+				}
+			}
 		}
 
-		$this->load->helper('menu');
-
-		//We load the settings and the blocks
-		$this->load->settings();
 		$this->load->frlibrary('blocks');
+		$this->load->helper('menu');
 	}
 
 	/**

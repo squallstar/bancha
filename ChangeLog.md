@@ -1,5 +1,11 @@
 ## Bancha Change Log file ##
 
+**v 0.7.16** (2011-10-13)
+
+- New setting: Maintenance mode (useful for closing temporary the website)
+- You can choose between "require login" and "maintenance message"
+
+
 **v 0.7.15** (2011-10-12)
 
 - The function "render_template" of the view class now accepts a fourth parameter to return the output instead echoing it
