@@ -4,6 +4,7 @@
 
 - Added a "bracket" open-close system to CI Active record
 - Search queries on the default dispatcher now uses the bracket system to chain conditions
+- Unserialized error log patch
 
 
 **v 0.7.16** (2011-10-13)
