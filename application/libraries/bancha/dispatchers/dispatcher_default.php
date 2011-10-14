@@ -230,7 +230,9 @@ Class Dispatcher_default
 			if ($search_query)
 			{
 				$this->_CI->records->like('title', $search_query);
+				$this->_CI->db->bracket('open');
 				$this->_CI->records->or_like('content', $search_query);
+				$this->_CI->db->bracket('close');
 			}
 		}
 		//Just list fields, not the detail ones
