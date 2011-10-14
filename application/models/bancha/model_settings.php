@@ -157,12 +157,16 @@ Class Model_settings extends CI_Model
 		{
 			foreach ($res as $row)
 			{
-				$value = @unserialize($row->value);
+				//We check if could be a serialized value
+				if (substr($value, 0, 2) == 'a:')
+				{
+					$value = @unserialize($row->value);
+				}
 				if ($value === false)
 				{
 					$value = $row->value;
 				}
-				$this->_items[ strlen($row->module) ? $row->module : 'default' ][$row->name] = $value;
+				$this->_items[ strlen($row->module) ? $row->module : 'General' ][$row->name] = $value;
 			}
 		}
 		$this->load->helper('file');
