@@ -1,8 +1,23 @@
 ## Bancha Change Log file ##
 
+**v 0.7.16** (2011-10-13)
+
+- New setting: Maintenance mode (useful for closing temporary the website)
+- You can choose between "require login" and "maintenance message"
+- Corrected a bug on the datetime fields (only affects the XML columns)
+
+
+**v 0.7.15** (2011-10-12)
+
+- The function "render_template" of the view class now accepts a fourth parameter to return the output instead echoing it
+- The default dispatcher now can handle the pdf files
+- New class added: Dispatcher_print (@alexmaroldi is working on it)
+
+
 **v 0.7.14** (2011-10-12)
 
 - Bug fix corrected on the installer (some people were getting stuck) - thx Marco Solazzi
+
 
 **v 0.7.13** (2011-10-11)
 

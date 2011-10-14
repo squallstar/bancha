@@ -62,15 +62,7 @@ Class Dispatcher_default
 			$this->_CI->load->helper('text');
 			$this->_CI->view->description = character_limiter(strip_tags($record->get('content')), 150, '...');
 		}
-		
-		// Dispatch PDF rendering page
-		if ($this->_CI->view->is_feed == 'pdf' && $record->get('action') != 'list') {
-			$this->_CI->load->dispatcher('print','print');
-			
-			$this->_CI->print->render($record);
-			//debug($this->_CI->view->is_feed,'IS FEED',1);
-			return;
-		}
+
 		//Is this a page?
 		if ($record->is_page())
 		{
@@ -108,8 +100,14 @@ Class Dispatcher_default
 		//Last check before dispatching
 		if ($page instanceof Record)
 		{
-			$this->_CI->view->set('page', $page);
-			$this->_CI->view->render_template($page->get('view_template'));
+			if ($this->_CI->view->is_feed == 'pdf')
+			{
+				$dispatcher_print = $this->_CI->load->dispatcher('print', 'dispatcher_print');
+				$dispatcher_print->render($page);
+			} else {
+				$this->_CI->view->set('page', $page);
+				$this->_CI->view->render_template($page->get('view_template'));
+			}
 		}
 	}
 
@@ -290,16 +288,9 @@ Class Dispatcher_default
 		}
 
 		$this->_CI->db->flush_cache();
-		
-		if ($this->_CI->view->is_feed)
+
+		if ($this->_CI->view->is_feed && $this->_CI->view->is_feed != 'pdf')
 		{
-			if ($this->_CI->view->is_feed == 'pdf'){
-				$this->_CI->load->dispatcher('print','print');
-				$page->set('records', $records);
-				$this->_CI->print->render($page);	
-				return;
-			}
-			
 			$this->_CI->load->frlibrary('feed');
 			$feed_header = array(
 				'title' 		=> $page->get('title'),

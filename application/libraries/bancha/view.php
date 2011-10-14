@@ -249,7 +249,7 @@ Class View
 	 * @param string $template_file
 	 * @param bool $layout
 	 * @param int $code HTTP code
-	 * @param bool $return
+	 * @param bool $return Whether the view needs to be returned or echoed
 	 */
 	public function render_template($template_file, $layout = TRUE, $code = '', $return = FALSE)
 	{

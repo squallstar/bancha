@@ -2,7 +2,7 @@
 /**
  * Print Dispatcher (Library)
  *
- * This router generates the print page for client
+ * This is the PDF dispatcher class of the routing system.
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -16,12 +16,22 @@
 Class Dispatcher_Print
 {
 	/**
-	 * Generates an image if not exists, then the image will be
-	 * served to the client during the same request.
+	 * Generates the PDF, or returns the content
+	 * @param Record|html $page
+	 * @param bool $return
+	 * @return mixed
 	 */
 	public function render($page, $return = FALSE)
 	{
 		$CI = & get_instance();
+		if ($page instanceof Record)
+		{
+			$html = $CI->view->render_template($page->get('view_template'));
+		} else {
+			$html = & $page;
+		}
+
+		//Here goes the PDF generation
 		$CI->output->enable_profiler(FALSE);
 		//debug($record,'Dispatcher_Print',1);
 		
@@ -42,15 +52,15 @@ Class Dispatcher_Print
     	$dompdf = new DOMPDF();
     	$dompdf->load_html($html);
     	$dompdf->render();
-		
-		if ($return) {
+
+		if ($return)
+		{
 			return $dompdf->output(); 
 		} else {
-			//The final output is sent to the client
+			//Pdf output
 			$CI->output->set_content_type('pdf')
 					   ->set_output($dompdf->output());
 		}
-		return;
-	}
 
+	}
 }
