@@ -316,7 +316,7 @@ Class Dispatcher_default
 						'pubDate'		=> date(DATE_RFC822, (int)$date_pub),
 						'description'	=> $record->get('content')
 					);
-					$this->_CI->feed->add_item($item);
+					$this->_CI->feed->add_item($item, array('title', 'description'));
 				}
 			}
 			$this->_CI->feed->render();
