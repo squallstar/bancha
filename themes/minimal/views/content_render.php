@@ -30,6 +30,8 @@ if (isset($page) && $page->is_page()) {
 					//We use the content type of the first record as template
 					$record = $records[0];
 					$this->view->render_type_template($record->tipo, 'list');
+				} else {
+					$this->view->render_type_template($this->content->type_name($page->get('action_list_type')), 'list');
 				}
 				break;
 			

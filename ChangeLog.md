@@ -1,5 +1,11 @@
 ## Bancha Change Log file ##
 
+**v 0.7.18** (2011-10-15)
+
+- Content type list view will be rendered also when there are no records
+- Unserialize fix on the settings model
+
+
 **v 0.7.17** (2011-10-14)
 
 - Added a "bracket" open-close system to CI Active record
