@@ -4,6 +4,7 @@
 
 - Content type list view will be rendered also when there are no records
 - Unserialize fix on the settings model
+- New favicon!
 - Added support for CDATA sections on the xml feed (second param - array - of the add_item() function on the feed lib)
 
 **v 0.7.17** (2011-10-14)
