@@ -90,7 +90,7 @@ Class Dispatcher_default
 
 				case 'link':
 					$link = $page->get('action_link_url');
-					redirect($link);
+					redirect($link, 'location', 301);
 			}
 		} else {
 			//Single record view
