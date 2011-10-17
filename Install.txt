@@ -10,9 +10,8 @@
 
 HOW TO INSTALL BANCHA
 
- 1. Before all, sets your current environment in the /index.php file
-    The default environment is "sqlite" (to use the Sqlite Database)
-    but you are encouraged to use "development" or "production"
+ 1. Before all, choose your environment in the /index.php file
+    The default environment is "development".
 
  2. Sets the database configuration parameters here: application/config/database.php
 

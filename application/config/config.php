@@ -209,7 +209,7 @@ $config['cache_path'] = APPPATH . 'cache' . DIRECTORY_SEPARATOR . '_pages' . DIR
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'banchacms45mdsdfj3d';
+$config['encryption_key'] = 'bancha:set_your_secret_key';
 
 /*
 |--------------------------------------------------------------------------
@@ -229,7 +229,7 @@ $config['encryption_key'] = 'banchacms45mdsdfj3d';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= '_bprobe';
+$config['sess_cookie_name']		= '_probe';
 $config['sess_expiration']		= 14400;
 $config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= TRUE;

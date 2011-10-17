@@ -1,6 +1,7 @@
 <?php
 /**
- * Output Core class
+ * Bancha Output Core
+ * Extended from CodeIgniter original Output Core class
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -23,7 +24,8 @@ class Bancha_Output extends CI_Output
 
 	/**
 	 * Write a Cache File
-	 * We added the query string to the cache file name to include GET requests and the .tmp extension
+	 * We added the query string to the cache file name to include GET req and the .tmp extension
+	 * We also toggled off the caching system for stage contents
 	 *
 	 * @access	public
 	 * @return	void
@@ -31,6 +33,19 @@ class Bancha_Output extends CI_Output
 	public function _write_cache($output)
 	{
 		$CI =& get_instance();
+
+		if (!isset($CI->content))
+		{
+			$CI->load->content();
+		}
+
+		if ($CI->content->is_stage || isset($_COOKIE['prevent_cache']))
+		{
+			//Stage contents cannot be saved to disk because they will
+			//overwrite the production files
+			return;
+		}
+
 		$path = $CI->config->item('cache_path');
 
 		$cache_path = ($path == '') ? APPPATH.'cache/' : $path;
@@ -74,12 +89,19 @@ class Bancha_Output extends CI_Output
 	/**
 	 * Update/serve a cached file
 	 * We added the query string to the cache file name to include GET requests and the .tmp extension
+	 * and we also check if the user is logged in.
 	 *
 	 * @access	public
 	 * @return	void
 	 */
 	public function _display_cache(&$CFG, &$URI)
 	{
+		if (isset($_COOKIE['prevent_cache']))
+		{
+			//The user is logged in. Let's always output not-cached pages
+			return FALSE;
+		}
+
 		$cache_path = ($CFG->item('cache_path') == '') ? APPPATH.'cache/' : $CFG->item('cache_path');
 
 		// Build the file path.  The file name is an MD5 hash of the full URI
@@ -120,14 +142,12 @@ class Bancha_Output extends CI_Output
 			if (is_really_writable($cache_path))
 			{
 				@unlink($filepath);
-				log_message('debug', "Cache file has expired. File deleted");
 				return FALSE;
 			}
 		}
 
 		// Display the cache
 		$this->_display(str_replace($match['0'], '', $cache));
-		log_message('debug', "Cache file is current. Sending it to browser.");
 		return TRUE;
 	}
 }
