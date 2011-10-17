@@ -850,10 +850,11 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 			<h3>16. Dispatchers</h3>
 			<p>Come forse avrai visto dallo schema MVC presente nella sezione <strong>1. Introduzione a BANCHA</strong>, i dispatchers sono collocati appena sotto la fase di routing dell'applicazione.</p>
 			<p>Un dispatcher, è una classe responsabile di un percorso di routing del <strong>front-end</strong> del sito internet.</p>
-			<p>Attualmente sono disponibili due dispatchers:</p>
+			<p>Attualmente sono disponibili tre dispatchers:</p>
 			<ul>
 				<li><strong>Default Dispatcher</strong> - il dispatcher generale del front-end.</li>
 				<li><strong>Image Dispatchers</strong> - responsabile di generazione e invio delle immagini con i preset.</li>
+				<li><strong>Print Dispatcher</strong> - il dispatcher che tramite la libreria DOMPDF, genera file pdf partendo dalle pagine del sito.</li>
 			</ul>
 
 			<p>Per aggiungere un dispatcher, aggiungilo alla cartella <strong>application/libraries/<?php echo FRNAME; ?>/dispatchers/</strong> chiamandolo <strong>dispatcher_&lt;nome&gt;.php</strong> ed utilizzando come nome della classe <strong>Dispatcher_&lt;nome&gt;</strong>. Dopodich&egrave;, potrai invocare un dispatcher in questo modo:</p>
