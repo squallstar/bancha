@@ -4,6 +4,7 @@
 
 - Cache will not be written when the environment is in staging mode (issue #63)
 - Added a cookie to let know a logged user if we have to skip the page-cache thing
+- Issue #62 corrected - empty categories generates a query error
 
 
 **v 0.7.18** (2011-10-15)

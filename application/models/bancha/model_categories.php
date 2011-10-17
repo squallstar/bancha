@@ -219,6 +219,8 @@ Class Model_categories extends CI_Model {
    */
   public function get_records_for_categories($array)
   {
+  	if (!count($array)) return array();
+
   	$res = $this->db->select('id_record')
 		   		    ->from('record_categories')
 		   		    ->where_in('id_category', $array)
