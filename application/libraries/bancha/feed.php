@@ -93,15 +93,24 @@ Class Feed
 	/**
 	 * Adds an element to the feed
 	 * @param array $item
+	 * @param array $cdata_sections
 	 */
-	public function add_item($item)
+	public function add_item($item, $cdata_sections = array())
 	{
 		if ($this->_type == 'xml')
 		{
 			$child = $this->xml->channel->addChild('item');
 			foreach ($item as $key => $val)
 			{
-				$child->addChild($key, $val);
+				if (in_array($key, $cdata_sections))
+				{
+					$column = $child->addChild($key);
+					$node = dom_import_simplexml($column);
+          			$single_node = $node->ownerDocument;
+          			$node->appendChild($single_node->createCDATASection($val));
+				} else {
+					$column = $child->addChild($key, $val);
+				}
 			}
 		} else if ($this->_type == 'json')
 		{

@@ -678,6 +678,16 @@ Class Contents extends Bancha_Controller
         $this->load->settings();
         $this->settings->clear_cache();
 
+        //Pages cache
+        $files = get_filenames($this->config->item('cache_path'));
+        if (is_array($files) && count($files))
+        {
+        	foreach ($files as $file)
+        	{
+        		@unlink($this->config->item('cache_path') . $file);
+        	}
+        }
+
         //Content types cache
     	if (!$this->content->rebuild())
         {

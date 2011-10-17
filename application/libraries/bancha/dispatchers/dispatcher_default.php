@@ -90,7 +90,7 @@ Class Dispatcher_default
 
 				case 'link':
 					$link = $page->get('action_link_url');
-					redirect($link);
+					redirect($link, 'location', 301);
 			}
 		} else {
 			//Single record view
@@ -316,7 +316,7 @@ Class Dispatcher_default
 						'pubDate'		=> date(DATE_RFC822, (int)$date_pub),
 						'description'	=> $record->get('content')
 					);
-					$this->_CI->feed->add_item($item);
+					$this->_CI->feed->add_item($item, array('title', 'description'));
 				}
 			}
 			$this->_CI->feed->render();
