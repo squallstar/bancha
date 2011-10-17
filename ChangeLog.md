@@ -1,5 +1,11 @@
 ## Bancha Change Log file ##
 
+**v 0.7.19** (2011-10-17)
+
+- Cache will not be written when the environment is in staging mode (issue #63)
+- Added a cookie to let know a logged user if we have to skip the page-cache thing
+
+
 **v 0.7.18** (2011-10-15)
 
 - Content type list view will be rendered also when there are no records
