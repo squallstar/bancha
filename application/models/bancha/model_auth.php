@@ -78,7 +78,10 @@ Class Model_auth extends CI_Model {
 			$this->lang->set_lang($user->admin_lang);
 			$this->lang->set_cookie();
 
-			//Carico i permessi dell'utente
+			//We also set a single cookie to help the Output class to send cached pages
+			setcookie("prevent_cache", TRUE, time() + $this->config->item('sess_expiration'));
+
+			//Loads the user permissions
 			$this->cache_permissions();
 
 			return TRUE;
@@ -94,6 +97,7 @@ Class Model_auth extends CI_Model {
 	public function logout()
 	{
 		$this->session->sess_destroy();
+		setcookie ("prevent_cache", "", time() - 3600);
 		return TRUE;
 	}
 
