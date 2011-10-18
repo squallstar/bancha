@@ -14,34 +14,67 @@ class Picasa_Gallery
 	
 	private $_username = NULL;
 	
-	private $_numAlbum = NULL;
-	
-	private $_author = NULL;
-	
 	private $_resourceData = NULL;
 	
-	private $_entry = array();
+	private $_galleryId = NULL;
+	
+	private $_galleryTitle = NULL;
+	
+	private $_galleryAuthors = NULL;
+	
+	private $_userThumbnail = NULL;
+	
+	private $_numAlbum = NULL;
+	
+	private $_albums = array();
+	
+	private $_maxAlbums = FALSE;
 	
 	
 	
 	public function __construct()
 	{
 		$this->_CI = & get_instance();
-		
-	} 
+	}
 	
-	public function init($jSonData)
+	
+	public function init()
 	{
-		if ($jSonData == NULL) {
-			return FALSE;
+		
+		if ($this->_resourceData == NULL) {
+			$this->_resourceData = json_decode(str_replace('$', '_',getter(self::PICASA_API_URL.'user/'.$this->_username.'?category=album'.($this->_maxAlbums ? '&max-results='.$this->_maxAlbums : '').'&access=public&alt=json')));
 		}
-		$this->_resourceData = $jSonData;		
-		$this->_numAlbum = count($this->_resourceData->feed->entry);
+		return $this;
 		
+		/*$this->_numAlbum = count($this->_resourceData->feed->entry);
 		
-		debug($this->_resourceData->version,'version');
-		debug($this->_resourceData->encoding,'encoding');		
+		$this->_titleGallery = $this->_resourceData->feed->title;
+				
+		// Gets the properties of the given object
+		// with get_object_vars function
+		$d = (is_object($this->_resourceData->feed) ? get_object_vars($this->_resourceData->feed): array());
 		
+		foreach ($d as $key => $value) {
+			switch ($key) {
+				case 'id':
+					$this->_galleryId = $value->_t;
+					break;
+				case 'title':
+					$this->_galleryTitle = $value->_t;
+					break;
+				case 'author':
+					$this->_galleryAuthors = $value; 
+					break;
+				case 'gphoto_thumbnail':
+					$this->_userThumbnail = $value->_t;
+					break;
+			}
+			if ($key == 'entry'){
+				echo "LOL";
+			}
+		}
+		debug($this,'this',TRUE);
+		die;
 		$id = $this->_resourceData->feed->id->_t;
 		$updated = $this->_resourceData->feed->updated->_t;
 		$category = $this->_resourceData->feed->category;
@@ -57,10 +90,35 @@ class Picasa_Gallery
 		$gPhotoNickname = $this->_resourceData->feed->gphoto_nickname->_t;
 		$gPhotoThumbnail = $this->_resourceData->feed->gphoto_thumbnail->_t;
 		$this->_getAlbum();
-		
-		//debug($jSonData->feed->entry,'feed entry',TRUE);
+		*/
 	}
 	
+	public function getAuthors() {
+		return $this->_resourceData->feed->author;
+	}
+	
+	public function getAlbumCovers() {
+		$albumCovers = array();
+		foreach ($this->_resourceData->feed->entry as $key => $album) {
+			$albumCovers['id'] = $album->id->_t;
+			$albumCovers['date_published'] = $album->published->_t;
+			$albumCovers['date_updated'] = $album->updated->_t;
+			$albumCovers['title'] = $album->title->_t;
+			$albumCovers['summary'] = $album->summary->_t;
+			$albumCovers[] = $album->
+			debug($album,$key);
+		}
+		die();
+	}
+
+
+	public function setUsername ($value) {
+		$this->_username = $value;
+		$this->init();
+		return $this;
+	}
+	
+
 	private function _getAlbum()
 	{
 		if ($this->_resourceData == NULL) {
