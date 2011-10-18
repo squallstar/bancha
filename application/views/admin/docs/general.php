@@ -21,7 +21,7 @@
 				<li><a href="#sb-documents">9. Documenti (files)</a>
 				<li><a href="#sb-trees">10. Alberi di menu</a></li>
 				<li><a href="#sb-caching">11. Caching</a></li>
-				<li><a href="#sb-feeds">12. Feed dei contenuti</a></li>
+				<li><a href="#sb-feeds">12. Feed e PDF</a></li>
 				<li><a href="#sb-triggers">13. Triggers (attivatori)</a></li>
 				<li><a href="#sb-image-presets">14. Image presets</a></li>
 				<li><a href="#sb-categories">15. Categorie, Gerarchie</a></li>
@@ -634,12 +634,12 @@ echo menu($albero);
 </div>
 
 <div class="sidebar_content" id="sb-feeds">
-			<h3>12. Feed dei contenuti</h3>
+			<h3>12. Feed dei contenuti e generazione PDF</h3>
 			<p>
 Le pagine configurate come <strong>lista di contenuti</strong> presentano due utili esportazioni predefinite: una <strong>xml rss 2.0</strong> ed una di tipo <strong>json</strong>.
 			</p>
 			<br />
-			<h3>feed.xml</h3>
+			<h3>&bull; feed.xml</h3>
 			<p>Aggiungendo al path di una pagina di tipo lista di contenuti il parametro <strong>/feed.xml</strong>, verr&agrave; visualizzato il relativo feed RSS 2.0. Ad esempio:</p>
 <pre class="prettyprint"><code>//Pagina lista di contenuti:
 http://localhost/lista-articoli
@@ -650,13 +650,22 @@ http://localhost/lista-articoli/feed.xml</code></pre><br />
 
 <div class="message info">Puoi disattivare la funzionalit&agrave; di esportazione feed di una pagina intervenendo sulla voce "Esportazione feed" presente nella maschera "Aspetto e azioni" di tale pagina. Il campo &egrave; definito nello schema xml dei tipi di contenuto ad albero ed &egrave; chiamato "action_list_has_feed".</div>
 <br />
-<h3>feed.json</h3>
+<h3>&bull; feed.json</h3>
 			<p>In maniera simile a quanto avviene per il feed rss, aggiungendo al path di una pagina di tipo lista di contenuti il parametro <strong>/feed.json</strong>, verr&agrave; visualizzata la relativa esportazione dati in formato JSON. Ad esempio:</p>
 <pre class="prettyprint"><code>//Pagina lista di contenuti:
 http://localhost/lista-articoli/ultimi-post
 
 //Esportazione dati in formato JSON:
 http://localhost/lista-articoli/ultimi-post/feed.json</code></pre><br />
+
+<h3>&bull; print.pdf</h3>
+<p>&Egrave; possibile stampare il contenuto di una qualsiasi pagina del sito in formato PDF. Prima di procedere, &egrave; necessario installare la libreria <strong>DOMPDF</strong> nel path <strong><?php echo APPPATH . 'libraries' . DIRECTORY_SEPARATOR . 'externals' . DIRECTORY_SEPARATOR . 'dompdf' . DIRECTORY_SEPARATOR; ?></strong>.<br />Infine, in maniera simile a quanto avviene per i feed, sar&agrave; necessario solamente aggiungere al path il parametro <strong>/print.pdf</strong>:</p>
+
+<pre class="prettyprint"><code>//Pagina di una lista di contenuti:
+http://localhost/lista-articoli/ultimi-post
+
+//Generazione di un file PDF della stessa pagina:
+http://localhost/lista-articoli/ultimi-post/print.pdf</code></pre><br />
 
 </div>
 
@@ -841,17 +850,22 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 			<h3>16. Dispatchers</h3>
 			<p>Come forse avrai visto dallo schema MVC presente nella sezione <strong>1. Introduzione a BANCHA</strong>, i dispatchers sono collocati appena sotto la fase di routing dell'applicazione.</p>
 			<p>Un dispatcher, è una classe responsabile di un percorso di routing del <strong>front-end</strong> del sito internet.</p>
-			<p>Attualmente sono disponibili due dispatchers:</p>
+			<p>Attualmente sono disponibili tre dispatchers:</p>
 			<ul>
 				<li><strong>Default Dispatcher</strong> - il dispatcher generale del front-end.</li>
 				<li><strong>Image Dispatchers</strong> - responsabile di generazione e invio delle immagini con i preset.</li>
+				<li><strong>Print Dispatcher</strong> - il dispatcher che tramite la libreria DOMPDF, genera file pdf partendo dalle pagine del sito.</li>
 			</ul>
 
 			<p>Per aggiungere un dispatcher, aggiungilo alla cartella <strong>application/libraries/<?php echo FRNAME; ?>/dispatchers/</strong> chiamandolo <strong>dispatcher_&lt;nome&gt;.php</strong> ed utilizzando come nome della classe <strong>Dispatcher_&lt;nome&gt;</strong>. Dopodich&egrave;, potrai invocare un dispatcher in questo modo:</p>
 <pre class="prettyprint"><code>$this->load->dispatcher('nome');
 
-//Ed otterrai l'oggetto:
-//$this->dispatcher</code></pre>
+//Ed otterrai l'oggetto utilizzabile:
+$this->dispatcher->start();
+
+//&Egrave; possibile anche definire il nome da utilizzare per l'oggetto:
+$this->load->dispatcher('foo', 'bar');
+$this->bar->start();</code></pre>
 <br />
 			<h3>Default dispatcher</h3>
 			<p>&Egrave; il dispatcher generale del sito internet, ed una volta impostato l'<strong>url da visitare</strong> si preoccupa di ricercare tra le pagine ed i records del database, nonch&egrave; preparare tutto il necessario alla visualizzazione del sito, comprese le liste di contenuti ed i feed del sito.</p>
@@ -891,6 +905,9 @@ $data = array(
 $this->dispatcher->retrieve($data);</code></pre><br />
 
 <p>Per altre informazioni sui preset applicati alle immagini, leggi la relativa sezione <strong>14. Image presets</strong> nella documentazione.</p>
+
+<h3>Print dispatcher</h3>
+<div class="message warning">TODO</div>
 	</div>
 
 	<div class="sidebar_content" id="sb-helpers">

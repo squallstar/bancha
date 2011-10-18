@@ -102,8 +102,8 @@ Class Dispatcher_default
 		{
 			if ($this->_CI->view->is_feed == 'pdf')
 			{
-				$dispatcher_print = $this->_CI->load->dispatcher('print', 'dispatcher_print');
-				$dispatcher_print->render($page);
+				$this->_CI->load->dispatcher('print', 'dispatcher_print');
+				$this->_CI->dispatcher_print->render($page);
 			} else {
 				$this->_CI->view->set('page', $page);
 				$this->_CI->view->render_template($page->get('view_template'));

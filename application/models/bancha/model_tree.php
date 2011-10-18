@@ -421,7 +421,7 @@ Class Model_tree extends CI_Model
 				return array();
 			}
 		} else {
-			show_error('Starting branch not set');
+			log_message('error', 'Starting branch not set');
 		}
 	}
 
