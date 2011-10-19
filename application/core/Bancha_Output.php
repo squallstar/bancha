@@ -39,7 +39,7 @@ class Bancha_Output extends CI_Output
 			$CI->load->content();
 		}
 
-		if ($CI->content->is_stage || isset($_COOKIE['prevent_cache']))
+		if ($CI->content->is_stage || isset($_SERVER['prevent_cache']))
 		{
 			//Stage contents cannot be saved to disk because they will
 			//overwrite the production files
@@ -58,7 +58,8 @@ class Bancha_Output extends CI_Output
 
 		$uri =	$_SERVER['REQUEST_URI'];
 
-		$cache_path .= md5($uri).'.tmp';
+		$cache_path .= md5($uri).'.' . $_SESSION['_website_theme'] . '.tmp';
+		
 
 		if ( ! $fp = @fopen($cache_path, FOPEN_WRITE_CREATE_DESTRUCTIVE))
 		{
@@ -96,7 +97,8 @@ class Bancha_Output extends CI_Output
 	 */
 	public function _display_cache(&$CFG, &$URI)
 	{
-		if (isset($_COOKIE['prevent_cache']))
+
+		if (isset($_SERVER['prevent_cache']))
 		{
 			//The user is logged in. Let's always output not-cached pages
 			return FALSE;
@@ -107,7 +109,13 @@ class Bancha_Output extends CI_Output
 		// Build the file path.  The file name is an MD5 hash of the full URI
 		$uri =	$_SERVER['REQUEST_URI'];
 
-		$filepath = $cache_path.md5($uri).'.tmp';
+		if (!isset($_SESSION['_website_theme']))
+		{
+			//We cannot trust users that doesn't have a theme
+			return FALSE;
+		}
+
+		$filepath = $cache_path.md5($uri).'.'. $_SESSION['_website_theme'] .'.tmp';
 
 		if ( ! @file_exists($filepath))
 		{
