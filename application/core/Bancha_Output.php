@@ -23,6 +23,18 @@ class Bancha_Output extends CI_Output
 	}
 
 	/**
+	 * Build the file path.
+	 * The file name is an MD5 hash of the full URI plus the current theme.
+	 * @param string $uri
+	 * @param string $theme
+	 * @return string
+	 */
+	public function get_cachefile($uri, $theme)
+	{
+		return md5($uri) . '.' . $theme . '.tmp';
+	}
+
+	/**
 	 * Write a Cache File
 	 * We added the query string to the cache file name to include GET req and the .tmp extension
 	 * We also toggled off the caching system for stage contents
@@ -56,9 +68,7 @@ class Bancha_Output extends CI_Output
 			return;
 		}
 
-		$uri =	$_SERVER['REQUEST_URI'];
-
-		$cache_path .= md5($uri).'.' . $_SESSION['_website_theme'] . '.tmp';
+		$cache_path .= $this->get_cachefile($_SERVER['REQUEST_URI'], $_SESSION['_website_theme']);
 		
 
 		if ( ! $fp = @fopen($cache_path, FOPEN_WRITE_CREATE_DESTRUCTIVE))
@@ -106,16 +116,13 @@ class Bancha_Output extends CI_Output
 
 		$cache_path = ($CFG->item('cache_path') == '') ? APPPATH.'cache/' : $CFG->item('cache_path');
 
-		// Build the file path.  The file name is an MD5 hash of the full URI
-		$uri =	$_SERVER['REQUEST_URI'];
-
 		if (!isset($_SESSION['_website_theme']))
 		{
 			//We cannot trust users that doesn't have a theme
 			return FALSE;
 		}
 
-		$filepath = $cache_path.md5($uri).'.'. $_SESSION['_website_theme'] .'.tmp';
+		$filepath = $cache_path . $this->get_cachefile($_SERVER['REQUEST_URI'], $_SESSION['_website_theme']);
 
 		if ( ! @file_exists($filepath))
 		{
