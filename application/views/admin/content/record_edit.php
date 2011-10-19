@@ -58,7 +58,7 @@ $has_full_textarea = FALSE;
 $p_start = '<p>';
 $p_end = '</p>';
 
-$breadcrumbs_render = '<p class="breadcrumb"><a href="<?php echo admin_url($_section); ?>">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
+$breadcrumbs_render = '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
 						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
 						 . (!$record->id ? _($tipo['label_new']) : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
 
