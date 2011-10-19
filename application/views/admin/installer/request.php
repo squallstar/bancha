@@ -31,7 +31,8 @@
 					</select><br />
 			  	</div>
 
-		  		<input name="install" onclick="$(this).fadeOut();" type="submit" class="submit" value="<?php echo _('Install'); ?>" />
+		  		<input name="install" onclick="$(this).fadeOut(200, function() {$('img.hidden').fadeIn();});" type="submit" class="submit" value="<?php echo _('Install'); ?>" />
+		  		<img class="hidden" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/loading.gif'; ?>" />
 		  	</form>
 <?php } ?>
 			<br />
