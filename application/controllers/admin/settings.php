@@ -54,6 +54,9 @@ Class Settings extends Bancha_Controller
 			}
 			$this->settings->build_cache();
 			$this->view->message('success', _('The settings has been updated'));
+
+			//The theme may have been changed
+			unset($_SESSION['_website_theme']);
 		}
 
 		//Additional set-ups before the page rendering
