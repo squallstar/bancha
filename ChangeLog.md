@@ -12,6 +12,7 @@
 - Two teasers on the default theme are now linked to the related content pages
 - Theme session switched from cookie to native php session
 - Added the new logo on the left side of the header
+- Corrected the "Publish" bug on the record edit (only on Pages content types)
 - Current theme name will be appeded to page cache files (prevent the same filename issue on different themes - issue #66)
 
 **v 0.7.19** (2011-10-17)
