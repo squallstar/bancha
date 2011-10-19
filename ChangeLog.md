@@ -5,8 +5,13 @@
 - Local date and datetime format are now applied to new records regarding of the current language (issue #65)
 - Theme cookie update (issue #67)
 - Added new contributors to Humans.txt file
+- The install button will now fade out during the install
+- Added a dummy "about us" page on the install default preset
+- Added a system that prevent the records to extract twice their documents
 - Native php session support added on bootstrap file
+- Two teasers on the default theme are now linked to the related content pages
 - Theme session switched from cookie to native php session
+- Added the new logo on the left side of the header
 - Current theme name will be appeded to page cache files (prevent the same filename issue on different themes - issue #66)
 
 **v 0.7.19** (2011-10-17)
@@ -14,7 +19,7 @@
 - Cache will not be written when the environment is in staging mode (issue #63)
 - Added a cookie to let know a logged user if we have to skip the page-cache thing
 - Issue #62 corrected - empty categories generates a query error
-- Issue #52 - new PDF generate functions: dispatcher_print and dompdf support added
+- Issue #52 - new PDF generate functions: dispatcher_print and dompdf support added (thx @alexmaroldi)
 
 
 **v 0.7.18** (2011-10-15)

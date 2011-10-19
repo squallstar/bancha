@@ -1,4 +1,8 @@
-/* Custom fonts */
+/*
+
+@bancha-green : #73b38e
+
+*/
 @import url("../fonts/titillium/stylesheet.css");
 
 * { padding:0; margin:0; }
@@ -121,16 +125,23 @@ a:hover {
 
 #header h1 {
 	float: left;
-	margin-right: 40px;
+	margin: 0 40px 0 10px;
 	font-family: "Titillium800", "Trebuchet MS", Arial, sans-serif;
 	font-size: 18px;
 	font-weight: normal;
 	text-transform: uppercase;
 	color: #fff;
 	}
+#header .logo_img {
+	float:left;
+	background:url('../widgets/logo_header.png') no-repeat;
+	width:22px;
+	height:20px;
+	margin-top:15px;
+}
 
 #header h1 a { color: #fff; }
-#header h1 a:hover { color: #008ee8; }
+#header h1 a:hover { color: #73b38e; }
 
 
 /* Navigation */
@@ -208,7 +219,7 @@ a:hover {
 	padding: 0 10px;
 	}
 
-#header #nav li.active a { color: #ddd; }
+#header #nav li.active a { color: #eee; }
 #header #nav li.active a:hover { color: #fff; }
 
 #header #nav a.hasmore {
