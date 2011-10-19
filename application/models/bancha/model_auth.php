@@ -22,7 +22,7 @@ Class Model_auth extends CI_Model {
 	/**
 	 * @var array Current user acls
 	 */
-	private $_acl;
+	private $_acl = '';
 
 	public function __construct()
 	{
