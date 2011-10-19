@@ -42,7 +42,7 @@ Class Record {
   	/**
 	 * @var string Set to TRUE when the documents will be extracted
 	 */
-  	private $_documents_extracted = FALSE;
+  	public $documents_extracted = FALSE;
 
   	public function __construct($type='')
   	{
@@ -258,7 +258,7 @@ Class Record {
   	 */
 	public function set_documents()
 	{
-		if ($this->_documents_extracted) return;
+		if ($this->documents_extracted) return;
 
 		$CI = & get_instance();
 		if (!isset($CI->documents))
@@ -302,6 +302,6 @@ Class Record {
 				}
 			}
 		}
-		$this->_documents_extracted = TRUE;
+		$this->documents_extracted = TRUE;
 	}
 }

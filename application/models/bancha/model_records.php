@@ -482,6 +482,7 @@ Class Model_records extends CI_Model {
                                 $record->set($field_name, $attachs);   
                             }
                         }
+                        $record->documents_extracted = TRUE;
                     }
                 }
             }
