@@ -28,3 +28,6 @@ if (isset($record) && $record instanceof Record) {
 }
 
 echo '</div><div class="clear"></div>';
+
+/* End of file feed.php */
+/* Location: /type_templates/{name}/detail.php */

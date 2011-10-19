@@ -284,8 +284,9 @@ Class View
 	 * Renders the template of a content type
 	 * @param string $type_name The name of the type
 	 * @param string $view_file (detail, list, etc...)
+	 * @param bool $propagate_data Whether to pass the local data to the view
 	 */
-	public function render_type_template($type_name='', $view_file='')
+	public function render_type_template($type_name='', $view_file='', $propagate_data = FALSE)
 	{
 		if ($type_name == '' || $view_file == '')
 		{
@@ -293,7 +294,7 @@ Class View
 		}
 		$view_path = $this->_CI->config->item('views_templates_folder') . $type_name . '/' . $view_file;
 
-		$this->_CI->load->view($view_path);
+		$this->_CI->load->view($view_path, $propagate_data ? $this->_data : '');
 	}
 
 	/**

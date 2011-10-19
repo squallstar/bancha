@@ -11,9 +11,13 @@
 - Native php session support added on bootstrap file
 - Two teasers on the default theme are now linked to the related content pages
 - Theme session switched from cookie to native php session
+- Added a loading wheel on the installer
+- clear_cache() method has been slighlty improved (model_pages)
+- Output class new function: get_cachefile()
 - Added the new logo on the left side of the header
 - Corrected the "Publish" bug on the record edit (only on Pages content types)
 - Current theme name will be appeded to page cache files (prevent the same filename issue on different themes - issue #66)
+- Now each content type have its own "feed" view, so you can choose how to render each one
 
 **v 0.7.19** (2011-10-17)
 
@@ -21,7 +25,6 @@
 - Added a cookie to let know a logged user if we have to skip the page-cache thing
 - Issue #62 corrected - empty categories generates a query error
 - Issue #52 - new PDF generate functions: dispatcher_print and dompdf support added (thx @alexmaroldi)
-
 
 **v 0.7.18** (2011-10-15)
 

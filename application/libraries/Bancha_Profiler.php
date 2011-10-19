@@ -115,5 +115,7 @@ class Bancha_Profiler extends CI_Profiler {
 
 		return $output;
 	}
-
 }
+
+/* End of file Bancha_Profiler.php */
+/* Location: /libraries/bancha/Bancha_Profiler.php */

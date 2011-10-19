@@ -294,6 +294,15 @@ Class Dispatcher_default
 		if ($this->_CI->view->is_feed && $this->_CI->view->is_feed != 'pdf')
 		{
 			$this->_CI->load->frlibrary('feed');
+
+			if ($this->_CI->config->item('type_custom_feeds') && isset($type['name']))
+			{
+				$this->_CI->view->set('page', $page);
+				$this->_CI->view->set('records', $records);
+				$this->_CI->view->render_type_template($type['name'], 'feed', TRUE);
+				return;
+			}
+
 			$feed_header = array(
 				'title' 		=> $page->get('title'),
 				'description'	=> $page->get('content')
