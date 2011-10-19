@@ -31,7 +31,7 @@
 					</select><br />
 			  	</div>
 
-		  		<input name="install" type="submit" class="submit" value="<?php echo _('Install'); ?>" />
+		  		<input name="install" onclick="$(this).fadeOut();" type="submit" class="submit" value="<?php echo _('Install'); ?>" />
 		  	</form>
 <?php } ?>
 			<br />
