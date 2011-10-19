@@ -172,6 +172,9 @@ Class View
 	public function store_theme()
 	{
 		$this->_CI->session->set_userdata('_website_theme', $this->theme);
+
+		//We also set a single cookie to help the Output class to send cached pages
+		setcookie("_website_theme", $this->theme, time() + $this->_CI->config->item('sess_expiration'));
 		return $this->update_ci_path();
 	}
 
