@@ -39,6 +39,11 @@ Class Record {
 	 */
   	public $xml = '';
 
+  	/**
+	 * @var string Set to TRUE when the documents will be extracted
+	 */
+  	private $_documents_extracted = FALSE;
+
   	public function __construct($type='')
   	{
   		if ($type != '')
@@ -253,8 +258,13 @@ Class Record {
   	 */
 	public function set_documents()
 	{
+		if ($this->_documents_extracted) return;
+
 		$CI = & get_instance();
-		$CI->load->documents();
+		if (!isset($CI->documents))
+		{
+			$CI->load->documents();
+		}
    		$tipo = & $CI->content->type($this->_tipo);
 
    		$has_attachments = FALSE;
@@ -292,5 +302,6 @@ Class Record {
 				}
 			}
 		}
+		$this->_documents_extracted = TRUE;
 	}
 }
