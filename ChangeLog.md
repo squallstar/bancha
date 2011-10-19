@@ -1,8 +1,13 @@
 ## Bancha Change Log file ##
 
-**v 0.7.20** (2011-10-19)
+**v 0.8** (2011-10-19)
 
 - Local date and datetime format are now applied to new records regarding of the current language (issue #65)
+- Theme cookie update (issue #67)
+- Added new contributors to Humans.txt file
+- Native php session support added on bootstrap file
+- Theme session switched from cookie to native php session
+- Current theme name will be appeded to page cache files (prevent the same filename issue on different themes - issue #66)
 
 **v 0.7.19** (2011-10-17)
 
