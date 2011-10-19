@@ -1,5 +1,9 @@
 ## Bancha Change Log file ##
 
+**v 0.7.20** (2011-10-19)
+
+- Local date and datetime format are now applied to new records regarding of the current language (issue #65)
+
 **v 0.7.19** (2011-10-17)
 
 - Cache will not be written when the environment is in staging mode (issue #63)

@@ -159,7 +159,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			case 'datetime':
 				$tmp = explode(' ', $field_value);
 				$attributes['name'] = $field_name.'['.$module.']';
-				$attributes['value'] = $tmp[0] ? $tmp[0] : date('d/m/Y');
+				$attributes['value'] = $tmp[0] ? $tmp[0] : date(LOCAL_DATE_FORMAT);
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
 				echo $p_start.$label.br(1).form_input($attributes);
 

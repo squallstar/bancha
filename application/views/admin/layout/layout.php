@@ -48,6 +48,7 @@ if ($this->input->is_ajax_request())
 		var site_url = '<?php echo site_url(); ?>';
 		var admin_url = '<?php echo admin_url(); ?>/';
 		var current_url = '<?php echo current_url(); ?>';
+		var local_date_format = '<?php echo LOCAL_DATE_FORMAT; ?>';
 		</script>
 		<!--[if IE]><script type="text/javascript" src="<?php echo $js_url; ?>excanvas.js"></script><![endif]-->
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.img.preload.js"></script>
