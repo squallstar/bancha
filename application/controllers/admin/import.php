@@ -61,7 +61,7 @@ Class Import extends Bancha_Controller
 			show_error(_('Adapter not found.'));
 		}
 
-		if (!isset($_FILES['records']))
+		if (!isset($_FILES['records']) || !$_FILES['records']['tmp_name'])
 		{
 			$this->view->message('warning', _('You must upload a file.'));
 			$this->index();
