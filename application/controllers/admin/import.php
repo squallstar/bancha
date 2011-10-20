@@ -80,7 +80,24 @@ Class Import extends Bancha_Controller
 			return;
 		}
 
-		$records = $this->adapter->parse_stream($contents);
+		$records = $this->adapter->parse_stream($contents, TRUE, $this->input->post('type_id'));
+		
+		$saved = 0;
+		if (count($records))
+		{
+			foreach ($records as $record)
+			{
+				if ($this->records->save($record))
+				{
+					$saved++;
+				}
+			}
+			$this->view->set('records', $records);
+			$this->view->message('success', $this->lang->_trans('%c records have been imported.', array('c' => $saved)));
+		} else {
+			$this->view->message('warning', _('No records have been imported.'));
+		}
+		$this->view->render_layout('import/report');
 	}
 
 
