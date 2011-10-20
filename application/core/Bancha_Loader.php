@@ -206,10 +206,22 @@ Class Bancha_Loader extends CI_Loader {
 	/**
 	 * Loads a dispatcher
 	 * @param string $name
+	 * @param string $obj_name
 	 */
 	function dispatcher($name = 'default', $obj_name = 'dispatcher')
 	{
 		$this->library(FRNAME.'/dispatchers/dispatcher_'.$name, NULL, $obj_name);
+	}
+
+	/**
+	 * Loads an adapter
+	 * @param string $name
+	 * @param string $obj_name
+	 */
+	function adapter($name = '', $obj_name = 'adapter')
+	{
+		require_once(APPPATH . '/libraries/' . FRNAME . '/adapter.php');
+		$this->library(FRNAME.'/adapters/adapter_'.$name, NULL, $obj_name);
 	}
 
 	// --------------------------------------------------------------------
