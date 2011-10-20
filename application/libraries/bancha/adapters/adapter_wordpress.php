@@ -2,7 +2,7 @@
 /**
  * Wordpress Adapter Class
  *
- * ...
+ * A library that can read the Wordpress XML Export feed
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -19,6 +19,11 @@ Class Adapter_wordpress implements Adapter
 	 */
 	private $_mimes;
 
+	/**
+	 * @var string The content type of the comments
+	 */
+	public $comment_type = 'Comments';
+
 	public function __construct()
 	{
 		$this->mimes = array(
@@ -34,18 +39,23 @@ Class Adapter_wordpress implements Adapter
 		return $this->_mimes;
 	}
 
-	public function parse_stream($stream, $to_record = TRUE, $type = '')
+	public function parse_stream($stream, $to_record = TRUE, $type = '', $autosave = FALSE)
 	{
-		
+		if ($autosave)
+		{
+			$CI = & get_instance();
+			$can_save_comments = $CI->content->type_id($this->comment_type);
+		}
 
 		$prepared_stream = str_replace(
-			array('content:encoded>'),
-			array('content>'),
+			array('content:encoded>', 'wp:comment>', 'wp:comment_author>', 'wp:comment_author_url>',
+				  'wp:comment_date>', 'wp:comment_content>'),
+			array('content>', 'comments>', 'author>', 'www>',
+				  'date_publish>', 'content>'),
 			$stream
 		);
 
 		$dom = simplexml_load_string($prepared_stream, 'SimpleXMLElement', LIBXML_NOCDATA);
-
 
 		if (isset($dom->channel->item))
 		{
@@ -53,14 +63,33 @@ Class Adapter_wordpress implements Adapter
 			$data = array();
 			foreach ($channel->item as $item)
 			{
+				$title = (string)$item->title;
 				$data[] = array(
-					'title'			=> (string)$item->title,
-					'date_publish'	=> (string)$item->pubDate,
+					'title'			=> $title ? $title : _('Without title'),
+					'date_publish'	=> date(LOCAL_DATE_FORMAT . ' H:i', strtotime((string)$item->pubDate)),
 					'content'		=> (string)$item->content,
-					'abstract'		=> (string)$item->description,
-					'title'	=> (string)$item->title,
+					'abstract'		=> (string)$item->description
 				);
+				if (isset($item->category[0]))
+				{
+					$categories_array = (array)$item->category;
+					$data['category'] = $categories_array[0];
+				}
+				if (count($item->comments))
+				{
+					$comments = array();
+					foreach ($item->comments as $comment)
+					{
+						$comments[] = array(
+							'author'	=> (string)$comment->author,
+							'www'		=> (string)$comment->www,
+							'date_publish'	=> (string)$comment->date_publish
+						);
+					}
+					$data['comments'] = $comments;
+				}
 			}
+
 			if (!$to_record)
 			{
 				return $data;
@@ -68,17 +97,55 @@ Class Adapter_wordpress implements Adapter
 				$records = array();
 				foreach ($data as $row)
 				{
-					$record = new Record($type);
+					$post = new Record($type);
 					if ($type != '')
 					{
-						$record->set_data($row);
+						$post->set_data($row);
 					} else {
 						foreach ($row as $key => $val)
 						{
-							$record->set($key, $val);
+							$post->set($key, $val);
 						}
 					}
-					$records[]= $record;
+					if ($autosave)
+					{
+						$id = $CI->records->save($post);
+						$post->id = $id;
+						$post->set('id_record', $id);
+
+						//Now we can try to save the comments
+						$comments = isset($data['comments']) ? $data['comments'] : FALSE;
+						if ($can_save_comments && is_array($comments) && count($comments))
+						{
+							$post_comments_count = 0;
+							foreach ($comments as $comment)
+							{
+								//We try to create and save a single comment
+								$post_comment = new Record($this->comment_type);
+								$post_comment->set_data($comment);
+								$post_comment->set('post_id', $post->id);
+								$comment_id = $CI->records->save($post_comment);
+
+								if ($comment_id)
+								{
+									$post_comment->id = $comment_id;
+									$post_comment->set('id_record', $comment_id);
+									$post_comments_count++;
+
+									//Records array is shared (so we have all the added records)
+									$records[] = $post_comment;
+								}
+							}
+
+							//If the post has comments, let's update the child count
+							if ($post_comments_count > 0)
+							{
+								$post->set('child_count', $post_comments_count);
+								$CI->records->save($post);
+							}
+						}
+					}
+					$records[]= $post;
 				}
 				return $records;
 			}
