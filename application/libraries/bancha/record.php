@@ -95,26 +95,39 @@ Class Record {
 
    			if ($field['type'] == 'date' || $field['type'] == 'datetime')
    			{
+   				//If the date includes the time, we split it
    				if (strpos($this->_data[$field_name], ':') !== FALSE)
    				{
    					list($this->_data[$field_name], $data['_time_'.$field_name]) = explode(' ', $this->_data[$field_name]);
    				}
    				switch (LOCAL_DATE_FORMAT)
     			{
-    				case 'd/m/Y':
-    					$tmp = explode('/', $this->_data[$field_name]);
-    					if (count($tmp) == 3)
-    					{
-    						list($day, $month, $year) = $tmp;
-    					}
-    					break;
+    				//Computer format
     				case 'Y-m-d':
     					$tmp = explode('-', $this->_data[$field_name]);
     					if (count($tmp) == 3)
     					{
     						list($year, $month, $day) = $tmp;
     					}
-    					break;    					
+    					break;
+    					
+    				//American format
+    				case 'm/d/Y':
+    					$tmp = explode('/', $this->_data[$field_name]);
+    					if (count($tmp) == 3)
+    					{
+    						list($month, $day, $year) = $tmp;
+    					}
+    					break;    
+    				
+    				//European date
+    				case 'd/m/Y':
+    					$tmp = explode('/', $this->_data[$field_name]);
+    					if (count($tmp) == 3)
+    					{
+    						list($day, $month, $year) = $tmp;
+    					}
+    					break;					
     			}
 
     			if (!isset($day) && !isset($month) && !isset($year))
