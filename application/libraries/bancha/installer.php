@@ -539,7 +539,8 @@ Class Installer
 					 ->set('lang', $this->CI->lang->current_language)
 					 ->set('show_in_menu', 'T')
 					 ->set('action_list_type', $this->CI->content->type_id('Blog'))
-				;
+					 ->set('action_list_order_by', 'date_publish DESC');
+				
 				$page_id = $this->CI->records->save($page);
 				$this->CI->records->publish($page_id, 'Menu');
 				$this->CI->pages->publish($page_id);
