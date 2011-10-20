@@ -22,7 +22,7 @@
  * production	: errors will not be displayed
  *
  */
-	define('ENVIRONMENT', 'ale');
+define('ENVIRONMENT', 'ale');
 /*
  */
 
@@ -199,5 +199,4 @@ if (defined('ENVIRONMENT'))
 session_start();
 require_once BASEPATH.'core/CodeIgniter.php';
 
->>>>>>> upstream/master
 /* End of file index.php */
