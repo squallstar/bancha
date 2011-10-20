@@ -129,7 +129,7 @@ Class Record {
 	    		}
 	    		else if ($field['type'] == 'datetime')
 	    		{
-	    			if (isset($data['_time_'.$field_name]))
+	    			if (isset($data['_time_'.$field_name]) && strpos($data['_time_'.$field_name], ':') !== FALSE)
 	    			{
 	    				list($hour, $min) = explode(':', $data['_time_'.$field_name]);
 	    			} else {
