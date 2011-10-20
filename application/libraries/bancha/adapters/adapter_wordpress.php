@@ -58,109 +58,111 @@ Class Adapter_wordpress implements Adapter
 		$prepared_stream = str_replace(
 			array('content:encoded>', 'wp:comment>', 'wp:comment_author>', 'wp:comment_author_url>',
 				  'wp:comment_date>', 'wp:comment_content>', 'wp:comment_author_email>'),
-			array('content>', 'comments>', 'author>', 'www>', 'email>',
-				  'date_publish>', 'content>'),
+			array('content>', 'comments>', 'author>', 'www>',
+				  'date_publish>', 'content>', 'email>'),
 
 			$stream // (the source)
 		);
 
 		$dom = simplexml_load_string($prepared_stream, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-		if (isset($dom->channel->item))
+		if (!isset($dom->channel->item)) return FALSE;
+	
+		$channel = $dom->channel;
+		$data = array();
+		foreach ($channel->item as $item)
 		{
-			$channel = $dom->channel;
-			$data = array();
-			foreach ($channel->item as $item)
+			$title = (string)$item->title;
+			$post = array(
+				'title'			=> $title ? $title : _('Without title'),
+				'date_publish'	=> date(LOCAL_DATE_FORMAT . ' H:i', strtotime((string)$item->pubDate)),
+				'content'		=> (string)$item->content,
+				'abstract'		=> (string)$item->description
+			);
+			if (isset($item->category[0]))
 			{
-				$title = (string)$item->title;
-				$data[] = array(
-					'title'			=> $title ? $title : _('Without title'),
-					'date_publish'	=> date(LOCAL_DATE_FORMAT . ' H:i', strtotime((string)$item->pubDate)),
-					'content'		=> (string)$item->content,
-					'abstract'		=> (string)$item->description
-				);
-				if (isset($item->category[0]))
-				{
-					$categories_array = (array)$item->category;
-					$data['category'] = $categories_array[0];
-				}
-				if (count($item->comments))
-				{
-					$comments = array();
-					foreach ($item->comments as $comment)
-					{
-						$comments[] = array(
-							'author'		=> (string)$comment->author,
-							'www'			=> (string)$comment->www,
-							'date_publish'	=> (string)$comment->date_publish,
-							'content'		=> (string)$comment->content,
-							'email'			=> (string)$comment->email
-						);
-					}
-					$data['comments'] = $comments;
-				}
+				$categories_array = (array)$item->category;
+				$data['category'] = $categories_array[0];
 			}
-
-			if (!$to_record)
+			if (count($item->comments))
 			{
-				return $data;
-			} else {
-				$records = array();
-				foreach ($data as $row)
+				$comments = array();
+				
+				foreach ($item->comments as $comment)
 				{
-					$post = new Record($type);
-					if ($type != '')
-					{
-						$post->set_data($row);
-					} else {
-						foreach ($row as $key => $val)
-						{
-							$post->set($key, $val);
-						}
-					}
-					if ($autosave)
-					{
-						$id = $CI->records->save($post);
-						$post->id = $id;
-						$post->set('id_record', $id);
-
-						//Now we can try to save the comments
-						$comments = isset($data['comments']) ? $data['comments'] : FALSE;
-						if ($can_save_comments && is_array($comments) && count($comments))
-						{
-							$post_comments_count = 0;
-							foreach ($comments as $comment)
-							{
-								//We try to create and save a single comment
-								$post_comment = new Record($this->comment_type);
-								$post_comment->set_data($comment);
-								$post_comment->set('post_id', $post->id);
-								$comment_id = $CI->records->save($post_comment);
-
-								if ($comment_id)
-								{
-									$post_comment->id = $comment_id;
-									$post_comment->set('id_record', $comment_id);
-									$post_comments_count++;
-
-									//Records array is shared (so we have all the added records)
-									$records[] = $post_comment;
-								}
-							}
-
-							//If the post has comments, let's update the child count
-							if ($post_comments_count > 0)
-							{
-								//$post->set('child_count', $post_comments_count);
-								//$CI->records->save($post);
-							}
-						}
-					}
-					$records[]= $post;
+					$comments[] = array(
+						'author'		=> (string)$comment->author,
+						'www'			=> (string)$comment->www,
+						'date_publish'	=> (string)$comment->date_publish,
+						'content'		=> (string)$comment->content,
+						'email'			=> (string)$comment->email
+					);
 				}
-				return $records;
+				$post['comments'] = $comments;
 			}
+			$data[] = $post;
 		}
-		
+
+		/** end of data preparing **/
+
+		if (!$to_record)
+		{
+			return $data;
+		} else {
+			$records = array();
+			foreach ($data as $row)
+			{
+				$post = new Record($type);
+				if ($type != '')
+				{
+					$post->set_data($row);
+				} else {
+					foreach ($row as $key => $val)
+					{
+						$post->set($key, $val);
+					}
+				}
+				if ($autosave)
+				{
+					$id = $CI->records->save($post);
+					$post->id = $id;
+					$post->set('id_record', $id);
+
+					//Now we can try to save the comments
+					$comments = isset($row['comments']) ? $row['comments'] : FALSE;
+					if ($can_save_comments && is_array($comments) && count($comments))
+					{
+						$post_comments_count = 0;
+						foreach ($comments as $comment)
+						{
+							//We try to create and save a single comment
+							$post_comment = new Record($this->comment_type);
+							$post_comment->set_data($comment);
+							$post_comment->set('post_id', $post->id);
+							$comment_id = $CI->records->save($post_comment);
+
+							if ($comment_id)
+							{
+								$post_comment->id = $comment_id;
+								$post_comment->set('id_record', $comment_id);
+								$post_comments_count++;
+
+								//Records array is shared (so we have all the added records)
+								$records[] = $post_comment;
+							}
+						}
+
+						//If the post has comments, let's update the child count
+						if ($post_comments_count > 0)
+						{
+							//$post->set('child_count', $post_comments_count);
+							//$CI->records->save($post);
+						}
+					}
+				}
+				$records[]= $post;
+			}
+			return $records;
+		}		
 	}
 }
