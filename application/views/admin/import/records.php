@@ -34,10 +34,11 @@
 			echo form_label(_('Source file'), 'records') . br(1);
 			echo form_upload('records') . br(2);
 			
-			echo form_submit('submit', _('Import records'), 'class="submit long"');
+			echo form_submit('submit', _('Import records'), 'class="submit long" onclick="$(this).fadeOut(200, function() {$(\'img.hidden\').fadeIn();});"');
 			echo form_close();
 			
 			?>
+			<img class="hidden" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/loading.gif'; ?>" />
 			
 		</div>
 		
