@@ -5,6 +5,7 @@
 - Import of CSV files is now possible
 - New class type: Adapters
 - Added a new adapter to handle CSV files
+- Added a new adapter to import wordpress xml files
 
 
 **v 0.8** (2011-10-19)

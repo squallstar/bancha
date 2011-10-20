@@ -25,13 +25,13 @@
 			
 			echo form_open_multipart(ADMIN_PUB_PATH . 'import/step/1');
 			
-			echo form_label(_('Content type'), 'type_id') . br(1);
+			echo form_label(_('Destination content type'), 'type_id') . br(1);
 			echo form_dropdown('type_id', $tipi, null, 'class="styled"') . br(1);
 
 			echo form_label(_('Adapter type'), 'adapter_type') . br(1);
 			echo form_dropdown('adapter_type', $adapters, null, 'class="styled"') . br(1);
 			
-			echo form_label(_('File'), 'records') . br(1);
+			echo form_label(_('Source file'), 'records') . br(1);
 			echo form_upload('records') . br(2);
 			
 			echo form_submit('submit', _('Import records'), 'class="submit long"');
