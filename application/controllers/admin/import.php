@@ -80,10 +80,11 @@ Class Import extends Bancha_Controller
 			return;
 		}
 
-		$records = $this->adapter->parse_stream($contents, TRUE, $this->input->post('type_id'));
+		$autosave = TRUE;
+
+		$records = $this->adapter->parse_stream($contents, TRUE, $this->input->post('type_id'), $autosave);
 		
-		$saved = 0;
-		if (count($records))
+		if (count($records) && !$autosave)
 		{
 			foreach ($records as $record)
 			{
@@ -92,11 +93,13 @@ Class Import extends Bancha_Controller
 					$saved++;
 				}
 			}
-			$this->view->set('records', $records);
-			$this->view->message('success', $this->lang->_trans('%c records have been imported.', array('c' => $saved)));
 		} else {
-			$this->view->message('warning', _('No records have been imported.'));
+			$saved = count($records);
 		}
+
+		$this->view->set('records', $records);
+		$this->view->message('success', $this->lang->_trans('%c records have been imported.', array('c' => $saved)));
+
 		$this->view->render_layout('import/report');
 	}
 

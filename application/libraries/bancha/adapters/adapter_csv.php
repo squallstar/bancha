@@ -34,9 +34,14 @@ Class Adapter_csv implements Adapter
 		return $this->_mimes;
 	}
 
-	public function parse_stream($stream, $to_record = TRUE, $type = '')
+	public function parse_stream($stream, $to_record = TRUE, $type = '', $autosave = FALSE)
 	{
 		$data = $this->_csv_to_array($stream);
+
+		if ($autosave)
+		{
+			$model_records = & get_instance()->records;
+		}
 		
 		if (!$to_record)
 		{
@@ -56,6 +61,12 @@ Class Adapter_csv implements Adapter
 						{
 							$record->set($key, $val);
 						}
+					}
+					if ($autosave)
+					{
+						$id = $model_records->save($record);
+						$record->id = $id;
+						$record->set('id_record', $id);
 					}
 					$records[]= $record;
 				}
