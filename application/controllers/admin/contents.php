@@ -365,9 +365,13 @@ Class Contents extends Bancha_Controller
                 $msg = $this->lang->_trans('The content %n has been saved.', array('n' => $content_edit_link));
           		$this->session->set_flashdata('message', $msg);
                 redirect(ADMIN_PUB_PATH.$this->_section.'/type/' . $tipo['name']);
-            } else if ($this->input->post('_bt_publish')) {
 
-          		$this->records->publish($record->id);
+            } else if ($this->input->post('_bt_publish')) {
+          		$this->records->publish($record->id, $type);
+          		if ($tipo['tree'])
+          		{
+          			$this->pages->publish($record->id);
+          		}
                 $msg = $this->lang->_trans('The content %n has been published.', array('n' => $content_edit_link));
                 $this->session->set_flashdata('message', $msg);
                 redirect(ADMIN_PUB_PATH.$this->_section.'/type/' . $tipo['name']);

@@ -93,6 +93,12 @@ class Bancha_Lang extends CI_Lang {
 			$this->_CI->config->prepend_language = $lang;
 		}
 
+        //Sets the date_format variable
+        if (!defined('LOCAL_DATE_FORMAT'))
+        {
+            define('LOCAL_DATE_FORMAT', $this->languages[$this->current_language]['date_format']);
+        }
+
 		//Update CI config
 		$this->_CI->config->set_item('language', $this->languages[$this->current_language]['name']);
     }

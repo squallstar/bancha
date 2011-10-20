@@ -68,12 +68,12 @@ $picasa->getGallery()->render();
 			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
 			<p style="text-align:center;"><img alt="" src="<?php echo theme_url('widgets/Art_Artdesigner.lv.png'); ?>" /></p>
 	</a>
-	<a class="quicknavgrid_3 quicknav" href="#">
+	<a class="quicknavgrid_3 quicknav" href="<?php echo site_url('about-us'); ?>">
 			<h4 class="title ">Learn about us</h4>
 			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
 			<p style="text-align:center;"><img alt="" src="<?php echo theme_url('widgets/info.png'); ?>" /></p>
 	</a>
-	<a class="quicknavgrid_3 quicknav" href="#">
+	<a class="quicknavgrid_3 quicknav" href="<?php echo site_url('blog'); ?>">
 			<h4 class="title ">Read our blog</h4>
 			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
 			<p style="text-align:center;"><img alt="" src="<?php echo theme_url('widgets/Blog_Artdesigner.lv.png'); ?>" /></p>

@@ -22,7 +22,7 @@ echo '<div class="details"><h1>'.$page->get('title').'</h1>'.
 if ($records && is_array($records) && count($records)) {
 ?>
 
-	<h3>Lista {name}</h3>
+	<h3>{name} list</h3>
 
 	<ul>
 	<?php

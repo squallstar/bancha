@@ -25,7 +25,7 @@ foreach ($this->content->types() as $tipo) {
 ?><div id="header">
 	<div class="hdrl"></div>
 	<div class="hdrr"></div>
-
+ 	<img class="logo_img" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/logo_header.png'; ?>" />
 	<h1><a href="<?php echo admin_url(); ?>">BANCHA</a></h1>
 
 	<ul id="nav">

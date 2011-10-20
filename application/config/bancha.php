@@ -61,7 +61,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.7.19');
+define('BANCHA_VERSION', '0.8');
 
 /*
  * Framework name
@@ -193,7 +193,7 @@ $config['default_view_template'] = 'default';
  * VIEW TEMPLATES TO COPY
  * The .php templates that will be copied from Bancha templates to the website theme.
  */
-$config['view_templates_to_copy'] = array('detail', 'list');
+$config['view_templates_to_copy'] = array('detail', 'list', 'feed');
 
 /*
  * VIEWS ABSOLUTE TEMPLATES FOLDER
@@ -212,7 +212,7 @@ $config['xml_translations_path'] = APPPATH . $sep . 'views' . $sep . 'admin' . $
  * The restriced names for the XML fields. They are not available due to internal use.
  */
 $config['restricted_field_names'] = array(
-	'categories', 'xml'
+	'xml', 'categories', 'hierarchies'
 );
 
 /*
@@ -309,6 +309,12 @@ $config['record_select_tree_fields'] = array('id_parent');
  * These kind of fields will be store as arrays values
  */
 $config['array_field_types'] = array('multiselect', 'hierarchy');
+
+/*
+ * CONTENT TYPE CUSTOM FEED
+ * When is set to TRUE, type template file "feed.php" will be used to render the feeds
+ */
+$config['type_custom_feeds'] = TRUE;
 
 
 /* End of file bancha.php */

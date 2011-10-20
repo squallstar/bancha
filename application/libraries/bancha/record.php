@@ -39,6 +39,11 @@ Class Record {
 	 */
   	public $xml = '';
 
+  	/**
+	 * @var string Set to TRUE when the documents will be extracted
+	 */
+  	public $documents_extracted = FALSE;
+
   	public function __construct($type='')
   	{
   		if ($type != '')
@@ -85,23 +90,28 @@ Class Record {
     		}
    			$this->_data[$field_name] = $value;
 
-    		if ($field['type'] == 'date')
-    		{
-    			if (strpos($this->_data[$field_name], '/'))
+   			if ($field['type'] == 'date' || $field['type'] == 'datetime')
+   			{
+   				switch (LOCAL_DATE_FORMAT)
     			{
-    				$this->_data[$field_name] = implode('-', array_reverse(explode('/', $this->_data[$field_name])));
+    				case 'd/m/Y':
+    					list($day, $month, $year) = explode('/', $this->_data[$field_name]);
+    					break;
+    				case 'Y-m-d':
+    				default:
+    					list($year, $month, $day) = explode('-', $this->_data[$field_name]);
     			}
-    			$this->_data[$field_name] = strtotime($this->_data[$field_name]);
-    		}
-    		else if ($field['type'] == 'datetime')
-    		{
-    			if (strpos($this->_data[$field_name], '/'))
-    			{
-    				$this->_data[$field_name] = implode('-', array_reverse(explode('/', $this->_data[$field_name])));
-    				$this->_data[$field_name] = $this->_data[$field_name]  . ' ' . $data['_time_'.$field_name] . ':00';
-    			}
-    			$this->_data[$field_name] = strtotime($this->_data[$field_name]);
-    		}
+
+    			if ($field['type'] == 'date')
+	    		{
+	    			$this->_data[$field_name] = mktime('00', '00', '00', $month, $day, $year);
+	    		}
+	    		else if ($field['type'] == 'datetime')
+	    		{
+	    			list($hour, $min) = explode(':', $data['_time_'.$field_name]);
+	    			$this->_data[$field_name] = mktime($hour, $min, '00', $month, $day, $year);    			
+	    		}
+   			}
     	}
 
     	//We set the primary key for the update queries
@@ -209,8 +219,6 @@ Class Record {
 		      			$this->_data[$field_name] = $field_value;
 		      		}
 
-		      		
-		      		//TODO: mettere tutti i format date e datetime nel config per lingua (tipo d/m/Y)
 		      		if (!isset($tipo['fields'][$field_name]['type']))
 		      		{
 		      			continue;
@@ -219,10 +227,10 @@ Class Record {
 		      		$field_type = $tipo['fields'][$field_name]['type'];
 		      		if ($field_type == 'date')
 		      		{
-		      			$this->_data[$field_name] = date('d/m/Y', $this->_data[$field_name]);
+		      			$this->_data[$field_name] = date(LOCAL_DATE_FORMAT, $this->_data[$field_name]);
 		      		} else if ($field_type == 'datetime')
 		      		{
-		      			$this->_data[$field_name] = date('d/m/Y H:i', $this->_data[$field_name]);
+		      			$this->_data[$field_name] = date(LOCAL_DATE_FORMAT . ' H:i', $this->_data[$field_name]);
 		      		}
                     else if (in_array($field_type, config_item('array_field_types')) && is_string($this->_data[$field_name]))
                     {
@@ -250,8 +258,13 @@ Class Record {
   	 */
 	public function set_documents()
 	{
+		if ($this->documents_extracted) return;
+
 		$CI = & get_instance();
-		$CI->load->documents();
+		if (!isset($CI->documents))
+		{
+			$CI->load->documents();
+		}
    		$tipo = & $CI->content->type($this->_tipo);
 
    		$has_attachments = FALSE;
@@ -289,5 +302,6 @@ Class Record {
 				}
 			}
 		}
+		$this->documents_extracted = TRUE;
 	}
 }

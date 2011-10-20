@@ -451,6 +451,7 @@ Class Installer
 
 		$languages = array_keys($this->CI->lang->languages);
 
+		//We make an homepage for each language we found
 		foreach ($languages as $lang)
 		{
 			$page = new Record('Menu');
@@ -465,10 +466,6 @@ Class Installer
 			$this->CI->pages->publish($page_id);
 			$this->CI->settings->set('website_homepage_' . $lang, 'home');
 		}
-
-
-
-
 	}
 
 	/**
@@ -547,24 +544,25 @@ Class Installer
 				$this->CI->records->publish($page_id, 'Menu');
 				$this->CI->pages->publish($page_id);
 
-				break;
+				//break; < no break! we will build also default pages
 
 			case 'default':
 				//We create a dummy page
 				$page = new Record('Menu');
-				$page->set('title', 'My first page')
+				$page->set('title', 'About us')
 				->set('action', 'text')
 				->set('lang', $this->CI->lang->current_language)
 				->set('show_in_menu', 'T')
 				->set('child_count', 0)
-				->set('content', _('Hello world'))
+				->set('uri', 'about-us')
+				->set('content', _('Hello world by a sample page.'))
 				;
 				$this->CI->records->save($page);
 
 				break;
 		}
 
-		//This tree needs to be cleared cos we added some pages before
+		//This tree needs to be cleared because we added some pages few lines above
 		$this->CI->tree->clear_cache('Menu');
 	}
 

@@ -58,7 +58,7 @@ $has_full_textarea = FALSE;
 $p_start = '<p>';
 $p_end = '</p>';
 
-$breadcrumbs_render = '<p class="breadcrumb"><a href="<?php echo admin_url($_section); ?>">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
+$breadcrumbs_render = '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
 						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
 						 . (!$record->id ? _($tipo['label_new']) : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
 
@@ -192,11 +192,11 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			case 'datetime':
 				if (is_numeric($field_value))
 				{
-					$field_value = date('d/m/Y H:i', $field_value);
+					$field_value = date(LOCAL_DATE_FORMAT . ' H:i', $field_value);
 				}
 				$tmp = explode(' ', $field_value);
 				$attributes['name'] = $field_name;
-				$attributes['value'] = $tmp[0] ? $tmp[0] : date('d/m/Y');
+				$attributes['value'] = $tmp[0] ? $tmp[0] : date(LOCAL_DATE_FORMAT);
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
 				echo $p_start.$label.br(1).form_input($attributes);
 

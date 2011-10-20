@@ -31,9 +31,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <?php
-	foreach ($this->view->css as $css) {
-      echo "\t".link_tag(theme_url().'css/'.$css);
-    }
+	echo link_tag(theme_url('css/style.css'));
 
 	if ($this->view->has_feed)
     {

@@ -55,6 +55,9 @@ Class Themes extends Bancha_Controller
 			}
 			$this->view->message('success', _('The settings have been updated.'));
 			$this->settings->clear_cache();
+
+			//The theme may have been changed
+			unset($_SESSION['_website_theme']);
 		}
 
 		$this->view->set('themes', $this->themes);

@@ -126,17 +126,17 @@ Class View
 	 * If it not exists in the session, will be loaded the default one (desktop or mobile)
 	 */
 	public function load_theme() {
-		$this->theme = $this->_CI->session->userdata('_website_theme');
+		$this->theme = isset($_SESSION['_website_theme']) ? $_SESSION['_website_theme'] : FALSE;
 		if (!$this->theme && !defined('DISABLE_SETTINGS'))
 		{
 			$this->_CI->load->library('user_agent');
 			$this->_CI->load->settings();
 
-			if ($this->_CI->agent->is_mobile())
+			if (!$this->_CI->agent->is_mobile())
 			{
-				$this->theme = $this->_CI->settings->get('website_mobile_theme');
-			} else {
 				$this->theme = $this->_CI->settings->get('website_desktop_theme');
+			} else {
+				$this->theme = $this->_CI->settings->get('website_theme_theme');
 			}
 
 			$this->store_theme();
@@ -171,7 +171,9 @@ Class View
 	 */
 	public function store_theme()
 	{
-		$this->_CI->session->set_userdata('_website_theme', $this->theme);
+		//We set a single cookie to help the Output class to send cached pages
+		$_SESSION['_website_theme'] = $this->theme;
+		
 		return $this->update_ci_path();
 	}
 
@@ -213,6 +215,10 @@ Class View
 		} else return FALSE;
 	}
 
+	/**
+	 * Gets all the data of the view
+	 * @return array
+	 */
 	public function get_data()
 	{
 		return $this->_data;
@@ -235,11 +241,11 @@ Class View
 	public function render_layout($view_file, $header=true)
 	{
 		return $this->_CI->load->view($this->base.$this->_layout_dir, array(
-			'base' => $this->base,
+			'base'		=> $this->base,
 			'content'	=> & $this->_data,
-			'view' => $this->base.$view_file,
-			'header' => $header,
-			'title'	=> $this->title
+			'view'		=> $this->base.$view_file,
+			'header'	=> $header,
+			'title'		=> $this->title
 		));
 	}
 
@@ -249,7 +255,7 @@ Class View
 	 * @param string $template_file
 	 * @param bool $layout
 	 * @param int $code HTTP code
-	 * @param bool $return Whether the view needs to be returned or echoed
+	 * @param bool $return Whether the view needs to be returned or "echoed"
 	 */
 	public function render_template($template_file, $layout = TRUE, $code = '', $return = FALSE)
 	{
@@ -278,8 +284,9 @@ Class View
 	 * Renders the template of a content type
 	 * @param string $type_name The name of the type
 	 * @param string $view_file (detail, list, etc...)
+	 * @param bool $propagate_data Whether to pass the local data to the view
 	 */
-	public function render_type_template($type_name='', $view_file='')
+	public function render_type_template($type_name='', $view_file='', $propagate_data = FALSE)
 	{
 		if ($type_name == '' || $view_file == '')
 		{
@@ -287,7 +294,7 @@ Class View
 		}
 		$view_path = $this->_CI->config->item('views_templates_folder') . $type_name . '/' . $view_file;
 
-		$this->_CI->load->view($view_path);
+		$this->_CI->load->view($view_path, $propagate_data ? $this->_data : '');
 	}
 
 	/**
@@ -335,12 +342,13 @@ Class View
 	 */
 	function live_tags($field, $record)
 	{
- 		if ($this->_CI->output->has_profiler() &&
- 			$this->_CI->auth->has_permission('content', $record->tipo)
- 		)
+ 		if ($this->_CI->output->has_profiler()
+ 			&& $this->_CI->auth->has_permission('content', $record->tipo))
  		{
- 			return ' data-mode="edit" data-field="'.$field.'" data-type="'.$record->tipo
- 				  .'" data-key="'.$record->id.'" data-fieldtype="'.$this->_CI->content->content_types[$record->_tipo]['fields'][$field]['type'].'"';
+ 			return ' data-mode="edit" data-field="'.$field.'" data-type="'
+ 				   . $record->tipo
+ 				   . '" data-key="'.$record->id.'" data-fieldtype="'
+ 				   . $this->_CI->content->content_types[$record->_tipo]['fields'][$field]['type'].'"';
  		} else {
  			return '';
  		}

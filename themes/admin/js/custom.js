@@ -378,23 +378,38 @@ var bancha = {
 }
 
 jQuery.extend(DateInput.DEFAULT_OPTS, {
-	  /*month_names: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
-	  short_month_names: ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
-	  short_day_names: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],*/
-	  stringToDate: function(string) {
-		    var matches;
+  	/*month_names: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+  	short_month_names: ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
+  	short_day_names: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],*/
+  	stringToDate: function(string) {
+	    var matches;
+	    if (local_date_format == 'd/m/Y') {
 		    if (matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/)) {
 		      return new Date(matches[3], matches[2] - 1, matches[1]);
 		    } else {
 		      return null;
 		    };
-		  },
+		} else {
+			 if (matches = string.match(/^(\d{4,4})\/(\d{2,2})\/(\d{2,2})$/)) {
+		      return new Date(matches[1], matches[2] - 1, matches[3]);
+		    } else {
+		      return null;
+		    };
+		}
+	},
 
-		  dateToString: function(date) {
-		    var month = (date.getMonth() + 1).toString();
-		    var dom = date.getDate().toString();
-		    if (month.length == 1) month = "0" + month;
-		    if (dom.length == 1) dom = "0" + dom;
-		    return dom + "/" + month + "/" + date.getFullYear();
-		  }
-	});
+	  dateToString: function(date) {
+	    var month = (date.getMonth() + 1).toString();
+	    var dom = date.getDate().toString();
+	    if (month.length == 1) month = "0" + month;
+	    if (dom.length == 1) dom = "0" + dom;
+	    if (local_date_format == 'd/m/Y') {
+	    	return dom + "/" + month + "/" + date.getFullYear();
+		} else {
+			return date.getFullYear() + "-" + month + "-" + dom;
+		}
+	}
+});
+
+
+

@@ -195,6 +195,9 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+
+session_start();
 require_once BASEPATH.'core/CodeIgniter.php';
 
+>>>>>>> upstream/master
 /* End of file index.php */

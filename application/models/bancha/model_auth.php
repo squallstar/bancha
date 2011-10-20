@@ -22,7 +22,7 @@ Class Model_auth extends CI_Model {
 	/**
 	 * @var array Current user acls
 	 */
-	private $_acl;
+	private $_acl = '';
 
 	public function __construct()
 	{
@@ -79,7 +79,7 @@ Class Model_auth extends CI_Model {
 			$this->lang->set_cookie();
 
 			//We also set a single cookie to help the Output class to send cached pages
-			setcookie("prevent_cache", TRUE, time() + $this->config->item('sess_expiration'));
+			$_SESSION['prevent_cache'] = TRUE;
 
 			//Loads the user permissions
 			$this->cache_permissions();
@@ -97,7 +97,8 @@ Class Model_auth extends CI_Model {
 	public function logout()
 	{
 		$this->session->sess_destroy();
-		setcookie ("prevent_cache", "", time() - 3600);
+		unset($_SESSION['prevent_cache']);
+		session_destroy();
 		return TRUE;
 	}
 
@@ -124,16 +125,17 @@ Class Model_auth extends CI_Model {
 	 */
 	function add_permission($acl_id)
 	{
-		//We first check if already exists
+		//We first check if the permission already exists
 		$result = $this->db->select('acl_id')
 		->from('groups_acl')
 		->where('acl_id', $acl_id)
 		->limit(1)->get();
+
 		if (!$result->num_rows())
 		{
 			$data = array(
-					'acl_id'	=> $acl_id,
-					'group_id'	=> $this->user('group_id')
+				'acl_id'	=> $acl_id,
+				'group_id'	=> $this->user('group_id')
 			);
 			return $this->db->insert('groups_acl', $data);
 		}
@@ -173,8 +175,8 @@ Class Model_auth extends CI_Model {
 			foreach ($permissions as $acl)
 			{
 				$data = array(
-								'group_id'			=> $group_id,
-								'acl_id'			=> $acl
+					'group_id'	=> $group_id,
+					'acl_id'	=> $acl
 				);
 				$this->db->insert('groups_acl', $data);
 			}

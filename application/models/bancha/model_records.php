@@ -427,13 +427,13 @@ Class Model_records extends CI_Model {
   								{
   									//We convert the date fields into timestamps
   									$record->set('_'.$column, $item->$column);
-  									$item->$column = date('d/m/Y', $item->$column);
+  									$item->$column = date(LOCAL_DATE_FORMAT, $item->$column);
   								} else if ($tipo['fields'][$column]['type'] == 'datetime')
   								{
   									if ($item->$column)
   									{
   										$record->set('_'.$column, $item->$column);
-  										$item->$column = date('d/m/Y H:i', $item->$column);
+  										$item->$column = date(LOCAL_DATE_FORMAT . ' H:i', $item->$column);
   									}
   								}
   								else if (in_array($tipo['fields'][$column]['type'], config_item('array_field_types')))
@@ -482,6 +482,7 @@ Class Model_records extends CI_Model {
                                 $record->set($field_name, $attachs);   
                             }
                         }
+                        $record->documents_extracted = TRUE;
                     }
                 }
             }
