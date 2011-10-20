@@ -83,14 +83,19 @@ Class Record {
     	foreach ($tipo['fields'] as $field_name => $field)
     	{
     		$value = isset($data[$field_name]) ? $data[$field_name] : '';
-    		if ($CI->config->item('strip_website_url') && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
+            
+    		if ($CI->config->item('strip_website_url')
+                && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
     		{
     			//Elimino il percorso del sito dalle textarea
     			$value = str_replace(site_url(), '/', $value);
     		}
+            
    			$this->_data[$field_name] = $value;
 
-   			if ($field['type'] == 'date' || $field['type'] == 'datetime')
+   			if (($field['type'] == 'date' || $field['type'] == 'datetime')
+                && (strpos($value, '/') !== FALSE || strpos($value, '-') !== FALSE)
+               )
    			{
    				switch (LOCAL_DATE_FORMAT)
     			{
