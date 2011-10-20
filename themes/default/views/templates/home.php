@@ -22,20 +22,7 @@ $config_picasa = array ('username' => 'kikkovolley');
 $picasa = $this->load->module('picasa', $config_picasa);
 $picasa->getGallery()->render();
 ########################################################*/
-
-
-########################## STAZIONE METEO NAVEVE #################
 ?>
-	<h2>Stazione Meteo @Naveve - Malcesine - Garda Lake - Verona - Italy</h2>
-	<div>
-		<img alt="Velocit&agrave; Vento" style="width:200px;" src="http://www.kitemalcesine.it/meteo/WindSpeed.gif">
-		<img alt="Cronologia Velocit&agrave; Vento" src="http://www.kitemalcesine.it/meteo/WindSpeedHistory.gif">
-	</div>
-	<div>
-		<img alt="Direzione vento" style="width:200px;" src="http://www.kitemalcesine.it/meteo/WindDirection.gif">
-		<img alt="Cronologia Direzione Vento" src="http://www.kitemalcesine.it/meteo/WindDirectionHistory.gif">
-	</div>
-<?php ################################################### ?>
 	<ul> 
 		<li>
 			<a href="#">
