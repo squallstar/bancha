@@ -1,5 +1,12 @@
 ## Bancha Change Log file ##
 
+**v 0.8.1** (2011-10-20)
+
+- Import of CSV files is now possible
+- New class type: Adapters
+- Added a new adapter to handle CSV files
+
+
 **v 0.8** (2011-10-19)
 
 - Local date and datetime format are now applied to new records regarding of the current language (issue #65)
