@@ -14,5 +14,6 @@
 
 interface Adapter
 {
-    public function parse_file($filepath);
+	public $mimes;
+    public function parse_stream($stream);
 }

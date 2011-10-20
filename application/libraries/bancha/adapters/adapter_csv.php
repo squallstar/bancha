@@ -14,8 +14,14 @@
 
 Class Adapter_csv implements Adapter
 {
-	public function parse_file($filepath)
+	public function __construct()
 	{
-
+		$this->mimes = array(
+			'text/csv', 'text/comma-separated-values'	
+		);
+	}
+	public function parse_stream($stream)
+	{
+		//debug($stream);
 	}
 }

@@ -19,14 +19,17 @@
 		<div class="sidebar_content" id="sb-import">
 			<h3><?php echo _('Import records'); ?></h3>
 			<p>
-			<div class="message warning"><p><?php echo _('WARNING').': '._('This function is under construction!'); ?></p></div>
-			</p>
-			<?php 
 			
-			echo form_open_multipart('');
+			<?php 
+			echo $this->view->get_messages();
+			
+			echo form_open_multipart(ADMIN_PUB_PATH . 'import/step/1');
 			
 			echo form_label(_('Content type'), 'type_id') . br(1);
 			echo form_dropdown('type_id', $tipi, null, 'class="styled"') . br(1);
+
+			echo form_label(_('Adapter type'), 'adapter_type') . br(1);
+			echo form_dropdown('adapter_type', $adapters, null, 'class="styled"') . br(1);
 			
 			echo form_label(_('File'), 'records') . br(1);
 			echo form_upload('records') . br(2);
