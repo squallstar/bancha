@@ -93,18 +93,34 @@ Class Record {
             
    			$this->_data[$field_name] = $value;
 
-   			if (($field['type'] == 'date' || $field['type'] == 'datetime')
-                && (strpos($value, '/') !== FALSE || strpos($value, '-') !== FALSE)
-               )
+   			if ($field['type'] == 'date' || $field['type'] == 'datetime')
    			{
+   				if (strpos($this->_data[$field_name], ':') !== FALSE)
+   				{
+   					list($this->_data[$field_name], $data['_time_'.$field_name]) = explode(' ', $this->_data[$field_name]);
+   				}
    				switch (LOCAL_DATE_FORMAT)
     			{
     				case 'd/m/Y':
-    					list($day, $month, $year) = explode('/', $this->_data[$field_name]);
+    					$tmp = explode('/', $this->_data[$field_name]);
+    					if (count($tmp) == 3)
+    					{
+    						list($day, $month, $year) = $tmp;
+    					}
     					break;
     				case 'Y-m-d':
-    				default:
-    					list($year, $month, $day) = explode('-', $this->_data[$field_name]);
+    					$tmp = explode('-', $this->_data[$field_name]);
+    					if (count($tmp) == 3)
+    					{
+    						list($year, $month, $day) = $tmp;
+    					}
+    					break;    					
+    			}
+
+    			if (!isset($day) && !isset($month) && !isset($year))
+    			{
+    				//Prevent wrong datetime input to throw notices
+    				list($day, $month, $year, $hour, $min) = explode('-', date('d-m-Y-H-i'));
     			}
 
     			if ($field['type'] == 'date')
@@ -113,7 +129,13 @@ Class Record {
 	    		}
 	    		else if ($field['type'] == 'datetime')
 	    		{
-	    			list($hour, $min) = explode(':', $data['_time_'.$field_name]);
+	    			if (isset($data['_time_'.$field_name]))
+	    			{
+	    				list($hour, $min) = explode(':', $data['_time_'.$field_name]);
+	    			} else {
+	    				$hour = date('H');
+	    				$min = date('i');
+	    			}
 	    			$this->_data[$field_name] = mktime($hour, $min, '00', $month, $day, $year);    			
 	    		}
    			}
