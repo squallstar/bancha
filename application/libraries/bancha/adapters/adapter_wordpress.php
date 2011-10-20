@@ -39,6 +39,13 @@ Class Adapter_wordpress implements Adapter
 		return $this->_mimes;
 	}
 
+	/**
+	 * Parse the wordpress export feed and gives back an array of records (or saves it)
+	 * @param mixed $stream The stream to parse
+	 * @param bool $to_record Whether each records need to be return as a "Record" object or just an array
+	 * @param string $type The default content type (used to create and save records)
+	 * @param bool $autosave When set to TRUE, records will also be saved into the database
+	 */
 	public function parse_stream($stream, $to_record = TRUE, $type = '', $autosave = FALSE)
 	{
 		if ($autosave)
@@ -47,12 +54,14 @@ Class Adapter_wordpress implements Adapter
 			$can_save_comments = $CI->content->type_id($this->comment_type);
 		}
 
+		//We need to normalize some of the Wordpress nodes
 		$prepared_stream = str_replace(
 			array('content:encoded>', 'wp:comment>', 'wp:comment_author>', 'wp:comment_author_url>',
-				  'wp:comment_date>', 'wp:comment_content>'),
-			array('content>', 'comments>', 'author>', 'www>',
+				  'wp:comment_date>', 'wp:comment_content>', 'wp:comment_author_email>'),
+			array('content>', 'comments>', 'author>', 'www>', 'email>',
 				  'date_publish>', 'content>'),
-			$stream
+
+			$stream // (the source)
 		);
 
 		$dom = simplexml_load_string($prepared_stream, 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -81,9 +90,11 @@ Class Adapter_wordpress implements Adapter
 					foreach ($item->comments as $comment)
 					{
 						$comments[] = array(
-							'author'	=> (string)$comment->author,
-							'www'		=> (string)$comment->www,
-							'date_publish'	=> (string)$comment->date_publish
+							'author'		=> (string)$comment->author,
+							'www'			=> (string)$comment->www,
+							'date_publish'	=> (string)$comment->date_publish,
+							'content'		=> (string)$comment->content,
+							'email'			=> (string)$comment->email
 						);
 					}
 					$data['comments'] = $comments;
@@ -140,8 +151,8 @@ Class Adapter_wordpress implements Adapter
 							//If the post has comments, let's update the child count
 							if ($post_comments_count > 0)
 							{
-								$post->set('child_count', $post_comments_count);
-								$CI->records->save($post);
+								//$post->set('child_count', $post_comments_count);
+								//$CI->records->save($post);
 							}
 						}
 					}
