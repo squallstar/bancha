@@ -6,6 +6,11 @@
 - New class type: Adapters
 - Added a new adapter to handle CSV files
 - Added a new adapter to import wordpress xml files
+- Wordpress adapter now can import also the post comments
+- Refactor of the datetime parser on the Record class
+- Visibility field moved (tree types)
+- Corrected a bug with the .po files and the record list table headers
+- Added many italian localizations to the .po files
 
 
 **v 0.8** (2011-10-19)
