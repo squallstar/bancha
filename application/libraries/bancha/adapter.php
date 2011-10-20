@@ -20,7 +20,11 @@ interface Adapter
 	public function get_mimes();
 
 	/**
-	 * Parse some content and gives back an array of records
+	 * Parse some content and gives back an array of records (or saves it)
+	 * @param mixed $stream The stream to parse
+	 * @param bool $to_record Whether each records need to be return as a "Record" object or just an array
+	 * @param string $type The default content type (used to create and save records)
+	 * @param bool $autosave When set to TRUE, records will also be saved into the database
 	 */
-    public function parse_stream($stream, $to_record = TRUE);
+    public function parse_stream($stream, $to_record = TRUE, $type = '', $autosave = FALSE);
 }
