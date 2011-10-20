@@ -14,6 +14,13 @@
 
 interface Adapter
 {
-	public $mimes;
-    public function parse_stream($stream);
+	/**
+	 * @var array Returns all the accepted mimes of the adapter
+	 */
+	public function get_mimes();
+
+	/**
+	 * Parse some content and gives back an array of records
+	 */
+    public function parse_stream($stream, $to_record = TRUE);
 }
