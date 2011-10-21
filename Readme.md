@@ -1,3 +1,5 @@
+![Logo](http://static.squallstar.it/images/bancha-trasp.png)
+
 # BANCHA - The CMS you were waiting for
 
 BANCHA is a Content Management System made with PHP5 and Code Igniter, a light and powerful PHP framework.
