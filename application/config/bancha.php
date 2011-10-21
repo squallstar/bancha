@@ -54,14 +54,17 @@ $config['admin_languages'] = array(
 
 /*
  * PREPEND URI LANGUAGE
- * When set to true, current language will be prepended to the URIs
+ * When set to true, the current language will be prepended all URIs.
+ *
+ * Example when is on:  www.example.org/it/path/to/page
+ * Example when is off: www.example.org/path/to/page
  */
  $config['prepend_uri_language'] = TRUE;
 
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.8');
+define('BANCHA_VERSION', '0.8.1');
 
 /*
  * Framework name
@@ -69,7 +72,7 @@ define('BANCHA_VERSION', '0.8');
 define('CMS', 'BANCHA');
 
 /*
- * Operative system directory separator
+ * OS directory separator
  * - On windows systems, will be "\"
  * - On unix-like systems, will be "/"
  * This variabile will be used just in this file

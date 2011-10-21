@@ -1,5 +1,18 @@
 ## Bancha Change Log file ##
 
+**v 0.8.1** (2011-10-20)
+
+- Import of CSV files is now possible
+- New class type: Adapters
+- Added a new adapter to handle CSV files
+- Added a new adapter to import wordpress xml files
+- Wordpress adapter now can import also the post comments
+- Refactor of the datetime parser on the Record class
+- Visibility field moved (tree types)
+- Corrected a bug with the .po files and the record list table headers
+- Added many italian localizations to the .po files
+
+
 **v 0.8** (2011-10-19)
 
 - Local date and datetime format are now applied to new records regarding of the current language (issue #65)

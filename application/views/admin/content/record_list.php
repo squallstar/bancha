@@ -42,7 +42,8 @@ $fields = array_keys($tipo['fields']);
 					<?php foreach ($admin_fields as $field) {
 							if ($field != $tipo['primary_key'])
 							{
-								echo '<th>'._($tipo['fields'][$field]['description']).'</th>';
+								$_descr = $tipo['fields'][$field]['description'];
+								echo '<th>'.($_descr ? _($_descr) : $field).'</th>';
 							}
 						}
 						?>

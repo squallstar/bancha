@@ -38,6 +38,11 @@
 			<list>true</list>
 			<default>eval:time()</default>
 		</field>
+		<field id="date_publish" column="true">
+			<description>Visibility date</description>
+			<type>datetime</type>
+			<list>true</list>
+		</field>
 		<field id="id_parent" column="true">
 			<description>Parent page</description>
 			<type>select</type>

@@ -32,8 +32,9 @@
 		<field id="published" column="true">
 			<type>hidden</type>
 			<default>0</default>
+			<list>true</list>
 		</field>
-		<field id="name" link="edit">
+		<field id="author" link="edit">
 			<type>text</type>
 			<admin>true</admin>
 			<list>true</list>

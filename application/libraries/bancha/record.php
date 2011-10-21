@@ -83,23 +83,57 @@ Class Record {
     	foreach ($tipo['fields'] as $field_name => $field)
     	{
     		$value = isset($data[$field_name]) ? $data[$field_name] : '';
-    		if ($CI->config->item('strip_website_url') && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
+            
+    		if ($CI->config->item('strip_website_url')
+                && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
     		{
     			//Elimino il percorso del sito dalle textarea
     			$value = str_replace(site_url(), '/', $value);
     		}
+            
    			$this->_data[$field_name] = $value;
 
    			if ($field['type'] == 'date' || $field['type'] == 'datetime')
    			{
+   				//If the date includes the time, we split it
+   				if (strpos($this->_data[$field_name], ':') !== FALSE)
+   				{
+   					list($this->_data[$field_name], $data['_time_'.$field_name]) = explode(' ', $this->_data[$field_name]);
+   				}
    				switch (LOCAL_DATE_FORMAT)
     			{
-    				case 'd/m/Y':
-    					list($day, $month, $year) = explode('/', $this->_data[$field_name]);
-    					break;
+    				//Computer format
     				case 'Y-m-d':
-    				default:
-    					list($year, $month, $day) = explode('-', $this->_data[$field_name]);
+    					$tmp = explode('-', $this->_data[$field_name]);
+    					if (count($tmp) == 3)
+    					{
+    						list($year, $month, $day) = $tmp;
+    					}
+    					break;
+    					
+    				//American format
+    				case 'm/d/Y':
+    					$tmp = explode('/', $this->_data[$field_name]);
+    					if (count($tmp) == 3)
+    					{
+    						list($month, $day, $year) = $tmp;
+    					}
+    					break;    
+    				
+    				//European date
+    				case 'd/m/Y':
+    					$tmp = explode('/', $this->_data[$field_name]);
+    					if (count($tmp) == 3)
+    					{
+    						list($day, $month, $year) = $tmp;
+    					}
+    					break;					
+    			}
+
+    			if (!isset($day) && !isset($month) && !isset($year))
+    			{
+    				//Prevent wrong datetime input to throw notices
+    				list($day, $month, $year, $hour, $min) = explode('-', date('d-m-Y-H-i'));
     			}
 
     			if ($field['type'] == 'date')
@@ -108,7 +142,13 @@ Class Record {
 	    		}
 	    		else if ($field['type'] == 'datetime')
 	    		{
-	    			list($hour, $min) = explode(':', $data['_time_'.$field_name]);
+	    			if (isset($data['_time_'.$field_name]) && strpos($data['_time_'.$field_name], ':') !== FALSE)
+	    			{
+	    				list($hour, $min) = explode(':', $data['_time_'.$field_name]);
+	    			} else {
+	    				$hour = date('H');
+	    				$min = date('i');
+	    			}
 	    			$this->_data[$field_name] = mktime($hour, $min, '00', $month, $day, $year);    			
 	    		}
    			}

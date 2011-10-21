@@ -19,22 +19,26 @@
 		<div class="sidebar_content" id="sb-import">
 			<h3><?php echo _('Import records'); ?></h3>
 			<p>
-			<div class="message warning"><p><?php echo _('WARNING').': '._('This function is under construction!'); ?></p></div>
-			</p>
+			
 			<?php 
+			echo $this->view->get_messages();
 			
-			echo form_open_multipart('');
+			echo form_open_multipart(ADMIN_PUB_PATH . 'import/step/1');
 			
-			echo form_label(_('Content type'), 'type_id') . br(1);
+			echo form_label(_('Destination content type'), 'type_id') . br(1);
 			echo form_dropdown('type_id', $tipi, null, 'class="styled"') . br(1);
+
+			echo form_label(_('Adapter type'), 'adapter_type') . br(1);
+			echo form_dropdown('adapter_type', $adapters, null, 'class="styled"') . br(1);
 			
-			echo form_label(_('File'), 'records') . br(1);
+			echo form_label(_('Source file'), 'records') . br(1);
 			echo form_upload('records') . br(2);
 			
-			echo form_submit('submit', _('Import records'), 'class="submit long"');
+			echo form_submit('submit', _('Import records'), 'class="submit long" onclick="$(this).fadeOut(200, function() {$(\'img.hidden\').fadeIn();});"');
 			echo form_close();
 			
 			?>
+			<img class="hidden" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/loading.gif'; ?>" />
 			
 		</div>
 		
