@@ -57,6 +57,7 @@ $first_lap = TRUE;
 $has_full_textarea = FALSE;
 $p_start = '<p>';
 $p_end = '</p>';
+$validator_rules = array();
 
 $breadcrumbs_render = '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
 						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
@@ -498,9 +499,18 @@ if ($tipo['has_attachments']) {
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/jquery-ui.js"></script>
 <?php } ?>
 
+<script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/validate.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	<?php echo $js_onload; ?>
+	var validator = new FormValidator('record_form',
+		<?php echo json_encode($validator_rules); ?>,
+		function(errors, events) {
+		    if (errors.length > 0) {
+		        // Show the errors
+		    }
+		}
+	);
 });
 </script>
 
