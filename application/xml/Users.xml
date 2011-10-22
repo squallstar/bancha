@@ -28,7 +28,7 @@
 		<field id="password" column="true">
 			<description>Password</description>
 			<type>password</type>
-			<rules>true</rules>
+			<rules>required|min_length[6]</rules>
 		</field>
 		<field id="password_confirm">
 			<description>Confirm password</description>

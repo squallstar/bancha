@@ -159,6 +159,7 @@ Il nodo <strong>&lt;has_categories&gt;</strong> &egrave; sempre un booleano, e d
 Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <strong>id</strong> e dovr&agrave; essere uno dei seguenti tipi di campo (definito tramite il nodo "type"):</p>
 <ul>
 	<li><strong>text</strong> - Per utilizzare un input testuale su riga singola senza stile</li>
+	<li><strong>password</strong> - Per utilizzare un input di tipo password</li>
 	<li><strong>textarea</strong> - Per utilizzare un input multiriga con possibilit&agrave; di inserimento stili e codice HTML</li>
 	<li><strong>textarea_full</strong> - Per utilizzare un campo di inserimento multiriga tramite editor CKEDITOR (avanzato)</li>
 	<li><strong>textarea_code</strong> - Per utilizzare un campo multiriga per inserire codice (ad esempio: css e javascript)</li>
