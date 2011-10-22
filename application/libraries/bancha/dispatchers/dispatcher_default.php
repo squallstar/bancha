@@ -170,11 +170,8 @@ Class Dispatcher_default
 			$this->_CI->load->categories();
 			$cat_ids = $this->_CI->categories->name_in($categories)->get_ids();
 
-			$category_record_ids = $this->_CI->categories->get_records_for_categories($cat_ids);
-			if (count($category_record_ids))
-			{
-				$this->_CI->records->id_in($category_record_ids);
-			}
+			$sql = $this->_CI->categories->get_records_for_categories($cat_ids, TRUE);
+			$this->_CI->records->id_in($sql, FALSE);
 		}
 
 		$hierarchies = $page->get('action_list_hierarchies');

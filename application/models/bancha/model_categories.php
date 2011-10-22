@@ -213,24 +213,31 @@ Class Model_categories extends CI_Model {
 	return $ids;
   }
 
-  /**
-   * Ottiene gli ID dei record appartenenti a una determinate categorie
-   * @param array $array id categorie
-   */
-  public function get_records_for_categories($array)
-  {
-  	if (!count($array)) return array();
+  	/**
+   	* Ottiene gli ID dei record appartenenti a una determinate categorie
+   	* @param array $array id categorie
+   	*/
+  	public function get_records_for_categories($array, $sql_string = FALSE)
+  	{
+  		if (!count($array)) return array();
 
-  	$res = $this->db->select('id_record')
-		   		    ->from('record_categories')
-		   		    ->where_in('id_category', $array)
-		   		    ->get();
-	$result = $res->result_array();
-	$ids = array();
-	foreach ($result as $record)
-	{
-		$ids[] = (int)$record['id_record'];
-	}
-	return $ids;
-  }
+	  	$this->db->select('id_record')
+	    		 ->from('record_categories')
+				 ->where_in('id_category', $array);
+
+		if ($sql_string)
+		{
+			return $this->db->get_sql();
+		} else {
+			$res = $this->db->get();
+		}
+
+		$result = $res->result_array();
+		$ids = array();
+		foreach ($result as $record)
+		{
+			$ids[] = (int)$record['id_record'];
+		}
+		return $ids;
+  	}
 }
