@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright		Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -17,16 +17,15 @@
  * BANCHA APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
  *
- * sqlite	: will use the sqlite internal database	(application/config/sqlite/database.php)
+ * sqlite		: will use the sqlite internal database	(application/config/sqlite/database.php)
  * development	: the default one			(application/config/database.php)
  * production	: errors will not be displayed
  *
  */
-//	define('ENVIRONMENT', 'development');
-	define('ENVIRONMENT', 'ale');
-
+define('ENVIRONMENT', 'ale');
 /*
  */
+
 if (defined('ENVIRONMENT'))
 {
 	switch (ENVIRONMENT)
@@ -95,6 +94,15 @@ if (defined('ENVIRONMENT'))
 	$themes_folder = 'themes';
 
 
+/*
+ *---------------------------------------------------------------
+ * ADMIN PUBLIC PATH
+ *---------------------------------------------------------------
+ *
+ */
+	$admin_path = 'admin/';
+
+
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
 // --------------------------------------------------------------------
@@ -145,6 +153,9 @@ if (defined('ENVIRONMENT'))
 	// Name of the "system folder"
 	define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
 
+	//The administration public path
+	define('ADMIN_PUB_PATH', $admin_path);
+
 
 	// The path to the "application" folder
 	if (is_dir($application_folder))
@@ -184,6 +195,8 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+
+session_start();
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */

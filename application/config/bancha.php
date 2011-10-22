@@ -19,42 +19,52 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  * Here goes the website languages
  */
 $config['website_languages'] = array(
-	'it' => array(
-		'name'			=> 'italian',
-		'locale'		=> 'it_IT',
-		'description'	=> 'Italiano',
-		'date_format'	=> 'd/m/Y'
-	),
 	'en' => array(
 		'name'			=> 'english',
 		'locale'		=> 'en_US',
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
+	),
+	'it' => array(
+		'name'			=> 'italian',
+		'locale'		=> 'it_IT',
+		'description'	=> 'Italiano',
+		'date_format'	=> 'd/m/Y'
 	)
+
 );
 
 /* ADMIN LANGUAGES
  * Here goes the admin languages
  */
 $config['admin_languages'] = array(
-	'it' => array(
-		'name'			=> 'italian',
-		'locale'		=> 'it_IT',
-		'description'	=> 'Italiano',
-		'date_format'	=> 'd/m/Y'
-	),
 	'en' => array(
 		'name'			=> 'english',
 		'locale'		=> 'en_US',
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
+	),
+	'it' => array(
+		'name'			=> 'italian',
+		'locale'		=> 'it_IT',
+		'description'	=> 'Italiano',
+		'date_format'	=> 'd/m/Y'
 	)
 );
 
 /*
+ * PREPEND URI LANGUAGE
+ * When set to true, the current language will be prepended all URIs.
+ *
+ * Example when is on:  www.example.org/it/path/to/page
+ * Example when is off: www.example.org/path/to/page
+ */
+ $config['prepend_uri_language'] = TRUE;
+
+/*
  * Framework version
  */
-define('BANCHA_VERSION', '0.7.3');
+define('BANCHA_VERSION', '0.8.1');
 
 /*
  * Framework name
@@ -62,22 +72,22 @@ define('BANCHA_VERSION', '0.7.3');
 define('CMS', 'BANCHA');
 
 /*
- * The Directory Separator
- * On windows systems, will be "\"
- * On unix-like systems, will be "/"
+ * OS directory separator
+ * - On windows systems, will be "\"
+ * - On unix-like systems, will be "/"
+ * This variabile will be used just in this file
  */
 $sep = DIRECTORY_SEPARATOR;
 
 /*
- * WEBSITE THEMES
- * Here you can set the themes to use. The main two defined keys are "desktop" and "mobile",
- * and their values refers to the theme that will be used.
+ * WEBSITE INSTALLED THEMES
+ * Here you can set the themes to use.
+ * To activate them, go to the settings section under "Manage".
  */
-$config['website_themes'] = array(
-	'desktop'	=> 'default',	//reached from: /go-desktop
-	'mobile'	=> 'desktop'	//reached from: /go-mobile
+$config['installed_themes'] = array(
+	'default' => 'Default theme',
+	'minimal' => 'A minimal theme'
 );
-
 
 /*
 * CACHE - CATEGORIES AND HIERARCHIES
@@ -166,7 +176,7 @@ $config['strip_website_url'] = TRUE;
  * FEED URI
  * The segments that can be added to the URL to reach the feed of a page
  */
-$config['feed_uri'] = array('feed.xml', 'feed.json');
+$config['feed_uri'] = array('feed.xml', 'feed.json', 'print.pdf');
 
 /*
  * VIEWS TEMPLATES FOLDER
@@ -186,7 +196,7 @@ $config['default_view_template'] = 'default';
  * VIEW TEMPLATES TO COPY
  * The .php templates that will be copied from Bancha templates to the website theme.
  */
-$config['view_templates_to_copy'] = array('detail', 'list');
+$config['view_templates_to_copy'] = array('detail', 'list', 'feed');
 
 /*
  * VIEWS ABSOLUTE TEMPLATES FOLDER
@@ -205,7 +215,7 @@ $config['xml_translations_path'] = APPPATH . $sep . 'views' . $sep . 'admin' . $
  * The restriced names for the XML fields. They are not available due to internal use.
  */
 $config['restricted_field_names'] = array(
-	'categories', 'xml'
+	'xml', 'categories', 'hierarchies'
 );
 
 /*
@@ -226,7 +236,7 @@ $config['delete_dead_records'] = FALSE;
  * RECORD COLUMNS
  * The physical columns of the records table.
  * The website router uses it when extracts the records when it doesn't know the type.
- * Keep it updated when you add columns that you want to extract.
+ * Keep it updated when you add columns that you want to extract without knowing the content type.
  */
 $config['record_columns'] = array(
 	'id_record',
@@ -302,6 +312,12 @@ $config['record_select_tree_fields'] = array('id_parent');
  * These kind of fields will be store as arrays values
  */
 $config['array_field_types'] = array('multiselect', 'hierarchy');
+
+/*
+ * CONTENT TYPE CUSTOM FEED
+ * When is set to TRUE, type template file "feed.php" will be used to render the feeds
+ */
+$config['type_custom_feeds'] = TRUE;
 
 
 /* End of file bancha.php */

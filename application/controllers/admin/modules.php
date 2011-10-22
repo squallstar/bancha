@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Modules Controller
  *
@@ -12,21 +12,15 @@
  *
  */
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 Class Modules extends Bancha_Controller
 {
-
 	public function __construct()
 	{
 	    parent::__construct();
-
 	    $this->content->set_stage(TRUE);
-
 	    $this->view->base = 'admin/';
 
 	    $this->auth->needs_login();
-
 	}
 
 	public function index()
@@ -35,6 +29,26 @@ Class Modules extends Bancha_Controller
 		$modules = directory_map($this->config->item('modules_folder'), 1);
 		$this->view->set('modules', $modules);
 		$this->view->render_layout('modules/list');
+	}
+
+	public function install()
+	{
+		if (count($_FILES) && isset($_FILES['zip_module']))
+		{
+			$this->load->extlibrary('unzip');
+			$this->unzip->allow(array('php'));
+
+			$zip_file = $_FILES['zip_module'];
+			$modules_folder = $this->config->item('modules_folder');
+			$tmp_dirname = date('YmdHis');
+
+			if ($this->unzip->extract($zip_file['tmp_name'], $modules_folder . $tmp_dirname))
+			{
+
+			} else {
+				//Errors here
+			}
+		}
 	}
 
 	public function docs($module = '')

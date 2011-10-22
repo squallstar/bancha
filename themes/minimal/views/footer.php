@@ -4,12 +4,11 @@
 	<div id="footer">
 		<p>Pagina generata in {elapsed_time} secondi.
 		<?php
-		
-		foreach ($this->lang->languages as $language => $val)
+		foreach ($this->settings->get('website_active_languages') as $_lang)
 		{
-			echo '<a href="'.site_url('change-language/'.$language).'">'.$val['description'].'</a>&nbsp; ';
+			echo '<a href="'.site_url('change-language/'.$_lang, FALSE).'">'.$this->lang->languages[$_lang]['description'].'</a>&nbsp; ';
 		}
-		?>
+		?>	
 		</p>
 	</div>
 </footer>

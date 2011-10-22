@@ -51,7 +51,7 @@ Class Installer
 
 	public function is_already_installed()
 	{
-		return $this->CI->db->table_exists('records');
+		return $this->CI->db->table_exists('settings');
 	}
 
 	/**
@@ -98,7 +98,7 @@ Class Installer
 		    'id_record'		=> array('type'	=> 'INT', 'unsigned' => TRUE),
 		    'date_publish'	=> array('type'	=> 'INT'),
 		    'id_type'		=> array('type'	=> 'INT', 'null' => FALSE),
-            'lang'			=> array('type' => 'VARCHAR', 'null' => TRUE, 'constraint' => '2'),
+            'lang'			=> array('type' => 'VARCHAR', 'null' => TRUE, 'constraint' => 2),
 		    'uri'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
 		    'full_uri'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
 		    'id_parent'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned'	=> TRUE),
@@ -139,7 +139,8 @@ Class Installer
 		    'password'	=> array('type'	=> 'VARCHAR', 'constraint'	=> 64, 'null' => FALSE),
 		    'name'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 64),
 		    'surname'	=> array('type'	=> 'VARCHAR', 'constraint'	=> 64),
-		    'email'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 255)
+		    'email'		=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
+		    'admin_lang' => array('type' => 'VARCHAR', 'constraint' => 2, 'null', TRUE)
 		);
 
 		$this->dbforge->drop_table('users');
@@ -277,7 +278,7 @@ Class Installer
 		//Settings table
 		$settings_fields = array(
 			'name'		=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 64),
-			'value'		=> array('type'	=> 'VARCHAR', 'null' => TRUE),
+			'value'		=> array('type'	=> 'VARCHAR', 'null' => TRUE, 'constraint' => 255),
 			'module'	=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 64)
 		);
 
@@ -293,16 +294,22 @@ Class Installer
 	 */
 	public function create_groups()
 	{
-		//Inserisco le ACL di default
+		//We insert the default ACLs
 		$acls = array();
 		$acls[]= $this->users->add_acl('users', 'list', 'Users list');
 		$acls[]= $this->users->add_acl('users', 'add', 'Create users');
+		$acls[]= $this->users->add_acl('users', 'groups', 'Manage groups and permissions');
 		$acls[]= $this->users->add_acl('types', 'add', 'Add content types');
 		$acls[]= $this->users->add_acl('types', 'manage', 'Edit XML schemes');
 		$acls[]= $this->users->add_acl('types', 'delete', 'Delete content types');
+		$acls[]= $this->users->add_acl('settings', 'manage', 'Manage website settings');
+		$acls[]= $this->users->add_acl('hierarchies', 'manage', 'Manage hierarchies');
 
 		$this->group_id = $this->users->add_group('Administrators');
 		$this->users->add_group('Editors');
+
+		//These strings are here just for translations
+		$dummy = _('Administrators') . _('Editors');
 
 		$this->CI->auth->update_permissions($acls, $this->group_id);
 
@@ -324,7 +331,8 @@ Class Installer
 			'email' => $email,
 			'username' => $username,
 			'password' => $password,
-			'id_group' => $this->group_id
+			'id_group' => $this->group_id,
+			'admin_lang' => $this->CI->lang->current_language
 		);
 		return $this->users->add_user($data);
 	}
@@ -339,7 +347,7 @@ Class Installer
 		{
 			foreach ($default as $type)
 			{
-				$this->CI->content->add_type($type, $type, 'true', TRUE);
+				$this->CI->content->add_type($type, $type, 'true', TRUE, $type == 'Menu' ? 'New page' : 'New ' . $type);
 			}
 		} else {
 			show_error(_('Default content type not defined'));
@@ -417,6 +425,50 @@ Class Installer
 	}
 
 	/**
+	 * Populates the default settings
+	 */
+	public function populate_settings()
+	{
+		$this->CI->load->settings();
+		$this->CI->settings->set('is_installed', 'T');
+
+		$this->CI->settings->set('website_name', 'My website');
+		$this->CI->settings->set('website_claim', 'This is my first website!');
+
+		$available_themes = array_keys($this->CI->config->item('installed_themes'));
+		$this->CI->settings->set('website_desktop_theme', $available_themes[0]);
+		$this->CI->settings->set('website_mobile_theme', $available_themes[0]);
+		$this->CI->settings->set('website_active_languages', array_keys($this->CI->config->item('languages_select')));
+		$this->CI->settings->clear_cache();
+	}
+
+	public function create_homepages()
+	{
+		if (!isset($this->CI->settings))
+		{
+			$this->CI->load->settings();
+		}
+
+		$languages = array_keys($this->CI->lang->languages);
+
+		//We make an homepage for each language we found
+		foreach ($languages as $lang)
+		{
+			$page = new Record('Menu');
+			$page->set('title', 'Homepage')
+				 ->set('uri', 'home')
+				 ->set('lang', $lang)
+				 ->set('action', 'text')
+				 ->set('view_template', 'home')
+			;
+			$page_id = $this->CI->records->save($page);
+			$this->CI->records->publish($page_id, 'Menu');
+			$this->CI->pages->publish($page_id);
+			$this->CI->settings->set('website_homepage_' . $lang, 'home');
+		}
+	}
+
+	/**
 	 * Create a custom installation (example: for a Blog)
 	 * @param string $type Premade name
 	 */
@@ -464,40 +516,54 @@ Class Installer
 				//Then, we create a dummy post
 				$post = new Record('Blog');
 				$post->set('title', _('My first post'))
-					 ->set('contenuto', _('Hello world'))
+					 ->set('content', _('Hello world'))
 					 ->set('lang', $this->CI->lang->current_language)
 					 ->set('date_publish', time())
 				;
-				$this->CI->records->save($post);
+				$post_id = $this->CI->records->save($post);
+				$this->CI->records->publish($post_id, 'Blog');
+
+				//A sample comment linked to this post
+				$comment = new Record('Comments');
+				$comment->set('name', 'Nicholas')
+						->set('www', 'http://getbancha.com')
+						->set('post_id', $post_id)
+				;
+				$this->CI->records->set_type('Comments')->save($comment);
 
 				//And a simple page that lists the posts
 				$page = new Record('Menu');
 				$page->set('title', 'Blog')
+					 ->set('uri', 'blog')
 					 ->set('action', 'list')
 					 ->set('lang', $this->CI->lang->current_language)
 					 ->set('show_in_menu', 'T')
 					 ->set('action_list_type', $this->CI->content->type_id('Blog'))
-				;
-				$this->CI->records->save($page);
+					 ->set('action_list_order_by', 'date_publish DESC');
+				
+				$page_id = $this->CI->records->save($page);
+				$this->CI->records->publish($page_id, 'Menu');
+				$this->CI->pages->publish($page_id);
 
-				break;
+				//break; < no break! we will build also default pages
 
 			case 'default':
 				//We create a dummy page
 				$page = new Record('Menu');
-				$page->set('title', 'My first page')
+				$page->set('title', 'About us')
 				->set('action', 'text')
 				->set('lang', $this->CI->lang->current_language)
 				->set('show_in_menu', 'T')
 				->set('child_count', 0)
-				->set('contenuto', _('Hello world'))
+				->set('uri', 'about-us')
+				->set('content', _('Hello world by a sample page.'))
 				;
 				$this->CI->records->save($page);
 
 				break;
 		}
 
-		//This tree needs to be cleared cos we added some pages before
+		//This tree needs to be cleared because we added some pages few lines above
 		$this->CI->tree->clear_cache('Menu');
 	}
 

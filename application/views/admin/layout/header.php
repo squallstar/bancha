@@ -25,13 +25,14 @@ foreach ($this->content->types() as $tipo) {
 ?><div id="header">
 	<div class="hdrl"></div>
 	<div class="hdrr"></div>
-
-	<h1><a href="<?php echo admin_url(); ?>"><?php echo CMS; ?></a></h1>
+ 	<img class="logo_img" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/logo_header.png'; ?>" />
+	<h1><a href="<?php echo admin_url(); ?>">BANCHA</a></h1>
 
 	<ul id="nav">
 		<li class="<?php echo $this->uri->segment(2) == 'dashboard' ? 'active' : ''; ?>">
 			<a href="<?php echo admin_url('dashboard/'); ?>"><?php echo _('Dashboard'); ?></a>
 		</li>
+
 		<li class="<?php echo $this->uri->segment(2) == 'contents' ? 'active' : ''; ?>">
 			<a href="<?php echo admin_url('contents/'); ?>"><?php echo _('Contents'); ?></a>
 			<ul>
@@ -44,6 +45,7 @@ foreach ($this->content->types() as $tipo) {
 				} ?>
 			</ul>
 		</li>
+
 		<li class="<?php echo $this->uri->segment(2) == 'pages' ? 'active' : ''; ?>">
 			<a href="<?php echo admin_url('pages/'); ?>"><?php echo _('Pages'); ?></a>
 			<ul>
@@ -56,21 +58,35 @@ foreach ($this->content->types() as $tipo) {
 				} ?>
 			</ul>
 		</li>
+
+		<?php if ($this->auth->has_permission('users', 'list')) { ?>
 		<li class="<?php echo $this->uri->segment(2) == 'users' ? 'active' : ''; ?>">
 			<a href="<?php echo admin_url('users/'); ?>"><?php echo _('Users'); ?></a>
 			<ul>
+				<?php if ($this->auth->has_permission('users', 'add')) { ?>
 				<li><a href="<?php echo admin_url('users/edit'); ?>"><?php echo _('Add new user'); ?></a></li>
+				<?php } ?>
 				<li><a href="<?php echo admin_url('users/lista'); ?>"><?php echo _('Users list'); ?></a></li>
+				<?php if ($this->auth->has_permission('users', 'groups')) { ?>
 				<li><a href="<?php echo admin_url('users/groups'); ?>"><?php echo _('Groups and permissions'); ?></a></li>
+				<?php } ?>
 			</ul>
 		</li>
+		<?php } ?>
+
 		<li class="<?php echo $this->uri->segment(2) == 'modules' ? 'active' : ''; ?>">
 			<a href="<?php echo admin_url('modules'); ?>"><?php echo _('Modules'); ?></a>
 		</li>
 		<li class="<?php echo $this->uri->segment(2) == 'manage' ? 'active' : ''; ?>">
 			<a href="#" style="cursor:default"><?php echo _('Manage'); ?></a>
 			<ul>
+				<?php if ($this->auth->has_permission('settings', 'manage')) { ?>
 				<li><a href="<?php echo admin_url('settings'); ?>"><?php echo _('Settings'); ?></a></li>
+				<?php } ?>
+
+				<li class="<?php echo $this->uri->segment(2) == 'themes' ? 'active' : ''; ?>">
+					<a href="<?php echo admin_url('themes'); ?>"><?php echo _('Themes'); ?></a>
+				</li>
 				<li class="<?php echo $this->uri->segment(2) == 'docs' ? 'active' : ''; ?>">
 					<a href="<?php echo admin_url('docs'); ?>"><?php echo _('Documentation'); ?></a>
 				</li>
@@ -78,7 +94,6 @@ foreach ($this->content->types() as $tipo) {
 				<li><a href="<?php echo admin_url('import'); ?>"><?php echo _('Import/export data'); ?></a></li>
 				<li><a href="<?php echo admin_url('unit_tests'); ?>"><?php echo _('Unit tests'); ?></a></li>
 				<li><a href="<?php echo admin_url('contents/renew_cache'); ?>"><?php echo _('Clear cache'); ?></a></li>
-
 			</ul>
 		</li>
 

@@ -113,7 +113,7 @@ Class Model_hierarchies extends CI_Model {
   		}
   		$done = $this->db->insert($this->table, $data);
   		if (CACHE) $this->db->cache_delete_all();
-  		return $done;
+  		return $done ? $this->db->insert_id() : FALSE;
   	}
 
   	/**

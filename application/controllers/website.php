@@ -19,32 +19,59 @@ Class Website extends Bancha_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->settings();
 
 		//If the user is logged in, we set the stage to true
 		//so he/she can surf on the stage pages and records
-		if ($this->auth->is_logged()) {
+		if ($this->auth->is_logged())
+		{
 			$this->content->set_stage(TRUE);
+
 			//We add also the preview bar
 			$this->output->enable_profiler();
 		} else {
 			$this->content->set_stage(FALSE);
+
+			//If is not logged in, let's check if the website is under maintenance
+			$maintenance = $this->settings->get('website_maintenance');
+			if ($maintenance)
+			{
+				switch ($maintenance)
+				{
+					case 'T':
+						show_error(_('The website is currently under maintenance. Please try later.'));
+						break;
+					case 'L':
+						redirect(admin_url());
+				}
+			}
 		}
 
+		$this->load->frlibrary('blocks');
 		$this->load->helper('menu');
 	}
 
 	/**
-	 * Website homepage
+	 * Website homepage routing
 	 */
 	function home()
 	{
-		//We need the default tree
-		$this->view->set('tree', $this->tree->get_default());
-
-		$this->view->javascript = array('jquery.js', 'application.js');
-		$this->view->css = array('style.css');
-
-		$this->view->render_template('home');
+		$home = $this->settings->get('website_homepage_' . $this->lang->current_language);
+		if ($home)
+		{
+			if ($this->config->item('prepend_uri_language'))
+			{
+				$this->config->prepend_language = $this->lang->current_language;
+			}
+			redirect(site_url($home), 'location', 301);
+		} else {
+			if (!$this->settings->get('is_installed'))
+			{
+				redirect(admin_url('install'));
+			} else {
+				show_error(_('The default homepage has not been set. Please go to the settings and update the website homepage.'));
+			}
+		}
 	}
 
 	/**
@@ -67,7 +94,7 @@ Class Website extends Bancha_Controller
 	{
 		$this->lang->set_lang($new_language);
 		$this->lang->set_cookie();
-		redirect('/');
+		$this->home();
 	}
 
 	/**
@@ -76,11 +103,21 @@ Class Website extends Bancha_Controller
 	 */
 	function router()
 	{
-		$this->view->javascript = array('jquery.js', 'application.js');
-		$this->view->css = array('style.css');
-
+		if (!(count($this->uri->segments)))
+		{
+			$this->home();
+			return;
+		}
 		$this->load->dispatcher('default');
 		$this->dispatcher->start();
+	}
+	
+	function demo ()
+	{
+		$html = '<h1 id="logo" class="grid_4"><a href="http://bancha.localhost/it/">My website</a></h1>';
+		$this->load->dispatcher('print');
+		$contenuto = $this->dispatcher->render($html, TRUE);
+		file_put_contents('ciccio.pdf', $contenuto);
 	}
 
 	/**

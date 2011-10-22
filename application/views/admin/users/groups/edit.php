@@ -26,7 +26,7 @@ $this->load->helper('form');
 
 		<div class="sidebar_content" id="info">
 
-<h3><?php echo ($group ? _('Group').': '.$group->group_name : _('New group')); ?></h3>
+<h3><?php echo ($group ? _('Group').': '._($group->group_name) : _('New group')); ?></h3>
 
 <?php echo $this->view->get_messages(); ?>
 <br />
@@ -34,8 +34,13 @@ $this->load->helper('form');
 
 echo form_open();
 
+if ($group)
+{
+	echo form_hidden('id_group', $group->id_group);
+}
+
 echo form_label(_('Group name'), 'name') . br(1);
-echo form_input(array('name' => 'name', 'class' => 'text', 'value' => $group ? $group->group_name : '')) . br(2);
+echo form_input(array('name' => 'name', 'class' => 'text'), $group ? $group->group_name : '') . br(2);
 
 echo form_label(_('Permissions'), 'permissions') . br(1);
 

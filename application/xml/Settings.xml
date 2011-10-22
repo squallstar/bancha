@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="bancha-0.8" -->
+<content>
+	<name>Settings</name>
+	<descriptions label="Settings" new=""/>
+	<primary_key>null</primary_key>
+	<table>null</table>
+	<fieldset name="General" icon="legend">
+		<field id="website_name">
+			<description>Website name</description>
+			<type>text</type>
+		</field>
+		<field id="website_claim">
+			<description>Website claim</description>
+			<type>text</type>
+		</field>
+		<field id="website_maintenance">
+			<description>Maintenance mode</description>
+			<type>radio</type>
+			<options>
+				<option value="F">Disabled</option>
+				<option value="T">Show maintenance message</option>	
+				<option value="L">Require login</option>
+			</options>
+			<default>F</default>
+		</field>
+		<field id="website_desktop_theme">
+			<type>radio</type>
+			<description>Website desktop theme</description>
+			<options>
+				<custom>config_item('installed_themes');</custom>
+			</options>
+		</field>
+		<field id="website_mobile_theme">
+			<type>radio</type>
+			<description>Website mobile theme</description>
+			<options>
+				<custom>config_item('installed_themes');</custom>
+			</options>
+		</field>
+		<field id="website_active_languages">
+			<type>checkbox</type>
+			<description>Website active languages</description>
+			<options>
+				<custom>config_item('languages_select');</custom>
+			</options>
+		</field>
+		<field id="website_homepage_en">
+			<type>select</type>
+			<description>Website homepage (English)</description>
+			<sql cache="false">
+				<select>full_uri as name, full_uri as value</select>
+				<from>pages</from>
+				<where>lang = 'en'</where>
+				<order_by>full_uri ASC</order_by>
+			</sql>
+		</field>
+		<field id="website_homepage_it">
+			<type>select</type>
+			<description>Website homepage (Italian)</description>
+			<sql cache="false">
+				<select>full_uri as name, full_uri as value</select>
+				<from>pages</from>
+				<where>lang = 'it'</where>
+				<order_by>full_uri ASC</order_by>
+			</sql>
+		</field>
+	</fieldset>
+</content>

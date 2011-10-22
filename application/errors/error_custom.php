@@ -6,7 +6,7 @@ if (!function_exists('site_url')) {
 }
 if (!function_exists('admin_url')) {
 	function admin_url() {
-		return '/admin/';
+		return '/'.ADMIN_PUB_PATH;
 	}
 }
 ?><!DOCTYPE html>
@@ -14,7 +14,7 @@ if (!function_exists('admin_url')) {
 	<head>
 
 		<style type="text/css" media="all">
-			<?php $css_url = site_url() . THEMESPATH . 'admin/css/'; ?>
+			<?php $css_url = site_url(NULL, FALSE) . THEMESPATH . 'admin/css/'; ?>
 			@import url("<?php echo $css_url; ?>style.css");
 			@import url("<?php echo $css_url; ?>jquery.wysiwyg.css");
 			@import url("<?php echo $css_url; ?>facebox.css");
@@ -27,7 +27,7 @@ if (!function_exists('admin_url')) {
 		var admin_url = '<?php echo admin_url(); ?>/';
 		</script>
 
-   		<script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/jquery.js"></script>
+   		<script type="text/javascript" src="<?php echo site_url(NULL, FALSE) . THEMESPATH; ?>admin/js/jquery.js"></script>
 
 	</head>
 	<body>
@@ -72,7 +72,7 @@ if (!function_exists('admin_url')) {
 		</div>
 
 
-	<?php $js_url = site_url() . THEMESPATH . 'admin/js/'; ?>
+	<?php $js_url = site_url(NULL, FALSE) . THEMESPATH . 'admin/js/'; ?>
 	<!--[if IE]><script type="text/javascript" src="<?php echo $js_url; ?>excanvas.js"></script><![endif]-->
 
 	<script type="text/javascript" src="<?php echo $js_url; ?>jquery.img.preload.js"></script>

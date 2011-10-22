@@ -1,6 +1,4 @@
-/* The humans responsible & colophon */
-/* humanstxt.org  */
-
+/* The humans responsible of Bancha project */
 
 /* TEAM */
    Main Developer: Nicholas Valbusa
@@ -14,23 +12,27 @@
    Twitter: @mintsugar
    Location: Verona, IT
 
-   Contributor (Developer): Alessandro Maroldi
+   Developer: Alessandro Maroldi
    Twitter: @alexmaroldi
    Github: @alexmaroldi
    Location: Verona, IT
 
-   Contributor (Front-end): Matteo Gildone
+   Contributor (Front-end Developer): Matteo Gildone
    Github: @dombender
+   Location: Verona, IT
+
+   Javascript Developer: Marco Solazzi
+   Github: @dwightjack
    Location: Verona, IT
 
    Contributor (Developer): Umberto Gariggio
    Github: @gariggio
    Location: Verona, IT
 
-/* THANKS TO */
-   Marco Solazzi
+   English documentation translator: Enrico Oliosi
+   Location: Verona, IT
 
-/* SITE */
-   Standards: HTML5, CSS3
-   Components: jQuery, jQuery UI
+/* TECHNOLOGIES */
+   Standards: HTML5, CSS3 - Works on IE7+, FF3.6+, Chrome, Safari and Opera
+   Components: jQuery, jQuery UI and many other little things
    Software: Espresso, Eclipse, Aptana, Adobe Photoshop

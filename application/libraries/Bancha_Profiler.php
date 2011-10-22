@@ -3,7 +3,7 @@
  * Bancha Profiler
  *
  * A Code Igniter Profiler extension
- * We changed the skin and we added a new rendering section
+ * We changed the theme, the position and we added a new rendering section
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -50,7 +50,7 @@ class Bancha_Profiler extends CI_Profiler {
 
 		if (count($rendered) == 0)
 		{
-			$output .= "<div style='color:#cd6e00;font-weight:normal;padding:4px 0 4px 0'>Nessuna vista renderizzata</div>";
+			$output .= "<div style='color:#cd6e00;font-weight:normal;padding:4px 0 4px 0'>No views have been rendered</div>";
 		}
 		else
 		{
@@ -75,11 +75,29 @@ class Bancha_Profiler extends CI_Profiler {
 	*/
 	public function run()
 	{
-		$output = link_tag(site_url(THEMESPATH . 'admin/css/profiler.css')).
-			'<script type="text/javascript" src="'.site_url(THEMESPATH . 'admin/js/profiler.js').'"></script>'.
+		//We can try to place a "Edit this page" link, so let's check if a page or a record exists
+		$record = $this->CI->view->get('record');
+		if ($record && $record instanceof Record)
+		{
+			$tipo = $this->CI->content->type($record->_tipo);
+			$edit_link = 'contents/edit_record/' . $tipo['name'] . '/' . $record->id;
+			$edit_name = _('Edit this content');
+		} else {
+			$page = $this->CI->view->get('page');
+			if ($page && $page instanceof Record && $page->is_page())
+			{
+				$tipo = $this->CI->content->type($page->_tipo);
+				$edit_link = 'pages/edit_record/' . $tipo['name'] . '/' . $page->id;
+				$edit_name = _('Edit this page');
+			}
+		}
+
+		$output = link_tag(site_url(THEMESPATH . 'admin/css/profiler.css', FALSE)).
+			'<script type="text/javascript" src="'.site_url(THEMESPATH . 'admin/js/profiler.js', FALSE).'"></script>'.
 			'<a id="bancha_profiler_preview" onclick="_show_profiler();" href="#">'._('Preview').'</a>'.
 			'<div id="bancha_profiler"><div id="bancha_profiler_content">'.
 			'BANCHA&nbsp; &nbsp; <a href="'.admin_url().'">'._('Back to admin').'</a> - '.
+			(isset($edit_link) ? '<a href="'.admin_url($edit_link).'">'.$edit_name.'</a> - ' : '').
 			'<a href="#" onclick="_show_ciprofiler();">'._('Open profiler').'</a>'
 			.'<div id="bancha_profiler_ci">'
 		;
@@ -97,5 +115,7 @@ class Bancha_Profiler extends CI_Profiler {
 
 		return $output;
 	}
-
 }
+
+/* End of file Bancha_Profiler.php */
+/* Location: /libraries/bancha/Bancha_Profiler.php */

@@ -2,7 +2,7 @@
 /**
  * {name} List View
  *
- * Lista di record di tipo {name}
+ * Content type list
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -17,12 +17,12 @@ $records = & $page->get('records');
 
 echo '<div class="details"><h1>'.$page->get('title').'</h1>'.
 	 '<p class="info">'.menu($this->tree->get_current_branch()).'</p></div>'.
-	 '<div class="body">'.$page->get('contenuto').br(2);
+	 '<div class="body">'.$page->get('content').br(2);
 
 if ($records && is_array($records) && count($records)) {
 ?>
 
-	<h3>Lista {name}</h3>
+	<h3>{name} list</h3>
 
 	<ul>
 	<?php
@@ -31,7 +31,7 @@ if ($records && is_array($records) && count($records)) {
 			?>
 			<li>
 				<strong><?php echo $record->get('title'); ?></strong><br />
-				<a href="<?php echo current_url() . '/' . $record->get('uri'); ?>">Vai al dettaglio</a>
+				<a href="<?php echo current_url() . '/' . $record->get('uri'); ?>"><?php echo _('View detail'); ?></a>
 				<br /><br />
 			</li>
 			<?php

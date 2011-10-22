@@ -13,7 +13,7 @@ $fields = array_keys($tipo['fields']);
 		<h2><?php echo ($tipo['tree']?_('Pages'):_('Contents')).': '.$tipo['description']; ?></h2>
 
 		<ul>
-			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url($_section.'/edit_record/'.$tipo['name']); ?>"><?php echo $_section == 'contents' ? _('Insert new content') : _('Insert new page');?></a></li>
+			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url($_section.'/edit_record/'.$tipo['name']); ?>"><?php echo _($tipo['label_new']);?></a></li>
 			<?php if ($tipo['has_categories']) { ?><li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/bookmark.png'); ?>" /> <a href="<?php echo admin_url($_section.'/type_categories/'.$tipo['name']); ?>"><?php echo _('Manage categories'); ?></a></li><?php } ?>
 		</ul>
 	</div>
@@ -25,7 +25,7 @@ $fields = array_keys($tipo['fields']);
 	<?php echo $this->view->get_messages(); ?>
 
 
-		<form action="<?php echo admin_url($_section . '/type/'.$tipo['name']); ?>" method="post">
+		<form action="" method="post">
 
 	<?php if (count($records) || count($filters)) { ?>
 
@@ -42,7 +42,8 @@ $fields = array_keys($tipo['fields']);
 					<?php foreach ($admin_fields as $field) {
 							if ($field != $tipo['primary_key'])
 							{
-								echo '<th>'._($tipo['fields'][$field]['description']).'</th>';
+								$_descr = $tipo['fields'][$field]['description'];
+								echo '<th>'.($_descr ? _($_descr) : $field).'</th>';
 							}
 						}
 						?>
@@ -204,8 +205,16 @@ $fields = array_keys($tipo['fields']);
 			}
 
 			echo '<td class="delete">'
-					.($tipo['tree'] ? '<a title="'._('Add child page').'" href="'.admin_url($_section.'/add_child_record/'.$track_str).'"><img src="'.site_url(THEMESPATH.'admin/widgets/icns/node-tree.png').'" border="" alt="'._('Add child page').'" /></a>&nbsp;&nbsp;&bull;&nbsp; ' : '')
-					.'<a title="'._('Delete').'" href="'.admin_url($_section.'/delete_record/'.$track_str).'" onclick="return confirm(\''._('Are you sure?').'\');"><img src="'.site_url(THEMESPATH.'admin/widgets/icns/trash.png').'" border="0" alt="'._('Delete').'" /></a>'
+
+					.($tipo['tree'] ?
+
+						'<a title="'._('Add child page').'" href="'.admin_url($_section.'/add_child_record/'.$track_str).'"><img src="'.site_url(THEMESPATH.'admin/widgets/icns/page_add.png').'" border="" alt="'._('Add child page').'" /></a>&nbsp;&nbsp;&bull;&nbsp; ' .
+
+						'<a title="'._('View children pages').'" href="'.admin_url($_section.'/type/'.$tipo['name'].'?parent='.$record->id).'"><img src="'.site_url(THEMESPATH.'admin/widgets/icns/node-tree.png').'" border="" alt="'._('View children pages').'" /></a>&nbsp;&nbsp;&bull;&nbsp; ' : ''
+					)
+
+					.'<a title="'._('Delete').'" href="'.admin_url($_section.'/delete_record/'.$track_str).'" onclick="return confirm(\''._('Do you really want to delete this content?').'\');"><img src="'.site_url(THEMESPATH.'admin/widgets/icns/trash.png').'" border="0" alt="'._('Delete').'" /></a>'
+
 				.'</td>';
 		echo '</tr>';
 	}
@@ -224,7 +233,7 @@ $fields = array_keys($tipo['fields']);
 
 			<input type="submit" class="submit tiny" value="<?php echo _('Apply to selected'); ?>" />
 
-			&nbsp;<?php echo $total_records == 1 ? _('There is'):_('There are'); ?> <strong><?php echo $total_records; ?></strong> <?php echo strtolower($tipo['name']); ?>.
+			&nbsp;<?php echo _('There are'); ?> <strong><?php echo $total_records; ?></strong> <?php echo strtolower(_($tipo['description'])); ?>.
 
 		</div>
 

@@ -35,8 +35,9 @@ echo form_input($attributes) . br(2);
 
 $attributes = array();
 $attributes['name'] = 'xml';
+$attributes['class'] = 'scheme code';
 $attributes['value'] = $xml;
-$attributes['style'] = 'height:350px;';
+$attributes['style'] = 'height:400px;';
 echo form_label(_('XML Structure'), 'xml') . br(1);
 echo form_textarea($attributes) . br(2);
 
@@ -52,3 +53,9 @@ echo form_close();
 	<div class="bendl"></div>
 	<div class="bendr"></div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	bancha.tab_textarea('.scheme');
+});
+</script>

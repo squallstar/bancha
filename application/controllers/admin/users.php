@@ -31,9 +31,16 @@ Class Users extends Bancha_Controller
 		$this->lista();
 	}
 
+	public function type() {
+		//Legacy: breadcrumbs in edit_user will use this route to go back to list
+		$this->lista();
+	}
+
 	public function lista($page=0)
 	{
-		//Paginazione
+		$this->auth->check_permission('users', 'list');
+
+		//Pagination
 		$pagination = array(
 		    	'total_rows'	=> $this->users->count(),
 		    	'per_page'		=> $this->config->item('records_per_page'),
@@ -57,6 +64,7 @@ Class Users extends Bancha_Controller
 
 	public function delete($id_username='')
 	{
+		$this->auth->check_permission('users', 'add');
 		$done = $this->users->delete($id_username);
 		if ($done)
 		{
@@ -67,6 +75,8 @@ Class Users extends Bancha_Controller
 
 	public function edit($id_username='')
 	{
+		$this->auth->check_permission('users', 'list');
+
 		$this->load->categories();
         $this->load->hierarchies();
         $this->load->documents();
@@ -100,7 +110,8 @@ Class Users extends Bancha_Controller
 			//We search for this user
 			$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
 
-			if (!$users) {
+			if (!$users)
+			{
 				show_error(_('User not found'));
 			} else {
 				$user = $users[0];
@@ -109,6 +120,16 @@ Class Users extends Bancha_Controller
 			//New user
 			$this->view->set('user', FALSE);
 		}
+
+		//Additional set-ups before the page rendering
+        foreach ($type_definition['fields'] as $field_name => $field_value)
+        {
+        	if (isset($field_value['extract']))
+            {
+                //We extract the custom options
+    			$type_definition['fields'][$field_name]['options'] = $this->records->get_field_options($field_value);
+        	}
+        }
 
 		$this->view->set('tipo', $type_definition);
 		$this->view->set('_section', 'users');
@@ -125,10 +146,18 @@ Class Users extends Bancha_Controller
 	 */
 	public function groups($action='', $param='')
 	{
+		$this->auth->check_permission('users', 'groups');
+
 		if ($action == 'edit')
 		{
 			if ($this->input->post('submit', FALSE))
 			{
+				$group_id = $this->input->post('id_group');
+				if ($group_id)
+				{
+					$param = $group_id;
+				}
+
 				if ($param != '')
 				{
 					//Existing group
@@ -155,7 +184,6 @@ Class Users extends Bancha_Controller
 							$this->view->message('success', _('The group has been created.'));
 						}
 					}
-
 				}
 
 				if ($param == $this->auth->user('group_id'))
@@ -178,10 +206,10 @@ Class Users extends Bancha_Controller
 				}
 			}
 
-			//Ottengo tutti i permessi impostabili
+			//We get all ACLs
 			$acl = $this->users->get_acl_list();
 
-			//Ottengo i permessi dell'utente
+			//And the user permissions
 			$user_acls = $this->auth->get_permissions_id($param);
 
 			$this->view->set('group', $group);

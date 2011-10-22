@@ -13,11 +13,11 @@ if (isset($page) && $page->is_page()) {
 				echo '<div class="details"><h1>'.$page->get('title').'</h1>'.
 					 '<p class="info">'.menu($this->tree->get_current_branch()).'</p>'.
 					 '</div>';
-				echo '<div class="body"'.$this->view->live_tags('contenuto', $page).'>'.$page->get('contenuto').'</div><div class="clear"></div>';
+				echo '<div class="body"'.$this->view->live_tags('content', $page).'>'.$page->get('content').'</div><div class="clear"></div>';
 				break;
 
 			case 'single':
-				//Singolo record
+				//Single record
 				if (isset($record) && $record instanceof Record) {
 					$this->view->render_type_template($record->tipo, 'detail');
 				}
@@ -27,9 +27,11 @@ if (isset($page) && $page->is_page()) {
 				$records = & $page->get('records');
 
 				if ($records && count($records)) {
-					//Ottengo il tipo del primo record
+					//We use the content type of the first record as template
 					$record = $records[0];
 					$this->view->render_type_template($record->tipo, 'list');
+				} else {
+					$this->view->render_type_template($this->content->type_name($page->get('action_list_type')), 'list');
 				}
 				break;
 			

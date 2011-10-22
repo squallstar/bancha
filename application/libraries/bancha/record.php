@@ -17,27 +17,32 @@ Class Record {
 	/**
 	 * @var array Contains all the data of the record
 	 */
-	private $_data	= array();
+	private $_data= array();
 
 	/**
 	 * @var int Primary key
 	 */
-	public $id 		= FALSE;
+	public $id = FALSE;
 
 	/**
 	 * @var int Record type id
 	 */
-	public $_tipo	= '';
+	public $_tipo = '';
 
 	/**
 	* @var int Type definition
 	*/
-	public $_tipo_def	= array();
+	public $_tipo_def = array();
 
 	/**
 	 * @var string The xml string that contains some data
 	 */
-  	public $xml 	= '';
+  	public $xml = '';
+
+  	/**
+	 * @var string Set to TRUE when the documents will be extracted
+	 */
+  	public $documents_extracted = FALSE;
 
   	public function __construct($type='')
   	{
@@ -78,30 +83,75 @@ Class Record {
     	foreach ($tipo['fields'] as $field_name => $field)
     	{
     		$value = isset($data[$field_name]) ? $data[$field_name] : '';
-    		if ($CI->config->item('strip_website_url') && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
+            
+    		if ($CI->config->item('strip_website_url')
+                && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
     		{
     			//Elimino il percorso del sito dalle textarea
     			$value = str_replace(site_url(), '/', $value);
     		}
+            
    			$this->_data[$field_name] = $value;
 
-    		if ($field['type'] == 'date')
-    		{
-    			if (strpos($this->_data[$field_name], '/'))
+   			if ($field['type'] == 'date' || $field['type'] == 'datetime')
+   			{
+   				//If the date includes the time, we split it
+   				if (strpos($this->_data[$field_name], ':') !== FALSE)
+   				{
+   					list($this->_data[$field_name], $data['_time_'.$field_name]) = explode(' ', $this->_data[$field_name]);
+   				}
+   				switch (LOCAL_DATE_FORMAT)
     			{
-    				$this->_data[$field_name] = implode('-', array_reverse(explode('/', $this->_data[$field_name])));
+    				//Computer format
+    				case 'Y-m-d':
+    					$tmp = explode('-', $this->_data[$field_name]);
+    					if (count($tmp) == 3)
+    					{
+    						list($year, $month, $day) = $tmp;
+    					}
+    					break;
+    					
+    				//American format
+    				case 'm/d/Y':
+    					$tmp = explode('/', $this->_data[$field_name]);
+    					if (count($tmp) == 3)
+    					{
+    						list($month, $day, $year) = $tmp;
+    					}
+    					break;    
+    				
+    				//European date
+    				case 'd/m/Y':
+    					$tmp = explode('/', $this->_data[$field_name]);
+    					if (count($tmp) == 3)
+    					{
+    						list($day, $month, $year) = $tmp;
+    					}
+    					break;					
     			}
-    			$this->_data[$field_name] = strtotime($this->_data[$field_name]);
-    		}
-    		else if ($field['type'] == 'datetime')
-    		{
-    			if (strpos($this->_data[$field_name], '/'))
+
+    			if (!isset($day) && !isset($month) && !isset($year))
     			{
-    				$this->_data[$field_name] = implode('-', array_reverse(explode('/', $this->_data[$field_name])));
-    				$this->_data[$field_name] = $this->_data[$field_name]  . ' ' . $data['_time_'.$field_name] . ':00';
+    				//Prevent wrong datetime input to throw notices
+    				list($day, $month, $year, $hour, $min) = explode('-', date('d-m-Y-H-i'));
     			}
-    			$this->_data[$field_name] = strtotime($this->_data[$field_name]);
-    		}
+
+    			if ($field['type'] == 'date')
+	    		{
+	    			$this->_data[$field_name] = mktime('00', '00', '00', $month, $day, $year);
+	    		}
+	    		else if ($field['type'] == 'datetime')
+	    		{
+	    			if (isset($data['_time_'.$field_name]) && strpos($data['_time_'.$field_name], ':') !== FALSE)
+	    			{
+	    				list($hour, $min) = explode(':', $data['_time_'.$field_name]);
+	    			} else {
+	    				$hour = date('H');
+	    				$min = date('i');
+	    			}
+	    			$this->_data[$field_name] = mktime($hour, $min, '00', $month, $day, $year);    			
+	    		}
+   			}
     	}
 
     	//We set the primary key for the update queries
@@ -209,15 +259,18 @@ Class Record {
 		      			$this->_data[$field_name] = $field_value;
 		      		}
 
+		      		if (!isset($tipo['fields'][$field_name]['type']))
+		      		{
+		      			continue;
+		      		}
 		      		//We convert the timestamps in dates
-		      		//TODO: mettere tutti i format date e datetime nel config per lingua (tipo d/m/Y)
 		      		$field_type = $tipo['fields'][$field_name]['type'];
 		      		if ($field_type == 'date')
 		      		{
-		      			$this->_data[$field_name] = date('d/m/Y', $this->_data[$field_name]);
+		      			$this->_data[$field_name] = date(LOCAL_DATE_FORMAT, $this->_data[$field_name]);
 		      		} else if ($field_type == 'datetime')
 		      		{
-		      			$this->_data[$field_name] = date('d/m/Y H:i', $this->_data[$field_name] . ' '.$this->_data['_time_'.$field_name]);
+		      			$this->_data[$field_name] = date(LOCAL_DATE_FORMAT . ' H:i', $this->_data[$field_name]);
 		      		}
                     else if (in_array($field_type, config_item('array_field_types')) && is_string($this->_data[$field_name]))
                     {
@@ -245,8 +298,13 @@ Class Record {
   	 */
 	public function set_documents()
 	{
+		if ($this->documents_extracted) return;
+
 		$CI = & get_instance();
-		$CI->load->documents();
+		if (!isset($CI->documents))
+		{
+			$CI->load->documents();
+		}
    		$tipo = & $CI->content->type($this->_tipo);
 
    		$has_attachments = FALSE;
@@ -284,5 +342,6 @@ Class Record {
 				}
 			}
 		}
+		$this->documents_extracted = TRUE;
 	}
 }

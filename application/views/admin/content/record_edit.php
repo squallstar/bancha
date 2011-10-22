@@ -10,7 +10,11 @@
  *
  */
 
-$this->load->helper('form'); ?>
+$this->load->helper('form');
+$this->load->frlibrary('form_renderer');
+$CI = & get_instance();
+
+?>
 
 <div class="block withsidebar">
 
@@ -18,7 +22,7 @@ $this->load->helper('form'); ?>
 		<div class="bheadl"></div>
 		<div class="bheadr"></div>
 
-		<h2><?php echo (!$record->id ? _('New content') : _('Edit content') ) . ': ' . $tipo['description']; ?></h2>
+		<h2><?php echo (!$record->id ? _($tipo['label_new']) : _('Edit content') ) . ': ' . $tipo['description']; ?></h2>
 
 		<ul>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url($_section.'/type/'.$tipo['id'])?>"><?php echo _('Back to list'); ?></a></li>
@@ -32,15 +36,7 @@ $this->load->helper('form'); ?>
 
 		<div class="sidebar">
 			<ul class="sidemenu">
-				<?php foreach ($tipo['fieldsets'] as $fieldset) { ?>
-				<li><a href="#sb-<?php echo url_title($fieldset['name']); ?>"><?php echo _($fieldset['name']); ?></a></li>
-				<?php }
-				if ($tipo['has_categories']) { ?>
-				<li><a href="#sb_category"><?php echo _('Categories'); ?></a>
-				<?php }
-				if ($tipo['has_hierarchies']) { ?>
-				<li><a href="#sb_hierarchies"><?php echo _('Hierarchies'); ?></a>
-				<?php } ?>
+				<?php echo $CI->form_renderer->get_sidebar($tipo); ?>
 			</ul>
 			<p></p>
 		</div>
@@ -54,7 +50,7 @@ $save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="banc
 			   .($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
 ;
 
-echo form_open_multipart(isset($action) ? $action : 'admin/'.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
+echo form_open_multipart(isset($action) ? $action : ADMIN_PUB_PATH.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
 
 $js_onload = '';
 $first_lap = TRUE;
@@ -62,9 +58,9 @@ $has_full_textarea = FALSE;
 $p_start = '<p>';
 $p_end = '</p>';
 
-$breadcrumbs_render = '<p class="breadcrumb"><a href="<?php echo admin_url($_section); ?>">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
+$breadcrumbs_render = '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
 						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
-						 . (!$record->id ? _('New content') : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
+						 . (!$record->id ? _($tipo['label_new']) : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
 
 foreach ($tipo['fieldsets'] as $fieldset)
 {
@@ -82,10 +78,8 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	if ($first_lap == true)
 	{
 		$first_lap = false;
-
-		//TODO: move into xml
-		if ($tipo['tree']) {
-
+		if ($tipo['tree'])
+		{
 			if ($record->id && isset($page_url))
 			{
 				$url = site_url($page_url);
@@ -100,7 +94,15 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		$attributes = array();
 
-		$label = form_label(_($field['description']), $field_name, $attributes);
+		$field_note = '';
+		$mandatory = '';
+		if ($field['mandatory'] == TRUE)
+		{
+			$field_note = '<span class="note">*' . _('Mandatory') . '</span>';
+			$mandatory = '*';
+		}
+
+		$label = form_label(_($field['description']) . $mandatory, $field_name, $attributes);
 
 		//We evaluates the evals
 		if ($field['default'] && substr($field['default'], 0, 5) == 'eval:')
@@ -151,7 +153,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'text'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$p_end;
+				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'textarea':
@@ -184,13 +186,17 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$p_end;
+				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'datetime':
+				if (is_numeric($field_value))
+				{
+					$field_value = date(LOCAL_DATE_FORMAT . ' H:i', $field_value);
+				}
 				$tmp = explode(' ', $field_value);
 				$attributes['name'] = $field_name;
-				$attributes['value'] = $tmp[0] ? $tmp[0] : date('d/m/Y');
+				$attributes['value'] = $tmp[0] ? $tmp[0] : date(LOCAL_DATE_FORMAT);
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
 				echo $p_start.$label.br(1).form_input($attributes);
 
@@ -198,8 +204,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['value'] = isset($tmp[1]) ? $tmp[1] : date('H:i');
 				$attributes['class'] = 'time_picker text small';
 				$attributes['type'] = 'time';
-				echo '&nbsp;'.form_input($attributes);
-				echo $p_end;
+				echo '&nbsp;'.form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'number':
@@ -207,7 +212,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['type'] = 'number';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'number text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$p_end;
+				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'select':
@@ -218,7 +223,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				}
 				$add .= 'class="styled'.($field['mandatory']?' mandatory':'');
 				$add .='" ';
-				echo $p_start.$label.br(1).form_dropdown($field_name, $field['options'], $field_value, $add).$p_end;
+				echo $p_start.$label.br(1).form_dropdown($field_name, $field['options'], $field_value, $add).$field_note.$p_end;
 				break;
 
 			case 'checkbox':
@@ -273,7 +278,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$js_onload.= "$('.".$nm." .rem').click(function(){ ".
 					 "return !$('.".$nm." .multi_right select option:selected').remove().appendTo('.".$nm." .multi_left select'); });";
 
-				echo $p_end;
+				echo $field_note.$p_end;
 				break;
 
 			case 'radio':
@@ -288,7 +293,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 					echo form_radio($data).form_label(' '.$opt_val, $field_name);
 				}
-				echo $p_end;
+				echo $field_note.$p_end;
 				break;
 
 			case 'images':
@@ -390,7 +395,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		}
 
 	}
-
 
 	echo $save_buttons;
 

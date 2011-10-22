@@ -240,8 +240,8 @@ var bancha = {
 		}
 	},
 	add_form_hash : function() {
-		$('form').attr('action', $('form').attr('action') + window.location.hash);
-
+		var attr = $('form').attr('action').split('#');
+		$('form').attr('action', attr[0] + window.location.hash);
 		return true;
 	},
 	sort_priority : function (event, ui) {
@@ -324,27 +324,92 @@ var bancha = {
 					break;
 			}
 		}
+	},
+	blocks : {
+		_last_section : false,
+		set_section : function(which) {
+			bancha.blocks._last_section = which;
+		},
+		save_section : function(el) {
+			var this_block = bancha.blocks._last_section;
+			$(el + ' form').append('<input type="hidden" name="block" value ="'+this_block+'" />');
+			var values = $(el + ' form').serialize();
+			values = values + '&theme=' + $('#add_section').attr('data-theme') + '&template='
+				   + $('#add_section').attr('data-template');
+			$('#cboxClose').click();
+			$.post(admin_url + 'themes/add_section', values, function(data) {
+
+				$(data).insertBefore($('.theme_block[data-name="'+this_block+'"]').children().last());
+
+				$('#add_section input[type=text], #add_section select, #add_section textarea').val('');
+				$('form input[name=block]').remove();
+				bancha.blocks.load_sortable();
+			});
+		},
+		delete_section : function(which) {
+			var pos = $(which).parent('.section').attr('data-pos');
+			var block = $(which).parent('.section').parent('.theme_block').attr('data-name');
+			window.location.href = current_url + '?delete_section=' + pos + '&block=' + block;
+		},
+		load_sortable : function() {
+			$('.theme_block').sortable({
+				stop: function(event, ui) {
+					bancha.blocks.sorted(event, ui);
+				}
+			});
+		},
+		sorted : function(event, ui) {
+			var block = ui.item.parent('.theme_block');
+			var block_name = block.attr('data-name');
+			var str = '&theme=' + $('#add_section').attr('data-theme') + '&template='
+					+ $('#add_section').attr('data-template'); + '&block=' + block;
+
+			var str = '&theme=' + $('#add_section').attr('data-theme') + '&template='
+				   + $('#add_section').attr('data-template') + '&block=' + block_name;
+
+			$('.section', block).each(function(index) {
+				str = str + '&' + index + '=' + $(this).attr('data-pos');
+			});
+			$.post(admin_url + 'themes/reorder_block', str, function(data) {
+				
+			});
+		}
 	}
 }
 
 jQuery.extend(DateInput.DEFAULT_OPTS, {
-	  month_names: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
-	  short_month_names: ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
-	  short_day_names: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
-	  stringToDate: function(string) {
-		    var matches;
+  	/*month_names: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+  	short_month_names: ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
+  	short_day_names: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],*/
+  	stringToDate: function(string) {
+	    var matches;
+	    if (local_date_format == 'd/m/Y') {
 		    if (matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/)) {
 		      return new Date(matches[3], matches[2] - 1, matches[1]);
 		    } else {
 		      return null;
 		    };
-		  },
+		} else {
+			 if (matches = string.match(/^(\d{4,4})\/(\d{2,2})\/(\d{2,2})$/)) {
+		      return new Date(matches[1], matches[2] - 1, matches[3]);
+		    } else {
+		      return null;
+		    };
+		}
+	},
 
-		  dateToString: function(date) {
-		    var month = (date.getMonth() + 1).toString();
-		    var dom = date.getDate().toString();
-		    if (month.length == 1) month = "0" + month;
-		    if (dom.length == 1) dom = "0" + dom;
-		    return dom + "/" + month + "/" + date.getFullYear();
-		  }
-	});
+	  dateToString: function(date) {
+	    var month = (date.getMonth() + 1).toString();
+	    var dom = date.getDate().toString();
+	    if (month.length == 1) month = "0" + month;
+	    if (dom.length == 1) dom = "0" + dom;
+	    if (local_date_format == 'd/m/Y') {
+	    	return dom + "/" + month + "/" + date.getFullYear();
+		} else {
+			return date.getFullYear() + "-" + month + "-" + dom;
+		}
+	}
+});
+
+
+

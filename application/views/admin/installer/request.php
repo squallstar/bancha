@@ -1,14 +1,15 @@
 <div class="block small center login">
-
         <div class="block_head">
           <div class="bheadl"></div>
           <div class="bheadr"></div>
-
           <h2><?php echo $this->lang->_trans('%n Installer', array('n'=>CMS)); ?></h2>
-
         </div>
-
 		<div class="block_content">
+
+<?php if ($already_installed === 'T') { ?>
+		<div class="warning message"><?php echo _('WARNING').': '._('Bancha is already installed on this database!'); ?></div>
+		<p><br /><?php echo _('To reinstall Bancha, you need to delete the "is_installed" key on the "settings" table.'); ?></p>
+<?php } else { ?>
 
           <?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
 
@@ -25,25 +26,18 @@
 					<br />
 					<?php echo _('Install type'); ?><br />
 					<select class="styled" name="premade">
-						<option value="default"><?php echo _('Default'); ?></option>
 						<option value="blog"><?php echo _('Blog'); ?></option>
+						<option value="default"><?php echo _('Default'); ?></option>
 					</select><br />
 			  	</div>
 
-			  	<?php if ($already_installed) { ?>
-			  	<div class="warning message"><?php echo _('WARNING').': '._('Bancha is already installed on this database!'); ?></div>
-			  	<?php } ?>
-
-		  		<input name="install" type="submit" class="submit" value="<?php echo _('Install'); ?>" />
+		  		<input name="install" onclick="$(this).fadeOut(200, function() {$('img.hidden').fadeIn();});" type="submit" class="submit" value="<?php echo _('Install'); ?>" />
+		  		<img class="hidden" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/loading.gif'; ?>" />
 		  	</form>
-
+<?php } ?>
 			<br />
 
-
-
         </div>
-
         <div class="bendl"></div>
         <div class="bendr"></div>
-
       </div>

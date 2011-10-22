@@ -22,7 +22,7 @@ Class Model_auth extends CI_Model {
 	/**
 	 * @var array Current user acls
 	 */
-	private $_acl;
+	private $_acl = '';
 
 	public function __construct()
 	{
@@ -59,7 +59,7 @@ Class Model_auth extends CI_Model {
 	 */
 	public function login($username, $password)
 	{
-		$result = $this->db->select('id_user, name, surname, id_group')
+		$result = $this->db->select('id_user, name, surname, id_group, admin_lang')
 					   	    ->from('users')
 					        ->where('username', $username)
 					        ->where('password', $password)
@@ -75,7 +75,13 @@ Class Model_auth extends CI_Model {
 			$this->user('id', $user->id_user);
 			$this->user('group_id', $user->id_group);
 
-			//Carico i permessi dell'utente
+			$this->lang->set_lang($user->admin_lang);
+			$this->lang->set_cookie();
+
+			//We also set a single cookie to help the Output class to send cached pages
+			$_SESSION['prevent_cache'] = TRUE;
+
+			//Loads the user permissions
 			$this->cache_permissions();
 
 			return TRUE;
@@ -91,6 +97,8 @@ Class Model_auth extends CI_Model {
 	public function logout()
 	{
 		$this->session->sess_destroy();
+		unset($_SESSION['prevent_cache']);
+		session_destroy();
 		return TRUE;
 	}
 
@@ -117,16 +125,17 @@ Class Model_auth extends CI_Model {
 	 */
 	function add_permission($acl_id)
 	{
-		//We first check if already exists
+		//We first check if the permission already exists
 		$result = $this->db->select('acl_id')
 		->from('groups_acl')
 		->where('acl_id', $acl_id)
 		->limit(1)->get();
+
 		if (!$result->num_rows())
 		{
 			$data = array(
-					'acl_id'	=> $acl_id,
-					'group_id'	=> $this->user('group_id')
+				'acl_id'	=> $acl_id,
+				'group_id'	=> $this->user('group_id')
 			);
 			return $this->db->insert('groups_acl', $data);
 		}
@@ -166,8 +175,8 @@ Class Model_auth extends CI_Model {
 			foreach ($permissions as $acl)
 			{
 				$data = array(
-								'group_id'			=> $group_id,
-								'acl_id'			=> $acl
+					'group_id'	=> $group_id,
+					'acl_id'	=> $acl
 				);
 				$this->db->insert('groups_acl', $data);
 			}
@@ -199,10 +208,21 @@ Class Model_auth extends CI_Model {
 	 * Checks whether an users has a permission
 	 * @param string $area
 	 * @param string $action
+	 * @return bool
 	 */
 	public function has_permission($area, $action)
 	{
-		return strpos($this->_acl, '<'.$area.'|'.$action.'>') == 0 ? FALSE : TRUE;
+		return strpos($this->_acl, '<'.$area.'|'.$action.'>') === FALSE ? FALSE : TRUE;
+	}
+
+	/**
+	 * Same as has_permission(), but when fails the user will be redirected to a "Forbidden 400" page
+	 * @param string $area
+	 * @param string $action
+	 */
+	public function check_permission($area, $action)
+	{
+		if (!$this->has_permission($area, $action)) show_400();
 	}
 
 }

@@ -12,8 +12,8 @@
  *
  */
 
-Class Content {
-
+Class Content
+{
 	/**
 	 * @var array Content types list
 	 */
@@ -97,7 +97,7 @@ Class Content {
 	 * @param bool $type_structure True when pages, False when contents
 	 * @return int Type id (autoincrement)
 	 */
-	public function add_type($type_name, $type_description, $type_structure, $delete_if_exists=FALSE)
+	public function add_type($type_name, $type_description, $type_structure, $delete_if_exists=FALSE, $type_label_new='')
 	{
 		$this->CI->load->library('parser');
 
@@ -150,6 +150,7 @@ Class Content {
 		          'id'			=> $type_id,
 		          'name'		=> $type_name,
 		          'description'	=> $type_description,
+		          'label_new'	=> $type_label_new,
 		          'version'		=> BANCHA_VERSION
 		),TRUE);
 
@@ -312,15 +313,18 @@ Class Content {
 			$this->CI->load->frlibrary('xml');
 		}
 
-		foreach ($filenames as $filename)
+		if (count($filenames) && is_array($filenames))
 		{
-			$content = $this->CI->xml->parse_scheme($this->xml_folder . $filename);
+			foreach ($filenames as $filename)
+			{
+				$content = $this->CI->xml->parse_scheme($this->xml_folder . $filename);
 
-			$all_types_id[] = $content['id'];
-			$all_types = $content['name'];
+				$all_types_id[] = $content['id'];
+				$all_types = $content['name'];
 
-			//Aggiungo il tipo
-			$contents[$content['id']] = $content;
+				//Aggiungo il tipo
+				$contents[$content['id']] = $content;
+			}
 		}
 
 		if ($this->CI->config->item('delete_dead_records') == TRUE)

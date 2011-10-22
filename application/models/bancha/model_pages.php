@@ -259,10 +259,26 @@ Class Model_Pages extends CI_Model {
     			$uri;
     	$uri = md5($uri);
 
-    	if (file_exists($this->cache_path . $uri))
+    	//Gets the current desktop and mobile themes
+    	if (!isset($this->settings))
     	{
-    		@unlink($this->cache_path . $uri);
+    		$this->load->settings();
     	}
+    	$themes = array(
+	    	$this->settings->get('website_desktop_theme'),
+	    	$this->settings->get('website_mobile_theme')
+	    );
+
+	    foreach ($themes as $theme)
+	    {
+	    	$filepath = $this->cache_path . $this->output->get_cachefile($uri, $theme);
+	    	if (file_exists($filepath))
+	    	{
+	    		@unlink($filepath);
+	    	}
+	    }
+
+    	
     }
 }
 

@@ -32,7 +32,8 @@ $this->view->render('header');
 			}
 			 ?>
 
-			
+			<?php echo $this->blocks->load('sidebar'); ?>
+			<br />
 
 			<dl class="history"> 
 				<dt>2010</dt> 

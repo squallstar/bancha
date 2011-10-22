@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="bancha-{version}" -->
+<content id="{id}">
+	<name>Comments</name>
+	<descriptions label="Comments" new="New comment"/>
+	<tree>false</tree>
+	<primary_key>id_record</primary_key>
+	<table>records</table>
+	<table_stage>records_stage</table_stage>
+	<has_categories>false</has_categories>
+	<triggers>
+		<trigger on="insert, update, delete" field="post_id">
+			<sql action="recount" type="Blog" target="child_count" />
+		</trigger>
+	</triggers>
+	<fieldset name="Author info" icon="user_comment">
+		<field id="id_record" column="true">
+			<type>hidden</type>
+			<list>true</list>
+			<admin>true</admin>
+		</field>
+		<field id="id_type" column="true">
+			<type>hidden</type>
+			<list>true</list>
+			<default>3</default>
+		</field>
+		<field id="date_insert" column="true">
+			<type>hidden</type>
+			<list>true</list>
+			<default>eval:time()</default>
+		</field>
+		<field id="published" column="true">
+			<type>hidden</type>
+			<default>0</default>
+			<list>true</list>
+		</field>
+		<field id="author" link="edit">
+			<type>text</type>
+			<admin>true</admin>
+			<list>true</list>
+			<description>Name</description>
+		</field>
+		<field id="www">
+			<description>Website</description>
+			<type>text</type>
+			<list>true</list>
+			<admin>true</admin>
+		</field>
+		<field id="email">
+			<description>E-mail address</description>
+			<type>text</type>
+			<list>true</list>
+			<admin>true</admin>
+		</field>
+		<field id="content">
+			<description>Message</description>
+			<type>textarea</type>
+			<list>true</list>
+		</field>
+		<field id="date_publish" column="true">
+			<description>Visibility date</description>
+			<type>hidden</type>
+			<default>eval:time()</default>
+		</field>
+		<field id="lang" column="true">
+			<description>Language</description>
+			<type>hidden</type>
+			<default>it</default>
+		</field>
+	</fieldset>
+	<fieldset name="Linked post" icon="link">
+		<field id="post_id" column="true">
+			<description>Linked post</description>
+			<type>select</type>
+			<admin>true</admin>
+			<list>true</list>
+			<options></options>
+			<sql cache="false">
+				<select>id_record AS value, title AS name</select>
+				<from>records</from>
+				<type>Blog</type>
+				<order_by>name ASC</order_by>
+			</sql>
+		</field>
+	</fieldset>
+</content>

@@ -241,6 +241,17 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
+	 * Imposta una clausola di "where in" nelle estrazioni
+	 * @param string $column colonna
+	 * @param string $value valore
+	 */
+	public function where_in($column, $values = array())
+	{
+		$this->db->where_in($column, $values);
+		return $this;
+	}	
+
+	/**
 	 * Imposta la clausola di limit nelle estrazioni
 	 * @param int $a numero di record da estrarre
 	 * @param int $b offset
@@ -288,7 +299,7 @@ Class Model_Documents extends CI_Model
 	 * @param bool $stage imposta se utilizzare come ricerca la tabella di produzione
 	 * @return bool success
 	 */
-	public function delete_by_binds($table, $id, $production=FALSE)
+	public function delete_by_binds($table, $id, $production=FALSE, $delete_files = TRUE)
 	{
 		$doc_table = $production ? $this->table : $this->table_stage;
 		$documents = $this->db->select('path')
@@ -298,11 +309,14 @@ Class Model_Documents extends CI_Model
 					 		  ->get();
 		if ($documents->num_rows())
 		{
-			foreach ($documents->result() as $document)
+			if ($delete_files)
 			{
-				if (file_exists($this->attach_folder . $document->path))
+				foreach ($documents->result() as $document)
 				{
-					@unlink($this->attach_folder . $document->path);
+					if (file_exists($this->attach_folder . $document->path))
+					{
+						@unlink($this->attach_folder . $document->path);
+					}
 				}
 			}
 			$this->delete_records_by_binds($table, $id, $production);
@@ -345,8 +359,8 @@ Class Model_Documents extends CI_Model
 			}
 		}
 
-		//Elimino i documenti (DB) in produzione
-		$this->delete_by_binds($table, $id, TRUE);
+		//Elimino i documenti (DB) in produzione (ma non i files!)
+		$this->delete_by_binds($table, $id, TRUE, FALSE);
 
 		//Prendo tutti gli allegati in sviluppo
 		$stage_documents = $this->db->select('*')

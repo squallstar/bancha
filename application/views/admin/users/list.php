@@ -55,7 +55,7 @@ $this->load->helper('text');
 				.'<td>'.$user->name.'</td>'
 				.'<td>'.$user->surname.'</td>'
 				.'<td>'.$user->email.'</td>'
-				.'<td><a href="'.admin_url('users/groups/edit/'.$user->id_group).'">'.$user->group_name.'</a></td>';
+				.'<td>'.($user->id_group ? '<a href="'.admin_url('users/groups/edit/'.$user->id_group).'">'._($user->group_name).'</a>' : '') . '</td>';
 
 			echo '<td class="delete">'
 					.'<a href="'.admin_url('users/delete/'.$user->id_user).'" onclick="return confirm(\''._('Do you want to delete this user?').'\');">'._('Delete').'</a>'

@@ -62,6 +62,9 @@ class CI_DB_active_record extends CI_DB_driver {
 	var $ar_no_escape 			= array();
 	var $ar_cache_no_escape     = array();
 
+	var $ar_bracket_open = FALSE;
+	var $last_bracket_type = 'where';
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -446,7 +449,7 @@ class CI_DB_active_record extends CI_DB_driver {
 			}
 
 		}
-
+		$this->last_bracket_type = 'where';
 		return $this;
 	}
 
@@ -688,6 +691,7 @@ class CI_DB_active_record extends CI_DB_driver {
 			}
 
 		}
+		$this->last_bracket_type = 'like';
 		return $this;
 	}
 
@@ -2034,6 +2038,43 @@ class CI_DB_active_record extends CI_DB_driver {
 		);
 
 		$this->_reset_run($ar_reset_items);
+	}
+
+	function bracket($type = NULL)
+	{
+		$arname = 'ar_' . $this->last_bracket_type;
+		$arcachename = 'ar_cache_' . $this->last_bracket_type;
+
+		$n_ar = & $this->$arname;
+		$n_ar_cache = & $this->$arcachename;
+
+	    if ( strtolower($type) == 'open' )
+	    {
+		// fetch the key of the last entry added
+	        $key = key($n_ar);
+
+	        $this->ar_bracket_open = TRUE;
+
+		// add a bracket close
+	        $n_ar[$key] = '('.$n_ar[$key];
+	    }
+	    elseif ( strtolower($type) == 'close' )
+	    {
+	        // fetch the key of the last entry added
+	        end($n_ar);
+	        $key = key($n_ar);
+
+	        // add a bracket close
+	        $n_ar[$key] .= ')';
+
+	        // update the AR cache clauses as well
+	        if ($this->ar_caching === TRUE)
+	        {
+	           $n_ar_cache[$key] = $n_ar[$key];
+	        }
+	    }
+	    
+	    return $this;
 	}
 }
 

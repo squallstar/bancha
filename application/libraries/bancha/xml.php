@@ -159,7 +159,7 @@ Class Xml
     	//The type name
     	$name = (string) $node->name;
 
-    	$type_id = (int) $node->id;
+    	
 
     	//Allowed types of field
     	$field_usable_inputs = array(
@@ -167,18 +167,25 @@ Class Xml
       		'images', 'files', 'number', 'textarea_full', 'textarea_code', 'datetime', 'hidden', 'hierarchy'
     	);
 
+        $attr = $node->attributes();
+        $type_id = isset($attr->id) ? (int)$attr->id : 0;
+
+        $descr_attr = $node->descriptions->attributes();
+
     	$content = array(
-      		'id'			=> $type_id,
-      		'name'			=> $safe_filename,
-      		'tree'			=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
-      		'has_categories'=> isset($node->has_categories) ? (strtolower((string)$node->has_categories) == 'true' ? TRUE : FALSE) : FALSE,
-            'has_hierarchies'=> isset($node->has_hierarchies) ? (strtolower((string)$node->has_hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
-      		'description'	=> (string) $node->description,
-      		'primary_key'	=> (string) $node->primary_key,
-      		'table'			=> (string) $node->table
+      		'id'				=> $type_id,
+      		'name'				=> $safe_filename,
+      		'tree'				=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
+      		'has_categories'	=> isset($node->has_categories) ? (strtolower((string)$node->has_categories) == 'true' ? TRUE : FALSE) : FALSE,
+            'has_hierarchies'	=> isset($node->has_hierarchies) ? (strtolower((string)$node->has_hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
+      		'description'		=> (string) $descr_attr->label,
+      		'label_new'			=> (string) $descr_attr->new,
+      		'primary_key'		=> (string) (isset($node->primary_key) ? $node->primary_key : ''),
+      		'table'				=> (string) (isset($node->table) ? $node->table : '')
     	);
 
         $this->_translations[$content['description']] = TRUE;
+        $this->_translations[$content['label_new']] = TRUE;
 
     	if (isset($node->table_stage))
     	{
@@ -275,19 +282,33 @@ Class Xml
 
     	foreach ($node->fieldset as $fieldset_node)
     	{
-      		$fieldset_name = isset($fieldset_node->name) ? convert_accented_characters((string)$fieldset_node->name) : _('Untitled');
+      		$fieldset_attr = $fieldset_node->attributes();
 
-          $this->_translations[$fieldset_name] = TRUE;
+            if (isset($fieldset_attr->name))
+            {
+                $fieldset_name = convert_accented_characters(trim((string)$fieldset_attr->name));
+            } else {
+                $fieldset_name = _('Untitled');
+            }
 
+            //We add the fieldset name to the localized labels
+            $this->_translations[$fieldset_name] = TRUE;
 
+            
+            //Fieldset name is needed
       		if ($fieldset_name == '')
       		{
-        		show_error($this->CI->_trans('One of the fieldsets of type %n does not have the node <name> (mandatory).', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
+        		show_error($this->CI->lang->_trans('One of the fieldsets of type %n does not have the name attribute (mandatory).', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
       		} else if (array_key_exists($fieldset_name, $content['fieldsets'])) {
-        		show_error($this->CI->_trans('The type %t has more than one fieldset named %n.', array('t' => '['.$safe_filename.']', 'n' => '['.$fieldset_name.']')), 500, _('XML parser: Error'));
+        		show_error($this->CI->lang->_trans('The type %t has more than one fieldset named %n.', array('t' => '['.$safe_filename.']', 'n' => '['.$fieldset_name.']')), 500, _('XML parser: Error'));
       		}
 
       		$fieldset = array('name' => $fieldset_name, 'fields' => array());
+
+            if (isset($fieldset_attr->icon))
+            {
+                $fieldset['icon'] = (string)$fieldset_attr->icon;
+            }
 
       		foreach ($fieldset_node->field as $field)
       		{
@@ -295,7 +316,7 @@ Class Xml
             $attr = $field->attributes();
         		$field_name = (string) $attr->id;
         		if (!$field_name || $field_name == '') {
-          			show_error($this->CI->_trans('One of the fields of type %t does not have a name.', array('t' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
+          			show_error($this->CI->lang->_trans('One of the fields of type %t does not have a name.', array('t' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
         		}
 
         		//Physical column
@@ -321,12 +342,12 @@ Class Xml
         		//Reserved names check
         		if (in_array($field_name, $this->CI->config->item('restricted_field_names')))
         		{
-          			show_error($this->CI->_trans('The field name %n is reserved (Type: %t) and needs to be changed!', array('t' => '['.$safe_filename.']', 'n' => '['.$field_name.']')), 500, _('XML parser: Error'));
+          			show_error($this->CI->lang->_trans('The field name %n is reserved (Type: %t) and needs to be changed!', array('t' => '['.$safe_filename.']', 'n' => '['.$field_name.']')), 500, _('XML parser: Error'));
         		}
 
         		if (!in_array((string)$field->type, $field_usable_inputs))
         		{
-          			show_error($this->CI->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are:', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
+          			show_error($this->CI->lang->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are:', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
         		}
 
         		//Default fields for each field
@@ -340,6 +361,11 @@ Class Xml
          			'visible'		=> isset($field->visible) ? (strtoupper($field->visible) == 'TRUE' ? TRUE : FALSE) : TRUE,
           			'default'		=> isset($field->default) ? (string)$field->default : ''
         		);
+
+        		if (isset($field->rules))
+        		{
+        			$content_field['rules'] = (string) $field->rules;
+        		}
 
                 $this->_translations[$content_field['description']] = TRUE;
 

@@ -1,4 +1,8 @@
-/* Custom fonts */
+/*
+
+@bancha-green : #73b38e
+
+*/
 @import url("../fonts/titillium/stylesheet.css");
 
 * { padding:0; margin:0; }
@@ -18,10 +22,20 @@ body {
 	display: block;
 	overflow: auto;
 	font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
-	border: 1px solid #F0F0F0;
-	background: #F8F8F8;
 	color: #555;
+	line-height: 18px;
+	font-size: 12px;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	background: #fefbf3;
+	padding: 9px;
+	border: 1px solid rgba(0,0,0,.2);
 }
 .code_format.docs p strong {
 	 background-color: #FFF6A9;
@@ -72,7 +86,7 @@ a:hover {
 	}
 
 .wrapper {
-	width:90%;
+	width:94%;
 	min-width: 960px;
 	margin:0 auto;
 	padding-top: 20px;
@@ -111,16 +125,23 @@ a:hover {
 
 #header h1 {
 	float: left;
-	margin-right: 80px;
+	margin: 0 40px 0 10px;
 	font-family: "Titillium800", "Trebuchet MS", Arial, sans-serif;
 	font-size: 18px;
 	font-weight: normal;
 	text-transform: uppercase;
 	color: #fff;
 	}
+#header .logo_img {
+	float:left;
+	background:url('../widgets/logo_header.png') no-repeat;
+	width:22px;
+	height:20px;
+	margin-top:15px;
+}
 
 #header h1 a { color: #fff; }
-#header h1 a:hover { color: #008ee8; }
+#header h1 a:hover { color: #73b38e; }
 
 
 /* Navigation */
@@ -198,7 +219,7 @@ a:hover {
 	padding: 0 10px;
 	}
 
-#header #nav li.active a { color: #ddd; }
+#header #nav li.active a { color: #eee; }
 #header #nav li.active a:hover { color: #fff; }
 
 #header #nav a.hasmore {
@@ -952,6 +973,10 @@ input.small {
 	border: 0;
 	}
 
+
+.block.withsidebar .block_content .sidebar ul.sidemenu img {
+	vertical-align: text-top;
+}
 .block.withsidebar .block_content .sidebar_content {
 	padding: 15px 20px 15px 210px;
 	}
@@ -1083,4 +1108,19 @@ input.small {
 }
 table.sortable td img {
 	vertical-align:middle;
+}
+
+/* Theme template composer */
+.theme_block {
+	background: #f6f6f6;
+	padding:13px 20px;
+	margin:20px 0;
+	border:1px solid #f0f0f0;
+}
+.theme_block .section {
+	padding:10px 15px;
+	margin:20px 0;
+	background:#e9e9e9;
+	border:1px dashed #cfcfcf;
+	cursor:move
 }

@@ -15,15 +15,15 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $this->view->render('header');
 
 ?>
-
-<div class="post">
-	<div class="details"><h1>404 - Pagina non trovata</h1></div>
+<div class="grid_12">
+	<h1 class="page_title">Page not found</h1>
+	<div class="hr dotted clearfix">&nbsp;</div>
 	<div class="body">
-	La pagina che stavi cercando non esiste oppure &egrave; stata rimossa
+	<?php echo _("We can't find the page you're looking for. Check out our website for help, or maybe you should try heading to home."); ?>
+	<br /><br />
 	</div>
-
-	<div class="clear"></div>
 </div>
+<div class="grid_12 clearfix">&nbsp;</div>
 
 <?php
 $this->view->render('footer');

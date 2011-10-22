@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="bancha-{version}" -->
-<content>
-	<id>{id}</id>
+<content id="{id}">
 	<name>{name}</name>
-	<description>{description}</description>
+	<descriptions label="{description}" new="{label_new}"/>
 	<tree>false</tree>
 	<primary_key>id_record</primary_key>
 	<table>records</table>
-	<table_stage>true</table_stage>
+	<table_stage>records_stage</table_stage>
 	<has_categories>true</has_categories>
 	<has_hierarchies>true</has_hierarchies>
-	<fieldset>
-		<name>General informations</name>
+	<fieldset name="General informations" icon="page">
 		<field id="id_record" column="true">
 			<type>hidden</type>
 			<list>true</list>
@@ -29,6 +27,7 @@
 		</field>
 		<field id="published" column="true">
 			<type>hidden</type>
+			<list>true</list>
 			<default>0</default>
 		</field>
 		<field id="title" column="true" link="edit">
@@ -60,29 +59,27 @@
 			</options>
 			<default>eval:$this->lang->current_language</default>
 		</field>
-		<field id="contenuto">
+		<field id="content">
 			<description>Content</description>
 			<type>textarea</type>
 			<list>true</list>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Attachments</name>
+	<fieldset name="Attachments" icon="images">
 		<field id="images">
 			<description>Images</description>
 			<type>images</type>
 			<size>4096</size>
 			<mimes>jpg|gif|png|jpeg</mimes>
 			<original>true</original>
-			<encrypt_name>false</encrypt_name>
+			<encrypt_name>true</encrypt_name>
 			<resized>640x?</resized>
 			<thumbnail>60x?</thumbnail>
 			<max>3</max>
 			<list>true</list>
 		</field>
 	</fieldset>
-	<fieldset>
-		<name>Meta tags</name>
+	<fieldset name="Meta tags" icon="tag">
 		<field id="meta_title">
 			<description>Title</description>
 			<type>text</type>

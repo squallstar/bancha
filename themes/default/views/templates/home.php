@@ -16,6 +16,13 @@ $this->view->render('header');
 
 ?>
 <div id="featured" class="clearfix grid_12">
+<?php /*
+####################### PICASA CALL ####################
+$config_picasa = array ('username' => 'kikkovolley');
+$picasa = $this->load->module('picasa', $config_picasa);
+$picasa->getGallery()->render();
+########################################################*/
+?>
 	<ul> 
 		<li>
 			<a href="#">
@@ -52,7 +59,7 @@ $this->view->render('header');
 <div class="hr grid_12 clearfix">&nbsp;</div>
 	
 <!-- Caption Line -->
-<h2 class="grid_12 caption clearfix">Welcome! This is the <span>homepage</span> of your website!</h2>
+<h2 class="grid_12 caption clearfix"><?php echo $this->settings->get('website_claim'); ?></h2>
 
 <div class="hr grid_12 clearfix quicknavhr">&nbsp;</div>
 <div id="quicknav" class="grid_12">
@@ -61,12 +68,12 @@ $this->view->render('header');
 			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
 			<p style="text-align:center;"><img alt="" src="<?php echo theme_url('widgets/Art_Artdesigner.lv.png'); ?>" /></p>
 	</a>
-	<a class="quicknavgrid_3 quicknav" href="#">
+	<a class="quicknavgrid_3 quicknav" href="<?php echo site_url('about-us'); ?>">
 			<h4 class="title ">Learn about us</h4>
 			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
 			<p style="text-align:center;"><img alt="" src="<?php echo theme_url('widgets/info.png'); ?>" /></p>
 	</a>
-	<a class="quicknavgrid_3 quicknav" href="#">
+	<a class="quicknavgrid_3 quicknav" href="<?php echo site_url('blog'); ?>">
 			<h4 class="title ">Read our blog</h4>
 			<p>Cras vestibulum lorem et dui mollis sed posuere leo semper. </p>
 			<p style="text-align:center;"><img alt="" src="<?php echo theme_url('widgets/Blog_Artdesigner.lv.png'); ?>" /></p>

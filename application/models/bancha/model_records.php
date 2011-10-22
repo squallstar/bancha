@@ -15,19 +15,24 @@
 Class Model_records extends CI_Model {
 
 	/**
-	 * @var bool Definisce se il tipo ricercato e' di tipo albero
+	 * @var bool Defines if we searched a simple or structured type
 	 */
   	public $last_search_has_tree = FALSE;
 
   	/**
-  	* @var bool Imposta se estrarre i documenti dalla prossima ricerca
+  	* @var bool Sets if we have to extract documents during the next search
   	*/
   	private $_get_documents = FALSE;
 
   	/**
-  	* @var bool Definisce se e' una ricerca di tipo lista o dettaglio
+  	* @var bool Defines whether a search is a list or a detail
   	*/
  	private $_is_list = FALSE;
+
+ 	/**
+  	* @var bool Defines whether an admin search is a list or a detail
+  	*/
+ 	private $_is_adminlist = FALSE;
 
  	/**
  	* @var bool|array Il tipo su cui si sta effettuando la ricerca
@@ -86,6 +91,16 @@ Class Model_records extends CI_Model {
   	public function set_list($extract=TRUE)
   	{
   		$this->_is_list = $extract;
+  		return $this;
+  	}
+
+  	/**
+   	* In the administration, defines is we have to extract only the "list" fields or also the "details" ones
+   	* @param bool $extract
+   	*/
+  	public function set_adminlist($extract=TRUE)
+  	{
+  		$this->_is_adminlist = $extract;
   		return $this;
   	}
 
@@ -248,6 +263,26 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
+  	 * Sets an or-like search condition
+  	 * @param string $field
+  	 * @param int|string $value
+  	 */
+  	public function or_like($field='', $value='')
+  	{
+  		if ($field != '')
+  		{
+  			if (in_array($field, $this->_single_type['columns']))
+  			{
+  				$this->db->or_like($field, $value);
+  			} else {
+  				//Xml search by tag content
+  				$this->db->or_like($this->table_current.'.xml', '<'.$field.'>'.CDATA_START.'%'.$value.'%'.CDATA_END.'</'.$field.'>');
+  			}
+  		}
+  		return $this;
+  	}
+
+  	/**
   	 * Imposta un limite sui risultati
   	 * @param start $a start
   	 * @param string $b howmany
@@ -306,7 +341,7 @@ Class Model_records extends CI_Model {
   		$record_columns = $this->columns;
 
   		//We check if we're searching for a list (not detail), and just for one type
-  		if ($this->_is_list && $this->_single_type)
+  		if (($this->_is_list || $this->_is_adminlist) && $this->_single_type)
   		{
   			foreach ($record_columns as $single_field)
   			{
@@ -314,8 +349,8 @@ Class Model_records extends CI_Model {
   				if (isset($this->_single_type['fields'][$single_field]))
   				{
   					if ($this->_single_type['fields'][$single_field]['list'] === TRUE
-  					//&& !in_array($single_field, $not_selectable)
-  					//TODO: fix and check
+  					    || ($this->_single_type['fields'][$single_field]['admin'] === TRUE && $this->_is_adminlist)
+  					
   					)
   					{
   						$fields_to_select[] = $single_field;
@@ -360,6 +395,7 @@ Class Model_records extends CI_Model {
   		{
   			$results = $query->result();
   			$records = array();
+            $record_ids = array();
   			foreach ($results as $item) {
 
   				if (!isset($item->id_type) || !$item->id_type)
@@ -377,6 +413,7 @@ Class Model_records extends CI_Model {
   				if ($record instanceof Record) {
 
   					$record->id = $item->{$tipo['primary_key']};
+                    $record_ids[] = $record->id;
   					$record->tipo = $type_name;
   					$record->xml = $item->xml;
 
@@ -390,13 +427,13 @@ Class Model_records extends CI_Model {
   								{
   									//We convert the date fields into timestamps
   									$record->set('_'.$column, $item->$column);
-  									$item->$column = date('d/m/Y', $item->$column);
+  									$item->$column = date(LOCAL_DATE_FORMAT, $item->$column);
   								} else if ($tipo['fields'][$column]['type'] == 'datetime')
   								{
   									if ($item->$column)
   									{
   										$record->set('_'.$column, $item->$column);
-  										$item->$column = date('d/m/Y H:i', $item->$column);
+  										$item->$column = date(LOCAL_DATE_FORMAT . ' H:i', $item->$column);
   									}
   								}
   								else if (in_array($tipo['fields'][$column]['type'], config_item('array_field_types')))
@@ -414,22 +451,43 @@ Class Model_records extends CI_Model {
   							$record->set($field_name, $item->$field_name);
   						}
   					}
-
   					$record->build_data();
-
-  					if ($this->_get_documents)
-  					{
-  						$record->set_documents();
-  					}
-
-  				}else{
+  				} else {
   					show_error(_('Cannot build the record.').' (records/get)');
   				}
   				$records[] = $record;
 
   			}
 
-  			//Reset the switchs
+            //We extract all the attachments, using the record IDS (single query = WOW!)
+            if ($this->_get_documents && count($record_ids))
+            {
+                $this->load->documents();
+                $docs = array();
+                $this->db->flush_cache();
+                $all_attachs = $this->documents->table($tipo['table'])->where_in('bind_id', $record_ids)->get();
+                if (count($all_attachs))
+                {
+                    foreach ($all_attachs as $attachment)
+                    {
+                        $docs[$attachment->bind_id][$attachment->bind_field][] = $attachment;
+                    }
+                    foreach ($records as & $record)
+                    {
+                        if (isset($docs[$record->id]))
+                        {
+                            $attachments = $docs[$record->id];
+                            foreach ($attachments as $field_name => $attachs)
+                            {
+                                $record->set($field_name, $attachs);   
+                            }
+                        }
+                        $record->documents_extracted = TRUE;
+                    }
+                }
+            }
+
+  			//Reset the switches
   			$this->last_search_has_tree = FALSE;
   			$this->_get_documents = FALSE;
 
@@ -497,12 +555,19 @@ Class Model_records extends CI_Model {
 	        	$data['uri'] = $this->get_safe_uri($uri);
 	        }
 
+	        //We ensure that a language will be always set if the content type supports it
+	        if (isset($tipo['fields']['lang']) && (!isset($data['lang']) || !$data['lang']))
+	        {
+	        	$data['lang'] = $this->lang->current_language;
+	        }
+
 	        //This type has a parent field?
 	        if (isset($tipo['fields']['id_parent']))
 	        {
 		        $parent = $record->get('id_parent');
 		        if ($parent || $parent === '') {
 		          if ($parent === '') {
+		          	//Hard column reset on the database
 		            $data['id_parent'] = null;
 		          } else {
 		            $data['id_parent'] = $parent;
@@ -517,10 +582,12 @@ Class Model_records extends CI_Model {
         		{
         			case 1:
         			case 2:
+        				//2 means that the record is different between the environments
         				$data['published'] = '2';
         				break;
 
         			default:
+        				//0 means that the record exists just in stage
         				$data['published'] = '0';
         				break;
         		}
@@ -528,7 +595,7 @@ Class Model_records extends CI_Model {
 
 		  	$done = FALSE;
 
-		  	//Trigger action
+		  	//We choose an action for the triggers
 			$action = $id ? 'update' : 'insert';
 
 			//Title fix
@@ -552,9 +619,12 @@ Class Model_records extends CI_Model {
 	               			 ->update($this->table_stage, $data))
 	          	{
 	            	$done = $id;
-	            	$this->events->log('update', $id, $data[$tipo['edit_link']], $data['id_type']);
+                    if (isset($data[$tipo['edit_link']]))
+                    {
+	            	  $this->events->log('update', $id, $data[$tipo['edit_link']], $data['id_type']);
+                    }
 	          	} else {
-		            show_error('Impossibile aggiornare il record ['.$id.'].', 500, 'Aggiornamento record');
+		            show_error('Cannot update the record ['.$id.'].', 500);
 	          	}
 
 	      	} else {
@@ -569,9 +639,12 @@ Class Model_records extends CI_Model {
 	          	if ($this->db->insert($this->table_stage, $data))
 	          	{
 		            $done = $this->db->insert_id();
-	            	$this->events->log('insert', $done, $data[$tipo['edit_link']], $data['id_type']);
+                    if (isset($data[$tipo['edit_link']]))
+                    {
+    	            	  $this->events->log('insert', $done, $data[$tipo['edit_link']], $data['id_type']);
+                    }
 	          	} else {
-	          		show_error('Impossibile aggiungere il record di tipo ['.$data['id_type'].'].', 500, 'Inserimento record');
+	          		show_error('Cannot create a new record of type ['.$data['id_type'].'].', 500);
 	          	}
 	      	}
 
@@ -596,7 +669,7 @@ Class Model_records extends CI_Model {
 	      	}
 	      	return $done;
 	  	} else {
-	    	show_error('Impossibile salvare un oggetto di tipo NON record.', 500);
+	    	show_error('Cannot save a non Record object.', 500);
 	  	}
 	}
 
@@ -648,7 +721,7 @@ Class Model_records extends CI_Model {
   	}
 
   /**
-   * Ottiene un URI sicuro da utilizzare
+   * Gets a safe web uri
    * @param string $uri
    * @return string
    */
@@ -658,9 +731,9 @@ Class Model_records extends CI_Model {
   }
 
   /**
-   * Controlla se un URI è stato utilizzato
-   * Se utilizzato, ritorna il record relativo
+   * Checks whether a URI is used, and returns the id of that record
    * @param string $uri
+   * @return bool|int
    */
   public function uri_is_used($uri='')
   {
@@ -677,7 +750,7 @@ Class Model_records extends CI_Model {
   }
 
   /**
-   * Controlla se un record è pubblicato, dato il suo ID
+   * Checks if a record is published given the id
    * @param int $id
    * @return bool
    */
@@ -698,88 +771,113 @@ Class Model_records extends CI_Model {
   		return FALSE;
   }
 
-  /**
-   * Pubblica un record e i suoi allegati
-   * @param int $id
-   */
-  public function publish($id = '')
-  {
-      if ($id == '') {
-        show_error('ID not specified. (records/publish)');
-      }
-    $record = $this->db->from($this->table_stage)
-               		   ->where($this->primary_key, $id)
-               		   ->limit(1)
-               		   ->select('*')
-               		   ->get();
-    if ($record->num_rows())
-    {
-      $record = $record->result_array();
-      $stage_record = $record[0];
-      if ($stage_record['date_publish'] < time())
-      {
-      		$stage_record['date_publish'] = time();
-      }
+	/**
+	* Publishes a record and its attachments
+	* @param int $id Record id
+	* @param string $type (optional) The content type
+	*/
+	public function publish($id = '', $type = '')
+ 	{
+		$this->set_type($type);
 
-      $this->events->log('publish', $stage_record[$this->primary_key], $stage_record['title'], $stage_record['id_type']);
+		if ($id == '')
+		{
+			show_error('ID not specified. (records/publish)');
+		}
 
-      $published_record = $this->db->from($this->table)
-			                       ->where($this->primary_key, $id)
-			                       ->limit(1)
-			                       ->select($this->primary_key)
-			                       ->get();
-      $done = FALSE;
-      if ($published_record->num_rows())
-      {
-        //Update
-        unset($stage_record[$this->primary_key]);
-        unset($stage_record['published']);
-        $done = $this->db->where($this->primary_key, $id)
-                     	 ->update($this->table, $stage_record);
-      } else {
-        //Insert
-        unset($stage_record['published']);
-        $done = $this->db->insert($this->table, $stage_record);
-      }
-      if ($done)
-      {
-      	//We update the attachments
-      	$this->load->documents();
-      	$this->documents->put_live_documents($this->table, $id);
-      	//And we update the state of the staged record
-        return $this->db->where($this->primary_key, $id)
-                  		->update($this->table_stage, array('published' => 1, 'date_publish' => $stage_record['date_publish']));
-      }
-    }
-    return FALSE;
-  }
+		$record = $this->db->from($this->table_stage)
+						   ->where($this->primary_key, $id)
+						   ->limit(1)
+						   ->select('*')
+						   ->get();
 
-  /**
-   * Depublishes a record
-   * @param $id
-   * @return bool
-   */
-  public function depublish($id = '')
-  {
-      if ($id == '')
-      {
-        show_error('ID del contenuto da depubblicare non specificato. (records/depublish)');
-      }
-    $done = $this->db->where($this->primary_key, $id)
-             ->delete($this->table);
-    if ($done)
-    {
-      $this->events->log('depublish', $id, $id);
+		if ($record->num_rows())
+		{
+			$record = $record->result_array();
+			$stage_record = $record[0];
 
-      //We delete the attachments
-      $this->load->documents();
-      $this->documents->delete_records_by_binds($this->table, $id, TRUE);
+			$this->events->log('publish', $stage_record[$this->primary_key], $stage_record['title'], $stage_record['id_type']);
 
-      //And we update the staged record status
-      return $this->db->where($this->primary_key, $id)
-              ->update($this->table_stage, array('published' => 0));
-    }
-  }
+			//Publishing triggers
+	  		if (isset($this->_single_type['triggers']['publish']))
+	  		{
+	  			$this->load->triggers();
+	  			$this->triggers->delegate($this->get($stage_record[$this->primary_key]))
+	  						   ->operation('publish')
+	  						   ->add($this->_single_type['triggers']['publish'])
+	  						   ->fire();
+	  		}
+
+			$published_record = $this->db->from($this->table)
+										 ->where($this->primary_key, $id)
+										 ->limit(1)
+										 ->select($this->primary_key)
+										 ->get();
+			$done = FALSE;
+			if ($published_record->num_rows())
+			{
+				//Update
+				unset($stage_record[$this->primary_key]);
+				unset($stage_record['published']);
+				$done = $this->db->where($this->primary_key, $id)
+								 ->update($this->table, $stage_record);
+			} else {
+				//Insert
+				unset($stage_record['published']);
+				$done = $this->db->insert($this->table, $stage_record);
+			}
+			if ($done)
+			{
+				//We update the attachments
+				$this->load->documents();
+				$this->documents->put_live_documents($this->table, $id);
+				//And we update the state of the staged record
+				return $this->db->where($this->primary_key, $id)
+								->update($this->table_stage, array('published' => 1, 'date_publish' => $stage_record['date_publish']));
+			}
+		}
+		return FALSE;
+	}
+
+	/**
+	* Depublishes a record
+	* @param $id Record id
+	* @param $type (optional) The content type
+	* @return bool
+	*/
+	public function depublish($id = '', $type = '')
+	{
+		$this->set_type($type);
+
+		if ($id == '')
+		{
+			show_error('ID del contenuto da depubblicare non specificato. (records/depublish)');
+		}
+			$done = $this->db->where($this->primary_key, $id)
+							 ->delete($this->table);
+		if ($done)
+		{
+			$this->events->log('depublish', $id, $id);
+
+			//Depublishing triggers
+	  		if (isset($this->_single_type['triggers']['depublish']))
+	  		{
+	  			$this->load->triggers();
+	  			$this->triggers->delegate($this->get($id))
+	  						   ->operation('publish')
+	  						   ->add($this->_single_type['triggers']['depublish'])
+	  						   ->fire();
+	  		}
+
+			//We delete the attachments
+			$this->load->documents();
+			$this->documents->delete_records_by_binds($this->table, $id, TRUE);
+
+			//And we update the staged record status
+			return $this->db->where($this->primary_key, $id)
+							->update($this->table_stage, array('published' => 0));
+		}
+	}
 
   /**
    * Extracts the custom options of a content type

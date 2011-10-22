@@ -2,7 +2,7 @@
 /**
  * Settings Model
  *
- * Model to work with the cms settings
+ * Model to work with the settings
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -22,7 +22,7 @@ Class Model_settings extends CI_Model
 	/**
 	 * @var string The database table
 	 */
-	private $_table = 'settings';
+	public $table = 'settings';
 
 	/**
 	 * @var array The settings items
@@ -45,28 +45,92 @@ Class Model_settings extends CI_Model
 	}
 
 	/**
-	 * Sets a value and saves it to the database
+	 * Create/updates a key to the settings and saves it to the database
 	 * @param string $key
 	 * @param mixed $val
+	 * @param string $module
 	 */
-	public function set($key, $val)
+	public function set($key, $val, $module = 'General')
 	{
-		$this->_items[$key] = $val;
+		//Does this setting already exists?
+		$exists = isset($this->_items[$module][$key]);
+
+		//If the value is not change, we don't do anything
+		if ($exists && $this->_items[$module][$key] == $val)
+		{
+			return;
+		}
+
+		//Elsewhere, let's update the value
+		$this->_items[$module][$key] = $val;
+
+		if (is_array($val)) {
+			$val = serialize($val);
+		}
 
 		//And let's save that record also into the database
+		if ($exists)
+		{
+			return $this->db->where('name', $key)
+							->where('module', $module)
+							->update($this->table, array('value' => $val));
+		} else {
+			return $this->db->insert($this->table,
+						array('name' => $key, 'value' => $val, 'module' => $module)
+				   );
+		}
+		return FALSE;
 	}
 
 	/**
-	 * Returns a pre-setted value from the view
+	 * Create/updates a blocks of a theme template
 	 * @param string $key
+	 * @param mixed $val
+	 * @param string $theme
+	 * @param string $template
 	 */
-	public function get($key)
+	public function set_block($key, $val, $theme, $template = 'default')
 	{
-		if (isset($this->_items[$key]))
+		return $this->set($key, $val, 'blocks-' . $theme . '-' . $template);
+	}
+
+	/**
+	 * Returns a single block of a theme template
+	 * @param string $key
+	 * @param string $theme
+	 * @param string $template
+	 * @return mixed value
+	 */
+	public function get_block($key, $theme, $template = 'default')
+	{
+		return $this->get($key, 'blocks-' . $theme . '-' . $template);
+	}
+
+	/**
+	 * Returns a single value from the settings
+	 * @param string $key
+	 * @param string $module
+	 * @return mixed value
+	 */
+	public function get($key, $module = 'General')
+	{
+		if (isset($this->_items[$module][$key]))
 		{
-			return $this->_items[$key];
+			return $this->_items[$module][$key];
 		}
 		return FALSE;
+	}
+
+	/**
+	 * Deletes a value from the settings table
+	 * @param string $key
+	 * @param string $module
+	 * @return bool success
+	 */
+	public function delete($key, $module = 'General')
+	{
+		$module = strtolower($module);
+		return $this->db->where('name', $name)->where('module', $module)->delete($this->table);
 	}
 
 	/**
@@ -87,9 +151,24 @@ Class Model_settings extends CI_Model
 	 */
 	public function build_cache()
 	{
-		$contents = array();
-		write_file($this->_cachefile, serialize($contents));
-		return $contents;
+		$res = $this->db->select('name, value, module')->from($this->table)->get()->result();
+		$this->_items = array();
+		if (count($res))
+		{
+			foreach ($res as $row)
+			{
+				//We check if could be a serialized value
+				$value = $row->value;
+				if (substr($value, 0, 2) == 'a:')
+				{
+					$value = @unserialize($row->value);
+				}
+				$this->_items[ strlen($row->module) ? $row->module : 'General' ][$row->name] = $value;
+			}
+		}
+		$this->load->helper('file');
+		write_file($this->_cachefile, serialize($this->_items));
+		return $this->_items;
 	}
 
 }

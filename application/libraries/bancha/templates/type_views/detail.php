@@ -2,7 +2,7 @@
 /**
  * {name} Detail View
  *
- * Vista di dettaglio di tipo {name}
+ * Content type detail
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -22,9 +22,12 @@ if (isset($record) && $record instanceof Record) {
 
 	<h1><?php echo $record->get('title'); ?></h1>
 
-	<div class="text"><?php echo $record->get('contenuto'); ?></div>
+	<div class="text"><?php echo $record->get('content'); ?></div>
 
 	<?php
 }
 
 echo '</div><div class="clear"></div>';
+
+/* End of file feed.php */
+/* Location: /type_templates/{name}/detail.php */

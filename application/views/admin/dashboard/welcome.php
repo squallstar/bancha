@@ -37,8 +37,8 @@
 		<ul>
 			<?php foreach ($events as $event) {
 
-				list($date, $time) = explode(' ', date('d/m/Y H:i:s', $event->event_date));
-				$str_time = ($date == date('d/m/Y') ? _('Today') : $date) . ' ' . $this->lang->_trans('at %time', array('time'=>$time));
+				list($date, $time) = explode(' ', date(LOCAL_DATE_FORMAT . ' H:i:s', $event->event_date));
+				$str_time = ($date == date(LOCAL_DATE_FORMAT) ? _('Today') : $date) . ' ' . $this->lang->_trans('at %time', array('time'=>$time));
 
 				echo '<li>';
 
