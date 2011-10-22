@@ -157,6 +157,8 @@ Class Dispatcher_default
 		$categories = $page->get('action_list_categories');
 		$get_category = $this->_CI->input->get('category');
 
+		//First of all, let's extract the categories (we prepare a select statement)
+		$cat_ids = FALSE;
 		if ($categories || $get_category) {
 			if ($categories)
 			{
@@ -169,20 +171,30 @@ Class Dispatcher_default
 
 			$this->_CI->load->categories();
 			$cat_ids = $this->_CI->categories->name_in($categories)->get_ids();
-
-			$sql = $this->_CI->categories->get_records_for_categories($cat_ids, TRUE);
-			$this->_CI->records->id_in($sql, FALSE);
+			if ($cat_ids)
+			{
+				$cat_sql = $this->_CI->categories->get_records_for_categories($cat_ids, TRUE);
+			}
+			
 		}
 
+		//Now we extract the hierarchies (just a select statement)
 		$hierarchies = $page->get('action_list_hierarchies');
 		if (is_array($hierarchies) && count($hierarchies))
 		{
 			$this->_CI->load->hierarchies();
-			$hierarchies_record_ids = $this->_CI->hierarchies->get_records_for_hierarchies($hierarchies);
-			if (count($hierarchies_record_ids))
-			{
-				$this->_CI->records->id_in($hierarchies_record_ids);
-			}
+			$hie_sql = $this->_CI->hierarchies->get_records_for_hierarchies($hierarchies, TRUE);
+			$this->_CI->records->id_in($hie_sql, FALSE);
+		} else {
+			$this->_CI->records->where(1, 2);
+		}
+
+		//After the query above we can apply the SELECT statement on the category
+		if ($cat_ids)
+		{
+			$this->_CI->records->id_in($cat_sql, FALSE);
+		} else {
+			$this->_CI->records->where(1, 2);
 		}
 
 		$limit = (int)$page->get('action_list_limit');

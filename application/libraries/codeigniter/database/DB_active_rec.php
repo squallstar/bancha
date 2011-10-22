@@ -2088,15 +2088,15 @@ class CI_DB_active_record extends CI_DB_driver {
 	}
 
 	/**
-	 * Get
+	 * Get SQL
 	 *
 	 * Compiles the select statement based on the other functions called
-	 * and runs the query
+	 * and returns the SQL query (it doesn't execute it)
 	 *
 	 * @param	string	the table
 	 * @param	string	the limit clause
 	 * @param	string	the offset clause
-	 * @return	object
+	 * @return	string
 	 */
 	public function get_sql($table = '', $limit = null, $offset = null)
 	{
@@ -2114,7 +2114,7 @@ class CI_DB_active_record extends CI_DB_driver {
 		$sql = $this->_compile_select();
 
 		$this->_reset_select();
-		return $sql;
+		return str_replace("\n", " ", $sql);
 	}
 }
 

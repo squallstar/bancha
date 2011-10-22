@@ -238,8 +238,10 @@ Class Model_hierarchies extends CI_Model {
 	/**
 	 * Returns the records that are in one or more hierarchies
 	 * @param array $hierarchies
+	 * @param bool $sql_string
+	 * @return array|string
 	 */
-	public function get_records_for_hierarchies($hierarchies)
+	public function get_records_for_hierarchies($hierarchies, $sql_string = FALSE)
   	{
   		if (is_string($hierarchies))
   		{
@@ -247,13 +249,19 @@ Class Model_hierarchies extends CI_Model {
   		}
   		$res = $this->db->select('id_record')
 		   		    	->from($this->table_relations)
-		   		    	->where_in('id_hierarchy', $hierarchies)
-		   		    	->get();
-		$result = $res->result_array();
+		   		    	->where_in('id_hierarchy', $hierarchies);
+		
+		if ($sql_string)
+		{
+			return $this->db->get_sql();
+		} else {
+			$result = $this->db->get()->result_array();
+		}
+		   		    	
 		$ids = array();
 		foreach ($result as $record)
 		{
-			$ids[] = (int)$record['id_record'];
+			$ids[] = $record['id_record'];
 		}
 		return $ids;
   	}
