@@ -1,5 +1,16 @@
 ## Bancha Change Log file ##
 
+**v 0.8.2** (2011-10-22)
+
+- Javascript record validation added (validate.js library)
+- New node on field schemes: <rules>. You can use the standard CodeIgniter "FormValidation" library rules
+- Removed the mandatory node on the field schemes. Now you need to set it into a rule: <rule>required</rule>
+- Added a popup when a record form contains some errors (plugin: jquery colorbox)
+- Added an escape parameter to the ActiveRecord "where_in" function
+- Categories query (dispatcher_default) has been moved inside the "where_in" clause of the next query
+- Hierarchies query: same as above (speed increment and two less queries)
+
+
 **v 0.8.1** (2011-10-20)
 
 - Import of CSV files is now possible

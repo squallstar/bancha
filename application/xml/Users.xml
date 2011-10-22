@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- generator="bancha-0.7.7" -->
+<!-- generator="bancha-0.8.2" -->
 <content>
 	<name>Users</name>
 	<descriptions label="Users" new="New user"/>
@@ -14,35 +14,40 @@
 		<field id="username" column="true" link="edit">
 			<description>Username</description>
 			<type>text</type>
-			<mandatory>true</mandatory>
 			<admin>true</admin>
 			<list>true</list>
+			<rules>required</rules>
 		</field>
 		<field id="email" column="true">
 			<description>E-mail address</description>
 			<type>text</type>
-			<mandatory>true</mandatory>
 			<admin>true</admin>
 			<list>true</list>
+			<rules>required|valid_email</rules>
 		</field>
 		<field id="password" column="true">
 			<description>Password</description>
-			<type>text</type>
-			<mandatory>true</mandatory>
+			<type>password</type>
+			<rules>true</rules>
+		</field>
+		<field id="password_confirm">
+			<description>Confirm password</description>
+			<type>password</type>
+			<rules>required|matches[password]</rules>
 		</field>
 		<field id="name" column="true">
 			<description>Name</description>
 			<type>text</type>
-			<mandatory>true</mandatory>
 			<admin>true</admin>
 			<list>true</list>
+			<rules>required</rules>
 		</field>
 		<field id="surname" column="true">
 			<description>Surname</description>
 			<type>text</type>
-			<mandatory>true</mandatory>
 			<admin>true</admin>
 			<list>true</list>
+			<rules>required</rules>
 		</field>
 		<field id="admin_lang" column="true">
 			<description>Admin language</description>

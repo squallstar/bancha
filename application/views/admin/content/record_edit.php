@@ -57,6 +57,7 @@ $first_lap = TRUE;
 $has_full_textarea = FALSE;
 $p_start = '<p>';
 $p_end = '</p>';
+$validator_rules = array();
 
 $breadcrumbs_render = '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
 						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
@@ -102,6 +103,16 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			$mandatory = '*';
 		}
 
+		//Validation rules
+		if (isset($field['rules']) && strlen($field['rules']))
+		{
+			$validator_rules[]= array(
+				'name'		=> $field_name,
+				'display'	=> '['._($field['description']).']',
+				'rules'		=> $field['rules']
+			);
+		}
+
 		$label = form_label(_($field['description']) . $mandatory, $field_name, $attributes);
 
 		//We evaluates the evals
@@ -129,7 +140,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		if ($field['mandatory'] && in_array($field['type'], array('text', 'number', 'date', 'datetime')))
 		{
-			$attributes['required'] = 'required';
+			//$attributes['required'] = 'required';
 		}
 
 		//Localized options
@@ -487,6 +498,29 @@ echo form_close() . br(2);
 
 </div>
 
+<div class="hidden">
+		<div id="js_errors">
+			<div class="block">
+
+			<div class="block_head">
+				<div class="bheadl"></div>
+				<div class="bheadr"></div>
+
+				<h2><?php echo _('Errors'); ?></h2>
+
+				<ul>
+					<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/delete.png'); ?>" /> <a href="#" onclick="$('#cboxClose').click();"> <?php echo _('Close'); ?></a></li>
+				</ul>
+			</div>
+
+			<div class="block_content"></div>
+
+			<div class="bendl"></div>
+			<div class="bendr"></div>			
+
+		</div>
+</div>
+
 <?php if ($has_full_textarea) { ?>
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/ckeditor/adapters/jquery.js"></script>
@@ -498,9 +532,26 @@ if ($tipo['has_attachments']) {
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/jquery-ui.js"></script>
 <?php } ?>
 
+<link type="text/css" rel="stylesheet" href="<?php echo site_url(THEMESPATH.'admin/css/colorbox.css'); ?>" />
+<script type="text/javascript" src="<?php echo site_url(THEMESPATH.'admin/js/jquery.colorbox.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/validate.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	<?php echo $js_onload; ?>
+	var validator = new FormValidator('record_form',
+		<?php echo json_encode($validator_rules); ?>,
+		function(errors, events) {
+		    if (errors.length > 0) {
+		        // Show the errors
+		        var el = $('#js_errors .block_content');
+		        el.html('');
+		        for each (var er in errors) {
+		        	el.append('<div class="message error">' + er + '</div>');
+		        }
+		        $.colorbox({width:"65%", inline:true, href:"#js_errors"});
+		    }
+		}
+	);
 });
 </script>
 

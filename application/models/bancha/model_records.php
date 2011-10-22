@@ -224,10 +224,11 @@ Class Model_records extends CI_Model {
   	/**
    	* Sets a "where in" condition for the primary key
    	* @param array $record_ids
+   	* @param bool $escape Whether the first parameter need to be escaped
    	*/
-  	public function id_in($record_ids)
+  	public function id_in($record_ids, $escape = TRUE)
   	{
-    	$this->db->where_in($this->primary_key, $record_ids);
+    	$this->db->where_in($this->primary_key, $record_ids, $escape);
     	return $this;
   	}
 
