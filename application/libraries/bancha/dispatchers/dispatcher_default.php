@@ -184,16 +184,19 @@ Class Dispatcher_default
 		{
 			$this->_CI->load->hierarchies();
 			$hie_sql = $this->_CI->hierarchies->get_records_for_hierarchies($hierarchies, TRUE);
-			$this->_CI->records->id_in($hie_sql, FALSE);
-		} else {
-			$this->_CI->records->where(1, 2);
+			if (count($hie_sql))
+			{
+				$this->_CI->records->id_in($hie_sql, FALSE);
+			} else {
+				$this->_CI->records->where(1, 2);
+			}
 		}
 
 		//After the query above we can apply the SELECT statement on the category
 		if ($cat_ids)
 		{
 			$this->_CI->records->id_in($cat_sql, FALSE);
-		} else {
+		} else if ($categories || $get_category) {
 			$this->_CI->records->where(1, 2);
 		}
 
