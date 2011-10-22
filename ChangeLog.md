@@ -1,5 +1,11 @@
 ## Bancha Change Log file ##
 
+**v 0.8.2** (2011-10-22)
+
+- Added an escape parameter to the ActiveRecord "where_in" function
+- Categories query (dispatcher_default) has been moved inside the "where_in" clause of the next query
+
+
 **v 0.8.1** (2011-10-20)
 
 - Import of CSV files is now possible
