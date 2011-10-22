@@ -9,6 +9,8 @@
 - Added an escape parameter to the ActiveRecord "where_in" function
 - Categories query (dispatcher_default) has been moved inside the "where_in" clause of the next query
 - Hierarchies query: same as above (speed increment and two less queries)
+- Added the password input field
+- Added a "confirm password" field on the users XML scheme
 
 
 **v 0.8.1** (2011-10-20)

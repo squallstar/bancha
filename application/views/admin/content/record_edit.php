@@ -167,6 +167,13 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
 				break;
 
+			case 'password':
+				$attributes['name'] = $field_name;
+				$attributes['value'] = $field_value;
+				$attributes['class'] = 'text'.($field['mandatory']?' mandatory':'');
+				echo $p_start.$label.br(1).form_password($attributes).$field_note.$p_end;
+				break;
+
 			case 'textarea':
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;

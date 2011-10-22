@@ -163,7 +163,7 @@ Class Xml
 
     	//Allowed types of field
     	$field_usable_inputs = array(
-      		'text', 'textarea', 'date', 'checkbox', 'select', 'multiselect', 'radio',
+      		'text', 'textarea', 'date', 'checkbox', 'select', 'multiselect', 'radio', 'password',
       		'images', 'files', 'number', 'textarea_full', 'textarea_code', 'datetime', 'hidden', 'hierarchy'
     	);
 
