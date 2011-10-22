@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-20 23:11+0100\n"
-"PO-Revision-Date: 2011-10-20 23:15+0100\n"
+"POT-Creation-Date: 2011-10-22 20:22+0100\n"
+"PO-Revision-Date: 2011-10-22 20:23+0100\n"
 "Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -291,7 +291,7 @@ msgstr "Il mio primo post"
 msgid "Hello world"
 msgstr "Ciao mondo"
 
-#: libraries/bancha/installer.php:559
+#: libraries/bancha/installer.php:560
 msgid "Hello world by a sample page."
 msgstr "Ciao mondo! Questa è una pagina di prova."
 
@@ -354,7 +354,7 @@ msgstr "Visualizza dettaglio"
 msgid "You cannot create a hierarchy without a name."
 msgstr "Non puoi creare una gerarchia senza nome."
 
-#: models/bancha/model_records.php:456
+#: models/bancha/model_records.php:457
 msgid "Cannot build the record."
 msgstr "Impossibile costruire il record."
 
@@ -400,12 +400,12 @@ msgid "Repository"
 msgstr "Repository"
 
 #: views/admin/content/documents_finder.php:31
-#: views/admin/content/record_edit.php:315
+#: views/admin/content/record_edit.php:333
 msgid "Original"
 msgstr "Originale"
 
 #: views/admin/content/documents_finder.php:31
-#: views/admin/content/record_edit.php:315
+#: views/admin/content/record_edit.php:333
 msgid "Resized"
 msgstr "Ridimensionata"
 
@@ -415,15 +415,15 @@ msgid "Thumbnail"
 msgstr "Anteprima"
 
 #: views/admin/content/documents_finder.php:31
-#: views/admin/content/record_edit.php:315
-#: views/admin/content/record_edit.php:353
+#: views/admin/content/record_edit.php:333
+#: views/admin/content/record_edit.php:371
 msgid "Alternative text"
 msgstr "Testo alternativo"
 
 #: views/admin/content/documents_finder.php:37
 #: views/admin/content/documents_finder.php:38
-#: views/admin/content/record_edit.php:325
-#: views/admin/content/record_edit.php:326
+#: views/admin/content/record_edit.php:343
+#: views/admin/content/record_edit.php:344
 msgid "View"
 msgstr "Visualizza"
 
@@ -435,7 +435,7 @@ msgid "Choose"
 msgstr "Scegli"
 
 #: views/admin/content/documents_finder.php:41
-#: views/admin/content/record_edit.php:329
+#: views/admin/content/record_edit.php:347
 msgid "Delete image"
 msgstr "Elimina immagine"
 
@@ -464,22 +464,22 @@ msgid "Preset"
 msgstr "Preset"
 
 #: views/admin/content/documents_finder.php:82
-#: views/admin/content/record_list.php:226
-#: views/admin/content/translations.php:22
+#: views/admin/content/record_list.php:227
+#: views/admin/content/translations.php:23
 msgid "Actions"
 msgstr "Azioni"
 
 #: views/admin/content/documents_finder.php:96
-msgid "Choose file"
-msgstr "Scegli file"
+msgid "Apply preset"
+msgstr "Applica preset"
 
 #: views/admin/content/documents_finder.php:97
-#: views/admin/content/record_edit.php:359
+#: views/admin/content/record_edit.php:377
 msgid "Delete file"
 msgstr "Elimina file"
 
 #: views/admin/content/record_edit.php:25
-#: views/admin/content/record_edit.php:63
+#: views/admin/content/record_edit.php:64
 msgid "Edit content"
 msgstr "Modifica contenuto"
 
@@ -497,83 +497,91 @@ msgid "Save and go to list"
 msgstr "Salva e vai alla lista"
 
 #: views/admin/content/record_edit.php:50
-#: views/admin/content/record_list.php:227
+#: views/admin/content/record_list.php:228
 msgid "Publish"
 msgstr "Pubblica"
 
-#: views/admin/content/record_edit.php:61
+#: views/admin/content/record_edit.php:62
 #: views/admin/content/record_list.php:13
 msgid "Contents"
 msgstr "Contenuti"
 
-#: views/admin/content/record_edit.php:61
+#: views/admin/content/record_edit.php:62
 #: views/admin/content/record_list.php:13
 msgid "Pages"
 msgstr "Pagine"
 
-#: views/admin/content/record_edit.php:86
+#: views/admin/content/record_edit.php:87
 msgid "The address of this page is:"
 msgstr "L'indirizzo di questa pagina è:"
 
-#: views/admin/content/record_edit.php:101
+#: views/admin/content/record_edit.php:102
 msgid "Mandatory"
 msgstr "Obbligatorio"
 
-#: views/admin/content/record_edit.php:269
+#: views/admin/content/record_edit.php:287
 #: views/admin/content/settings_edit.php:233
 msgid "Add"
 msgstr "Aggiungi"
 
-#: views/admin/content/record_edit.php:272
+#: views/admin/content/record_edit.php:290
 #: views/admin/content/settings_edit.php:236
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: views/admin/content/record_edit.php:308
-#: views/admin/content/record_edit.php:311
+#: views/admin/content/record_edit.php:326
+#: views/admin/content/record_edit.php:329
 msgid "You can attach up to %n images"
 msgstr "Puoi allegare %n immagini"
 
-#: views/admin/content/record_edit.php:310
+#: views/admin/content/record_edit.php:328
 msgid "Number of uploadable images excedeed."
 msgstr "Numero consentito di immagini superato."
 
-#: views/admin/content/record_edit.php:315
+#: views/admin/content/record_edit.php:333
 msgid "Order"
 msgstr "Ordinamento"
 
-#: views/admin/content/record_edit.php:346
-#: views/admin/content/record_edit.php:349
+#: views/admin/content/record_edit.php:364
+#: views/admin/content/record_edit.php:367
 msgid "You can attach up to %n files"
 msgstr "Puoi allegare fino a %n files"
 
-#: views/admin/content/record_edit.php:348
+#: views/admin/content/record_edit.php:366
 msgid "File limit exceeded."
 msgstr "Limite di caricamento files superato"
 
-#: views/admin/content/record_edit.php:353
+#: views/admin/content/record_edit.php:371
 msgid "File name"
 msgstr "Nome del file"
 
-#: views/admin/content/record_edit.php:353
+#: views/admin/content/record_edit.php:371
 msgid "File type"
 msgstr "Tipo"
 
-#: views/admin/content/record_edit.php:419
+#: views/admin/content/record_edit.php:437
 msgid "This content can be associated to these categories"
 msgstr "Questo contenuto può essere associato a queste categorie"
 
-#: views/admin/content/record_edit.php:436
+#: views/admin/content/record_edit.php:454
 msgid "This type has no categories"
 msgstr "Questo tipo non ha categorie"
 
-#: views/admin/content/record_edit.php:463
+#: views/admin/content/record_edit.php:481
 msgid "This content can be associated to these hierarchies"
 msgstr "Questo contenuto può essere associato a queste gerarchie"
 
-#: views/admin/content/record_edit.php:471
+#: views/admin/content/record_edit.php:489
 msgid "There are no hierarchies"
 msgstr "Non ci sono gerarchie"
+
+#: views/admin/content/record_edit.php:516
+msgid "Errors"
+msgstr "Errore"
+
+#: views/admin/content/record_edit.php:519
+msgid "Close"
+msgstr "Chiudi"
 
 #: views/admin/content/record_list.php:17
 msgid "Manage categories"
@@ -583,67 +591,67 @@ msgstr "Gestione categorie"
 msgid "Status"
 msgstr "Stato"
 
-#: views/admin/content/record_list.php:57
-#: views/admin/content/record_list.php:134
+#: views/admin/content/record_list.php:58
+#: views/admin/content/record_list.php:135
 msgid "Draft"
 msgstr "Bozza"
 
-#: views/admin/content/record_list.php:57
-#: views/admin/content/record_list.php:143
+#: views/admin/content/record_list.php:58
+#: views/admin/content/record_list.php:144
 msgid "Published"
 msgstr "Pubblicato"
 
-#: views/admin/content/record_list.php:57
-#: views/admin/content/record_list.php:137
+#: views/admin/content/record_list.php:58
+#: views/admin/content/record_list.php:138
 msgid "Different"
 msgstr "Differente"
 
-#: views/admin/content/record_list.php:111
+#: views/admin/content/record_list.php:112
 msgid "Apply filters"
 msgstr "Applica filtri"
 
-#: views/admin/content/record_list.php:140
+#: views/admin/content/record_list.php:141
 msgid "Programmed"
 msgstr "Programmato"
 
-#: views/admin/content/record_list.php:210
+#: views/admin/content/record_list.php:211
 msgid "Add child page"
 msgstr "Aggiungi pagina figlia"
 
-#: views/admin/content/record_list.php:212
+#: views/admin/content/record_list.php:213
 msgid "View children pages"
 msgstr "Visualizza pagine figlie"
 
-#: views/admin/content/record_list.php:215
-#: views/admin/content/record_list.php:230
+#: views/admin/content/record_list.php:216
+#: views/admin/content/record_list.php:231
 msgid "Delete"
 msgstr "Elimina"
 
-#: views/admin/content/record_list.php:215
+#: views/admin/content/record_list.php:216
 msgid "Do you really want to delete this content?"
 msgstr "Vuoi veramente eliminare questo contenuto?"
 
-#: views/admin/content/record_list.php:228
+#: views/admin/content/record_list.php:229
 msgid "Unpublish"
 msgstr "Depubblica"
 
-#: views/admin/content/record_list.php:229
+#: views/admin/content/record_list.php:230
 msgid "Discard draft"
 msgstr "Scarta bozza"
 
-#: views/admin/content/record_list.php:233
+#: views/admin/content/record_list.php:234
 msgid "Apply to selected"
 msgstr "Applica ai selez."
 
-#: views/admin/content/record_list.php:235
+#: views/admin/content/record_list.php:236
 msgid "There are"
 msgstr "Ci sono"
 
-#: views/admin/content/record_list.php:242
+#: views/admin/content/record_list.php:243
 msgid "add a new one"
 msgstr "aggiungine uno"
 
-#: views/admin/content/record_list.php:241
+#: views/admin/content/record_list.php:242
 msgid "There are no contents/pages for this type. To start, %a."
 msgstr "Non ci sono contenuti/pagine inserite per questo tipo. Per iniziare, %a."
 
@@ -676,188 +684,188 @@ msgid "General informations"
 msgstr "Informazioni generali"
 
 #: views/admin/content/translations.php:6
+msgid "Visibility date"
+msgstr "Data di visibilità"
+
+#: views/admin/content/translations.php:7
 msgid "Parent page"
 msgstr "Pagina padre"
 
-#: views/admin/content/translations.php:7
+#: views/admin/content/translations.php:8
 msgid "Title"
 msgstr "Titolo"
 
-#: views/admin/content/translations.php:8
+#: views/admin/content/translations.php:9
 msgid "Page URL"
 msgstr "Parte finale URL"
 
-#: views/admin/content/translations.php:9
+#: views/admin/content/translations.php:10
 msgid "Language"
 msgstr "Lingua"
 
-#: views/admin/content/translations.php:10
+#: views/admin/content/translations.php:11
 msgid "Content"
 msgstr "Contenuto"
 
-#: views/admin/content/translations.php:11
+#: views/admin/content/translations.php:12
 msgid "Show in menu"
 msgstr "Mostra nel menu"
 
-#: views/admin/content/translations.php:12
+#: views/admin/content/translations.php:13
 msgid "Main menu"
 msgstr "Menu principale"
 
-#: views/admin/content/translations.php:13
+#: views/admin/content/translations.php:14
 msgid "Sitemap"
 msgstr "Mappa del sito"
 
-#: views/admin/content/translations.php:14
+#: views/admin/content/translations.php:15
 msgid "Don't show"
 msgstr "Non mostrare"
 
-#: views/admin/content/translations.php:15
+#: views/admin/content/translations.php:16
 msgid "Child no."
 msgstr "N. figli"
 
-#: views/admin/content/translations.php:16
+#: views/admin/content/translations.php:17
 msgid "Aspect"
 msgstr "Aspetto"
 
-#: views/admin/content/translations.php:17
+#: views/admin/content/translations.php:18
 msgid "View template"
 msgstr "Template di visualizzazione"
 
-#: views/admin/content/translations.php:18
+#: views/admin/content/translations.php:19
 msgid "Default"
 msgstr "Predefinito"
 
-#: views/admin/content/translations.php:19
+#: views/admin/content/translations.php:20
 msgid "Homepage"
 msgstr "Homepage"
 
-#: views/admin/content/translations.php:20
+#: views/admin/content/translations.php:21
 msgid "CSS Stylesheet"
 msgstr "Regole di stile CSS"
 
-#: views/admin/content/translations.php:21
+#: views/admin/content/translations.php:22
 msgid "Javascript code"
 msgstr "Codice Javascript"
 
-#: views/admin/content/translations.php:23
+#: views/admin/content/translations.php:24
 msgid "Page cache (minutes)"
 msgstr "Cache pagina (minuti)"
 
-#: views/admin/content/translations.php:24
+#: views/admin/content/translations.php:25
 msgid "Priority"
 msgstr "Priorità"
 
-#: views/admin/content/translations.php:25
+#: views/admin/content/translations.php:26
 msgid "Page action"
 msgstr "Azione pagina"
 
-#: views/admin/content/translations.php:26
+#: views/admin/content/translations.php:27
 msgid "Single text"
 msgstr "Testo introduttivo"
 
-#: views/admin/content/translations.php:27
+#: views/admin/content/translations.php:28
 msgid "Content list"
 msgstr "Lista di contenuti"
 
-#: views/admin/content/translations.php:28
+#: views/admin/content/translations.php:29
 msgid "Custom action"
 msgstr "Azione personalizzata"
 
-#: views/admin/content/translations.php:29
+#: views/admin/content/translations.php:30
 msgid "External link"
 msgstr "Link esterno"
 
-#: views/admin/content/translations.php:30
+#: views/admin/content/translations.php:31
 msgid "Content type"
 msgstr "Tipo di contenuto"
 
-#: views/admin/content/translations.php:33
+#: views/admin/content/translations.php:34
 msgid "WHERE Condition"
 msgstr "Condizione WHERE"
 
-#: views/admin/content/translations.php:34
+#: views/admin/content/translations.php:35
 msgid "Results per page"
 msgstr "Risultati per pagina"
 
-#: views/admin/content/translations.php:35
+#: views/admin/content/translations.php:36
 msgid "Results order"
 msgstr "Ordinamento risultati"
 
-#: views/admin/content/translations.php:36
+#: views/admin/content/translations.php:37
 msgid "ID record (DESC)"
 msgstr "ID record (DESC)"
 
-#: views/admin/content/translations.php:37
+#: views/admin/content/translations.php:38
 msgid "ID record (ASC)"
 msgstr "ID record (ASC)"
 
-#: views/admin/content/translations.php:38
+#: views/admin/content/translations.php:39
 msgid "Publish date (DESC)"
 msgstr "Data di pubblicazione (DESC)"
 
-#: views/admin/content/translations.php:39
+#: views/admin/content/translations.php:40
 msgid "Publish date (ASC)"
 msgstr "Data di pubblicazione (ASC)"
 
-#: views/admin/content/translations.php:40
+#: views/admin/content/translations.php:41
 msgid "RSS Feed"
 msgstr "Feed RSS"
 
-#: views/admin/content/translations.php:41
+#: views/admin/content/translations.php:42
 msgid "Yes"
 msgstr "Si"
 
-#: views/admin/content/translations.php:42
+#: views/admin/content/translations.php:43
 msgid "No"
 msgstr "No"
 
-#: views/admin/content/translations.php:43
+#: views/admin/content/translations.php:44
 msgid "Action name"
 msgstr "Nome azione"
 
-#: views/admin/content/translations.php:44
+#: views/admin/content/translations.php:45
 msgid "Action mode"
 msgstr "Modalità azione"
 
-#: views/admin/content/translations.php:45
+#: views/admin/content/translations.php:46
 msgid "Dispatch"
 msgstr "Dispatcher"
 
-#: views/admin/content/translations.php:46
+#: views/admin/content/translations.php:47
 msgid "Content render"
 msgstr "Render del contenuto"
 
-#: views/admin/content/translations.php:47
+#: views/admin/content/translations.php:48
 msgid "Redirect URL"
 msgstr "URL di reindirizzamento"
 
-#: views/admin/content/translations.php:48
+#: views/admin/content/translations.php:49
 msgid "Attachments"
 msgstr "Allegati"
 
-#: views/admin/content/translations.php:49
+#: views/admin/content/translations.php:50
 msgid "Images"
 msgstr "Immagini"
 
-#: views/admin/content/translations.php:50
+#: views/admin/content/translations.php:51
 msgid "Meta tags"
 msgstr "Meta tags"
 
-#: views/admin/content/translations.php:51
+#: views/admin/content/translations.php:52
 msgid "Description"
 msgstr "Descrizione"
 
-#: views/admin/content/translations.php:52
+#: views/admin/content/translations.php:53
 msgid "Keywords"
 msgstr "Parole chiave"
 
-#: views/admin/content/translations.php:53
+#: views/admin/content/translations.php:54
 msgid "Blog"
 msgstr "Blog"
-
-#: views/admin/content/translations.php:54
-msgid "Visibility date"
-msgstr "Data di visibilità"
 
 #: views/admin/content/translations.php:55
 msgid "Blog posts"
@@ -936,7 +944,7 @@ msgstr "Aggiungi nuovo tipo"
 #: views/admin/content/type_add.php:29
 #: views/admin/content/type_delete.php:30
 #: views/admin/content/type_edit_xml.php:22
-#: views/admin/import/records.php:48
+#: views/admin/import/records.php:49
 #: views/admin/installer/request.php:10
 msgid "WARNING"
 msgstr "ATTENZIONE"
@@ -1194,7 +1202,7 @@ msgid "Import records"
 msgstr "Importazione dati"
 
 #: views/admin/import/records.php:15
-#: views/admin/import/records.php:45
+#: views/admin/import/records.php:46
 msgid "Export records"
 msgstr "Esportazione dati"
 
@@ -1210,7 +1218,7 @@ msgstr "Tipo di adapter"
 msgid "Source file"
 msgstr "File sorgente"
 
-#: views/admin/import/records.php:48
+#: views/admin/import/records.php:49
 msgid "This function is under construction!"
 msgstr "Questa funzione è attualmente in costruzione!"
 
@@ -1359,22 +1367,13 @@ msgstr "Non ci sono temi installati."
 msgid "Sections"
 msgstr "Sezioni"
 
-#: views/admin/themes/section_composer.php:12
-msgid "Close"
-msgstr "Chiudi"
-
 #: views/admin/themes/section_composer.php:20
-#: views/admin/themes/section_composer.php:52
-msgid "Add module"
-msgstr "Aggiungi modulo"
-
-#: views/admin/themes/section_composer.php:21
-#: views/admin/themes/section_composer.php:28
+#: views/admin/themes/section_composer.php:26
 msgid "Add HTML"
 msgstr "Aggiungi codice HTML"
 
-#: views/admin/themes/section_composer.php:22
-#: views/admin/themes/section_composer.php:40
+#: views/admin/themes/section_composer.php:21
+#: views/admin/themes/section_composer.php:38
 msgid "Add PHP code"
 msgstr "Aggiungi codice PHP"
 
@@ -1495,6 +1494,12 @@ msgstr "Vuoi eliminare questo gruppo?"
 #: views/admin/users/groups/list.php:50
 msgid "Delete group"
 msgstr "Elimina gruppo"
+
+#~ msgid "Choose file"
+#~ msgstr "Scegli file"
+
+#~ msgid "Add module"
+#~ msgstr "Aggiungi modulo"
 
 #~ msgid "File"
 #~ msgstr "File"
