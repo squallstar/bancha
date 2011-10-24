@@ -63,8 +63,7 @@
 	line-height:20px;
 	font-weight:normal;
 	height:500px;
-	overflow-x:hidden;
-	overflow-y:scroll;
+	overflow:scroll;
 	background:#FFF;
 	padding:0 10px;
 	border:10px solid #000;

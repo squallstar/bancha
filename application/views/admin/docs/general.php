@@ -159,6 +159,7 @@ Il nodo <strong>&lt;has_categories&gt;</strong> &egrave; sempre un booleano, e d
 Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <strong>id</strong> e dovr&agrave; essere uno dei seguenti tipi di campo (definito tramite il nodo "type"):</p>
 <ul>
 	<li><strong>text</strong> - Per utilizzare un input testuale su riga singola senza stile</li>
+	<li><strong>password</strong> - Per utilizzare un input di tipo password</li>
 	<li><strong>textarea</strong> - Per utilizzare un input multiriga con possibilit&agrave; di inserimento stili e codice HTML</li>
 	<li><strong>textarea_full</strong> - Per utilizzare un campo di inserimento multiriga tramite editor CKEDITOR (avanzato)</li>
 	<li><strong>textarea_code</strong> - Per utilizzare un campo multiriga per inserire codice (ad esempio: css e javascript)</li>
@@ -177,7 +178,7 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 <p>Inoltre, ogni field ha a disposizione le seguenti propriet&agrave; definibili sempre tramite nodi:</p>
 <ul>
 	<li><strong>&lt;description&gt;</strong> (string) - per definire il testo da utilizzare come label del campo</li>
-	<li><strong>&lt;mandatory&gt;</strong> (bool) - per definire se un campo &egrave; obbligatorio</li>
+	<li><strong>&lt;rules&gt;</strong> (bool) - per definire le regole di validazione del campo</li>
 	<li><strong>&lt;length&gt;</strong> (int) - per definire la lunghezza massima accettata per i campi testuali</li>
 	<li><strong>&lt;list&gt;</strong> (bool) - per definire se il campo andr&agrave; estratto nelle operazioni di "Lista contenuti"</li>
 	<li><strong>&lt;admin&gt;</strong> (bool) - per definire se il campo dovr&agrave; essere visualizzato nella lista dei contenuto di questo tipo in amministrazione</li>
@@ -193,7 +194,7 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 <pre class="prettyprint"><code>&lt;field id="title" column="true"&gt;
 	&lt;description&gt;Titolo&lt;/description&gt;
 	&lt;type&gt;text&lt;/type&gt;
-	&lt;mandatory&gt;true&lt;/mandatory&gt;
+	&lt;rules&gt;required|valid_email&lt;/rules&gt;
 	&lt;admin&gt;true&lt;/admin&gt;
 	&lt;default&gt;Senza titolo&lt;/default&gt;
 &lt;/field&gt;</code></pre><br />
@@ -267,7 +268,7 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 		&lt;field id="nome_utente" column="true"&gt;
 			&lt;description&gt;Il tuo nome&lt;/description&gt;
 			&lt;type&gt;text&lt;/type&gt;
-			&lt;mandatory&gt;true&lt;/mandatory&gt;
+			&lt;rules&gt;required&lt;/rules&gt;
 			&lt;length&gt;32&lt;/length&gt;
 			&lt;list&gt;true&lt;/list&gt;
 		&lt;/field&gt;
@@ -287,7 +288,6 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 		&lt;field id="profile_img"&gt;
 			&lt;description&gt;Immagine profilo&lt;/description&gt;
 			&lt;type&gt;images&lt;/type&gt;
-			&lt;mandatory&gt;true&lt;/mandatory&gt;
 			&lt;encrypt_name&gt;false&lt;/encrypt_name&gt;
 			&lt;mimes&gt;jpg|gif|png&lt;/mimes&gt;
 			&lt;max&gt;1&lt;/max&gt;
@@ -499,8 +499,8 @@ Dopodich&egrave;, sar&agrave; necessario anche aggiungere tale colonna alla tabe
 <p>&Egrave; possibile creare, aggiornare ed eliminare records anche in maniera manuale. Di seguito un'esempio:</p>
 <pre class="prettyprint"><code>//Creiamo un nuovo record di tipo Blog e ne impostiamo titolo e autore
 $post = new Record('Blog');
-$post-&gt;('title', 'My first post');
-$post-&gt;('author', 'Nicholas');
+$post-&gt;set('title', 'My first post');
+$post-&gt;set('author', 'Nicholas');
 
 //Salviamo sul database il post
 $id = $this-&gt;records-&gt;save($post);

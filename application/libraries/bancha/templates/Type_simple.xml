@@ -33,9 +33,9 @@
 		<field id="title" column="true" link="edit">
 			<description>Title</description>
 			<type>text</type>
-			<mandatory>true</mandatory>
 			<admin>true</admin>
 			<list>true</list>
+			<rules>required</rules>
 		</field>
 		<field id="date_publish" column="true">
 			<description>Visibility date</description>

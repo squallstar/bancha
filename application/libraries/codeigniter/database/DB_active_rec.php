@@ -463,11 +463,12 @@ class CI_DB_active_record extends CI_DB_driver {
 	 *
 	 * @param	string	The field to search
 	 * @param	array	The values searched on
+	 * @param   bool $escape
 	 * @return	object
 	 */
-	public function where_in($key = NULL, $values = NULL)
+	public function where_in($key = NULL, $values = NULL, $escape = TRUE)
 	{
-		return $this->_where_in($key, $values);
+		return $this->_where_in($key, $values, FALSE, 'AND', $escape);
 	}
 
 	// --------------------------------------------------------------------
@@ -531,10 +532,11 @@ class CI_DB_active_record extends CI_DB_driver {
 	 * @param	string	The field to search
 	 * @param	array	The values searched on
 	 * @param	boolean	If the statement would be IN or NOT IN
-	 * @param	string
+	 * @param	string $type
+	 * @param   bool $escape
 	 * @return	object
 	 */
-	protected function _where_in($key = NULL, $values = NULL, $not = FALSE, $type = 'AND ')
+	protected function _where_in($key = NULL, $values = NULL, $not = FALSE, $type = 'AND ', $escape = TRUE)
 	{
 		if ($key === NULL OR $values === NULL)
 		{
@@ -548,9 +550,17 @@ class CI_DB_active_record extends CI_DB_driver {
 
 		$not = ($not) ? ' NOT' : '';
 
-		foreach ($values as $value)
+		if ($escape)
 		{
-			$this->ar_wherein[] = $this->escape($value);
+			foreach ($values as $value)
+			{
+				$this->ar_wherein[] = $this->escape($value);
+			}
+		} else {
+			foreach ($values as $value)
+			{
+				$this->ar_wherein[] = $value;
+			}
 		}
 
 		$prefix = (count($this->ar_where) == 0) ? '' : $type;
@@ -2075,6 +2085,36 @@ class CI_DB_active_record extends CI_DB_driver {
 	    }
 	    
 	    return $this;
+	}
+
+	/**
+	 * Get SQL
+	 *
+	 * Compiles the select statement based on the other functions called
+	 * and returns the SQL query (it doesn't execute it)
+	 *
+	 * @param	string	the table
+	 * @param	string	the limit clause
+	 * @param	string	the offset clause
+	 * @return	string
+	 */
+	public function get_sql($table = '', $limit = null, $offset = null)
+	{
+		if ($table != '')
+		{
+			$this->_track_aliases($table);
+			$this->from($table);
+		}
+
+		if ( ! is_null($limit))
+		{
+			$this->limit($limit, $offset);
+		}
+
+		$sql = $this->_compile_select();
+
+		$this->_reset_select();
+		return str_replace("\n", " ", $sql);
 	}
 }
 

@@ -525,9 +525,10 @@ Class Installer
 
 				//A sample comment linked to this post
 				$comment = new Record('Comments');
-				$comment->set('name', 'Nicholas')
+				$comment->set('author', 'Nicholas')
 						->set('www', 'http://getbancha.com')
 						->set('post_id', $post_id)
+						->set('content', 'I am cool.')
 				;
 				$this->CI->records->set_type('Comments')->save($comment);
 
