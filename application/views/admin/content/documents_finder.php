@@ -34,7 +34,7 @@ $this->load->helper('form');
 		{
 			$src = $image->thumb_path ? $image->thumb_path : $image->path;
 						echo '<tr><td><img src="'. attach_url($src) . '" alt="" border="0" /></td>'
-							.'<td><a target="_blank" href="'. attach_url($image->path) . '">'._('View').'</a> - <a href="#" onclick="finder_choose(\''. attach_url($image->path) . '\');">'._('Choose').'</a><br />'.$image->width.' x '.$image->height.' px<br />'.$image->size.' Kb</td>'
+							.'<td><a target="_blank" onclick="finder_choose(\''.attach_url($image->path).'\');" href="#">'._('View').'</a> - <a href="#" onclick="finder_choose(\''. attach_url($image->path) . '\');">'._('Choose').'</a><br />'.$image->width.' x '.$image->height.' px<br />'.$image->size.' Kb</td>'
 							.'<td>'.($image->resized_path ? '<a target="_blank" href="'. attach_url($image->resized_path) . '">'._('View').'</a> - <a href="#" onclick="finder_choose(\''. attach_url($image->resized_path) . '\');">'._('Choose').'</a>':'').'</td>'
 							.'<td>'.($src ? '<a href="#" onclick="finder_choose(\''. attach_url($src) . '\');">'._('Choose').'</a>':'').'</td>'
 							.'<td>'.$image->alt_text.'</td>'
@@ -91,9 +91,9 @@ $this->load->helper('form');
 							echo '<img src="' . attach_url($file->thumb_path) . '" border="0" alt="" />';
 						}
 						?></td>
-						<td><?php echo '<a target="_blank" href="'.attach_url($file->path).'">'.$file->name.'</a>'; ?></td>
+						<td><?php echo '<a target="_blank" href="#" onclick="finder_choose(\''.attach_url($file->path).'\');">'.$file->name.'</a>'; ?></td>
 						<td><?php echo $presets_select; ?></td>
-						<td><a href="#" class="choose" onclick="finder_choose('<?php echo attach_url($file->path); ?>');"><?php echo _('Choose file'); ?></a></td>
+						<td><a href="#" class="choose" onclick="finder_choose('<?php echo attach_url($file->path); ?>');"><?php echo _('Apply preset'); ?></a></td>
 						<td class="delete"><img align="absmiddle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/delete.png'); ?>" /> <a href="#" onclick="return bancha.remove.document(this, '<?php echo $file->id_document; ?>');"><?php echo _('Delete file'); ?></a></td>
 					</tr>
 				<?php } ?>

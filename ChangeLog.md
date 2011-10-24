@@ -11,6 +11,7 @@
 - Hierarchies query: same as above (speed increment and two less queries)
 - Added the password input field
 - Added a "confirm password" field on the users XML scheme
+- Clicking on the filename (repository - documents finder) now will attach the file to the textarea
 
 
 **v 0.8.1** (2011-10-20)

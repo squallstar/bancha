@@ -552,9 +552,9 @@ $(document).ready(function() {
 		        // Show the errors
 		        var el = $('#js_errors .block_content');
 		        el.html('');
-		        for each (var er in errors) {
+		        $.each(errors, function(el) {
 		        	el.append('<div class="message error">' + er + '</div>');
-		        }
+		        });
 		        $.colorbox({width:"65%", inline:true, href:"#js_errors"});
 		    }
 		}
