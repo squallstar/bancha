@@ -28,7 +28,7 @@ if ($this->input->is_ajax_request())
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
 		<meta http-equiv="X-UA-Compatible" content="IE=7" />
 		<style type="text/css" media="all">
-			@import url("<?php echo $css_url; ?>style.css");
+			@import url("<?php echo $css_url; ?>style_new.css");
 			@import url("<?php echo $css_url; ?>jquery.wysiwyg.css");
 			@import url("<?php echo $css_url; ?>facebox.css");
 			@import url("<?php echo $css_url; ?>visualize.css");
@@ -40,7 +40,7 @@ if ($this->input->is_ajax_request())
 		<div id="hld">
 			<div class="wrapper">
 				<?php if ($header) { $this->load->view($base.'layout/header', $content); } ?>
-				<div id="content_wrapper"><?php $this->load->view($view, $content); ?></div>
+				<div id="content_wrapper"><?php $this->load->view($view, $content); ?></div><div class="clear"></div>
 				<?php if ($header) { $this->load->view($base.'layout/footer', $content); } ?>
 			</div>
 		</div>
