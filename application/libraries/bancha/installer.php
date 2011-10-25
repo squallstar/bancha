@@ -286,6 +286,18 @@ Class Installer
 		$this->dbforge->add_field($settings_fields);
 		$this->dbforge->create_table('settings');
 
+		//User tokens table
+		$api_tokens = array(
+		    'username'		=> array('type'	=> 'VARCHAR', 'null'	=> FALSE, 'constraint' => 64),
+		    'token'			=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 255),
+			'last_activity'	=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE)
+		);
+
+		$this->dbforge->drop_table('api_tokens');
+		$this->dbforge->add_field($api_tokens);
+		$this->dbforge->add_key('username');
+		$this->dbforge->create_table('api_tokens');
+
 		return TRUE;
 	}
 

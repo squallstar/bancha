@@ -177,6 +177,15 @@ Class Record {
     	return isset($this->_data[$key]) ? $this->_data[$key] : $default;
   	}
 
+    /**
+    * Returns all record data
+    * @return array
+    */
+    public function get_data()
+    {
+      return $this->_data;
+    }
+
   	/**
    	* Sets a single value
    	* @param string $key
