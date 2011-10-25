@@ -12,7 +12,7 @@
 			<ul class="sidemenu">
 				<li><a href="#sb-intro">1. Introduction to Bancha</a></li>
 				<li><a href="#sb-install">2. How to install</a></li>
-				<li><a href="#sb-content-types">3. Tipi di contenuto</a></li>
+				<li><a href="#sb-content-types">3. Content Types</a></li>
 				<li><a href="#sb-types-xml">4. Schema XML dei tipi</a></li>
 				<li><a href="#sb-page-actions">5. Azioni delle pagine</a></li>
 				<li><a href="#sb-template-layout">6. Template e Layout</a></li>
@@ -31,6 +31,7 @@
 				<li><a href="#sb-settings">19. Impostazioni</a></li>
 				<li><a href="#sb-languages">20. Languages</a></li>
 				<li><a href="#sb-blocks">21. Blocks and sections</a></li>
+				<li><a href="#sb-api">22. API</a></li>
 			</ul>
 			<p>Version: <?php echo BANCHA_VERSION; ?><br />Last update: Oct 8, 2011</p>
 		</div>
@@ -82,28 +83,40 @@ The Blog one, will create and configures the "Blog" and "Comments" content types
 		</div>
 
 		<div class="sidebar_content" id="sb-content-types">
-			<h3>3. Tipi di contenuto</h3>
-			<p>Bancha ti permette di definire diversi contenuti per il tuo sito internet.
-			Ogni contenuto, &egrave; basato su un file XML che ne descrive tutti i campi gestibili.
-			In questo modo, puoi creare centinaia di schemi per amministrare i vari contenuti del tuo sito internet.
-			Ad esempio, un tipo di contenuto potrebbero essere i <strong>Prodotti</strong>, oppure delle <strong>Gallerie immagini</strong>.</p>
+			<h3>3. Content Types</h3>
+			
+			<p>Bancha allows you to define several content types for your internet site; each content is described
+			by a xml file which defines all fields, so you are able to create several schemas to manage the different
+			contents of your site. For example, a content type could be <strong>Products</strong> or some 
+			<strong>Image galleries</strong>.
+			</p>
+			
 			<p>
-			Un tipo di contenuto deve sempre essere uno tra i seguenti tipi:</p>
+			There are two content types:
+			</p>
+			
 			<ul>
-				<li><strong>Semplice</strong> (per contenuti lineari, senza gerarchia)</li>
-				<li><strong>Ad albero</strong> (per contenuti strutturabili gerarchicamente, come le pagine di un sito internet)</li>
+				<li><strong>Simple</strong> (for flat content, without hierarchies)</li>
+				<li><strong>Tree</strong> (for content described by a hierarchical structure, such as internet site pages)</li>
 			</ul>
+			
 			<p>
-			Come avrai intuito, anche le pagine stesse di un sito internet sono a loro volta un tipo di contenuto. &Egrave; proprio per questo che
-			dovr&agrave; essere definito almeno un tipo di contenuto associato all'albero delle pagine del sito. Tale associazione viene impostata nel file di configurazione di Bancha alla voce <strong>DEFAULT TREE TYPE</strong>.</p>
+			In Bancha the site pages are themselves a content type, then you have to define at least one content type and associate it
+			to the site pages tree. This association is defined into Bancha configuration file using <strong>DEFAULT TREE TYPE</strong> field.			
+			</p>
 
-			<p>Aggiungendo un nuovo tipo di contenuto, verranno <strong>automaticamente creati</strong> i seguenti files:</p>
+			<p>When you add a new content type, Bancha will <strong>create automatically</strong> these files:</p>
+			
 			<ul>
-				<li><strong>/application/xml/Nome_contenuto.xml</strong> che conterr&agrave; la struttura dei campi gestibili,</li>
-				<li><strong>/application/views/website/type_templates/Nome_contenuto/list.php</strong> ovvero il template xhtml per la visualizzazione come lista dei contenuti,</li>
-				<li><strong>/application/views/website/type_templates/Nome_contenuto/detail.php</strong> rispettivo template per la visualizzazione di dettaglio.</li>
+				<li><strong>/application/xml/Nome_contenuto.xml</strong> contains the structure of manageable fields,</li>
+				<li><strong>/application/views/website/type_templates/Nome_contenuto/list.php</strong>, this file is the xhtml template for listing content types,</li>
+				<li><strong>/application/views/website/type_templates/Nome_contenuto/detail.php</strong>, this file is the xhtml template for editing a single content types.</li>
 			</ul>
-			<p>Bene, ora sei pronto per imparare a configurare un tipo di contenuto!<br />Prosegui con la prossima sezione della documentazione: <strong>4. Schema XML dei tipi</strong>.
+			
+			<p>
+			Ok, you are ready to learn how to configure a single content type now!<br />Go to the next section: <strong>4. XML Schema of types</strong>.
+			</p>
+
 		</div>
 
 		<div class="sidebar_content" id="sb-types-xml">
@@ -1048,10 +1061,24 @@ When you create a new language, just copy one of these folders changing the name
 	</div>
 
 	<div class="sidebar_content" id="sb-blocks">
-			<h3>18. Blocks and sections</h3>
-			<p>
-			<div class="message warning">TODO</div>
-			</p>
+		<h3>21. Blocks and sections</h3>
+		<p>
+		<div class="message warning">TODO</div>
+		</p>
+	</div>
+
+	<div class="sidebar_content" id="sb-api">
+		<h3>22. API</h3>
+		<p>
+		<div class="message warning">TODO</div>
+		</p>
+
+		<h3>api/login</h3>
+		<p>...</p>
+
+		<h3>api/records</h3>
+		<p>...</p>
+
 	</div>
 
 <!-- end -->
