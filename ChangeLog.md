@@ -1,5 +1,14 @@
 ## Bancha Change Log file ##
 
+**v 0.8.4** (2011-10-25)
+
+- Experimental: API implementation
+- New table added: api_tokens
+- New controller added: Api_Controller
+- New model added: Model_tokens
+- Now is possible to login via the new API system
+- You can query the records model via the API method "records" to retrieve records or perform many other operations
+
 **v 0.8.3** (2011-10-24)
 
 - Now is possible to choose the theme before installing Bancha
