@@ -427,7 +427,7 @@ Class Installer
 	/**
 	 * Populates the default settings
 	 */
-	public function populate_settings()
+	public function populate_settings($theme = '')
 	{
 		$this->CI->load->settings();
 		$this->CI->settings->set('is_installed', 'T');
@@ -435,9 +435,8 @@ Class Installer
 		$this->CI->settings->set('website_name', 'My website');
 		$this->CI->settings->set('website_claim', 'This is my first website!');
 
-		$available_themes = array_keys($this->CI->config->item('installed_themes'));
-		$this->CI->settings->set('website_desktop_theme', $available_themes[0]);
-		$this->CI->settings->set('website_mobile_theme', $available_themes[0]);
+		$this->CI->settings->set('website_desktop_theme', $theme);
+		$this->CI->settings->set('website_mobile_theme', $theme);
 		$this->CI->settings->set('website_active_languages', array_keys($this->CI->config->item('languages_select')));
 		$this->CI->settings->clear_cache();
 	}

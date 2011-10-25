@@ -64,7 +64,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.8.2');
+define('BANCHA_VERSION', '0.8.3');
 
 /*
  * Framework name

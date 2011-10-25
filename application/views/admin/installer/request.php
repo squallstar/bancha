@@ -1,4 +1,6 @@
-<div class="block small center login">
+<?php
+$this->load->helper('form');
+?><div class="block small center login">
         <div class="block_head">
           <div class="bheadl"></div>
           <div class="bheadr"></div>
@@ -24,11 +26,16 @@
 			  		<input type="checkbox" checked="checked" name="clear_cache" value="T" /> <?php echo _('Clear and rebuild cache'); ?><br />
 			  		<input type="checkbox" checked="checked" name="log_events" value="T" /> <?php echo _('Enable event logging'); ?><br />
 					<br />
+
 					<?php echo _('Install type'); ?><br />
 					<select class="styled" name="premade">
 						<option value="blog"><?php echo _('Blog'); ?></option>
 						<option value="default"><?php echo _('Default'); ?></option>
 					</select><br />
+
+					<?php echo _('Theme'); ?><br />
+					<?php echo form_dropdown('theme', $this->config->item('installed_themes'), null, 'class="styled"'); ?>
+					<br />
 			  	</div>
 
 		  		<input name="install" onclick="$(this).fadeOut(200, function() {$('img.hidden').fadeIn();});" type="submit" class="submit" value="<?php echo _('Install'); ?>" />

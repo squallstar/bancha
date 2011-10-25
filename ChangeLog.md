@@ -1,5 +1,11 @@
 ## Bancha Change Log file ##
 
+**v 0.8.3** (2011-10-24)
+
+- Now is possible to choose the theme before installing Bancha
+- Bugfix on Javascript for each cycles (Webkit browsers)
+
+
 **v 0.8.2** (2011-10-22)
 
 - Javascript record validation added (validate.js library)
