@@ -176,21 +176,21 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'text'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
+				echo $p_start.$label.form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'password':
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'text'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_password($attributes).$field_note.$p_end;
+				echo $p_start.$label.form_password($attributes).$field_note.$p_end;
 				break;
 
 			case 'textarea':
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'wysiwyg'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				echo $p_start.$label.form_textarea($attributes).$p_end;
 				break;
 
 			case 'textarea_code':
@@ -198,7 +198,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'code'.($field['mandatory']?' mandatory':'');
 				$attributes['id'] = 'texteditor_'.$field_name;
-				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				echo $p_start.$label.form_textarea($attributes).$p_end;
 				$js_onload.= "bancha.tab_textarea('#".$attributes['id']."');";
 				break;
 
@@ -209,14 +209,14 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['id'] = 'ckeditor_'.$field_name;
 				$js_onload .="CKEDITOR.replace( '".$attributes['id']."', { filebrowserBrowseUrl : admin_url + 'ajax/finder/' + $('input[name=".$tipo['primary_key']."]').val() });";
 				$has_full_textarea = TRUE;
-				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				echo $p_start.$label.form_textarea($attributes).$p_end;
 				break;
 
 			case 'date':
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
+				echo $p_start.$label.form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'datetime':
@@ -228,7 +228,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $tmp[0] ? $tmp[0] : date(LOCAL_DATE_FORMAT);
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes);
+				echo $p_start.$label.form_input($attributes);
 
 				$attributes['name'] = '_time_'.$field_name;
 				$attributes['value'] = isset($tmp[1]) ? $tmp[1] : date('H:i');
@@ -253,11 +253,11 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				}
 				$add .= 'class="styled'.($field['mandatory']?' mandatory':'');
 				$add .='" ';
-				echo $p_start.$label.br(1).form_dropdown($field_name, $field['options'], $field_value, $add).$field_note.$p_end;
+				echo $p_start.$label.form_dropdown($field_name, $field['options'], $field_value, $add).$field_note.$p_end;
 				break;
 
 			case 'checkbox':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				foreach ($field['options'] as $opt_key => $opt_val) {
 					$checked = is_array($field_value) ? (in_array($opt_key, $field_value) ? 'checked' : '') : '';
 					$data = array(
@@ -281,7 +281,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$add .= 'multiple size="999" class="multi '.($field['mandatory']?' mandatory':'');
 				$add .='" ';
 				$field['options']['multiple'] = '';
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 
 				$left_options = array();
 				$right_options = array();
@@ -312,7 +312,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'radio':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				foreach ($field['options'] as $opt_key => $opt_val) {
 					$data = array(
 					    'name'        => $field_name,
@@ -327,7 +327,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'images':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				$count = $field_value != '' ? count($field_value) : 0;
 
 				//Multi upload on webkit+ff browsers
@@ -335,7 +335,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['multiple'] = ' ';
 
 				if ($count < $field['max']) {
-					echo br(1).form_upload($attributes).br(1).$this->lang->_trans('You can attach up to %n images', array('n' => $field['max']));
+					echo form_upload($attributes).br(1).$this->lang->_trans('You can attach up to %n images', array('n' => $field['max']));
 				} else {
 					echo '<span class="limit">'._('Number of uploadable images excedeed.').'</span>';
 					echo '<div class="hidden limit">'.br(1).form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n images', array('n' => $field['max'])).')</div>';
@@ -365,7 +365,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'files':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				$count = $field_value != '' ? count($field_value) : 0;
 
 				//Multi upload on webkit+ff browsers
@@ -373,7 +373,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['multiple'] = ' ';
 
 				if ($count < $field['max']) {
-					echo br(1).form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n files', array('n' => $field['max'])).')';
+					echo form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n files', array('n' => $field['max'])).')';
 				} else {
 					echo '<span class="limit">'._('File limit exceeded.').'</span>';
 					echo '<div class="hidden limit">'.br(1).form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n files', array('n' => $field['max'])).')</div>';

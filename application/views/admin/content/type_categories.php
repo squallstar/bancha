@@ -25,13 +25,11 @@
 			<p></p>
 		</div>
 
-		<div class="sidebar_content" id="list">
-			<h3><?php echo _('Categories list'); ?></h3>
-			<p></p>
-
-			<?php if (isset($message)) { ?><div class="message errormsg"><p><?php echo $message; ?></p></div><?php } ?>
+		<?php if (isset($message)) { ?><div class="message errormsg"><p><?php echo $message; ?></p></div><?php } ?>
 
 			<?php if (isset($message_ok)) { ?><div class="message success"><p><?php echo $message_ok; ?></p></div><?php } ?>
+
+		<div class="sidebar_content no_margin" id="list">			
 
 			<?php if (count($categories)) { ?>
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
@@ -61,17 +59,17 @@
 
 		</div>
 
-		<div class="sidebar_content" id="add">
-			<h3><?php echo _('Add new category'); ?></h3>
+		<div class="sidebar_content no_margin" id="add">
+			<div class="internal_padding"><h3><?php echo _('Add new category'); ?></h3>
 			<br />
-			<p><?php echo _('Categories permits your contents to be more differents each other.'); ?><br /><?php echo _('They can be useful to make different extractions and use them such as tags.'); ?></p>
+			<p><?php echo _('Categories permits your contents to be more differents each other.'); ?><br /><?php echo _('They can be useful to make different extractions and use them such as tags.'); ?></p></div>
 			<?php
 			echo form_open(ADMIN_PUB_PATH.$_section.'/type_categories/'.$tipo['name']);
 
-			echo form_label(_('Category name'), 'category_name') . br(1);
-			echo form_input(array('name' => 'category_name', 'class' => 'text')) . br(2);
+			echo '<div class="fieldset clearfix">'.form_label(_('Category name'), 'category_name').'<div class="right">';
+			echo form_input(array('name' => 'category_name', 'class' => 'text')) . '</div></div>';
 
-			echo form_submit('submit', _('Add'), 'class="submit mid"');
+			echo '<div class="fieldset clearfix noborder"><label></label><div class="right">'.form_submit('submit', _('Add'), 'class="submit mid"').'</div></div>';
 			echo form_close();
 
 			?>

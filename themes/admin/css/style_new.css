@@ -260,9 +260,12 @@ h1 {
 		.block_content .breadcrumb a {
 			color:#222;
 		}
-		.block_content form h3,
-		.block_content form br {
+		.block_content form h3
+		 {
 			display:none;
+		}
+		.block_content div.internal_padding {
+			padding:15px 15px 15px 20px;
 		}
 			.block_content form .fieldset > label {
 				display:block;
