@@ -45,20 +45,29 @@ $CI = & get_instance();
 
 <?php
 
-$save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="bancha.add_form_hash();"')
+$save_buttons = '<div class="fieldset noborder"><label></label><div class="right">'.form_submit('_bt_save', _('Save'), 'class="submit" onclick="bancha.add_form_hash();"')
 			   .form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
 			   .($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
+			   .'</div><div class="clear"></div></div>';
 ;
 
 echo form_open_multipart(isset($action) ? $action : ADMIN_PUB_PATH.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
 
-$js_onload = '';
-$first_lap = TRUE;
-$has_full_textarea = FALSE;
-$p_start = '<div class="fieldset clearfix">';
-$p_end = '</div></div>';
-$validator_rules = array();
+/******************************/
+/* Recurring variables */
 
+	$js_onload = '';
+	$first_lap = TRUE;
+	$has_full_textarea = FALSE;
+	$p_start = '<div class="fieldset">';
+	$p_end = '</div><div class="clear"></div></div>';
+	$validator_rules = array();
+	$view_messages = $this->view->get_messages();
+
+/* End of recurring variables */
+/******************************/
+
+//We store all the breadcrumbs into a single variable
 $breadcrumbs_render = '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
 						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
 						 . (!$record->id ? _($tipo['label_new']) : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
@@ -72,9 +81,9 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			echo $breadcrumbs_render;
 
 			//Messages
-			echo $this->view->get_messages();
+			echo $view_messages;
 
-			echo br(1).'<h3>'._($fieldset['name']).'</h3>'.br(1);
+			echo '<h3>'._($fieldset['name']).'</h3>';
 
 	if ($first_lap == true)
 	{
@@ -84,7 +93,9 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			if ($record->id && isset($page_url))
 			{
 				$url = site_url($page_url);
-				echo _('The address of this page is:').br(1).'<a target="_blank" href="'.$url.'">'.$url.'</a>'.br(2);
+				echo '<div class="fieldset clearfix">'
+					 . '<label>' . _('Page address:') . '</label>'
+					 . '<label class="full"><a target="_blank" href="'.$url.'">'.$url.'</a></label></div>';
 			}
 		}
 	}
@@ -403,7 +414,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		if ($field['type'] != 'hidden')
 		{
-			echo "<br />\n";
+			//echo "<br />\n"; new style without br between fields
 		}
 
 		if (isset($field['visible'])) {
@@ -428,13 +439,11 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		echo $breadcrumbs_render;
 
 		//Messages
-		echo $this->view->get_messages().'<br />';
+		echo $view_messages;
 
-		echo '<h3>'._('Categories').'</h3>';
+		echo '<div class="fieldset clearfix"><label>'._('Categories').'</label><div class="right">';
 
 		if (count($categories)) { ?>
-
-		<p><?php echo _('This content can be associated to these categories'); ?>:<br /></p>
 
 		<?php
 			$data = array(
@@ -448,11 +457,13 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				echo form_checkbox($data).form_label(' '.$category->name, 'categories[]');
 			}
 
-			echo br(3).$save_buttons;
-
 		} else {
 			echo '<p>'._('This type has no categories').'.</p>';
 		}
+
+		echo '</div></div>';
+
+		echo $save_buttons;
 
 		?>
 
@@ -468,7 +479,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		echo $breadcrumbs_render;
 
 		//Messages
-		echo $this->view->get_messages().'<br />';
+		echo $view_messages;
 
 		echo '<h3>'._('Hierarchies').'</h3>';
 
@@ -478,19 +489,24 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 			?>
 
-		<p><?php echo _('This content can be associated to these hierarchies'); ?>:<br /></p>
+		<div class="fieldset clearfix">
+			<label><?php echo _('Hierarchies'); ?></label>
+			<div class="right">
+				<div id="hierarchies"></div>
 
-		<div id="hierarchies"></div>
+				<?php
+					
 
-		<?php
-			echo br(3).$save_buttons;
-
-		} else {
-			echo '<p>'._('There are no hierarchies').'.</p>';
-		}
+				} else {
+					echo '<p>'._('There are no hierarchies').'.</p>';
+				}
 
 
-		?>
+			?>
+			</div>
+		</div>
+
+		<?php echo $save_buttons; ?>
 
 	</div>
 	<?php }
