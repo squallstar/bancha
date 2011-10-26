@@ -12,91 +12,181 @@
  *
  */
 
+$_admin_url = admin_url() . '/';
+$segment_2 = $this->uri->segment(2);
+$segment_3 = $this->uri->segment(3);
+$segment_4 = $this->uri->segment(4);
+
 $tipi_content = array();
 $tipi_pages = array();
 foreach ($this->content->types() as $tipo) {
 	if ($tipo['tree']) {
-		$tipi_pages[] = $tipo;
+		$tipi_pages[] = array(
+			'name'	=> $tipo['description'],
+			'url'	=> $_admin_url . 'pages/type/' . $tipo['name'],
+			'acl'	=> 'content|' . $tipo['name'],
+			'altsegment' =>  $tipo['name']
+		);
 	} else {
-		$tipi_content[] = $tipo;
+		$tipi_content[] = array(
+			'name'	=> $tipo['description'],
+			'url'	=> $_admin_url . 'contents/type/' . $tipo['name'],
+			'acl'	=> 'content|' . $tipo['name'],
+			'altsegment' =>  $tipo['name']
+		);
 	}
 }
 
+$menu = array(
+	array(
+		'name'		=> $this->auth->user('full_name'),
+		'url'		=> $_admin_url . 'dashboard',
+		'segment'	=> 'dashboard',
+		'sons'	=> array(
+			array(
+				'name'	=> _('Back to site'),
+				'url'	=> site_url()
+			)
+		)
+	),
+	array(
+		'name'		=> _('Pages'),
+		'url'		=> $_admin_url . 'pages',
+		'segment'	=> 'pages',
+		'sons'		=> $tipi_pages
+	),
+	array(
+		'name'		=> _('Contents'),
+		'url'		=> $_admin_url . 'contents',
+		'segment'	=> 'contents',
+		'sons'		=> $tipi_content
+	),
+	array(
+		'name'		=> _('Users'),
+		'url'		=> $_admin_url . 'users',
+		'acl'		=> 'users|list',
+		'segment'	=> 'users',
+		'sons'	=> array(
+			array(
+				'name'	=> _('Add new user'),
+				'url'	=> $_admin_url . 'users/edit',
+				'acl'	=> 'users|add',
+				'altsegment' => 'edit'
+			),
+			array(
+				'name'	=> _('Users list'),
+				'url'	=> $_admin_url . 'users/lista',
+				'altsegment' => 'lista'
+			),
+			array(
+				'name'	=> _('Groups and permissions'),
+				'url'	=> $_admin_url . 'users/groups',
+				'altsegment' => 'groups'
+			)
+		)
+	),
+	array(
+		'name'		=> _('Manage'),
+		'url'		=> '#',
+		'segment'	=> 'settings',
+		'sons'	=> array(
+			array(
+				'name'	=> _('Settings'),
+				'url'	=> $_admin_url . 'settings',
+				'acl'	=> 'settings|manage',
+				'segment' => 'settings'
+			),
+			array(
+				'name'	=> _('Modules'),
+				'url'	=> $_admin_url . 'modules',
+				'segment' => 'modules'
+			),
+			array(
+				'name'	=> _('Themes'),
+				'url'	=> $_admin_url . 'themes',
+				'segment' => 'themes'
+			),
+			array(
+				'name'	=> _('Documentation'),
+				'url'	=> $_admin_url . 'docs',
+				'segment' => 'docs'
+			),
+			array(
+				'name'	=> _('Hierarchies'),
+				'url'	=> $_admin_url . 'hierarchies',
+				'segment' => 'hierarchies'
+			),
+			array(
+				'name'	=> _('Import/export data'),
+				'url'	=> $_admin_url . 'import',
+				'segment' => 'import'
+			),
+			array(
+				'name'	=> _('Unit tests'),
+				'url'	=> $_admin_url . 'unit_tests',
+				'segment' => 'unit_tests'
+			),
+			array(
+				'name'	=> _('Clear cache'),
+				'url'	=> $_admin_url . 'contents/renew_cache',
+				'altsegment' => 'renew_cache'
+			),
+			array(
+				'name'	=> _('Logout'),
+				'url'	=> $_admin_url . 'auth/logout'
+			)
+		)
+	)
+);
+
 ?><div id="header">
-	<div class="hdrl"></div>
-	<div class="hdrr"></div>
- 	<img class="logo_img" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/logo_header.png'; ?>" />
-	<h1><a href="<?php echo admin_url(); ?>">BANCHA</a></h1>
+	
+	<a href="<?php echo admin_url(); ?>"><h1 class="logo_img"></h1></a>
+	<hr />
 
 	<ul id="nav">
-		<li class="<?php echo $this->uri->segment(2) == 'dashboard' ? 'active' : ''; ?>">
-			<a href="<?php echo admin_url('dashboard/'); ?>"><?php echo _('Dashboard'); ?></a>
-		</li>
+		<?php
+		foreach ($menu as $row) {
+			if (isset($row['acl'])) {
+				list($controller, $action) = explode('|', $row['acl']);
+				$available = $this->auth->has_permission($controller, $action);
+				if (!$available) continue;
+			}
 
-		<li class="<?php echo $this->uri->segment(2) == 'contents' ? 'active' : ''; ?>">
-			<a href="<?php echo admin_url('contents/'); ?>"><?php echo _('Contents'); ?></a>
-			<ul>
-				<?php
-				foreach ($tipi_content as $tipo) {
-					if ($this->auth->has_permission('content', $tipo['name'])) {
-				?>
-				<li><a href="<?php echo admin_url('contents/type/'.$tipo['name']); ?>"><?php echo $tipo['description']; ?></a></li>
-				<?php }
-				} ?>
-			</ul>
-		</li>
+			echo  '<li' . ($segment_2 == $row['segment'] ? ' class="open"' : '') . '>'
+				 .'<a href="' . $row['url'] . '">' . $row['name'] . '</a>';
 
-		<li class="<?php echo $this->uri->segment(2) == 'pages' ? 'active' : ''; ?>">
-			<a href="<?php echo admin_url('pages/'); ?>"><?php echo _('Pages'); ?></a>
-			<ul>
-				<?php
-				foreach ($tipi_pages as $tipo) {
-					if ($this->auth->has_permission('content', $tipo['name'])) {
-				?>
-				<li><a href="<?php echo admin_url('pages/type/'.$tipo['name']); ?>"><?php echo $tipo['description']; ?></a></li>
-				<?php }
-				} ?>
-			</ul>
-		</li>
+			if (isset($row['sons']) && count($row['sons'])) {
+				echo '<ul>';
+				foreach ($row['sons'] as $son) {
 
-		<?php if ($this->auth->has_permission('users', 'list')) { ?>
-		<li class="<?php echo $this->uri->segment(2) == 'users' ? 'active' : ''; ?>">
-			<a href="<?php echo admin_url('users/'); ?>"><?php echo _('Users'); ?></a>
-			<ul>
-				<?php if ($this->auth->has_permission('users', 'add')) { ?>
-				<li><a href="<?php echo admin_url('users/edit'); ?>"><?php echo _('Add new user'); ?></a></li>
-				<?php } ?>
-				<li><a href="<?php echo admin_url('users/lista'); ?>"><?php echo _('Users list'); ?></a></li>
-				<?php if ($this->auth->has_permission('users', 'groups')) { ?>
-				<li><a href="<?php echo admin_url('users/groups'); ?>"><?php echo _('Groups and permissions'); ?></a></li>
-				<?php } ?>
-			</ul>
-		</li>
-		<?php } ?>
+					if(isset($son['acl'])) {
+						list($controller_2, $action_2) = explode('|', $son['acl']);
+						$available_2 = $this->auth->has_permission($controller_2, $action_2);
+					} else {
+						$available_2 = TRUE;
+					}
+					
+					if ($available_2) {
+						if (isset($son['altsegment'])) {
+							$is_active = $segment_3 == $son['altsegment'] || $segment_4 == $son['altsegment'];
+						} else if (isset($son['segment'])) {
+							$is_active = $segment_2 == $son['segment'];
+						} else {
+							$is_active = FALSE;
+						}
 
-		<li class="<?php echo $this->uri->segment(2) == 'modules' ? 'active' : ''; ?>">
-			<a href="<?php echo admin_url('modules'); ?>"><?php echo _('Modules'); ?></a>
-		</li>
-		<li class="<?php echo $this->uri->segment(2) == 'manage' ? 'active' : ''; ?>">
-			<a href="#" style="cursor:default"><?php echo _('Manage'); ?></a>
-			<ul>
-				<?php if ($this->auth->has_permission('settings', 'manage')) { ?>
-				<li><a href="<?php echo admin_url('settings'); ?>"><?php echo _('Settings'); ?></a></li>
-				<?php } ?>
-
-				<li class="<?php echo $this->uri->segment(2) == 'themes' ? 'active' : ''; ?>">
-					<a href="<?php echo admin_url('themes'); ?>"><?php echo _('Themes'); ?></a>
-				</li>
-				<li class="<?php echo $this->uri->segment(2) == 'docs' ? 'active' : ''; ?>">
-					<a href="<?php echo admin_url('docs'); ?>"><?php echo _('Documentation'); ?></a>
-				</li>
-				<li><a href="<?php echo admin_url('hierarchies'); ?>"><?php echo _('Hierarchies'); ?></a></li>
-				<li><a href="<?php echo admin_url('import'); ?>"><?php echo _('Import/export data'); ?></a></li>
-				<li><a href="<?php echo admin_url('unit_tests'); ?>"><?php echo _('Unit tests'); ?></a></li>
-				<li><a href="<?php echo admin_url('contents/renew_cache'); ?>"><?php echo _('Clear cache'); ?></a></li>
-			</ul>
-		</li>
+						echo   '<li' . ($is_active ? ' class="active"' : '') . '>'
+					 		  .'<a href="' . $son['url'] . '">' . $son['name'] . '</a>'
+					 		  .'</li>';
+				 	}
+				}
+				echo '</ul>';
+			}
+			echo '</li>';
+		
+		}
+		?>
 
 	</ul>
-	<p class="user"><?php echo $this->auth->user('full_name'); ?> | <a href="<?php echo site_url(); ?>"><?php echo _('Back to site'); ?></a> | <a href="<?php echo admin_url('auth/logout'); ?>"><?php echo _('Logout'); ?></a></p>
 </div>
