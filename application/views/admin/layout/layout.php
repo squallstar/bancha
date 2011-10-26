@@ -40,7 +40,8 @@ if ($this->input->is_ajax_request())
 		<div id="hld">
 			<div class="wrapper">
 				<?php if ($header) { $this->load->view($base.'layout/header', $content); } ?>
-				<div id="content_wrapper"><?php $this->load->view($view, $content); ?></div><div class="clear"></div>
+				<div id="content_wrapper"><?php $this->load->view($view, $content); ?></div>
+				<div class="clear"></div>
 				<?php if ($header) { $this->load->view($base.'layout/footer', $content); } ?>
 			</div>
 		</div>

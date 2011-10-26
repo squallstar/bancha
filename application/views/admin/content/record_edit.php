@@ -55,8 +55,8 @@ echo form_open_multipart(isset($action) ? $action : ADMIN_PUB_PATH.$_section.'/e
 $js_onload = '';
 $first_lap = TRUE;
 $has_full_textarea = FALSE;
-$p_start = '<p>';
-$p_end = '</p>';
+$p_start = '<div class="fieldset clearfix">';
+$p_end = '</div></div>';
 $validator_rules = array();
 
 $breadcrumbs_render = '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
@@ -113,7 +113,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			);
 		}
 
-		$label = form_label(_($field['description']) . $mandatory, $field_name, $attributes);
+		$label = form_label(_($field['description']) . $mandatory, $field_name, $attributes) . '<div class="right">';
 
 		//We evaluates the evals
 		if ($field['default'] && substr($field['default'], 0, 5) == 'eval:')
