@@ -34,6 +34,14 @@ $CI = & get_instance();
 
 	<div class="block_content">
 
+<?php
+
+	//We store all the breadcrumbs into a single variable
+echo '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
+						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
+						 . (!$record->id ? _($tipo['label_new']) : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>'; ?>
+
+
 		<div class="sidebar">
 			<ul class="sidemenu">
 				<?php echo $CI->form_renderer->get_sidebar($tipo); ?>
@@ -45,6 +53,9 @@ $CI = & get_instance();
 
 <?php
 
+	//Messages
+	echo $this->view->get_messages();
+	
 $save_buttons = '<div class="fieldset noborder"><label></label><div class="right">'.form_submit('_bt_save', _('Save'), 'class="submit" onclick="bancha.add_form_hash();"')
 			   .form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
 			   .($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
@@ -62,26 +73,16 @@ echo form_open_multipart(isset($action) ? $action : ADMIN_PUB_PATH.$_section.'/e
 	$p_start = '<div class="fieldset">';
 	$p_end = '</div><div class="clear"></div></div>';
 	$validator_rules = array();
-	$view_messages = $this->view->get_messages();
 
 /* End of recurring variables */
 /******************************/
 
-//We store all the breadcrumbs into a single variable
-$breadcrumbs_render = '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
-						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
-						 . (!$record->id ? _($tipo['label_new']) : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
+
 
 foreach ($tipo['fieldsets'] as $fieldset)
 {
 
 	echo '<div class="sidebar_content" id="sb-'.url_title($fieldset['name']).'">';
-
-			//Breadcrumbs
-			echo $breadcrumbs_render;
-
-			//Messages
-			echo $view_messages;
 
 			echo '<h3>'._($fieldset['name']).'</h3>';
 
@@ -435,12 +436,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	<div class="sidebar_content" id="sb_category">
 		<?php
 
-		//Breadcrumbs
-		echo $breadcrumbs_render;
-
-		//Messages
-		echo $view_messages;
-
 		echo '<div class="fieldset clearfix"><label>'._('Categories').'</label><div class="right">';
 
 		if (count($categories)) { ?>
@@ -474,13 +469,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	<div class="sidebar_content" id="sb_hierarchies">
 
 		<?php
-
-		//Breadcrumbs
-		echo $breadcrumbs_render;
-
-		//Messages
-		echo $view_messages;
-
+		
 		echo '<h3>'._('Hierarchies').'</h3>';
 
 		if ($this->config->item('hierarchies')) {

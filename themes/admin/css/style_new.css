@@ -11,7 +11,7 @@ body, html {
 	min-height:100%;
 }
 body {
-	background: #FFF url(../widgets/alt_bgleft.png) top left repeat-y;
+	background: #FFF url(../widgets/alt_bgdark.png) top left repeat-y;
 	font-family: "Lucida Grande", Verdana, sans-serif;
 	font-size: 12px;
 	color: #666;
@@ -106,42 +106,59 @@ h1 {
 }
 
 #header {
-	width:200px;
-	background:#E0E3E9;
-	border-right:1px solid #B4B3B3;
+	width:201px;
 	margin:0;
 	padding:0;
 	
 	position:absolute;
 	z-index:10;
 }
+	#header hr {
+		border:0;
+		margin:15px 0 0 0;
+		padding:0;
+		width:200px;
+		height:2px;
+		background:url('../widgets/header_hr.png') repeat-x bottom left;
+		display:block;
+	}
 	#header .logo_img {
-		display:none;
+		background:url('../widgets/logo_header_alt.png') no-repeat bottom center;
+		display:block;
+		width:89px;
+		height:22px;
+		margin:0 0 0 15px;
+		padding-top:15px;
 	}
 	#header #nav {
-		margin:15px 20px;
+		margin:0 1px 0 0;
 	}
-	#header #nav li.active ul a {
+	#header #nav li ul li.active > a {
 		font-weight:bold;
-		color:#008ee8;
+		color:#FFF;
+		border-bottom:1px dotted #888;
 	}
 	#header #nav > li {
-		margin-bottom:5px;
+		background:url('../widgets/header_hr.png') repeat-x bottom left;
+		padding:15px 15px 15px 15px;
+		margin:0;
+		display:block;
 	}
 		#header #nav > li > a {
 			font-size:11px;
-			color:#555;
+			color:#CCC;
 			line-height:15px;
 			text-transform:uppercase;
 			font-weight:bold;
 		}
 			#header #nav > li ul a {
 				font-size:11px;
-				color:#777;
+				color:#AAA;
 			}
 			#header #nav > li ul {
-				margin:3px 0 15px 0;
+				margin:3px 0 0 0;
 			}
+
 
 #content_wrapper {
 	margin:0;
@@ -149,7 +166,7 @@ h1 {
 	position:relative;
 }
 .block {
-	margin-left:201px;
+	margin-left:200px;
 }
 
 #footer {
@@ -158,15 +175,17 @@ h1 {
 
 .block_head {
 	padding:10px 10px 10px 20px;
-	background:#EAEAEA;
-	height:30px;
-	border-bottom:1px dotted #C1C1C1;
+	background:url(../widgets/topbar_bg.png) top left repeat-x #b4b4b4;
+	height:32px;
+	border-bottom:1px dotted #AAA;
 }
 	.block_head h2 {
 		float:left;
 		font-weight:300;
 		padding:0;
-		margin:4px 0 0;
+		margin:6px 0 0;
+		font-size:16px;
+		color:#444;
 	}
 	.block_head ul {
 		float:right;
@@ -271,13 +290,10 @@ h1 {
 /************/
 
 .block .message {
-	padding: 10px 15px 10px 40px;
-	margin: 10px 0;
+	padding: 10px 15px 10px 48px;
+	margin: 0;
 	font-weight: bold;
 	overflow: hidden;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
 	}
 
 .block .message p {
@@ -288,25 +304,25 @@ h1 {
 
 .block .message.errormsg, .block .message.error {
 	border: 1px solid #e9c59b;
-	background: #ffecce url(../widgets/error.gif) 12px 12px no-repeat;
+	background: #ffecce url(../widgets/error.gif) 20px 12px no-repeat;
 	color: #e3302c;
 	}
 
 .block .message.success {
-	border: 1px solid #bfde84;
-	background: #edfbd8 url(../widgets/success.gif) 12px 12px no-repeat;
+	border-bottom: 1px solid #bfde84;
+	background: #edfbd8 url(../widgets/success.gif) 20px 12px no-repeat;
 	color: #508600;
 	}
 
 .block .message.info {
 	border: 1px solid #bbdbe0;
-	background: #ecf9ff url(../widgets/info.gif) 12px 12px no-repeat;
+	background: #ecf9ff url(../widgets/info.gif) 20px 12px no-repeat;
 	color: #0888c3;
 	}
 
 .block .message.warning {
 	border: 1px solid #e5e181;
-	background: #fefde2 url(../widgets/warning.gif) 12px 12px no-repeat;
+	background: #fefde2 url(../widgets/warning.gif) 20px 12px no-repeat;
 	color: #666;
 	}
 
