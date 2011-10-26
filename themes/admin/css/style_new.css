@@ -113,6 +113,11 @@ h1 {
 	position:absolute;
 	z-index:10;
 }
+	#header p {
+		font-size:10px;
+		margin:15px 10px 10px 15px;
+		line-height:15px;
+	}
 	#header hr {
 		border:0;
 		margin:15px 0 0 0;
@@ -212,10 +217,10 @@ h1 {
 			background:#EDEDED;
 			line-height:25px;
 			padding:0 10px 0 10px;
-			-moz-border-radius: 10px;
-			-webkit-border-radius: 10px;
-			-khtml-border-radius: 10px;
-			border-radius: 10px;
+			-moz-border-radius: 6px;
+			-webkit-border-radius: 6px;
+			-khtml-border-radius: 6px;
+			border-radius: 6px;
 			border:1px solid #EDEDED;
 			margin-bottom:10px;
 		}
@@ -233,8 +238,8 @@ h1 {
 			border:1px solid #DFDFDF;
 		}
 		.block_content .sidebar ul li.active {
-			background:url(../widgets/alt_bgblue.png) repeat-x top left #C5D4F3;
-			border:1px solid #7A86D9;
+			background:url(../widgets/topbar_bg.png) repeat-x top left #C5D4F3;
+			border:1px solid #AAA;
 		}
 		.block_content .sidebar ul li.active a {
 			color:#000;
@@ -242,48 +247,53 @@ h1 {
 		.block_content .sidebar_content {
 			padding:15px 20px;
 		}
-		.block_content #record_form .sidebar_content {
+		.block_content form .sidebar_content, .block_content .sidebar_content.no_margin {
 			padding:0;
 		}
 	.block_content .breadcrumb {
 		background:#EDEDED;
 		display:block;
 		border-bottom:1px dotted #C1C1C1;
-		padding:10px 10px 10px 20px;
+		padding:5px 10px 5px 20px;
+		font-size:11px;
 	}
-		.block_content #record_form h3,
-		.block_content #record_form br {
+		.block_content .breadcrumb a {
+			color:#222;
+		}
+		.block_content form h3,
+		.block_content form br {
 			display:none;
 		}
-			.block_content #record_form .fieldset > label {
+			.block_content form .fieldset > label {
 				display:block;
-				width:15%;
+				width:20%;
 				font-size:14px;
 				float:left;
 				margin-top:7px;
 			}
-			.block_content #record_form .fieldset > label.full {
-				width:85%;
+			.block_content form .fieldset > label.full {
+				width:80%;
 			}
-			.block_content #record_form .fieldset .right label {
+			.block_content form .fieldset .right {
+				width:80%;
+				float:left;
+			}
+			.block_content form .fieldset .right label {
 				margin-right:20px;
 			}	
-		.block_content #record_form .fieldset {
+		.block_content form .fieldset {
 			display:block;
 			padding:10px 10px 10px 20px;
 			border-bottom:1px dotted #C1C1C1;
 			background:#FFF;
 		}
-		.block_content #record_form .fieldset.noborder {
+		.block_content form .fieldset.noborder {
 			border-bottom:0;
 		}
-		.block_content #record_form .fieldset:hover {
+		.block_content form .fieldset:hover {
 			/*background:#FFF6D9;*/
 		}
-			.block_content #record_form .fieldset .right {
-				width:85%;
-				float:left;
-			}
+			
 
 /************/
 /* Messages */
@@ -303,7 +313,7 @@ h1 {
 	}
 
 .block .message.errormsg, .block .message.error {
-	border: 1px solid #e9c59b;
+	border-bottom: 1px solid #e9c59b;
 	background: #ffecce url(../widgets/error.gif) 20px 12px no-repeat;
 	color: #e3302c;
 	}
@@ -315,13 +325,13 @@ h1 {
 	}
 
 .block .message.info {
-	border: 1px solid #bbdbe0;
+	border-bottom: 1px solid #bbdbe0;
 	background: #ecf9ff url(../widgets/info.gif) 20px 12px no-repeat;
 	color: #0888c3;
 	}
 
 .block .message.warning {
-	border: 1px solid #e5e181;
+	border-bottom: 1px solid #e5e181;
 	background: #fefde2 url(../widgets/warning.gif) 20px 12px no-repeat;
 	color: #666;
 	}

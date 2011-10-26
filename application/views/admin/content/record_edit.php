@@ -70,8 +70,8 @@ echo form_open_multipart(isset($action) ? $action : ADMIN_PUB_PATH.$_section.'/e
 	$js_onload = '';
 	$first_lap = TRUE;
 	$has_full_textarea = FALSE;
-	$p_start = '<div class="fieldset">';
-	$p_end = '</div><div class="clear"></div></div>';
+	$p_start = '<div class="fieldset clearfix">';
+	$p_end = '</div></div>';
 	$validator_rules = array();
 
 /* End of recurring variables */
@@ -469,7 +469,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	<div class="sidebar_content" id="sb_hierarchies">
 
 		<?php
-		
+
 		echo '<h3>'._('Hierarchies').'</h3>';
 
 		if ($this->config->item('hierarchies')) {

@@ -189,4 +189,5 @@ $menu = array(
 		?>
 
 	</ul>
+	<p><?php echo CMS . ' v.' . BANCHA_VERSION; ?><br />Squallstar Studio &copy; 2011</p>
 </div>

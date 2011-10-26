@@ -37,23 +37,24 @@ $CI = & get_instance();
 			<p><?php echo _('Scheme'); ?>: <strong><?php echo $scheme_name; ?></strong></p>
 		</div>
 <?php
-$save_buttons = form_submit('_bt_save', _('Update settings'), 'class="submit long" onclick="bancha.add_form_hash();"');
+
+//Messages
+echo $this->view->get_messages();
+
+$save_buttons = '<div class="fieldset noborder clearfix"><label></label><div class="right">'.form_submit('_bt_save', _('Update settings'), 'class="submit long" onclick="bancha.add_form_hash();"') . '</div></div>';
 
 echo form_open(null, array('id' => 'record_form', 'name' => 'record_form'));
 
 $js_onload = '';
 $first_lap = TRUE;
 $has_full_textarea = FALSE;
-$p_start = '<p>';
-$p_end = '</p>';
+$p_start = '<div class="fieldset clearfix">';
+$p_end = '</div></div>';
 
 foreach ($tipo['fieldsets'] as $fieldset)
 {
 
 	echo '<div class="sidebar_content" id="sb-'.url_title($fieldset['name']).'">';
-
-	//Messages
-	echo $this->view->get_messages();
 
 	echo br(1).'<h3>'._($fieldset['name']).'</h3>'.br(1);
 
@@ -63,7 +64,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		$attributes = array();
 
-		$label = form_label(_($field['description']), $field_name, $attributes);
+		$label = form_label(_($field['description']), $field_name, $attributes) . '<div class="right">';
 
 		//We evaluates the evals
 		if ($field['default'] && substr($field['default'], 0, 5) == 'eval:')

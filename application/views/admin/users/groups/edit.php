@@ -7,7 +7,7 @@ $this->load->helper('form');
 		<div class="bheadl"></div>
 		<div class="bheadr"></div>
 
-		<h2><?php echo _('Manage group'); ?></h2>
+		<h2><?php echo _('Manage group').': '._($group->group_name); ?></h2>
 
 		<ul>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/arrow_left.png'); ?>" /> <a href="<?php echo admin_url('users/groups')?>"><?php echo _('Back to groups list'); ?></a></li>
@@ -21,15 +21,11 @@ $this->load->helper('form');
 			<ul class="sidemenu">
 				<li><a href="#info"><?php echo _('Group informations'); ?></a></li>
 			</ul>
-			<p></p>
+			
 		</div>
+		<?php echo $this->view->get_messages(); ?>
 
-		<div class="sidebar_content" id="info">
-
-<h3><?php echo ($group ? _('Group').': '._($group->group_name) : _('New group')); ?></h3>
-
-<?php echo $this->view->get_messages(); ?>
-<br />
+		<div class="sidebar_content no_margin" id="info">
 <?php
 
 echo form_open();
@@ -39,10 +35,10 @@ if ($group)
 	echo form_hidden('id_group', $group->id_group);
 }
 
-echo form_label(_('Group name'), 'name') . br(1);
-echo form_input(array('name' => 'name', 'class' => 'text'), $group ? $group->group_name : '') . br(2);
+echo '<div class="fieldset clearfix">'.form_label(_('Group name'), 'name').'<div class="right">';
+echo form_input(array('name' => 'name', 'class' => 'text'), $group ? $group->group_name : '').'</div></div>';
 
-echo form_label(_('Permissions'), 'permissions') . br(1);
+echo '<div class="fieldset clearfix">'.form_label(_('Permissions'), 'permissions').'<div class="right">';
 
 $data = array(
 			    'name'        => 'acl[]',
@@ -52,10 +48,10 @@ foreach ($acls as $acl) {
 	$data['checked'] = in_array($acl->id, $user_acls);
 	$data['value'] = $acl->id;
 
-	echo form_checkbox($data).form_label(' ' . $acl->name, 'acl[]').br(1);
+	echo form_checkbox($data).form_label(' ' . $acl->name, 'acl[]').'<div class="clear"></div>';
 }
 
-echo br(2).form_submit('submit', $group ? _('Save changes') : _('Add group'), 'class="submit long"');
+echo '</div></div><div class="fieldset noborder clearfix"><label></label><div class="right">'.form_submit('submit', $group ? _('Save changes') : _('Add group'), 'class="submit long"').'</div></div>';
 echo form_close();
 ?>
 		</div>
