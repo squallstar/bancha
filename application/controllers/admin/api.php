@@ -49,7 +49,7 @@ Class Api extends Bancha_Controller
 
 		if (!$ok)
 		{
-			$this->_display(NULL, 400, 'TOKEN_INVALID');
+			$this->_display(NULL, 400, 'BAD_TOKEN');
 		}
 		return $ok;
 	}
@@ -77,6 +77,12 @@ Class Api extends Bancha_Controller
 		}
 	}
 
+	public function logout()
+	{
+		$this->tokens->destroy_token($this->input->get_post('token'));
+		$this->_display(NULL, 200, 'OK');
+	}
+
 	public function records()
 	{
 		if (! $this->_check_token()) return;
@@ -102,7 +108,6 @@ Class Api extends Bancha_Controller
 						$result = $this->records->$method($first_param, $second_param);
 					} else {
 						//Single param
-
 						if ($method == 'type')
 						{
 							//Check ACL for this content type
