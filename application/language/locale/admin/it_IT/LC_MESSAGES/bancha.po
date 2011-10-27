@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 20:22+0100\n"
-"PO-Revision-Date: 2011-10-22 20:23+0100\n"
+"POT-Creation-Date: 2011-10-27 23:11+0100\n"
+"PO-Revision-Date: 2011-10-27 23:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
@@ -158,7 +158,7 @@ msgstr "Il mime-type del file non è valido per l'adapter selezionato."
 msgid "%c records have been imported."
 msgstr "%c records sono stati importati."
 
-#: controllers/admin/install.php:107
+#: controllers/admin/install.php:115
 msgid "%n has been installed!"
 msgstr "%n è stato correttamente installato!"
 
@@ -271,27 +271,27 @@ msgstr "Categorie"
 msgid "Hierarchies"
 msgstr "Gerarchie"
 
-#: libraries/bancha/installer.php:312
+#: libraries/bancha/installer.php:323
 msgid "Administrators"
 msgstr "Amministratore"
 
-#: libraries/bancha/installer.php:312
+#: libraries/bancha/installer.php:323
 msgid "Editors"
 msgstr "Editor"
 
-#: libraries/bancha/installer.php:353
+#: libraries/bancha/installer.php:364
 msgid "Default content type not defined"
 msgstr "Tipo predefinito non definito."
 
-#: libraries/bancha/installer.php:518
+#: libraries/bancha/installer.php:527
 msgid "My first post"
 msgstr "Il mio primo post"
 
-#: libraries/bancha/installer.php:519
+#: libraries/bancha/installer.php:528
 msgid "Hello world"
 msgstr "Ciao mondo"
 
-#: libraries/bancha/installer.php:560
+#: libraries/bancha/installer.php:569
 msgid "Hello world by a sample page."
 msgstr "Ciao mondo! Questa è una pagina di prova."
 
@@ -304,35 +304,35 @@ msgid "Primary key or table not defined for the content type %n."
 msgstr "Chiave primaria o tabella non definita per il tipo di contenuto %n."
 
 #: libraries/bancha/xml.php:206
-#: libraries/bancha/xml.php:301
-#: libraries/bancha/xml.php:303
-#: libraries/bancha/xml.php:319
-#: libraries/bancha/xml.php:345
-#: libraries/bancha/xml.php:350
+#: libraries/bancha/xml.php:320
+#: libraries/bancha/xml.php:322
+#: libraries/bancha/xml.php:338
+#: libraries/bancha/xml.php:364
+#: libraries/bancha/xml.php:369
 msgid "XML parser: Error"
 msgstr "Errore durante il parsing XML"
 
-#: libraries/bancha/xml.php:291
+#: libraries/bancha/xml.php:310
 msgid "Untitled"
 msgstr "Senza titolo"
 
-#: libraries/bancha/xml.php:301
+#: libraries/bancha/xml.php:320
 msgid "One of the fieldsets of type %n does not have the name attribute (mandatory)."
 msgstr "One dei fieldset di tipo %n non presenta l'attributo obbligatorio \"name\"."
 
-#: libraries/bancha/xml.php:303
+#: libraries/bancha/xml.php:322
 msgid "The type %t has more than one fieldset named %n."
 msgstr "Il tipo %t ha più di un fieldset chiamato %n."
 
-#: libraries/bancha/xml.php:319
+#: libraries/bancha/xml.php:338
 msgid "One of the fields of type %t does not have a name."
 msgstr "One dei campi del tipo %t è senza nome."
 
-#: libraries/bancha/xml.php:345
+#: libraries/bancha/xml.php:364
 msgid "The field name %n is reserved (Type: %t) and needs to be changed!"
 msgstr "Il campo %n di tipo %t utilizza un nome riservato che deve essere necessariamente cambiato."
 
-#: libraries/bancha/xml.php:350
+#: libraries/bancha/xml.php:369
 msgid "The value of the node named type (field: %n, type %t) does not exists. Allowed values are:"
 msgstr "Il valore inserito nel nodo type del campo %n di tipo %t non è ammesso. I valori consentiti sono:"
 
@@ -346,7 +346,7 @@ msgstr "Senza titolo"
 msgid "Page not found"
 msgstr "Pagina non trovata"
 
-#: libraries/bancha/templates/type_views/list.php:34
+#: libraries/bancha/templates/type_views/list.php:33
 msgid "View detail"
 msgstr "Visualizza dettaglio"
 
@@ -400,12 +400,12 @@ msgid "Repository"
 msgstr "Repository"
 
 #: views/admin/content/documents_finder.php:31
-#: views/admin/content/record_edit.php:333
+#: views/admin/content/record_edit.php:345
 msgid "Original"
 msgstr "Originale"
 
 #: views/admin/content/documents_finder.php:31
-#: views/admin/content/record_edit.php:333
+#: views/admin/content/record_edit.php:345
 msgid "Resized"
 msgstr "Ridimensionata"
 
@@ -415,15 +415,15 @@ msgid "Thumbnail"
 msgstr "Anteprima"
 
 #: views/admin/content/documents_finder.php:31
-#: views/admin/content/record_edit.php:333
-#: views/admin/content/record_edit.php:371
+#: views/admin/content/record_edit.php:345
+#: views/admin/content/record_edit.php:383
 msgid "Alternative text"
 msgstr "Testo alternativo"
 
 #: views/admin/content/documents_finder.php:37
 #: views/admin/content/documents_finder.php:38
-#: views/admin/content/record_edit.php:343
-#: views/admin/content/record_edit.php:344
+#: views/admin/content/record_edit.php:355
+#: views/admin/content/record_edit.php:356
 msgid "View"
 msgstr "Visualizza"
 
@@ -435,7 +435,7 @@ msgid "Choose"
 msgstr "Scegli"
 
 #: views/admin/content/documents_finder.php:41
-#: views/admin/content/record_edit.php:347
+#: views/admin/content/record_edit.php:359
 msgid "Delete image"
 msgstr "Elimina immagine"
 
@@ -465,7 +465,6 @@ msgstr "Preset"
 
 #: views/admin/content/documents_finder.php:82
 #: views/admin/content/record_list.php:227
-#: views/admin/content/translations.php:23
 msgid "Actions"
 msgstr "Azioni"
 
@@ -474,12 +473,12 @@ msgid "Apply preset"
 msgstr "Applica preset"
 
 #: views/admin/content/documents_finder.php:97
-#: views/admin/content/record_edit.php:377
+#: views/admin/content/record_edit.php:389
 msgid "Delete file"
 msgstr "Elimina file"
 
 #: views/admin/content/record_edit.php:25
-#: views/admin/content/record_edit.php:64
+#: views/admin/content/record_edit.php:42
 msgid "Edit content"
 msgstr "Modifica contenuto"
 
@@ -487,99 +486,89 @@ msgstr "Modifica contenuto"
 msgid "Back to list"
 msgstr "Torna alla lista"
 
-# Bottone salva
-#: views/admin/content/record_edit.php:48
-msgid "Save"
-msgstr "Salva"
-
-#: views/admin/content/record_edit.php:49
-msgid "Save and go to list"
-msgstr "Salva e vai alla lista"
-
-#: views/admin/content/record_edit.php:50
-#: views/admin/content/record_list.php:228
-msgid "Publish"
-msgstr "Pubblica"
-
-#: views/admin/content/record_edit.php:62
+#: views/admin/content/record_edit.php:40
 #: views/admin/content/record_list.php:13
 msgid "Contents"
 msgstr "Contenuti"
 
-#: views/admin/content/record_edit.php:62
+#: views/admin/content/record_edit.php:40
 #: views/admin/content/record_list.php:13
 msgid "Pages"
 msgstr "Pagine"
 
-#: views/admin/content/record_edit.php:87
-msgid "The address of this page is:"
-msgstr "L'indirizzo di questa pagina è:"
+# Bottone salva
+#: views/admin/content/record_edit.php:59
+msgid "Save"
+msgstr "Salva"
 
-#: views/admin/content/record_edit.php:102
+#: views/admin/content/record_edit.php:60
+msgid "Save and go to list"
+msgstr "Salva e vai alla lista"
+
+#: views/admin/content/record_edit.php:61
+#: views/admin/content/record_list.php:228
+msgid "Publish"
+msgstr "Pubblica"
+
+#: views/admin/content/record_edit.php:98
+msgid "Page address:"
+msgstr "Indirizzo pagina:"
+
+#: views/admin/content/record_edit.php:114
 msgid "Mandatory"
 msgstr "Obbligatorio"
 
-#: views/admin/content/record_edit.php:287
-#: views/admin/content/settings_edit.php:233
+#: views/admin/content/record_edit.php:299
 msgid "Add"
 msgstr "Aggiungi"
 
-#: views/admin/content/record_edit.php:290
-#: views/admin/content/settings_edit.php:236
+#: views/admin/content/record_edit.php:302
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: views/admin/content/record_edit.php:326
-#: views/admin/content/record_edit.php:329
+#: views/admin/content/record_edit.php:338
+#: views/admin/content/record_edit.php:341
 msgid "You can attach up to %n images"
 msgstr "Puoi allegare %n immagini"
 
-#: views/admin/content/record_edit.php:328
+#: views/admin/content/record_edit.php:340
 msgid "Number of uploadable images excedeed."
 msgstr "Numero consentito di immagini superato."
 
-#: views/admin/content/record_edit.php:333
+#: views/admin/content/record_edit.php:345
 msgid "Order"
 msgstr "Ordinamento"
 
-#: views/admin/content/record_edit.php:364
-#: views/admin/content/record_edit.php:367
+#: views/admin/content/record_edit.php:376
+#: views/admin/content/record_edit.php:379
 msgid "You can attach up to %n files"
 msgstr "Puoi allegare fino a %n files"
 
-#: views/admin/content/record_edit.php:366
+#: views/admin/content/record_edit.php:378
 msgid "File limit exceeded."
 msgstr "Limite di caricamento files superato"
 
-#: views/admin/content/record_edit.php:371
+#: views/admin/content/record_edit.php:383
 msgid "File name"
 msgstr "Nome del file"
 
-#: views/admin/content/record_edit.php:371
+#: views/admin/content/record_edit.php:383
 msgid "File type"
 msgstr "Tipo"
 
-#: views/admin/content/record_edit.php:437
-msgid "This content can be associated to these categories"
-msgstr "Questo contenuto può essere associato a queste categorie"
-
-#: views/admin/content/record_edit.php:454
+#: views/admin/content/record_edit.php:456
 msgid "This type has no categories"
 msgstr "Questo tipo non ha categorie"
 
-#: views/admin/content/record_edit.php:481
-msgid "This content can be associated to these hierarchies"
-msgstr "Questo contenuto può essere associato a queste gerarchie"
-
-#: views/admin/content/record_edit.php:489
+#: views/admin/content/record_edit.php:490
 msgid "There are no hierarchies"
 msgstr "Non ci sono gerarchie"
 
-#: views/admin/content/record_edit.php:516
+#: views/admin/content/record_edit.php:521
 msgid "Errors"
 msgstr "Errore"
 
-#: views/admin/content/record_edit.php:519
+#: views/admin/content/record_edit.php:524
 msgid "Close"
 msgstr "Chiudi"
 
@@ -667,7 +656,7 @@ msgstr "Gestione impostazioni"
 msgid "Scheme"
 msgstr "Schema"
 
-#: views/admin/content/settings_edit.php:40
+#: views/admin/content/settings_edit.php:44
 msgid "Update settings"
 msgstr "Aggiorna impostazioni"
 
@@ -736,6 +725,7 @@ msgid "View template"
 msgstr "Template di visualizzazione"
 
 #: views/admin/content/translations.php:19
+#: views/admin/installer/request.php:41
 msgid "Default"
 msgstr "Predefinito"
 
@@ -856,6 +846,7 @@ msgid "Meta tags"
 msgstr "Meta tags"
 
 #: views/admin/content/translations.php:52
+#: views/admin/content/type_list.php:27
 msgid "Description"
 msgstr "Descrizione"
 
@@ -864,6 +855,7 @@ msgid "Keywords"
 msgstr "Parole chiave"
 
 #: views/admin/content/translations.php:54
+#: views/admin/installer/request.php:40
 msgid "Blog"
 msgstr "Blog"
 
@@ -908,6 +900,7 @@ msgid "Author info"
 msgstr "Informazioni autore"
 
 #: views/admin/content/translations.php:65
+#: views/admin/content/type_list.php:26
 msgid "Name"
 msgstr "Nome"
 
@@ -945,7 +938,7 @@ msgstr "Aggiungi nuovo tipo"
 #: views/admin/content/type_delete.php:30
 #: views/admin/content/type_edit_xml.php:22
 #: views/admin/import/records.php:49
-#: views/admin/installer/request.php:10
+#: views/admin/installer/request.php:12
 msgid "WARNING"
 msgstr "ATTENZIONE"
 
@@ -988,37 +981,36 @@ msgid "Back to contents"
 msgstr "Torna ai contenuti"
 
 #: views/admin/content/type_categories.php:22
-#: views/admin/content/type_categories.php:29
 msgid "Categories list"
 msgstr "Lista categorie"
 
 #: views/admin/content/type_categories.php:23
-#: views/admin/content/type_categories.php:65
+#: views/admin/content/type_categories.php:63
 msgid "Add new category"
 msgstr "Aggiungi categoria"
 
-#: views/admin/content/type_categories.php:42
-#: views/admin/content/type_categories.php:71
+#: views/admin/content/type_categories.php:40
+#: views/admin/content/type_categories.php:69
 msgid "Category name"
 msgstr "Nome categoria"
 
-#: views/admin/content/type_categories.php:52
+#: views/admin/content/type_categories.php:50
 msgid "Do you want to delete this category?"
 msgstr "Vuoi eliminare questa categoria?"
 
-#: views/admin/content/type_categories.php:52
+#: views/admin/content/type_categories.php:50
 msgid "Delete category"
 msgstr "Elimina categoria"
 
-#: views/admin/content/type_categories.php:58
+#: views/admin/content/type_categories.php:56
 msgid "This content type has no categories."
 msgstr "Questo contenuto non ha categorie."
 
-#: views/admin/content/type_categories.php:67
+#: views/admin/content/type_categories.php:65
 msgid "Categories permits your contents to be more differents each other."
 msgstr "Le categorie permettono ai tuoi contenuti di differenziarsi maggiornamente tra di loro."
 
-#: views/admin/content/type_categories.php:67
+#: views/admin/content/type_categories.php:65
 msgid "They can be useful to make different extractions and use them such as tags."
 msgstr "Può essere utile per gestire differenti estrazioni, ad esempio possono essere usati come tags."
 
@@ -1191,7 +1183,6 @@ msgid "Parent hierarchy"
 msgstr "Gerarchia padre"
 
 #: views/admin/import/records.php:7
-#: views/admin/layout/header.php:94
 msgid "Import/export data"
 msgstr "Importaz./esportaz. dati"
 
@@ -1226,48 +1217,60 @@ msgstr "Questa funzione è attualmente in costruzione!"
 msgid "Import report"
 msgstr "Report importazione dati"
 
-#: views/admin/installer/request.php:5
-#: views/admin/installer/success.php:7
+#: views/admin/installer/request.php:7
+#: views/admin/installer/success.php:4
 msgid "%n Installer"
 msgstr "Installazione di %n"
 
-#: views/admin/installer/request.php:10
+#: views/admin/installer/request.php:12
 msgid "Bancha is already installed on this database!"
 msgstr "Bancha è già installato su questo database!"
 
-#: views/admin/installer/request.php:11
+#: views/admin/installer/request.php:13
 msgid "To reinstall Bancha, you need to delete the \"is_installed\" key on the \"settings\" table."
 msgstr "Per reinstallare Bancha, devi eliminare la chiave \"is_installed\" della tabella \"settings\"."
 
-#: views/admin/installer/request.php:16
-msgid "Select the operations you want to perform"
-msgstr "Seleziona le operazioni che vuoi effettuare"
-
 #: views/admin/installer/request.php:21
+msgid "Bancha will be installed on the current host. Please select the operations that you want to perform"
+msgstr "Bancha sarà installato sull'host corrente. Seleziona le operazioni che desideri eseguire."
+
+#: views/admin/installer/request.php:25
+msgid "Select operations"
+msgstr "Seleziona operazioni"
+
+#: views/admin/installer/request.php:27
 msgid "Remove/Create directories"
 msgstr "Elimina e ricrea le directory"
 
-#: views/admin/installer/request.php:22
+#: views/admin/installer/request.php:28
 msgid "Drop records and create tables"
 msgstr "Elimina records e ricrea tabelle"
 
-#: views/admin/installer/request.php:23
+#: views/admin/installer/request.php:29
 msgid "Restore default types"
 msgstr "Ripristina tipi predefiniti"
 
-#: views/admin/installer/request.php:24
+#: views/admin/installer/request.php:30
+msgid "Restore default settings"
+msgstr "Ripristina impostazioni predefinite"
+
+#: views/admin/installer/request.php:31
 msgid "Clear and rebuild cache"
 msgstr "Svuota e ricrea cache"
 
-#: views/admin/installer/request.php:25
+#: views/admin/installer/request.php:32
 msgid "Enable event logging"
 msgstr "Abilita logging degli eventi"
 
-#: views/admin/installer/request.php:27
+#: views/admin/installer/request.php:37
 msgid "Install type"
 msgstr "Tipo di installazione"
 
-#: views/admin/installer/request.php:34
+#: views/admin/installer/request.php:47
+msgid "Theme"
+msgstr "Tema"
+
+#: views/admin/installer/request.php:56
 msgid "Install"
 msgstr "Installa"
 
@@ -1275,51 +1278,55 @@ msgstr "Installa"
 msgid "Page rendered in %n seconds using %m of memory."
 msgstr "La pagina è stata generata in %n secondi utilizzando %m di memoria."
 
-#: views/admin/layout/header.php:33
-msgid "Dashboard"
-msgstr "Panoramica"
-
-#: views/admin/layout/header.php:64
+#: views/admin/layout/header.php:65
+#: views/admin/users/list.php:22
 msgid "Users"
 msgstr "Utenti"
 
-#: views/admin/layout/header.php:67
+#: views/admin/layout/header.php:71
+#: views/admin/users/list.php:15
 msgid "Add new user"
 msgstr "Aggiungi nuovo utente"
 
-#: views/admin/layout/header.php:69
+#: views/admin/layout/header.php:77
+#: views/admin/users/list.php:12
 msgid "Users list"
 msgstr "Lista utenti"
 
-#: views/admin/layout/header.php:71
+#: views/admin/layout/header.php:82
+#: views/admin/users/list.php:16
+#: views/admin/users/groups/list.php:12
+#: views/admin/users/groups/list.php:22
 msgid "Groups and permissions"
 msgstr "Gruppi e permessi"
 
-#: views/admin/layout/header.php:78
-msgid "Modules"
-msgstr "Moduli"
-
-#: views/admin/layout/header.php:81
+#: views/admin/layout/header.php:89
 msgid "Manage"
 msgstr "Gestione"
 
-#: views/admin/layout/header.php:84
+#: views/admin/layout/header.php:94
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: views/admin/layout/header.php:88
+#: views/admin/layout/header.php:100
+msgid "Modules"
+msgstr "Moduli"
+
+#: views/admin/layout/header.php:105
 msgid "Themes"
 msgstr "Temi"
 
-#: views/admin/layout/header.php:91
+#: views/admin/layout/header.php:110
+#: views/admin/modules/list.php:23
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: views/admin/layout/header.php:95
+#: views/admin/layout/header.php:125
+#: views/admin/unit_tests/intro.php:5
 msgid "Unit tests"
 msgstr "Unit tests"
 
-#: views/admin/layout/header.php:101
+#: views/admin/layout/header.php:135
 msgid "Logout"
 msgstr "Esci"
 
@@ -1392,7 +1399,7 @@ msgid "Add section"
 msgstr "Aggiungi sezione"
 
 #: views/admin/themes/template_edit.php:46
-#: views/admin/users/groups/edit.php:58
+#: views/admin/users/groups/edit.php:54
 msgid "Save changes"
 msgstr "Salva cambiamenti"
 
@@ -1438,7 +1445,6 @@ msgid "Email address"
 msgstr "Indirizzo email"
 
 #: views/admin/users/list.php:41
-#: views/admin/users/groups/edit.php:29
 msgid "Group"
 msgstr "Gruppo"
 
@@ -1462,20 +1468,16 @@ msgstr "Torna alla lista dei gruppi"
 msgid "Group informations"
 msgstr "Informazioni sul gruppo"
 
-#: views/admin/users/groups/edit.php:29
-msgid "New group"
-msgstr "Nuovo gruppo"
-
-#: views/admin/users/groups/edit.php:42
+#: views/admin/users/groups/edit.php:38
 #: views/admin/users/groups/list.php:36
 msgid "Group name"
 msgstr "Nome del gruppo"
 
-#: views/admin/users/groups/edit.php:45
+#: views/admin/users/groups/edit.php:41
 msgid "Permissions"
 msgstr "Permessi"
 
-#: views/admin/users/groups/edit.php:58
+#: views/admin/users/groups/edit.php:54
 msgid "Add group"
 msgstr "Aggiungi gruppo"
 
@@ -1494,6 +1496,24 @@ msgstr "Vuoi eliminare questo gruppo?"
 #: views/admin/users/groups/list.php:50
 msgid "Delete group"
 msgstr "Elimina gruppo"
+
+#~ msgid "The address of this page is:"
+#~ msgstr "L'indirizzo di questa pagina è:"
+
+#~ msgid "This content can be associated to these categories"
+#~ msgstr "Questo contenuto può essere associato a queste categorie"
+
+#~ msgid "This content can be associated to these hierarchies"
+#~ msgstr "Questo contenuto può essere associato a queste gerarchie"
+
+#~ msgid "Select the operations you want to perform"
+#~ msgstr "Seleziona le operazioni che vuoi effettuare"
+
+#~ msgid "Dashboard"
+#~ msgstr "Panoramica"
+
+#~ msgid "New group"
+#~ msgstr "Nuovo gruppo"
 
 #~ msgid "Choose file"
 #~ msgstr "Scegli file"
