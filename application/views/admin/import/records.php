@@ -41,11 +41,13 @@
 			
 			echo '<div class="fieldset clearfix"><label></label><div class="right">';
 			echo form_submit('submit', _('Import records'), 'class="submit long" onclick="$(this).fadeOut(200, function() {$(\'img.hidden\').fadeIn();});"');
+			?>
+			<img class="hidden" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/loading.gif'; ?>" />
+			<?php
 			echo '</div></div>';
 			echo form_close();
 			
 			?>
-			<img class="hidden" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/loading.gif'; ?>" />
 			
 		</div>
 	</div>

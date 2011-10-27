@@ -19,31 +19,38 @@
 			<ul class="sidemenu">
 				<li><a href="#add"><?php echo _('Add new type'); ?></a></li>
 			</ul>
-			<p></p>
 		</div>
+
+		<div class="message info"><p><?php echo _('WARNING').': '._('You can\'t change the type name after its creation.'); ?></p></div>
 
 		<div class="sidebar_content" id="add">
 
-<h3><?php echo _('Add new content type'); ?></h3><br />
-
-<div class="message info"><p><?php echo _('WARNING').': '._('You can\'t change the type name after its creation.'); ?></p></div>
 
 <?php
 echo form_open();
 
-echo form_label(_('Type name'). ' *', 'type_name') . br(1);
-echo form_input(array('name' => 'type_name', 'class' => 'text')) . br(2);
+echo '<div class="fieldset clearfix">';
+echo form_label(_('Type name'). ' *', 'type_name') . '<div class="right">';
+echo form_input(array('name' => 'type_name', 'class' => 'text')) . '</div></div>';
 
-echo form_label(_('Type description'). ' *', 'type_description') . br(1);
-echo form_input(array('name' => 'type_description', 'class' => 'text')) . br(2);
+echo '<div class="fieldset clearfix">';
+echo form_label(_('Type description'). ' *', 'type_description') . '<div class="right">';
+echo form_input(array('name' => 'type_description', 'class' => 'text'));
+echo '</div></div>';
 
-echo form_label(_('New item label'). ' *', 'type_label_new') . br(1);
-echo form_input(array('name' => 'type_label_new', 'class' => 'text'), _('New content')) . br(2);
+echo '<div class="fieldset clearfix">';
+echo form_label(_('New item label'). ' *', 'type_label_new') .'<div class="right">';
+echo form_input(array('name' => 'type_label_new', 'class' => 'text'), _('New content'));
+echo '</div></div>';
 
-echo form_label(_('Type structure'), 'type_tree') . br(1);
-echo form_dropdown('type_tree', array('false' => _('Simple (Contents)'), 'true' => _('Tree (Pages)')), $_section == 'pages' ? 'true' : 'false', 'class="styled"') . br(1);
+echo '<div class="fieldset clearfix">';
+echo form_label(_('Type structure'), 'type_tree') . '<div class="right">';
+echo form_dropdown('type_tree', array('false' => _('Simple (Contents)'), 'true' => _('Tree (Pages)')), $_section == 'pages' ? 'true' : 'false', 'class="styled"');
+echo '</div></div>';
 
+echo '<div class="fieldset clearfix noborder"><label></label><div class="right">';
 echo form_submit('submit', _('Add'), 'class="submit mid"');
+echo '</div></div>';
 echo form_close();
 
 ?>
