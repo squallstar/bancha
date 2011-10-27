@@ -468,7 +468,7 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	public function where_in($key = NULL, $values = NULL, $escape = TRUE)
 	{
-		return $this->_where_in($key, $values, FALSE, 'AND', $escape);
+		return $this->_where_in($key, $values, FALSE, 'AND ', $escape);
 	}
 
 	// --------------------------------------------------------------------
