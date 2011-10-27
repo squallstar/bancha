@@ -12,15 +12,14 @@
  *
  */
 
-
-/**
- * Prints the website breadcrumbs using the current state
- * @param array
- * @return xhtml
- */
 if (!function_exists('breadcrumbs'))
 {
-	function breadcrumbs($breadcrumbs_array = array())
+	/**
+	 * Prints the view breadcrumbs
+	 * @param array $breadcrumbs_array
+	 * @param string $separator
+	 */
+	function breadcrumbs($breadcrumbs_array = array(), $separator = ' &raquo; ')
 	{
 		$tmp = '';
 		$current_uri = uri_string().'/';
@@ -31,10 +30,7 @@ if (!function_exists('breadcrumbs'))
 			$i = 0;
 			foreach ($breadcrumbs_array as $key => $breadcrumb)
 			{
-				if ($i > 0)
-				{
-					$tmp.= ' &raquo; ';
-				}
+				if ($i > 0) $tmp.= $separator;
 
 				if ($current_uri == $breadcrumb['link'])
 				{
