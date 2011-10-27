@@ -7,6 +7,7 @@
 	<primary_key>id_record</primary_key>
 	<table>records</table>
 	<table_stage>records_stage</table_stage>
+	<relation name="comments" type="1-n" with="Comments" from="id_record" to="post_id" />
 	<has_categories>true</has_categories>
 	<has_hierarchies>true</has_hierarchies>
 	<fieldset name="Post content" icon="layout">

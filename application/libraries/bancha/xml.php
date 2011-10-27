@@ -272,6 +272,25 @@ Class Xml
     		$content['triggers'] = $triggers;
     	}
 
+        //Relations
+        if (isset($node->relation))
+        {
+            $relations = array();
+            foreach ($node->relation as $node_relation)
+            {
+                $attr = $node_relation->attributes();
+
+                $relation = array(
+                    'type'  => (string)$attr->type,
+                    'with'  => (string)$attr->with,
+                    'from'  => (string)$attr->from,
+                    'to'    => (string)$attr->to,
+                );
+
+                $content['relations'][(string)$attr->name] = $relation;   
+            }
+        }
+
     	$content['fieldsets'] = array();
 
     	//The XML column, is always present on each type, but it is not on the scheme

@@ -8,6 +8,9 @@
 - Blog premade template: little bug fix on the "published" field
 - Added a config variable to set whether multiple tokens can be handle a single username
 - The attach_url() helper now correctly skips the language parameter when generates an url
+- Added a "separator" parameter to the breadcrumbs helper
+- Introduced the relations between record objects (1-0, 1-1, 1-n) - experimental
+- New function added to record objects: relation()
 
 **v 0.8.4** (2011-10-25)
 

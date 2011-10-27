@@ -34,10 +34,10 @@ if (!function_exists('breadcrumbs'))
 
 				if ($current_uri == $breadcrumb['link'])
 				{
-					$tmp.= $breadcrumb['title'];
+					$tmp.= '<span>'.$breadcrumb['title'].'</span>';
 					break;
 				} else {
-					$tmp.= '<a href="'.$site_url.$breadcrumb['link'].'">'.$breadcrumb['title'].'</a>';
+					$tmp.= '<span><a href="'.$site_url.$breadcrumb['link'].'">'.$breadcrumb['title'].'</a></span>';
 				}
 				$i++;
 			}
