@@ -340,7 +340,7 @@ Class View
 	 * Adds the live tags
 	 * @return XHTML
 	 */
-	function live_tags($field, $record)
+	public function live_tags($field, $record)
 	{
  		if ($this->_CI->output->has_profiler()
  			&& $this->_CI->auth->has_permission('content', $record->tipo))

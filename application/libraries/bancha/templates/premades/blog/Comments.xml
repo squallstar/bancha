@@ -39,6 +39,7 @@
 			<admin>true</admin>
 			<list>true</list>
 			<description>Name</description>
+			<rules>required</rules>
 		</field>
 		<field id="www">
 			<description>Website</description>
@@ -51,11 +52,13 @@
 			<type>text</type>
 			<list>true</list>
 			<admin>true</admin>
+			<rules>valid_email</rules>
 		</field>
 		<field id="content">
 			<description>Message</description>
 			<type>textarea</type>
 			<list>true</list>
+			<rules>required</rules>
 		</field>
 		<field id="date_publish" column="true">
 			<description>Visibility date</description>

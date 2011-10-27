@@ -90,7 +90,7 @@ Class Model_records extends CI_Model {
    	*/
   	public function set_list($extract=TRUE)
   	{
-  		$this->_is_list = $extract;
+  		$this->_is_list = $extract || strtolower($extract) === 'true' ? TRUE : FALSE;
   		return $this;
   	}
 
@@ -224,10 +224,11 @@ Class Model_records extends CI_Model {
   	/**
    	* Sets a "where in" condition for the primary key
    	* @param array $record_ids
+   	* @param bool $escape Whether the first parameter need to be escaped
    	*/
-  	public function id_in($record_ids)
+  	public function id_in($record_ids, $escape = TRUE)
   	{
-    	$this->db->where_in($this->primary_key, $record_ids);
+    	$this->db->where_in($this->primary_key, $record_ids, $escape);
     	return $this;
   	}
 
@@ -796,6 +797,11 @@ Class Model_records extends CI_Model {
 			$record = $record->result_array();
 			$stage_record = $record[0];
 
+      if (!isset($this->events))
+      {
+        $this->load->events();
+      }
+
 			$this->events->log('publish', $stage_record[$this->primary_key], $stage_record['title'], $stage_record['id_type']);
 
 			//Publishing triggers
@@ -857,6 +863,10 @@ Class Model_records extends CI_Model {
 							 ->delete($this->table);
 		if ($done)
 		{
+      if (!isset($this->events))
+      {
+        $this->load->events();
+      }
 			$this->events->log('depublish', $id, $id);
 
 			//Depublishing triggers

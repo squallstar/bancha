@@ -95,8 +95,14 @@ Class Record {
 
    			if ($field['type'] == 'date' || $field['type'] == 'datetime')
    			{
+   				if (is_numeric($value))
+   				{
+   					//The value is already a timestamp. Let's skip the checks below
+   					continue;
+   				}
+
    				//If the date includes the time, we split it
-   				if (strpos($this->_data[$field_name], ':') !== FALSE)
+   				if (strpos($value, ':') !== FALSE)
    				{
    					list($this->_data[$field_name], $data['_time_'.$field_name]) = explode(' ', $this->_data[$field_name]);
    				}
@@ -170,6 +176,15 @@ Class Record {
   	{
     	return isset($this->_data[$key]) ? $this->_data[$key] : $default;
   	}
+
+    /**
+    * Returns all record data
+    * @return array
+    */
+    public function get_data()
+    {
+      return $this->_data;
+    }
 
   	/**
    	* Sets a single value

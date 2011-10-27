@@ -410,6 +410,3 @@ jQuery.extend(DateInput.DEFAULT_OPTS, {
 		}
 	}
 });
-
-
-

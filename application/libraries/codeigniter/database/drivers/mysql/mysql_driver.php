@@ -332,7 +332,7 @@ class CI_DB_mysql_driver extends CI_DB {
 		if ($like === TRUE)
 		{
 			//$str = str_replace(array('%', '_'), array('\\%', '\\_'), $str);
-			//Modified by Nicholas Valbusa
+			//Modified to have double wildcards in bancha
 			$str = str_replace('_', '\\_', $str);
 		}
 

@@ -54,9 +54,9 @@
 		<field id="title" column="true" link="edit">
 			<description>Title</description>
 			<type>text</type>
-			<mandatory>true</mandatory>
 			<admin>true</admin>
 			<list>true</list>
+			<rules>required</rules>
 		</field>
 		<field id="uri" column="true">
 			<description>Page URL</description>
@@ -81,7 +81,7 @@
 		<field id="show_in_menu" column="true">
 			<description>Show in menu</description>
 			<type>radio</type>
-			<mandatory>true</mandatory>
+			<rules>required</rules>
 			<admin>true</admin>
 			<list>true</list>
 			<options>
@@ -103,7 +103,7 @@
 		<field id="view_template">
 			<description>View template</description>
 			<type>select</type>
-			<mandatory>true</mandatory>
+			<rules>required</rules>
 			<admin>false</admin>
 			<list>true</list>
 			<options>

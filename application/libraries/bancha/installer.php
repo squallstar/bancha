@@ -286,6 +286,18 @@ Class Installer
 		$this->dbforge->add_field($settings_fields);
 		$this->dbforge->create_table('settings');
 
+		//User tokens table
+		$api_tokens = array(
+		    'username'		=> array('type'	=> 'VARCHAR', 'null'	=> FALSE, 'constraint' => 64),
+		    'token'			=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 255),
+			'last_activity'	=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE)
+		);
+
+		$this->dbforge->drop_table('api_tokens');
+		$this->dbforge->add_field($api_tokens);
+		$this->dbforge->add_key('username');
+		$this->dbforge->create_table('api_tokens');
+
 		return TRUE;
 	}
 
@@ -427,7 +439,7 @@ Class Installer
 	/**
 	 * Populates the default settings
 	 */
-	public function populate_settings()
+	public function populate_settings($theme = '')
 	{
 		$this->CI->load->settings();
 		$this->CI->settings->set('is_installed', 'T');
@@ -435,9 +447,8 @@ Class Installer
 		$this->CI->settings->set('website_name', 'My website');
 		$this->CI->settings->set('website_claim', 'This is my first website!');
 
-		$available_themes = array_keys($this->CI->config->item('installed_themes'));
-		$this->CI->settings->set('website_desktop_theme', $available_themes[0]);
-		$this->CI->settings->set('website_mobile_theme', $available_themes[0]);
+		$this->CI->settings->set('website_desktop_theme', $theme);
+		$this->CI->settings->set('website_mobile_theme', $theme);
 		$this->CI->settings->set('website_active_languages', array_keys($this->CI->config->item('languages_select')));
 		$this->CI->settings->clear_cache();
 	}
@@ -525,9 +536,10 @@ Class Installer
 
 				//A sample comment linked to this post
 				$comment = new Record('Comments');
-				$comment->set('name', 'Nicholas')
+				$comment->set('author', 'Nicholas')
 						->set('www', 'http://getbancha.com')
 						->set('post_id', $post_id)
+						->set('content', 'I am cool.')
 				;
 				$this->CI->records->set_type('Comments')->save($comment);
 

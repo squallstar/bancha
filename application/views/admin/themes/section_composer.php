@@ -17,11 +17,9 @@
 		
 		<div class="sidebar">
 			<ul class="sidemenu">
-				<!--<li><a href="#module"><?php echo _('Add module'); ?></a></li>-->
 				<li><a href="#html"><?php echo _('Add HTML'); ?></a></li>
 				<li><a href="#code"><?php echo _('Add PHP code'); ?></a></li>
 			</ul>
-			<p>This section is purely experimental!</p>
 		</div>
 
 		<div class="sidebar_content" id="html">
@@ -47,13 +45,6 @@
 			echo form_close();
 			?>
 		</div>
-
-		<div class="sidebar_content" id="module">
-			<h3><?php echo _('Add module'); ?></h3>
-
-		</div>
-
-		
 
 	</div>
 

@@ -59,16 +59,10 @@ Class Model_auth extends CI_Model {
 	 */
 	public function login($username, $password)
 	{
-		$result = $this->db->select('id_user, name, surname, id_group, admin_lang')
-					   	    ->from('users')
-					        ->where('username', $username)
-					        ->where('password', $password)
-					        ->limit(1)->get();
+		$user = $this->get_login_resource($username, $password);
 
-		if ($result->num_rows())
+		if ($user)
 		{
-			$user = $result->row(0);
-
 			$this->session->set_userdata($this->_str_loggedin, TRUE);
 			$this->user('username', $username);
 			$this->user('full_name', $user->name . ' ' . $user->surname);
@@ -87,6 +81,32 @@ Class Model_auth extends CI_Model {
 			return TRUE;
 		}
 
+		return FALSE;
+	}
+
+	/**
+	 * Tries to do a user login and returns the user object if login succeeds
+	 * @param string $username
+	 * @param string $password
+	 * @return Object|bool
+	 */
+	public function get_login_resource($username, $password)
+	{
+		if (!$username || !$password)
+		{
+			return FALSE;
+		}
+		
+		$result = $this->db->select('id_user, name, surname, id_group, admin_lang')
+					   	   ->from('users')
+					       ->where('username', $username)
+					       ->where('password', $password)
+					       ->limit(1)->get();
+
+		if ($result->num_rows())
+		{
+			return $result->row(0);
+		}
 		return FALSE;
 	}
 
@@ -224,5 +244,4 @@ Class Model_auth extends CI_Model {
 	{
 		if (!$this->has_permission($area, $action)) show_400();
 	}
-
 }
