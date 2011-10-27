@@ -15,20 +15,31 @@
           <?php if (isset($message)) { ?><div class="message errormsg"><p><?php echo $message; ?></p></div><?php } ?>
 
           <form action="" method="post">
-            <p>
-              <label><?php echo _('Username'); ?>:</label> <br />
-              <input name="username" type="text" class="text" value="<?php echo $this->input->post('username'); ?>" />
-            </p>
+         	<div class="fieldset clearfix">
+              	<label class="full"><?php echo _('Please log in with your provided credentials'); ?>:</label>
+              	
+            </div>
+            <div class="fieldset clearfix">
+              	<label><?php echo _('Username'); ?>:</label>
+              	<div class="right">
+              		<input name="username" type="text" class="text" value="<?php echo $this->input->post('username'); ?>" />
+            	</div>
+            </div>
 
-            <p>
-              <label><?php echo _('Password'); ?>:</label> <br />
-              <input name="password" type="password" class="text" value="" />
-            </p>
+            <div class="fieldset clearfix">
+              	<label><?php echo _('Password'); ?>:</label>
+              	<div class="right">
+              		<input name="password" type="password" class="text" value="" />
+              	</div>
+            </div>
 
-            <p>
-              <input type="submit" class="submit" value="<?php echo _('Login'); ?>" /> &nbsp;
-              <input type="checkbox" class="checkbox" checked="checked" id="rememberme" /> <label for="rememberme"><?php echo _('Remember me'); ?></label>
-            </p>
+            <div class="fieldset noborder clearfix">
+              	<label></label>
+              	<div class="right">
+              		<input type="submit" class="submit" value="<?php echo _('Login'); ?>" /> &nbsp;
+              		<input type="checkbox" class="checkbox" checked="checked" id="rememberme" /> <label for="rememberme"><?php echo _('Remember me'); ?></label>
+              	</div>
+            </div>
           </form>
 
         </div>

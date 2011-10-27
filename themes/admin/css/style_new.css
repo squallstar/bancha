@@ -2,8 +2,9 @@
 
 @bancha-green : #73b38e
 
+@import url("../fonts/titillium/stylesheet.css"); (disabled)
 */
-@import url("../fonts/titillium/stylesheet.css");
+
 
 * { padding:0; margin:0; }
 body, html {

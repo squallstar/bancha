@@ -22,9 +22,6 @@ $CI = & get_instance();
 <div class="block withsidebar">
 
 	<div class="block_head">
-		<div class="bheadl"></div>
-		<div class="bheadr"></div>
-
 		<h2><?php echo _('Manage settings'); ?></h2>
 	</div>
 
@@ -245,7 +242,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'radio':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				foreach ($field['options'] as $opt_key => $opt_val) {
 					$data = array(
 					    'name'        => $field_name.'['.$module.']',
@@ -260,10 +257,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 		}
 
-		if ($field['type'] != 'hidden')
-		{
-			echo "<br />\n";
-		}
+		
 
 		if (isset($field['visible']))
 		{

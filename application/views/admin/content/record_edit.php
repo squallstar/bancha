@@ -413,10 +413,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		}
 
-		if ($field['type'] != 'hidden')
-		{
-			//echo "<br />\n"; new style without br between fields
-		}
+		echo "\r";
 
 		if (isset($field['visible'])) {
 			if ($field['visible'] === false) {
@@ -505,9 +502,6 @@ echo form_close() . br(2);
 ?>
 
 	</div>
-	<div class="bendl"></div>
-	<div class="bendr"></div>
-
 </div>
 
 <div class="hidden">
@@ -526,10 +520,6 @@ echo form_close() . br(2);
 			</div>
 
 			<div class="block_content"></div>
-
-			<div class="bendl"></div>
-			<div class="bendr"></div>			
-
 		</div>
 </div>
 
@@ -553,6 +543,7 @@ $(document).ready(function() {
 	var validator = new FormValidator('record_form',
 		<?php echo json_encode($validator_rules); ?>,
 		function(errors, events) {
+			
 		    if (errors.length > 0) {
 		        // Show the errors
 		        var el = $('#js_errors .block_content');

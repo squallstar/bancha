@@ -15,6 +15,7 @@
 - New method added to the API system: logout
 - Added the API documentation
 - Tokens have been slightly changed to improve compatibility between different types of requests
+- Many italian translations have been added
 
 
 **v 0.8.4** (2011-10-25)

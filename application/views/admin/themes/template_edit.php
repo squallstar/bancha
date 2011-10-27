@@ -3,8 +3,6 @@
 <div class="block">
 
 	<div class="block_head">
-		<div class="bheadl"></div>
-		<div class="bheadr"></div>
 
 		<h2><?php echo _('Edit blocks') . ': ' . rtrim($template, '.php'); ?></h2>
 
@@ -56,9 +54,6 @@
 
 
 	</div>
-
-	<div class="bendl"></div>
-	<div class="bendr"></div>
 </div>
 
 <div class="hidden">

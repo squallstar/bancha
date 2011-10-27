@@ -3,8 +3,6 @@
 <div class="block withsidebar">
 
 	<div class="block_head">
-		<div class="bheadl"></div>
-		<div class="bheadr"></div>
 
 		<h2><?php echo _('Sections'); ?></h2>
 
@@ -47,8 +45,4 @@
 		</div>
 
 	</div>
-
-	<div class="bendl"></div>
-	<div class="bendr"></div>
-
 </div>
