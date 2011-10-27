@@ -136,10 +136,14 @@ Lo schema utilizzato per i tipi di contenuto <strong>Ad albero</strong> &egrave;
 	&lt;has_categories&gt;true&lt;/has_categories&gt;
 	&lt;has_hierarchies&gt;false&lt;/has_hierarchies&gt;
 	&lt;primary_key&gt;id_record&lt;/primary_key&gt;
+	&lt;relation name="comments" type="1-n" with="Comments" from="id_record" to="page_id" /&gt;
 	&lt;table&gt;records&lt;/table&gt;
 	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
 	&lt;fieldset name="Sample fields"&gt;
-	...
+		&lt;field id="field_1"&gt;&lt;/field&gt;
+		&lt;field id="field_2"&gt;&lt;/field&gt;
+		&lt;field id="field_3"&gt;&lt;/field&gt;
+		...
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code></pre><br />
 <p>L'attributo <strong>id</strong> verr&agrave; popolato automaticamente da Bancha quando verr&agrave; creato il tipo di contenuto, cos&igrave; come i nodi <strong>&lt;name&gt;</strong> e <strong>&lt;description&gt;</strong> che definiscono rispettivamente il nome utilizzato internamente come chiave, e quello visualizzato all'utente nel pannello (l'attributo label indica il nome visualizzato, mentre l'attributo <strong>new</strong> indica l'etichetta/link per l'inserimento di un nuovo contenuto di questo tipo).<br />
@@ -275,7 +279,7 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 	&lt;primary_key&gt;id_record&lt;/primary_key&gt;
 	&lt;table&gt;records&lt;/table&gt;
 	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
-	&lt;relation name="comments" type="1-n" from="id_record" to="product_id" /&gt;
+	&lt;relation name="comments" type="1-n" with="Comments" from="id_record" to="product_id" /&gt;
 
 	&lt;fieldset name="Informazioni" icon="page"&gt;
 
@@ -314,8 +318,28 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code></pre><br />
 
-<h3>Relazioni</h3>
-<div class="message warning">TODO</div>
+<h3>Relations</h3>
+<p>
+Sometimes you will need to set-up a relation <strong>between two different content types</strong>.<br />
+Bancha XML schemes permits you to define 1-0, 1-1 and 1-n relations.
+</p>
+<p>You can easily made a relation using the following prototype. This will be the relation on a <strong>Blog</strong> content type:</p>
+<pre class="prettyprint">
+<code>&lt;relation name="comments" type="1-n" with="Comments" from="id_record" to="post_id" /&gt;
+</code></pre><br />
+<p>In the above example, we are setting a relation named <strong>comments</strong> of type <strong>1-n</strong>, between the field <strong>id_record</strong> of the current content type (Blog) and the field <strong>post_id</strong> of the content type named <strong>Comments</strong>.</p>
+<p>Likewise, on the <strong>Comments</strong> scheme you will define the relation as follows:</p>
+<pre class="prettyprint">
+<code>&lt;relation name="post" type="1-1" with="Blog" from="post_id" to="id_record" /&gt;
+</code></pre><br />
+<p>This system permits you to <strong>item</strong> a Record to its childs. On the next sections of the documentation you will discover how to work with records. Setting up a relation between a content type "Blog" and its comments gives you the ability to gets all the comments of a post at a glance:</p>
+<pre class="prettyprint"><code>$post_comments = $post->related('comments');
+</code></pre><br />
+<p>On the other side, a comment can access its blog post like this:</p>
+<pre class="prettyprint"><code>$the_post = $comment->related('post');
+</code></pre><br />
+<p>Don't worry, you will learn how to manage records on the next chapters!</p>
+
 
 		</div>
 
@@ -512,6 +536,14 @@ Per estrarre solamente i campi che nello schema XML hanno attributo <strong>&lt;
 <div class="message info">Puoi aggiungere campi fisici ad un record intervenendo sull'attributo <strong>column</strong> di un qualsiasi dei campi all'interno dello schema di un tipo di contenuto.
 Dopodich&egrave;, sar&agrave; necessario anche aggiungere tale colonna alla tabella <strong>records</strong> di Bancha con un ALTER-TABLE.</div>
 <br />
+<h3>Relazioni tra oggetti</h3>
+<p>Se i record estratti sono associati ad alcune relazioni, puoi ottenere gli oggetti collegati utilizzando la funzione <strong>related</strong> in questo modo:</p>
+<pre class="prettyprint">
+<code>$post = $this->records->type('Blog')->get_first();
+
+//Ora, estraiamo i commenti collegati (necessita di aver definito una relazione)
+$post_comments = $post->related('comments');
+</code></pre><br /><p>Per informazioni sull'utilizzo delle relazioni, consulta la sezione <strong>Schema XML dei tipi</strong>.</p>
 <h3>Creare e salvare records</h3>
 <p>&Egrave; possibile creare, aggiornare ed eliminare records anche in maniera manuale. Di seguito un'esempio:</p>
 <pre class="prettyprint"><code>//Creiamo un nuovo record di tipo Blog e ne impostiamo titolo e autore
@@ -1073,15 +1105,90 @@ When you create a new language, just copy one of these folders changing the name
 
 	<div class="sidebar_content" id="sb-api">
 		<h3>22. API</h3>
-		<p>
-		<div class="message warning">TODO</div>
-		</p>
+		<p>Bancha ships with a complete API system that permits your apps to completely integrates with the Bancha framework.<br />All responses have the same prototype that consists in three keys:<br />- <strong>status</strong> (the HTTP status code),<br />- <strong>data</strong> which contains the requested data,<br />- <strong>message</strong>, a short string indicating the status of the request.</p>
+		<p>Before all, the client must <strong>login</strong> with his username/password. Bancha will returns a <strong>unique token</strong> that needs to be sent on each requests that requires authentication.</p>
+<br />
+		<h3>:api/login</h3>
+		<p>Gives you the token on success.</p>
+		<ul>
+			<li>Method: <strong>GET/POST</strong>
+			<li>Response: <strong>Json</strong></li>
+			<li>Params: <strong>username</strong> (string), <strong>password</strong> (string)
+		</ul>
+		<pre class="prettyprint">
+		<code>//Example of call:
+www.example.org/admin/api/login
+   
+    username = demo
+    password = demo
 
-		<h3>api/login</h3>
-		<p>...</p>
+//Outputs:
+{"status":200,"data":{"token":"abcdefg123456789"},"message":"OK"}
 
-		<h3>api/records</h3>
-		<p>...</p>
+//Outputs on failure:
+{"status":403,"data":[],"message":"USER_PWD_WRONG"}</code></pre><br />
+<br />
+		<h3>:api/records</h3>
+		<p>This API gives you the ability to query the Bancha ORM system such as the Records class.<br />We called this feature <strong>ActiveQuery</strong>, and all the methods remains the same. It always requires two parameters: <strong>token</strong> and <strong>query</strong>.</p>
+		<ul>
+			<li>Method: <strong>GET/POST</strong>
+			<li>Response: <strong>Json</strong></li>
+			<li>Params: <strong>token</strong> (string), <strong>query</strong> (string)
+		</ul>
+		<pre class="prettyprint">
+		<code>//Example of call:
+www.example.org/admin/api/records
+
+	token = abcdefg123456789
+	query = type:Blog|limit:1|order_by:id_record,DESC|get
+
+//Outputs:
+{
+	"status":200,
+	"data": {
+		"records": [
+			{"id_record":"1","id_type":"2","date_insert":"1319743682","title":"..."}
+		],
+		"count":1
+	},
+	"message":"OK"
+}</code></pre><br />
+<p>As you can see, the syntax is very similar to the PHP one. Check this other example:</p>
+<pre class="prettyprint"><code>//PHP Syntax:
+$posts = $this->records->type('Products')->like('title', 'Hello')->limit(5)->get();
+
+//Same result with ActiveQuery syntax:
+type:Products|like:title,Hello|limit:5|get
+
+/*************/
+
+//Another PHP example:
+$last_post = $this->records->type('Blog')->order_by('date_publish', 'DESC')->get_first();
+
+//And the same record using the ActiveQuery syntax:
+type:Blog|order_by:date_publish,DESC|get_first
+</code></pre></p>
+<p>When no records are found, you will receive an output with this prototype:</p>
+<pre class="prettyprint"><code>{"status":200,"data":[],"message":"NO_RECORDS"}</code></pre><br />
+<div class="message warning">Functions that accepts arrays are not supported by the ActiveQuery system yet.</div>
+<br /><br />
+
+<h3>:api/logout</h3>
+		<p>Destroys the current token.</p>
+		<ul>
+			<li>Method: <strong>GET/POST</strong>
+			<li>Response: <strong>Json</strong></li>
+			<li>Param: <strong>token</strong> (string)
+		</ul>
+		<pre class="prettyprint">
+		<code>//Example of call:
+www.example.org/admin/api/logout
+   
+    token = abcdefg123456789
+
+//Outputs:
+{"status":200,"data":[],"message":"OK"}</code></pre><br />
+<br />
 
 	</div>
 
