@@ -106,6 +106,9 @@ Class Install extends Bancha_Controller
 			//We create the default homepages
 			$this->installer->create_homepages();
 
+			//And finally, the cache needs to be cleared
+			$this->settings->clear_cache();
+
 			$this->view->set('message', $this->lang->_trans('%n has been installed!', array('n' => CMS)));
 			$this->view->render_layout('installer/success', FALSE);
 			return;
