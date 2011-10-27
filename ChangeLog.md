@@ -11,6 +11,11 @@
 - Added a "separator" parameter to the breadcrumbs helper
 - Introduced the relations between record objects (1-0, 1-1, 1-n) - experimental
 - New function added to record objects: relation()
+- Relations documentation has been added
+- New method added to the API system: logout
+- Added the API documentation
+- Tokens have been slightly changed to improve compatibility between different types of requests
+
 
 **v 0.8.4** (2011-10-25)
 
