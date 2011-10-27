@@ -42,10 +42,6 @@ $records = & $page->get('records');
 		echo $this->pagination->create_links();
 	}
 }
-?>
 
-</div><div class="clear"></div>
-
-<?php
 /* End of file list.php */
 /* Location: /type_templates/{name}/list.php */
