@@ -275,6 +275,7 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 	&lt;primary_key&gt;id_record&lt;/primary_key&gt;
 	&lt;table&gt;records&lt;/table&gt;
 	&lt;table_stage&gt;records_stage&lt;/table_stage&gt;
+	&lt;relation name="comments" type="1-n" from="id_record" to="product_id" /&gt;
 
 	&lt;fieldset name="Informazioni" icon="page"&gt;
 
@@ -312,6 +313,9 @@ Il marcatore <strong>"?"</strong> pu&ograve; essere utilizzato come misura autom
 
 	&lt;/fieldset&gt;
 &lt;/content&gt;</code></pre><br />
+
+<h3>Relazioni</h3>
+<div class="message warning">TODO</div>
 
 		</div>
 
