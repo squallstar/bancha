@@ -33,10 +33,10 @@ Class Model_tokens extends CI_Model
 	{
 		if (strlen($token))
 		{
-			//GET params have whitespaces instead of the plus sign
-			$token = str_replace(' ', '+', $token);
+			//Will get safer queries
+			$encoded_token = urlencode($token);
 
-			$res = $this->db->select('username')->from('api_tokens')->where('token', $token)
+			$res = $this->db->select('username')->from('api_tokens')->where('token', $encoded_token)
 						    ->limit(1)->get();
 			if ($res->num_rows())
 			{
@@ -70,7 +70,7 @@ Class Model_tokens extends CI_Model
 		{
 			//We generate the token
 			$data = $user->id_user . '|' . $user->id_group . '|' . time();
-			$token = $this->encrypt->encode($data);
+			$token = urlencode($this->encrypt->encode($data));
 
 			//We delete old tokens if the sharing is not allowed
 			if (!$this->_shared_tokens)
@@ -89,6 +89,29 @@ Class Model_tokens extends CI_Model
 			}
 		} else {
 			return FALSE;
+		}
+	}
+
+	/**
+	 * Destroys a token
+	 * @param string $token
+	 * @return bool
+	 */
+	public function destroy_token($token = '')
+	{
+		if (strlen($token))
+		{
+			//Will get safer queries
+			$encoded_token = urlencode($token);
+
+			//We delete old tokens if the sharing is not allowed
+			$username = $this->auth->user('username');
+			if ($username && !$this->_shared_tokens)
+			{
+				$this->db->where('username', $username)->delete('api_tokens');
+			}
+
+			return $this->db->where('token', $encoded_token)->delete('api_tokens');
 		}
 	}
 
