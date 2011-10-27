@@ -295,7 +295,6 @@ Class Installer
 
 		$this->dbforge->drop_table('api_tokens');
 		$this->dbforge->add_field($api_tokens);
-		$this->dbforge->add_key('username');
 		$this->dbforge->create_table('api_tokens');
 
 		return TRUE;
