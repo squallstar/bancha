@@ -14,7 +14,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 Class Api extends Bancha_Controller
 {
-
 	public function __construct()
 	{
 	    parent::__construct();
@@ -23,8 +22,7 @@ Class Api extends Bancha_Controller
 	    $this->view->base = 'admin/';
 
 	    $this->load->frmodel('model_tokens', 'tokens');
-
-	   //$this->auth->needs_login();
+	    //$this->auth->needs_login();
 	}
 
 	private function _display($data = array(), $code = 200, $message = 'OK')

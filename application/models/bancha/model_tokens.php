@@ -12,12 +12,15 @@
  *
  */
 
-Class Model_tokens extends CI_Model {
+Class Model_tokens extends CI_Model
+{
+	private $_shared_tokens = FALSE;
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library('encrypt');
+		$this->_shared_tokens = $this->config->item('shared_api_token');
 	}
 
 	/**
@@ -69,8 +72,11 @@ Class Model_tokens extends CI_Model {
 			$data = $user->id_user . '|' . $user->id_group . '|' . time();
 			$token = $this->encrypt->encode($data);
 
-			//We delete old tokens
-			$this->db->where('username', $username)->delete('api_tokens');
+			//We delete old tokens if the sharing is not allowed
+			if (!$this->_shared_tokens)
+			{
+				$this->db->where('username', $username)->delete('api_tokens');
+			}
 
 			$done = $this->db->insert('api_tokens', array(
 				'username'		=> $username,

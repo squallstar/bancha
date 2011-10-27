@@ -1,5 +1,13 @@
 ## Bancha Change Log file ##
 
+**v 0.9.0** (2011-10-X)
+
+- Default type templates views (detail and list) have been refactored
+- Corrected a bug on the "where_in" active record function (missed a space after 'AND')
+- New admin layout! Re-designed from scratch :)
+- Blog premade template: little bug fix on the "published" field
+- Added a config variable to set whether multiple tokens can be handle a single username
+
 **v 0.8.4** (2011-10-25)
 
 - Experimental: API implementation
@@ -8,6 +16,7 @@
 - New model added: Model_tokens
 - Now is possible to login via the new API system
 - You can query the records model via the API method "records" to retrieve records or perform many other operations
+
 
 **v 0.8.3** (2011-10-24)
 
