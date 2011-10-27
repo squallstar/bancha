@@ -18,6 +18,9 @@ body {
 	line-height: 20px;
 	-webkit-text-size-adjust: none;
 }
+body.no-header {
+	background:#FFF;
+}
 
 .clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
 .clearfix:after { clear: both; }
@@ -172,6 +175,9 @@ h1 {
 }
 .block {
 	margin-left:200px;
+}
+body.no-header .block {
+	margin-left:0;
 }
 
 #footer {

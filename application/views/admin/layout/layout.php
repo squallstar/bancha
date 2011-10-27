@@ -36,7 +36,7 @@ if ($this->input->is_ajax_request())
    		</style>
    		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.js"></script>
 	</head>
-	<body>
+	<body<?php echo $header ? '' : ' class="no-header"'; ?>>
 		<div id="hld">
 			<div class="wrapper">
 				<?php if ($header) { $this->load->view($base.'layout/header', $content); } ?>
