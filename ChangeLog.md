@@ -18,6 +18,7 @@
 - Many italian translations have been added
 - Removed the "username" key on the api_tokens table
 - Added a "limit" parameter to the last events controller (dashboard/events)
+- Records that are not published will be displayed with a yellow background on the record list
 
 
 **v 0.8.4** (2011-10-25)
