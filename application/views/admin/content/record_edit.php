@@ -55,12 +55,6 @@ echo '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == '
 
 	//Messages
 	echo $this->view->get_messages();
-	
-$save_buttons = '<div class="fieldset noborder"><label></label><div class="right">'.form_submit('_bt_save', _('Save'), 'class="submit" onclick="bancha.save_form();"')
-			   .form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
-			   .($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
-			   .'</div><div class="clear"></div></div>';
-;
 
 echo form_open_multipart(isset($action) ? $action : ADMIN_PUB_PATH.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
 
@@ -491,12 +485,15 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	</div>
 	<?php }
 
-	echo $save_buttons;
+	echo '<div class="fieldset noborder"><label></label><div class="right">'
+		 . form_submit('_bt_save', _('Save'), 'class="submit"')
+		 . form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
+		 . ($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
+		 . '</div><div class="clear"></div></div>';
 
-echo form_close() . br(2);
+echo form_close();
 
 ?>
-
 	</div>
 </div>
 
@@ -526,7 +523,8 @@ echo form_close() . br(2);
 <?php }
 
 if ($tipo['has_attachments']) {
-	$js_onload.= "$('table.sortable tbody').sortable({ stop: function(event, ui) { bancha.sort_priority(event, ui); } });";
+	$js_onload.= "$('table.sortable tbody').sortable({ stop: function(event, ui) {"
+				." bancha.sort_priority(event, ui); } });";
 	?>
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/jquery-ui.js"></script>
 <?php } ?>
@@ -543,7 +541,6 @@ $(document).ready(function() {
 		function(errors, events) {
 
 		    if (errors.length > 0) {
-		        // Show the errors
 		        var el = $('#js_errors .block_content');
 		        el.html('');
 		        $.each(errors, function(er) {
@@ -551,6 +548,8 @@ $(document).ready(function() {
 		        });
 		        $.colorbox({width:"65%", inline:true, href:"#js_errors"});
 
+		    } else {
+		    	bancha.add_form_hash('#record_form');
 		    }
 		}
 	);
