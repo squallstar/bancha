@@ -209,7 +209,7 @@ Ogni nodo dovr&agrave; avere un id univoco descritto attraverso l'attributo <str
 
 <p>Ecco un esempio di definizione di un campo di testo semplice:</p>
 <pre class="prettyprint"><code>&lt;field id="title" column="true"&gt;
-	&lt;description&gt;Titolo&lt;/description&gt;
+	&lt;description note="Max 128 caratteri"&gt;Titolo&lt;/description&gt;
 	&lt;type&gt;text&lt;/type&gt;
 	&lt;rules&gt;required|valid_email&lt;/rules&gt;
 	&lt;admin&gt;true&lt;/admin&gt;

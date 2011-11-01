@@ -102,11 +102,9 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		$attributes = array();
 
 		$field_note = '';
-		$mandatory = '';
-		if ($field['mandatory'] == TRUE)
+		if ($field['note'])
 		{
-			$field_note = '<span class="note">*' . _('Mandatory') . '</span>';
-			$mandatory = '*';
+			$field_note = '<span class="note">' . _($field['note']) . '</span>';
 		}
 
 		//Validation rules
@@ -119,7 +117,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			);
 		}
 
-		$label = form_label(_($field['description']) . $mandatory, $field_name, $attributes) . '<div class="right">';
+		$label = form_label(_($field['description']), $field_name, $attributes) . '<div class="right">';
 
 		//We evaluates the evals
 		if ($field['default'] && substr($field['default'], 0, 5) == 'eval:')
