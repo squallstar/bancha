@@ -56,7 +56,7 @@ echo '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == '
 	//Messages
 	echo $this->view->get_messages();
 	
-$save_buttons = '<div class="fieldset noborder"><label></label><div class="right">'.form_submit('_bt_save', _('Save'), 'class="submit" onclick="bancha.add_form_hash();"')
+$save_buttons = '<div class="fieldset noborder"><label></label><div class="right">'.form_submit('_bt_save', _('Save'), 'class="submit" onclick="bancha.save_form();"')
 			   .form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
 			   .($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
 			   .'</div><div class="clear"></div></div>';
@@ -423,8 +423,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 	}
 
-	echo $save_buttons;
-
 	echo '</div>';
 
 } //end fieldset foreach
@@ -454,8 +452,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		}
 
 		echo '</div></div>';
-
-		echo $save_buttons;
 
 		?>
 
@@ -492,10 +488,10 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			</div>
 		</div>
 
-		<?php echo $save_buttons; ?>
-
 	</div>
 	<?php }
+
+	echo $save_buttons;
 
 echo form_close() . br(2);
 
@@ -506,20 +502,21 @@ echo form_close() . br(2);
 
 <div class="hidden">
 		<div id="js_errors">
-			<div class="block">
+			<div class="block no_margin">
 
-			<div class="block_head">
-				<div class="bheadl"></div>
-				<div class="bheadr"></div>
+				<div class="block_head">
+					<div class="bheadl"></div>
+					<div class="bheadr"></div>
 
-				<h2><?php echo _('Errors'); ?></h2>
+					<h2><?php echo _('Errors'); ?></h2>
 
-				<ul>
-					<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/delete.png'); ?>" /> <a href="#" onclick="$('#cboxClose').click();"> <?php echo _('Close'); ?></a></li>
-				</ul>
+					<ul>
+						<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/delete.png'); ?>" /> <a href="#" onclick="$('#cboxClose').click();"> <?php echo _('Close'); ?></a></li>
+					</ul>
+				</div>
+
+				<div class="block_content"></div>
 			</div>
-
-			<div class="block_content"></div>
 		</div>
 </div>
 
@@ -540,18 +537,20 @@ if ($tipo['has_attachments']) {
 <script type="text/javascript">
 $(document).ready(function() {
 	<?php echo $js_onload; ?>
+
 	var validator = new FormValidator('record_form',
 		<?php echo json_encode($validator_rules); ?>,
 		function(errors, events) {
-			
+
 		    if (errors.length > 0) {
 		        // Show the errors
 		        var el = $('#js_errors .block_content');
 		        el.html('');
-		        $.each(errors, function(el) {
-		        	el.append('<div class="message error">' + er + '</div>');
+		        $.each(errors, function(er) {
+		        	el.append('<div class="message error">' + this + '</div>');
 		        });
 		        $.colorbox({width:"65%", inline:true, href:"#js_errors"});
+
 		    }
 		}
 	);
