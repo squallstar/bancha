@@ -239,9 +239,9 @@ var bancha = {
 			return false;
 		}
 	},
-	add_form_hash : function() {
-		var attr = $('form').attr('action').split('#');
-		$('form').attr('action', attr[0] + window.location.hash);
+	add_form_hash : function(el) {
+		var obj = $(el), attr = obj.attr('action').split('#');
+		obj.attr('action', attr[0] + window.location.hash);
 		return true;
 	},
 	sort_priority : function (event, ui) {
@@ -294,33 +294,35 @@ var bancha = {
 			var action_fields = '.field-action_custom_name, .field-action_custom_mode';
 			var link_fields = '.field-action_link_url';
 
+			var speed = 200;
+
 			switch (val) {
 				case 'text':
-					$(list_fields).hide(200);
-					$(action_fields).hide(200);
-					$(link_fields).hide(200);
+					$(list_fields).hide(speed);
+					$(action_fields).hide(speed);
+					$(link_fields).hide(speed);
 					break;
 
 				case 'list':
-					$(list_fields).show(200);
-					$(action_fields).hide(200);
-					$(link_fields).hide(200);
-					$(link_fields).hide(200, function(){
+					$(list_fields).show(speed);
+					$(action_fields).hide(speed);
+					$(link_fields).hide(speed);
+					$(link_fields).hide(speed, function(){
 						//Temporary fix
 						$('.cmf-skinned-text').css('height', '20px');
 					});
 					break;
 
 				case 'action':
-					$(action_fields).show(200);
-					$(list_fields).hide(200);
-					$(link_fields).hide(200);
+					$(action_fields).show(speed);
+					$(list_fields).hide(speed);
+					$(link_fields).hide(speed);
 					break;
 
 				case 'link':
-					$(link_fields).show(200);
-					$(list_fields).hide(200);
-					$(action_fields).hide(200);
+					$(link_fields).show(speed);
+					$(list_fields).hide(speed);
+					$(action_fields).hide(speed);
 					break;
 			}
 		}

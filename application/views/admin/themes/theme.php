@@ -3,8 +3,6 @@
 <div class="block">
 
 	<div class="block_head">
-		<div class="bheadl"></div>
-		<div class="bheadr"></div>
 
 		<h2><?php echo _('Theme templates') . ': ' . $theme_description; ?></h2>
 

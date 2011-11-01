@@ -210,7 +210,7 @@ Class Model_records extends CI_Model {
   			{
 				$this->type($value);
   			}
-  			else if (in_array($field, $this->columns))
+  			else if (is_array($this->columns) && in_array($field, $this->columns))
   			{
 				$this->db->where($this->table_current.'.'.$field, $value);
   			} else {

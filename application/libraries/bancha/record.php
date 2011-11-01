@@ -44,6 +44,11 @@ Class Record {
 	 */
   	public $documents_extracted = FALSE;
 
+    /**
+     * @var array Contains the relations
+     */
+    private $_related_objects = array();
+
   	public function __construct($type='')
   	{
   		if ($type != '')
@@ -53,7 +58,7 @@ Class Record {
 				//Do nothing for now
 			} else if (!is_numeric($type))
 			{
-				$CI = &get_instance();
+				$CI = & get_instance();
 				$type = $CI->content->type_id($type);
 			}
 			$this->_tipo = $type;
@@ -359,4 +364,48 @@ Class Record {
 		}
 		$this->documents_extracted = TRUE;
 	}
+
+    /**
+     * When the record has a relation, calling this function will returns its
+     * related records
+     * @param $relation_name
+     * @return relations 1-1 and 1-0: Record object
+     * @return relations 1-n: array of records
+     */
+    public function related($relation_name)
+    {
+        if (isset($this->_related_objects[$relation_name]))
+        {
+            return $this->_related_objects[$relation_name];
+        }
+
+        $CI = & get_instance();
+
+        if (!$this->_tipo_def)
+        {
+            $tipo = & $CI->content->type($this->_tipo);
+        } else {
+            $tipo = $this->_tipo_def;
+        }
+
+        if (isset($tipo['relations'][$relation_name]))
+        {
+            $rel = $tipo['relations'][$relation_name];
+
+            $CI->records->type($rel['with'])
+                        ->where($rel['to'], $this->get($rel['from']));
+
+            $type = strtolower($rel['type']);
+
+            if (in_array($type, array('1-0', '1-1', '0-1')))
+            {
+                $this->_related_objects[$relation_name] = $CI->records->get_first();
+            } else {
+                $this->_related_objects[$relation_name] = $CI->records->get();
+            }
+
+            return $this->_related_objects[$relation_name];
+        }
+        return FALSE;
+    }
 }

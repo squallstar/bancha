@@ -1,13 +1,7 @@
 <?php echo $this->load->helper('form'); ?><div class="block">
 
 	<div class="block_head">
-		<div class="bheadl"></div>
-		<div class="bheadr"></div>
-
 		<h2><?php echo _('Installed themes'); ?></h2>
-
-		<ul>
-		</ul>
 	</div>
 
 	<div class="block_content">
@@ -41,7 +35,9 @@
 			</tbody>
 		</table>
 
-		<input type="submit" class="submit tiny" value="<?php echo _('Apply changes'); ?>" /><br /><br />
+		<div class="internal_padding">
+			<input type="submit" class="submit long" value="<?php echo _('Apply changes'); ?>" />
+		</div>
 		<?php
 
 		echo form_close();
@@ -49,7 +45,4 @@
 			echo '<p>'._('There are no installed themes.').'</p>';
 		} ?>
 	</div>
-
-	<div class="bendl"></div>
-	<div class="bendr"></div>
 </div>

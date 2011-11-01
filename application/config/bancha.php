@@ -64,7 +64,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.8.4');
+define('BANCHA_VERSION', '0.9.0');
 
 /*
  * Framework name
@@ -97,10 +97,17 @@ $config['installed_themes'] = array(
 define('CACHE', TRUE);
 
 /*
+* SHARED API TOKEN
+* Defines whether a single username can handle multiple tokens or not.
+* Set to TRUE to enable multiple tokens.
+*/
+$config['shared_api_token'] = FALSE;
+
+/*
 * RECORDS PER PAGE
 * The number of record extracted per page in the administration
 */
-$config['records_per_page'] = 10;
+$config['records_per_page'] = 15;
 
 /* FRAMEWORK PATH
  * The library path where Bancha classes are stored

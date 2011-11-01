@@ -1,6 +1,6 @@
 <?php
 $this->load->helper('form');
-?><div class="block withsidebar">
+?><div class="block withsidebar no_margin">
 
 	<div class="block_head">
 		<div class="bheadl"></div>

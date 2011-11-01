@@ -272,6 +272,25 @@ Class Xml
     		$content['triggers'] = $triggers;
     	}
 
+        //Relations
+        if (isset($node->relation))
+        {
+            $relations = array();
+            foreach ($node->relation as $node_relation)
+            {
+                $attr = $node_relation->attributes();
+
+                $relation = array(
+                    'type'  => (string)$attr->type,
+                    'with'  => (string)$attr->with,
+                    'from'  => (string)$attr->from,
+                    'to'    => (string)$attr->to,
+                );
+
+                $content['relations'][(string)$attr->name] = $relation;   
+            }
+        }
+
     	$content['fieldsets'] = array();
 
     	//The XML column, is always present on each type, but it is not on the scheme
@@ -313,14 +332,14 @@ Class Xml
       		foreach ($fieldset_node->field as $field)
       		{
         		//Unique name
-            $attr = $field->attributes();
+            	$attr = $field->attributes();
         		$field_name = (string) $attr->id;
         		if (!$field_name || $field_name == '') {
           			show_error($this->CI->lang->_trans('One of the fields of type %t does not have a name.', array('t' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
         		}
 
         		//Physical column
-        		$is_column = isset($field->attributes()->column) ? (string) $field->attributes()->column : FALSE;
+        		$is_column = isset($attr->column) ? (string) $attr->column : FALSE;
         		if (strtoupper($is_column) == 'TRUE')
         		{
           			$content['columns'][] = $field_name;
@@ -350,9 +369,25 @@ Class Xml
           			show_error($this->CI->lang->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are:', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
         		}
 
+        		$_note = FALSE;
+        		if (isset($field->description))
+        		{
+        			$_descr = convert_accented_characters((string)$field->description);
+        			$this->_translations[$_descr] = TRUE;
+        			$descr_attrs = $field->description->attributes();
+        			if (isset($descr_attrs->note))
+        			{
+        				$_note = (string)$descr_attrs->note;
+        				$this->_translations[$_note] = TRUE;
+        			}
+        		} else {
+        			$_descr = $field_name;
+        		}
+
         		//Default fields for each field
         		$content_field = array(
-          			'description'	=> isset($field->description) ? convert_accented_characters((string)$field->description) : '',
+          			'description'	=> $_descr,
+          			'note'			=> $_note,
           			'type'			=> (string) $field->type,
           			'length'		=> isset($field->length) ? (int)$field->length : 255,
           			'mandatory'		=> isset($field->mandatory) ? (strtoupper($field->mandatory) == 'TRUE' ? TRUE : FALSE) : FALSE,
@@ -366,8 +401,6 @@ Class Xml
         		{
         			$content_field['rules'] = (string) $field->rules;
         		}
-
-                $this->_translations[$content_field['description']] = TRUE;
 
         		if ($content_field['type'] == 'files' || $content_field['type'] == 'images')
         		{

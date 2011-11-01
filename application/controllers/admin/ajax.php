@@ -114,7 +114,7 @@ Class Ajax extends Bancha_Controller
 
 		$this->view->set('repository_files', $repository);
 
-		$this->view->render_layout('content/documents_finder');
+		$this->view->render_layout('content/documents_finder', FALSE);
 	}
 
 }

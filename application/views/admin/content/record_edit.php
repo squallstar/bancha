@@ -34,6 +34,14 @@ $CI = & get_instance();
 
 	<div class="block_content">
 
+<?php
+
+	//We store all the breadcrumbs into a single variable
+echo '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
+						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
+						 . (!$record->id ? _($tipo['label_new']) : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>'; ?>
+
+
 		<div class="sidebar">
 			<ul class="sidemenu">
 				<?php echo $CI->form_renderer->get_sidebar($tipo); ?>
@@ -45,36 +53,32 @@ $CI = & get_instance();
 
 <?php
 
-$save_buttons = form_submit('_bt_save', _('Save'), 'class="submit" onclick="bancha.add_form_hash();"')
-			   .form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
-			   .($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
-;
+	//Messages
+	echo $this->view->get_messages();
 
 echo form_open_multipart(isset($action) ? $action : ADMIN_PUB_PATH.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
 
-$js_onload = '';
-$first_lap = TRUE;
-$has_full_textarea = FALSE;
-$p_start = '<p>';
-$p_end = '</p>';
-$validator_rules = array();
+/******************************/
+/* Recurring variables */
 
-$breadcrumbs_render = '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == 'contents' ? _('Contents') : _('Pages')).'</a> '
-						 . '&raquo; <a href="'.admin_url($_section.'/type/'.$tipo['id']).'">'.$tipo['description'].'</a> &raquo; '
-						 . (!$record->id ? _($tipo['label_new']) : (_('Edit content') . ' &raquo; <strong>' . $record->get($tipo['edit_link']) . '</strong>')) . '</p>';
+	$js_onload = '';
+	$first_lap = TRUE;
+	$has_full_textarea = FALSE;
+	$p_start = '<div class="fieldset clearfix">';
+	$p_end = '</div></div>';
+	$validator_rules = array();
+
+/* End of recurring variables */
+/******************************/
+
+
 
 foreach ($tipo['fieldsets'] as $fieldset)
 {
 
 	echo '<div class="sidebar_content" id="sb-'.url_title($fieldset['name']).'">';
 
-			//Breadcrumbs
-			echo $breadcrumbs_render;
-
-			//Messages
-			echo $this->view->get_messages();
-
-			echo br(1).'<h3>'._($fieldset['name']).'</h3>'.br(1);
+			echo '<h3>'._($fieldset['name']).'</h3>';
 
 	if ($first_lap == true)
 	{
@@ -84,7 +88,9 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			if ($record->id && isset($page_url))
 			{
 				$url = site_url($page_url);
-				echo _('The address of this page is:').br(1).'<a target="_blank" href="'.$url.'">'.$url.'</a>'.br(2);
+				echo '<div class="fieldset clearfix">'
+					 . '<label>' . _('Page address:') . '</label>'
+					 . '<label class="full"><a target="_blank" href="'.$url.'">'.$url.'</a></label></div>';
 			}
 		}
 	}
@@ -96,11 +102,9 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		$attributes = array();
 
 		$field_note = '';
-		$mandatory = '';
-		if ($field['mandatory'] == TRUE)
+		if ($field['note'])
 		{
-			$field_note = '<span class="note">*' . _('Mandatory') . '</span>';
-			$mandatory = '*';
+			$field_note = '<span class="note">' . _($field['note']) . '</span>';
 		}
 
 		//Validation rules
@@ -113,7 +117,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			);
 		}
 
-		$label = form_label(_($field['description']) . $mandatory, $field_name, $attributes);
+		$label = form_label(_($field['description']), $field_name, $attributes) . '<div class="right">';
 
 		//We evaluates the evals
 		if ($field['default'] && substr($field['default'], 0, 5) == 'eval:')
@@ -164,21 +168,21 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'text'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
+				echo $p_start.$label.form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'password':
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'text'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_password($attributes).$field_note.$p_end;
+				echo $p_start.$label.form_password($attributes).$field_note.$p_end;
 				break;
 
 			case 'textarea':
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'wysiwyg'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				echo $p_start.$label.form_textarea($attributes).$p_end;
 				break;
 
 			case 'textarea_code':
@@ -186,7 +190,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'code'.($field['mandatory']?' mandatory':'');
 				$attributes['id'] = 'texteditor_'.$field_name;
-				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				echo $p_start.$label.form_textarea($attributes).$p_end;
 				$js_onload.= "bancha.tab_textarea('#".$attributes['id']."');";
 				break;
 
@@ -197,14 +201,14 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['id'] = 'ckeditor_'.$field_name;
 				$js_onload .="CKEDITOR.replace( '".$attributes['id']."', { filebrowserBrowseUrl : admin_url + 'ajax/finder/' + $('input[name=".$tipo['primary_key']."]').val() });";
 				$has_full_textarea = TRUE;
-				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				echo $p_start.$label.form_textarea($attributes).$p_end;
 				break;
 
 			case 'date':
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
+				echo $p_start.$label.form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'datetime':
@@ -216,7 +220,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['name'] = $field_name;
 				$attributes['value'] = $tmp[0] ? $tmp[0] : date(LOCAL_DATE_FORMAT);
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes);
+				echo $p_start.$label.form_input($attributes);
 
 				$attributes['name'] = '_time_'.$field_name;
 				$attributes['value'] = isset($tmp[1]) ? $tmp[1] : date('H:i');
@@ -241,11 +245,11 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				}
 				$add .= 'class="styled'.($field['mandatory']?' mandatory':'');
 				$add .='" ';
-				echo $p_start.$label.br(1).form_dropdown($field_name, $field['options'], $field_value, $add).$field_note.$p_end;
+				echo $p_start.$label.form_dropdown($field_name, $field['options'], $field_value, $add).$field_note.$p_end;
 				break;
 
 			case 'checkbox':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				foreach ($field['options'] as $opt_key => $opt_val) {
 					$checked = is_array($field_value) ? (in_array($opt_key, $field_value) ? 'checked' : '') : '';
 					$data = array(
@@ -269,7 +273,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$add .= 'multiple size="999" class="multi '.($field['mandatory']?' mandatory':'');
 				$add .='" ';
 				$field['options']['multiple'] = '';
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 
 				$left_options = array();
 				$right_options = array();
@@ -300,7 +304,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'radio':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				foreach ($field['options'] as $opt_key => $opt_val) {
 					$data = array(
 					    'name'        => $field_name,
@@ -315,7 +319,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'images':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				$count = $field_value != '' ? count($field_value) : 0;
 
 				//Multi upload on webkit+ff browsers
@@ -323,7 +327,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['multiple'] = ' ';
 
 				if ($count < $field['max']) {
-					echo br(1).form_upload($attributes).br(1).$this->lang->_trans('You can attach up to %n images', array('n' => $field['max']));
+					echo form_upload($attributes).br(1).$this->lang->_trans('You can attach up to %n images', array('n' => $field['max']));
 				} else {
 					echo '<span class="limit">'._('Number of uploadable images excedeed.').'</span>';
 					echo '<div class="hidden limit">'.br(1).form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n images', array('n' => $field['max'])).')</div>';
@@ -353,7 +357,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'files':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				$count = $field_value != '' ? count($field_value) : 0;
 
 				//Multi upload on webkit+ff browsers
@@ -361,7 +365,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['multiple'] = ' ';
 
 				if ($count < $field['max']) {
-					echo br(1).form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n files', array('n' => $field['max'])).')';
+					echo form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n files', array('n' => $field['max'])).')';
 				} else {
 					echo '<span class="limit">'._('File limit exceeded.').'</span>';
 					echo '<div class="hidden limit">'.br(1).form_upload($attributes).br(1).'('.$this->lang->_trans('You can attach up to %n files', array('n' => $field['max'])).')</div>';
@@ -401,10 +405,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		}
 
-		if ($field['type'] != 'hidden')
-		{
-			echo "<br />\n";
-		}
+		echo "\r";
 
 		if (isset($field['visible'])) {
 			if ($field['visible'] === false) {
@@ -414,8 +415,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 	}
 
-	echo $save_buttons;
-
 	echo '</div>';
 
 } //end fieldset foreach
@@ -424,17 +423,9 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	<div class="sidebar_content" id="sb_category">
 		<?php
 
-		//Breadcrumbs
-		echo $breadcrumbs_render;
-
-		//Messages
-		echo $this->view->get_messages().'<br />';
-
-		echo '<h3>'._('Categories').'</h3>';
+		echo '<div class="fieldset clearfix"><label>'._('Categories').'</label><div class="right">';
 
 		if (count($categories)) { ?>
-
-		<p><?php echo _('This content can be associated to these categories'); ?>:<br /></p>
 
 		<?php
 			$data = array(
@@ -448,11 +439,11 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				echo form_checkbox($data).form_label(' '.$category->name, 'categories[]');
 			}
 
-			echo br(3).$save_buttons;
-
 		} else {
 			echo '<p>'._('This type has no categories').'.</p>';
 		}
+
+		echo '</div></div>';
 
 		?>
 
@@ -464,12 +455,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		<?php
 
-		//Breadcrumbs
-		echo $breadcrumbs_render;
-
-		//Messages
-		echo $this->view->get_messages().'<br />';
-
 		echo '<h3>'._('Hierarchies').'</h3>';
 
 		if ($this->config->item('hierarchies')) {
@@ -478,53 +463,55 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 			?>
 
-		<p><?php echo _('This content can be associated to these hierarchies'); ?>:<br /></p>
+		<div class="fieldset clearfix">
+			<label><?php echo _('Hierarchies'); ?></label>
+			<div class="right">
+				<div id="hierarchies"></div>
 
-		<div id="hierarchies"></div>
+				<?php
+					
 
-		<?php
-			echo br(3).$save_buttons;
-
-		} else {
-			echo '<p>'._('There are no hierarchies').'.</p>';
-		}
+				} else {
+					echo '<p>'._('There are no hierarchies').'.</p>';
+				}
 
 
-		?>
+			?>
+			</div>
+		</div>
 
 	</div>
 	<?php }
 
-echo form_close() . br(2);
+	echo '<div class="fieldset noborder"><label></label><div class="right">'
+		 . form_submit('_bt_save', _('Save'), 'class="submit"')
+		 . form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
+		 . ($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
+		 . '</div><div class="clear"></div></div>';
+
+echo form_close();
 
 ?>
-
 	</div>
-	<div class="bendl"></div>
-	<div class="bendr"></div>
-
 </div>
 
 <div class="hidden">
 		<div id="js_errors">
-			<div class="block">
+			<div class="block no_margin">
 
-			<div class="block_head">
-				<div class="bheadl"></div>
-				<div class="bheadr"></div>
+				<div class="block_head">
+					<div class="bheadl"></div>
+					<div class="bheadr"></div>
 
-				<h2><?php echo _('Errors'); ?></h2>
+					<h2><?php echo _('Errors'); ?></h2>
 
-				<ul>
-					<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/delete.png'); ?>" /> <a href="#" onclick="$('#cboxClose').click();"> <?php echo _('Close'); ?></a></li>
-				</ul>
+					<ul>
+						<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/delete.png'); ?>" /> <a href="#" onclick="$('#cboxClose').click();"> <?php echo _('Close'); ?></a></li>
+					</ul>
+				</div>
+
+				<div class="block_content"></div>
 			</div>
-
-			<div class="block_content"></div>
-
-			<div class="bendl"></div>
-			<div class="bendr"></div>			
-
 		</div>
 </div>
 
@@ -534,7 +521,8 @@ echo form_close() . br(2);
 <?php }
 
 if ($tipo['has_attachments']) {
-	$js_onload.= "$('table.sortable tbody').sortable({ stop: function(event, ui) { bancha.sort_priority(event, ui); } });";
+	$js_onload.= "$('table.sortable tbody').sortable({ stop: function(event, ui) {"
+				." bancha.sort_priority(event, ui); } });";
 	?>
 <script type="text/javascript" src="<?php echo site_url() . THEMESPATH; ?>admin/js/jquery-ui.js"></script>
 <?php } ?>
@@ -545,17 +533,21 @@ if ($tipo['has_attachments']) {
 <script type="text/javascript">
 $(document).ready(function() {
 	<?php echo $js_onload; ?>
+
 	var validator = new FormValidator('record_form',
 		<?php echo json_encode($validator_rules); ?>,
 		function(errors, events) {
+
 		    if (errors.length > 0) {
-		        // Show the errors
 		        var el = $('#js_errors .block_content');
 		        el.html('');
-		        $.each(errors, function(el) {
-		        	el.append('<div class="message error">' + er + '</div>');
+		        $.each(errors, function(er) {
+		        	el.append('<div class="message error">' + this + '</div>');
 		        });
 		        $.colorbox({width:"65%", inline:true, href:"#js_errors"});
+
+		    } else {
+		    	bancha.add_form_hash('#record_form');
 		    }
 		}
 	);

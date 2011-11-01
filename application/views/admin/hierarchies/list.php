@@ -15,18 +15,8 @@ $this->load->helper('form');
 <div class="block withsidebar">
 
 	<div class="block_head">
-		<div class="bheadl"></div>
-		<div class="bheadr"></div>
-
 		<h2><?php echo _('Manage hierarchies'); ?></h2>
-
-		<ul>
-		</ul>
-
 	</div>
-
-
-
 	<div class="block_content">
 
 		<div class="sidebar">
@@ -34,14 +24,15 @@ $this->load->helper('form');
 				<li><a href="#list"><?php echo _('Hierarchies list'); ?></a></li>
 				<li><a href="#add"><?php echo _('Add hierarchy'); ?></a></li>
 			</ul>
-			<p></p>
 		</div>
+
+		<?php echo $this->view->get_messages(); ?>
 
 		<div class="sidebar_content" id="list">
 			<h3><?php echo _('Hierarchies list'); ?></h3>
 			<p><?php echo _('Here you will find the inserted hierarchies.'); ?></p>
 
-			<?php echo $this->view->get_messages(); ?>
+			
 
 			<?php if (count($hierarchies)) { ?>
 			<form action="" method="POST" class="tree">
@@ -81,12 +72,7 @@ echo form_close();
 ?>
 
 		</div>
-
 	</div>
-
-	<div class="bendl"></div>
-	<div class="bendr"></div>
-
 </div>
 
 <?php

@@ -30,18 +30,21 @@ $attributes = array();
 $attributes['name'] = 'description';
 $attributes['value'] = $tipo['description'];
 $attributes['class'] = 'text';
-echo form_label(_('Type description'), 'description') . br(1);
-echo form_input($attributes) . br(2);
+echo '<div class="fieldset clearfix">';
+echo form_label(_('Type description'), 'description') . '<div class="right">';
+echo form_input($attributes) . '</div></div>';
 
 $attributes = array();
 $attributes['name'] = 'xml';
 $attributes['class'] = 'scheme code';
 $attributes['value'] = $xml;
 $attributes['style'] = 'height:400px;';
-echo form_label(_('XML Structure'), 'xml') . br(1);
-echo form_textarea($attributes) . br(2);
+echo '<div class="fieldset clearfix">';
+echo form_label(_('XML Structure'), 'xml') . '<div class="right">';
+echo form_textarea($attributes) . '</div></div>';
 
-echo form_submit('save', _('Save scheme'), 'class="submit long"') . br(2);
+echo '<div class="fieldset clearfix noborder"><label></label><div class="right">';
+echo form_submit('save', _('Save scheme'), 'class="submit long"') . '</div></div>';
 
 echo form_close();
 
