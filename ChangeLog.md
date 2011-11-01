@@ -16,6 +16,8 @@
 - Added the API documentation
 - Tokens have been slightly changed to improve compatibility between different types of requests
 - Many italian translations have been added
+- Removed the "username" key on the api_tokens table
+- Added a "limit" parameter to the last events controller (dashboard/events)
 
 
 **v 0.8.4** (2011-10-25)

@@ -117,6 +117,11 @@ $menu = array(
 				'segment' => 'hierarchies'
 			),
 			array(
+				'name'	=> _('Last events'),
+				'url'	=> $_admin_url . 'dashboard/events',
+				'altsegment' => 'events'
+			),
+			array(
 				'name'	=> _('Import/export data'),
 				'url'	=> $_admin_url . 'import',
 				'segment' => 'import'
