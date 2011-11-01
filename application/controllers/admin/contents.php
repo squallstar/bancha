@@ -76,18 +76,20 @@ Class Contents extends Bancha_Controller
     * Legacy name of the record_list function
     * @param int|string $tipo
     * @param int $page
+    * @param int $per_page
     */
-    public function type($tipo='', $page=0)
+    public function type($tipo='', $page=0, $per_page=0)
     {
-    	$this->record_list($tipo, $page);
+    	$this->record_list($tipo, $page, $per_page);
     }
 
     /**
     * A record list of a single content type
     * @param int|string $tipo
     * @param int $page
+    * @param int $per_page
     */
-    public function record_list($tipo='', $page=0)
+    public function record_list($tipo='', $page=0, $per_page = 0)
     {
         if ($tipo == '')
         {
@@ -189,7 +191,7 @@ Class Contents extends Bancha_Controller
         	$this->records->where('id_parent', $parent_id);
         }
 
-        //Filtri manuali
+        //Manual filters
         $filters_manual = array($type['primary_key'], 'published');
         foreach ($filters_manual as $filter) {
         	$filters[$filter] = isset($post_filters[$filter]) ? $post_filters[$filter] : '';
@@ -205,10 +207,11 @@ Class Contents extends Bancha_Controller
         $this->view->set('filters', $filters);
         $this->view->set('admin_fields', $admin_fields);
 
-        //Paginazione
+        //Pagination
+        $per_page = $per_page != 0 ? $per_page : $this->config->item('records_per_page');
         $pagination = array(
             	'total_rows'	=> $this->records->type($tipo)->count(),
-            	'per_page'		=> $this->config->item('records_per_page'),
+            	'per_page'		=> $per_page,
             	'base_url'		=> admin_url('contents/type/'.$tipo.'/'),
             	'uri_segment'	=> 5,
             	'cur_tag_open'	=> '<a href="#" class="active">',
@@ -220,7 +223,7 @@ Class Contents extends Bancha_Controller
         $this->load->library('pagination');
         $this->pagination->initialize($pagination);
 
-        //Ottengo i records
+        //We get the records
         $records = $this->records->type($tipo)
         						 ->set_adminlist(TRUE)
         						 ->order_by('date_update', 'DESC')

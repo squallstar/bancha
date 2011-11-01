@@ -19,6 +19,7 @@
 - Removed the "username" key on the api_tokens table
 - Added a "limit" parameter to the last events controller (dashboard/events)
 - Records that are not published will be displayed with a yellow background on the record list
+- Added a third parameter (per_page) to the record_list function
 
 
 **v 0.8.4** (2011-10-25)
