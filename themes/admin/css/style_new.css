@@ -177,7 +177,7 @@ h1 {
 .block {
 	margin-left:200px;
 }
-body.no-header .block {
+body.no-header .block, .block.no_margin {
 	margin-left:0;
 }
 
