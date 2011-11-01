@@ -668,6 +668,7 @@ table.sortable td img {
 	border: 0;
 	width: 500px;
 	overflow: hidden;
+	margin-right:20px;
 	}
 
 .block .pagination a {
