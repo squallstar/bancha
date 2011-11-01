@@ -39,9 +39,13 @@ Class Dashboard extends Bancha_Controller {
 		$this->view->render_layout('dashboard/intro');	
 	}
 
-	public function events()
+	public function events($limit = 30)
 	{
-		$this->view->set('events', $this->events->get_last(10));
+		if ($limit == 'all')
+		{
+			$limit = 999999;
+		}
+		$this->view->set('events', $this->events->get_last($limit));
 
 		$this->view->render_layout('dashboard/events');
 	}

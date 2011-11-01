@@ -4,7 +4,7 @@
 		<div class="bheadl"></div>
 		<div class="bheadr"></div>
 
-		<h2><?php echo $this->lang->_trans('Welcome back, %u', array('u'=>$this->auth->user('full_name')))?></h2>
+		<h2><?php echo $this->lang->_trans('Last %n events.', array('n' => count($events)))?></h2>
 	</div>		<!-- .block_head ends -->
 
 
