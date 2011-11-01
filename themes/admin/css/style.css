@@ -727,3 +727,27 @@ table.sortable td img {
 	border-bottom: 1px solid #ddd;
 	margin-bottom: 15px;
 	}
+
+/** DASHBOARD **/
+.block.grain {
+	background:url('../widgets/grain.gif') repeat;
+	width:100%;
+	height:100%;
+	position:fixed;
+}
+.grain .shadow {
+	width:96px;
+	height:100%;
+	position:absolute;
+	background:url('../widgets/dashboard_shadow.png') repeat-y;
+}
+.logo_shadow {
+	width:398px;
+	height:378px;
+	position:absolute;
+	margin:-200px 0 0 -100px;
+	left:50%;
+	top:50%;
+	background:url('../widgets/logo_shadow.png') no-repeat;
+	z-index:10;
+}

@@ -24,21 +24,26 @@ Class Dashboard extends Bancha_Controller {
 	    $this->load->events();
 	}
 
-	public function index() {
+	public function index()
+	{
 		$this->welcome();
 	}
 
-	public function welcome($lang = '') {
-		
+	public function welcome($lang = '')
+	{
 		if ($lang != '')
 		{
 			$this->lang->set_lang($lang);
 			$this->lang->set_cookie();
 		}
+		$this->view->render_layout('dashboard/intro');	
+	}
 
+	public function events()
+	{
 		$this->view->set('events', $this->events->get_last(10));
 
-		$this->view->render_layout('dashboard/welcome');
+		$this->view->render_layout('dashboard/events');
 	}
 
 }
