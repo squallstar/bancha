@@ -239,6 +239,9 @@ var bancha = {
 			return false;
 		}
 	},
+	save_form : function() {
+		bancha.add_form_hash();	
+	},
 	add_form_hash : function() {
 		var attr = $('form').attr('action').split('#');
 		$('form').attr('action', attr[0] + window.location.hash);
