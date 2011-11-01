@@ -116,13 +116,14 @@ $fields = array_keys($tipo['fields']);
 <?php
 	foreach ($records as $record)
 	{
-		echo '<tr>';
+		$is_published = $record->get('published');
+		echo '<tr' . ($tipo['stage'] && ($is_published == '0' || !$is_published) ? ' class="draft"' : '') . '>';
 
 			$track_str = $tipo['name'].'/'.$record->id;
 
 			$current_url = admin_url($_section.'/type/'.$tipo['name']);
 
-			//Campi ricorrenti
+			//Recurrent fields
 			echo '<td><input type="checkbox" name="record[]" value="'.$record->id.'"/></td>';
 
 			$primary_key = $tipo['primary_key'];
@@ -130,10 +131,10 @@ $fields = array_keys($tipo['fields']);
 
 			if ($tipo['stage'])
 			{
-				if ($record->get('published') == '0' || !$record->get('published')) {
+				if ($is_published == '0' || !$is_published) {
 					//Solo bozza
 					echo '<td><a href="'.$current_url.'?publish='.$record->id.'"><img class="middle" border="0" src="'.site_url(THEMESPATH.'admin/widgets/icns/page_edit.png').'" /></a> '._('Draft').'</td>';
-				} else if ($record->get('published') == '2') {
+				} else if ($is_published == '2') {
 					//Bozza + pubblico
 					echo '<td><a href="'.$current_url.'?depublish='.$record->id.'"><img class="middle" border="0" src="'.site_url(THEMESPATH.'admin/widgets/icns/page_copy.png').'" /></a> '._('Different').'</td>';
 				} else if (isset($tipo['fields']['date_publish']) && ((int)$record->get('_date_publish')) > time()) {

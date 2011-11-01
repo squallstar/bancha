@@ -607,6 +607,12 @@ table.sortable td img {
 .block table tr.even td {
 	background: #fbfbfb;
 	}
+.block table tr.odd.draft td {
+	background: #ffffe3;
+	}
+.block table tr.even.draft td {
+	background: #ffffe3;
+	}
 
 .block table tr td,
 .block table tr th {
