@@ -38,8 +38,6 @@ $CI = & get_instance();
 //Messages
 echo $this->view->get_messages();
 
-$save_buttons = '<div class="fieldset noborder clearfix"><label></label><div class="right">'.form_submit('_bt_save', _('Update settings'), 'class="submit long" onclick="bancha.add_form_hash();"') . '</div></div>';
-
 echo form_open(null, array('id' => 'record_form', 'name' => 'record_form'));
 
 $js_onload = '';
@@ -88,11 +86,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		{
 			$attributes['onkeyup'] = $field['onkeyup'];
 			$js_onload .= trim($field['onkeyup'], ';').'; ';
-		}
-
-		if ($field['mandatory'] && in_array($field['type'], array('text', 'number', 'date', 'datetime')))
-		{
-			$attributes['required'] = 'required';
 		}
 
 		//Localized options
@@ -268,19 +261,16 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		}
 	}
 
-	echo $save_buttons;
-
 	echo '</div>';
 
 } //end fieldset foreach
 
-echo form_close() . br(2);
+echo '<div class="fieldset noborder clearfix"><label></label><div class="right">'.form_submit('_bt_save', _('Update settings'), 'class="submit long" onclick="bancha.add_form_hash(\'#record_form\');"') . '</div></div>';
+
+echo form_close();
 
 ?>
 	</div>
-	<div class="bendl"></div>
-	<div class="bendr"></div>
-
 </div>
 
 <?php if ($has_full_textarea) { ?>

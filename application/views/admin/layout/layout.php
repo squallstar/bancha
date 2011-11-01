@@ -28,7 +28,7 @@ if ($this->input->is_ajax_request())
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
 		<meta http-equiv="X-UA-Compatible" content="IE=7" />
 		<style type="text/css" media="all">
-			@import url("<?php echo $css_url; ?>style_new.css");
+			@import url("<?php echo $css_url; ?>style.css");
 			@import url("<?php echo $css_url; ?>jquery.wysiwyg.css");
 			@import url("<?php echo $css_url; ?>facebox.css");
 			@import url("<?php echo $css_url; ?>visualize.css");

@@ -10,7 +10,7 @@ if (!function_exists('admin_url')) {
 	}
 }
 ?><!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 	<head>
 
 		<style type="text/css" media="all">
@@ -30,15 +30,13 @@ if (!function_exists('admin_url')) {
    		<script type="text/javascript" src="<?php echo site_url(NULL, FALSE) . THEMESPATH; ?>admin/js/jquery.js"></script>
 
 	</head>
-	<body>
-
-	<body>
+	<body class="no-header">
 
 			<div id="hld">
 				<div class="wrapper">
 
 
-				<div class="block">
+				<div class="block no_margin">
 
 					<div class="block_head">
 						<div class="bheadl"></div>
@@ -54,17 +52,13 @@ if (!function_exists('admin_url')) {
 
 					<div class="block_content">
 
-
-
-							<h3>Descrizione dell'errore</h3>
 							<div class="message errormsg"><?php echo $message; ?></div>
 
-							<p><a href="javascript:history.go(-1);">&laquo; Torna indietro</a><br /></p>
+							<div class="internal_padding">
+								<p><a href="javascript:history.go(-1);">&laquo; Torna indietro</a></p>
+							</div>
 
 					</div>
-
-					<div class="bendl"></div>
-					<div class="bendr"></div>
 
 				</div>
 
