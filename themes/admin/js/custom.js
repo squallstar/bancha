@@ -240,7 +240,7 @@ var bancha = {
 		}
 	},
 	add_form_hash : function(el) {
-		var obh = $(el), attr = obj.attr('action').split('#');
+		var obj = $(el), attr = obj.attr('action').split('#');
 		obj.attr('action', attr[0] + window.location.hash);
 		return true;
 	},
