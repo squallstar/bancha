@@ -2,7 +2,8 @@
 
 **v 0.9.1** (2011-10-02)
 
-- The limit function of the Records model now will prevent a negative limit to be set
+- The limit function of the Records, Pages and Users model now will prevent a negative limit to be set
+- Page URI now will be trimmed by whitespaces at the end/start of the string
 
 
 **v 0.9.0** (2011-10-01)
