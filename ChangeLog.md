@@ -1,5 +1,28 @@
 ## Bancha Change Log file ##
 
+**v 0.9.0** (2011-10-X)
+
+- Default type templates views (detail and list) have been refactored
+- Corrected a bug on the "where_in" active record function (missed a space after 'AND')
+- New admin layout! Re-designed from scratch :)
+- Blog premade template: little bug fix on the "published" field
+- Added a config variable to set whether multiple tokens can be handle a single username
+- The attach_url() helper now correctly skips the language parameter when generates an url
+- Added a "separator" parameter to the breadcrumbs helper
+- Introduced the relations between record objects (1-0, 1-1, 1-n) - experimental
+- New function added to record objects: relation()
+- Relations documentation has been added
+- New method added to the API system: logout
+- Added the API documentation
+- Tokens have been slightly changed to improve compatibility between different types of requests
+- Many italian translations have been added
+- Removed the "username" key on the api_tokens table
+- Added a "limit" parameter to the last events controller (dashboard/events)
+- Records that are not published will be displayed with a yellow background on the record list
+- Added a third parameter (per_page) to the record_list function
+- Added a "note" attribute to the description node of each field
+
+
 **v 0.8.4** (2011-10-25)
 
 - Experimental: API implementation
@@ -8,6 +31,7 @@
 - New model added: Model_tokens
 - Now is possible to login via the new API system
 - You can query the records model via the API method "records" to retrieve records or perform many other operations
+
 
 **v 0.8.3** (2011-10-24)
 

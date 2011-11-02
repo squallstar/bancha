@@ -22,9 +22,6 @@ $CI = & get_instance();
 <div class="block withsidebar">
 
 	<div class="block_head">
-		<div class="bheadl"></div>
-		<div class="bheadr"></div>
-
 		<h2><?php echo _('Manage settings'); ?></h2>
 	</div>
 
@@ -37,25 +34,22 @@ $CI = & get_instance();
 			<p><?php echo _('Scheme'); ?>: <strong><?php echo $scheme_name; ?></strong></p>
 		</div>
 <?php
-$save_buttons = form_submit('_bt_save', _('Update settings'), 'class="submit long" onclick="bancha.add_form_hash();"');
+
+//Messages
+echo $this->view->get_messages();
 
 echo form_open(null, array('id' => 'record_form', 'name' => 'record_form'));
 
 $js_onload = '';
 $first_lap = TRUE;
 $has_full_textarea = FALSE;
-$p_start = '<p>';
-$p_end = '</p>';
+$p_start = '<div class="fieldset clearfix">';
+$p_end = '</div></div>';
 
 foreach ($tipo['fieldsets'] as $fieldset)
 {
 
 	echo '<div class="sidebar_content" id="sb-'.url_title($fieldset['name']).'">';
-
-	//Messages
-	echo $this->view->get_messages();
-
-	echo br(1).'<h3>'._($fieldset['name']).'</h3>'.br(1);
 
 	foreach ($fieldset['fields'] as $field_name)
 	{
@@ -63,7 +57,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		$attributes = array();
 
-		$label = form_label(_($field['description']), $field_name, $attributes);
+		$label = form_label(_($field['description']), $field_name, $attributes) . '<div class="right">';
 
 		//We evaluates the evals
 		if ($field['default'] && substr($field['default'], 0, 5) == 'eval:')
@@ -94,11 +88,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			$js_onload .= trim($field['onkeyup'], ';').'; ';
 		}
 
-		if ($field['mandatory'] && in_array($field['type'], array('text', 'number', 'date', 'datetime')))
-		{
-			$attributes['required'] = 'required';
-		}
-
 		//Localized options
 		if (isset($field['options']) && is_array($field['options']) && $field['type'] != 'hierarchy')
 		{
@@ -120,14 +109,14 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'text'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$p_end;
+				echo $p_start.$label.form_input($attributes).$p_end;
 				break;
 
 			case 'textarea':
 				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'wysiwyg'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				echo $p_start.$label.form_textarea($attributes).$p_end;
 				break;
 
 			case 'textarea_code':
@@ -135,7 +124,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'code'.($field['mandatory']?' mandatory':'');
 				$attributes['id'] = 'texteditor_'.$field_name;
-				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				echo $p_start.$label.form_textarea($attributes).$p_end;
 				$js_onload.= "bancha.tab_textarea('#".$attributes['id']."');";
 				break;
 
@@ -146,14 +135,14 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['id'] = 'ckeditor_'.$field_name;
 				$js_onload .="CKEDITOR.replace( '".$attributes['id']."', { filebrowserBrowseUrl : admin_url + 'ajax/finder/' + $('input[name=".$tipo['primary_key']."]').val() });";
 				$has_full_textarea = TRUE;
-				echo $p_start.$label.br(1).form_textarea($attributes).$p_end;
+				echo $p_start.$label.form_textarea($attributes).$p_end;
 				break;
 
 			case 'date':
 				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$p_end;
+				echo $p_start.$label.form_input($attributes).$p_end;
 				break;
 
 			case 'datetime':
@@ -161,7 +150,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['name'] = $field_name.'['.$module.']';
 				$attributes['value'] = $tmp[0] ? $tmp[0] : date(LOCAL_DATE_FORMAT);
 				$attributes['class'] = 'date_picker text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes);
+				echo $p_start.$label.form_input($attributes);
 
 				$attributes['name'] = '_time_'.$field_name.'['.$module.']';
 				$attributes['value'] = isset($tmp[1]) ? $tmp[1] : date('H:i');
@@ -176,7 +165,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['type'] = 'number';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'number text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$p_end;
+				echo $p_start.$label.form_input($attributes).$p_end;
 				break;
 
 			case 'select':
@@ -187,11 +176,11 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				}
 				$add .= 'class="styled'.($field['mandatory']?' mandatory':'');
 				$add .='" ';
-				echo $p_start.$label.br(1).form_dropdown($field_name.'['.$module.']', $field['options'], $field_value, $add).$p_end;
+				echo $p_start.$label.form_dropdown($field_name.'['.$module.']', $field['options'], $field_value, $add).$p_end;
 				break;
 
 			case 'checkbox':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				foreach ($field['options'] as $opt_key => $opt_val) {
 					$checked = is_array($field_value) ? (in_array($opt_key, $field_value) ? 'checked' : '') : '';
 					$data = array(
@@ -215,7 +204,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$add .= 'multiple size="999" class="multi '.($field['mandatory']?' mandatory':'');
 				$add .='" ';
 				$field['options']['multiple'] = '';
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 
 				$left_options = array();
 				$right_options = array();
@@ -246,7 +235,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 
 			case 'radio':
-				echo $p_start.$label.br(1);
+				echo $p_start.$label;
 				foreach ($field['options'] as $opt_key => $opt_val) {
 					$data = array(
 					    'name'        => $field_name.'['.$module.']',
@@ -261,10 +250,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 		}
 
-		if ($field['type'] != 'hidden')
-		{
-			echo "<br />\n";
-		}
+		
 
 		if (isset($field['visible']))
 		{
@@ -275,19 +261,16 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		}
 	}
 
-	echo $save_buttons;
-
 	echo '</div>';
 
 } //end fieldset foreach
 
-echo form_close() . br(2);
+echo '<div class="fieldset noborder clearfix"><label></label><div class="right">'.form_submit('_bt_save', _('Update settings'), 'class="submit long" onclick="bancha.add_form_hash(\'#record_form\');"') . '</div></div>';
+
+echo form_close();
 
 ?>
 	</div>
-	<div class="bendl"></div>
-	<div class="bendr"></div>
-
 </div>
 
 <?php if ($has_full_textarea) { ?>

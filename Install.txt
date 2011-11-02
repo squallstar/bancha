@@ -26,6 +26,8 @@ HOW TO INSTALL BANCHA
  6. You're done! The install script will create a content type named "Menu" which is
  	linked to the page tree of your website.
 
+Need to reinstall? Just remove the **is_installed** row from the database table named **settings**.
+
 **************************************
 
 BANCHA DOCUMENTATION

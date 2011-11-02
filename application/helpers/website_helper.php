@@ -73,7 +73,7 @@ function theme_url($str = '')
  */
 function attach_url($str='')
 {
-	return site_url(config_item('attach_out_folder') . str_replace('\\', '/', $str));
+	return site_url(config_item('attach_out_folder') . str_replace('\\', '/', $str), FALSE);
 }
 
 /**

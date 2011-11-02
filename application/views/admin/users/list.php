@@ -6,8 +6,6 @@ $this->load->helper('text');
 <div class="block">
 
 	<div class="block_head">
-		<div class="bheadl"></div>
-		<div class="bheadr"></div>
 
 		<h2><?php echo _('Users list')?></h2>
 

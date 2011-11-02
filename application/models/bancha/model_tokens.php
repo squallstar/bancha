@@ -12,12 +12,15 @@
  *
  */
 
-Class Model_tokens extends CI_Model {
+Class Model_tokens extends CI_Model
+{
+	private $_shared_tokens = FALSE;
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library('encrypt');
+		$this->_shared_tokens = $this->config->item('shared_api_token');
 	}
 
 	/**
@@ -30,10 +33,10 @@ Class Model_tokens extends CI_Model {
 	{
 		if (strlen($token))
 		{
-			//GET params have whitespaces instead of the plus sign
-			$token = str_replace(' ', '+', $token);
+			//Will get safer queries
+			$encoded_token = urlencode($token);
 
-			$res = $this->db->select('username')->from('api_tokens')->where('token', $token)
+			$res = $this->db->select('username')->from('api_tokens')->where('token', $encoded_token)
 						    ->limit(1)->get();
 			if ($res->num_rows())
 			{
@@ -67,10 +70,13 @@ Class Model_tokens extends CI_Model {
 		{
 			//We generate the token
 			$data = $user->id_user . '|' . $user->id_group . '|' . time();
-			$token = $this->encrypt->encode($data);
+			$token = urlencode($this->encrypt->encode($data));
 
-			//We delete old tokens
-			$this->db->where('username', $username)->delete('api_tokens');
+			//We delete old tokens if the sharing is not allowed
+			if (!$this->_shared_tokens)
+			{
+				$this->db->where('username', $username)->delete('api_tokens');
+			}
 
 			$done = $this->db->insert('api_tokens', array(
 				'username'		=> $username,
@@ -83,6 +89,29 @@ Class Model_tokens extends CI_Model {
 			}
 		} else {
 			return FALSE;
+		}
+	}
+
+	/**
+	 * Destroys a token
+	 * @param string $token
+	 * @return bool
+	 */
+	public function destroy_token($token = '')
+	{
+		if (strlen($token))
+		{
+			//Will get safer queries
+			$encoded_token = urlencode($token);
+
+			//We delete old tokens if the sharing is not allowed
+			$username = $this->auth->user('username');
+			if ($username && !$this->_shared_tokens)
+			{
+				$this->db->where('username', $username)->delete('api_tokens');
+			}
+
+			return $this->db->where('token', $encoded_token)->delete('api_tokens');
 		}
 	}
 

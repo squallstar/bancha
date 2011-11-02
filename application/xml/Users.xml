@@ -68,6 +68,7 @@
 				<select>id_group as value, group_name as name</select>
 				<from>groups</from>
 			</sql>
+			<default>1</default>
 		</field>
 	</fieldset>
 </content>

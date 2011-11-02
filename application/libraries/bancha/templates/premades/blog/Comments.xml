@@ -7,6 +7,7 @@
 	<primary_key>id_record</primary_key>
 	<table>records</table>
 	<table_stage>records_stage</table_stage>
+	<relation name="blog" type="1-1" with="Blog" from="post_id" to="id_record" />
 	<has_categories>false</has_categories>
 	<triggers>
 		<trigger on="insert, update, delete" field="post_id">

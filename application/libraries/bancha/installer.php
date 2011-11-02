@@ -295,7 +295,7 @@ Class Installer
 
 		$this->dbforge->drop_table('api_tokens');
 		$this->dbforge->add_field($api_tokens);
-		$this->dbforge->add_key('username');
+		//$this->dbforge->add_key('username');
 		$this->dbforge->create_table('api_tokens');
 
 		return TRUE;
@@ -450,7 +450,6 @@ Class Installer
 		$this->CI->settings->set('website_desktop_theme', $theme);
 		$this->CI->settings->set('website_mobile_theme', $theme);
 		$this->CI->settings->set('website_active_languages', array_keys($this->CI->config->item('languages_select')));
-		$this->CI->settings->clear_cache();
 	}
 
 	public function create_homepages()
