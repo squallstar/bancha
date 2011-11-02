@@ -18,7 +18,7 @@
    Location: Verona, IT
 
    Contributor (Front-end Developer): Matteo Gildone
-   Github: @dombender
+   Github: @DomSmasher
    Location: Verona, IT
 
    Javascript Developer: Marco Solazzi
