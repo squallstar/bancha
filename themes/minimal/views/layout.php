@@ -5,7 +5,7 @@
  * Website base rendering layout
  *
  * @package		Bancha
- * @author		Matteo Gildone - @dombender
+ * @author		Matteo Gildone - @DomSmasher
  * @copyright	Copyright (c) 2011, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
