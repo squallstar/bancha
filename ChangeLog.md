@@ -1,6 +1,11 @@
 ## Bancha Change Log file ##
 
-**v 0.9.0** (2011-10-X)
+**v 0.9.1** (2011-10-02)
+
+- The limit function of the Records model now will prevent a negative limit to be set
+
+
+**v 0.9.0** (2011-10-01)
 
 - Default type templates views (detail and list) have been refactored
 - Corrected a bug on the "where_in" active record function (missed a space after 'AND')

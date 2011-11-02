@@ -290,7 +290,10 @@ Class Model_records extends CI_Model {
   	 */
   	public function limit($a, $b=0)
   	{
-  		$this->db->limit($a, $b);
+  		if ($a > 0)
+		{
+			$this->db->limit($a, $b);
+		}
   		return $this;
   	}
 
