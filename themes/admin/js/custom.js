@@ -382,7 +382,7 @@ var bancha = {
 			$.post(admin_url + 'ajax/get_relation',
 				{ name : relation_name, id : id_record, type : content_type },
 				function(data) {
-					console.log(data);
+					$('.relation-'+relation_name).html(data);
 			});
 		}
 	}
