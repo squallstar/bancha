@@ -258,7 +258,10 @@ Class Model_Documents extends CI_Model
 	 */
 	public function limit($a, $b='')
 	{
-		$this->db->limit($a, $b);
+		if ($a > 0)
+		{
+			$this->db->limit($a, $b);
+		}
 		return $this;
 	}
 

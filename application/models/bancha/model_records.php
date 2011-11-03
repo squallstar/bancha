@@ -290,7 +290,10 @@ Class Model_records extends CI_Model {
   	 */
   	public function limit($a, $b=0)
   	{
-  		$this->db->limit($a, $b);
+  		if ($a > 0)
+		{
+			$this->db->limit($a, $b);
+		}
   		return $this;
   	}
 
@@ -553,7 +556,7 @@ Class Model_records extends CI_Model {
 		      	if (strlen($uri) < 1) {
 		        	$uri = strtolower($record->get('title'));
 		      	}
-	        	$data['uri'] = $this->get_safe_uri($uri);
+	        	$data['uri'] = $this->get_safe_uri(trim($uri));
 	        }
 
 	        //We ensure that a language will be always set if the content type supports it
