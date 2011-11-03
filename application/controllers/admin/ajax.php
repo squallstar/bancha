@@ -128,7 +128,7 @@ Class Ajax extends Bancha_Controller
 			$record = $this->records->type($type)->get($id);
 			$this->view->set('objects', $record->related($name));
 
-			$this->view->render($this->view->base . 'relations/single');
+			$this->view->render($this->view->base . 'relations/single', $this->view->get_data());
 		}
 	}
 
