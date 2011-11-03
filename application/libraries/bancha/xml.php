@@ -275,7 +275,7 @@ Class Xml
         //Relations
         if (isset($node->relation))
         {
-            $relations = array();
+            $content['relations'] = array();
             foreach ($node->relation as $node_relation)
             {
                 $attr = $node_relation->attributes();
