@@ -126,7 +126,9 @@ Class Ajax extends Bancha_Controller
 		if ($name && $id && $type)
 		{
 			$record = $this->records->type($type)->get($id);
-			echo json_encode($record->related($name));
+			$this->view->set('objects', $record->related($name));
+
+			$this->view->render($this->view->base . 'relations/single');
 		}
 	}
 
