@@ -19,17 +19,33 @@ if ($objects instanceof Record)
 if (!count($objects)) return;
 
 $tipo = $this->content->type($objects[0]->_tipo);
-
+?>
+<table cellpadding="0" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th><?php echo _('Content name'); ?></th>
+			<th><?php echo _('Content type'); ?></th>
+			<th><?php echo _('Insert date'); ?></th>
+		</tr>
+	</thead>
+	<tbody>
+<?php
 foreach ($objects as $relation) {
 	$url = admin_url(
 			($tipo['tree'] ? 'pages' : 'contents') . '/edit_record/'
 			. $tipo['name'] . '/'.$relation->id
 		);
 ?>
-<div class="item">
-	<a href="<?php echo $url; ?>"><?php echo $relation->get($tipo['edit_link']); ?></a>
-</div>
+<tr class="relation">
+	<td>
+		<img src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/pencil.png'); ?>" />
+		 <a href="<?php echo $url; ?>"><?php echo $relation->get($tipo['edit_link']); ?></a>
+	</td>
+	<td><?php echo $tipo['description']; ?></td>
+	<td><?php echo date(LOCAL_DATE_FORMAT, $relation->get('date_insert')); ?></td>
+</tr>
  
  
-<?php	
-}
+<?php } ?>
+	</tbody>
+</table>
