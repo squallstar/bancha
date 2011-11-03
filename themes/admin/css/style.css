@@ -1,9 +1,15 @@
-/*
+/**
+ * Admin theme CSS style
+ *
+ * @package		Bancha
+ * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
+ * @copyright	Copyright (c) 2011, Squallstar
+ * @license		GNU/GPL (General Public License)
+ * @link		http://squallstar.it
 
-@bancha-green : #73b38e
-
-@import url("../fonts/titillium/stylesheet.css"); (disabled)
-*/
+ * @bancha-green : #73b38e
+ *
+ */
 
 
 * { padding:0; margin:0; }
@@ -757,4 +763,19 @@ table.sortable td img {
 	top:50%;
 	background:url('../widgets/logo_shadow.png') no-repeat;
 	z-index:10;
+}
+
+/* Theme template composer */
+.theme_block {
+	background: #f6f6f6;
+	padding:13px 20px;
+	margin:20px 0;
+	border:1px solid #f0f0f0;
+}
+.theme_block .section {
+	padding:10px 15px;
+	margin:20px 0;
+	background:#e9e9e9;
+	border:1px dashed #cfcfcf;
+	cursor:move
 }
