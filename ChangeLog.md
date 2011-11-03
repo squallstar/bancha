@@ -5,7 +5,7 @@
 - The limit function of the Records, Pages and Users model now will prevent a negative limit to be set
 - Page URI now will be trimmed by whitespaces at the end/start of the string
 - Content Class got a new function: Simplify (to convert Record objects into arrays)
-- New sidebar (experimental): Relations
+- New experimental sidebar: Relations
 
 
 **v 0.9.0** (2011-10-01)
@@ -44,7 +44,7 @@
 **v 0.8.3** (2011-10-24)
 
 - Now is possible to choose the theme before installing Bancha
-- Bugfix on Javascript for each cycles (Webkit browsers)
+- Bugfix on Javascript for each cycles (onyl on Webkit browsers)
 
 
 **v 0.8.2** (2011-10-22)
