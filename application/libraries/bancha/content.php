@@ -321,30 +321,29 @@ Class Content
 
 				$all_types_id[] = $content['id'];
 				$all_types = $content['name'];
-
-				//Aggiungo il tipo
 				$contents[$content['id']] = $content;
 			}
 		}
 
 		if ($this->CI->config->item('delete_dead_records') == TRUE)
 		{
-			//Elimino i dead records
+			//We delete the dead records
 			$this->CI->load->records();
-			//TODO: modifica per fare il delete in base alla tabella del tipo
+			//TODO: we need to clean content types on external tables
 			$this->CI->db->where_not_in('id_type', $all_types_id)->delete($this->CI->records->table_stage);
 			$this->CI->db->where_not_in('id_type', $all_types_id)->delete($this->CI->records->table);
 		}
 
-		//Scrivo in cache i tipi
+		//We write the content types cache into a file
 		$done = write_file($this->types_cache_folder, serialize($contents));
 
-		//Pulisco il menu principale del sito
+		//And we finally clear the website menu
 		if (isset($this->CI->tree))
 		{
 			$this->CI->tree->clear_cache();
 		}
 
+		//Translations need to be updated
 		$this->CI->xml->update_translations();
 
 		return $done;
@@ -379,7 +378,7 @@ Class Content
 			$data = $object->get_data();
 			unset($data['xml']);
 			return $data;
-			
+
 		} else if (is_array($object) && count($object) && $object[0] instanceof Record)
 		{
 			$records = array();
@@ -401,7 +400,4 @@ Class Content
 	{
 		//Blah blah blash
 	}
-
-
-
 }
