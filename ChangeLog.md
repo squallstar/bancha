@@ -7,7 +7,9 @@
 - Content Class got a new function: Simplify (to convert Record objects into arrays)
 - New experimental sidebar: Relations
 - The mime type text/plain has been added to the CSV adapter
-
+- Added the strpos function to custom.js (same of PHP strpos)
+- Bug fix on the add_hash function (custom.js) to improve compatibility on Firefox
+- Tree content types now have a relation with their childs by default
 
 **v 0.9.0** (2011-10-01)
 

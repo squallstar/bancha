@@ -12,6 +12,7 @@
 	</parent_types>
 	<has_categories>true</has_categories>
 	<has_hierarchies>false</has_hierarchies>
+	<relation name="childs" type="1-n" with="{name}" from="id_record" to="id_parent" />
 	<triggers>
 		<trigger on="insert, update, delete" field="id_parent">
 			<sql action="recount" type="{name}" target="child_count" />

@@ -16,7 +16,12 @@ if ($objects instanceof Record)
 {
 	$objects = array($objects);
 }
-if (!count($objects)) return;
+
+if (!$objects || !count($objects))
+{
+	echo _('This record has no relations of this type.');
+	return;
+}
 
 if (!$objects) {
 	echo _('No relation found');
