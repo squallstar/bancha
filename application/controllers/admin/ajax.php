@@ -117,4 +117,17 @@ Class Ajax extends Bancha_Controller
 		$this->view->render_layout('content/documents_finder', FALSE);
 	}
 
+	public function get_relation()
+	{
+		$name = $this->input->post('name');
+		$id = $this->input->post('id');
+		$type = $this->input->post('type');
+
+		if ($name && $id && $type)
+		{
+			$record = $this->records->type($type)->get($id);
+			echo json_encode($record->related($name));
+		}
+	}
+
 }
