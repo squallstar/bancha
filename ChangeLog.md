@@ -6,6 +6,7 @@
 - Page URI now will be trimmed by whitespaces at the end/start of the string
 - Content Class got a new function: Simplify (to convert Record objects into arrays)
 - New experimental sidebar: Relations
+- The mime type text/plain has been added to the CSV adapter
 
 
 **v 0.9.0** (2011-10-01)
