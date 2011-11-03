@@ -367,6 +367,14 @@ Class Content
 		return $record;
 	}
 
+	function simplify($object)
+	{
+		if ($object instanceof Record)
+		{
+			
+		}
+	}
+
 	/**
 	 * FUNZIONE NON ANCORA IMPLEMENTATA
 	 * In futuro verra' implementata la creazione automatica
