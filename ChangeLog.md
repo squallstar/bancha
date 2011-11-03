@@ -1,6 +1,6 @@
 ## Bancha Change Log file ##
 
-**v 0.9.1** (2011-10-X)
+**v 0.9.1** (2011-10-03)
 
 - The limit function of the Records, Pages and Users model now will prevent a negative limit to be set
 - Page URI now will be trimmed by whitespaces at the end/start of the string
@@ -45,7 +45,7 @@
 **v 0.8.3** (2011-10-24)
 
 - Now is possible to choose the theme before installing Bancha
-- Bugfix on Javascript for each cycles (onyl on Webkit browsers)
+- Bugfix on Javascript for each cycles (only on Webkit browsers)
 
 
 **v 0.8.2** (2011-10-22)
