@@ -481,7 +481,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	</div>
 	<?php }
 
-	if (isset($tipo['relations']) && FALSE) { ?>
+	if (isset($tipo['relations'])) { ?>
 	<div class="sidebar_content" id="sb_relations">
 
 		<?php foreach ($tipo['relations'] as $rel_name => $relation) { ?>
