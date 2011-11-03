@@ -487,7 +487,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		<?php foreach ($tipo['relations'] as $rel_name => $relation) { ?>
 		<div class="fieldset clearfix">
 			<label><?php echo $rel_name; ?></label>
-			<div class="right">
+			<div class="right relation-<?php echo $rel_name; ?>">
 				<?php
 				if ($record->id) {
 					echo form_submit(
