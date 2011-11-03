@@ -382,7 +382,7 @@ Class Content
 			$records = array();
 			foreach ($object as $record)
 			{
-				$records[] = $this->simplify($record);
+				$records[]= $this->simplify($record);
 			}
 			return $records;
 		}
