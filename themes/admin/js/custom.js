@@ -212,6 +212,11 @@ $(function () {
 
 });
 
+function strpos (haystack, needle, offset) {
+	var i = (haystack+'').indexOf(needle, (offset || 0));
+	return i === -1 ? false : i;
+}
+
 var bancha = {
 	_priority : 0,
 	load : function(url) {
@@ -240,8 +245,19 @@ var bancha = {
 		}
 	},
 	add_form_hash : function(el) {
-		var obj = $(el), attr = obj.attr('action').split('#');
-		obj.attr('action', attr[0] + window.location.hash);
+		var obj = $(el);
+		var action = obj.attr('action');
+
+		if (!action)return;
+
+		if (strpos(action, '#')) {
+			var attr = action.split('#');
+			attr = attr[0];
+		} else {
+			var attr = action;
+		}
+
+		obj.attr('action', action + window.location.hash);
 		return true;
 	},
 	sort_priority : function (event, ui) {
