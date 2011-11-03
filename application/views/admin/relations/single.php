@@ -18,6 +18,11 @@ if ($objects instanceof Record)
 }
 if (!count($objects)) return;
 
+if (!isset($objects[0])) {
+	echo _('No relation found');
+	return;
+} 
+	
 $tipo = $this->content->type($objects[0]->_tipo);
 ?>
 <table cellpadding="0" cellspacing="0" width="100%">
