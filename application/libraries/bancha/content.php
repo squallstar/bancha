@@ -376,7 +376,10 @@ Class Content
 	{
 		if ($object instanceof Record)
 		{
-			return $object->get_data();
+			$data = $object->get_data();
+			unset($data['xml']);
+			return $data;
+			
 		} else if (is_array($object) && count($object) && $object[0] instanceof Record)
 		{
 			$records = array();
