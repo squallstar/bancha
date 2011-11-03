@@ -367,11 +367,24 @@ Class Content
 		return $record;
 	}
 
+	/**
+	 * Simplifies a Record (or an array of Record objects) to an associative array
+	 * @param Record|array $object
+	 * @return Record|array
+	 */
 	function simplify($object)
 	{
 		if ($object instanceof Record)
 		{
-			
+			return $object->get_data();
+		} else if (is_array($object) && count($object) && $object[0] instanceof Record)
+		{
+			$records = array();
+			foreach ($object as $record)
+			{
+				$records[] = $this->simplify($record);
+			}
+			return $records;
 		}
 	}
 
