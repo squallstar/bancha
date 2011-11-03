@@ -53,8 +53,8 @@ echo '<p class="breadcrumb"><a href="'.admin_url($_section).'">'.($_section == '
 
 <?php
 
-	//Messages
-	echo $this->view->get_messages();
+//Messages
+echo $this->view->get_messages();
 
 echo form_open_multipart(isset($action) ? $action : ADMIN_PUB_PATH.$_section.'/edit_record/'.$tipo['name'].($record->id?'/'.$record->id:''), array('id' => 'record_form', 'name' => 'record_form'));
 
@@ -455,8 +455,6 @@ foreach ($tipo['fieldsets'] as $fieldset)
 
 		<?php
 
-		echo '<h3>'._('Hierarchies').'</h3>';
-
 		if ($this->config->item('hierarchies')) {
 
 			echo form_hidden('_hierarchies');
@@ -479,6 +477,31 @@ foreach ($tipo['fieldsets'] as $fieldset)
 			?>
 			</div>
 		</div>
+
+	</div>
+	<?php }
+
+	if (isset($tipo['relations']) && FALSE) { ?>
+	<div class="sidebar_content" id="sb_relations">
+
+		<?php foreach ($tipo['relations'] as $rel_name => $relation) { ?>
+		<div class="fieldset clearfix">
+			<label><?php echo $rel_name; ?></label>
+			<div class="right">
+				<?php
+				if ($record->id) {
+					echo form_submit(
+						array(
+							'name' 		=> '_relation_' . $rel_name,
+							'class'		=> 'submit button',
+							'type'		=> 'button',
+							'onclick'	=> "bancha.relations.load('" . $rel_name . "', ".$record->id.", '".$tipo['name']."');"
+						), _('Load')
+					);
+				} ?>
+			</div>
+		</div>
+		<?php } ?>
 
 	</div>
 	<?php }

@@ -36,6 +36,9 @@ Class Form_renderer
 		if ($tipo['has_hierarchies']) {
 			$xhtml.= '<li><a href="#sb_hierarchies"><img src="' . site_url(THEMESPATH.'admin/widgets/schemes_icons/folders.png') . '" /> '. _('Hierarchies') . '</a>';
 		}
+		if (isset($tipo['relations']) && FALSE) {
+			$xhtml.= '<li><a href="#sb_relations"><img src="' . site_url(THEMESPATH.'admin/widgets/schemes_icons/link.png') . '" /> '. _('Relations') . '</a>';
+		}
 		return $xhtml;
   	}
 }
