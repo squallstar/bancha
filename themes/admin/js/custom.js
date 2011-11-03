@@ -376,6 +376,15 @@ var bancha = {
 				
 			});
 		}
+	},
+	relations : {
+		load : function(relation_name, id_record, content_type) {
+			$.post(admin_url + 'ajax/get_relation',
+				{ name : relation_name, id : id_record, type : content_type },
+				function(data) {
+					console.log(data);
+			});
+		}
 	}
 }
 
