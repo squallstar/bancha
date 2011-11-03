@@ -39,7 +39,10 @@ Class Model_users extends CI_Model {
 	 */
 	public function limit($limit, $offset=null)
 	{
-		$this->db->limit($limit, $offset);
+		if ($limit > 0)
+		{
+			$this->db->limit($limit, $offset);
+		}
 		return $this;
 	}
 

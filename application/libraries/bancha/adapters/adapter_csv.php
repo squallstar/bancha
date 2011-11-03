@@ -22,7 +22,7 @@ Class Adapter_csv implements Adapter
 	public function __construct()
 	{
 		$this->mimes = array(
-			'text/csv', 'text/comma-separated-values'	
+			'text/csv', 'text/comma-separated-values', 'text/plain'
 		);
 	}
 

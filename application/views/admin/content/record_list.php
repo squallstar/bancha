@@ -197,7 +197,7 @@ $fields = array_keys($tipo['fields']);
 					}
 					if ($tipo['edit_link'] == $field)
 					{
-						echo '<td><a href="'.admin_url($_section.'/edit_record/'.$track_str).'"><img src="'.site_url(THEMESPATH.'admin/widgets/icns/pencil.png').'" border="0" alt="" /> '.$value.'</a></td>';
+						echo '<td><a href="'.admin_url($_section.'/edit_record/'.$track_str).'"><img src="'.site_url(THEMESPATH.'admin/widgets/icns/pencil.png').'" /> '.$value.'</a></td>';
 					} else {
 						echo '<td>'.$value.'</td>';
 					}
