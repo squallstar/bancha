@@ -18,7 +18,7 @@ if ($objects instanceof Record)
 }
 if (!count($objects)) return;
 
-if (!isset($objects[0])) {
+if (!$objects) {
 	echo _('No relation found');
 	return;
 } 
