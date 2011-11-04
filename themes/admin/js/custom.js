@@ -6,22 +6,19 @@ $(function () {
 
 
 	// CSS tweaks
-	$('#header #nav li:last').addClass('nobg');
+	$('#nav').find('li:last').addClass('nobg');
 	$('.block_head ul').each(function() { $('li:first', this).addClass('nobg'); });
-	//$('.block form input[type=file]').addClass('file');
-
-
-
+	
 	// Web stats
 	$('table.stats').each(function() {
-
+			var statsType = '',
+				chart_width = ($(this).parent('div').width()) - 60;
+		
 		if($(this).attr('rel')) {
-			var statsType = $(this).attr('rel');
+			statsType = $(this).attr('rel');
 		} else {
-			var statsType = 'area';
+			statsType = 'area';
 		}
-
-		var chart_width = ($(this).parent('div').width()) - 60;
 
 
 		if(statsType == 'line' || statsType == 'pie') {
@@ -36,8 +33,9 @@ $(function () {
 				multiHover: 5,
 				tooltip: true,
 				tooltiphtml: function(data) {
-					var html ='';
-					for(var i=0; i<data.point.length; i++){
+					var html ='',
+						$dataLength = data.point.length;
+					for(var i=0; i<$dataLength; i++){
 						html += '<p class="chart_tooltip"><strong>'+data.point[i].value+'</strong> '+data.point[i].yLabels[0]+'</p>';
 					}
 					return html;
@@ -61,16 +59,16 @@ $(function () {
 		widgets: ['zebra']
 	});
 
-	$('.block table tr th.header').css('cursor', 'pointer');
+	
+	$('.block').find('th.header').css('cursor', 'pointer');
 
 
 
 	// Check / uncheck all checkboxes
-	$('.check_all').click(function() {
+	
+	$('body').delegate('.check_all', 'click', function () {
 		$(this).parents('form').find('input:checkbox').attr('checked', $(this).is(':checked'));
 	});
-
-
 
 	// Set WYSIWYG editor
 	$('.wysiwyg').wysiwyg({css: site_url+"themes/admin/css/wysiwyg.css", brIE: false });
@@ -109,11 +107,11 @@ $(function () {
 	$(".block").find(".tab_content:first").show();
 
 	$("ul.tabs li").click(function() {
+		var activeTab = $(this).find("a").attr("href");
 		$(this).parent().find('li').removeClass("active");
 		$(this).addClass("active");
 		$(this).parents('.block').find(".tab_content").hide();
-
-		var activeTab = $(this).find("a").attr("href");
+		
 		$(activeTab).show();
 
 		// refresh visualize for IE
@@ -200,7 +198,7 @@ $(function () {
 
 	// Navigation dropdown fix for IE6
 	if(jQuery.browser.version.substr(0,1) < 7) {
-		$('#header #nav li').hover(
+		$('#nav').find('li').hover(
 			function() { $(this).addClass('iehover'); },
 			function() { $(this).removeClass('iehover'); }
 		);
@@ -229,32 +227,33 @@ var bancha = {
 		if (!append || append === 'undefined') {
 			append = false;
 		}
-		var tmp = path.split('/');
-		var i = tmp.length-1;
-		path = 'attach/cache/' + tmp[i-3] + '/' + tmp[i-2] + '/' + tmp[i-1] + '/' + preset + '/' + tmp[i];
+		var tmp = path.split('/'),
+			i = tmp.length-1,
+			path = 'attach/cache/' + tmp[i-3] + '/' + tmp[i-2] + '/' + tmp[i-1] + '/' + preset + '/' + tmp[i];
 		return (append ? site_url : '') + path;
 	},
 	remove : {
 		document : function(self, e) {
+			var pr = $(self).closest('table').prev('div.limit.hidden');
 			$.post(admin_url+'ajax/delete_document', {document_id : e});
 			$(self).closest('tr').fadeOut(200);
-			var pr = $(self).closest('table').prev('div.limit.hidden');
 			pr.removeClass('hidden');
 			pr.prev('span.limit').fadeOut(200);
 			return false;
 		}
 	},
 	add_form_hash : function(el) {
-		var obj = $(el);
-		var action = obj.attr('action');
+		var obj = $(el),
+			action = obj.attr('action'),
+			attr;
 
 		if (!action)return;
 
 		if (strpos(action, '#')) {
-			var attr = action.split('#');
+			attr = action.split('#');
 			attr = attr[0];
 		} else {
-			var attr = action;
+			attr = action;
 		}
 
 		obj.attr('action', action + window.location.hash);
@@ -288,10 +287,10 @@ var bancha = {
 	tab_textarea : function(selector) {
 		$(selector).keypress(function (e) {
 		    if (e.keyCode == 9) {
-		        var myValue = "\t";
-		        var startPos = this.selectionStart;
-		        var endPos = this.selectionEnd;
-		        var scrollTop = this.scrollTop;
+		        var myValue = "\t",
+		        	startPos = this.selectionStart,
+		        	endPos = this.selectionEnd,
+		        	scrollTop = this.scrollTop;
 		        this.value = this.value.substring(0, startPos) + myValue + this.value.substring(endPos,this.value.length);
 		        this.focus();
 		        this.selectionStart = startPos + myValue.length;
@@ -304,13 +303,13 @@ var bancha = {
 	},
 	actions : {
 		record_act : function() {
-			var val = $('select[name=action]').val();
-			var list_fields = '.field-action_list_type, .field-action_list_categories, .field-action_list_limit, '
-							+ '.field-action_list_order_by, .field-action_list_where, .field-action_list_has_feed, .field-action_list_hierarchies ';
-			var action_fields = '.field-action_custom_name, .field-action_custom_mode';
-			var link_fields = '.field-action_link_url';
+			var val = $('select[name=action]').val(),
+				list_fields = '.field-action_list_type, .field-action_list_categories, .field-action_list_limit, '
+							+ '.field-action_list_order_by, .field-action_list_where, .field-action_list_has_feed, .field-action_list_hierarchies ',
+				action_fields = '.field-action_custom_name, .field-action_custom_mode';
+				link_fields = '.field-action_link_url',
 
-			var speed = 200;
+				speed = 200;
 
 			switch (val) {
 				case 'text':
@@ -349,9 +348,10 @@ var bancha = {
 			bancha.blocks._last_section = which;
 		},
 		save_section : function(el) {
-			var this_block = bancha.blocks._last_section;
+			var this_block = bancha.blocks._last_section,
+				values = $(el + ' form').serialize();
 			$(el + ' form').append('<input type="hidden" name="block" value ="'+this_block+'" />');
-			var values = $(el + ' form').serialize();
+			
 			values = values + '&theme=' + $('#add_section').attr('data-theme') + '&template='
 				   + $('#add_section').attr('data-template');
 			$('#cboxClose').click();
@@ -365,8 +365,8 @@ var bancha = {
 			});
 		},
 		delete_section : function(which) {
-			var pos = $(which).parent('.section').attr('data-pos');
-			var block = $(which).parent('.section').parent('.theme_block').attr('data-name');
+			var pos = $(which).parent('.section').attr('data-pos'),
+				block = $(which).parent('.section').parent('.theme_block').attr('data-name');
 			window.location.href = current_url + '?delete_section=' + pos + '&block=' + block;
 		},
 		load_sortable : function() {
@@ -377,12 +377,12 @@ var bancha = {
 			});
 		},
 		sorted : function(event, ui) {
-			var block = ui.item.parent('.theme_block');
-			var block_name = block.attr('data-name');
-			var str = '&theme=' + $('#add_section').attr('data-theme') + '&template='
-					+ $('#add_section').attr('data-template'); + '&block=' + block;
+			var block = ui.item.parent('.theme_block'),
+				block_name = block.attr('data-name'),
+				str = '&theme=' + $('#add_section').attr('data-theme') + '&template='
+					+ $('#add_section').attr('data-template'); + '&block=' + block,
 
-			var str = '&theme=' + $('#add_section').attr('data-theme') + '&template='
+				str = '&theme=' + $('#add_section').attr('data-theme') + '&template='
 				   + $('#add_section').attr('data-template') + '&block=' + block_name;
 
 			$('.section', block).each(function(index) {
