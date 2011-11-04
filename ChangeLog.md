@@ -1,5 +1,10 @@
 ## Bancha Change Log file ##
 
+**v 0.9.3** (2011-10-X)
+
+- Layout fix on the type delete view
+
+
 **v 0.9.1** (2011-10-03)
 
 - The limit function of the Records, Pages and Users model now will prevent a negative limit to be set
