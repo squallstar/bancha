@@ -54,6 +54,9 @@ Class Adapter_wordpress implements Adapter
 			$can_save_comments = $CI->content->type_id($this->comment_type);
 		}
 
+		$langs = array_keys($CI->config->item('website_languages'));
+		$lang = $langs[0];
+
 		//We need to normalize some of the Wordpress nodes
 		$prepared_stream = str_replace(
 			array('content:encoded>', 'wp:comment>', 'wp:comment_author>', 'wp:comment_author_url>',
@@ -77,7 +80,8 @@ Class Adapter_wordpress implements Adapter
 				'title'			=> $title ? $title : _('Without title'),
 				'date_publish'	=> date(LOCAL_DATE_FORMAT . ' H:i', strtotime((string)$item->pubDate)),
 				'content'		=> (string)$item->content,
-				'abstract'		=> (string)$item->description
+				'abstract'		=> (string)$item->description,
+				'lang'			=> $lang
 			);
 			if (isset($item->category[0]))
 			{

@@ -1,8 +1,10 @@
 ## Bancha Change Log file ##
 
-**v 0.9.3** (2011-10-X)
+**v 0.9.3** (2011-10-05)
 
 - Layout fix on the type delete view
+- Wordpress adapter now adds the website first language as record language
+- Added a new function on the model_records: id_not_in()
 
 
 **v 0.9.1** (2011-10-03)
