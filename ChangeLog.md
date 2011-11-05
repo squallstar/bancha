@@ -2,10 +2,14 @@
 
 **v 0.9.3** (2011-10-05)
 
-- Layout fix on the type delete view
 - Wordpress adapter now adds the website first language as record language
 - Added a new function on the model_records: id_not_in()
 - Now the Tree cache should be always clear the page tree using the website languages (instead of the administration ones)
+
+
+**v 0.9.2** (2011-10-04)
+
+- Layout fix on the type delete view
 
 
 **v 0.9.1** (2011-10-03)
