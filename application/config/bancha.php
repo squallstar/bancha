@@ -25,12 +25,12 @@ $config['website_languages'] = array(
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
 	),
-	'it' => array(
+	/*'it' => array(
 		'name'			=> 'italian',
 		'locale'		=> 'it_IT',
 		'description'	=> 'Italiano',
 		'date_format'	=> 'd/m/Y'
-	)
+	)*/
 
 );
 
@@ -38,12 +38,12 @@ $config['website_languages'] = array(
  * Here goes the admin languages
  */
 $config['admin_languages'] = array(
-	'en' => array(
+	/*'en' => array(
 		'name'			=> 'english',
 		'locale'		=> 'en_US',
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
-	),
+	),*/
 	'it' => array(
 		'name'			=> 'italian',
 		'locale'		=> 'it_IT',

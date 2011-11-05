@@ -70,9 +70,9 @@
 			<admin>true</admin>
 			<list>true</list>
 			<options>
-				<custom>config_item('languages_select')</custom>
+				<custom>config_item('website_languages_select')</custom>
 			</options>
-			<default>eval:$this->lang->current_language</default>
+			<default>eval:$this->lang->default_language</default>
 		</field>
 		<field id="content">
 			<description>Content</description>
