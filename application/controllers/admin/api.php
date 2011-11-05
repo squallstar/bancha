@@ -150,4 +150,37 @@ Class Api extends Bancha_Controller
 			$this->_display(NULL, 400, 'BAD_QUERY');
 		}
 	}
+
+	public function types($name = '')
+	{
+		//if (! $this->_check_token()) return;
+
+		//We check the post data for a single type
+		if ($name == '')
+		{
+			$name = $this->input->post('type');
+		}	
+		if ($name)
+		{
+			//Single content type
+			$type = $this->content->type($name);
+			if ($type)
+			{
+				unset($type['name']);
+				$this->_display(array($name => $type), 200, 'OK');
+			} else {
+				$this->_display(NULL, 400, 'CONTENT_TYPE_NOT_FOUND');
+			}
+		} else {
+			$types = array();
+			$tmp = $this->content->types();
+			foreach ($tmp as $type)
+			{
+				$name = $type['name'];
+				unset($type['name']);
+				$types[$name] = $type;
+			}
+			$this->_display($types, 200, 'OK');
+		}
+	}
 }
