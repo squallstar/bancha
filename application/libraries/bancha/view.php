@@ -136,7 +136,7 @@ Class View
 			{
 				$this->theme = $this->_CI->settings->get('website_desktop_theme');
 			} else {
-				$this->theme = $this->_CI->settings->get('website_theme_theme');
+				$this->theme = $this->_CI->settings->get('website_mobile_theme');
 			}
 
 			$this->store_theme();
