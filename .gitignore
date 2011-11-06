@@ -4,7 +4,7 @@
 # Logs #
 ########
 *.log
-/application/logs/*.php
+/core/logs/*.php
 
 ######################
 # OS generated files #
@@ -21,8 +21,8 @@ Thumbs.db
 ########################
 # Custom install files #
 ########################
-/application/views/type_templates
-/application/views/admin/content/translations.php
+/core/views/type_templates
+/core/views/admin/content/translations.php
 /application/xml/types/*.xml
 
 ##############

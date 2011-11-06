@@ -56,19 +56,7 @@ if (defined('ENVIRONMENT'))
 
 /*
  *---------------------------------------------------------------
- * SYSTEM FOLDER NAME
- *---------------------------------------------------------------
- *
- * This variable must contain the name of your "system" folder.
- * Include the path if the folder is not in the same  directory
- * as this file.
- *
- */
-	$system_path = 'application/libraries/codeigniter';
-
-/*
- *---------------------------------------------------------------
- * APPLICATION FOLDER NAME
+ * CORE FOLDER NAME
  *---------------------------------------------------------------
  *
  * If you want this front controller to use a different "application"
@@ -80,7 +68,29 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'application';
+	$core_folder = 'core';
+
+/*
+ *---------------------------------------------------------------
+ * USER APPLICATION FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * NO TRAILING SLASH!
+ *
+ */
+	$user_path = 'application';
+
+/*
+ *---------------------------------------------------------------
+ * SYSTEM FOLDER NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" folder.
+ * Include the path if the folder is not in the same  directory
+ * as this file.
+ *
+ */
+	$system_path = $core_folder . '/libraries/codeigniter';
 
 /*
  *---------------------------------------------------------------
@@ -155,20 +165,19 @@ if (defined('ENVIRONMENT'))
 	//The administration public path
 	define('ADMIN_PUB_PATH', $admin_path);
 
-
 	// The path to the "application" folder
-	if (is_dir($application_folder))
+	if (is_dir($core_folder))
 	{
-		define('APPPATH', $application_folder.'/');
+		define('APPPATH', $core_folder.'/');
 	}
 	else
 	{
-		if ( ! is_dir(BASEPATH.$application_folder.'/'))
+		if ( ! is_dir(BASEPATH.$core_folder.'/'))
 		{
 			exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
 		}
 
-		define('APPPATH', BASEPATH.$application_folder.'/');
+		define('APPPATH', BASEPATH.$core_folder.'/');
 	}
 
 	// The path to the "application" folder
@@ -185,6 +194,8 @@ if (defined('ENVIRONMENT'))
 
 		define('THEMESPATH', BASEPATH.$themes_folder.'/');
 	}
+
+	define('USERPATH', $user_path.'/');
 
 /*
  * --------------------------------------------------------------------
