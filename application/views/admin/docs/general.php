@@ -332,7 +332,7 @@ Bancha XML schemes permits you to define 1-0, 1-1 and 1-n relations.
 <pre class="prettyprint">
 <code>&lt;relation name="post" type="1-1" with="Blog" from="post_id" to="id_record" /&gt;
 </code></pre><br />
-<p>This system permits you to <strong>item</strong> a Record to its childs. On the next sections of the documentation you will discover how to work with records. Setting up a relation between a content type "Blog" and its comments gives you the ability to gets all the comments of a post at a glance:</p>
+<p>This system permits you to <strong>set up a relation</strong> between a Record and its childs. On the next sections of the documentation you will discover how to work with records. Setting up a relation between a content type "Blog" and its comments gives you the ability to gets all the comments of a post at a glance:</p>
 <pre class="prettyprint"><code>$post_comments = $post->related('comments');
 </code></pre><br />
 <p>On the other side, a comment can access its blog post like this:</p>

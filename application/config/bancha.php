@@ -64,7 +64,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.9.1');
+define('BANCHA_VERSION', '0.9.3');
 
 /*
  * Framework name
@@ -82,7 +82,7 @@ $sep = DIRECTORY_SEPARATOR;
 /*
  * WEBSITE INSTALLED THEMES
  * Here you can set the themes to use.
- * To activate them, go to the settings section under "Manage".
+ * To activate a theme, go to the settings section under "Manage".
  */
 $config['installed_themes'] = array(
 	'default' => 'Default theme',

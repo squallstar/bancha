@@ -449,7 +449,7 @@ Class Installer
 
 		$this->CI->settings->set('website_desktop_theme', $theme);
 		$this->CI->settings->set('website_mobile_theme', $theme);
-		$this->CI->settings->set('website_active_languages', array_keys($this->CI->config->item('languages_select')));
+		$this->CI->settings->set('website_active_languages', array_keys($this->CI->config->item('website_languages_select')));
 	}
 
 	public function create_homepages()
@@ -459,7 +459,7 @@ Class Installer
 			$this->CI->load->settings();
 		}
 
-		$languages = array_keys($this->CI->lang->languages);
+		$languages = array_keys($this->CI->config->item('website_languages'));
 
 		//We make an homepage for each language we found
 		foreach ($languages as $lang)
@@ -527,7 +527,7 @@ Class Installer
 				$post = new Record('Blog');
 				$post->set('title', _('My first post'))
 					 ->set('content', _('Hello world'))
-					 ->set('lang', $this->CI->lang->current_language)
+					 ->set('lang', $this->CI->lang->default_language)
 					 ->set('date_publish', time())
 				;
 				$post_id = $this->CI->records->save($post);
@@ -538,6 +538,7 @@ Class Installer
 				$comment->set('author', 'Nicholas')
 						->set('www', 'http://getbancha.com')
 						->set('post_id', $post_id)
+						->set('lang', $this->CI->lang->default_language)
 						->set('content', 'I am cool.')
 				;
 				$this->CI->records->set_type('Comments')->save($comment);
@@ -547,7 +548,7 @@ Class Installer
 				$page->set('title', 'Blog')
 					 ->set('uri', 'blog')
 					 ->set('action', 'list')
-					 ->set('lang', $this->CI->lang->current_language)
+					 ->set('lang', $this->CI->lang->default_language)
 					 ->set('show_in_menu', 'T')
 					 ->set('action_list_type', $this->CI->content->type_id('Blog'))
 					 ->set('action_list_order_by', 'date_publish DESC');
@@ -563,7 +564,7 @@ Class Installer
 				$page = new Record('Menu');
 				$page->set('title', 'About us')
 				->set('action', 'text')
-				->set('lang', $this->CI->lang->current_language)
+				->set('lang', $this->CI->lang->default_language)
 				->set('show_in_menu', 'T')
 				->set('child_count', 0)
 				->set('uri', 'about-us')

@@ -234,7 +234,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$attributes['type'] = 'number';
 				$attributes['value'] = $field_value;
 				$attributes['class'] = 'number text small'.($field['mandatory']?' mandatory':'');
-				echo $p_start.$label.br(1).form_input($attributes).$field_note.$p_end;
+				echo $p_start.$label.form_input($attributes).$field_note.$p_end;
 				break;
 
 			case 'select':

@@ -77,7 +77,8 @@ Class Adapter_wordpress implements Adapter
 				'title'			=> $title ? $title : _('Without title'),
 				'date_publish'	=> date(LOCAL_DATE_FORMAT . ' H:i', strtotime((string)$item->pubDate)),
 				'content'		=> (string)$item->content,
-				'abstract'		=> (string)$item->description
+				'abstract'		=> (string)$item->description,
+				'lang'			=> $CI->lang->default_language
 			);
 			if (isset($item->category[0]))
 			{
@@ -95,7 +96,8 @@ Class Adapter_wordpress implements Adapter
 						'www'			=> (string)$comment->www,
 						'date_publish'	=> (string)$comment->date_publish,
 						'content'		=> (string)$comment->content,
-						'email'			=> (string)$comment->email
+						'email'			=> (string)$comment->email,
+						'lang'			=> $CI->lang->default_language
 					);
 				}
 				$post['comments'] = $comments;
