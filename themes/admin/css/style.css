@@ -148,10 +148,17 @@ h1 {
 	#header #nav {
 		margin:0 1px 0 0;
 	}
+	#header #nav > li:hover > a {
+		color:#FFF;
+	}
 	#header #nav li ul li.active > a {
 		font-weight:bold;
 		color:#FFF;
 		border-bottom:1px dotted #888;
+	}
+	#header #nav li ul li:hover > a {
+		border-bottom:1px dotted #777;
+		color:#CCC;
 	}
 	#header #nav > li {
 		background:url('../widgets/header_hr.png') repeat-x bottom left;

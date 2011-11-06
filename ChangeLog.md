@@ -1,5 +1,11 @@
 ## Bancha Change Log file ##
 
+**v 0.9.4** (2011-10-06) Live from #banchafest
+
+- Javascript refactor made by @dombender
+- Bug fix on the mobile settings variable (View class)
+
+
 **v 0.9.3** (2011-10-05)
 
 - Wordpress adapter now adds the website first language as record language
