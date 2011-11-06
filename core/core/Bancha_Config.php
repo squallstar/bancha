@@ -28,16 +28,22 @@ class Bancha_Config extends CI_Config
 	 *
 	 * @access	public
 	 * @param	string	the URI string
+	 * @param   string|bool $prepend_language
 	 * @return	string
 	 */
 	function site_url($uri = '', $prepend_language = TRUE)
 	{
 		$base = $this->slash_item('base_url');
 
-		if ($prepend_language && $this->prepend_language)
+		if (is_string($prepend_language))
 		{
-			$base.= $this->prepend_language . '/';
-		}
+			$base.= $prepend_language . '/';
+		} else {
+			if ($prepend_language && $this->prepend_language)
+			{
+				$base.= $this->prepend_language . '/';
+			}
+		}		
 
 		if ($uri == '')
 		{

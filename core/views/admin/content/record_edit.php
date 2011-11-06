@@ -87,7 +87,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 		{
 			if ($record->id && isset($page_url))
 			{
-				$url = site_url($page_url);
+				$url = site_url($page_url, $record->get('lang'));
 				echo '<div class="fieldset clearfix">'
 					 . '<label>' . _('Page address:') . '</label>'
 					 . '<label class="full"><a target="_blank" href="'.$url.'">'.$url.'</a></label></div>';
