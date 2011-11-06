@@ -18,6 +18,7 @@ class Bancha_Lang extends CI_Lang {
 
 	public $language_context = 'website';
 	public $current_language = '';
+    public $default_language = '';
 	public $languages = FALSE;
     public $gettext_language;
     public $gettext_path;
@@ -55,6 +56,20 @@ class Bancha_Lang extends CI_Lang {
         	$select[$lang] = $val['description'];
         }
         $this->_CI->config->set_item('languages_select', $select);
+
+        if ($this->language_context != 'website')
+        {
+            $website_langs = $this->_CI->config->item('website_languages');
+            $select = array();
+            foreach ($website_langs as $lang => $val)
+            {
+                $select[$lang] = $val['description'];
+            }
+        }
+
+        $this->_CI->config->set_item('website_languages_select', $select);
+        $keys = array_keys($select);
+        $this->default_language = $keys[0];
     }
 
     /**

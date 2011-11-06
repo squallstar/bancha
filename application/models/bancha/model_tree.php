@@ -333,7 +333,7 @@ Class Model_tree extends CI_Model
 				$name = $type;
 			}
 		}
-		$languages = array_keys($this->lang->languages);
+		$languages = array_keys($this->config->item('website_languages'));
 		$this->_use_lang = $this->lang->current_language;
 
 		$source_name = $this->config->item('tree_cache_folder');

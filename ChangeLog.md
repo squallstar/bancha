@@ -1,5 +1,20 @@
 ## Bancha Change Log file ##
 
+**v 0.9.3** (2011-10-05)
+
+- Wordpress adapter now adds the website first language as record language
+- Added a new function on the model_records: id_not_in()
+- Now the Tree cache should be always clear the page tree using the website languages (instead of the administration ones)
+- We added a new property on the Lang class: $this->lang->default_language
+- Now the select fields use the default language of the website (the first of the config array) instead of the current one
+- The above change should be reflected around Bancha, so it results in a better language compatibility when using different languages between the admin and the website
+- New API method: types() - documentation will be available soon
+
+**v 0.9.2** (2011-10-04)
+
+- Layout fix on the type delete view
+
+
 **v 0.9.1** (2011-10-03)
 
 - The limit function of the Records, Pages and Users model now will prevent a negative limit to be set

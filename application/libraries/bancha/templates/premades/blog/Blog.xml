@@ -56,9 +56,8 @@
 			<admin>true</admin>
 			<list>true</list>
 			<options>
-				<custom>$this->config->item('languages_select')</custom>
+				<custom>$this->config->item('website_languages_select')</custom>
 			</options>
-			<default>it</default>
 		</field>
 		<field id="content">
 			<description>Content</description>

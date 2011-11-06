@@ -69,7 +69,7 @@
 		<field id="lang" column="true">
 			<description>Language</description>
 			<type>hidden</type>
-			<default>it</default>
+			<default>eval:$this->lang->default_language</default>
 		</field>
 	</fieldset>
 	<fieldset name="Linked post" icon="link">
