@@ -292,8 +292,17 @@ Class View
 		{
 			show_error('Content type or view name not set (view/render_type_template');
 		}
-		$view_path = $this->_CI->config->item('views_templates_folder') . $type_name . '/' . $view_file;
 
+		$type_templates = THEMESPATH . $this->theme . '/views/' . $this->_CI->config->item('views_templates_folder');
+
+
+		if (file_exists($type_templates . $type_name . '/' . $view_file))
+		{
+			$view_path = $this->_CI->config->item('views_templates_folder') . $type_name . '/' . $view_file;
+		} else {
+			$view_path = $this->_CI->config->item('views_templates_folder') . 'Default' . '/' . $view_file;
+		}
+			
 		$this->_CI->load->view($view_path, $propagate_data ? $this->_data : '');
 	}
 

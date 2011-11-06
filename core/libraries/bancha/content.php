@@ -175,27 +175,6 @@ Class Content
 				show_error(_('Cannot delete the template view directory for the content type %n.', array('n' => '['.$type_name.']'),
 				500, _('Error')));
 			}
-			$created = mkdir($type_view_abs_dir, DIR_WRITE_MODE);
-
-			if ($created) {
-				//Copio anche i templates di default
-				$templates_to_copy = $this->CI->config->item('view_templates_to_copy');
-				foreach ($templates_to_copy as $template_name) {
-					$template_content = read_file($this->CI->config->item('templates_folder') .
-		        				 'type_views/' . $template_name . '.php');
-					$template_destination = $type_view_abs_dir . $template_name . '.php';
-
-					$template_content = $this->CI->parser->parse_string($template_content, array(
-		        				'name'	=> $type_name
-					),TRUE);
-
-					write_file($template_destination, $template_content);
-				}
-
-			} else {
-				$this->delete_type($type_name);
-				show_error('Impossibile creare la directory di template per le view del tipo ['.$type_name.'].', 500, 'Errore di scrittura');
-			}
 
 			//Rinnovo la cache
 			$this->rebuild();
