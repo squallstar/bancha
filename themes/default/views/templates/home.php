@@ -16,6 +16,13 @@ $this->view->render('header');
 
 ?>
 <div id="featured" class="clearfix grid_12">
+<?php /*
+####################### PICASA CALL ####################
+$config_picasa = array ('username' => 'kikkovolley');
+$picasa = $this->load->module('picasa', $config_picasa);
+$picasa->getGallery()->render();
+########################################################*/
+?>
 	<ul> 
 		<li>
 			<a href="#">

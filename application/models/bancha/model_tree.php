@@ -47,6 +47,7 @@ Class Model_tree extends CI_Model
 		$this->_uri_segments = $this->uri->segment_array();
 
 		$pieces = count($this->_uri_segments);
+
 		if ($pieces)
 		{
 			//We check if the requested URL is a feed
@@ -253,17 +254,18 @@ Class Model_tree extends CI_Model
 		foreach ($tree as $key => $node)
 		{
 
-		if ($node->id_parent == $id_parent)
-		{
-			$options [$node->id_record] = str_repeat('---' , $level)." ".$node->title;
-			unset($tree[$key]);
-			$level++;
-			$options = $this->get_branch_dropdown($tree, $node->id_record, $level, $options);
-			$level--;
+			if ($node->id_parent == $id_parent)
+			{
+				$options [$node->id_record] = str_repeat('---' , $level)." ".$node->title;
+				unset($tree[$key]);
+				$level++;
+				$options = $this->get_branch_dropdown($tree, $node->id_record, $level, $options);
+				$level--;
+			}
 		}
-	}
 	return $options;
 	}
+
 
 	/**
 	 * Force the data to be fetched again from the database on the next request
@@ -450,6 +452,7 @@ Class Model_tree extends CI_Model
 		return $this->_current_branch;
 	}
 
+
 	/**
 	 * Builds a single tree, given the pages
 	 * @param array $pages Array of Record objects
@@ -502,7 +505,7 @@ Class Model_tree extends CI_Model
 		$tree = array();
 		foreach ($root as $r)
 		{
-			$this->_treemap($r, $nodes, $sons, '', $tree);
+			$this->_treemap($r, $nodes, $sons, '', $tree);				
 		}
 		if (isset($tree['sons']))
 		{
@@ -510,6 +513,7 @@ Class Model_tree extends CI_Model
 		}
 		return $tree;
 	}
+
 
 	/**
 	 * Internal recursive function that generates the trees
@@ -549,6 +553,7 @@ Class Model_tree extends CI_Model
 			}
 		}
 	}
+	
 
 	/**
 	 * Deletes a tree cached file, given the type (when not given, it deletes the default one)

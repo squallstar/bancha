@@ -36,6 +36,29 @@ Class Dispatcher_Print
 	}
 
 	/**
+	 * 
+	 */
+	private $_dompdfpath = '';
+	
+	
+	/**
+	 * 
+	 */
+	public function __contruct()
+	{
+		$this->_dompdfpath =  str_replace(array('\\','/'), DIRECTORY_SEPARATOR,
+					APPPATH . 'libraries' . DIRECTORY_SEPARATOR . 
+		  		  'externals' . DIRECTORY_SEPARATOR . 
+			  		'dompdf' . DIRECTORY_SEPARATOR);
+		 
+		if (!is_dir($this->_dompdfpath) || !file_exists($this->_dompdfpath."dompdf_config.inc.php")) {
+			show_error ("DOMPDF Library not found, please install before loading the dispatcher in [".$this->_dompdfpath."]");
+		}
+		
+	}
+	
+	
+	/**
 	 * Generates the PDF, or returns the content
 	 * @param Record|html $page
 	 * @param bool $return
@@ -44,7 +67,6 @@ Class Dispatcher_Print
 	public function render($page, $return = FALSE)
 	{
 		$CI = & get_instance();
-
 		if ($page instanceof Record)
 		{
 			$html = $CI->view->render_template($page->get('view_template'));
@@ -54,6 +76,7 @@ Class Dispatcher_Print
 
 		//Here goes the PDF generation
 		$CI->output->enable_profiler(FALSE);
+
 		require_once($this->_dompdfpath."dompdf_config.inc.php");
 
 		if ($page instanceof Record)

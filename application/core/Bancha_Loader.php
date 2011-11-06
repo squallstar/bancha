@@ -208,9 +208,9 @@ Class Bancha_Loader extends CI_Loader {
 	 * @param string $name
 	 * @param string $obj_name
 	 */
-	function dispatcher($name = 'default', $obj_name = 'dispatcher')
+	function dispatcher($name = 'default', $lib_name = 'dispatcher')
 	{
-		$this->library(FRNAME.'/dispatchers/dispatcher_'.$name, NULL, $obj_name);
+		$this->library(FRNAME.'/dispatchers/dispatcher_'.$name, NULL, $lib_name);
 	}
 
 	/**

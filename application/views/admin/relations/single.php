@@ -23,6 +23,11 @@ if (!$objects || !count($objects))
 	return;
 }
 
+if (!$objects) {
+	echo _('No relation found');
+	return;
+} 
+	
 $tipo = $this->content->type($objects[0]->_tipo);
 ?>
 <table cellpadding="0" cellspacing="0" width="100%">
