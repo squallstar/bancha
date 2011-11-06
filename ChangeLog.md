@@ -2,6 +2,8 @@
 
 **v 0.9.4** (2011-10-06) Live from #banchafest
 
+- We decided to use an external folder for the application, so we added a "core" folder with the Bancha framework
+- Controllers, Helpers and Config files can now be overwrited by the ones placed in the application folder
 - Javascript refactor made by @dombender
 - Bug fix on the mobile settings variable (View class)
 

@@ -1,10 +1,8 @@
 <?php
-if ( ! defined('CUSTOM_TRIGGER')) exit('You cannot call the triggers directly');
+require_once(APPPATH . 'controllers/custom/triggers.php');
 
 /**
  * Website custom Triggers
- *
- * Attivatori chiamabili dai tipi di contenuto
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -14,7 +12,7 @@ if ( ! defined('CUSTOM_TRIGGER')) exit('You cannot call the triggers directly');
  *
  */
 
-Class Triggers
+Class Triggers extends Core_Triggers
 {
 	public $CI;
 
@@ -24,7 +22,7 @@ Class Triggers
 	}
 
 	/**
-	 * Trigger/attivatore dimostrativo
+	 * A dummy trigger
 	 */
 	function demotrigger($record)
 	{
