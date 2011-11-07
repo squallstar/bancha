@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 	    
-	    <title>Server-side requirements &mdash; Bancha 0.9.4 documentation</title>
+	    <title>How to install &mdash; Bancha 0.9.4 documentation</title>
 
 	    <link rel="stylesheet" href="_static/asset/css/common.css" type="text/css" />
 	    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -21,16 +21,15 @@
 	    <script type="text/javascript" src="_static/underscore.js"></script>
 	    <script type="text/javascript" src="_static/doctools.js"></script>
 	    <link rel="top" title="Bancha 0.9.4 documentation" href="index.html" />
-	    <link rel="next" title="How to install" href="howtoinstall.html" />
-	    <link rel="prev" title="ChangeLog" href="changelog.html" /> 
+	    <link rel="prev" title="Server-side requirements" href="requirements.html" /> 
 	</head>
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
 			<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">ChangeLog</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Server-side requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="howtoinstall.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Server-side requirements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">How to install</a></li>
 </ul>
 
 			</div>
@@ -39,7 +38,7 @@
 		<div id="brand" class="bancha">
 			<a href="http://getbancha.com/"><img src="_static/asset/img/logo.png" alt="Bancha"></a>
 			<p>0.9.4 User Guide</p>
-		    <!--<p><a href="_sources/requirements.txt"
+		    <!--<p><a href="_sources/howtoinstall.txt"
 			           rel="nofollow">Show Source</a></p>-->
 		</div><!-- /#brand -->
 
@@ -55,20 +54,22 @@
 				<li><a href="index.html">Home</a>&nbsp;&nbsp; &rsaquo;</li>
 				<li><a id="toc-link" href="index.html">Table of Contents</a>&nbsp;&nbsp; &rsaquo;</li>
 
-				<li><strong>Server-side requirements</strong></li>
+				<li><strong>How to install</strong></li>
 			</ul>
 		</div><!-- /#header -->
 
 		<div class="section" id="content">
-			<div class="section" id="server-side-requirements">
-<h1>Server-side requirements<a class="headerlink" href="#server-side-requirements" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li>Apache 2.2 with mod_rewrite enabled</li>
-<li>PHP 5.3</li>
-<li>GD2 libraries</li>
-<li>Database server (MySQL, Postgre, etc..)</li>
-</ul>
-<p><a class="reference internal" href="howtoinstall.html"><em>How to install</em></a></p>
+			<div class="section" id="how-to-install">
+<h1>How to install<a class="headerlink" href="#how-to-install" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>Before all, choose your environment in the /index.php file. The default environment is &#8220;development&#8221;.</li>
+<li>Now, configure your base settings here: application/config/config.php. As you can see, this file is similar to the CodeIgniter config file.</li>
+<li>Sets the database configuration parameters here: application/config/database.php</li>
+<li>Go through your browser to this URL: <a class="reference external" href="http://example.org/admin/install">http://example.org/admin/install</a></li>
+<li>Choose your install type between &#8220;Default&#8221; and &#8220;Blog&#8221;. The Blog one, will create and configures the &#8220;Blog&#8221; and &#8220;Comments&#8221; content types for you.</li>
+<li>You&#8217;re done! The install script will create a content type named &#8220;Menu&#8221; which is linked to the page tree of your website.</li>
+</ol>
+<p>Need to reinstall? Just remove the <strong>is_installed</strong> row from the database table named <strong>settings</strong>.</p>
 </div>
 
 		</div>
@@ -78,10 +79,8 @@
 		<div id="footer">
 			<p class="top">
 				
-				<span class="prev">Previous Topic: <a href="changelog.html">ChangeLog</a></span>
+				<span class="prev">Previous Topic: <a href="requirements.html">Server-side requirements</a></span>
 				
-				
-				<span class="next">Next Topic: <a href="howtoinstall.html">How to install</a></span>
 				
 				<a href="#header" title="Return to top">Return to top</a>
 			</p>

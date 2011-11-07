@@ -82,11 +82,11 @@
 		</div>
 
 		<div id="brand" class="{{ project_abbreviation }}">
-			<a href="http://{{ project_domain }}/"><img src="{{ pathto('_static/asset/img/' + project_abbreviation + '-logo.gif', 1) }}" alt="{{ project }}"></a>
+			<a href="http://{{ project_domain }}/"><img src="{{ pathto('_static/asset/img/logo.png', 1) }}" alt="{{ project }}"></a>
 			<p>{{ release }} User Guide</p>
 			{%- if show_source and has_source and sourcename %}
-		    <p><a href="{{ pathto('_sources/' + sourcename, true)|e }}"
-			           rel="nofollow">{{ _('Show Source') }}</a></p>
+		    <!--<p><a href="{{ pathto('_sources/' + sourcename, true)|e }}"
+			           rel="nofollow">{{ _('Show Source') }}</a></p>-->
 			{%- endif %}
 		</div><!-- /#brand -->
 

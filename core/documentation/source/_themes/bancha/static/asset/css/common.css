@@ -45,7 +45,7 @@ kbd, samp{ color: #B83044; }
 
 	kbd{ font-style: italic; }
 
-h1, h2, h3, h4, h5, h6, pre{ color: #094776; }
+h1, h2, h3, h4, h5, h6, pre{ color: #444; }
 
 h1{ font-size: 28px; }
 
@@ -230,7 +230,7 @@ fieldset{ border: 0; }
 #content{ background-color: #FFFFFF; padding: 40px 40px 20px; }
 
 #brand{ 
-	background-color: #F5F5F5; 
+	background:url(../../asset/img/grain.gif) repeat-x #F5F5F5; 
 	color: #FFFFFF; 
 	overflow: hidden;
 	padding: 10px 20px 13px; 
@@ -245,10 +245,13 @@ fieldset{ border: 0; }
 	#brand.ci{ background-color: #4A0202; }
 	#brand.mm{ background-color: #222627; }
 	#brand.el{ background-color: #4A0202; }
+	#brand.bancha { background:url(../../asset/img/grain.gif) repeat-x #000; }
+	#brand a {
+		color:#FFF;
+	}
 
 #header{ 
-	background-color: #3B7EB0;
-	border-top: 2px solid #539ECC;
+	background-color: #555;
 	color: #FFFFFF; 
 	overflow: hidden; 
 	padding: 15px 15px 16px 20px; 
