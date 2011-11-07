@@ -28,5 +28,6 @@ If you move, the above two folders, be sure to update their paths on the **index
 
 6. You're done! The install script will create a content type named "Menu" which is linked to the page tree of your website.
 
-
 Need to reinstall? Just remove the **is_installed** row from the database table named **settings**.
+
+Next chapter: :doc:`/install/upgrading`

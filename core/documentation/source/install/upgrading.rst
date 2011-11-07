@@ -13,3 +13,5 @@ All the user content (tipically all the custom things of a website) are containe
 # Log into Bancha and **Clear the cache**
 
 You're done!
+
+See also: :doc:`howtoinstall` or :doc:`/introduction/understanding`

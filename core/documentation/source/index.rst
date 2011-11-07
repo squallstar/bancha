@@ -25,9 +25,9 @@ Basic info
    basic/changelog
    basic/credits
 
-----------
+------------
 Installation
-----------
+------------
 
 .. toctree::
    :maxdepth: 2
@@ -35,3 +35,11 @@ Installation
    install/howtoinstall
    install/upgrading
 
+------------
+Introduction
+------------
+
+.. toctree::
+   :maxdepth: 2
+
+   introduction/understanding
