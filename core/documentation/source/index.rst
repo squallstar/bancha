@@ -32,5 +32,6 @@ Installation
 .. toctree::
    :maxdepth: 2
 
-   howtoinstall
+   install/howtoinstall
+   install/upgrading
 
