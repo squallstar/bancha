@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    
+	    <title>BANCHA - The CMS you were waiting for &mdash; Bancha 1.0-dev documentation</title>
+
+	    <link rel="stylesheet" href="_static/asset/css/common.css" type="text/css" />
+	    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+	    <script type="text/javascript">
+	      var DOCUMENTATION_OPTIONS = {
+	        URL_ROOT:    '',
+	        VERSION:     '1.0-dev',
+	        COLLAPSE_INDEX: false,
+	        FILE_SUFFIX: '.html',
+	        HAS_SOURCE:  true
+	      };
+	    </script>
+	    <script type="text/javascript" src="_static/jquery.js"></script>
+	    <script type="text/javascript" src="_static/underscore.js"></script>
+	    <script type="text/javascript" src="_static/doctools.js"></script>
+	    <link rel="top" title="Bancha 1.0-dev documentation" href="#" />
+	    <link rel="next" title="Bancha Server-side requirements" href="requirements.html" /> 
+	</head>
+	<body>
+		<div id="table-contents">
+			<div class="toctree-wrapper compound">
+			<ul>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Bancha Server-side requirements</a></li>
+</ul>
+
+			</div>
+		</div>
+
+		<div id="brand" class="bancha">
+			<a href="http://getbancha.com/"><img src="_static/asset/img/bancha-logo.gif" alt="Bancha"></a>
+			<p>1.0-dev User Guide</p>
+		    <p><a href="_sources/index.txt"
+			           rel="nofollow">Show Source</a></p>
+		</div><!-- /#brand -->
+
+		<div id="header">
+			<form method="get" action="http://www.google.com/search">
+				<fieldset>
+					<input type="text" name="q" id="q" value="">
+					<input type="hidden" name="as_sitesearch" id="as_sitesearch" value="getbancha.com/user_guide/" />
+					<input class="grades" type="submit" value="search">
+				</fieldset>
+			</form>
+			<ul>
+				<li><a href="#">Home</a>&nbsp;&nbsp; &rsaquo;</li>
+				<li><a id="toc-link" href="#">Table of Contents</a>&nbsp;&nbsp; &rsaquo;</li>
+
+				<li><strong>BANCHA - The CMS you were waiting for</strong></li>
+			</ul>
+		</div><!-- /#header -->
+
+		<div class="section" id="content">
+			<div class="section" id="bancha-the-cms-you-were-waiting-for">
+<h1>BANCHA - The CMS you were waiting for<a class="headerlink" href="#bancha-the-cms-you-were-waiting-for" title="Permalink to this headline">¶</a></h1>
+<p>BANCHA is a Content Management System made with PHP5 and Code Igniter, a light and powerful PHP framework.
+It is capable to manage any kind of project/website, specially when it have many different types of contents.</p>
+<p>BANCHA bases its power on some pillars that make it different from other CMS:
+It allows you to handle any type of content: pages, news, photo galleries, products, etc ... through XML schemas.
+In 10 minutes, you can configure a website to manage, list and view any kind of thing you want.</p>
+<div class="section" id="who-is-bancha-for">
+<h2>Who is Bancha For?<a class="headerlink" href="#who-is-bancha-for" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>It doesn&#8217;t sacrifice the performance of a static site, because under the hood it uses many different caching systems.</li>
+<li>It&#8217;s modular, so it can be extended with different types of modules that you can develop yourself.</li>
+<li>It&#8217;s totally open-source (you can download the source from <a class="reference external" href="http://getbancha.com">http://getbancha.com</a>).</li>
+<li>It&#8217;s easy to install and to maintain. It doesnt&#8217;t need any complicated or advanced infrastructure: just PHP5, some extensions and a DB server.</li>
+<li>It totally separates the application framework (MVC) from the website themes, so it&#8217;s easy to use for web developers as well as web designers.</li>
+<li>It use a wonderful ORM system to &#8220;play&#8221; with the database objects without the needs to write a single query.</li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Bancha Server-side requirements</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+		</div>
+
+		<!-- {user_guide_comments} -->
+					
+		<div id="footer">
+			<p class="top">
+				
+				
+				<span class="next">Next Topic: <a href="requirements.html">Bancha Server-side requirements</a></span>
+				
+				<a href="#header" title="Return to top">Return to top</a>
+			</p>
+			<p><a href="">Bancha</a> &ndash; Copyright &copy; 2011, Squallstar Studio</a> &ndash; Last updated: Nov 07, 2011</p>
+		</div><!-- /#footer -->
+	
+	<script src="_static/asset/js/jquery-ui-min.js" type="text/javascript" charset="utf-8" async></script>
+	<script type="text/javascript" charset="utf-8">
+		$('#toc-link').click(function(){
+			$('#table-contents').animate({ left: '0' },1000);
+			return false;
+		});
+		$('html').click(function(){
+			if ($('#table-contents').css("left") == '0px'){
+				$('#table-contents').animate({ left: '-520' },1000);
+			}
+		});
+		$('#table-contents').click(function(event){
+			event.stopPropagation();
+		});
+/*		$('*:not(#table-contents,#toc-link)').click(function(){
+			if ($('#table-contents').css("left") == '0px'){
+				$('#table-contents').animate({ left: '-520' },1000);
+			}
+		});
+/*		$("#toc-link").click(function () {
+			$('#table-contents').show("slide", { direction: "left" }, 100);
+			event.stopPropagation();
+			return false;
+		});
+		$('*:not(#table-contents,#toc-link)').click(function () {
+			if ($('#table-contents').is(":visible")) {
+				$('#table-contents').hide("slide", { direction: "left" }, 100);
+				event.stopPropagation();	
+			}
+		}); */
+	</script>
+	</body>
+</html>

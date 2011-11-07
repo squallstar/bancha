@@ -24,10 +24,10 @@ Thumbs.db
 /core/views/type_templates
 /core/views/admin/content/translations.php
 /application/xml/types/*.xml
-/documentation/build
+/core/documentation/build
 
 ##############
-#Cache files #
+# Temp and Cache files #
 ##############
 *.tmp
 /attach/cache/
