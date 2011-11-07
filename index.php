@@ -17,8 +17,8 @@
  * BANCHA APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
  *
- * sqlite		: will use the sqlite internal database	(application/config/sqlite/database.php)
- * development	: the default one			(application/config/database.php)
+ * development	: the default environment (DB: application/config/database.php)
+ * sqlite		: uses the sqlite internal database	(DB: application/config/sqlite/database.php)
  * production	: errors will not be displayed
  *
  */
@@ -59,12 +59,6 @@ if (defined('ENVIRONMENT'))
  * CORE FOLDER NAME
  *---------------------------------------------------------------
  *
- * If you want this front controller to use a different "application"
- * folder then the default one you can set its name here. The folder
- * can also be renamed or relocated anywhere on your server.  If
- * you do, use a full server path. For more info please see the user guide:
- * http://codeigniter.com/user_guide/general/managing_apps.html
- *
  * NO TRAILING SLASH!
  *
  */
@@ -82,12 +76,8 @@ if (defined('ENVIRONMENT'))
 
 /*
  *---------------------------------------------------------------
- * SYSTEM FOLDER NAME
+ * CODEIGNITER SYSTEM FOLDER NAME
  *---------------------------------------------------------------
- *
- * This variable must contain the name of your "system" folder.
- * Include the path if the folder is not in the same  directory
- * as this file.
  *
  */
 	$system_path = $core_folder . '/libraries/codeigniter';
@@ -115,12 +105,6 @@ if (defined('ENVIRONMENT'))
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
 // --------------------------------------------------------------------
-
-/*
- * ---------------------------------------------------------------
- *  Resolve the system path for increased reliability
- * ---------------------------------------------------------------
- */
 
 	// Set the current directory correctly for CLI requests
 	if (defined('STDIN'))
@@ -165,7 +149,7 @@ if (defined('ENVIRONMENT'))
 	//The administration public path
 	define('ADMIN_PUB_PATH', $admin_path);
 
-	// The path to the "application" folder
+	// The path to the core folder
 	if (is_dir($core_folder))
 	{
 		define('APPPATH', $core_folder.'/');
@@ -174,7 +158,7 @@ if (defined('ENVIRONMENT'))
 	{
 		if ( ! is_dir(BASEPATH.$core_folder.'/'))
 		{
-			exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
+			exit("Your core folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
 		}
 
 		define('APPPATH', BASEPATH.$core_folder.'/');
