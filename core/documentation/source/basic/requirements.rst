@@ -9,4 +9,4 @@ To run, Bancha requires a basic Apache server with PHP support.
 * GD2 libraries
 * Database server (MySQL, Postgre, etc..)
 
-:doc:`/howtoinstall`
+Next: :doc:`/install/howtoinstall`

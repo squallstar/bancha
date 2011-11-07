@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 	    
-	    <title>Server-side requirements &mdash; Bancha 0.9.4 documentation</title>
+	    <title>Architecture &mdash; Bancha 0.9.4 documentation</title>
 
 	    <link rel="stylesheet" href="../_static/asset/css/common.css" type="text/css" />
 	    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -21,8 +21,7 @@
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
 	    <link rel="top" title="Bancha 0.9.4 documentation" href="../index.html" />
-	    <link rel="next" title="ChangeLog" href="changelog.html" />
-	    <link rel="prev" title="Why Bancha?" href="../whybancha.html" /> 
+	    <link rel="prev" title="Understanding Bancha" href="understanding.html" /> 
 	</head>
 	<body>
 		<div id="table-contents">
@@ -30,18 +29,18 @@
 			<ul>
 <li class="toctree-l1"><a class="reference internal" href="../whybancha.html">Why Bancha?</a></li>
 </ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Server-side requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">ChangeLog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../basic/requirements.html">Server-side requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/changelog.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/credits.html">Credits</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install/howtoinstall.html">How to install</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install/upgrading.html">Upgrading From a Previous Version</a></li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../introduction/understanding.html">Understanding Bancha</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../introduction/architecture.html">Architecture</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="understanding.html">Understanding Bancha</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Architecture</a></li>
 </ul>
 
 			</div>
@@ -50,7 +49,7 @@
 		<div id="brand" class="bancha">
 			<a href="http://getbancha.com/"><img src="../_static/asset/img/logo.png" alt="Bancha"></a>
 			<p>0.9.4 User Guide</p>
-		    <!--<p><a href="../_sources/basic/requirements.txt"
+		    <!--<p><a href="../_sources/introduction/architecture.txt"
 			           rel="nofollow">Show Source</a></p>-->
 		</div><!-- /#brand -->
 
@@ -66,21 +65,15 @@
 				<li><a href="../index.html">Home</a>&nbsp;&nbsp; &rsaquo;</li>
 				<li><a id="toc-link" href="../index.html">Table of Contents</a>&nbsp;&nbsp; &rsaquo;</li>
 
-				<li><strong>Server-side requirements</strong></li>
+				<li><strong>Architecture</strong></li>
 			</ul>
 		</div><!-- /#header -->
 
 		<div class="section" id="content">
-			<div class="section" id="server-side-requirements">
-<h1>Server-side requirements<a class="headerlink" href="#server-side-requirements" title="Permalink to this headline">¶</a></h1>
-<p>To run, Bancha requires a basic Apache server with PHP support.</p>
-<ul class="simple">
-<li>Apache 2.2 with mod_rewrite enabled</li>
-<li>PHP 5.3</li>
-<li>GD2 libraries</li>
-<li>Database server (MySQL, Postgre, etc..)</li>
-</ul>
-<p>Next: <a class="reference internal" href="../install/howtoinstall.html"><em>How to install</em></a></p>
+			<div class="section" id="architecture">
+<h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<p>Bancha uses the Model-View-Controller approach, which allows great separation between logic and presentation.</p>
+<p>We extended the base CodeIgniter structure into a new, better one.</p>
 </div>
 
 		</div>
@@ -90,10 +83,8 @@
 		<div id="footer">
 			<p class="top">
 				
-				<span class="prev">Previous Topic: <a href="../whybancha.html">Why Bancha?</a></span>
+				<span class="prev">Previous Topic: <a href="understanding.html">Understanding Bancha</a></span>
 				
-				
-				<span class="next">Next Topic: <a href="changelog.html">ChangeLog</a></span>
 				
 				<a href="#header" title="Return to top">Return to top</a>
 			</p>

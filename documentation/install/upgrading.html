@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 	    
-	    <title>Server-side requirements &mdash; Bancha 0.9.4 documentation</title>
+	    <title>Upgrading From a Previous Version &mdash; Bancha 0.9.4 documentation</title>
 
 	    <link rel="stylesheet" href="../_static/asset/css/common.css" type="text/css" />
 	    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -21,8 +21,8 @@
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
 	    <link rel="top" title="Bancha 0.9.4 documentation" href="../index.html" />
-	    <link rel="next" title="ChangeLog" href="changelog.html" />
-	    <link rel="prev" title="Why Bancha?" href="../whybancha.html" /> 
+	    <link rel="next" title="Understanding Bancha" href="../introduction/understanding.html" />
+	    <link rel="prev" title="How to install" href="howtoinstall.html" /> 
 	</head>
 	<body>
 		<div id="table-contents">
@@ -30,14 +30,14 @@
 			<ul>
 <li class="toctree-l1"><a class="reference internal" href="../whybancha.html">Why Bancha?</a></li>
 </ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Server-side requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">ChangeLog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
-</ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install/howtoinstall.html">How to install</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install/upgrading.html">Upgrading From a Previous Version</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/requirements.html">Server-side requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/changelog.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/credits.html">Credits</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="howtoinstall.html">How to install</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Upgrading From a Previous Version</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction/understanding.html">Understanding Bancha</a></li>
@@ -50,7 +50,7 @@
 		<div id="brand" class="bancha">
 			<a href="http://getbancha.com/"><img src="../_static/asset/img/logo.png" alt="Bancha"></a>
 			<p>0.9.4 User Guide</p>
-		    <!--<p><a href="../_sources/basic/requirements.txt"
+		    <!--<p><a href="../_sources/install/upgrading.txt"
 			           rel="nofollow">Show Source</a></p>-->
 		</div><!-- /#brand -->
 
@@ -66,21 +66,25 @@
 				<li><a href="../index.html">Home</a>&nbsp;&nbsp; &rsaquo;</li>
 				<li><a id="toc-link" href="../index.html">Table of Contents</a>&nbsp;&nbsp; &rsaquo;</li>
 
-				<li><strong>Server-side requirements</strong></li>
+				<li><strong>Upgrading From a Previous Version</strong></li>
 			</ul>
 		</div><!-- /#header -->
 
 		<div class="section" id="content">
-			<div class="section" id="server-side-requirements">
-<h1>Server-side requirements<a class="headerlink" href="#server-side-requirements" title="Permalink to this headline">¶</a></h1>
-<p>To run, Bancha requires a basic Apache server with PHP support.</p>
-<ul class="simple">
-<li>Apache 2.2 with mod_rewrite enabled</li>
-<li>PHP 5.3</li>
-<li>GD2 libraries</li>
-<li>Database server (MySQL, Postgre, etc..)</li>
-</ul>
-<p>Next: <a class="reference internal" href="../install/howtoinstall.html"><em>How to install</em></a></p>
+			<div class="section" id="upgrading-from-a-previous-version">
+<h1>Upgrading From a Previous Version<a class="headerlink" href="#upgrading-from-a-previous-version" title="Permalink to this headline">¶</a></h1>
+<p>Basically, all the Bancha framework is contained inside the <strong>core</strong> folder.</p>
+<p>Beside, all the user content (tipically all the custom things of a website) is contained inside the <strong>application</strong> folder.
+This means that to upgrade Bancha, you just need to replace the core folder with an updated one.</p>
+<ol class="arabic simple">
+<li>Download the latest version of Bancha <a class="reference external" href="http://getbancha.com">http://getbancha.com</a></li>
+<li>Unzip the tarball</li>
+<li>Replace the <strong>core</strong> folder</li>
+<li>Replace the <strong>themes/admin</strong> folder</li>
+<li>Log into Bancha and <strong>Clear the cache</strong></li>
+</ol>
+<p>You&#8217;re done!</p>
+<p>See also: <a class="reference internal" href="howtoinstall.html"><em>How to install</em></a> or <a class="reference internal" href="../introduction/understanding.html"><em>Understanding Bancha</em></a></p>
 </div>
 
 		</div>
@@ -90,10 +94,10 @@
 		<div id="footer">
 			<p class="top">
 				
-				<span class="prev">Previous Topic: <a href="../whybancha.html">Why Bancha?</a></span>
+				<span class="prev">Previous Topic: <a href="howtoinstall.html">How to install</a></span>
 				
 				
-				<span class="next">Next Topic: <a href="changelog.html">ChangeLog</a></span>
+				<span class="next">Next Topic: <a href="../introduction/understanding.html">Understanding Bancha</a></span>
 				
 				<a href="#header" title="Return to top">Return to top</a>
 			</p>

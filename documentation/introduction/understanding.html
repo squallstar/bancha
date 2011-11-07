@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 	    
-	    <title>Server-side requirements &mdash; Bancha 0.9.4 documentation</title>
+	    <title>Understanding Bancha &mdash; Bancha 0.9.4 documentation</title>
 
 	    <link rel="stylesheet" href="../_static/asset/css/common.css" type="text/css" />
 	    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -21,8 +21,8 @@
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
 	    <link rel="top" title="Bancha 0.9.4 documentation" href="../index.html" />
-	    <link rel="next" title="ChangeLog" href="changelog.html" />
-	    <link rel="prev" title="Why Bancha?" href="../whybancha.html" /> 
+	    <link rel="next" title="Architecture" href="architecture.html" />
+	    <link rel="prev" title="Upgrading From a Previous Version" href="../install/upgrading.html" /> 
 	</head>
 	<body>
 		<div id="table-contents">
@@ -30,18 +30,21 @@
 			<ul>
 <li class="toctree-l1"><a class="reference internal" href="../whybancha.html">Why Bancha?</a></li>
 </ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Server-side requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">ChangeLog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../basic/requirements.html">Server-side requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/changelog.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/credits.html">Credits</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install/howtoinstall.html">How to install</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install/upgrading.html">Upgrading From a Previous Version</a></li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../introduction/understanding.html">Understanding Bancha</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../introduction/architecture.html">Architecture</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Understanding Bancha</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#content-types">Content types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 </ul>
 
 			</div>
@@ -50,7 +53,7 @@
 		<div id="brand" class="bancha">
 			<a href="http://getbancha.com/"><img src="../_static/asset/img/logo.png" alt="Bancha"></a>
 			<p>0.9.4 User Guide</p>
-		    <!--<p><a href="../_sources/basic/requirements.txt"
+		    <!--<p><a href="../_sources/introduction/understanding.txt"
 			           rel="nofollow">Show Source</a></p>-->
 		</div><!-- /#brand -->
 
@@ -66,21 +69,30 @@
 				<li><a href="../index.html">Home</a>&nbsp;&nbsp; &rsaquo;</li>
 				<li><a id="toc-link" href="../index.html">Table of Contents</a>&nbsp;&nbsp; &rsaquo;</li>
 
-				<li><strong>Server-side requirements</strong></li>
+				<li><strong>Understanding Bancha</strong></li>
 			</ul>
 		</div><!-- /#header -->
 
 		<div class="section" id="content">
-			<div class="section" id="server-side-requirements">
-<h1>Server-side requirements<a class="headerlink" href="#server-side-requirements" title="Permalink to this headline">¶</a></h1>
-<p>To run, Bancha requires a basic Apache server with PHP support.</p>
+			<div class="section" id="understanding-bancha">
+<h1>Understanding Bancha<a class="headerlink" href="#understanding-bancha" title="Permalink to this headline">¶</a></h1>
+<p>It&#8217;s very important to understand how Bancha works, before using it.</p>
+<p>Bancha has been built to manage any type of content. This means that teoretically you can manage an infinite number of <strong>things</strong>.</p>
+<p>Any different kind on thing, in Bancha becomes a <strong>Content type</strong>.</p>
 <ul class="simple">
-<li>Apache 2.2 with mod_rewrite enabled</li>
-<li>PHP 5.3</li>
-<li>GD2 libraries</li>
-<li>Database server (MySQL, Postgre, etc..)</li>
+<li>The news list of a website, will be a content type named <strong>News</strong>.</li>
+<li>The posts of a blog, will be a content type named <strong>Posts</strong> and the linked comments will be another content type named <strong>Comments</strong>.</li>
+<li>If you want to build an e-commerce, you may need to create also a <strong>Products</strong> content type.</li>
 </ul>
-<p>Next: <a class="reference internal" href="../install/howtoinstall.html"><em>How to install</em></a></p>
+<p>Feel free to create tens of different content types.</p>
+<div class="section" id="content-types">
+<h2>Content types<a class="headerlink" href="#content-types" title="Permalink to this headline">¶</a></h2>
+<p>How can a content types be differents between each others?
+Every content types have a unique <strong>scheme</strong> that describes it.</p>
+<p>The <strong>News</strong> content type will have a scheme, the <strong>Comments</strong> content type will have a different scheme and so on.</p>
+<p>Basically, a <strong>Scheme</strong> consists in a single <strong>XML</strong> file that describes all the fields that the <strong>Records</strong> of that content type needs to implement.
+You will learn how to create and manage the content types and their schemes in the next chapters of the documentation.</p>
+</div>
 </div>
 
 		</div>
@@ -90,10 +102,10 @@
 		<div id="footer">
 			<p class="top">
 				
-				<span class="prev">Previous Topic: <a href="../whybancha.html">Why Bancha?</a></span>
+				<span class="prev">Previous Topic: <a href="../install/upgrading.html">Upgrading From a Previous Version</a></span>
 				
 				
-				<span class="next">Next Topic: <a href="changelog.html">ChangeLog</a></span>
+				<span class="next">Next Topic: <a href="architecture.html">Architecture</a></span>
 				
 				<a href="#header" title="Return to top">Return to top</a>
 			</p>
