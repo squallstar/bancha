@@ -43,3 +43,4 @@ Introduction
    :maxdepth: 2
 
    introduction/understanding
+   introduction/architecture
