@@ -24,6 +24,7 @@ Thumbs.db
 /core/views/type_templates
 /core/views/admin/content/translations.php
 /application/xml/types/*.xml
+/documentation/build
 
 ##############
 #Cache files #
