@@ -47,5 +47,5 @@ if ($records && is_array($records) && count($records)) {
 
 echo '</div><div class="clear"></div>';
 
-/* End of file feed.php */
+/* End of file list.php */
 /* Location: /type_templates/Default/list.php */

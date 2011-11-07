@@ -29,5 +29,5 @@ if (isset($record) && $record instanceof Record) {
 
 echo '</div><div class="clear"></div>';
 
-/* End of file feed.php */
+/* End of file detail.php */
 /* Location: /type_templates/Default/detail.php */
