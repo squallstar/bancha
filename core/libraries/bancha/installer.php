@@ -420,7 +420,7 @@ Class Installer
 		$directories = array(
 			$this->CI->config->item('attach_folder'),					//Attachs directory
 			$this->CI->config->item('xml_typefolder'),					//XML Types schemes
-			$this->CI->config->item('views_absolute_templates_folder'),	//Content type Views,
+			//$this->CI->config->item('views_absolute_templates_folder'),	//Content type Views - DEPRECATED,
 			$this->CI->config->item('fr_cache_folder'),					//Bancha Cache files,
 			$this->CI->config->item('cache_path')						//CI Cache folder
 		);

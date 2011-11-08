@@ -1,10 +1,13 @@
-# BANCHA GIT IGNORE FILE #
+#######################################
+#        BANCHA GIT IGNORE FILE       #
+# Copyright 2011(C) Squallstar Studio #
+#######################################
 
 ########
 # Logs #
 ########
 *.log
-/core/logs/*.php
+/application/logs/*.php
 
 ######################
 # OS generated files #

@@ -60,7 +60,7 @@ class Bancha_Output extends CI_Output
 
 		$path = $CI->config->item('cache_path');
 
-		$cache_path = ($path == '') ? APPPATH.'cache/' : $path;
+		$cache_path = ($path == '') ? USERPATH.'cache/' : $path;
 
 		if ( ! is_dir($cache_path) OR ! is_really_writable($cache_path))
 		{
@@ -114,7 +114,7 @@ class Bancha_Output extends CI_Output
 			return FALSE;
 		}
 
-		$cache_path = ($CFG->item('cache_path') == '') ? APPPATH.'cache/' : $CFG->item('cache_path');
+		$cache_path = ($CFG->item('cache_path') == '') ? USERPATH.'cache/' : $CFG->item('cache_path');
 
 		if (!isset($_SESSION['_website_theme']))
 		{

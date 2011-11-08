@@ -2,6 +2,15 @@
 ChangeLog
 ######################
 
+**v 0.9.5** (Planned)
+
+- English documentation is now available!!
+- To contribute with the documentation, check the "core/documentation" folder
+- To compile the documentation, you must install Phyton 2.7 + Sphynx. Then, type "make html" while in the core documentation folder (from terminal)
+- You can find the static compiled documentation on the project folder "/documentation"
+- Config variable "views_absolute_templates_folder" has been removed
+- Bug fix on the application/config.php (the core config file was loaded instead)
+
 **v 0.9.4** (2011-10-06) Live from #banchafest
 
 - We decided to use an external folder for the application, so we added a "core" folder with the Bancha framework
