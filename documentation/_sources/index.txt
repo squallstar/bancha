@@ -9,11 +9,6 @@ BANCHA bases its power on some pillars that make it different from other CMS:
 It allows you to handle any type of content: pages, news, photo galleries, products, etc ... through XML schemas.
 In 10 minutes, you can configure a website to manage, list and view any kind of thing you want.
 
-.. toctree::
-   :maxdepth: 2
-
-   whybancha
-
 ----------
 Basic info
 ----------
@@ -21,6 +16,7 @@ Basic info
 .. toctree::
    :maxdepth: 2
 
+   basic/whybancha
    basic/requirements
    basic/changelog
    basic/credits
@@ -30,7 +26,7 @@ Installation
 ------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    install/howtoinstall
    install/upgrading
@@ -40,7 +36,7 @@ Introduction
 ------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    introduction/understanding
    introduction/architecture
@@ -50,9 +46,10 @@ First steps
 -----------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    firststeps/getting-started
+   firststeps/stage-workflow
    firststeps/create-pages
    firststeps/create-news
    firststeps/listing-items

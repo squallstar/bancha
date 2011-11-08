@@ -14,9 +14,13 @@ Any different kind on thing, in Bancha becomes a **Content type**.
 
 Feel free to create tens of different content types.
 
--------------------
+================
+Bancha's pillars
+================
+
+-------------
 Content types
--------------------
+-------------
 
 How can a content types be differents between each others?
 Every content types have a unique **scheme** that describes it.
@@ -26,8 +30,16 @@ The **News** content type will have a scheme, the **Comments** content type will
 Basically, a **Scheme** consists in a single **XML** file that describes all the fields that the **Records** of that content type needs to implement.
 You will learn how to create and manage the content types and their schemes in the next chapters of the documentation.
 
+
 ----------------
 MVC Architecture
 ----------------
 
-Before to start using Bancha, take a look at the :doc:`architecture`.
+Before starting with Bancha, take a look at the :doc:`architecture`.
+
+
+---------------------
+Introduction tutorial
+---------------------
+
+To make your first steps with Bancha, follow the introduction tutorial: :doc:`/firststeps/getting-started`

@@ -11,6 +11,6 @@ Pages and Contents, are content types: they slightly differ by the scheme, becau
 The first Page content type installed by default is **Menu**. This content type will contains all the pages of your website.
 Click on **Menu** on the list, and a record list of pages records will appear.
 
-Proceed to the next chapter of the tutorial: :doc:`create-pages`
+Discover how Bancha works, proceed to the **next chapter** of the tutorial: :doc:`stage-workflow`
 
-Already done? Proceed to :doc:`create-news`
+Already done? Proceed to :doc:`create-pages`

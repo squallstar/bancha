@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 	    
-	    <title>Create some pages &mdash; Bancha 0.9.4 documentation</title>
+	    <title>Create our first page &mdash; Bancha 0.9.4 documentation</title>
 
 	    <link rel="stylesheet" href="../_static/asset/css/common.css" type="text/css" />
 	    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -22,15 +22,13 @@
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
 	    <link rel="top" title="Bancha 0.9.4 documentation" href="../index.html" />
 	    <link rel="next" title="Create some news" href="create-news.html" />
-	    <link rel="prev" title="Getting started" href="getting-started.html" /> 
+	    <link rel="prev" title="The stage workflow" href="stage-workflow.html" /> 
 	</head>
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
 			<ul>
-<li class="toctree-l1"><a class="reference internal" href="../whybancha.html">Why Bancha?</a></li>
-</ul>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="../basic/whybancha.html">Why Bancha?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic/requirements.html">Server-side requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic/changelog.html">ChangeLog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic/credits.html">Credits</a></li>
@@ -45,7 +43,8 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Create some pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stage-workflow.html">The stage workflow</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Create our first page</a></li>
 <li class="toctree-l1"><a class="reference internal" href="create-news.html">Create some news</a></li>
 <li class="toctree-l1"><a class="reference internal" href="listing-items.html">Listing items</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content-render.html">The content render</a></li>
@@ -73,19 +72,22 @@
 				<li><a href="../index.html">Home</a>&nbsp;&nbsp; &rsaquo;</li>
 				<li><a id="toc-link" href="../index.html">Table of Contents</a>&nbsp;&nbsp; &rsaquo;</li>
 
-				<li><strong>Create some pages</strong></li>
+				<li><strong>Create our first page</strong></li>
 			</ul>
 		</div><!-- /#header -->
 
 		<div class="section" id="content">
-			<div class="section" id="create-some-pages">
-<h1>Create some pages<a class="headerlink" href="#create-some-pages" title="Permalink to this headline">¶</a></h1>
+			<div class="section" id="create-our-first-page">
+<h1>Create our first page<a class="headerlink" href="#create-our-first-page" title="Permalink to this headline">¶</a></h1>
 <p>By default, the pages of the website are linked to the content type named <strong>Menu</strong>.
 You can change this behaviour adding an array of types to your config file <strong>application/config/website.php</strong>, listing one or more content type to use as website pages</p>
 <blockquote>
 <div>$config[&#8216;default_tree_types&#8217;] = array(&#8216;Menu&#8217;);</div></blockquote>
 <p>Tipically you just need a single content type, so let&#8217;s go on.</p>
 <p>On the right upper side of the list you will see the <strong>Create new page</strong> button. Let&#8217;s create a new page!</p>
+<p>Type &#8220;My first page&#8221; as <strong>Title</strong> and paste some text to the <strong>content textarea</strong>, click <strong>&#8220;Save and go to list&#8221;</strong> and voilà: your first page is done!</p>
+<p>To propagate the page that we just created on the production environment, <strong>publish</strong> it!
+(if you are new to the stage-production environment, remember to read first <a class="reference internal" href="stage-workflow.html"><em>The stage workflow</em></a>)</p>
 </div>
 
 		</div>
@@ -95,7 +97,7 @@ You can change this behaviour adding an array of types to your config file <stro
 		<div id="footer">
 			<p class="top">
 				
-				<span class="prev">Previous Topic: <a href="getting-started.html">Getting started</a></span>
+				<span class="prev">Previous Topic: <a href="stage-workflow.html">The stage workflow</a></span>
 				
 				
 				<span class="next">Next Topic: <a href="create-news.html">Create some news</a></span>
