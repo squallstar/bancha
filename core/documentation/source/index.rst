@@ -44,3 +44,26 @@ Introduction
 
    introduction/understanding
    introduction/architecture
+
+-----------
+First steps
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   firststeps/getting-started
+   firststeps/create-pages
+   firststeps/create-news
+   firststeps/listing-items
+   firststeps/content-render
+
+--------------------
+Custom Content types
+--------------------
+
+* Adding a new content type
+* XML Scheme
+* Fieldsets and Fields
+* Relations
+* Triggers
