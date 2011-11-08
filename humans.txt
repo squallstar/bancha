@@ -1,6 +1,7 @@
-/* The humans responsible of Bancha project */
+/* The humans responsible of the Bancha project */
 
 /* TEAM */
+
    Main Developer: Nicholas Valbusa
    Site: www.squallstar.it
    Twitter: @squallstar
@@ -17,11 +18,11 @@
    Github: @alexmaroldi
    Location: Verona, IT
 
-   Contributor (Front-end Developer): Matteo Gildone
+   Front-end Developer: Matteo Gildone
    Github: @DomSmasher
    Location: Verona, IT
 
-   Javascript Developer: Marco Solazzi
+   Contributor (Javascript Developer): Marco Solazzi
    Github: @dwightjack
    Location: Verona, IT
 
@@ -29,10 +30,10 @@
    Github: @gariggio
    Location: Verona, IT
 
-   English documentation translator: Enrico Oliosi
+   Contributor (Part of english documentation): Enrico Oliosi
    Location: Verona, IT
 
 /* TECHNOLOGIES */
    Standards: HTML5, CSS3 - Works on IE7+, FF3.6+, Chrome, Safari and Opera
    Components: jQuery, jQuery UI and many other little things
-   Software: Espresso, Eclipse, Aptana, Adobe Photoshop
+   Software: Sublime Text, Aptana Studio, Adobe Photoshop, Git
