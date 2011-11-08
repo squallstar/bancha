@@ -25,3 +25,9 @@ The **News** content type will have a scheme, the **Comments** content type will
 
 Basically, a **Scheme** consists in a single **XML** file that describes all the fields that the **Records** of that content type needs to implement.
 You will learn how to create and manage the content types and their schemes in the next chapters of the documentation.
+
+----------------
+MVC Architecture
+----------------
+
+Before to start using Bancha, take a look at the :doc:`architecture`.
