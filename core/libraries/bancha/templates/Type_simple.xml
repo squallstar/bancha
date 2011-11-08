@@ -61,7 +61,7 @@
 		</field>
 		<field id="content">
 			<description>Content</description>
-			<type>textarea</type>
+			<type>textarea_full</type>
 			<list>true</list>
 		</field>
 	</fieldset>

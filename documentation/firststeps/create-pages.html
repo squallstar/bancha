@@ -4,14 +4,14 @@
 	<head>
 		<meta charset="utf-8">
 	    
-	    <title>Create our first page &mdash; Bancha 0.9.4 documentation</title>
+	    <title>Create our first page &mdash; Bancha 0.9.5 documentation</title>
 
 	    <link rel="stylesheet" href="../_static/asset/css/common.css" type="text/css" />
 	    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
 	    <script type="text/javascript">
 	      var DOCUMENTATION_OPTIONS = {
 	        URL_ROOT:    '../',
-	        VERSION:     '0.9.4',
+	        VERSION:     '0.9.5',
 	        COLLAPSE_INDEX: false,
 	        FILE_SUFFIX: '.html',
 	        HAS_SOURCE:  true
@@ -20,8 +20,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
-	    <link rel="top" title="Bancha 0.9.4 documentation" href="../index.html" />
-	    <link rel="next" title="Create some news" href="create-news.html" />
+	    <link rel="top" title="Bancha 0.9.5 documentation" href="../index.html" />
+	    <link rel="next" title="Create our first post" href="create-news.html" />
 	    <link rel="prev" title="The stage workflow" href="stage-workflow.html" /> 
 	</head>
 	<body>
@@ -45,7 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage-workflow.html">The stage workflow</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Create our first page</a></li>
-<li class="toctree-l1"><a class="reference internal" href="create-news.html">Create some news</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create-news.html">Create our first post</a></li>
 <li class="toctree-l1"><a class="reference internal" href="listing-items.html">Listing items</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content-render.html">The content render</a></li>
 </ul>
@@ -55,7 +55,7 @@
 
 		<div id="brand" class="bancha">
 			<a href="http://getbancha.com/"><img src="../_static/asset/img/logo.png" alt="Bancha"></a>
-			<p>0.9.4 User Guide</p>
+			<p>0.9.5 User Guide</p>
 		    <!--<p><a href="../_sources/firststeps/create-pages.txt"
 			           rel="nofollow">Show Source</a></p>-->
 		</div><!-- /#brand -->
@@ -80,14 +80,17 @@
 			<div class="section" id="create-our-first-page">
 <h1>Create our first page<a class="headerlink" href="#create-our-first-page" title="Permalink to this headline">¶</a></h1>
 <p>By default, the pages of the website are linked to the content type named <strong>Menu</strong>.
-You can change this behaviour adding an array of types to your config file <strong>application/config/website.php</strong>, listing one or more content type to use as website pages</p>
-<blockquote>
-<div>$config[&#8216;default_tree_types&#8217;] = array(&#8216;Menu&#8217;);</div></blockquote>
+You can change this behaviour adding an array of types to your config file <strong>application/config/website.php</strong>, listing one or more content type to use as website pages:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;default_tree_types&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Menu&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
 <p>Tipically you just need a single content type, so let&#8217;s go on.</p>
 <p>On the right upper side of the list you will see the <strong>Create new page</strong> button. Let&#8217;s create a new page!</p>
 <p>Type &#8220;My first page&#8221; as <strong>Title</strong> and paste some text to the <strong>content textarea</strong>, click <strong>&#8220;Save and go to list&#8221;</strong> and voilà: your first page is done!</p>
+<p>The pages of a website are hierarchically, so feel free to set the <strong>parent page</strong> of this new page as you prefer.</p>
 <p>To propagate the page that we just created on the production environment, <strong>publish</strong> it!
 (if you are new to the stage-production environment, remember to read first <a class="reference internal" href="stage-workflow.html"><em>The stage workflow</em></a>)</p>
+<p>It&#8217;s time to create a post for our Blog! Proceed to the next chapter of the tutorial: <a class="reference internal" href="create-news.html"><em>Create our first post</em></a></p>
 </div>
 
 		</div>
@@ -100,7 +103,7 @@ You can change this behaviour adding an array of types to your config file <stro
 				<span class="prev">Previous Topic: <a href="stage-workflow.html">The stage workflow</a></span>
 				
 				
-				<span class="next">Next Topic: <a href="create-news.html">Create some news</a></span>
+				<span class="next">Next Topic: <a href="create-news.html">Create our first post</a></span>
 				
 				<a href="#header" title="Return to top">Return to top</a>
 			</p>

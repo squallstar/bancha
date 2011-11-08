@@ -31,11 +31,26 @@ Basically, a **Scheme** consists in a single **XML** file that describes all the
 You will learn how to create and manage the content types and their schemes in the next chapters of the documentation.
 
 
+^^^^^^^^^^^^^^^^^^^^^^^^
+Hierarchically structure
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+A content type could be of type **Pages**: it means that its records can be organized hierarchically. Each record can have a unique parent and infinite childs, so it's perfect for "tree shaped" contents.
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Non-hierarchically structure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+These content types cannot be organized hierarchically. It's perfect when you have to define linear contents such as **news**, **products** or the **posts** of a blog.
+
+
 ----------------
 MVC Architecture
 ----------------
 
-Before starting with Bancha, take a look at the :doc:`architecture`.
+Bancha it's all written using the MVC paradigm.
+Before starting with the tutorial, take a look at the :doc:`architecture`.
 
 
 ---------------------

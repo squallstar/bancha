@@ -4,14 +4,14 @@
 	<head>
 		<meta charset="utf-8">
 	    
-	    <title>Understanding Bancha &mdash; Bancha 0.9.4 documentation</title>
+	    <title>Understanding Bancha &mdash; Bancha 0.9.5 documentation</title>
 
 	    <link rel="stylesheet" href="../_static/asset/css/common.css" type="text/css" />
 	    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
 	    <script type="text/javascript">
 	      var DOCUMENTATION_OPTIONS = {
 	        URL_ROOT:    '../',
-	        VERSION:     '0.9.4',
+	        VERSION:     '0.9.5',
 	        COLLAPSE_INDEX: false,
 	        FILE_SUFFIX: '.html',
 	        HAS_SOURCE:  true
@@ -20,7 +20,7 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
-	    <link rel="top" title="Bancha 0.9.4 documentation" href="../index.html" />
+	    <link rel="top" title="Bancha 0.9.5 documentation" href="../index.html" />
 	    <link rel="next" title="Architecture" href="architecture.html" />
 	    <link rel="prev" title="Upgrading From a Previous Version" href="../install/upgrading.html" /> 
 	</head>
@@ -53,7 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../firststeps/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firststeps/stage-workflow.html">The stage workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firststeps/create-pages.html">Create our first page</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firststeps/create-news.html">Create some news</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firststeps/create-news.html">Create our first post</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firststeps/listing-items.html">Listing items</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firststeps/content-render.html">The content render</a></li>
 </ul>
@@ -63,7 +63,7 @@
 
 		<div id="brand" class="bancha">
 			<a href="http://getbancha.com/"><img src="../_static/asset/img/logo.png" alt="Bancha"></a>
-			<p>0.9.4 User Guide</p>
+			<p>0.9.5 User Guide</p>
 		    <!--<p><a href="../_sources/introduction/understanding.txt"
 			           rel="nofollow">Show Source</a></p>-->
 		</div><!-- /#brand -->
@@ -105,10 +105,19 @@ Every content types have a unique <strong>scheme</strong> that describes it.</p>
 <p>The <strong>News</strong> content type will have a scheme, the <strong>Comments</strong> content type will have a different scheme and so on.</p>
 <p>Basically, a <strong>Scheme</strong> consists in a single <strong>XML</strong> file that describes all the fields that the <strong>Records</strong> of that content type needs to implement.
 You will learn how to create and manage the content types and their schemes in the next chapters of the documentation.</p>
+<div class="section" id="hierarchically-structure">
+<h4>Hierarchically structure<a class="headerlink" href="#hierarchically-structure" title="Permalink to this headline">¶</a></h4>
+<p>A content type could be of type <strong>Pages</strong>: it means that its records can be organized hierarchically. Each record can have a unique parent and infinite childs, so it&#8217;s perfect for &#8220;tree shaped&#8221; contents.</p>
+</div>
+<div class="section" id="non-hierarchically-structure">
+<h4>Non-hierarchically structure<a class="headerlink" href="#non-hierarchically-structure" title="Permalink to this headline">¶</a></h4>
+<p>These content types cannot be organized hierarchically. It&#8217;s perfect when you have to define linear contents such as <strong>news</strong>, <strong>products</strong> or the <strong>posts</strong> of a blog.</p>
+</div>
 </div>
 <div class="section" id="mvc-architecture">
 <h3>MVC Architecture<a class="headerlink" href="#mvc-architecture" title="Permalink to this headline">¶</a></h3>
-<p>Before starting with Bancha, take a look at the <a class="reference internal" href="architecture.html"><em>Architecture</em></a>.</p>
+<p>Bancha it&#8217;s all written using the MVC paradigm.
+Before starting with the tutorial, take a look at the <a class="reference internal" href="architecture.html"><em>Architecture</em></a>.</p>
 </div>
 <div class="section" id="introduction-tutorial">
 <h3>Introduction tutorial<a class="headerlink" href="#introduction-tutorial" title="Permalink to this headline">¶</a></h3>

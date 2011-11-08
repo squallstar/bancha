@@ -4,14 +4,14 @@
 	<head>
 		<meta charset="utf-8">
 	    
-	    <title>The content render &mdash; Bancha 0.9.4 documentation</title>
+	    <title>The content render &mdash; Bancha 0.9.5 documentation</title>
 
 	    <link rel="stylesheet" href="../_static/asset/css/common.css" type="text/css" />
 	    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
 	    <script type="text/javascript">
 	      var DOCUMENTATION_OPTIONS = {
 	        URL_ROOT:    '../',
-	        VERSION:     '0.9.4',
+	        VERSION:     '0.9.5',
 	        COLLAPSE_INDEX: false,
 	        FILE_SUFFIX: '.html',
 	        HAS_SOURCE:  true
@@ -20,7 +20,7 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
-	    <link rel="top" title="Bancha 0.9.4 documentation" href="../index.html" />
+	    <link rel="top" title="Bancha 0.9.5 documentation" href="../index.html" />
 	    <link rel="prev" title="Listing items" href="listing-items.html" /> 
 	</head>
 	<body>
@@ -44,9 +44,13 @@
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage-workflow.html">The stage workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="create-pages.html">Create our first page</a></li>
-<li class="toctree-l1"><a class="reference internal" href="create-news.html">Create some news</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create-news.html">Create our first post</a></li>
 <li class="toctree-l1"><a class="reference internal" href="listing-items.html">Listing items</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">The content render</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">The content render</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#single-text">Single text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#content-list">Content list</a></li>
+</ul>
+</li>
 </ul>
 
 			</div>
@@ -54,7 +58,7 @@
 
 		<div id="brand" class="bancha">
 			<a href="http://getbancha.com/"><img src="../_static/asset/img/logo.png" alt="Bancha"></a>
-			<p>0.9.4 User Guide</p>
+			<p>0.9.5 User Guide</p>
 		    <!--<p><a href="../_sources/firststeps/content-render.txt"
 			           rel="nofollow">Show Source</a></p>-->
 		</div><!-- /#brand -->
@@ -78,7 +82,35 @@
 		<div class="section" id="content">
 			<div class="section" id="the-content-render">
 <h1>The content render<a class="headerlink" href="#the-content-render" title="Permalink to this headline">¶</a></h1>
-<p>...</p>
+<p>On the previous chapter, you learned how to set up a page to list Blog posts.
+The <strong>content render</strong> is the element responsable of the rendering of the body of the pages/records.</p>
+<p>It fires different actions based on the behaviour that each page choose.</p>
+<ul class="simple">
+<li>Single text</li>
+<li>Content list</li>
+<li>External link</li>
+<li>Custom action</li>
+</ul>
+<p>The <strong>content render</strong> is tipically placed in the container element of a website, and is defined inside every theme: this means that each teme can completely customize how the <strong>content render</strong> takes care of any action!</p>
+<div class="section" id="single-text">
+<h2>Single text<a class="headerlink" href="#single-text" title="Permalink to this headline">¶</a></h2>
+<p>When a page choose the action <strong>Single text</strong>, the <strong>Content render</strong> just displays the text you typed into the field named <strong>content</strong>.</p>
+</div>
+<div class="section" id="content-list">
+<h2>Content list<a class="headerlink" href="#content-list" title="Permalink to this headline">¶</a></h2>
+<p>If a page is set to the <strong>Content list</strong> action, first of all the <strong>Dispatcher</strong> extracts the record list, and links it to the <strong>page</strong>.
+Then, when the <strong>content render</strong> is called it will load the <strong>custom template</strong> of the content type passing the record list as parameter.</p>
+<p>In our example, these are the operations performed under the hood:</p>
+<ol class="arabic simple">
+<li>The router tells the dispatcher to extract the <strong>my-first-page</strong> page.</li>
+<li>The dispatcher see that the page action is <strong>Content list</strong>, so extracts the <strong>posts of the blog</strong>.</li>
+<li>The dispatcher links the posts to the page, and launch the <strong>view</strong> rendering process.</li>
+<li>While in the view, the <strong>content render</strong> see that there is a record list, so it checks the type of the records (in our example: Blog).</li>
+<li>The content render loads the template view of that content type, using the current theme: <strong>themes/default/views/type_templates/Blog/list.php</strong>.</li>
+<li>Finally, the view will be rendered and passed back as output.</li>
+</ol>
+<p>When you click on a record (a post), the differences are that only the chosen record will be extracted, and the rendered view will be <strong>Blog/detail.php</strong> instead of <strong>Blog/list.php</strong>.</p>
+</div>
 </div>
 
 		</div>
