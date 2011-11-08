@@ -1,0 +1,78 @@
+/* -----------------------------------------
+   Bancha custom styles
+----------------------------------------- */
+
+body, html {
+	background:#F5F5F5; 
+	color:#000;
+}
+a {
+	color:#20834a;
+}
+h1 {
+	font-size:38px;
+}
+h2 {
+	font-size:32px;
+}
+h3 {
+	font-size:26px;
+}
+.headerlink {
+	display:none;
+}
+.header, .header-right {
+	height:50px;
+	line-height:50px;
+}
+.header-right {
+	text-align:right;
+}
+.header-right p {
+	margin:0;
+	padding:0;
+	line-height:60px;
+	height:50px;
+	font-size:13px;
+}
+.header hr {
+	display:none;
+}
+.header img {
+	margin-top:14px;
+}
+.breadcrumbs {
+	margin-bottom:0;
+}
+.breadcrumbs li {
+	display:inline;
+}
+.section {
+	border-bottom:1px solid #DDD;
+	padding-bottom:20px;
+	margin-bottom:20px;
+}
+.highlight pre {
+	padding:20px 20px 20px 20px;
+	font-family:'Monaco', Monospace;
+	font-size:12px;
+	background:#EEE;
+	border:1px solid #DDD;
+}
+.toctree-wrapper {
+	margin:20px 0 20px 20px;
+}
+.toctree-l1 {
+	padding-bottom:10px;
+	border-bottom:1px dotted #DDD;
+}
+.section .toctree-l1 {
+	list-style-type:disc;
+}
+.toctree-l1 ul {
+	margin-top:10px;
+	margin-bottom:20px;
+}
+.section ul.simple {
+	margin-bottom:25px;
+}

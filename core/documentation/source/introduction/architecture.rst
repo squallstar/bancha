@@ -6,7 +6,7 @@ Bancha uses the Model-View-Controller approach, which allows great separation be
 
 We extended the base CodeIgniter structure into a new, better one.
 
-.. image:: /_themes/bancha/static/asset/img/mvc-scheme.png
+.. image:: /_themes/banchize/static/asset/mvc-scheme.png
 
 First of all, there's a routing system that calls a front-controller. This, loads a specific dispatcher depending on the request, and starts the loaded dispatcher.
 
