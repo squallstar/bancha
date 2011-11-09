@@ -28,7 +28,7 @@ The **BANCHA documentation** is available through the BANCHA administration pane
 
 3. Sets the database configuration parameters here: application/config/database.php
 
-4. Go through your browser to this URL: http://<yourwebsitename>/admin/install
+4. Go through your browser to this URL: http://yourwebsitename/admin/install
 
 5. Choose your install type between "Default" and "Blog".
    The Blog one, will create and configures the "Blog" and "Comments" content types for you.
