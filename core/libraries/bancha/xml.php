@@ -172,30 +172,30 @@ Class Xml
 
         $descr_attr = $node->descriptions->attributes();
 
+        if (isset($node->table))
+        {
+			$tables = $node->table->attributes();
+    	}
+
     	$content = array(
       		'id'				=> $type_id,
       		'name'				=> $safe_filename,
       		'tree'				=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
-      		'has_categories'	=> isset($node->has_categories) ? (strtolower((string)$node->has_categories) == 'true' ? TRUE : FALSE) : FALSE,
-            'has_hierarchies'	=> isset($node->has_hierarchies) ? (strtolower((string)$node->has_hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
+      		'has_categories'	=> isset($node->categories) ? (strtolower((string)$node->categories) == 'true' ? TRUE : FALSE) : FALSE,
+            'has_hierarchies'	=> isset($node->hierarchies) ? (strtolower((string)$node->hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
       		'description'		=> (string) $descr_attr->label,
       		'label_new'			=> (string) $descr_attr->new,
-      		'primary_key'		=> (string) (isset($node->primary_key) ? $node->primary_key : ''),
-      		'table'				=> (string) (isset($node->table) ? $node->table : '')
+      		'primary_key'		=> (string) (isset($tables->key) ? $tables->key : 'id_record'),
+      		'table'				=> (string) (isset($tables->production) ? $tables->production : 'records')
     	);
 
         $this->_translations[$content['description']] = TRUE;
         $this->_translations[$content['label_new']] = TRUE;
 
-    	if (isset($node->table_stage))
+    	if (isset($tables->stage))
     	{
     		$content['stage'] = TRUE;
-    		if (strtolower((string)$node->table_stage) == 'true')
-    		{
-				$content['table_stage'] = (string) $node->table.'_stage';
-			} else {
-				$content['table_stage'] = (string) $node->table_stage;
-			}
+    		$content['table_stage'] = (string) $tables->stage;
     	} else {
     		$content['stage'] = FALSE;
     		$content['table_stage'] = $content['table'];
@@ -207,10 +207,10 @@ Class Xml
     	}
 
     	//Parent types
-    	if (isset($node->parent_types))
+    	if (isset($node->parents))
     	{
       		$parent_types = array();
-      		foreach ($node->parent_types->type as $parent_type)
+      		foreach ($node->parents->type as $parent_type)
       		{
         		$parent_types[] = (string) $parent_type;
       		}
