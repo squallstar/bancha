@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- generator="bancha-0.8.2" -->
+<!-- generator="bancha-0.9.6" -->
 <content>
 	<name>Users</name>
 	<descriptions label="Users" new="New user"/>
-	<primary_key>id_user</primary_key>
-	<table>users</table>
+	<table key="id_user" production="users" />
 	<fieldset name="Informations" icon="layout">
 		<field id="id_user" column="true">
 			<type>hidden</type>
