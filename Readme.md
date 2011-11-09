@@ -1,6 +1,6 @@
 ![Logo](http://static.squallstar.it/images/bancha-trasp.png)
 
-# BANCHA - The CMS you were waiting for
+# BANCHA - Open-source CMS
 
 BANCHA is a Content Management System made with PHP5 and Code Igniter, a light and powerful PHP framework.
 It is capable to manage any kind of project/website, specially when it have many different types of contents.
