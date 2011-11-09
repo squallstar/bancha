@@ -296,7 +296,7 @@ Class View
 		$type_templates = THEMESPATH . $this->theme . '/views/' . $this->_CI->config->item('views_templates_folder');
 
 
-		if (file_exists($type_templates . $type_name . '/' . $view_file))
+		if (file_exists($type_templates . $type_name . '/' . $view_file . '.php'))
 		{
 			$view_path = $this->_CI->config->item('views_templates_folder') . $type_name . '/' . $view_file;
 		} else {

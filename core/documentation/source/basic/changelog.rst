@@ -6,6 +6,7 @@ ChangeLog
 
 - Some XML nodes have been renamed to remove the underscore (categories, hierarchies, parents, etc...). Please update all your scheme to stay updated with the core xml parser.
 - Tables and the primary key on the XML schemes have been merged into a single node
+- Fixed a bug on the type_template rendering function (missing .php extension on file_exists)
 
 **v 0.9.5** (2011-10-09)
 
