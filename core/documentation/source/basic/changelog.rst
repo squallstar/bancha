@@ -2,7 +2,12 @@
 ChangeLog
 ######################
 
-**v 0.9.5** (Planned)
+**v 0.9.6** (Planned)
+
+- Some XML nodes have been renamed to remove the underscore (categories, hierarchies, parents, etc...). Please update all your scheme to stay updated with the core xml parser.
+- Tables and the primary key on the XML schemes have been merged into a single node
+
+**v 0.9.5** (2011-10-09)
 
 - We are working hard to write all the extended Bancha documentation
 - To contribute with the documentation, check the new "core/documentation" folder
@@ -11,6 +16,7 @@ ChangeLog
 - Config variable "views_absolute_templates_folder" has been removed
 - New documentation theme: Banchize
 - Bug fix on the application/config.php (the core config file was loaded instead)
+
 
 **v 0.9.4** (2011-10-06) Live from #banchafest
 

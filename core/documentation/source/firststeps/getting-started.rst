@@ -13,4 +13,4 @@ Click on **Menu** on the list, and a record list of pages records will appear.
 
 Discover how Bancha works, proceed to the **next chapter** of the tutorial: :doc:`stage-workflow`
 
-Already done? Proceed to :doc:`create-pages`
+Already done? **Proceed** to :doc:`create-pages`

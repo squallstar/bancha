@@ -29,7 +29,7 @@ You should see the list of the records of type **Blog**! Clicking on an item wil
     //Blog post detail:
     http://example.org/my-first-page/title-of-my-post
 
-When the last segment of a URL isn't a page, the Bancha **Dispatcher** will find a page using the previous segment and checks whether that page is listing contents of the same type of the last segment. Pretty complicated to understand, but don't worry 'cos you don't have to learn this right now!
+When the last segment of a URL isn't a page, the Bancha **Default Dispatcher** will find a page using the previous segment and checks whether that page is listing contents of the same type of the last segment. Pretty complicated to understand, but don't worry because you don't have to learn all this things right now!
 
 On the next chapters you will learn how to completely customize the layout of that lists/details pages, and which field need to be shown.
 

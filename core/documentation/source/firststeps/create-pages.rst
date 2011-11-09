@@ -18,4 +18,4 @@ The pages of a website are hierarchically, so feel free to set the **parent page
 To propagate the page that we just created on the production environment, **publish** it!
 (if you are new to the stage-production environment, remember to read first :doc:`stage-workflow`)
 
-It's time to create a post for our Blog! Proceed to the next chapter of the tutorial: :doc:`create-news`
+It's time to create a post for our Blog! Proceed to the **next chapter** of the tutorial: :doc:`create-news`

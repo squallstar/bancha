@@ -9,6 +9,10 @@ BANCHA bases its power on some pillars that make it different from other CMS:
 It allows you to handle any type of content: pages, news, photo galleries, products, etc ... through XML schemas.
 In 10 minutes, you can configure a website to manage, list and view any kind of thing you want.
 
+-----------------
+Table of contents
+-----------------
+
 .. toctree::
    :maxdepth: 1
 

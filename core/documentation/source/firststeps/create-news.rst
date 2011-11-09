@@ -9,4 +9,4 @@ Create a single post in the same way we created a page in the last chapter (:doc
 Ok, we created a page, a post, what's now?
 We need to set a page to list our posts, so users can see them.
 
-Proceed to the next chapter: :doc:`listing-items`
+Proceed to the **next chapter**: :doc:`listing-items`
