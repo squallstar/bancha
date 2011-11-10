@@ -290,6 +290,7 @@ Class Installer
 		$api_tokens = array(
 		    'username'		=> array('type'	=> 'VARCHAR', 'null'	=> FALSE, 'constraint' => 64),
 		    'token'			=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 255),
+		    'content'		=> array('type'	=> 'VARCHAR', 'null' => FALSE, 'constraint' => 255),
 			'last_activity'	=> array('type'	=> 'INT', 'null' => FALSE, 'unsigned' => TRUE)
 		);
 

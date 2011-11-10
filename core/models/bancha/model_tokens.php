@@ -33,19 +33,18 @@ Class Model_tokens extends CI_Model
 	{
 		if (strlen($token))
 		{
-			//Will get safer queries
-			$encoded_token = urlencode($token);
-
-			$res = $this->db->select('username')->from('api_tokens')->where('token', $encoded_token)
+			$res = $this->db->select('username, content')->from('api_tokens')->where('token', $token)
 						    ->limit(1)->get();
 			if ($res->num_rows())
 			{
+				$userdata = $res->row(0);
+
 				//Token exists
-				$data = explode('|', $this->encrypt->decode($token));
+				$data = explode('|', $this->encrypt->decode($userdata->content));
 				if (count($data) == 3)
 				{
 					//Token is valid
-					$this->auth->user('username', $res->row(0)->username);
+					$this->auth->user('username', $userdata->username);
 					$this->auth->user('id', $data[0]);
 					$this->auth->user('group_id', $data[1]);
 					$this->auth->cache_permissions();
@@ -70,7 +69,8 @@ Class Model_tokens extends CI_Model
 		{
 			//We generate the token
 			$data = $user->id_user . '|' . $user->id_group . '|' . time();
-			$token = urlencode($this->encrypt->encode($data));
+			$content = $this->encrypt->encode($data);
+			$token = md5($content);
 
 			//We delete old tokens if the sharing is not allowed
 			if (!$this->_shared_tokens)
@@ -81,6 +81,7 @@ Class Model_tokens extends CI_Model
 			$done = $this->db->insert('api_tokens', array(
 				'username'		=> $username,
 				'token'			=> $token,
+				'content'		=> $content,
 				'last_activity'	=> time()
 			));
 			if ($done)
