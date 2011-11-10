@@ -153,7 +153,7 @@ Class Core_Api extends Bancha_Controller
 
 	public function types($name = '')
 	{
-		//if (! $this->_check_token()) return;
+		if (! $this->_check_token()) return;
 
 		//We check the post data for a single type
 		if ($name == '')
