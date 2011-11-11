@@ -8,6 +8,8 @@ ChangeLog
 - Tables and the primary key on the XML schemes have been merged into a single node
 - Fixed a bug on the type_template rendering function (missing .php extension on file_exists)
 - Token generation has been changed to improve compatibility and to maximize the performances
+- Added a new column on the api_tokens table: content
+- Added an index on the token field of the api_tokens table
 
 **v 0.9.5** (2011-10-09)
 
