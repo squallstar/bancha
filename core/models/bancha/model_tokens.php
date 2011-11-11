@@ -19,7 +19,6 @@ Class Model_tokens extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('encrypt');
 		$this->_shared_tokens = $this->config->item('shared_api_token');
 	}
 
@@ -40,7 +39,7 @@ Class Model_tokens extends CI_Model
 				$userdata = $res->row(0);
 
 				//Token exists
-				$data = explode('|', $this->encrypt->decode($userdata->content));
+				$data = explode('|', $userdata->content);
 				if (count($data) == 3)
 				{
 					//Token is valid
@@ -67,10 +66,10 @@ Class Model_tokens extends CI_Model
 		$user = $this->auth->get_login_resource($username, $password);
 		if ($user)
 		{
+			$data = $user->id_user . '|' . $user->id_group;
+
 			//We generate the token
-			$data = $user->id_user . '|' . $user->id_group . '|' . time();
-			$content = $this->encrypt->encode($data);
-			$token = md5($content);
+			$token = md5($data . time() . $this->config->item('encryption_key'));
 
 			//We delete old tokens if the sharing is not allowed
 			if (!$this->_shared_tokens)
@@ -81,7 +80,7 @@ Class Model_tokens extends CI_Model
 			$done = $this->db->insert('api_tokens', array(
 				'username'		=> $username,
 				'token'			=> $token,
-				'content'		=> $content,
+				'content'		=> $data,
 				'last_activity'	=> time()
 			));
 			if ($done)
