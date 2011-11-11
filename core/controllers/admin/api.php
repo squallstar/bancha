@@ -18,7 +18,7 @@ Class Core_Api extends Bancha_Controller
 	{
 	    parent::__construct();
 
-		$this->content->set_stage($this->input->post('production') == TRUE ? TRUE : FALSE);
+		$this->content->set_stage($this->input->post('production') == TRUE ? FALSE : TRUE);
 	    $this->view->base = 'admin/';
 
 	    $this->load->frmodel('model_tokens', 'tokens');
