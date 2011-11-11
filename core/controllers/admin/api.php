@@ -110,10 +110,11 @@ Class Core_Api extends Bancha_Controller
 						//Single param
 						if ($method == 'type')
 						{
+							$type = $this->content->type($param);
 							//Check ACL for this content type
-							if (!$this->auth->has_permission('content', $param))
+							if (!$this->auth->has_permission('content', $type['name']))
 							{
-								$this->_display(NULL, 400, 'NOT_AUTHORIZED');
+								$this->_display(array('query' => $this->input->get_post('query')), 400, 'NOT_AUTHORIZED');
 								return;
 							}
 						}
