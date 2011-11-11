@@ -40,9 +40,9 @@ Class Model_tokens extends CI_Model
 
 				//Token exists
 				$data = explode('|', $userdata->content);
-				if (count($data) == 3)
+				if (count($data) == 2)
 				{
-					//Token is valid
+					//Content is valid
 					$this->auth->user('username', $userdata->username);
 					$this->auth->user('id', $data[0]);
 					$this->auth->user('group_id', $data[1]);
