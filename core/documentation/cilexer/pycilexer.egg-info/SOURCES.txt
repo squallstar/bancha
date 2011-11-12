@@ -1,0 +1,10 @@
+README
+setup.py
+cilexer/__init__.py
+cilexer/cilexer.py
+pycilexer.egg-info/PKG-INFO
+pycilexer.egg-info/SOURCES.txt
+pycilexer.egg-info/dependency_links.txt
+pycilexer.egg-info/entry_points.txt
+pycilexer.egg-info/requires.txt
+pycilexer.egg-info/top_level.txt

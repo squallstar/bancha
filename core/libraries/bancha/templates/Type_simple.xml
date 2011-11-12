@@ -4,11 +4,9 @@
 	<name>{name}</name>
 	<descriptions label="{description}" new="{label_new}"/>
 	<tree>false</tree>
-	<primary_key>id_record</primary_key>
-	<table>records</table>
-	<table_stage>records_stage</table_stage>
-	<has_categories>true</has_categories>
-	<has_hierarchies>true</has_hierarchies>
+	<table key="id_record" production="records" stage="records_stage" />
+	<categories>true</categories>
+	<hierarchies>true</hierarchies>
 	<fieldset name="General informations" icon="page">
 		<field id="id_record" column="true">
 			<type>hidden</type>
@@ -61,7 +59,7 @@
 		</field>
 		<field id="content">
 			<description>Content</description>
-			<type>textarea</type>
+			<type>textarea_full</type>
 			<list>true</list>
 		</field>
 	</fieldset>

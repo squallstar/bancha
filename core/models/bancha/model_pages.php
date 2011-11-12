@@ -24,7 +24,7 @@ Class Model_Pages extends CI_Model {
     	parent::__construct();
 
     	$path = $this->config->item('cache_path');
-    	$this->cache_path = ($path == '') ? APPPATH.'cache/' : $path;
+    	$this->cache_path = ($path == '') ? USERPATH.'cache/' : $path;
 	}
 
 	/**

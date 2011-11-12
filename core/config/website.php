@@ -64,7 +64,7 @@ $config['admin_languages'] = array(
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.9.4');
+define('BANCHA_VERSION', '0.9.5');
 
 /*
  * Framework name
@@ -134,7 +134,7 @@ $config['modules_folder'] = APPPATH . 'modules' . $sep;
 /*
  * CACHE FOLDER
  */
-$config['fr_cache_folder'] = APPPATH . 'cache' . $sep . '_' . FRNAME. $sep;
+$config['fr_cache_folder'] = USERPATH . 'cache' . $sep . '_' . FRNAME. $sep;
 
 /*
  * TYPES CACHE FILE

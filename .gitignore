@@ -1,10 +1,13 @@
-# BANCHA GIT IGNORE FILE #
+#######################################
+#        BANCHA GIT IGNORE FILE       #
+# Copyright 2011(C) Squallstar Studio #
+#######################################
 
 ########
 # Logs #
 ########
 *.log
-/core/logs/*.php
+/application/logs/*.php
 
 ######################
 # OS generated files #
@@ -24,9 +27,10 @@ Thumbs.db
 /core/views/type_templates
 /core/views/admin/content/translations.php
 /application/xml/types/*.xml
+/core/documentation/build
 
 ##############
-#Cache files #
+# Temp and Cache files #
 ##############
 *.tmp
 /attach/cache/
