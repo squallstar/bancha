@@ -177,9 +177,12 @@ Class Core_Api extends Bancha_Controller
 			$tmp = $this->content->types();
 			foreach ($tmp as $type)
 			{
-				$name = $type['name'];
-				unset($type['name']);
-				$types[$name] = $type;
+				if ($this->auth->check_permission('content', $type['name']))
+				{
+					$name = $type['name'];
+					unset($type['name']);
+					$types[$name] = $type;
+				}
 			}
 			$this->_display($types, 200, 'OK');
 		}
