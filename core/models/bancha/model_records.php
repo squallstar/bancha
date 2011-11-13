@@ -112,7 +112,13 @@ Class Model_records extends CI_Model {
   	{
     	if ($type != '')
     	{
+    		$this->_single_type = FALSE;
 	    	$this->set_type($type);
+	    	if (!$this->_single_type)
+	    	{
+	    		//Type not exists
+	    		return $this;
+	    	}
 	      	$tipo = $this->_single_type;
 
 	        //Imposto tutti i riferimenti
@@ -146,6 +152,11 @@ Class Model_records extends CI_Model {
 				$tipo = $type;
 			} else {
 				$tipo = $this->content->type($type);
+				if (!$tipo)
+				{
+					//Type not exists
+					return $this;
+				}
 			}
 
 			$this->_single_type = $tipo;

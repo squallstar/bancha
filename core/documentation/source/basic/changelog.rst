@@ -2,6 +2,12 @@
 ChangeLog
 ######################
 
+**v 0.9.7** (Planned)
+
+- Major compatibility on the type() and set_type() functions (content and records classes) on fail
+
+
+
 **v 0.9.6** (2011-11-13)
 
 - Some XML nodes have been renamed to remove the underscore (categories, hierarchies, parents, etc...). Please update all your scheme to stay updated with the core xml parser.

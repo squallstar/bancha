@@ -202,6 +202,7 @@ Class Content
 	 * Restituisce lo schema di un tipo di contenuto
 	 * E' possibile chiamare la funzione sia passando l'ID che il nome del tipo
 	 * @param int|string $type
+	 * @return array|bool
 	 */
 	public function type($type='')
 	{
@@ -222,12 +223,9 @@ Class Content
 					return $this->content_types[$type];
 				}
 			}
-
-			log_message('error', 'Il tipo di contenuto ['.$type.'] non esiste. (content/type)', 500, 'Tipo di contenuto non trovato');
-
-		} else {
-			log_message('error', 'Tipo ['.$type.'] non trovato. (content/type)', 500, 'Tipo non trovato');
 		}
+		log_message('error', 'Type ['.$type.'] not found. (content/type)', 500, 'Type not found');
+		return FALSE;
 	}
 
 	/**
