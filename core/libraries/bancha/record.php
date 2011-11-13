@@ -81,6 +81,7 @@ Class Record {
     	if (!$this->_tipo_def)
     	{
     		$tipo = & $CI->content->type($this->_tipo);
+    		if (!$tipo) return;
     	} else {
     		$tipo = $this->_tipo_def;
     	}
@@ -92,7 +93,7 @@ Class Record {
     		if ($CI->config->item('strip_website_url')
                 && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
     		{
-    			//Elimino il percorso del sito dalle textarea
+    			//We strip the website url from the textarea fields
     			$value = str_replace(site_url(), '/', $value);
     		}
             
@@ -240,10 +241,8 @@ Class Record {
     	if (count($this->_data)) {
      		$this->xml = $CI->xml->get_record_xml($this->_tipo_def ? $this->_tipo_def : $this->_tipo, $this->_data);
 
-      		//Tolgo i caratteri di a capo per recuperare spazio
+      		//We strip the newline and return characters
       		$this->xml = str_replace(array("\r\n", "\r", "\n"), "", $this->xml);
-    	} else {
-      		show_error('Impossibile costruire i nodi xml, il record &egrave; vuoto. (record/build_xml)');
     	}
   	}
 
@@ -256,8 +255,9 @@ Class Record {
     	{
     		$CI = & get_instance();
     		$tipo = & $CI->content->type($this->_tipo);
+    		if (!$tipo) return;
 
-	      	$xmltree = simplexml_load_string($this->xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+	      	$xmltree = @simplexml_load_string($this->xml, 'SimpleXMLElement', LIBXML_NOCDATA);
 
 	      	if ($xmltree)
 	      	{
@@ -299,8 +299,8 @@ Class Record {
 				}
 	      	}
 
-			//Se il template non e' impostato, metto quello di default
-			if ($this->is_page() && !$this->get('view_template'))
+			//If a page hasn't the template, we will use the default one
+			if ($tipo['tree'] && !$this->get('view_template'))
 			{
 	      		$CI = & get_instance();
 	      		$this->set('view_template', $CI->config->item('default_view_template'));
@@ -309,7 +309,7 @@ Class Record {
 	      	$this->xml = '';
 
     	} else {
-      		show_error('I dati XML del record non sono stati trovati. (record/build_data)');
+      		log_message('error', 'Record XML data not found. (record/build_data)');
     	}
   	}
 
@@ -384,6 +384,7 @@ Class Record {
         if (!$this->_tipo_def)
         {
             $tipo = & $CI->content->type($this->_tipo);
+            if (!$tipo) return FALSE;
         } else {
             $tipo = $this->_tipo_def;
         }
@@ -391,6 +392,11 @@ Class Record {
         if (isset($tipo['relations'][$relation_name]))
         {
             $rel = $tipo['relations'][$relation_name];
+
+            if (!isset($rel['with']) || !isset($rel['to']) !isset($rel['from']))
+            {
+            	log_message('error', 'The relation ' . $relation_name . ' is incomplete Please check your scheme.');
+            }
 
             $CI->records->type($rel['with'])
                         ->where($rel['to'], $this->get($rel['from']));

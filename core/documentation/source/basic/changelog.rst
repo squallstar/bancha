@@ -5,7 +5,7 @@ ChangeLog
 **v 0.9.7** (Planned)
 
 - Major compatibility on the type() and set_type() functions (content and records classes) on fail
-
+- Some improvements on build_data(), build_xml() and related() functions of the record class
 
 
 **v 0.9.6** (2011-11-13)
