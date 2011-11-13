@@ -175,9 +175,10 @@ Class Core_Api extends Bancha_Controller
 		} else {
 			$types = array();
 			$tmp = $this->content->types();
+
 			foreach ($tmp as $type)
 			{
-				if ($this->auth->check_permission('content', $type['name']))
+				if ($this->auth->has_permission('content', $type['name']))
 				{
 					$name = $type['name'];
 					unset($type['name']);
