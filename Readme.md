@@ -42,6 +42,10 @@ Need to reinstall? Just remove the **is_installed** row from the database table 
 
 ![MVC Scheme](http://static.squallstar.it/images/bancha_mvc_scheme.png)
 
+# Changelog
+
+See **core/documentation/source/basic/changelog.rst**
+
 # Resources
 
  * [Project homepage](https://github.com/squallstar/bancha)

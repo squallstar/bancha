@@ -2,7 +2,7 @@
 ChangeLog
 ######################
 
-**v 0.9.6** (Planned)
+**v 0.9.6** (2011-11-13)
 
 - Some XML nodes have been renamed to remove the underscore (categories, hierarchies, parents, etc...). Please update all your scheme to stay updated with the core xml parser.
 - Tables and the primary key on the XML schemes have been merged into a single node
@@ -10,8 +10,9 @@ ChangeLog
 - Token generation has been changed to improve compatibility and to maximize the performances
 - Added a new column on the api_tokens table: content
 - Added an index on the token field of the api_tokens table
+- Compatibility fix on the administration theme by @dombender
 
-**v 0.9.5** (2011-10-09)
+**v 0.9.5** (2011-11-09)
 
 - We are working hard to write all the extended Bancha documentation
 - To contribute with the documentation, check the new "core/documentation" folder
@@ -22,7 +23,7 @@ ChangeLog
 - Bug fix on the application/config.php (the core config file was loaded instead)
 
 
-**v 0.9.4** (2011-10-06) Live from #banchafest
+**v 0.9.4** (2011-11-06) Live from #banchafest
 
 - We decided to use an external folder for the application, so we added a "core" folder with the Bancha framework
 - Controllers, Helpers and Config files can now be overwrited by the ones placed in the application folder
@@ -30,7 +31,7 @@ ChangeLog
 - Bug fix on the mobile settings variable (View class)
 
 
-**v 0.9.3** (2011-10-05)
+**v 0.9.3** (2011-11-05)
 
 - Wordpress adapter now adds the website first language as record language
 - Added a new function on the model_records: id_not_in()
@@ -40,12 +41,12 @@ ChangeLog
 - The above change should be reflected around Bancha, so it results in a better language compatibility when using different languages between the admin and the website
 - New API method: types() - documentation will be available soon
 
-**v 0.9.2** (2011-10-04)
+**v 0.9.2** (2011-11-04)
 
 - Layout fix on the type delete view
 
 
-**v 0.9.1** (2011-10-03)
+**v 0.9.1** (2011-11-03)
 
 - The limit function of the Records, Pages and Users model now will prevent a negative limit to be set
 - Page URI now will be trimmed by whitespaces at the end/start of the string
@@ -56,7 +57,7 @@ ChangeLog
 - Bug fix on the add_hash function (custom.js) to improve compatibility on Firefox
 - Tree content types now have a relation with their childs by default
 
-**v 0.9.0** (2011-10-01)
+**v 0.9.0** (2011-11-01)
 
 - Default type templates views (detail and list) have been refactored
 - Corrected a bug on the "where_in" active record function (missed a space after 'AND')
