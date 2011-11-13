@@ -393,7 +393,7 @@ Class Record {
         {
             $rel = $tipo['relations'][$relation_name];
 
-            if (!isset($rel['with']) || !isset($rel['to']) !isset($rel['from']))
+            if (!isset($rel['with']) || !isset($rel['to']) || !isset($rel['from']))
             {
             	log_message('error', 'The relation ' . $relation_name . ' is incomplete Please check your scheme.');
             }
