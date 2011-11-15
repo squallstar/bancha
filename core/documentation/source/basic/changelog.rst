@@ -2,11 +2,12 @@
 ChangeLog
 ######################
 
-**v 0.9.7** (Planned)
+**v 0.9.7** (2011-11-16)
 
 - Major compatibility on the type() and set_type() functions (content and records classes) on fail
 - Some improvements on build_data(), build_xml() and related() functions of the record class
 - ACL check on the api types() function
+- Documentation: added the content types and fields pages
 
 
 **v 0.9.6** (2011-11-13)
