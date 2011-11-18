@@ -5,6 +5,7 @@ ChangeLog
 **v 0.9.8** (2011-11-18)
 
 - Fixed a bug with the page address listed on the record edit view when the "prepend language" was disabled.
+- Token index removed on SQLite installations (improves the compatibility)
 
 
 **v 0.9.7** (2011-11-16)
