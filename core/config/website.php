@@ -59,12 +59,12 @@ $config['admin_languages'] = array(
  * Example when is on:  www.example.org/it/path/to/page
  * Example when is off: www.example.org/path/to/page
  */
- $config['prepend_uri_language'] = TRUE;
+$config['prepend_uri_language'] = TRUE;
 
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.9.7');
+define('BANCHA_VERSION', '0.9.8');
 
 /*
  * Framework name
