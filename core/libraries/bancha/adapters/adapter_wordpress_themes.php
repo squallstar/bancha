@@ -12,7 +12,7 @@
  * @link		http://squallstar.it
  *
  */
-
+error_reporting(E_ALL);
 $GLOBALS['B'] = & get_instance();
 
 Class Adapter_wordpress_themes
@@ -43,7 +43,14 @@ Class Adapter_wordpress_themes
 
 		$page = $this->CI->view->get('page');
 
-		if ($page->get('action') == 'list')
+		$action = $page->get('action');
+
+		if ($action == 'text')
+		{
+			//Single page
+			$this->CI->view->render('page', $DATA);
+			return;
+		} else if ($action == 'list')
 		{
 			$this->posts = $page->get('records');
 			$this->post_count = count($this->posts);
@@ -164,7 +171,7 @@ function get_bloginfo($show, $filter = '')
 		case 'name':
 			return $GLOBALS['B']->settings->get('website_title');break;
 		case 'stylesheet_url':
-			return theme_url('views/style.css');
+			return theme_url('style.css');
 
 		default:
 			return '';
@@ -236,7 +243,7 @@ function wp_enqueue_script($handle, $src = '', $deps = array(), $ver = '', $in_f
  */
 function get_template_directory_uri()
 {
-	return theme_url('views');
+	return rtrim(theme_url(), '/');
 }
 
 /**
@@ -365,7 +372,7 @@ function the_post()
  */
 function next_posts_link($label , $max_pages = 10)
 {
-	return '';
+	return 'Next';
 }
 
 /**
@@ -376,7 +383,7 @@ function next_posts_link($label , $max_pages = 10)
  */
 function previous_posts_link($label , $max_pages = 10)
 {
-	return '';
+	return 'Prev';
 }
 
 
@@ -387,10 +394,39 @@ function previous_posts_link($label , $max_pages = 10)
  */
 function __($first = '', $second = '')
 {
-	return '';
+	return '[TODO]';
 }
 
+/**
+ * Standard translation wrapper
+ * @param $text
+ * @param $domain
+ */
 function _e($text, $domain = '')
 {
 	echo _($text);
+}
+
+/**
+ * Load a template part into a template
+ * @param $slug
+ * @param $name
+ *
+ * Loading order:
+ * wp-content/themes/twentytenchild/loop-index.php
+ * wp-content/themes/twentytenchild/loop.php
+ * wp-content/themes/twentyten/loop-index.php
+ * wp-content/themes/twentyten/loop.php
+ *
+ */
+function get_template_part($slug, $name= '')
+{
+	if ($name && $name != '') {
+		$view = $slug . '-' . $name;
+	} else {
+		$view = $slug;
+	}
+
+	$GLOBALS['B']->view->render($view);
+	echo 'lol';
 }
