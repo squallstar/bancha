@@ -238,6 +238,11 @@ Class Model_Pages extends CI_Model {
     	$this->delete($id_record, $this->table);
     }
 
+    /**
+     * Gets the full uri of a page, given the id_record
+     * @param int $id_record
+     * @return string
+     */
     public function get_record_url($id_record)
     {
     	$result = $this->db->select('full_uri')
@@ -252,6 +257,10 @@ Class Model_Pages extends CI_Model {
     	return FALSE;
     }
 
+    /**
+     * Clears the page cache for each theme, or just a single page when a URI is passed
+     * @param int $id_record
+     */
     public function clear_cache($uri)
     {
     	$uri =	$this->config->item('base_url').
@@ -276,9 +285,34 @@ Class Model_Pages extends CI_Model {
 	    	{
 	    		@unlink($filepath);
 	    	}
-	    }
+	    }	
+    }
 
-    	
+    /**
+     * Tries to find the the semantic URL of a page
+     * @see semantic_url() in website_helper
+     * @param string|int $type
+     */
+    public function get_semantic_url($type)
+    {
+    	if (isset($this->view->semantic_url[$type]))
+    	{
+    		return $this->view->semantic_url[$type];
+    	}
+		foreach ($this->config->item('default_tree_types') as $type_name)
+		{
+			$record = $this->records->type($type_name)
+								     ->where('action', 'list')
+								     ->where('action_list_type', $type)
+								     ->get_first();
+			if ($record)
+			{
+				//Record found. Let's return the page
+				$url = $this->get_record_url($record->id);
+				$this->view->semantic_url[$type] = $url;
+				return $url;
+			}
+		}
     }
 }
 
