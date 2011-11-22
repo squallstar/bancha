@@ -2,6 +2,13 @@
 ChangeLog
 ######################
 
+**v 0.9.9** (2011-11-22)
+
+- New helper function: semantic_url() that will (try to) generate the detail link of a record.
+- The function above, uses also a new ad-hoc function on the model_pages called get_semantic_url().
+- We started a new branch on GitHub named "wpthemes". We're working hard to implement the full-compatibility between Bancha and Wordpress themes. More details will be available with the next Bancha releases.
+
+
 **v 0.9.8** (2011-11-18)
 
 - Fixed a bug with the page address listed on the record edit view when the "prepend language" was disabled.

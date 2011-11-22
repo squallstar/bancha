@@ -64,7 +64,7 @@ $config['prepend_uri_language'] = TRUE;
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.9.8');
+define('BANCHA_VERSION', '0.9.9');
 
 /*
  * Framework name
