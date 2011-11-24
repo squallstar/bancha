@@ -46,3 +46,6 @@ Each kind of field can implement these features:
 * :doc:`shared-visible`
 * :doc:`shared-onkeyup`
 * :doc:`shared-onchange`
+
+
+Go back to :doc:`/content-types/scheme`

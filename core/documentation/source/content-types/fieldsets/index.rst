@@ -21,3 +21,5 @@ This will be a tipical structure of a **fieldset** node::
 
 
 Next: :doc:`fields`
+
+Back to :doc:`/content-types/scheme`
