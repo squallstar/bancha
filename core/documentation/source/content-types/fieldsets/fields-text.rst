@@ -4,7 +4,8 @@ Text fields
 
 These fields are used to store a single-line or multi-line text. It can be also formatted or not. Four different types are available as text fields:
 
-* **Single-line text** (not formatted): "text"
+* **Standard single-line text** (not formatted): "text"
+* **Password text**: "password"
 * **Multi-line** text (not formatted): "textarea_code"
 * **Multi-line** text (formatted): "textarea"
 * **Multi-line** full rich-text (CKEditor): "textarea_full"
