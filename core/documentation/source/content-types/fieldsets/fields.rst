@@ -31,3 +31,19 @@ Field types
 
    fields-text
    fields-selection
+
+
+---------------
+Shared features
+---------------
+
+Each kind of field can implement these features:
+
+* :doc:`shared-default`
+* :doc:`shared-rules`
+* :doc:`shared-length`
+* :doc:`shared-list`
+* :doc:`shared-admin`
+* :doc:`shared-visible`
+* :doc:`shared-onkeyup`
+* :doc:`shared-onchange`
