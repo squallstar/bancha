@@ -41,7 +41,6 @@ Each kind of field can implement these features:
 
 * :doc:`shared-default`
 * :doc:`shared-rules`
-* :doc:`shared-length`
 * :doc:`shared-list`
 * :doc:`shared-admin`
 * :doc:`shared-visible`
