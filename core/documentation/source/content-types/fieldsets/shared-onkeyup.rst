@@ -12,5 +12,7 @@ Basic usage::
         ....
     </field>
 
+This event will be triggered on **input**, **textarea** and other text input fields.
+
 
 Back to :doc:`fields`.
