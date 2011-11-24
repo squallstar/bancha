@@ -56,5 +56,18 @@ Please note that in this format the **<options>** node is **NOT** used: you have
 
 Settings the cache to **true**, let your query to be cached until the content-types cache will be cleared.
 
+Below you can find an example of a select field::
+
+    <field id="lang" column="true">
+        <description>Language</description>
+        <type>select</type>
+        <admin>true</admin>
+        <list>true</list>
+        <options>
+            <custom>config_item('website_languages_select')</custom>
+        </options>
+        <default>eval:$this->lang->default_language</default>
+    </field>
+
 
 Back to :doc:`fields`.
