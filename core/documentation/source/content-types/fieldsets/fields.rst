@@ -31,6 +31,7 @@ Field types
 
    fields-text
    fields-selection
+   fields-hierarchy
 
 
 ---------------
