@@ -2,6 +2,14 @@
 ChangeLog
 ######################
 
+**v 0.9.10** (Planned)
+
+- Content types documentation completed
+- Themes documentation added
+- Fields documentation added
+- Cleanup and more readability on the website config file
+
+
 **v 0.9.9** (2011-11-22)
 
 - New helper function: semantic_url() that will (try to) generate the detail link of a record.

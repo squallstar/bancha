@@ -37,7 +37,7 @@ Field types
    fields-hidden
    fields-date
    fields-number
-   
+
 
 ---------------
 Shared features
@@ -45,13 +45,16 @@ Shared features
 
 Each kind of field can implement these features:
 
-* :doc:`shared-default`
-* :doc:`shared-rules`
-* :doc:`shared-list`
-* :doc:`shared-admin`
-* :doc:`shared-visible`
-* :doc:`shared-onkeyup`
-* :doc:`shared-onchange`
+.. toctree::
+   :maxdepth: 1
+
+   shared-default
+   shared-rules
+   shared-list
+   shared-admin
+   shared-visible
+   shared-onkeyup
+   shared-onchange
 
 
 Go back to :doc:`/content-types/scheme`

@@ -21,3 +21,4 @@ Table of contents
    introduction/index
    firststeps/index
    content-types/index
+   themes/index

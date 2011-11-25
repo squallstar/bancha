@@ -16,8 +16,8 @@
 */
 $config['installed_themes'] = array(
 
-	'default'	=>	'Default theme',
-	'minimal'	=>	'A minimal theme'
+	  'default'	=>	'Default theme'
+	, 'minimal'	=>	'A minimal theme'
 
 );
 
