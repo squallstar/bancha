@@ -1,8 +1,6 @@
 <?php
 /**
- * Bancha Requests Collector (Index)
- *
- * All the requests pass here!
+ * Bancha Requests Collector (Index file)
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
