@@ -32,7 +32,12 @@ Field types
    fields-text
    fields-selection
    fields-hierarchy
-
+   fields-images
+   fields-files
+   fields-hidden
+   fields-date
+   fields-number
+   
 
 ---------------
 Shared features
