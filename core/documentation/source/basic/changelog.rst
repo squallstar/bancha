@@ -5,7 +5,7 @@ ChangeLog
 **v 0.9.11** (Planned)
 
 - New "API_ENABLED" configuration constant. GitHub Issue #78 
-
+- Custom redirection after the login process. GitHub Issue #79
 
 **v 0.9.10** (2011-11-26)
 

@@ -38,7 +38,12 @@ Class Model_auth extends CI_Model {
 	{
 		if (!$this->session->userdata($this->_str_loggedin))
 		{
-			redirect('/admin/auth/login');
+			$request = '';
+			if (isset($_SERVER['REQUEST_URI']))
+			{
+				$request = '?continue=' . urlencode($_SERVER['REQUEST_URI']);
+			}
+			redirect('/admin/auth/login' . $request);
 		}
 	}
 
