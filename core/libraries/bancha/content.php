@@ -271,6 +271,9 @@ Class Content
 	 */
 	public function rebuild()
 	{
+		//Loads the Database
+		$this->CI->load->database();
+		
 		//All types
 		$this->CI->load->helper(array('file', 'text'));
 
