@@ -96,10 +96,19 @@ function preset_url($path, $preset, $append_siteurl = TRUE)
 	return '';
 }
 
-function minify_url($files = array())
+/**
+ * Returns the path of a minified file with the provided resources
+ * @param array|string $files One or more resources
+ * @return string
+ */
+function minify($files = array())
 {
+	if (is_string($files))
+	{
+		$files = array($files);
+	}
 	$current_theme = get_instance()->view->theme;
-	return site_url('_min/' . $current_theme . '?src=' . implode(',', $files), FALSE);
+	return site_url('-min-/' . $current_theme . '?src=' . urlencode(implode(',', $files)), FALSE);
 }
 
 /**

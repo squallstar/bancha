@@ -6,6 +6,8 @@ ChangeLog
 
 - New "API_ENABLED" configuration constant. GitHub Issue #78 
 - Custom redirection after the login process. GitHub Issue #79
+- New Resources minifier (a dispatcher) - now JS and CSS resources can be minified
+- New function: minify() that accepts an array of resources to be minified (returns an url)
 
 **v 0.9.10** (2011-11-26)
 

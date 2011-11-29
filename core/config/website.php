@@ -90,8 +90,9 @@ $config['installed_themes'] = array(
 );
 
 /*
-* CACHE - CATEGORIES AND HIERARCHIES
+* CACHE - CATEGORIES, HIERARCHIES, CSS+JS MINIFIED FILES
 * Defines if the categories and hierarchies queries can be cached on the filesystem.
+* Defines also if the CSS + JS files can be cached on disk by the minifier script.
 * Feel free to disable this feature if your disk makes a lot of file read/write operations.
 */
 if (!defined('CACHE'))

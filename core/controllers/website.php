@@ -130,4 +130,14 @@ Class Core_Website extends Bancha_Controller
 
 		$this->dispatcher->retrieve($data);
 	}
+
+	/**
+	 * Resources minification routing
+	 */
+	function minify($theme)
+	{
+		$resources = $this->input->get('src');
+		$this->load->dispatcher('resources');
+		$this->dispatcher->minify($theme, $resources);
+	}
 }
