@@ -151,6 +151,7 @@ Class Model_settings extends CI_Model
 	 */
 	public function build_cache()
 	{
+		$this->load->database();
 		$res = $this->db->select('name, value, module')->from($this->table)->get()->result();
 		$this->_items = array();
 		if (count($res))

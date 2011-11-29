@@ -17,6 +17,7 @@ Class Core_Modules extends Bancha_Controller
 	public function __construct()
 	{
 	    parent::__construct();
+	    $this->load->database();
 	    $this->content->set_stage(TRUE);
 	    $this->view->base = 'admin/';
 

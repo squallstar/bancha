@@ -96,7 +96,7 @@ function preset_url($path, $preset, $append_siteurl = TRUE)
 	return '';
 }
 
-function minified_url($files = array())
+function minify_url($files = array())
 {
 	$current_theme = get_instance()->view->theme;
 	return site_url('_min/' . $current_theme . '?src=' . implode(',', $files), FALSE);

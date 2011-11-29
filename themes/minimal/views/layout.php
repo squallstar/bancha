@@ -59,7 +59,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<?php echo theme_url();?>js/jquery.js"><\/script>')</script>
-<script src="<?php echo minified_url(array('js/plugins.js', 'js/jquery.js', 'js.application.js'));?>"></script>
+<script src="<?php echo minify_url(array('js/plugins.js', 'js/jquery.js', 'js.application.js'));?>"></script>
 <script src="<?php echo theme_url();?>js/application.js"></script>
 <?php
 if (isset($page))

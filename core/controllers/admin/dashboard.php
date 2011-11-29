@@ -18,6 +18,7 @@ Class Core_Dashboard extends Bancha_Controller {
 
 	public function __construct() {
 	    parent::__construct();
+	    $this->load->database();
 	    $this->view->base = 'admin/';
 
 	    $this->auth->needs_login();

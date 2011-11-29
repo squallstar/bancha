@@ -21,6 +21,7 @@ Class Core_Install extends Bancha_Controller
 	{
 	    define('DISABLE_SETTINGS', TRUE);
 	    parent::__construct();
+	    $this->load->database();
 	    $this->view->base = 'admin/';
 	}
 

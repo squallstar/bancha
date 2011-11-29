@@ -27,7 +27,7 @@ Class Core_Utils extends Bancha_Controller
 
 	public function minify($theme) {
 
-		//JSMin
+		//JSMin lib
 		$path =  str_replace(array('\\','/'), DIRECTORY_SEPARATOR,
 					APPPATH . 'libraries' . DIRECTORY_SEPARATOR . 
 		  		  'externals' . DIRECTORY_SEPARATOR . 
@@ -37,14 +37,17 @@ Class Core_Utils extends Bancha_Controller
 		$cache_folder = $this->config->item('fr_cache_folder');
 
 		$src = $this->input->get('src');
-		$cache_name = md5($theme . $src);
+		$cache_filename = md5($theme . $src);
 
-		$file_name = 'min.'.$cache_name . '.tmp';
+		$tmp = explode('.', $src);
+		$ext = $tmp[count($tmp)-1];
 
-		if (file_exists($cache_folder . $file_name)) {
+		$full_filename = 'res.'.$cache_filename . '.'.$ext;
+
+		if (file_exists($cache_folder . $full_filename)) {
 			//The final output is sent to the client
-			$this->output->set_content_type('js')
-				   ->set_output(file_get_contents($cache_folder . $file_name));
+			$this->output->set_content_type($ext)
+				   ->set_output(file_get_contents($cache_folder . $full_filename));
 			return;
 		}
 
@@ -55,17 +58,20 @@ Class Core_Utils extends Bancha_Controller
 
 		$minified = '';
 
-		foreach ($files as $file) {
-			$content = @file_get_contents($full_path . $file);
-			if (rtrim($file, '.js') != $file) {
+		if ($ext == 'js')
+		{
+			foreach ($files as $file)
+			{
+				$content = @file_get_contents($full_path . $file);
 				$minified .= JSMin::minify($content);
 			}
 		}
 
 		$this->load->helper('file');
-		write_file($cache_folder . $file_name, $minified);
+		write_file($cache_folder . $full_filename, $minified);
 
-		echo $minified;
+		$this->output->set_content_type($ext)
+				   ->set_output($minified);
 	}
 
 }

@@ -17,6 +17,7 @@ Class Core_Api extends Bancha_Controller
 	public function __construct()
 	{
 	    parent::__construct();
+	    $this->load->database();
 
 	    if (API_ENABLED == FALSE)
 	    {
