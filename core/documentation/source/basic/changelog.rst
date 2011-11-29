@@ -2,7 +2,12 @@
 ChangeLog
 ######################
 
-**v 0.9.10** (Planned)
+**v 0.9.11** (Planned)
+
+- New "API_ENABLED" configuration constant. GitHub Issue #78 
+
+
+**v 0.9.10** (2011-11-26)
 
 - Content types documentation completed
 - Themes documentation added

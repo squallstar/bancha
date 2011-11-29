@@ -64,7 +64,7 @@ $config['prepend_uri_language'] = TRUE;
 /*
  * Framework version
  */
-define('BANCHA_VERSION', '0.9.10');
+define('BANCHA_VERSION', '0.9.11');
 
 /*
  * Framework name
@@ -94,7 +94,19 @@ $config['installed_themes'] = array(
 * Defines if the categories and hierarchies queries can be cached on the filesystem.
 * Feel free to disable this feature if your disk makes a lot of file read/write operations.
 */
-define('CACHE', TRUE);
+if (!defined('CACHE'))
+{
+	define('CACHE', TRUE);
+}
+
+/*
+* API ENABLED
+* Enable/Disable the API system
+*/
+if (!defined('API_ENABLED'))
+{
+	define('API_ENABLED', TRUE);
+}
 
 /*
 * SHARED API TOKEN
@@ -112,7 +124,10 @@ $config['records_per_page'] = 15;
 /* FRAMEWORK PATH
  * The library path where Bancha classes are stored
  */
-define('FRPATH', APPPATH . 'libraries' . $sep . FRNAME . $sep);
+if (!defined('FRPATH'))
+{
+	define('FRPATH', APPPATH . 'libraries' . $sep . FRNAME . $sep);
+}
 
 /*
 * XML FOLDER

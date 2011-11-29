@@ -18,6 +18,11 @@ Class Core_Api extends Bancha_Controller
 	{
 	    parent::__construct();
 
+	    if (API_ENABLED == FALSE)
+	    {
+	    	show_error('API are disabled.', 400);
+	    }
+
 		$this->content->set_stage($this->input->post('production') == TRUE ? FALSE : TRUE);
 	    $this->view->base = 'admin/';
 
