@@ -96,6 +96,12 @@ function preset_url($path, $preset, $append_siteurl = TRUE)
 	return '';
 }
 
+function minified_url($files = array())
+{
+	$current_theme = get_instance()->view->theme;
+	return site_url('_min/' . $current_theme . '?src=' . implode(',', $files), FALSE);
+}
+
 /**
  * This function tries to generate the detail following url, based on the current page and the given uri
  * @param Record|string $object A record object, or just the URI to append
