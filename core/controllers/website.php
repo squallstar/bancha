@@ -42,7 +42,7 @@ Class Core_Website extends Bancha_Controller
 						show_error(_('The website is currently under maintenance. Please try later.'));
 						break;
 					case 'L':
-						redirect(admin_url());
+						redirect(admin_url('?continue='.urlencode(site_url())));
 				}
 			}
 		}
