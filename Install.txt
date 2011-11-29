@@ -13,8 +13,7 @@ HOW TO INSTALL BANCHA
  1. Before all, choose your environment in the /index.php file
     The default environment is "development".
 
- 2. Now, configure your base settings here: application/config/config.php
-    As you can see, this file is similar to the CodeIgniter config file.
+ 2. Now, configure your base url here: application/config/config.php
 
  3. Sets the database configuration parameters here: application/config/database.php
 
@@ -26,11 +25,12 @@ HOW TO INSTALL BANCHA
  6. You're done! The install script will create a content type named "Menu" which is
  	linked to the page tree of your website.
 
-Need to reinstall? Just remove the **is_installed** row from the database table named **settings**.
-
 **************************************
 
+Need to reinstall? Just remove the "is_installed" row from the database table named "settings".
+More informations are available on the official documentation.
+
 BANCHA DOCUMENTATION
- - Just go to the "Documentation" page of the administration under the "Manage" section
+http://docs.getbancha.com
 
 **************************************
