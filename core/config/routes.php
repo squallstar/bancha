@@ -34,6 +34,9 @@ $route['^change-language/([a-z]+)$'] = "website/change_language/$1";
 //The route that generates images with presets
 $route['^attach/cache/([A-Za-z0-9_]+)/([A-Za-z0-9_]+)/([0-9]+)/([a-z0-9_-]+)/([A-Za-z0-9_-]+)\.([A-z]{3,4})'] = "website/image_router/$1/$2/$3/$4/$5/$6";
 
+//Minifier
+$route['_min/(.+)'] = "admin/utils/minify/$1";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
