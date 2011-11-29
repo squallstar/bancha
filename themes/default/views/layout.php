@@ -20,9 +20,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	<title><?php echo ($this->view->title ? $this->view->title . ' - ' : '') . _('Website title'); ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="<?php echo theme_url(); ?>css/reset.css" />
-	<link rel="stylesheet" href="<?php echo theme_url(); ?>css/styles.css" />
+	<link rel="stylesheet" href="<?php echo minify(array('css/reset.css', 'css/styles.css')); ?>" />
 
 	<meta name="description" content="<?php echo $this->view->description; ?>">
 	<meta name="keywords" content="<?php echo $this->view->keywords; ?>">
@@ -50,8 +48,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 		<?php $this->view->render($_template_file); ?>
     </div>
 
-<script type="text/javascript" src="<?php echo theme_url(); ?>js/jquery.roundabout-1.0.min.js"></script> 
-<script type="text/javascript" src="<?php echo theme_url(); ?>js/jquery.easing.1.3.js"></script> 
+<script type="text/javascript" src="<?php echo minify(array('js/jquery.roundabout-1.0.min.js', 'js/jquery.easing.1.3.js')); ?>"></script> 
 
 <?php
 if (isset($page))

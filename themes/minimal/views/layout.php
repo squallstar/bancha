@@ -31,7 +31,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <?php
-	echo link_tag(theme_url('css/style.css'));
+	echo link_tag(minify('css/style.css'));
 
 	if ($this->view->has_feed)
     {
@@ -59,8 +59,8 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<?php echo theme_url();?>js/jquery.js"><\/script>')</script>
-<script src="<?php echo minify_url(array('js/plugins.js', 'js/jquery.js', 'js.application.js'));?>"></script>
-<script src="<?php echo theme_url();?>js/application.js"></script>
+<script src="<?php echo minify(array('js/plugins.js', 'js.application.js'));?>"></script>
+
 <?php
 if (isset($page))
 {
