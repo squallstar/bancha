@@ -134,10 +134,13 @@ Class Core_Website extends Bancha_Controller
 	/**
 	 * Resources minification routing
 	 */
-	function minify($theme)
+	function minify()
 	{
-		$resources = $this->input->get('src');
+		$resources = $this->input->get('f');
+		$theme = $this->input->get('t');
+		$version = $this->input->get('v');
+
 		$this->load->dispatcher('resources');
-		$this->dispatcher->minify($theme, $resources);
+		$this->dispatcher->minify($theme, $resources, $version);
 	}
 }

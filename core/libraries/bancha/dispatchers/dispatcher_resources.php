@@ -23,10 +23,10 @@ Class Dispatcher_resources
 	 * Starts the minification process of a single Content-Type resources
 	 * Used by the minify() function inside website_helper
 	 */
-	public function minify($theme, $src)
+	public function minify($theme, $src, $version = FALSE)
 	{
 		$B = & get_instance();
-		
+
 		//Cache headers
 		$B->output->set_header('Cache-Control: public,max-age=31536000')
 				  ->set_header('Age: 5881')
@@ -36,10 +36,11 @@ Class Dispatcher_resources
 				  ->enable_profiler(FALSE);
 
 		$cache_folder = $B->config->item('fr_cache_folder');
-		$cache_filename = md5($theme . $src);
 
 		$tmp = explode('.', $src);
 		$ext = $tmp[count($tmp)-1];
+
+		$store_path = $B->config->item('attach_folder') . 'cache' . DIRECTORY_SEPARATOR . 'resources-' . $ext . DIRECTORY_SEPARATOR;
 
 		switch ($ext)
 		{
@@ -51,16 +52,6 @@ Class Dispatcher_resources
 				break;
 			default:
 				$mime = 'text/html';
-		}
-
-		$full_filename = 'res.'.$cache_filename . '.'.$ext;
-
-		if (CACHE && file_exists($cache_folder . $full_filename))
-		{
-			//The cached file is sent to the client
-			$B->output->set_content_type($mime)
-				         ->set_output(file_get_contents($cache_folder . $full_filename));
-			return;
 		}
 
 		$path = urldecode($theme);
@@ -112,7 +103,13 @@ Class Dispatcher_resources
 
 		if (CACHE)
 		{
-			write_file($cache_folder . $full_filename, $minified);
+			//If the cache directory not exists, we will create it
+			if (!file_exists($store_path))
+			{
+				@mkdir($store_path, DIR_WRITE_MODE, TRUE);
+				@chmod($store_path, DIR_WRITE_MODE);
+			}
+			write_file($store_path . md5($theme.$src).($version?'.'.$version:'').'.'.$ext, $minified);
 		}
 
 		//The generated minified file is sent to the client

@@ -99,16 +99,32 @@ function preset_url($path, $preset, $append_siteurl = TRUE)
 /**
  * Returns the path of a minified file with the provided resources
  * @param array|string $files One or more resources
+ * @param int $version
  * @return string
  */
-function minify($files = array())
+function minify($files = array(), $version='')
 {
 	if (is_string($files))
 	{
 		$files = array($files);
 	}
 	$current_theme = get_instance()->view->theme;
-	return site_url('-min-/' . $current_theme . '?src=' . urlencode(implode(',', $files)), FALSE);
+
+	$ext = explode('.', $files[0]);
+	$ext = $ext[count($ext)-1];
+
+	$folder = config_item('attach_out_folder') . 'cache/resources-'.$ext.'/' . md5($current_theme.implode(',', $files));
+
+	$params = '?t=' . $current_theme . '&f=' . urlencode(implode(',', $files));
+	if ($version != '')
+	{
+		$folder.= '.' . $version;
+		$params.= '&v=' . $version;
+	}
+
+	$folder.= '.' . $ext;
+
+	return site_url($folder . $params, FALSE);
 }
 
 /**
