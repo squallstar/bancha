@@ -50,7 +50,7 @@ Class Dispatcher_resources
 				$mime = 'text/css';
 				break;
 			default:
-				$mime = 'text/html'; //change to text/html, i'm using "text/bancha" for debug
+				$mime = 'text/html';
 		}
 
 		$full_filename = 'res.'.$cache_filename . '.'.$ext;
@@ -94,7 +94,7 @@ Class Dispatcher_resources
 			foreach ($files as $file)
 			{
 				$content = read_file($full_path . $file);
-				$minified .= Minify_CSS_Compressor::process($content);
+				$minified .= CSSMin::compress($content);
 			}
 		} else
 		{
