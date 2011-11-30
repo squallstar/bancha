@@ -23,3 +23,4 @@ Helpers
 
    helpers/website
    helpers/menu
+   helpers/breadcrumbs
