@@ -22,3 +22,4 @@ Table of contents
    firststeps/index
    content-types/index
    themes/index
+   framework/index

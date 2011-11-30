@@ -128,8 +128,8 @@ function minify($files = array(), $version='')
 }
 
 /**
- * This function tries to generate the detail following url, based on the current page and the given uri
- * @param Record|string $object A record object, or just the URI to append
+ * This function tries to generate the detail url of the given Record
+ * @param Record|string $object A record object, or just the slug to append
  */
 function semantic_url($object = '')
 {
