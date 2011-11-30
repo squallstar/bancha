@@ -31,7 +31,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <?php
-	echo link_tag(minify('css/style.css'));
+	echo link_tag(minify('css/style.css', 1));
 
 	if ($this->view->has_feed)
     {
