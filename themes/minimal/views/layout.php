@@ -23,7 +23,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title><?php echo ($this->view->title ? $this->view->title . ' - ' : '') . _('Website title'); ?></title>
+	<title><?php echo title() . settings('website_name'); ?></title>
 	<meta name="description" content="<?php echo $this->view->description; ?>">
 	<meta name="keywords" content="<?php echo $this->view->keywords; ?>">
 	<meta name="author" content="<?php echo $this->view->author; ?>">
@@ -33,44 +33,23 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 <?php
 	echo link_tag(minify('css/style.css', 1));
 
-	if ($this->view->has_feed)
-    {
-      echo "\t".link_tag(current_url().'/feed.xml', 'alternate', 'application/rss+xml', isset($page) ? $page->get('title').' - Feed': 'RSS Feed');
-    }
+	page_feed();
+	page_css();
 ?>
 	<script src="<?php echo theme_url();?>js/modernizr-2.0.6.min.js"></script>
-<?php
-    if (isset($page))
-    {
-    	$css = $page->get('view_css');
-    	if ($css)
-    	{
-    		echo "\n\t".'<style type="text/css">' . $css . '</style>';
-    	}
-    }
-?>
 
 
 </head>
 <body>
     <div id="wrapper">
-		<?php $this->view->render($_template_file); ?>
+		<?php template(); ?>
     </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<?php echo theme_url();?>js/jquery.js"><\/script>')</script>
 <script src="<?php echo minify(array('js/plugins.js', 'js.application.js'));?>"></script>
 
-<?php
-if (isset($page))
-{
-	$js = $page->get('view_js');
-   	if ($js)
-   	{
-   		echo "\n\t".'<script type="text/javascript">' . $js . '</script>';
-   	}
-}
-?>
+<?php page_js(); ?>
 
 <script>
 	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID

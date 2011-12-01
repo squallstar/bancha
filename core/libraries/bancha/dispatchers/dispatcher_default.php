@@ -21,8 +21,11 @@ Class Dispatcher_default
 
 	public function __construct()
 	{
-		$this->_CI = & get_instance();
+		$this->_CI = & CI_Controller::get_instance();
 		$this->_CI->load->database();
+
+		//Front-end helper
+		$this->_CI->load->helper('frontend');
 	}
 
 	/**
@@ -106,6 +109,8 @@ Class Dispatcher_default
 				$this->_CI->load->dispatcher('print', 'dispatcher_print');
 				$this->_CI->dispatcher_print->render($page);
 			} else {
+				//We add a page global variable
+				$GLOBALS['page'] = & $page;
 				$this->_CI->view->set('page', $page);
 				$this->_CI->view->render_template($page->get('view_template'));
 			}
