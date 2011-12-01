@@ -2,9 +2,32 @@
 ChangeLog
 ######################
 
+**v 0.9.11** (2011-11-30)
+
+- New "API_ENABLED" configuration constant. GitHub Issue #78 
+- Custom redirection after the login process. GitHub Issue #79
+- New Resources minifier (a dispatcher) - now JS and CSS resources can be minified
+- New function: minify() that accepts an array of resources to be minified (returns an url)
+
+**v 0.9.10** (2011-11-26)
+
+- Content types documentation completed
+- Themes documentation added
+- Fields documentation added
+- Cleanup and more readability on the website config file
+
+
+**v 0.9.9** (2011-11-22)
+
+- New helper function: semantic_url() that will (try to) generate the detail link of a record.
+- The function above, uses also a new ad-hoc function on the model_pages called get_semantic_url().
+- We started a new branch on GitHub named "wpthemes". We're working hard to implement the full-compatibility between Bancha and Wordpress themes. More details will be available with the next Bancha releases.
+
+
 **v 0.9.8** (2011-11-18)
 
 - Fixed a bug with the page address listed on the record edit view when the "prepend language" was disabled.
+- Token index removed on SQLite installations (improves the compatibility)
 
 
 **v 0.9.7** (2011-11-16)

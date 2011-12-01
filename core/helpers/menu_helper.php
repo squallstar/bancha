@@ -14,7 +14,7 @@
 
 
 /**
- * Prints a tree as an XHTML (UL>LI>A tags)
+ * Prints a tree as an HTML (UL>LI>A tags)
  * @param array $tree The tree that we print
  * @param int $max_depth Max depth
  * @param int $level Starting level

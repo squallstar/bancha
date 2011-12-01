@@ -21,6 +21,7 @@ Class Core_Import extends Bancha_Controller
 	public function __construct()
 	{
 	    parent::__construct();
+	    $this->load->database();
 
 	    $this->content->set_stage(TRUE);
 

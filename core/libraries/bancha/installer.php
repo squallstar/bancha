@@ -296,7 +296,11 @@ Class Installer
 
 		$this->dbforge->drop_table('api_tokens');
 		$this->dbforge->add_field($api_tokens);
-		$this->dbforge->add_key('token');
+		if (strpos($this->CI->db->database, 'sqlite:') === FALSE)
+		{
+			//We create the index only if the Database driver is not SQLite
+			$this->dbforge->add_key('token');
+		}
 		$this->dbforge->create_table('api_tokens');
 
 		return TRUE;
@@ -553,7 +557,7 @@ Class Installer
 					 ->set('show_in_menu', 'T')
 					 ->set('action_list_type', $this->CI->content->type_id('Blog'))
 					 ->set('action_list_order_by', 'date_publish DESC');
-				
+
 				$page_id = $this->CI->records->save($page);
 				$this->CI->records->publish($page_id, 'Menu');
 				$this->CI->pages->publish($page_id);

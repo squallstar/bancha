@@ -19,6 +19,7 @@ Class Core_Auth extends Bancha_Controller {
 	public function __construct()
 	{
 	    parent::__construct();
+	    $this->load->database();
 	    $this->view->base = 'admin/';
 	}
 
@@ -45,7 +46,14 @@ Class Core_Auth extends Bancha_Controller {
 			{
 				$this->load->events();
 				$this->events->log('login');
+
+				$redirect = $this->input->get('continue');
+				if ($redirect)
+				{
+					redirect(urldecode($redirect));
+				}
 				redirect(ADMIN_PUB_PATH.'dashboard');
+				
 			} else {
 				$this->view->set('message', _('Username/password wrong.'));
 			}

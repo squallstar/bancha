@@ -111,6 +111,12 @@ Class View
 	public $is_feed = FALSE;
 
 	/**
+	 * @var array Will be used as placemarker of the current URI context
+	 * @see semantic_url() in website_helper
+	 */
+	public $semantic_url = array();
+
+	/**
 	 * @var array The flashmessages to show
 	 */
 	public $messages = array();

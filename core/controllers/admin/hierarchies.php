@@ -20,7 +20,8 @@ Class Core_Hierarchies extends Bancha_Controller
 	public function __construct()
   	{
 	    parent::__construct();
-
+	    $this->load->database();
+	    
 	    //We are always in staging here
 	    $this->content->set_stage(TRUE);
 

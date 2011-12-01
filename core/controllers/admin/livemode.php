@@ -17,6 +17,7 @@ Class Core_Livemode extends Bancha_Controller
 	public function __construct()
 	{
 	    parent::__construct();
+	    $this->load->database();
 	    $this->view->base = 'admin/';
 	}
 

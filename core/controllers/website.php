@@ -42,7 +42,7 @@ Class Core_Website extends Bancha_Controller
 						show_error(_('The website is currently under maintenance. Please try later.'));
 						break;
 					case 'L':
-						redirect(admin_url());
+						redirect(admin_url('?continue='.urlencode(site_url())));
 				}
 			}
 		}
@@ -129,5 +129,18 @@ Class Core_Website extends Bancha_Controller
 		);
 
 		$this->dispatcher->retrieve($data);
+	}
+
+	/**
+	 * Resources minification routing
+	 */
+	function minify()
+	{
+		$resources = $this->input->get('f');
+		$theme = $this->input->get('t');
+		$version = $this->input->get('v');
+
+		$this->load->dispatcher('resources');
+		$this->dispatcher->minify($theme, $resources, $version);
 	}
 }

@@ -47,3 +47,14 @@ A content type, is made by one or more :doc:`fieldsets/index`. Each fieldset, is
    fieldsets/index
    fieldsets/fields
 
+---------
+Relations
+---------
+
+A content type can define relations between other records using the "1-0", "1-1" or "1-n" types.
+
+.. toctree::
+   :maxdepth: 1
+
+   relations/define
+   relations/use

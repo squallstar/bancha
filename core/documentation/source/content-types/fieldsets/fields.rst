@@ -31,3 +31,30 @@ Field types
 
    fields-text
    fields-selection
+   fields-hierarchy
+   fields-images
+   fields-files
+   fields-hidden
+   fields-date
+   fields-number
+
+
+---------------
+Shared features
+---------------
+
+Each kind of field can implement these features:
+
+.. toctree::
+   :maxdepth: 1
+
+   shared-default
+   shared-rules
+   shared-list
+   shared-admin
+   shared-visible
+   shared-onkeyup
+   shared-onchange
+
+
+Go back to :doc:`/content-types/scheme`

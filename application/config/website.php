@@ -1,24 +1,35 @@
-<?php
-/**
- * Bancha configuration
- *
- * The Bancha main configuration file
- *
- * @package		Bancha
- * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
- * @license		GNU/GPL (General Public License)
- * @link		http://squallstar.it
- *
- */
+<?php include(APPPATH . 'config/website.php');
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-include(APPPATH . 'config/website.php');
+/* ------------------------------------------------------------------------ */
+/* ------------------------ BANCHA MAIN SETTINGS -------------------------- */
+/* ------------------------------------------------------------------------ */
+
+/*
+|--------------------------------------------------------------------------
+| 1. Installed themes
+|--------------------------------------------------------------------------
+|
+| Here you can set the themes that you want to use.
+| The key must be the exact name of the folder under the themes directory.
+| To activate a theme, go to the "Theme" or "Settings" page on the admin.
+|
+*/
+$config['installed_themes'] = array(
+
+	  'default'	=>	'Default theme'
+	, 'minimal'	=>	'A minimal theme'
+
+);
 
 
-/* WEBSITE LANGUAGES
- * Here goes the website languages
- */
+/*
+|--------------------------------------------------------------------------
+| 2. Website languages
+|--------------------------------------------------------------------------
+|
+| Here goes all the website available languages
+|
+*/
 $config['website_languages'] = array(
 	'en' => array(
 		'name'			=> 'english',
@@ -35,23 +46,23 @@ $config['website_languages'] = array(
 );
 
 /*
- * PREPEND URI LANGUAGE
- * When set to true, the current language will be prepended all URIs.
- *
- * Example when is on:  www.example.org/it/path/to/page
- * Example when is off: www.example.org/path/to/page
- */
+|--------------------------------------------------------------------------
+| 3. URI language prefix
+|--------------------------------------------------------------------------
+|
+| When set to true, the current language will be prefixed all URIs.
+|
+| Example when is on:  www.example.org/it/path/to/page
+| Example when is off: www.example.org/path/to/page
+|
+*/
 $config['prepend_uri_language'] = TRUE;
 
-/*
- * WEBSITE INSTALLED THEMES
- * Here you can set the themes to use.
- * To activate a theme, go to the settings section under "Manage".
- */
-$config['installed_themes'] = array(
-	'default' => 'Default theme',
-	'minimal' => 'A minimal theme'
-);
+
+/* ------------------------------------------------------------------------ */
+/* --------------------- SECONDARY SETTINGS ------------------------------- */
+/* ------------------------------------------------------------------------ */
+
 
 /*
 * SHARED API TOKEN

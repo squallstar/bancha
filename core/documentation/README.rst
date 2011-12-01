@@ -53,5 +53,4 @@ fork issue the command you used at the end of the installation instructions::
 Style Guideline
 ***************
 
-Please refer to source/documentation/index.rst for general guidelines for
-using Sphinx to document Bancha.
+Please refer to source/documentation/index.rst for general guidelines for using Sphinx to document Bancha.

@@ -22,6 +22,7 @@ Class Dispatcher_default
 	public function __construct()
 	{
 		$this->_CI = & get_instance();
+		$this->_CI->load->database();
 	}
 
 	/**

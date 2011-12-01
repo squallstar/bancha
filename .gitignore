@@ -35,3 +35,5 @@ Thumbs.db
 *.tmp
 /attach/cache/
 /attach/
+/application/cache/_bancha/*.css
+/application/cache/_bancha/*.js
