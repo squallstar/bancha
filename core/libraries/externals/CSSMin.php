@@ -1,6 +1,6 @@
 <?php
 /**
- * CSS Minifier
+ * Bancha CSS Minifier
  *
  * Simply compress a CSS File
  * Usage: CSSMin::compress($content)
@@ -14,8 +14,19 @@
  */
 class CSSMin
 {
-    public static function compress($buffer) {
+    public static function compress($buffer, $resources_root='')
+    {
         $buffer = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $buffer);
+
+        if ($resources_root != '')
+        {
+        	//The resources paths needs to be normalized using the new resources root
+        	$buffer = preg_replace(
+            "/url\('*([^)']+)'*+\)/e", "str_replace('../', '', '$resources_root$1')", $buffer
+            );
+
+        }
+
         return str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $buffer);
     }    
 }

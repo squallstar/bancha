@@ -25,7 +25,7 @@ Class Dispatcher_resources
 	 */
 	public function minify($theme, $src, $version = FALSE)
 	{
-		$B = & get_instance();
+		$B = & bancha();
 
 		//Cache headers
 		$B->output->set_header('Cache-Control: public,max-age=31536000')
@@ -82,10 +82,13 @@ Class Dispatcher_resources
 			$path =  $ext_libs . 'CSSMin.php';
 			require_once($path);
 
+			//Theme base path
+			$theme_root = '/' . THEMESPATH . $theme . '/';
+
 			foreach ($files as $file)
 			{
 				$content = read_file($full_path . $file);
-				$minified .= CSSMin::compress($content);
+				$minified .= CSSMin::compress($content, $theme_root);
 			}
 		} else
 		{
