@@ -91,3 +91,21 @@ function records($type = '')
 	global $B;
 	return $type =! '' ? $B->records->type($type) : $B->records;
 }
+
+function page_author()
+{
+	global $B;
+	return $B->view->author;
+}
+
+function page_keywords()
+{
+	global $B;
+	return $B->view->keywords;
+}
+
+function page_description()
+{
+	global $B;
+	return $B->view->description;
+}

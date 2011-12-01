@@ -24,9 +24,9 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 	<title><?php echo title() . settings('website_name'); ?></title>
-	<meta name="description" content="<?php echo $this->view->description; ?>">
-	<meta name="keywords" content="<?php echo $this->view->keywords; ?>">
-	<meta name="author" content="<?php echo $this->view->author; ?>">
+	<meta name="description" content="<?php echo page_description(); ?>">
+	<meta name="keywords" content="<?php echo page_keywords(); ?>">
+	<meta name="author" content="<?php echo page_author(); ?>">
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
