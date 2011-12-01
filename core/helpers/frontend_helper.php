@@ -43,6 +43,7 @@ function page($what='')
 {
 	global $page;
 	if (!isset($page)) return FALSE;
+	if ($what == '') return $page;
 	return $page->get($what);
 }
 

@@ -22,5 +22,6 @@ Helpers
    :maxdepth: 1
 
    helpers/website
+   helpers/frontend
    helpers/menu
    helpers/breadcrumbs
