@@ -22,9 +22,8 @@ class CSSMin
         {
         	//The resources paths needs to be normalized using the new resources root
         	$buffer = preg_replace(
-            "/url\('*([^)']+)'*+\)/e", "str_replace('../', '', '$resources_root$1')", $buffer
+            "/url\('*([^)']+)'*+\)/e", "str_replace('../', '', 'url($resources_root$1)')", $buffer
             );
-
         }
 
         return str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $buffer);
