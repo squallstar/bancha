@@ -1,6 +1,6 @@
-===============
+==========================
 Javascript "onkeyup" event
-===============
+==========================
 
 With the **<onkey>** node, you can define some javascript code that will be executed on the field **onkeyup** dom event.
 
