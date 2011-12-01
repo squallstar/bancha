@@ -2,9 +2,15 @@
 ChangeLog
 ######################
 
-**v 0.9.12** (2011-12-01)
+**v 1.0** (2011-12-01)
 
-- New front-end helper: we improved the rendering process to make it more designer-friendly (such as Wordpress do)
+- 1st December, 1.0 is finally live!!!
+- New theme: "sandbox", the starting boilerplate for your themes!
+- We removed the old two themes (we hate legacy support)
+- Rendering process has been re-factored from scratch
+- Global variables added
+- New front-end helper: we greatly improved the rendering process to make it more designer-friendly
+- Designing themes become easier with the new front-end functions
 
 
 **v 0.9.11** (2011-11-30)

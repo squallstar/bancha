@@ -154,6 +154,7 @@ Class Dispatcher_default
 
 		$parent_page->set('view_template', $template);
 		$this->_CI->view->set('record', $record);
+		$GLOBALS['record'] = & $record;
 
 		return $parent_page;
 	}
@@ -315,8 +316,11 @@ Class Dispatcher_default
 
 			if ($this->_CI->config->item('type_custom_feeds') && isset($type['name']))
 			{
+				$page->set('records', & $records);
 				$this->_CI->view->set('page', $page);
+				$GLOBALS['page'] = & $page;
 				$this->_CI->view->set('records', $records);
+				$GLOBALS['records'] = & $records;
 				$this->_CI->view->render_type_template($type['name'], 'feed', TRUE);
 				return;
 			}

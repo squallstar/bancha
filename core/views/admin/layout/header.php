@@ -108,7 +108,7 @@ $menu = array(
 			),
 			array(
 				'name'	=> _('Documentation'),
-				'url'	=> $_admin_url . 'docs',
+				'url'	=> 'http://docs.getbancha.com/',
 				'segment' => 'docs'
 			),
 			array(

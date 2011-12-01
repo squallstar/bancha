@@ -33,10 +33,22 @@ function settings($name, $area = 'General')
 	return $B->settings->get($name, $area);
 }
 
+function type($type_name)
+{
+	global $B;
+	return $B->content->type($type_name);
+}
+
 function content_render()
 {
 	global $B;
 	$B->load->view('content_render');
+}
+
+function load_helper($name='')
+{
+	global $B;
+	$B->load->helper($name);
 }
 
 function page($what='')
@@ -45,6 +57,49 @@ function page($what='')
 	if (!isset($page)) return FALSE;
 	if ($what == '') return $page;
 	return $page->get($what);
+}
+
+function tree($which='')
+{
+	global $B;
+	switch($which)
+	{
+		case '':
+			return $B->view->get('tree');
+			break;
+
+		case 'current':
+			return $B->tree->get_current_branch();
+			break;
+		
+		case 'breadcrumbs':
+			return $B->tree->breadcrumbs;
+			break;
+	}
+}
+
+function record($what='')
+{
+	global $record;
+	if (!isset($record)) return FALSE;
+	if ($what == '') return $record;
+	return $record->get($what);
+}
+
+function records()
+{
+	global $page;
+	if (!isset($page)) return FALSE;
+	$records = & $page->get('records');
+	return is_array($records) && count($records) ? $records : FALSE;
+}
+
+function have_records()
+{
+	global $page;
+	if (!isset($page)) return FALSE;
+	$records = & $page->get('records');
+	return is_array($records) && count($records);
 }
 
 function page_feed()
@@ -86,7 +141,7 @@ function module($name)
 	return $B->load->module($name);
 }
 
-function records($type = '')
+function find($type = '')
 {
 	global $B;
 	return $type =! '' ? $B->records->type($type) : $B->records;
@@ -108,4 +163,33 @@ function page_description()
 {
 	global $B;
 	return $B->view->description;
+}
+
+function pagination()
+{
+	global $B;
+	if (isset($B->pagination))
+	{
+		return $B->pagination->create_links();
+	}
+}
+
+function languages($sep = '&nbsp;')
+{
+	global $B;
+	$langs = $B->settings->get('website_active_languages');
+	$all_langs = & $B->lang->languages;
+	if (is_array($langs) && count($langs))
+	{
+		foreach ($langs as $lang)
+		{
+			echo '<a href="'.site_url('change-language/'.$lang, FALSE).'">'.$all_langs[$lang]['description'].'</a>' . $sep;
+		}
+	}
+}
+
+function language()
+{
+	global $B;
+	return $B->lang->current_language;
 }

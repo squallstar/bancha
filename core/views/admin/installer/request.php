@@ -37,8 +37,8 @@ $this->load->helper('form');
 		  			<label><?php echo _('Install type'); ?></label>
 				  	<div class="right">
 						<select class="styled" name="premade">
-							<option value="blog"><?php echo _('Blog'); ?></option>
-							<option value="default"><?php echo _('Default'); ?></option>
+							<option value="blog"><?php echo _('Full'); ?></option>
+							<option value="default"><?php echo _('Minimal'); ?></option>
 						</select>
 					</div>
 				</div>

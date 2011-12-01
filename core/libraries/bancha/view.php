@@ -306,7 +306,8 @@ Class View
 		{
 			$view_path = $this->_CI->config->item('views_templates_folder') . $type_name . '/' . $view_file;
 		} else {
-			$view_path = $this->_CI->config->item('views_templates_folder') . 'Default' . '/' . $view_file;
+			$type = $this->_CI->content->type($type_name);
+			$view_path = $this->_CI->config->item('views_templates_folder') . 'Default-' . ($type['tree'] ? 'Page' : 'Content') . '/' . $view_file;
 		}
 			
 		$this->_CI->load->view($view_path, $propagate_data ? $this->_data : '');

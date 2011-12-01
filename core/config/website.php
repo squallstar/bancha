@@ -1,8 +1,11 @@
 <?php
 /**
- * Bancha configuration
+ * Bancha main configuration file.
  *
- * The Bancha main configuration file
+ * >>> WARNING: THIS SETTINGS ARE OVERWRITTEN BY THE APPLICATION CONFIG FILE <<<
+ *
+ * This means that you can copy one of the following configs on the application
+ * config file to extend or change the values.
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -14,6 +17,11 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/*
+ * Framework version
+ */
+define('BANCHA_VERSION', '1.0');
+
 
 /* WEBSITE LANGUAGES
  * Here goes the website languages
@@ -24,14 +32,7 @@ $config['website_languages'] = array(
 		'locale'		=> 'en_US',
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
-	),
-	'it' => array(
-		'name'			=> 'italian',
-		'locale'		=> 'it_IT',
-		'description'	=> 'Italiano',
-		'date_format'	=> 'd/m/Y'
 	)
-
 );
 
 /* ADMIN LANGUAGES
@@ -62,11 +63,6 @@ $config['admin_languages'] = array(
 $config['prepend_uri_language'] = TRUE;
 
 /*
- * Framework version
- */
-define('BANCHA_VERSION', '0.9.11');
-
-/*
  * Framework name
  */
 define('CMS', 'BANCHA');
@@ -85,8 +81,7 @@ $sep = DIRECTORY_SEPARATOR;
  * To activate a theme, go to the settings section under "Manage".
  */
 $config['installed_themes'] = array(
-	'default' => 'Default theme',
-	'minimal' => 'A minimal theme'
+	'sandbox' => 'The default sandbox'
 );
 
 /*
