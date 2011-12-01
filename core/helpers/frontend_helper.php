@@ -33,6 +33,12 @@ function settings($name, $area = 'General')
 	return $B->settings->get($name, $area);
 }
 
+function content_render()
+{
+	global $B;
+	$B->load->view('content_render');
+}
+
 function page($what='')
 {
 	global $page;

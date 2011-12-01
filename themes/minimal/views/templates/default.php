@@ -14,6 +14,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 render('header');
 
-render('content_render');
+content_render();
 
 render('footer');

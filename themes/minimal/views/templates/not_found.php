@@ -12,7 +12,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-$this->view->render('header');
+render('header');
 
 ?>
 
@@ -26,4 +26,4 @@ $this->view->render('header');
 </div>
 
 <?php
-$this->view->render('footer');
+render('footer');
