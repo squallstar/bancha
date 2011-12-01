@@ -72,3 +72,15 @@ function title($sep = ' - ')
 	global $B;
 	return $B->view->title ? $B->view->title . $sep : '';
 }
+
+function module($name)
+{
+	global $B;
+	return $B->load->module($name);
+}
+
+function records($type = '')
+{
+	global $B;
+	return $type =! '' ? $B->records->type($type) : $B->records;
+}

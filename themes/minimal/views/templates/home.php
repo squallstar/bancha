@@ -12,8 +12,8 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-$this->view->render('header');
-$posts = $this->records->type('Blog')->get();
+render('header');
+$posts = records('Blog')->limit(10)->get();
 
 ?>
 
@@ -32,12 +32,7 @@ $posts = $this->records->type('Blog')->get();
 
 		<hr />
 
-		<?php
-	
-		$sharer = $this->load->module('sharer');
-		echo $sharer->type('facebook')->render();
-	
-		?>
+		<?php echo module('sharer')->type('facebook')->render(); ?>
 	
 		</div>
 	</div>
@@ -60,5 +55,4 @@ $posts = $this->records->type('Blog')->get();
 	</div>
 </div>
 
-<?php
-$this->view->render('footer');
+<?php render('footer');

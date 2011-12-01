@@ -2,12 +2,18 @@
 ChangeLog
 ######################
 
+**v 0.9.12** (2011-12-01)
+
+- New front-end helper: we improved the rendering process to make it more designer-friendly (such as Wordpress do)
+
+
 **v 0.9.11** (2011-11-30)
 
 - New "API_ENABLED" configuration constant. GitHub Issue #78 
 - Custom redirection after the login process. GitHub Issue #79
 - New Resources minifier (a dispatcher) - now JS and CSS resources can be minified
 - New function: minify() that accepts an array of resources to be minified (returns an url)
+
 
 **v 0.9.10** (2011-11-26)
 

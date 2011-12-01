@@ -12,8 +12,8 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-$this->view->render('header');
+render('header');
 
-$this->view->render('content_render');
+render('content_render');
 
-$this->view->render('footer');
+render('footer');
