@@ -57,6 +57,17 @@ Class Dispatcher_resources
 		$path = urldecode($theme);
 		$files = explode(',',$src);
 		if (!count($files)) return;
+
+		//We need to check if the requests files are JS or CSS
+		foreach ($files as $file)
+		{
+			$tmp = explode('.', $file);
+			if (!in_array($tmp[count($tmp)-1], array('js', 'css')))
+			{
+				show_error('One or more resources are not allowed to be minified.');
+			}
+		}
+
 		$full_path = THEMESPATH . $path . '/';
 
 		$minified = '';
