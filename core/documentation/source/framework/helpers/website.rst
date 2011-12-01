@@ -5,6 +5,20 @@ Website helper
 This helper is automatically loaded by the framework and contains many useful functions for the front-end of the website.
 The helper is located here: **core/helpers/website_helper.php**
 
+--------------------
+Get the Super-Object
+--------------------
+
+**& bancha( )**
+
+Returns by reference the **Bancha** super-object. This function can be used everywhere on the application.
+Usage::
+
+    $B = & bancha();
+    
+    //For example, we access to the current page
+    $page = $B->view->get('page');
+
 
 ---------------
 Debug an object

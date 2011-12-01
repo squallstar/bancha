@@ -20,12 +20,12 @@ Class Dispatcher_Images
 	 */
 	public function retrieve($data)
 	{
-		$CI = & get_instance();
+		$B = & bancha();
 
 		if ($data['type'] != 'repository')
 		{
 			//We retrieve the content type
-			$tipo = $CI->content->type($data['type']);
+			$tipo = $B->content->type($data['type']);
 
 			//Let's check if the request field is an image
 			if ($tipo['fields'][$data['field']]['type'] != 'images')
@@ -38,13 +38,13 @@ Class Dispatcher_Images
 		ini_set('memory_limit', MEMORY_LIMIT);
 
 		//Carico le librerie che mi servono
-		$CI->output->enable_profiler(FALSE);
-		$CI->load->library('image_lib');
-		$CI->load->config('image_presets');
+		$B->output->enable_profiler(FALSE);
+		$B->load->library('image_lib');
+		$B->load->config('image_presets');
 
 		$sep = DIRECTORY_SEPARATOR;
 
-		$presets_list = $CI->config->item('presets');
+		$presets_list = $B->config->item('presets');
 
 		if (isset($presets_list[$data['preset']]))
 		{
@@ -60,9 +60,9 @@ Class Dispatcher_Images
 
 		$file_name =  $data['filename'] . '.' . $data['ext'];
 
-		$source_image  = $CI->config->item('attach_folder') . $path . $file_name;
+		$source_image  = $B->config->item('attach_folder') . $path . $file_name;
 
-		$store_path = $CI->config->item('attach_folder') . 'cache' . $sep . $path
+		$store_path = $B->config->item('attach_folder') . 'cache' . $sep . $path
 					. $data['preset'] . $sep;
 
 		//Paths will be uniformed (windows sucks at this)
@@ -159,8 +159,8 @@ Class Dispatcher_Images
 			switch ($operation['operation'])
 			{
 				case 'resize':
-					$CI->image_lib->initialize($config);
-					$done = $CI->image_lib->resize();
+					$B->image_lib->initialize($config);
+					$done = $B->image_lib->resize();
 					break;
 
 				case 'crop':
@@ -172,20 +172,20 @@ Class Dispatcher_Images
 					{
 						$config['y_axis'] = (int) $operation['y'];
 					}
-					$CI->image_lib->initialize($config);
-					$done = $CI->image_lib->crop();
+					$B->image_lib->initialize($config);
+					$done = $B->image_lib->crop();
 					break;
 			}
 
 			if (!$done)
 			{
-				log_message('error', $CI->image_lib->display_errors());
+				log_message('error', $B->image_lib->display_errors());
 				return;
 			}
 		}
 
 		//The final output is sent to the client
-		$CI->output->set_content_type($data['ext'])
+		$B->output->set_content_type($data['ext'])
 				   ->set_output(file_get_contents($store_path  . $file_name));
 		return;
 	}

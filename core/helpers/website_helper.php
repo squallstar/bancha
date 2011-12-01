@@ -15,6 +15,15 @@
  */
 
 /**
+ * Returns the Bancha singleton super-object
+ * @return CI_Controller
+ */
+function &bancha()
+{
+	return CI_Controller::get_instance();
+}
+
+/**
  * Dumps an object (or a variable)
  * @param mixed $obj
  * @param string $title
