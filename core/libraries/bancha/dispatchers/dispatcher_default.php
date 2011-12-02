@@ -316,7 +316,7 @@ Class Dispatcher_default
 
 			if ($this->_CI->config->item('type_custom_feeds') && isset($type['name']))
 			{
-				$page->set('records', & $records);
+				$page->set('records', $records);
 				$this->_CI->view->set('page', $page);
 				$GLOBALS['page'] = & $page;
 				$this->_CI->view->set('records', $records);
