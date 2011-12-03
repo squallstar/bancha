@@ -43,7 +43,7 @@
     </div>
 
 	<script src="<?php echo theme_url('js/jquery.js');?>"></script>
-	<script src="<?php echo theme_url('application.js');?>"></script>
+	<script src="<?php echo theme_url('js/application.js');?>"></script>
 	<?php page_js(); ?>
 
 	<!-- Google Analytics code -->
