@@ -32,7 +32,6 @@ Create these files in the views directory::
     1) themes/themename/views/layout.php
     2) themes/themename/views/header.php
     3) themes/themename/views/footer.php
-    4) themes/themename/views/content_render.php
 
 Before starting, take a look at this little thing. The view cycle, looks like this:
 **Layout** >> **Template** >> **Content render**
@@ -48,15 +47,15 @@ Below, you can see a simple implementation of that file::
 
     <html>
         <head>
-            <title><?php echo $this->view->title; ?></title>
-            <meta name="description" content="<?php echo $this->view->description; ?>">
-            <meta name="keywords" content="<?php echo $this->view->keywords; ?>">
+            <title><?php echo title(); ?></title>
+            <meta name="description" content="<?php echo page_description(); ?>">
+            <meta name="keywords" content="<?php echo page_description(); ?>">
             <?php echo echo link_tag(theme_url('css/style.css')); ?>
         </head>
         <body>
 
             <div id="wrapper">
-            <?php $this->view->render($_template_file); ?>
+            <?php template(); ?>
             </div>
 
             <script src="<?php echo theme_url('js/application.js');?>"></script>
@@ -64,7 +63,7 @@ Below, you can see a simple implementation of that file::
         </body>
     </html>
 
-As you can see, the scope of this file is to declare the base html, head, etc.. of the page, plus loading the **$_template_file** inside a wrapper. The templates are located under the **views/templates** folder and we are gonna see them in few minutes.
+As you can see, the scope of this file is to declare the base html, head, etc.. of the page, plus loading the **$template** inside a wrapper. The templates are located under the **views/templates** folder and we are gonna see them in few minutes.
 
 
 ^^^^^^^^^^^^^^^^^
