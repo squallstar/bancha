@@ -147,6 +147,17 @@ function find($type = '')
 	return $type =! '' ? $B->records->type($type) : $B->records;
 }
 
+function categories($type = '')
+{
+	global $B;
+	if (!isset($B->categories))
+	{
+		$B->load->categories();
+	}
+	if ($type != '') return $B->categories->type($type);
+	return $B->categories;
+}
+
 function page_author()
 {
 	global $B;

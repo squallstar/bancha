@@ -115,6 +115,21 @@ You can easily search throught your records using the records model inside a the
     //Searchs for a specific record
     $product = find('Products')->where('title', 'Teabag')->get_first();
 
+ 
+-------------------------------------
+List the categories of a content type
+-------------------------------------
+
+**categories( $type_name)**
+
+You can easily get the categories of a content type using the categories model inside a theme. To access that model, use the **categories** functions as follows in the examples below::
+
+    //Gets the categories of the content type "Blog"
+    $categories = categories('Blog')->get();
+
+    //Get the categories of the content type that a page is listing
+    $categories = categories( page('action_list_type') )->get();
+
 
 ---------------------------------
 Get a field from the current page
