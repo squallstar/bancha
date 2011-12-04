@@ -21,4 +21,4 @@ Basic usage::
     echo menu($tree, 2);
 
     //Prints the tree below the current level
-    echo menu( $this->tree->get_current_branch() );
+    echo menu( tree('current') );
