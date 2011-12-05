@@ -194,7 +194,9 @@ function languages($sep = '&nbsp;')
 	{
 		foreach ($langs as $lang)
 		{
-			echo '<a href="'.site_url('change-language/'.$lang, FALSE).'">'.$all_langs[$lang]['description'].'</a>' . $sep;
+			if (isset($all_langs[$lang])) {
+				echo '<a href="'.site_url('change-language/'.$lang, FALSE).'">'.$all_langs[$lang]['description'].'</a>' . $sep;
+			}
 		}
 	}
 }
