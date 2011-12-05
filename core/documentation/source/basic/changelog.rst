@@ -2,6 +2,13 @@
 ChangeLog
 ######################
 
+**v 1.0.1** (2011-12-05)
+
+- New categories search function added (frontend helper)
+- Many languages have been added to CKEditor textarea
+- Now you can choose the language during the install setup
+
+
 **v 1.0** (2011-12-01)
 
 - 1st December, 1.0 is finally live!!!

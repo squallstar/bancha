@@ -340,7 +340,7 @@ Class Installer
 	 * @param string $surname
 	 * @param string $email
 	 */
-	public function create_user($username, $password, $name, $surname, $email = 'admin@example.org')
+	public function create_user($username, $password, $name, $surname, $lang='', $email = 'admin@example.org')
 	{
 		$data = array(
 			'name' => $name,
@@ -349,7 +349,7 @@ Class Installer
 			'username' => $username,
 			'password' => $password,
 			'id_group' => $this->group_id,
-			'admin_lang' => $this->CI->lang->current_language
+			'admin_lang' => $lang =! '' ? $lang : $this->CI->lang->current_language
 		);
 		return $this->users->add_user($data);
 	}

@@ -34,6 +34,13 @@ $this->load->helper('form');
 				</div>
 
 				<div class="fieldset clearfix">
+		  			<label><?php echo _('Language'); ?></label>
+				  	<div class="right">
+						<?php echo form_dropdown('language', $this->config->item('languages_select'), $this->lang->current_language, 'class="styled"'); ?>
+					</div>
+				</div>
+
+				<div class="fieldset clearfix">
 		  			<label><?php echo _('Install type'); ?></label>
 				  	<div class="right">
 						<select class="styled" name="premade">

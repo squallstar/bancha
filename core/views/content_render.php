@@ -3,9 +3,12 @@
  * (Core) Content Render
  *
  * The default content render of the website
- * ----------------------------------------
- * To use your custom content render, just create a file named content_render.php
- * inside the "views" directory of your theme
+ * 
+ * Tipically you should not touch this file.
+ * Feel free to extend it in your theme
+ * 
+ * To use your custom content render, create a file named
+ * content_render.php inside the "views" directory of your theme
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
