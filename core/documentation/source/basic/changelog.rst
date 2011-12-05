@@ -2,12 +2,31 @@
 ChangeLog
 ######################
 
+**v 1.0.1** (2011-12-05)
+
+- New categories search function added (frontend helper)
+- Many languages have been added to CKEditor textarea
+- Now you can choose the language during the install setup
+
+
+**v 1.0** (2011-12-01)
+
+- 1st December, 1.0 is finally live!!!
+- New theme: "sandbox", the starting boilerplate for your themes!
+- We removed the old two themes (we hate legacy support)
+- Rendering process has been re-factored from scratch
+- Global variables added
+- New front-end helper: we greatly improved the rendering process to make it more designer-friendly
+- Designing themes become easier with the new front-end functions
+
+
 **v 0.9.11** (2011-11-30)
 
 - New "API_ENABLED" configuration constant. GitHub Issue #78 
 - Custom redirection after the login process. GitHub Issue #79
 - New Resources minifier (a dispatcher) - now JS and CSS resources can be minified
 - New function: minify() that accepts an array of resources to be minified (returns an url)
+
 
 **v 0.9.10** (2011-11-26)
 

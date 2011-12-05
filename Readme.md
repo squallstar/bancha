@@ -16,7 +16,7 @@ In 10 minutes, you can configure a website to manage, list and view any kind of 
   * It totally separates the application framework (MVC) from the website themes, so it's easy to use for web developers as well as web designers.
   * It use a wonderful ORM system to "play" with the database objects without the needs to write a single query.
 
-The **BANCHA documentation** is available through the BANCHA administration panel, under **Manage > Documentation**.
+The **BANCHA documentation** is available here: **http://docs.getbancha.com**
 
 # How to install
 
@@ -44,7 +44,7 @@ Need to reinstall? Just remove the **is_installed** row from the database table 
 
 # Changelog
 
-See **core/documentation/source/basic/changelog.rst**
+See **http://docs.getbancha.com/basic/changelog.html**
 
 # Resources
 
@@ -62,5 +62,3 @@ Now you can pull the upstream updates anytime you want via these commands:
 
     git fetch upstream
     git merge upstream/master
-
-NOTE: we are working hard to translate the documentation in English (currently it's just in Italian)

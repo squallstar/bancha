@@ -4,7 +4,8 @@
  *
  * Some utilities for the website
  * ------------------------------
- * Please do not change the functions below. Instead, feel free to copy and rename them.
+ * Please do not change the functions below.
+ * Instead, feel free to copy and rename them.
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -15,12 +16,20 @@
  */
 
 /**
+ * Many helper functions access this global variable
+ * to improve performances instead of using the bancha()
+ * function declared below.
+ */
+$GLOBALS['B'] = CI_Controller::get_instance();
+
+/**
  * Returns the Bancha singleton super-object
  * @return CI_Controller
  */
 function &bancha()
 {
-	return CI_Controller::get_instance();
+	global $B;
+	return $B;
 }
 
 /**
@@ -113,11 +122,12 @@ function preset_url($path, $preset, $append_siteurl = TRUE)
  */
 function minify($files = array(), $version='')
 {
+	global $B;
 	if (is_string($files))
 	{
 		$files = array($files);
 	}
-	$current_theme = get_instance()->view->theme;
+	$current_theme = $B->view->theme;
 
 	$ext = explode('.', $files[0]);
 	$ext = $ext[count($ext)-1];
@@ -142,12 +152,12 @@ function minify($files = array(), $version='')
  */
 function semantic_url($object = '')
 {
-	$CI = & get_instance();
-	$view = & $CI->view;
+	global $B;
+	$view = & $B->view;
 	$record = $view->get('record');
 	$page = $view->get('page');
 
-	$current_uri = $CI->uri->uri_string;
+	$current_uri = $B->uri->uri_string;
 
 	if ($object instanceof Record)
 	{
@@ -176,7 +186,7 @@ function semantic_url($object = '')
 	//If we are here, is a normal page. We have to try to find another page that is listing this record
 	if ($page && $object instanceof Record)
 	{
-		return site_url($CI->pages->get_semantic_url($object->_tipo) . '/' . $uri);
+		return site_url($B->pages->get_semantic_url($object->_tipo) . '/' . $uri);
 	} else {
 		//No more things to try on
 		return '#';

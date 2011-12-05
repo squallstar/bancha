@@ -1,6 +1,6 @@
-===============
+===========================
 Javascript "onchange" event
-===============
+===========================
 
 With the **<onchange>** node, you can define some javascript code that will be executed on the field **onchange** dom event.
 

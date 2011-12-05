@@ -32,7 +32,6 @@ Create these files in the views directory::
     1) themes/themename/views/layout.php
     2) themes/themename/views/header.php
     3) themes/themename/views/footer.php
-    4) themes/themename/views/content_render.php
 
 Before starting, take a look at this little thing. The view cycle, looks like this:
 **Layout** >> **Template** >> **Content render**
@@ -48,15 +47,15 @@ Below, you can see a simple implementation of that file::
 
     <html>
         <head>
-            <title><?php echo $this->view->title; ?></title>
-            <meta name="description" content="<?php echo $this->view->description; ?>">
-            <meta name="keywords" content="<?php echo $this->view->keywords; ?>">
+            <title><?php echo title(); ?></title>
+            <meta name="description" content="<?php echo page_description(); ?>">
+            <meta name="keywords" content="<?php echo page_description(); ?>">
             <?php echo echo link_tag(theme_url('css/style.css')); ?>
         </head>
         <body>
 
             <div id="wrapper">
-            <?php $this->view->render($_template_file); ?>
+            <?php template(); ?>
             </div>
 
             <script src="<?php echo theme_url('js/application.js');?>"></script>
@@ -64,60 +63,20 @@ Below, you can see a simple implementation of that file::
         </body>
     </html>
 
-As you can see, the scope of this file is to declare the base html, head, etc.. of the page, plus loading the **$_template_file** inside a wrapper. The templates are located under the **views/templates** folder and we are gonna see them in few minutes.
+As you can see, the scope of this file is to declare the base html, head, etc.. of the page, plus loading the **$template** inside a wrapper. The templates are located under the **views/templates** folder and we are gonna see them in few minutes.
 
 
 ^^^^^^^^^^^^^^^^^
 2) Content render
 ^^^^^^^^^^^^^^^^^
 
+**Note: this file is not mandatory, the framework will use the default one located in core/views/content_render.php when a custom content render is not defined in the theme.**
+If you choose to not extend this file, skip this section.
+
 This file is responsable of handling the actions of a page. On the :doc:`/firststeps/index` tutorial under the section :doc:`/firststeps/content-render` you have learned how each page can choose its behaviour. Now it's time to implement those behaviours on the theme throught the **content_render.php** file.
 
-This is the base implementation of the **views/content_render.php**::
-
-    <?php
-    if (isset($page) && $page->is_page()) {
-
-        switch ($page->get('action')) {
-
-            case 'text':
-                echo '<h1>'.$page->get('title').'</h1>';
-                echo '<p>'.$page->get('content').'</p>';
-                break;
-
-            case 'single':
-                if (isset($record) && $record instanceof Record) {
-                    $this->view->render_type_template($record->tipo, 'detail');
-                }
-                break;
-
-            case 'list':
-                $records = & $page->get('records');
-
-                if ($records && count($records)) {
-                    //We use the content type of the first record as template
-                    $record = $records[0];
-                    $this->view->render_type_template($record->tipo, 'list');
-                } else {
-                    $type_name = $this->content->type_name($page->get('action_list_type'));
-                    $this->view->render_type_template($type_name, 'list');
-                }
-                break;
-            
-            case 'action_render':
-                $class = $page->get('_action_class');
-                if ($class)
-                {
-                    $method = $page->get('action_custom_name');
-                    $class->$method('content_render');
-                }
-                break;
-        }
-    }
-    ?>
-
 If you had trouble reading this, please read :doc:`/firststeps/content-render`.
-As you can see, basically there's a switch that tests which **action** the page wants to be fired.
+As you can see opening the **core/views/content_render.php** file, basically there's a switch that tests which **action** the page wants to be fired.
 When the case is **single** or **list**, the **views/type_templates** will be used.
 
-**Note:** between the **layout** and the **content_render**, there's the **template**.
+**Note:** between the **layout** and the **content_render**, there's the **template** (next section).

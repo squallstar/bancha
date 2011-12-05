@@ -15,10 +15,7 @@
 |
 */
 $config['installed_themes'] = array(
-
-	  'default'	=>	'Default theme'
-	, 'minimal'	=>	'A minimal theme'
-
+	'sandbox' => 'The default sandbox'
 );
 
 
@@ -36,12 +33,6 @@ $config['website_languages'] = array(
 		'locale'		=> 'en_US',
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
-	),
-	'it' => array(
-		'name'			=> 'italian',
-		'locale'		=> 'it_IT',
-		'description'	=> 'Italiano',
-		'date_format'	=> 'd/m/Y'
 	)
 );
 
@@ -56,7 +47,7 @@ $config['website_languages'] = array(
 | Example when is off: www.example.org/path/to/page
 |
 */
-$config['prepend_uri_language'] = TRUE;
+$config['prepend_uri_language'] = FALSE;
 
 
 /* ------------------------------------------------------------------------ */

@@ -50,11 +50,19 @@ Class Core_Install extends Bancha_Controller
 				//Then, let's add some indexes
 				$this->installer->create_indexes();
 
+				$language = $this->input->post('language');
+				if (!$language)
+				{
+					$language = $this->lang->current_language;
+				} else {
+					$this->lang->set_lang($language);
+				}
+
 				//We create a defaut user
 				$username = 'admin';
 				$password = 'admin';
 				$this->installer->create_groups();
-				$this->installer->create_user($username, $password, 'Super', 'User');
+				$this->installer->create_user($username, $password, 'Super', 'User', $language);
 				$this->auth->login($username, $password);
 				$this->view->set('username', $username);
 				$this->view->set('password', $password);

@@ -7,8 +7,11 @@ The breadcrumbs helper is located inside **core/helpers/breadcrumbs_helper.php**
     //Inside controllers and models:
     $this->load->helper('breadcrumbs');
 
-    //Our outside the MVC:
-    $B = & get_instance();
+    //Inside the views (themes):
+    load_helper('breadcrumbs');
+
+    //Outside of the MVC
+    $B = & bancha();
     $B->load->helper('breadcrumbs');
 
 
@@ -23,7 +26,7 @@ If the link of a breadcrumbs is different from the current url, an anchor will b
 Usage::
 
     //Example using the website breadcrumbs contained in the model tree
-    echo breadcrumbs($this->tree->breadcrumbs);
+    echo breadcrumbs( tree('breadcrumbs') );
 
     //Or passing an array
     $tree = array(
