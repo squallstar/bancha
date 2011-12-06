@@ -2,6 +2,16 @@
 ChangeLog
 ######################
 
+**v 1.0.2** (2011-12-06)
+
+- Base Reactor (CodeIgniter) has been updated from 2.0.3 to 2.1
+- New attribute on the "field" node: "kind" (used by the scheme library. accepted values are "numeric" and "text")
+- New library "Schemeforge": creates and updates the custom content types tables
+- Huge refactor on the Default dispatcher: page and record routing should gain a 100% speed increase on some queries
+- Contents and Pages views have been merged into a new view, accessible from the left menu (Content types)
+- Bugfix on the publish log
+
+
 **v 1.0.1** (2011-12-05)
 
 - New categories search function added (frontend helper)
