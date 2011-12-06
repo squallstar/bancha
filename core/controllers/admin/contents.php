@@ -45,32 +45,11 @@ Class Core_Contents extends Bancha_Controller
   	}
 
     /**
-    * Lista dei tipi
+    * Content types list
     */
     public function index()
     {
-
-    	if ($this->session->flashdata('message'))
-    	{
-    		$this->view->set('message', $this->session->flashdata('message'));
-    	}
-
-    $tipi = $this->content->types();
-
-    $contents = array();
-    $pages = array();
-
-    foreach ($tipi as $tipo)
-    {
-    	if ($tipo['tree']) {
-    		$pages[] = $tipo;
-    	} else {
-    		$contents[] = $tipo;
-    	}
-    }
-
-    $this->view->set('tipi', $this->uri->segment(2) == 'contents' ? $contents : $pages);
-    $this->view->render_layout('content/type_list');
+    	redirect(admin_url('schemes'));
     }
 
     /**
@@ -105,7 +84,7 @@ Class Core_Contents extends Bancha_Controller
     	$this->records->set_type($tipo);
         $this->view->set('tipo', $type);
 
-        //Pubblicazione record
+        //Record publish
         $to_publish = $this->input->get('publish');
         if ($to_publish)
         {
@@ -118,7 +97,7 @@ Class Core_Contents extends Bancha_Controller
         	}
         }
 
-    	//Depubblicazione record
+    	//Record depublish
         $to_depublish = $this->input->get('depublish');
         if ($to_depublish)
         {
@@ -131,7 +110,7 @@ Class Core_Contents extends Bancha_Controller
         	}
         }
 
-        //Azioni varie collettive
+        //Various actions
         if ($this->input->post('action'))
         {
         	$records = $this->input->post('record');
@@ -173,7 +152,7 @@ Class Core_Contents extends Bancha_Controller
         	}
         }
 
-        //Filtri automatici
+        //Automatic filters
         $this->db->start_cache();
         $post_filters = $this->input->post('filter');
         foreach (array_keys($type['fields']) as $field) {
@@ -243,7 +222,7 @@ Class Core_Contents extends Bancha_Controller
     }
 
     /**
-    * Azione per aggiungere un contenuto figlio di un altro
+    * Adds a child record
     * @param int|string $type
     * @param int $child_id
     */
@@ -253,7 +232,7 @@ Class Core_Contents extends Bancha_Controller
     }
 
     /**
-    * Form di aggiunta/modifica di un record
+    * Edit form for a single record
     * @param int|string $type
     * @param int $record_id
     */
@@ -270,7 +249,7 @@ Class Core_Contents extends Bancha_Controller
         //ACL Check
         $this->auth->check_permission('content', $tipo['name']);
 
-        //Aggiunta-Modifica record
+        //Add-Edit record
         if ($this->input->post('id_type', FALSE)) {
 
         	$id_type = $this->input->post('id_type', FALSE);
@@ -282,7 +261,7 @@ Class Core_Contents extends Bancha_Controller
 
             if ($record->id) {
 	      	    if ($tipo['has_categories']) {
-	      		   //Aggiorno le categorie associate a questo record
+	      		   //We update the linked record categories
 	      		   $this->categories->set_record_categories($record->id, $this->input->post('categories'));
 	      	    }
 
@@ -572,7 +551,7 @@ Class Core_Contents extends Bancha_Controller
 
                 if ($done)
                 {
-                	redirect(ADMIN_PUB_PATH . ($this->input->post('type_tree') == 'true' ? 'pages' : 'contents'));
+                	redirect(admin_url('schemes'));
                 }
 
             } else {
@@ -604,7 +583,7 @@ Class Core_Contents extends Bancha_Controller
 				$this->session->set_flashdata('message', $msg);
 
 				$this->content->rebuild();
-				redirect(ADMIN_PUB_PATH.'contents/');
+				redirect(admin_url('schemes'));
 			} else {
 				show_error(_('Cannot save that XML scheme.'), 500, _('Saving error'));
 			}
@@ -672,38 +651,6 @@ Class Core_Contents extends Bancha_Controller
 			}
 			$this->type_categories($type_id);
     	}
-    }
-
-    /**
-    * Renews the content types cache
-    */
-    public function renew_cache()
-    {
-        //Database cache
-        if (CACHE) $this->db->cache_delete_all();
-
-        //Settings cache
-        $this->load->settings();
-        $this->settings->clear_cache();
-
-        //Pages cache
-        $files = get_filenames($this->config->item('cache_path'));
-        if (is_array($files) && count($files))
-        {
-        	foreach ($files as $file)
-        	{
-        		@unlink($this->config->item('cache_path') . $file);
-        	}
-        }
-
-        //Content types cache
-    	if (!$this->content->rebuild())
-        {
-    		show_error(_('Cannot renew the cache.'), 500, _('Error'));
-    	} else {
-            $this->view->message('success', _('The cache has been cleared.'));
-            $this->view->render_layout('content/renewed');
-        }
     }
 
     /**

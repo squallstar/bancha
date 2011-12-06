@@ -2,7 +2,7 @@
 Add a new Content type
 ######################
 
-To create a new content type, click on the "Contents" or "Pages" section, and the content types list will appear. On the top right side of the page, you will find the **Add new content type** button, click it!
+To create a new content type, click on the "Content types" section, and the content types list will appear. On the top right side of the page, you will find the **Add new content type** button, click it!
 
 The form asks you to fill some fields in order to create a new content type, as described here below.
 

@@ -1,6 +1,9 @@
 <?php
 /**
- * Schemeforge Class
+ * Schemeforge Library class
+ *
+ * This library creates and keep updated the tables of the content types
+ * It will be tipically used by the "Schemes" controller
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -25,13 +28,19 @@ Class Schemeforge
 		$this->B->load->dbforge();
 	}
 
+	/**
+	 * Returns the optimal Database fields of a table, given the content type
+	 * @param array $type
+	 * @return array
+	 */
 	public function get_tablescheme($type)
     {
     	//Primary key
 		$table_fields[$type['primary_key']] = array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE);
 
-		//XML Field
+		//Additional Fields
 		$table_fields['xml'] = array('type' => 'TEXT', 'null' => TRUE);
+		$table_fields['date_update'] = array('type' => 'INT', 'null' => TRUE);
 
 		foreach ($type['columns'] as $field_name)
 		{
@@ -44,26 +53,38 @@ Class Schemeforge
 			$field = $type['fields'][$field_name];
 
 			$tmp = array(
-				'type' => 'VARCHAR', 'null' => TRUE, 'constraint'	=> 255
+				'type' => 'VARCHAR', 'null' => TRUE, 'constraint'	=> $field['length']
 			);
-
-			switch ($field['type'])
+			if (isset($field['kind']))
 			{
-				case 'number':
-				case 'date':
-				case 'datetime':
-					$tmp['type'] = 'INT';
-					break;
+				switch ($field['kind'])
+				{
+					case 'numeric':
+					case 'number':
+					case 'int':
+					case 'integer':
+						$tmp['type'] = 'INT';
+						break;
+				}
+			} else {
+				switch ($field['type'])
+				{
+					case 'number':
+					case 'date':
+					case 'datetime':
+						$tmp['type'] = 'INT';
+						break;
 
-				case 'textarea':
-				case 'textarea_full':
-				case 'textarea_code':
-					$tmp['type'] = 'TEXT';
-					unset($tmp['constraint']);
-				
-				case 'files':
-				case 'images':
-					continue;
+					case 'textarea':
+					case 'textarea_full':
+					case 'textarea_code':
+						$tmp['type'] = 'TEXT';
+						unset($tmp['constraint']);
+					
+					case 'files':
+					case 'images':
+						continue;
+				}
 			}
 
 			$table_fields[$field_name] = $tmp;
@@ -71,6 +92,11 @@ Class Schemeforge
 		return $table_fields;
     }
 
+    /**
+	 * Creates and updates the tables of a content types
+	 * @param array $type
+	 * @return BOOL
+	 */
     public function recreate_by_scheme($type)
     {
     	$DB = & $this->B->db;
@@ -98,6 +124,13 @@ Class Schemeforge
 		return $done;
     }
 
+    /**
+	 * Updates the table of a content type
+	 * @param array $type
+	 * @param array $fields (generated with the get_tablescheme private function)
+	 * @param bool $stage
+	 * @return BOOL
+	 */
     private function _update_table($type, $fields, $stage = FALSE)
     {
     	if ($stage && !$type['stage']) return TRUE;
@@ -199,6 +232,13 @@ Class Schemeforge
     	return TRUE;
     }
 
+    /**
+	 * Creates the table of a content type
+	 * @param array $type
+	 * @param array $fields (generated with the get_tablescheme private function)
+	 * @param bool $stage
+	 * @return BOOL
+	 */
     private function _create_table($type, $fields, $stage = FALSE)
     {
     	if ($stage && !$type['stage']) return TRUE;
