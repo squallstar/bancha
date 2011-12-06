@@ -99,6 +99,7 @@
 			<list>true</list>
 			<default>0</default>
 			<admin>true</admin>
+			<length>5</length>
 		</field>
 	</fieldset>
 	<fieldset name="Aspect" icon="code">

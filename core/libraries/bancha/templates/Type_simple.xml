@@ -48,7 +48,7 @@
 			<admin>true</admin>
 			<list>true</list>
 		</field>
-		<field id="lang" column="true" kind="numeric">
+		<field id="lang" column="true">
 			<description>Language</description>
 			<type>select</type>
 			<admin>true</admin>
