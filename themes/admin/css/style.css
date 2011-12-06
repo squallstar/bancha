@@ -772,6 +772,12 @@ table.sortable td img {
 	background:url('../widgets/logo_shadow.png') no-repeat;
 	z-index:10;
 }
+.copyright a {
+	color:#666;
+}
+.copyright a:hover {
+	text-decoration:underline;
+}
 
 /* Theme template composer */
 .theme_block {
