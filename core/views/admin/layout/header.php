@@ -91,16 +91,16 @@ $menu = array(
 		'segment'	=> 'settings',
 		'sons'	=> array(
 			array(
-				'name'	=> _('Settings'),
-				'url'	=> $_admin_url . 'settings',
-				'acl'	=> 'settings|manage',
-				'segment' => 'settings'
-			),
-			array(
 				'name'	=> _('Content types'),
 				'url'	=> $_admin_url . 'schemes',
 				'segment' => 'schemes',
 				'acl'	=> 'types|manage',
+			),
+			array(
+				'name'	=> _('Settings'),
+				'url'	=> $_admin_url . 'settings',
+				'acl'	=> 'settings|manage',
+				'segment' => 'settings'
 			),
 			array(
 				'name'	=> _('Modules'),
