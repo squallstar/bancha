@@ -12,8 +12,7 @@
  *
  */
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+define('WEBSITE_CONTROLLER_EXISTS', TRUE);
 require_once(APPPATH . 'controllers/website.php');
 
 Class Website extends Core_Website

@@ -145,7 +145,7 @@ Class Core_Website extends Bancha_Controller
 	}
 }
 
-if (!class_exists('Website'))
+if (!defined('WEBSITE_CONTROLLER_EXISTS'))
 {
 	show_404();
 }
