@@ -64,6 +64,13 @@ Class Schemeforge
 					case 'int':
 					case 'integer':
 						$tmp['type'] = 'INT';
+						if ($field['length'] == 255)
+						{
+							$tmp['constraint'] = 11; //max int length
+						}
+						break;
+					case 'text':
+						$tmp['type'] = 'TEXT';
 						break;
 				}
 			} else {
@@ -73,6 +80,10 @@ Class Schemeforge
 					case 'date':
 					case 'datetime':
 						$tmp['type'] = 'INT';
+						if ($field['length'] == 255)
+						{
+							$tmp['constraint'] = 11; //max int length
+						}
 						break;
 
 					case 'textarea':
