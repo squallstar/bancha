@@ -345,18 +345,18 @@ Class Xml
           			$content['columns'][] = $field_name;
         		}
 
-            //Includes a link?
-            if (isset($attr->link))
-            {
-              $link = (string) $attr->link;
-              switch (strtolower($link))
-              {
-                case 'edit':
-                  //Admin edit record link
-                  $content['edit_link'] = $field_name;
-                  break;
-              }
-            }
+	            //Includes a link?
+	            if (isset($attr->link))
+	            {
+	              $link = (string) $attr->link;
+	              switch (strtolower($link))
+	              {
+	                case 'edit':
+	                  //Admin edit record link
+	                  $content['edit_link'] = $field_name;
+	                  break;
+	              }
+	            }
 
         		//Reserved names check
         		if (in_array($field_name, $this->CI->config->item('restricted_field_names')))
@@ -405,6 +405,13 @@ Class Xml
         		if ($content_field['type'] == 'files' || $content_field['type'] == 'images')
         		{
           			$content['has_attachments'] = TRUE;
+        		}
+
+        		//Custom kind (needed to specify a particular kind of column on the DB)
+        		$custom_kind = isset($attr->kind) ? strtolower((string) $attr->kind) : FALSE;
+        		if ($custom_kind)
+        		{
+        			$content_field['kind'] = $custom_kind;
         		}
 
       			if ($content_field['type'] == 'images')
