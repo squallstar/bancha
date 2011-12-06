@@ -81,7 +81,7 @@ $sep = DIRECTORY_SEPARATOR;
  * To activate a theme, go to the settings section under "Manage".
  */
 $config['installed_themes'] = array(
-	'sandbox' => 'The default sandbox'
+	'sandbox' => 'Sandbox'
 );
 
 /*
