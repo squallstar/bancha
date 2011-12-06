@@ -827,7 +827,7 @@ Class Model_records extends CI_Model {
         $this->load->events();
       }
 
-			$this->events->log('publish', $stage_record[$this->primary_key], $stage_record['title'], $stage_record['id_type']);
+			$this->events->log('publish', $stage_record[$this->primary_key], $stage_record[$this->_single_type['edit_link']], $stage_record['id_type']);
 
 			//Publishing triggers
 	  		if (isset($this->_single_type['triggers']['publish']))
