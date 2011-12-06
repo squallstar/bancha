@@ -258,15 +258,6 @@
 		$core_prefix = '';
 	}
 
-
-	// Load the local application controller
-	// Note: The Router class automatically validates the controller path using the router->_validate_request().
-	// If this include fails it means that the default controller in the Routes.php file is not resolving to something valid.
-	if ( ! file_exists($base.'controllers/'.$RTR->fetch_directory().$RTR->fetch_class().'.php'))
-	{
-		show_error('Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.');
-	}
-
 	include($base.'controllers/'.$RTR->fetch_directory().$RTR->fetch_class().'.php');
 
 	// Set a mark point for benchmarking
