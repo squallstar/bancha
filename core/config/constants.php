@@ -42,6 +42,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 |--------------------------------------------------------------------------
 |
 */
+define('SHOW_DEBUG_BACKTRACE', TRUE);
 
 define('CDATA_START',	'<![CDATA[');
 define('CDATA_END',		']]>');

@@ -1243,11 +1243,12 @@ class CI_DB_active_record extends CI_DB_driver {
 	 *
 	 * Compiles an insert string and runs the query
 	 *
+	 * @access	public
 	 * @param	string	the table to insert data into
 	 * @param	array	an associative array of insert values
 	 * @return	object
 	 */
-	function insert($table = '', $set = NULL)
+	public function insert($table = '', $set = NULL)
 	{
 		if ( ! is_null($set))
 		{

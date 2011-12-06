@@ -711,7 +711,7 @@ class CI_Session {
 		}
 		return serialize($data);
 	}
-
+	
 	/**
 	 * Escape slashes
 	 *
@@ -751,7 +751,7 @@ class CI_Session {
 
 		return (is_string($data)) ? str_replace('{{slash}}', '\\', $data) : $data;
 	}
-
+	
 	/**
 	 * Unescape slashes
 	 *
