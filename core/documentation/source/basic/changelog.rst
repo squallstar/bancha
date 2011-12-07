@@ -4,6 +4,7 @@ ChangeLog
 
 **v 1.0.2** (2011-12-06)
 
+- UPDATING FROM 1.0.x: you need also to merge the "website.php" controller inside application/controllers (we just added a new constant)
 - Base Reactor (CodeIgniter) has been updated from 2.0.3 to 2.1
 - New attribute on the "field" node: "kind" (used by the scheme library. accepted values are "numeric" and "text")
 - New library "Schemeforge": creates and updates the custom content types tables
