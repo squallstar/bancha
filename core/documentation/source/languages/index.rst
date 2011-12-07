@@ -12,3 +12,4 @@ Each language, has also an homepage: basically it's a page record, with the view
    :maxdepth: 3
 
    add
+   i18n
