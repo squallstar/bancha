@@ -23,3 +23,4 @@ Table of contents
    content-types/index
    themes/index
    framework/index
+   languages/index
