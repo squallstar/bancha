@@ -3,6 +3,8 @@
  * Frontend Helper
  *
  * Some utilities for the website front-end
+ * The following functions are well-documented on the official
+ * documenation available here: http://docs.getbancha.com
  * ----------------------------------------
  * Please do not change the functions below.
  * Instead, feel free to copy and rename them.
@@ -27,10 +29,10 @@ function template()
 	$B->load->view($B->view->get('_template_file'));
 }
 
-function settings($name, $area = 'General')
+function settings($name, $namespace = 'General')
 {
 	global $B;
-	return $B->settings->get($name, $area);
+	return $B->settings->get($name, $namespace);
 }
 
 function type($type_name)

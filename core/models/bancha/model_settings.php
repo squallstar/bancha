@@ -48,21 +48,21 @@ Class Model_settings extends CI_Model
 	 * Create/updates a key to the settings and saves it to the database
 	 * @param string $key
 	 * @param mixed $val
-	 * @param string $module
+	 * @param string $namespace
 	 */
-	public function set($key, $val, $module = 'General')
+	public function set($key, $val, $namespace = 'General')
 	{
 		//Does this setting already exists?
-		$exists = isset($this->_items[$module][$key]);
+		$exists = isset($this->_items[$namespace][$key]);
 
 		//If the value is not change, we don't do anything
-		if ($exists && $this->_items[$module][$key] == $val)
+		if ($exists && $this->_items[$namespace][$key] == $val)
 		{
 			return;
 		}
 
 		//Elsewhere, let's update the value
-		$this->_items[$module][$key] = $val;
+		$this->_items[$namespace][$key] = $val;
 
 		if (is_array($val)) {
 			$val = serialize($val);
@@ -72,7 +72,7 @@ Class Model_settings extends CI_Model
 		if ($exists)
 		{
 			return $this->db->where('name', $key)
-							->where('module', $module)
+							->where('module', $namespace)
 							->update($this->table, array('value' => $val));
 		} else {
 			return $this->db->insert($this->table,
@@ -109,14 +109,14 @@ Class Model_settings extends CI_Model
 	/**
 	 * Returns a single value from the settings
 	 * @param string $key
-	 * @param string $module
+	 * @param string $namespace
 	 * @return mixed value
 	 */
-	public function get($key, $module = 'General')
+	public function get($key, $namespace = 'General')
 	{
-		if (isset($this->_items[$module][$key]))
+		if (isset($this->_items[$namespace][$key]))
 		{
-			return $this->_items[$module][$key];
+			return $this->_items[$namespace][$key];
 		}
 		return FALSE;
 	}
@@ -124,13 +124,13 @@ Class Model_settings extends CI_Model
 	/**
 	 * Deletes a value from the settings table
 	 * @param string $key
-	 * @param string $module
+	 * @param string $namespace
 	 * @return bool success
 	 */
-	public function delete($key, $module = 'General')
+	public function delete($key, $namespace = 'General')
 	{
-		$module = strtolower($module);
-		return $this->db->where('name', $name)->where('module', $module)->delete($this->table);
+		$namespace = strtolower($namespace);
+		return $this->db->where('name', $name)->where('module', $namespace)->delete($this->table);
 	}
 
 	/**
