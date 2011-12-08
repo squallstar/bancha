@@ -8,25 +8,26 @@
 	<categories>true</categories>
 	<hierarchies>true</hierarchies>
 	<fieldset name="General informations" icon="page">
-		<field id="id_record" column="true">
+		<field id="id_record" column="true" kind="numeric">
 			<type>hidden</type>
 			<list>true</list>
 			<admin>true</admin>
 		</field>
-		<field id="id_type" column="true">
+		<field id="id_type" column="true" kind="numeric">
 			<type>hidden</type>
 			<list>true</list>
 			<default>{id}</default>
 		</field>
-		<field id="date_insert" column="true">
+		<field id="date_insert" column="true" kind="numeric">
 			<type>hidden</type>
 			<list>true</list>
 			<default>eval:time()</default>
 		</field>
-		<field id="published" column="true">
+		<field id="published" column="true" kind="numeric">
 			<type>hidden</type>
 			<list>true</list>
 			<default>0</default>
+			<length>1</length>
 		</field>
 		<field id="title" column="true" link="edit">
 			<description>Title</description>
@@ -56,6 +57,7 @@
 				<custom>config_item('website_languages_select')</custom>
 			</options>
 			<default>eval:$this->lang->default_language</default>
+			<length>2</length>
 		</field>
 		<field id="content">
 			<description>Content</description>

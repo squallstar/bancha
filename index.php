@@ -30,9 +30,10 @@ if (defined('ENVIRONMENT'))
 	{
 		case 'sqlite':
 		case 'development':
-			error_reporting(E_ALL);
+			error_reporting(-1);
 		break;
 
+		case 'testing':
 		case 'production':
 			error_reporting(0);
 		break;
@@ -178,6 +179,9 @@ if (defined('ENVIRONMENT'))
 	}
 
 	define('USERPATH', $user_path.'/');
+
+	//New constant added in CI 2.1
+	define ('VIEWPATH', APPPATH.'views/' );
 
 /*
  * --------------------------------------------------------------------

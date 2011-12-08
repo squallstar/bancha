@@ -18,9 +18,9 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
- * Framework version
+ * Bancha primary version
  */
-define('BANCHA_VERSION', '1.0.1');
+define('BANCHA_VERSION', '1.0.2');
 
 
 /* WEBSITE LANGUAGES
@@ -81,7 +81,7 @@ $sep = DIRECTORY_SEPARATOR;
  * To activate a theme, go to the settings section under "Manage".
  */
 $config['installed_themes'] = array(
-	'sandbox' => 'The default sandbox'
+	'sandbox' => 'Sandbox'
 );
 
 /*

@@ -144,3 +144,8 @@ Class Core_Website extends Bancha_Controller
 		$this->dispatcher->minify($theme, $resources, $version);
 	}
 }
+
+if (!defined('WEBSITE_CONTROLLER_EXISTS'))
+{
+	show_404();
+}

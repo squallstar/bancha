@@ -51,13 +51,13 @@ $menu = array(
 	),
 	array(
 		'name'		=> _('Pages'),
-		'url'		=> $_admin_url . 'pages',
+		'url'		=> $_admin_url . 'schemes',
 		'segment'	=> 'pages',
 		'sons'		=> $tipi_pages
 	),
 	array(
 		'name'		=> _('Contents'),
-		'url'		=> $_admin_url . 'contents',
+		'url'		=> $_admin_url . 'schemes',
 		'segment'	=> 'contents',
 		'sons'		=> $tipi_content
 	),
@@ -91,6 +91,12 @@ $menu = array(
 		'segment'	=> 'settings',
 		'sons'	=> array(
 			array(
+				'name'	=> _('Content types'),
+				'url'	=> $_admin_url . 'schemes',
+				'segment' => 'schemes',
+				'acl'	=> 'types|manage',
+			),
+			array(
 				'name'	=> _('Settings'),
 				'url'	=> $_admin_url . 'settings',
 				'acl'	=> 'settings|manage',
@@ -105,11 +111,6 @@ $menu = array(
 				'name'	=> _('Themes'),
 				'url'	=> $_admin_url . 'themes',
 				'segment' => 'themes'
-			),
-			array(
-				'name'	=> _('Documentation'),
-				'url'	=> 'http://docs.getbancha.com/',
-				'segment' => 'docs'
 			),
 			array(
 				'name'	=> _('Hierarchies'),
@@ -133,8 +134,7 @@ $menu = array(
 			),
 			array(
 				'name'	=> _('Clear cache'),
-				'url'	=> $_admin_url . 'contents/renew_cache',
-				'altsegment' => 'renew_cache'
+				'url'	=> $_admin_url . 'schemes/rebuild_cache'
 			),
 			array(
 				'name'	=> _('Logout'),
@@ -194,5 +194,6 @@ $menu = array(
 		?>
 
 	</ul>
-	<p><?php echo CMS . ' v.' . BANCHA_VERSION; ?><br />Squallstar Studio &copy; 2011</p>
+	<p class="copyright"><a href="http://getbancha.com"><?php echo CMS . ' v' . BANCHA_VERSION; ?></a>
+	<br /><a href="http://www.squallstar.it">Squallstar Studio</a> &copy; 2011</p>
 </div>

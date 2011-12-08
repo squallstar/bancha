@@ -15,7 +15,7 @@
 Class Dispatcher_default
 {
 	/**
-	 * @var Code Igniter instance
+	 * @var Bancha instance
 	 */
 	private $_CI;
 
@@ -423,48 +423,25 @@ Class Dispatcher_default
 
 		if (!count($result))
 		{
-			//If not found, it could be a content
-			$result = $this->_CI->records->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
+			//If not found, let's search for the parent page
+			$parent_page_uri = str_replace('/'.$current_page, '', $current_request);
+			$result_pages = $this->_CI->records->full_uri($parent_page_uri)->documents(FALSE)->limit(1)->get();
 
-			if (!count($result))
+			if (count($result_pages))
 			{
-				//Let's search also on the custom tables
-				$content_types = $this->_CI->content->types();
+				$page = $result_pages[0];
 
-				$tipi_ricerca = array();
-				foreach ($content_types as $id_tipo => $single_tipo)
+				//Page found! Now we need to find the child record
+				if (in_array($page->get('action'), array('list', 'single')))
 				{
-					//If the table isn't the record one and we haven't searched in this table
-					if ($single_tipo['table'] != 'records' && !$found && !(in_array($id_tipo, $tipi_ricerca)))
-					{
-						$result = $this->_CI->records->type($id_tipo)->where('uri', $current_page)->documents(FALSE)->limit(5)->get();
-						if (count($result)) {
-							break;
-						}
-						$tipi_ricerca[] = $id_tipo;
-					}
-				}
-			}
+					$child_type = $page->get('action_list_type');
+					$result_childs = $this->_CI->records->type($child_type)->where('uri', $current_page)->documents(FALSE)->limit(1)->get();
 
-			if (count($result))
-			{
-				//We extracted a record, so let's extract the parent page
-				$parent_page_uri = str_replace('/'.$current_page, '', $current_request);
-				$result_pages = $this->_CI->records->full_uri($parent_page_uri)->documents(FALSE)->limit(1)->get();
-				if (count($result_pages))
-				{
-					$page = $result_pages[0];
-					foreach ($result as $single_record)
+					if (count($result_childs))
 					{
-						if (in_array($page->get('action'), array('list', 'single')))
-						{
-							//We check if the parent page is listing records of the current record type
-							if ($page->get('action_list_type') == $single_record->_tipo)
-							{
-								$single_record->set('_parentpage', $page);
-								return $single_record;
-							}
-						}
+						$record = $result_childs[0];
+						$record->set('_parentpage', $page);
+						return $record;
 					}
 				}
 			}

@@ -15,7 +15,7 @@
 |
 */
 $config['installed_themes'] = array(
-	'sandbox' => 'The default sandbox'
+	'sandbox' => 'Sandbox'
 );
 
 

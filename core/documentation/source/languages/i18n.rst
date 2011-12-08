@@ -1,0 +1,26 @@
+==================================
+Internationalization and .PO files
+==================================
+
+Bancha uses the **gettext** system as default for translating the labels of the website (and also the administration).
+For example, the translated labels (website) for the italian language are located here: **application/language/it_IT**.
+
+When you create a new language (:doc:`add`), just copy one of these folders changing the name to the new locale (es. **en_GB**) and that locale will be automatically used.
+
+On your theme view files, when a label that needs to be translated just use the default gettext function **_('text')** as follows::
+
+    echo _('Hello');
+    //Now, the .PO files will find this label!
+
+
+You can also use placeholders using the **$this->lang->_trans()** function like this::
+
+    $this->lang->_trans('Welcome back, %u! Today it is %d', array(
+        'u' => 'Nicholas',
+        'd' => date('l')
+    ));
+
+    //The .PO files will now find the "Welcome back, %u! Today it is %d" label.</code></pre>
+
+
+Back to :doc:`index`

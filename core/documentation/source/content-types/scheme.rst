@@ -6,7 +6,7 @@ Each content type is configured by a single XML file describing all its fields a
 When you create a new content type, it's scheme file contains a simple xml structure with some "starters" fields.
 
 The schema used for **tree-structured** content type definition is a bit different from the **simple-structured** one, since it includes more option for displaying custom content and some other things.
-You can edit this file from the administration section (**Edit scheme** link on the types list), or by hand (the best choice) with your favorite editor. The basic structure of a content type is defined as follows::
+You can edit this file from the administration section (click on the type name on the content types list), or by hand (the best choice) with your favorite editor. The basic structure of a content type is defined as follows::
 
     <?xml version="1.0" encoding="utf-8"?>
     <content id="1">
@@ -23,6 +23,8 @@ You can edit this file from the administration section (**Edit scheme** link on 
         	<type>Pages</type>
         </parents>
     </content>
+
+**NOTE: Content types are cached on the file "application/_bancha/content.tmp" for faster access. After editing a xml scheme, you need to delete that file or you can just click on the "Clear cache" link on the left menu of the administration**. If you edit the scheme by the "edit scheme" section, the cache will be automatically cleared after saving the scheme.
 
 When you create a new content type, Bancha will automatically sets a value to the id attribute of the **content** node; Bancha will similarly set the values to the **<name>** and **<description>** nodes which define the value used as key and the value read by the user into the panel (the label attribute set the value which will be displayed, whereas the new attribute set the label/link used to insert a new content of the same type). 
 

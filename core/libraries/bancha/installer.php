@@ -62,19 +62,19 @@ Class Installer
 		//Records and Records_stage tables
 		$record_fields = array(
             'id_record'		=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
-            'date_insert'	=> array('type'	=> 'INT'),
-            'date_update'	=> array('type'	=> 'INT'),
-            'date_publish'	=> array('type'	=> 'INT'),
+            'date_insert'	=> array('type'	=> 'INT', 'null' => TRUE),
+            'date_update'	=> array('type'	=> 'INT', 'null' => TRUE),
+            'date_publish'	=> array('type'	=> 'INT', 'null' => TRUE),
             'id_type'		=> array('type'	=> 'INT', 'null' => FALSE),
             'lang'			=> array('type' => 'VARCHAR', 'null' => TRUE, 'constraint' => '2'),
             'xml'			=> array('type'	=> 'TEXT', 'null' => FALSE),
-            'uri'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
+            'uri'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255, 'null' => TRUE),
             'id_parent'		=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned' => TRUE),
 			'child_count'	=> array('type'	=> 'INT', 'null' => TRUE, 'unsigned' => TRUE, 'default'	=> 0),
-            'title'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255),
-            'show_in_menu'	=> array('type'	=> 'VARCHAR', 'constraint'=> '1'),
-            'published'		=> array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE, 'default' => 0, 'constraint' => 1),
-			'priority'		=> array('type'	=> 'INT', 'unsigned' => TRUE, 'default' => 0, 'constraint' => 2)
+            'title'			=> array('type'	=> 'VARCHAR', 'constraint'	=> 255, 'null' => TRUE),
+            'show_in_menu'	=> array('type'	=> 'VARCHAR', 'constraint'=> '1', 'null' => TRUE),
+            'published'		=> array('type' => 'INT', 'unsigned' => TRUE, 'null' => TRUE, 'default' => 0, 'constraint' => 1),
+			'priority'		=> array('type'	=> 'INT', 'unsigned' => TRUE, 'default' => 0, 'constraint' => 3, 'null' => TRUE)
 		);
 
 		$this->dbforge->drop_table('records_stage');

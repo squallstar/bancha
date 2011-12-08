@@ -41,7 +41,7 @@
 			<type>checkbox</type>
 			<description>Website active languages</description>
 			<options>
-				<custom>config_item('languages_select');</custom>
+				<custom>config_item('website_languages_select');</custom>
 			</options>
 		</field>
 		<field id="website_homepage_en">
