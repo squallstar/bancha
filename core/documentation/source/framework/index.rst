@@ -10,8 +10,7 @@ Models
 .. toctree::
    :maxdepth: 1
 
-   models/records
-   models/tree
+   models/settings
 
 
 -------
