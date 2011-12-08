@@ -25,3 +25,13 @@ Helpers
    helpers/frontend
    helpers/menu
    helpers/breadcrumbs
+
+
+-------
+Other
+-------
+
+.. toctree::
+   :maxdepth: 1
+
+   dispatchers/index
