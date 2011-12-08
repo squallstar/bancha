@@ -76,7 +76,7 @@ Class Model_settings extends CI_Model
 							->update($this->table, array('value' => $val));
 		} else {
 			return $this->db->insert($this->table,
-						array('name' => $key, 'value' => $val, 'module' => $module)
+						array('name' => $key, 'value' => $val, 'module' => $namespace)
 				   );
 		}
 		return FALSE;
