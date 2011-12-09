@@ -88,12 +88,16 @@ Class Core_Contents extends Bancha_Controller
         $to_publish = $this->input->get('publish');
         if ($to_publish)
         {
-        	$done = $this->records->publish($to_publish);
+        	$done = $this->records->publish($to_publish, $type);
         	if ($done)
         	{
-        		$this->pages->publish($to_publish);
-        		$this->view->message('success', 'Il record ['.$to_publish.'] &egrave; stato pubblicato.');
-        		$this->tree->clear_cache();
+				if ($type['tree'])
+				{
+					$this->pages->publish($to_publish);
+					$this->tree->clear_cache();
+				}
+        		
+				$this->view->message('success', 'The record ['.$to_publish.'] has been published.');
         	}
         }
 
@@ -101,12 +105,15 @@ Class Core_Contents extends Bancha_Controller
         $to_depublish = $this->input->get('depublish');
         if ($to_depublish)
         {
-        	$done = $this->records->depublish($to_depublish);
+        	$done = $this->records->depublish($to_depublish, $type);
         	if ($done)
         	{
-        		$this->pages->depublish($to_depublish);
-        		$this->view->message('success', 'Il record ['.$to_depublish.'] &egrave; stato depubblicato.');
-        		$this->tree->clear_cache();
+				if ($type['tree'])
+				{
+					$this->pages->depublish($to_publish);
+					$this->tree->clear_cache();
+				}
+				$this->view->message('success', 'The record ['.$to_depublish.'] has been depublished.');
         	}
         }
 
@@ -121,16 +128,16 @@ Class Core_Contents extends Bancha_Controller
             		case 'publish':
             			foreach ($records as $record)
             			{
-            				$this->records->publish($record);
-            				$this->pages->publish($record);
+            				$this->records->publish($record, $type);
+            				if ($type['tree']) $this->pages->publish($record);
             				$this->view->message('success', _('The records have been published.'));
             			}
             			break;
         			case 'depublish':
         				foreach ($records as $record)
         				{
-        					$this->records->depublish($record);
-        					$this->pages->depublish($record);
+        					$this->records->depublish($record, $type);
+        					if ($type['tree']) $this->pages->depublish($record);
         					$this->view->message('success', _('The records have been depublished.'));
         				}
         				break;
