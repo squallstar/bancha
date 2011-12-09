@@ -7,6 +7,8 @@ For example, the translated labels (website) for the italian language are locate
 
 When you create a new language (:doc:`add`), just copy one of these folders changing the name to the new locale (es. **en_GB**) and that locale will be automatically used.
 
+To update the translations, open the **.PO** file with an external software such as the open-source **PO Edit**.
+
 On your theme view files, when a label that needs to be translated just use the default gettext function **_('text')** as follows::
 
     echo _('Hello');
@@ -21,6 +23,15 @@ You can also use placeholders using the **$this->lang->_trans()** function like 
     ));
 
     //The .PO files will now find the "Welcome back, %u! Today it is %d" label.</code></pre>
+
+
+--------------------------
+Content types translations
+--------------------------
+
+The labels contained inside the **XML Schemes** can also be translated: the core automatically generates a static file with the gettext functions here: **core/views/admin/content/translations.php**.
+
+Use your favorite **.PO files** editor (such as PO Edit) and click on "Update" to auto-discover these translations.
 
 
 Back to :doc:`index`

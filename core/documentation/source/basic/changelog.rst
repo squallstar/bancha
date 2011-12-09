@@ -4,7 +4,11 @@ ChangeLog
 
 **v 1.0.3** (Planned)
 
-- TBD
+- New API added: Save records
+- Now the saved records use the first language available (only when is not setted)
+- Publish/depublish record bugfix when saving into external tables (issue #82)
+- Speed increase on record saving script: empty fields will not be populated anymore
+
 
 **v 1.0.2** (2011-12-08)
 

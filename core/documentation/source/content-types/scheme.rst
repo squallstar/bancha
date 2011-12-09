@@ -34,6 +34,8 @@ The **<parents>** node is mandatory for hierarchical content type and contains a
 The **<table>** node defines the production table, the staging table and the primary key of the tables that will be used to save the records of this content type. Tipically you will leave this set to the "records" table, using "id_record" as primary key.
 If you need you are free to create more tables in addition to the records table. If you define stage table (attribute), the content type will use that table as staging for the records (that table needs also to include a column named "published" defined as INT(1) DEFAULT 0).
 
+When you use external tables, Bancha can generate and keep updated these tables automatically for you (added in **v1.0.2**): click on the **Rebuild tables** link on the **Content list** view and you're done!
+
 The **<categories>** and **<hierarchies>** nodes says if content type has to show the Categories and Hierarchies sections. These sections makes you able to make sub-groups of records, such as the categories of a blog.
 
 
