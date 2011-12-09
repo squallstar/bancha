@@ -827,7 +827,15 @@ Class Model_records extends CI_Model {
         $this->load->events();
       }
 
-			$this->events->log('publish', $stage_record[$this->primary_key], $stage_record[$this->_single_type['edit_link']], $stage_record['id_type']);
+      //This prevent a notice on non-physical columns
+      if (!isset($stage_record[$this->_single_type['edit_link']]))
+      {
+        $pub_label = $stage_record[$this->primary_key];
+      } else {
+        $pub_label = $stage_record[$this->_single_type['edit_link']];
+      }
+
+			$this->events->log('publish', $stage_record[$this->primary_key], $pub_label, $stage_record['id_type']);
 
 			//Publishing triggers
 	  		if (isset($this->_single_type['triggers']['publish']))
