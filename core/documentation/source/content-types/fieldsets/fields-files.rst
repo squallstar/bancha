@@ -1,6 +1,6 @@
-================
+===========
 File fields
-================
+===========
 
 File fields are used to display an input "file" and let the users to upload one or more files linked to the record.
 
