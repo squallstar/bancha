@@ -3,4 +3,5 @@
 # package: bancha cms - http://getbancha.com
 
 User-agent: *
-
+Disallow: /application 
+Disallow: /core
