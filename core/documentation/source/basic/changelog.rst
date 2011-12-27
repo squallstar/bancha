@@ -10,6 +10,8 @@ ChangeLog
 - Speed increase on record saving script: empty fields will not be populated anymore
 - Image presets documentation
 - Repository refresh bug now should be fixed (#83)
+- Repository preset url now correctly works cross-browser
+- Repository sidebars have been switched (now the repository is the first visible one)
 
 
 **v 1.0.2** (2011-12-08)
