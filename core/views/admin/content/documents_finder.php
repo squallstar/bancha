@@ -56,7 +56,7 @@ $this->load->helper('form');
 			<p><?php echo _('Here you can find the uploaded documents.'); ?></p>
 			
 			<?php
-			echo form_open_multipart(current_url().'#sb-repository');
+			echo form_open_multipart(current_url().'?CKEditorFuncNum=' . $this->input->get('CKEditorFuncNum') . '#sb-repository');
 
 			$presets_select = form_dropdown('preset', $presets);
 
@@ -91,9 +91,9 @@ $this->load->helper('form');
 							echo '<img src="' . attach_url($file->thumb_path) . '" border="0" alt="" />';
 						}
 						?></td>
-						<td><?php echo '<a target="_blank" href="#" onclick="finder_choose(\''.attach_url($file->path).'\');">'.$file->name.'</a>'; ?></td>
+						<td><?php echo $file->name . '<br /><a target="_blank" href="#" onclick="finder_choose(\''.attach_url($file->path).'\');return false;">'._('Select').'</a>'; ?></td>
 						<td><?php echo $presets_select; ?></td>
-						<td><a href="#" class="choose" onclick="finder_choose('<?php echo attach_url($file->path); ?>');"><?php echo _('Apply preset'); ?></a></td>
+						<td><a href="#" class="choose" onclick="finder_choose('<?php echo attach_url($file->path); ?>');return false;"><?php echo _('Apply preset'); ?></a></td>
 						<td class="delete"><img align="absmiddle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/delete.png'); ?>" /> <a href="#" onclick="return bancha.remove.document(this, '<?php echo $file->id_document; ?>');"><?php echo _('Delete file'); ?></a></td>
 					</tr>
 				<?php } ?>
@@ -123,6 +123,8 @@ function finder_choose(el) {
 		var funcNum = getUrlParam('CKEditorFuncNum');
 		parentWindow['CKEDITOR'].tools.callFunction( funcNum, el);
 		window.close();
+	} else {
+		alert('not found');
 	}
 }
 function getUrlParam(paramName) {
