@@ -21,9 +21,9 @@ api/login
 Returns you the **token** on success.
 The token needs to be sent on each requests that requires authentication.
 
- * Method: **GET/POST**
- * Response: **Json**
- * Params: **username** (string), **password** (string)::
+* Method: **GET/POST**
+* Response: **Json**
+* Params: **username** (string), **password** (string)::
 
     //Example of call:
     www.example.org/admin/api/login
@@ -46,9 +46,9 @@ This API gives you the ability to query the Bancha ORM system such as the Record
 We called this feature **ActiveQuery**, and all the methods remains the same of the model methods.
 It always requires two parameters: **token** and **query**.
 
- * Method: **GET/POST**
- * Response: **Json**
- * Params: **token** (string), **query** (string)::
+* Method: **GET/POST**
+* Response: **Json**
+* Params: **token** (string), **query** (string)::
 
     //Example of call:
     www.example.org/admin/api/records
@@ -94,15 +94,43 @@ When no records are found, you will receive an output with this prototype::
 **Note: Functions that accepts arrays are not supported by the ActiveQuery system yet.**
 
 
+------------------------
+api/record/:action/:type
+------------------------
+
+**Needs authentication.** This method is used to save, publish, depublish and delete records.
+
+* Method: **GET/POST**
+* Response: **Json**
+
+URI Params
+* action: "save", "publish", "depublish"
+* type: The type id or name
+
+Any other **appended parameter** will be used for the **record data**. Below you can see an example of how looks like a sample call::
+
+    http://example.org/admin/api/record/save/Blog?title=Hello&content=World
+
+Success response::
+
+    {"status":200,"data":[],"message":"OK"}
+
+Error messages::
+
+    {"status":403,"data":[],"message":"TYPE IS MANDATORY"}
+
+    {"status":403,"data":[],"message":"TYPE NOT FOUND"}
+
+
 ----------
 api/logout
 ----------
 
 **Needs authentication.** Destroys the current token.
 
- * Method: **GET/POST**
- * Response: **Json**
- * Param: **token**::
+* Method: **GET/POST**
+* Response: **Json**
+* Param: **token**::
 
     token = abcdefg123456789
 

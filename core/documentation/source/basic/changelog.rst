@@ -2,13 +2,21 @@
 ChangeLog
 ######################
 
-**v 1.0.3** (Planned)
+**v 1.0.3** (2011-12-27)
 
-- TBD
+- New API added: Save records
+- Now the saved records use the first language available (only when is not setted)
+- Publish/depublish record bugfix when saving into external tables (issue #82)
+- Speed increase on record saving script: empty fields will not be populated anymore
+- Image presets documentation
+- Repository refresh bug now should be fixed (#83)
+- Repository preset url now correctly works cross-browser
+- Repository sidebars have been switched (now the repository is the first visible one)
+
 
 **v 1.0.2** (2011-12-08)
 
-- UPDATING FROM 1.0.x: you need also to merge the "website.php" controller inside "application/controllers" (we just added a new constant) and the "application/xml/Settings.xml"
+- UPDATING FROM 1.0.x: you need also to merge the "website.php" controller inside "application/controllers" (we just added a new constant), the "application/xml/Settings.xml" and the **/index.php** file
 - Base Reactor (CodeIgniter) has been updated from 2.0.3 to 2.1
 - New attribute on the "field" node: "kind" (used by the scheme library. accepted values are "numeric" and "text")
 - New library "Schemeforge": creates and updates the custom content types tables: now is possible to automatically create external tables based on the content types

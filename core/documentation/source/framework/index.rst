@@ -2,6 +2,15 @@
 Framework
 =========
 
+----
+Core
+----
+
+.. toctree::
+   :maxdepth: 1
+
+   core/image-presets
+
 
 ------
 Models

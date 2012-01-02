@@ -89,6 +89,49 @@ Class Core_Api extends Bancha_Controller
 		$this->_display(NULL, 200, 'OK');
 	}
 
+	public function record($action = 'save', $type_name = '')
+	{
+		$data = $this->input->get_post();
+
+		if ($type_name == '')
+		{
+			$this->_display(NULL, 403, 'TYPE IS MANDATORY');
+			return;
+		}
+
+		$type = $this->content->type($type_name);
+		if (!$type)
+		{
+			$this->_display(NULL, 403, 'TYPE NOT FOUND');
+			return;
+		}
+
+		$errormsg = 'ERROR';
+		switch ($action)
+		{
+			case 'save':
+				if (!is_array($data))
+				{
+					$this->_display(NULL, 403, 'DATA EMPTY');
+					return;
+				}
+				$record = new Record($type);
+				$record->set_data($data);
+
+				$done = $this->records->save($record);
+				$errormsg = 'CANNOT SAVE RECORD';
+				break;
+		}
+
+		if ($done)
+		{
+			$this->_display(NULL, 200, 'OK');
+		} else {
+			$this->_display(NULL, 403, $errormsg);
+		}
+		
+	}
+
 	public function records()
 	{
 		if (! $this->_check_token()) return;

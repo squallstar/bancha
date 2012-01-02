@@ -140,9 +140,9 @@ Class Model_records extends CI_Model {
   	}
 
  	/**
-  	* We set the type for the current extractions
-	* @param int|string|array $type
-  	*/
+   * We set the type for the current extractions
+	 * @param int|string|array $type
+   */
 	public function set_type($type='')
  	{
 		if ($type != '')
@@ -178,9 +178,9 @@ Class Model_records extends CI_Model {
 
 
 	/**
-  	* Imposta un filtro sulla lingua se il tipo lo prevede
-	* @param string $language se non passato, utilizza la lingua corrente
-	*/
+   * Imposta un filtro sulla lingua se il tipo lo prevede
+	 * @param string $language se non passato, utilizza la lingua corrente
+	 */
 	public function language($language = '')
  	{
 		if (isset($this->_single_type['fields']['lang']))
@@ -190,7 +190,7 @@ Class Model_records extends CI_Model {
   		return $this;
 	}
 
-	/**
+	 /**
    	* Imposta se prendere anche i documenti dei record durante le estrazioni
    	* @param bool $extract
    	*/
@@ -827,7 +827,15 @@ Class Model_records extends CI_Model {
         $this->load->events();
       }
 
-			$this->events->log('publish', $stage_record[$this->primary_key], $stage_record[$this->_single_type['edit_link']], $stage_record['id_type']);
+      //This prevent a notice on non-physical columns
+      if (!isset($stage_record[$this->_single_type['edit_link']]))
+      {
+        $pub_label = $stage_record[$this->primary_key];
+      } else {
+        $pub_label = $stage_record[$this->_single_type['edit_link']];
+      }
+
+			$this->events->log('publish', $stage_record[$this->primary_key], $pub_label, $stage_record['id_type']);
 
 			//Publishing triggers
 	  		if (isset($this->_single_type['triggers']['publish']))
@@ -882,7 +890,7 @@ Class Model_records extends CI_Model {
 
 		if ($id == '')
 		{
-			show_error('ID del contenuto da depubblicare non specificato. (records/depublish)');
+			show_error('ID not specified. (records/depublish)');
 		}
 			$done = $this->db->where($this->primary_key, $id)
 							 ->delete($this->table);

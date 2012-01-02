@@ -52,17 +52,19 @@ Class Record {
   	public function __construct($type='')
   	{
   		if ($type != '')
-		{
-			if (is_array($type) && FALSE)
-			{
-				//Do nothing for now
-			} else if (!is_numeric($type))
-			{
-				$CI = & get_instance();
-				$type = $CI->content->type_id($type);
-			}
-			$this->_tipo = $type;
-		}
+  		{
+  			if (is_array($type))
+  			{
+  				$this->_tipo_def = $type;
+          $this->_tipo = $type['id'];
+          return;
+  			} else if (!is_numeric($type))
+  			{
+  				$CI = & get_instance();
+  				$type = $CI->content->type_id($type);
+  			}
+  			$this->_tipo = $type;
+  		}
   	}
 
   	public function set_type($type)
@@ -88,7 +90,9 @@ Class Record {
 
     	foreach ($tipo['fields'] as $field_name => $field)
     	{
-    		$value = isset($data[$field_name]) ? $data[$field_name] : '';
+    		if (!isset($data[$field_name])) continue;
+
+        $value = $data[$field_name];
             
     		if ($CI->config->item('strip_website_url')
                 && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
@@ -171,6 +175,13 @@ Class Record {
     	{
     		$this->id = $data[$tipo['primary_key']];
     	}
+
+      //We set the default language if is possible
+      if (!isset($this->_data['lang']) && isset($tipo['fields']['lang']))
+      {
+        $langs = array_keys($CI->lang->languages);
+        $this->_data['lang'] = $langs[0];
+      }
   	}
 
   	/**
