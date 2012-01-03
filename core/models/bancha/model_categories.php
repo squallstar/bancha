@@ -156,8 +156,9 @@ Class Model_categories extends CI_Model
 						'id_record'		=> $record_id,
 						'id_category'	=> $category
 					);
-					return $this->db->insert('record_categories', $data);
+					$this->db->insert('record_categories', $data);
 				}
+				return TRUE;
 			}
 		}
 	}
