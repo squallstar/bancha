@@ -2,7 +2,7 @@
 Create a new theme
 ==================
 
-To create a new theme, you can duplicate one of the default themes shipped with Bancha (default and minimal) or you can make a new theme from scratch.
+To create a new theme, you can duplicate the default theme shipped with Bancha (**sandbox**) or you can make a new theme from scratch.
 
 This tutorial helps you creating a theme from scratch, so you can fully understand all the components of a theme.
 
