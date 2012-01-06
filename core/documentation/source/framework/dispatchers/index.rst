@@ -35,7 +35,7 @@ Called from the **router** action of the **Website** controller::
 Image dispatcher
 ----------------
 
-This dispatcher handles the :doc:`/framework/core/image-presets.rst`. When a preset cached file does not exists, an action on the **website controller** will be called and that action then fires the image dispatcher. This, will performs all the graphical preset operations and after saving the file on the disk (to cache the next request) will output the content to the client.
+This dispatcher handles the :doc:`/framework/core/imagepresets`. When a preset cached file does not exists, an action on the **website controller** will be called and that action then fires the image dispatcher. This, will performs all the graphical preset operations and after saving the file on the disk (to cache the next request) will output the content to the client.
 Called from the **image_router** action of the **Website** controller::
 
     $this->load->dispatcher('images');
@@ -51,7 +51,7 @@ Called from the **image_router** action of the **Website** controller::
 
     $this->dispatcher->retrieve($data);
 
-Read more about the :doc:`/framework/core/image-presets.rst`.
+Read more about the :doc:`/framework/core/imagepresets`.
 
 
 --------------------
