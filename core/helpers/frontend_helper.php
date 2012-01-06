@@ -67,8 +67,11 @@ function tree($which='')
 	switch($which)
 	{
 		case '':
-			return $B->view->get('tree');
-			break;
+			$tree = $B->view->get('tree');
+			if (!$tree) {
+				return $B->tree->get_default();
+			}
+			return $tree;
 
 		case 'current':
 			return $B->tree->get_current_branch();

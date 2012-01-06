@@ -2,6 +2,13 @@
 ChangeLog
 ######################
 
+
+**v 1.0.4** (2012-01-06)
+
+- Fixed a bug on the categories update script (return removed in a foreach cycle)
+- Tree helper now extracts the tree when is not already loaded (so the tree is now loaded also on the 404 error page)
+
+
 **v 1.0.3** (2011-12-27)
 
 - New API added: Save records
