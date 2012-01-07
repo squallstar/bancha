@@ -23,7 +23,7 @@ If you move, the above two folders, be sure to update their paths on the **index
 
 3. Go through your browser to this URL: http://example.org/admin/install. If you see an error, check the previous steps!
 
-4. Choose your install type between "Default" and "Blog". The Blog one, will create and configures the "Blog" and "Comments" content types for you. Let all the options checked or Bancha will not work!
+4. Choose your install type between "Full" and "Minimal". The Full one, will create and configures the "Blog" and "Comments" content types for you. Let all the options checked or Bancha will not work properly! :)
 
 6. You're done! The install script will create a content type named **"Menu"** which is linked to the page tree of your website.
 
