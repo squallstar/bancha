@@ -3,10 +3,11 @@ ChangeLog
 ######################
 
 
-**v 1.0.4** (2012-01-06)
+**v 1.0.4** (2012-01-07)
 
 - Fixed a bug on the categories update script (return removed in a foreach cycle)
 - Tree helper now extracts the tree when is not already loaded (so the tree is now loaded also on the 404 error page)
+- New feature (based on issue #86): now you can switch between the preview and the live website from the profiler topbar without logging out of the administration
 
 
 **v 1.0.3** (2011-12-27)

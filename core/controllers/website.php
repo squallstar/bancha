@@ -25,7 +25,11 @@ Class Core_Website extends Bancha_Controller
 		//so he/she can surf on the stage pages and records
 		if ($this->auth->is_logged())
 		{
-			$this->content->set_stage(TRUE);
+			if ($this->session->userdata('environment')) {
+				$this->content->set_stage(FALSE);
+			} else {
+				$this->content->set_stage(TRUE);
+			}
 
 			//We add also the preview bar
 			$this->output->enable_profiler();
@@ -95,6 +99,21 @@ Class Core_Website extends Bancha_Controller
 		$this->lang->set_lang($new_language);
 		$this->lang->set_cookie();
 		$this->home();
+	}
+
+	/**
+	 * Changes the current environment
+	 * Called by: /change-env/{environment}
+	 * @param string $new_environment
+	 */
+	function change_environment($new_environment)
+	{
+		if ($new_environment == 'live') {
+			$this->session->set_userdata('environment', TRUE);
+		} else {
+			$this->session->unset_userdata('environment');
+		}
+		redirect(site_url());
 	}
 
 	/**
