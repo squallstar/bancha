@@ -2,6 +2,10 @@
 ChangeLog
 ######################
 
+**v 1.0.5** (Planned)
+
+- Now you can search for more than one content types as time! The find() and records->type() functions accepts an array of content types (names).
+
 
 **v 1.0.4** (2012-01-07)
 

@@ -106,11 +106,29 @@ Class Model_records extends CI_Model {
 
   	/**
    	* Sets a where filter on the content type
-   	* @param int|string $type
+   	* @param int|string|array $type
    	*/
   	public function type($type='')
   	{
-    	if ($type != '')
+  		if (is_array($type))
+  		{
+  			$tipi_id = array();
+  			$tipi = array();
+  			foreach ($type as $tipo) {
+  				$tmp = $this->content->type($tipo);
+  				$tipi_id[] = $tmp['id'];
+  				$tipi[] = $tmp;
+  			}
+ 
+  			if ($tipi[0]['tree'])
+	        {
+	        	$this->last_search_has_tree = TRUE;
+	        }else{
+	       		$this->last_search_has_tree = FALSE;
+	        }
+	        $this->db->where_in('id_type', $tipi_id);
+  		}
+    	else if ($type != '')
     	{
     		$this->_single_type = FALSE;
 	    	$this->set_type($type);
