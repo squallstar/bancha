@@ -5,6 +5,8 @@ ChangeLog
 **v 1.0.5** (Planned)
 
 - Now you can search for more than one content types as time! The find() and records->type() functions accepts an array of content types (names).
+- Added an order_by function to the categories model. That function has also been used on the categories view of content types.
+- Wordpress adapter now can link each post to its categories (they must be created before importing the posts).
 
 
 **v 1.0.4** (2012-01-07)
