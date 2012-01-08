@@ -121,7 +121,7 @@ Class Core_Contents extends Bancha_Controller
         if ($this->input->post('action'))
         {
         	$records = $this->input->post('record');
-        	if (count($records))
+        	if (is_array($records) && count($records))
         	{
             	switch ($this->input->post('action'))
             	{
