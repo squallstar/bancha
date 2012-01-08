@@ -632,7 +632,7 @@ Class Core_Contents extends Bancha_Controller
 			}
 		}
 
-		$categories = $this->categories->type($tipo['id'])->get();
+		$categories = $this->categories->type($tipo['id'])->order_by('name')->get();
 
 		$this->view->set('tipo', $tipo);
 		$this->view->set('categories', $categories);

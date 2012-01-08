@@ -236,4 +236,15 @@ Class Model_categories extends CI_Model
 		}
 		return $ids;
   	}
+
+  	/**
+   	* Adds an order_by clause
+   	* @param string $field
+   	* @param ASC|DESC $order
+   	* @return $this
+   	*/
+  	public function order_by($field = 'name', $order = 'ASC') {
+  		$this->db->order_by($field, $order);
+  		return $this;
+  	}
 }
