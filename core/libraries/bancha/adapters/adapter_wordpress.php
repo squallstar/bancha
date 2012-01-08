@@ -88,12 +88,18 @@ Class Adapter_wordpress implements Adapter
 				'date_publish'	=> date(LOCAL_DATE_FORMAT . ' H:i', strtotime((string)$item->pubDate)),
 				'content'		=> (string)$item->content,
 				'abstract'		=> (string)$item->description,
-				'lang'			=> $B->lang->default_language
+				'lang'			=> $B->lang->default_language,
+				'categories'	=> array()
 			);
+			
 			if (isset($item->category[0]))
 			{
-				$categories_array = (array)$item->category;
-				$post['category'] = $categories_array[0];
+				foreach ($item->category as $cat) {
+					$cat = strtolower((string)$cat);
+					if ( in_array($cat, array_keys($categories))) {
+						$post['categories'][] = $categories[$cat];
+					}
+				}		
 			}
 			if (count($item->comments))
 			{
@@ -141,11 +147,8 @@ Class Adapter_wordpress implements Adapter
 					$post->set('id_record', $id);
 
 					//Categories
-					if (isset($row['category'])) {
-						if ( in_array(strtolower($row['category']), array_keys($categories))) {
-							$cat = $categories[ strtolower($row['category']) ];
-							$B->categories->set_record_categories($id, array($cat));
-						}
+					if (count($row['categories'])) {
+						$B->categories->set_record_categories($id, $row['categories']);
 					}
 
 					//Now we can try to save the comments
