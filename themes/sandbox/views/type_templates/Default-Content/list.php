@@ -2,7 +2,7 @@
 /**
  * List View
  *
- * Content type list
+ * Content type list - Sandbox theme
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar

@@ -2,7 +2,7 @@
 /**
  * Detail View
  *
- * Content detail - Boilerplate Theme
+ * Content detail - Sandbox Theme
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
