@@ -112,6 +112,13 @@ if (!defined('API_ENABLED'))
 $config['shared_api_token'] = FALSE;
 
 /*
+* HOMEPAGE 301 REDIRECT
+* FALSE: the homepage will be served without a redirect
+* TRUE: the homepage will be served after a 301 redirect appending the homepage slug to the URL
+*/
+$config['homepage_redirect'] = FALSE;
+
+/*
 * RECORDS PER PAGE
 * The number of record extracted per page in the administration
 */

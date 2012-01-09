@@ -9,6 +9,7 @@ ChangeLog
 - Wordpress adapter now can link each post to its categories (they must be created before importing the posts).
 - Added an "or_where" method on the records model.
 - Added the documentation on the Record Objects and the records model.
+- Now you can select to serve the homepage without the initial 301 redirect: this results in a big speed improvement (active by default - you can disable it on a variable placed into the website config file).
 
 
 **v 1.0.4** (2012-01-07)
