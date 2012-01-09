@@ -30,17 +30,18 @@ The **get()** function that you just saw is used to extract the :doc:`../core/re
 Where condition
 ---------------
 
-**where($column, $val)**
+**where($column, $val)** and **or_where($column, $val)**
 
 You can add where conditions on physical columns as well as **xml columns**::
 
-    $posts = find('Blog')->where('title', 'First post')->get();
+    $posts = find('Blog')->where('title', 'Foo')->get();
 
     $products = find('Products')->where('id_record !=', 5)->get();
 
     //You can add more than one where conditions:
     $prods = find('Products')->where('date_publish >', time())
                              ->where('id_record', 4)
+                             ->or_where('title !=', 'Foo')
                              ->get();
 
 --------------

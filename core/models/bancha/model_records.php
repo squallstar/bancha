@@ -219,7 +219,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-  	 * Imposta un filtro where (anche sui campi xml del record)
+  	 * Sets an "AND WHERE" condition
   	 * @param string $field
   	 * @param int|string $value
   	 */
@@ -232,23 +232,55 @@ Class Model_records extends CI_Model {
   		{
   			if ($field == 'id' || $field == $this->primary_key)
   			{
-				$this->db->where($this->table_current.'.'.$this->primary_key, $value);
-				$this->db->limit(1);
+  				$this->db->where($this->table_current.'.'.$this->primary_key, $value);
+  				$this->db->limit(1);
   			}
   			else if ($field == 'id_type' || $field == 'type' || $field == 'id_tipo' || $field == 'tipo')
   			{
-				$this->type($value);
+				  $this->type($value);
   			}
   			else if (is_array($this->columns) && in_array($field, $this->columns))
   			{
-				$this->db->where($this->table_current.'.'.$field, $value);
+				  $this->db->where($this->table_current.'.'.$field, $value);
   			} else {
-				//Xml search by tag content
-				$this->db->like($this->table_current.'.xml', '%<'.$field.'>'.CDATA_START.$value.CDATA_END.'</'.$field.'>%');
+				  //Xml search by tag content
+				  $this->db->like($this->table_current.'.xml', '%<'.$field.'>'.CDATA_START.$value.CDATA_END.'</'.$field.'>%');
   			}
     	}
     	return $this;
   	}
+
+    /**
+     * Sets an "OR WHERE" condition
+     * @param string $field
+     * @param int|string $value
+     */
+    public function or_where($field='', $value=null)
+    {
+      if ($value == null)
+      {
+        $this->db->or_where($field);
+      } else if ($field != '')
+      {
+        if ($field == 'id' || $field == $this->primary_key)
+        {
+          $this->db->or_where($this->table_current.'.'.$this->primary_key, $value);
+          $this->db->limit(1);
+        }
+        else if ($field == 'id_type' || $field == 'type' || $field == 'id_tipo' || $field == 'tipo')
+        {
+          $this->type($value);
+        }
+        else if (is_array($this->columns) && in_array($field, $this->columns))
+        {
+          $this->db->or_where($this->table_current.'.'.$field, $value);
+        } else {
+          //Xml search by tag content
+          $this->db->or_like($this->table_current.'.xml', '%<'.$field.'>'.CDATA_START.$value.CDATA_END.'</'.$field.'>%');
+        }
+      }
+      return $this;
+    }
 
   	/**
    	* Sets a "where in" condition for the primary key
