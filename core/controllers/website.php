@@ -66,23 +66,12 @@ Class Core_Website extends Bancha_Controller
 			if ($this->config->item('prepend_uri_language'))
 			{
 				$this->config->prepend_language = $this->lang->current_language;
-			}
-
-			if ($this->config->item('homepage_redirect') == FALSE)
+			} else if ($this->config->item('homepage_redirect') == FALSE)
 			{
-				//Homepage served without redirect
-				$segments = explode('/', $home);
-
-				$this->uri->uri_string = trim($home, '/');
-				$this->uri->segments = array($segments);
-				$i = 1;
-				$rsegments = array();
-				foreach ($segments as $segment) {
-					$rsegments[$i] = $segment;
-					$i++;
-				}
-				$this->uri->rsegments = $rsegments;
-				$this->router();return;
+				//Homepage served without the 301 redirect for faster performances
+				$this->tree->set_request_uri($home);
+				$this->router();
+				return;
 			}
 
 			//Homepage served after a 301 redirect

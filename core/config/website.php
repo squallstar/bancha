@@ -113,8 +113,11 @@ $config['shared_api_token'] = FALSE;
 
 /*
 * HOMEPAGE 301 REDIRECT
-* FALSE: the homepage will be served without a redirect
-* TRUE: the homepage will be served after a 301 redirect appending the homepage slug to the URL
+* Only available when the "prepend_uri_language" (few lines above) is set to FALSE.
+* Let this set to FALSE is you want better performances on the website homepage.
+
+* - FALSE: the homepage will be served without a redirect
+* - TRUE: the homepage will be served after a 301 redirect appending the homepage slug to the URL
 */
 $config['homepage_redirect'] = FALSE;
 
@@ -261,7 +264,8 @@ $config['delete_dead_records'] = FALSE;
  * RECORD COLUMNS
  * The physical columns of the records table.
  * The website router uses it when extracts the records when it doesn't know the type.
- * Keep it updated when you add columns that you want to extract without knowing the content type.
+ * Keep it updated when you add columns that you want to extract without knowing the content type
+ * or when you are extracting more then one content type at time.
  */
 $config['record_columns'] = array(
 	'id_record',
@@ -334,7 +338,7 @@ $config['record_select_tree_fields'] = array('id_parent');
 
 /*
  * ARRAY FIELD TYPES
- * These kind of fields will be store as arrays values
+ * These kind of fields will be stored as arrays values
  */
 $config['array_field_types'] = array('multiselect', 'hierarchy');
 
