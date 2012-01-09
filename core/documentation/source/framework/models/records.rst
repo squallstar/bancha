@@ -39,7 +39,7 @@ You can add where conditions on physical columns as well as **xml columns**::
     $products = find('Products')->where('id_record !=', 5)->get();
 
     //You can add more than one where conditions:
-    $prods = find('Products')->where('date_publish >', time())
+    $prods = find('Products')->where('date_publish > ' . time())
                              ->where('id_record', 4)
                              ->or_where('title !=', 'Foo')
                              ->get();
@@ -57,7 +57,7 @@ The like condition works identical to the above **where condition**::
     $posts = find('Products')->like('title', 'Helmet')->get();
 
     //You can combine the like condition with other conditions:
-    $prods = find('Products')->where('date_publish >', time())
+    $prods = find('Products')->where('date_publish > ' . time())
                              ->like('title', 'Helmet')
                              ->or_like('title', 'Hats')
                              ->get();
