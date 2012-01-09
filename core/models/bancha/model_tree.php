@@ -567,5 +567,26 @@ Class Model_tree extends CI_Model
 		}
 	}
 
+	/**
+	 * Sets a new Request URI
+	 * This method is useful to make a fake URI and let Bancha interpret it
+	 * such as the home() action when the 301 redirect is disabled.
+	 * @param string $new_request_uri
+	 */
+	public function set_request_uri($new_request_uri)
+	{
+		$segments = explode('/', $new_request_uri);
+
+		$this->uri->uri_string = trim($new_request_uri, '/');
+		$this->uri->segments = array($segments);
+		$i = 1;
+		$rsegments = array();
+		foreach ($segments as $segment) {
+			$rsegments[$i] = $segment;
+			$i++;
+		}
+		$this->uri->rsegments = $rsegments;
+	}
+
 
 }
