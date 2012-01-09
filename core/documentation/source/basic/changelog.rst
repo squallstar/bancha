@@ -2,7 +2,7 @@
 ChangeLog
 ######################
 
-**v 1.0.5** (Planned)
+**v 1.0.5** (2012-01-09)
 
 - Now you can search for more than one content types as time! The find() and records->type() functions accepts an array of content types (names).
 - Added an order_by function to the categories model. That function has also been used on the categories view of content types.
@@ -11,7 +11,7 @@ ChangeLog
 - Added the documentation on the Record Objects and the records model.
 - Now you can select to serve the homepage without the initial 301 redirect: this results in a big speed improvement (active by default - you can disable it on a variable placed into the website config file).
 - New method on the tree models: set_request_uri()
-
+- New blog detail view (with comments) added to the boilerplate
 
 **v 1.0.4** (2012-01-07)
 
