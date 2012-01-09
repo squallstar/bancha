@@ -21,16 +21,21 @@ render('header'); ?>
 <?php
 if (type('Blog')) {
 
-	$posts = find('Blog')->limit(10)->get(); ?>
+	$posts = find('Blog')->limit(10)->order_by('date_publish', 'DESC')->get(); ?>
 
 	<h2>Some posts</h2>
 
+	<ul>
 	<?php
 	foreach ($posts as $post)
 	{
-		?><a href="<?php echo semantic_url($post); ?>"><?php echo $post->get('title'); ?></a><?php
+		?><li><a href="<?php echo semantic_url($post); ?>"><?php echo $post->get('title'); ?></a></li>
+		<?php
 	}
+	?>
+	</ul>
 
+<?php
 }
 
 render('footer');
