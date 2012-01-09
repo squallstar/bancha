@@ -10,6 +10,7 @@ Core
    :maxdepth: 1
 
    core/controllers
+   core/record
    core/imagepresets
 
 
@@ -20,6 +21,7 @@ Models
 .. toctree::
    :maxdepth: 1
 
+   models/records
    models/settings
 
 

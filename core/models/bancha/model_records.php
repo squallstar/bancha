@@ -324,7 +324,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-  	 * Imposta un limite sui risultati
+  	 * Sets a sql limit
   	 * @param start $a start
   	 * @param string $b howmany
   	 */
@@ -338,7 +338,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-  	 * Imposta l'ordine dei risultati
+  	 * Sets the results order
   	 * @param string $a field name
   	 * @param string $b ASC|DESC
   	 */
@@ -349,7 +349,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-  	 * Conta i records anziché estrarli
+  	 * Counts the record instead of extracting them
   	 * @return int
   	 */
   	public function count()
@@ -363,7 +363,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-  	 * Imposta se estrarre solo record pubblicati o depubblicati
+  	 * Filter the results by published or staged records
   	 * @param bool $published
   	 */
   	public function published($published = TRUE)
