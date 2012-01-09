@@ -16,7 +16,8 @@ render('header'); ?>
 
 <h1>This is the homepage of your website.</h1>
 
-<p>This script is located in <strong>themes/&lt;themename&gt;/views/templates/home.php</strong></p>
+<p>This script is located here: <strong>themes/<?php echo $this->view->theme; ?>/views/templates/home.php</strong></p>
+<p>Note that this is also a Record of type <strong>Menu</strong> marked as <strong>website homepage</strong> on the settings.</p>
 
 <?php
 if (type('Blog')) {
