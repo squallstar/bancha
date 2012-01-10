@@ -223,7 +223,7 @@ Class Bancha_Loader extends CI_Loader {
 
 		$class_name = 'Dispatcher_' . $name;
 
-		if (!strlen($obj_name))
+		if (!isset($obj_name))
 		{
 			$obj_name = 'dispatcher';
 		}
