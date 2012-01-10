@@ -314,7 +314,7 @@ Class Installer
 		//We insert the default ACLs
 		$acls = array();
 		$acls[]= $this->users->add_acl('users', 'list', 'Users list');
-		$acls[]= $this->users->add_acl('users', 'add', 'Create users');
+		$acls[]= $this->users->add_acl('users', 'add', 'Create/Edit users');
 		$acls[]= $this->users->add_acl('users', 'groups', 'Manage groups and permissions');
 		$acls[]= $this->users->add_acl('types', 'add', 'Add content types');
 		$acls[]= $this->users->add_acl('types', 'manage', 'Edit XML schemes');
