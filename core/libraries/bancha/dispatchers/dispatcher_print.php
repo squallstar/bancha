@@ -7,7 +7,7 @@
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @author		Alessandro Maroldi - alexmaroldi@gmail.com - @alexmaroldi
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
