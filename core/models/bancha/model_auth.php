@@ -101,11 +101,13 @@ Class Model_auth extends CI_Model {
 		{
 			return FALSE;
 		}
+
+		$enc_password = md5($password);
 		
 		$result = $this->db->select('id_user, name, surname, id_group, admin_lang')
 					   	   ->from('users')
 					       ->where('username', $username)
-					       ->where('password', $password)
+					       ->where('password', $enc_password)
 					       ->limit(1)->get();
 
 		if ($result->num_rows())

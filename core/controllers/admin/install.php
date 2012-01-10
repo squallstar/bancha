@@ -60,7 +60,8 @@ Class Core_Install extends Bancha_Controller
 
 				//We create a defaut user
 				$username = 'admin';
-				$password = 'admin';
+				$password = md5('admin');
+
 				$this->installer->create_groups();
 				$this->installer->create_user($username, $password, 'Super', 'User', $language);
 				$this->auth->login($username, $password);
