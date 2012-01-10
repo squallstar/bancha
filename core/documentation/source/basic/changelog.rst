@@ -2,6 +2,14 @@
 ChangeLog
 ######################
 
+**v 1.0.6** (Planned)
+
+- Password are now stored with standard md5 encryption.
+- Big refactor and improvements on the Users and Groups ACL.
+- More documentation on the database application config file.
+- Added a remove() function that deletes a single key on the Record Object class.
+
+
 **v 1.0.5** (2012-01-09)
 
 - Now you can search for more than one content types as time! The find() and records->type() functions accepts an array of content types (names).

@@ -425,4 +425,14 @@ Class Record {
         }
         return FALSE;
     }
+
+    /**
+    * Remove a single value from the current record
+    * @param string $key
+    * @return bool
+    */
+    public function remove($key = '')
+    {
+      return unset($this->_data[$key]);
+    }
 }
