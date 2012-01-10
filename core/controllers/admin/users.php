@@ -77,6 +77,7 @@ Class Core_Users extends Bancha_Controller
 	public function edit($id_username='')
 	{
 		$this->auth->check_permission('users', 'list');
+		$this->auth->check_permission('users', 'add');
 
 		$this->load->categories();
         $this->load->hierarchies();
@@ -91,6 +92,32 @@ Class Core_Users extends Bancha_Controller
 		if ($this->input->post())
 		{
 			$user->set_data($this->input->post());
+
+			$pwd = $this->input->post('password');
+			if ($id_username != '' && !strlen($pwd) || $pwd != $this->input->post('password_confirm')) {
+				//We don't need to update the password
+				$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
+
+				if ($users) {
+					$tmp_user = $users[0];
+					$user->set('password', $tmp_user->get('password'));
+				}
+
+			}
+			$user->set('password', md5($user->get('password')));
+
+			if ($id_username != '' && !$this->auth->has_permission('users', 'groups')) {
+				//User can't edit groups
+				if (!isset($users)) {
+					$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
+				}
+				
+				if ($users) {
+					$tmp_user = $users[0];
+					$user->set('id_group', $tmp_user->get('id_group'));
+				}	
+			}
+
 			$done = $this->records->save($user);
 
 			if ($done)
@@ -108,15 +135,19 @@ Class Core_Users extends Bancha_Controller
 
 		if ($id_username != '')
 		{
-			//We search for this user
-			$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
-
-			if (!$users)
-			{
-				show_error(_('User not found'));
+			if ($user->id) {
+				//We already have the user
 			} else {
-				$user = $users[0];
-			}
+				//We search for this user
+				$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
+
+				if (!$users)
+				{
+					show_error(_('User not found'));
+				} else {
+					$user = $users[0];
+				}
+			}	
 		} else {
 			//New user
 			$this->view->set('user', FALSE);
