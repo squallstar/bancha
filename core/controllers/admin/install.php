@@ -62,7 +62,7 @@ Class Core_Install extends Bancha_Controller
 				$username = 'admin';
 				$password = 'admin';
 
-				$enc_password = md5($password);
+				$enc_password = $this->config->item('encrypt_password') ? md5($password) : $password;
 				$this->installer->create_groups();
 				$this->installer->create_user($username, $enc_password, 'Super', 'User', $language);
 				$this->auth->login($username, $password);

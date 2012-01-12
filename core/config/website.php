@@ -53,6 +53,11 @@ $config['admin_languages'] = array(
 	)
 );
 
+/* ENCRYPT PASSWORDS
+ * Select if the user passwords needs to be encrypted
+ */
+$config['encrypt_password'] = TRUE;
+
 /*
  * PREPEND URI LANGUAGE
  * When set to true, the current language will be prepended all URIs.

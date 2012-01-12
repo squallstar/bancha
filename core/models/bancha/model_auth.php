@@ -102,7 +102,7 @@ Class Model_auth extends CI_Model {
 			return FALSE;
 		}
 
-		$enc_password = md5($password);
+		$enc_password = $this->config->item('encrypt_password') ? md5($password) : $password;
 		
 		$result = $this->db->select('id_user, name, surname, id_group, admin_lang')
 					   	   ->from('users')
