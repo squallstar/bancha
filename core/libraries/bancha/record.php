@@ -433,6 +433,6 @@ Class Record {
     */
     public function remove($key = '')
     {
-      return unset($this->_data[$key]);
+        unset($this->_data[$key]);
     }
 }
