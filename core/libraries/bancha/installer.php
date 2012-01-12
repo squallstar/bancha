@@ -15,16 +15,6 @@
 Class Installer extends Core
 {
 	/**
-	 * @var mixed Reference to the Code Igniter DB Forge
-	 */
-	private $dbforge;
-
-	/**
-	 * @var mixed Reference to the users model
-	 */
-	private $users;
-
-	/**
 	 * @var int The administrator group autoincrement ID
 	 */
 	public $group_id;
@@ -36,9 +26,6 @@ Class Installer extends Core
 
 		$this->load->helper('directories');
 		$this->load->helper('directory');
-
-		$this->dbforge = & $this->dbforge;
-		$this->users = & $this->users;
 	}
 
 	public function is_already_installed()

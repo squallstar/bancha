@@ -399,6 +399,8 @@ Class Dispatcher_default extends Core
 		{
 			//The current page/record segment
 			$current_page = $this->tree->current_page_uri;
+		} else {
+			$current_page = '';
 		}
 
 		$current_request = $this->uri->uri_string();

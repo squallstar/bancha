@@ -12,7 +12,7 @@
  *
  */
 
-Class Xml
+Class Xml extends Core
 {
   /**
 	 * @var string Directory with the XML schemes
@@ -31,8 +31,8 @@ Class Xml
 
   	public function __construct()
   	{
-    	$this->xml_folder	= $this->config->item('xml_typefolder');
-    	$this->types_cache_folder	= $this->config->item('types_cache_folder');
+    	$this->xml_folder = $this->config->item('xml_typefolder');
+    	$this->types_cache_folder = $this->config->item('types_cache_folder');
   	}
 
   	/**

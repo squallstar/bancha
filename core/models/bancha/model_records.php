@@ -308,7 +308,8 @@ Class Model_records extends CI_Model {
   	 * Sets a JOIN query on the pages tables and adds a search condition on the full_uri
   	 * @param string $string
   	 */
-  	public function full_uri($string) {
+  	public function full_uri($string)
+  	{
   		$this->db->join($this->pages->table_current,
   		$this->pages->table_current.'.id_record = '.$this->table_current.'.'.$this->primary_key,
   					'inner')->where('full_uri', $string);
@@ -988,6 +989,11 @@ Class Model_records extends CI_Model {
   			//Non-cached query
   			case 'query':
   				$sql = $field['options'];
+  				if ($sql)
+  				{
+  					log_message('error', 'Query not valid on field '.$field['description']);
+  					return array();
+  				}
   				//Stage tables
   				$sql = str_replace(
   					array('FROM (`'.$this->db->dbprefix.$this->table.'`)',

@@ -12,7 +12,7 @@
  *
  */
 
-Class Record extends Core {
+Class Record {
 
 	/**
 	 * @var array Contains all the data of the record
@@ -65,6 +65,15 @@ Class Record extends Core {
   			$this->_tipo = $type;
   		}
   	}
+
+  	function __get($key)
+	{
+		if ($key == 'libxml') {
+			$key = 'xml';
+		}
+		$CI =& get_instance();
+		return $CI->$key;		
+	}
 
   	public function set_type($type)
   	{
@@ -245,7 +254,7 @@ Class Record extends Core {
   	public function build_xml()
   	{
     	if (count($this->_data)) {
-     		$this->xml = $this->xml->get_record_xml($this->_tipo_def ? $this->_tipo_def : $this->_tipo, $this->_data);
+     		$this->xml = $this->libxml->get_record_xml($this->_tipo_def ? $this->_tipo_def : $this->_tipo, $this->_data);
 
       		//We strip the newline and return characters
       		$this->xml = str_replace(array("\r\n", "\r", "\n"), "", $this->xml);
@@ -423,6 +432,6 @@ Class Record extends Core {
     */
     public function remove($key = '')
     {
-      return unset($this->_data[$key]);
+        unset($this->_data[$key]);
     }
 }

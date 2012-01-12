@@ -12,7 +12,7 @@
  *
  */
 
-Class View
+Class View extends Core
 {
 
 	/**

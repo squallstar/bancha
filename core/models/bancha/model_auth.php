@@ -12,8 +12,8 @@
  *
  */
 
-Class Model_auth extends CI_Model {
-
+Class Model_auth extends CI_Model
+{
 	/**
 	 * @var string Nome del cookie di sessione
 	 */
