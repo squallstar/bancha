@@ -12,7 +12,7 @@
  *
  */
 
-Class Content
+Class Content extends Core
 {
 	/**
 	 * @var array Content types list
@@ -23,11 +23,6 @@ Class Content
 	 * @var array List of all content types names
 	 */
 	private $_string_types;
-
-	/**
-	 * @var mixed Code Igniter instance
-	 */
-	private $CI;
 
 	/**
 	 * @var string This directory contains the XML schemes
@@ -46,10 +41,8 @@ Class Content
 
 	public function __construct()
 	{
-		$this->CI = & get_instance();
-
-		$this->xml_folder	= $this->CI->config->item('xml_typefolder');
-		$this->types_cache_folder	= $this->CI->config->item('types_cache_folder');
+		$this->xml_folder	= $this->config->item('xml_typefolder');
+		$this->types_cache_folder	= $this->config->item('types_cache_folder');
 
 		//We read the content types
 		$this->read();
@@ -62,13 +55,13 @@ Class Content
 	public function set_stage($stage)
 	{
 		$this->is_stage = $stage;
-		if (isset($this->CI->records))
+		if (isset($this->records))
 		{
-			$this->CI->records->set_stage($stage);
+			$this->records->set_stage($stage);
 		}
-		if (isset($this->CI->pages))
+		if (isset($this->pages))
 		{
-			$this->CI->pages->set_stage($stage);
+			$this->pages->set_stage($stage);
 		}
 	}
 
@@ -80,7 +73,7 @@ Class Content
 	{
 		if (!file_exists($this->types_cache_folder))
 		{
-			@mkdir($this->CI->config->item('fr_cache_folder'), DIR_WRITE_MODE, TRUE);
+			@mkdir($this->config->item('fr_cache_folder'), DIR_WRITE_MODE, TRUE);
 			$this->rebuild();
 		}
 		$this->content_types = unserialize(file_get_contents($this->types_cache_folder));
@@ -99,7 +92,7 @@ Class Content
 	 */
 	public function add_type($type_name, $type_description, $type_structure, $delete_if_exists=FALSE, $type_label_new='')
 	{
-		$this->CI->load->library('parser');
+		$this->load->library('parser');
 
 		//We clears the type name
 		$type_name = url_title(convert_accented_characters($type_name), 'underscore');
@@ -111,24 +104,24 @@ Class Content
 		}
 
 		//Let's check if already exists on filesystem
-		$storage_path = $this->CI->config->item('xml_typefolder').$type_name.'.xml';
+		$storage_path = $this->config->item('xml_typefolder').$type_name.'.xml';
 		if (file_exists($storage_path) && !$delete_if_exists) {
 			show_error(
-				$this->CI->lang->_trans('A content type named %n already exists', array('n' => '['.$type_name.']')),
+				$this->lang->_trans('A content type named %n already exists', array('n' => '['.$type_name.']')),
 				500, _('Cannot create that type'));
 		} else {
 			$this->delete_type($type_name);
 		}
 
 		//Saves the content type into the DB
-		$done = $this->CI->db->insert('types', array(
+		$done = $this->db->insert('types', array(
 			'name'	=> $type_name
 		));
 		if (!$done)
 		{
 			show_error(_('Cannot insert that content type.') . ' (content/add_type)', 500, _('Error'));
 		}
-		$type_id = $this->CI->db->insert_id();
+		$type_id = $this->db->insert_id();
 
 		//Loads the base XML (Type_simple of Type_tree)
 		if (is_bool($type_structure))
@@ -137,7 +130,7 @@ Class Content
 		} else {
 			$type_complexity = strtolower($type_structure) == 'true' ? 'tree' : 'simple';
 		}
-		$xml = read_file($this->CI->config->item('templates_folder').'Type_'.$type_complexity.'.xml');
+		$xml = read_file($this->config->item('templates_folder').'Type_'.$type_complexity.'.xml');
 
 		$type_description = strip_tags($type_description);
 		if (!$type_description)
@@ -146,7 +139,7 @@ Class Content
 		}
 
 		//Parses the base file with the content types variables
-		$xml = $this->CI->parser->parse_string($xml, array(
+		$xml = $this->parser->parse_string($xml, array(
 		          'id'			=> $type_id,
 		          'name'		=> $type_name,
 		          'description'	=> $type_description,
@@ -159,16 +152,16 @@ Class Content
 		if (write_file($storage_path, $xml)) {
 
 			//We add the ACL for this content type
-			$this->CI->load->users();
-			$acl_id = $this->CI->users->add_acl('content', $type_name, 'Manage ' . $type_name);
+			$this->load->users();
+			$acl_id = $this->users->add_acl('content', $type_name, 'Manage ' . $type_name);
 
 			//Permissions to the current user
-			$this->CI->auth->add_permission($acl_id);
-			$this->CI->auth->cache_permissions();
+			$this->auth->add_permission($acl_id);
+			$this->auth->cache_permissions();
 
 			//We create the directory with the view templates
-			$type_view_abs_dir = $this->CI->config->item('views_absolute_templates_folder') . $type_name . '/';
-			$this->CI->load->helper('directories');
+			$type_view_abs_dir = $this->config->item('views_absolute_templates_folder') . $type_name . '/';
+			$this->load->helper('directories');
 
 			if (!delete_directory($type_view_abs_dir)) {
 				$this->delete_type($type_name);
@@ -195,7 +188,7 @@ Class Content
 	 */
 	public function delete_type($name)
 	{
-		return $this->CI->db->where('name', $name)->delete('types');
+		return $this->db->where('name', $name)->delete('types');
 	}
 
 	/**
@@ -272,15 +265,15 @@ Class Content
 	public function rebuild()
 	{
 		//Loads the Database
-		$this->CI->load->database();
+		$this->load->database();
 		
 		//All types
-		$this->CI->load->helper(array('file', 'text'));
+		$this->load->helper(array('file', 'text'));
 
 		$filenames = get_filenames($this->xml_folder);
 
 		//Restricted names
-		$restricted_names = $this->CI->config->item('restricted_field_names');
+		$restricted_names = $this->config->item('restricted_field_names');
 
 		//Will contains all types
 		$contents = array();
@@ -288,16 +281,16 @@ Class Content
 		$all_types = array();
 		$all_types_id = array();
 
-		if (!isset($this->CI->xml))
+		if (!isset($this->xml))
 		{
-			$this->CI->load->frlibrary('xml');
+			$this->load->frlibrary('xml');
 		}
 
 		if (count($filenames) && is_array($filenames))
 		{
 			foreach ($filenames as $filename)
 			{
-				$content = $this->CI->xml->parse_scheme($this->xml_folder . $filename);
+				$content = $this->xml->parse_scheme($this->xml_folder . $filename);
 
 				$all_types_id[] = $content['id'];
 				$all_types = $content['name'];
@@ -305,26 +298,26 @@ Class Content
 			}
 		}
 
-		if ($this->CI->config->item('delete_dead_records') == TRUE)
+		if ($this->config->item('delete_dead_records') == TRUE)
 		{
 			//We delete the dead records
-			$this->CI->load->records();
+			$this->load->records();
 			//TODO: we need to clean content types on external tables
-			$this->CI->db->where_not_in('id_type', $all_types_id)->delete($this->CI->records->table_stage);
-			$this->CI->db->where_not_in('id_type', $all_types_id)->delete($this->CI->records->table);
+			$this->db->where_not_in('id_type', $all_types_id)->delete($this->records->table_stage);
+			$this->db->where_not_in('id_type', $all_types_id)->delete($this->records->table);
 		}
 
 		//We write the content types cache into a file
 		$done = write_file($this->types_cache_folder, serialize($contents));
 
 		//And we finally clear the website menu
-		if (isset($this->CI->tree))
+		if (isset($this->tree))
 		{
-			$this->CI->tree->clear_cache();
+			$this->tree->clear_cache();
 		}
 
 		//Translations need to be updated
-		$this->CI->xml->update_translations();
+		$this->xml->update_translations();
 
 		return $done;
 	}

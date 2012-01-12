@@ -13,7 +13,7 @@
  *
  */
 
-Class Dispatcher_Print
+Class Dispatcher_Print extends Core
 {
 	private $_dompdfpath = '';
 
@@ -43,23 +43,21 @@ Class Dispatcher_Print
 	 */
 	public function render($page, $return = FALSE)
 	{
-		$CI = & get_instance();
-
 		if ($page instanceof Record)
 		{
-			$html = $CI->view->render_template($page->get('view_template'));
+			$html = $this->view->render_template($page->get('view_template'));
 		} else {
 			$html = & $page;
 		}
 
 		//Here goes the PDF generation
-		$CI->output->enable_profiler(FALSE);
+		$this->output->enable_profiler(FALSE);
 		require_once($this->_dompdfpath."dompdf_config.inc.php");
 
 		if ($page instanceof Record)
 		{
-			$CI->view->set('page', $page);
-			$html = $CI->view->render_template($page->get('view_template'), TRUE, '', TRUE);
+			$this->view->set('page', $page);
+			$html = $this->view->render_template($page->get('view_template'), TRUE, '', TRUE);
 		} else {
 			$html = $page;
 		}
@@ -74,7 +72,7 @@ Class Dispatcher_Print
 			return $dompdf->output(); 
 		} else {
 			//Sends the content to the browser
-			$CI->output->set_content_type('pdf')
+			$this->output->set_content_type('pdf')
 					   ->set_output($dompdf->output());
 		}
 

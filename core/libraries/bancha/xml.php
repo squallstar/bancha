@@ -14,17 +14,12 @@
 
 Class Xml
 {
-	/**
-	 * @var mixed Code Igniter instance
-	 */
-  	private $CI;
-
-  	/**
+  /**
 	 * @var string Directory with the XML schemes
 	 */
   	public $xml_folder;
 
-  	/**
+  /**
 	 * @var string The file which contains the content types cache
 	 */
   	public $types_cache_folder;
@@ -36,10 +31,8 @@ Class Xml
 
   	public function __construct()
   	{
-   		$this->CI = & get_instance();
-
-    	$this->xml_folder	= $this->CI->config->item('xml_typefolder');
-    	$this->types_cache_folder	= $this->CI->config->item('types_cache_folder');
+    	$this->xml_folder	= $this->config->item('xml_typefolder');
+    	$this->types_cache_folder	= $this->config->item('types_cache_folder');
   	}
 
   	/**
@@ -56,10 +49,10 @@ Class Xml
     		{
     			$tipo = $type;
     		} else {
-    			$tipo = $this->CI->content->type($type);
+    			$tipo = $this->content->type($type);
     		}
 
-      		$xmlstring = read_file($this->CI->config->item('templates_folder').'Record.xml');
+      		$xmlstring = read_file($this->config->item('templates_folder').'Record.xml');
 
       		$xml = new SimpleXMLElement($xmlstring);
 
@@ -98,42 +91,42 @@ Class Xml
    	 */
   	function records_from_sql_xml($sql, $id_type = '')
   	{
-    	if (!isset($this->CI->content))
+    	if (!isset($this->content))
     	{
     		//TODO: fix - how and when it happens?
     		return;
     	}
 
-    	$this->CI->db->select((string)$sql->select);
+    	$this->db->select((string)$sql->select);
 
-    	$tipo = $this->CI->content->type($id_type);
+    	$tipo = $this->content->type($id_type);
 
     	//We will use the staging table if we are in stage
     	$from_tbl = (string)$sql->from;
 
-    	$this->CI->db->from($from_tbl);
+    	$this->db->from($from_tbl);
 
     	if (isset($sql->where))
     	{
       		if ((string)$sql->where != '')
       		{
-        		$this->CI->db->where((string)$sql->where);
+        		$this->db->where((string)$sql->where);
       		}
     	}
     	if (isset($sql->order_by))
     	{
-     		$this->CI->db->order_by((string)$sql->order_by);
+     		$this->db->order_by((string)$sql->order_by);
     	}
     	if (isset($sql->limit))
     	{
-      		$this->CI->db->limit((string)$sql->limit);
+      		$this->db->limit((string)$sql->limit);
     	}
     	if (isset($sql->type))
     	{
-      		$id_tipo = is_numeric((string)$sql->type) ? (string)$sql->type : $this->CI->content->type_id((string)$sql->type);
-     		$this->CI->db->where('id_type', $id_tipo);
+      		$id_tipo = is_numeric((string)$sql->type) ? (string)$sql->type : $this->content->type_id((string)$sql->type);
+     		$this->db->where('id_type', $id_tipo);
     	}
-   		return $this->CI->db->get()->result();
+   		return $this->db->get()->result();
   	}
 
   	/**
@@ -203,7 +196,7 @@ Class Xml
 
     	if (!$content['primary_key'] || !$content['table'])
     	{
-      	show_error($this->CI->lang->_trans('Primary key or table not defined for the content type %n.', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
+      	show_error($this->lang->_trans('Primary key or table not defined for the content type %n.', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
     	}
 
     	//Parent types
@@ -317,9 +310,9 @@ Class Xml
             //Fieldset name is needed
       		if ($fieldset_name == '')
       		{
-        		show_error($this->CI->lang->_trans('One of the fieldsets of type %n does not have the name attribute (mandatory).', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
+        		show_error($this->lang->_trans('One of the fieldsets of type %n does not have the name attribute (mandatory).', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
       		} else if (array_key_exists($fieldset_name, $content['fieldsets'])) {
-        		show_error($this->CI->lang->_trans('The type %t has more than one fieldset named %n.', array('t' => '['.$safe_filename.']', 'n' => '['.$fieldset_name.']')), 500, _('XML parser: Error'));
+        		show_error($this->lang->_trans('The type %t has more than one fieldset named %n.', array('t' => '['.$safe_filename.']', 'n' => '['.$fieldset_name.']')), 500, _('XML parser: Error'));
       		}
 
       		$fieldset = array('name' => $fieldset_name, 'fields' => array());
@@ -335,7 +328,7 @@ Class Xml
             	$attr = $field->attributes();
         		$field_name = (string) $attr->id;
         		if (!$field_name || $field_name == '') {
-          			show_error($this->CI->lang->_trans('One of the fields of type %t does not have a name.', array('t' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
+          			show_error($this->lang->_trans('One of the fields of type %t does not have a name.', array('t' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
         		}
 
         		//Physical column
@@ -359,14 +352,14 @@ Class Xml
 	            }
 
         		//Reserved names check
-        		if (in_array($field_name, $this->CI->config->item('restricted_field_names')))
+        		if (in_array($field_name, $this->config->item('restricted_field_names')))
         		{
-          			show_error($this->CI->lang->_trans('The field name %n is reserved (Type: %t) and needs to be changed!', array('t' => '['.$safe_filename.']', 'n' => '['.$field_name.']')), 500, _('XML parser: Error'));
+          			show_error($this->lang->_trans('The field name %n is reserved (Type: %t) and needs to be changed!', array('t' => '['.$safe_filename.']', 'n' => '['.$field_name.']')), 500, _('XML parser: Error'));
         		}
 
         		if (!in_array((string)$field->type, $field_usable_inputs))
         		{
-          			show_error($this->CI->lang->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are:', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
+          			show_error($this->lang->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are:', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
         		}
 
         		$_note = FALSE;
@@ -499,7 +492,7 @@ Class Xml
 
           			} else {
             			//Save the query string for later
-           				$query = str_replace("\n", ' ', $this->CI->db->last_query());
+           				$query = str_replace("\n", ' ', $this->db->last_query());
             			$content_field['options'] = $query;
             			$content_field['extract'] = 'query';
           			}
@@ -531,7 +524,7 @@ Class Xml
                     $str.= "\n_('" . str_replace("'", "\'", $key) . "');";
                 }
             }
-            write_file($this->CI->config->item('xml_translations_path'), $str);
+            write_file($this->config->item('xml_translations_path'), $str);
         }
     }
 }

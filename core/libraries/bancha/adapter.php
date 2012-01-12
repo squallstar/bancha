@@ -12,7 +12,7 @@
  *
  */
 
-interface Adapter
+interface Adapter extends Core
 {
 	/**
 	 * @var array Returns all the accepted mimes of the adapter

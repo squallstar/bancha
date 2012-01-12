@@ -14,13 +14,6 @@ require_once(APPPATH . 'controllers/custom/triggers.php');
 
 Class Triggers extends Core_Triggers
 {
-	public $CI;
-
-	public function __construct()
-	{
-		$this->CI = & get_instance();
-	}
-
 	/**
 	 * A dummy trigger
 	 */

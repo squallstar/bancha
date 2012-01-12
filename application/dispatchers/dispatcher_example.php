@@ -16,7 +16,7 @@
  *
  */
 
-Class Dispatcher_example
+Class Dispatcher_example extends Core
 {
 	public function start()
 	{

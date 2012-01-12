@@ -12,20 +12,14 @@
  *
  */
 
-Class Dispatcher_default
+Class Dispatcher_default extends Core
 {
-	/**
-	 * @var Bancha instance
-	 */
-	private $_CI;
-
 	public function __construct()
 	{
-		$this->_CI = & CI_Controller::get_instance();
-		$this->_CI->load->database();
+		$this->load->database();
 
 		//Front-end helper
-		$this->_CI->load->helper('frontend');
+		$this->load->helper('frontend');
 	}
 
 	/**
@@ -41,30 +35,30 @@ Class Dispatcher_default
 
 			if (!$record)
 			{
-				$this->_CI->view->title = _('Page not found');
-				$this->_CI->view->render_template('not_found', TRUE, 404);
+				$this->view->title = _('Page not found');
+				$this->view->render_template('not_found', TRUE, 404);
 				return;
 			}
 		}
 
 		//We get the website pages tree
-		$this->_CI->view->set('tree', $this->_CI->tree->get_default());
+		$this->view->set('tree', $this->tree->get_default());
 
 		//Let's set the meta title, keywords and description
-		$this->_CI->view->title = $record->get('meta_title');
-		if (!$this->_CI->view->title)
+		$this->view->title = $record->get('meta_title');
+		if (!$this->view->title)
 		{
 			//If the meta title is not found, let's use the title field
-			$this->_CI->view->title = $record->get('title');
+			$this->view->title = $record->get('title');
 		}
-		$this->_CI->view->keywords = $record->get('meta_keywords');
+		$this->view->keywords = $record->get('meta_keywords');
 
-		$this->_CI->view->description = strip_tags($record->get('meta_description'));
-		if (!$this->_CI->view->description)
+		$this->view->description = strip_tags($record->get('meta_description'));
+		if (!$this->view->description)
 		{
 			//If the meta description is not found, let's use the content field
-			$this->_CI->load->helper('text');
-			$this->_CI->view->description = character_limiter(strip_tags($record->get('content')), 150, '...');
+			$this->load->helper('text');
+			$this->view->description = character_limiter(strip_tags($record->get('content')), 150, '...');
 		}
 
 		//Is this a page?
@@ -73,13 +67,13 @@ Class Dispatcher_default
 			$page = $record;
 
 			//We set the language to be the same as the page
-			$this->_CI->lang->set_lang($page->get('lang'));
+			$this->lang->set_lang($page->get('lang'));
 
 			//We set che cache if the page wants it
 			$cache = (int)$page->get('page_cache');
 			if ($cache > 0)
 			{
-				$this->_CI->output->cache($cache);
+				$this->output->cache($cache);
 			}
 
 			switch ($page->get('action'))
@@ -104,15 +98,15 @@ Class Dispatcher_default
 		//Last check before dispatching
 		if ($page instanceof Record)
 		{
-			if ($this->_CI->view->is_feed == 'pdf')
+			if ($this->view->is_feed == 'pdf')
 			{
-				$this->_CI->load->dispatcher('print', 'dispatcher_print');
-				$this->_CI->dispatcher_print->render($page);
+				$this->load->dispatcher('print', 'dispatcher_print');
+				$this->dispatcher_print->render($page);
 			} else {
 				//We add a page global variable
 				$GLOBALS['page'] = & $page;
-				$this->_CI->view->set('page', $page);
-				$this->_CI->view->render_template($page->get('view_template'));
+				$this->view->set('page', $page);
+				$this->view->render_template($page->get('view_template'));
 			}
 		}
 	}
@@ -130,8 +124,8 @@ Class Dispatcher_default
 
 		if (! ($record instanceof Record))
 		{
-			$this->_CI->view->title = _('Page not found');
-			$this->_CI->view->render_template('not_found', TRUE, 404);
+			$this->view->title = _('Page not found');
+			$this->view->render_template('not_found', TRUE, 404);
 		}
 
 		//Action: single record
@@ -142,18 +136,18 @@ Class Dispatcher_default
 		$date_publish = $record->get('_date_publish');
 		if ($date_publish && $date_publish > time())
 		{
-			$this->_CI->view->title = _('Page not found');
-			$this->_CI->view->render_template('not_found', TRUE, 404);
+			$this->view->title = _('Page not found');
+			$this->view->render_template('not_found', TRUE, 404);
 			return;
 		}
 
-		$this->_CI->tree->breadcrumbs[$record->id] = array(
+		$this->tree->breadcrumbs[$record->id] = array(
 					'title'	=> $record->get('title'),
 					'link'	=> uri_string().'/'
 		);
 
 		$parent_page->set('view_template', $template);
-		$this->_CI->view->set('record', $record);
+		$this->view->set('record', $record);
 		$GLOBALS['record'] = & $record;
 
 		return $parent_page;
@@ -162,7 +156,7 @@ Class Dispatcher_default
 	protected function set_recordlist($page)
 	{
 		$categories = $page->get('action_list_categories');
-		$get_category = $this->_CI->input->get('category');
+		$get_category = $this->input->get('category');
 
 		//First of all, let's extract the categories (we prepare a select statement)
 		$cat_ids = FALSE;
@@ -176,11 +170,11 @@ Class Dispatcher_default
 				$categories[] = $get_category;
 			}
 
-			$this->_CI->load->categories();
-			$cat_ids = $this->_CI->categories->name_in($categories)->get_ids();
+			$this->load->categories();
+			$cat_ids = $this->categories->name_in($categories)->get_ids();
 			if ($cat_ids)
 			{
-				$cat_sql = $this->_CI->categories->get_records_for_categories($cat_ids, TRUE);
+				$cat_sql = $this->categories->get_records_for_categories($cat_ids, TRUE);
 			}
 			
 		}
@@ -189,37 +183,37 @@ Class Dispatcher_default
 		$hierarchies = $page->get('action_list_hierarchies');
 		if (is_array($hierarchies) && count($hierarchies))
 		{
-			$this->_CI->load->hierarchies();
-			$hie_sql = $this->_CI->hierarchies->get_records_for_hierarchies($hierarchies, TRUE);
+			$this->load->hierarchies();
+			$hie_sql = $this->hierarchies->get_records_for_hierarchies($hierarchies, TRUE);
 			if (count($hie_sql))
 			{
-				$this->_CI->records->id_in($hie_sql, FALSE);
+				$this->records->id_in($hie_sql, FALSE);
 			} else {
-				$this->_CI->records->where(1, 2);
+				$this->records->where(1, 2);
 			}
 		}
 
 		//After the query above we can apply the SELECT statement on the category
 		if ($cat_ids)
 		{
-			$this->_CI->records->id_in($cat_sql, FALSE);
+			$this->records->id_in($cat_sql, FALSE);
 		} else if ($categories || $get_category) {
-			$this->_CI->records->where(1, 2);
+			$this->records->where(1, 2);
 		}
 
 		$limit = (int)$page->get('action_list_limit');
 		if ($limit) {
-			$current_cursor = $this->_CI->input->get('page');
+			$current_cursor = $this->input->get('page');
 			if (!$current_cursor) {
 				$offset = 0;
 			} else {
 				$offset = $current_cursor;
 			}
-			$this->_CI->records->limit($limit, $offset);
+			$this->records->limit($limit, $offset);
 		}
 
 		$tipo = $page->get('action_list_type');
-		$type = $this->_CI->content->type($tipo);
+		$type = $this->content->type($tipo);
 
 		$order_by = $page->get('action_list_order_by');
 		if ($order_by) {
@@ -227,69 +221,69 @@ Class Dispatcher_default
 			{
 				$order_by = str_replace('id_record', $type['primary_key'], $order_by);
 			}
-			$this->_CI->records->order_by($order_by);
+			$this->records->order_by($order_by);
 		}
 
 		$sql_where = $page->get('action_list_where');
 		if ($sql_where) {
-			$this->_CI->records->where($sql_where);
+			$this->records->where($sql_where);
 		}
 
 		if (isset($type['fields']['date_publish']))
 		{
 			//We can extract only published records
-			$this->_CI->records->where('date_publish <= ' . time());
+			$this->records->where('date_publish <= ' . time());
 		}
 
 		if ($tipo)
 		{
-			$this->_CI->records->type($tipo);
+			$this->records->type($tipo);
 
-			$search_query = $this->_CI->input->get('search');
+			$search_query = $this->input->get('search');
 			if ($search_query)
 			{
-				$this->_CI->records->like('title', $search_query);
-				$this->_CI->db->bracket('open');
-				$this->_CI->records->or_like('content', $search_query);
-				$this->_CI->db->bracket('close');
+				$this->records->like('title', $search_query);
+				$this->db->bracket('open');
+				$this->records->or_like('content', $search_query);
+				$this->db->bracket('close');
 			}
 		}
 		//Just list fields, not the detail ones
-		$this->_CI->records->set_list(TRUE);
-		$this->_CI->records->language();
+		$this->records->set_list(TRUE);
+		$this->records->language();
 
-		$records = $this->_CI->records->documents(TRUE)->get();
+		$records = $this->records->documents(TRUE)->get();
 
 		//If there's a limit, we will make a pagination
 		if ($limit)
 		{
 			if ($tipo)
 			{
-				$this->_CI->records->type($tipo);
+				$this->records->type($tipo);
 				if ($search_query)
 				{
-					$this->_CI->records->like('title', $search_query);
-					$this->_CI->records->or_like('content', $search_query);
+					$this->records->like('title', $search_query);
+					$this->records->or_like('content', $search_query);
 				}
 			}
 			if (isset($type['fields']['date_publish']))
 			{
 				//We can extract only published records
-				$this->_CI->records->where('date_publish <= ' . time());
+				$this->records->where('date_publish <= ' . time());
 			}
 			if ($sql_where) {
-				$this->_CI->records->where($sql_where);
+				$this->records->where($sql_where);
 			}
 			if (isset($category_record_ids))
 			{
-				$this->_CI->records->id_in($category_record_ids);
+				$this->records->id_in($category_record_ids);
 			}
 			if (isset($hierarchies_record_ids))
 			{
-				$this->_CI->records->id_in($hierarchies_record_ids);
+				$this->records->id_in($hierarchies_record_ids);
 			}
 
-			$count = $this->_CI->records->documents(FALSE)->set_list(TRUE)->language()->count();
+			$count = $this->records->documents(FALSE)->set_list(TRUE)->language()->count();
 
 			$pagination = array(
 	        	'total_rows'			=> $count,
@@ -302,26 +296,26 @@ Class Dispatcher_default
 	        	'first_url'				=> current_url()
 			);
 
-			$this->_CI->view->set('total_records', $pagination['total_rows']);
+			$this->view->set('total_records', $pagination['total_rows']);
 
-			$this->_CI->load->library('pagination');
-			$this->_CI->pagination->initialize($pagination);
+			$this->load->library('pagination');
+			$this->pagination->initialize($pagination);
 		}
 
-		$this->_CI->db->flush_cache();
+		$this->db->flush_cache();
 
-		if ($this->_CI->view->is_feed && $this->_CI->view->is_feed != 'pdf')
+		if ($this->view->is_feed && $this->view->is_feed != 'pdf')
 		{
-			$this->_CI->load->frlibrary('feed');
+			$this->load->frlibrary('feed');
 
-			if ($this->_CI->config->item('type_custom_feeds') && isset($type['name']))
+			if ($this->config->item('type_custom_feeds') && isset($type['name']))
 			{
 				$page->set('records', $records);
-				$this->_CI->view->set('page', $page);
+				$this->view->set('page', $page);
 				$GLOBALS['page'] = & $page;
-				$this->_CI->view->set('records', $records);
+				$this->view->set('records', $records);
 				$GLOBALS['records'] = & $records;
-				$this->_CI->view->render_type_template($type['name'], 'feed', TRUE);
+				$this->view->render_type_template($type['name'], 'feed', TRUE);
 				return;
 			}
 
@@ -329,7 +323,7 @@ Class Dispatcher_default
 				'title' 		=> $page->get('title'),
 				'description'	=> $page->get('content')
 			);
-			$this->_CI->feed->create_new($feed_header, $this->_CI->view->is_feed);
+			$this->feed->create_new($feed_header, $this->view->is_feed);
 
 			if (count($records))
 			{
@@ -347,15 +341,15 @@ Class Dispatcher_default
 						'pubDate'		=> date(DATE_RFC822, (int)$date_pub),
 						'description'	=> str_replace('src="/attach', 'src="'.$url.'attach', $record->get('content'))
 					);
-					$this->_CI->feed->add_item($item, array('title', 'description'));
+					$this->feed->add_item($item, array('title', 'description'));
 				}
 			}
-			$this->_CI->feed->render();
+			$this->feed->render();
 			return;
 
 		} else if ($page->get('action_list_has_feed') == 'T')
 		{
-			$this->_CI->view->has_feed = TRUE;
+			$this->view->has_feed = TRUE;
 		}
 
 		$page->set('records', $records);
@@ -369,7 +363,7 @@ Class Dispatcher_default
 	 */
 	protected function call_action($page)
 	{
-		$folder = $this->_CI->config->item('custom_controllers_folder');
+		$folder = $this->config->item('custom_controllers_folder');
 		define('CUSTOM_ACTION', TRUE);
 		$custom_actions_controller = $folder . 'actions.php';
 		require_once($custom_actions_controller);
@@ -401,23 +395,23 @@ Class Dispatcher_default
 	{
 		$found = FALSE;
 
-		if (isset($this->_CI->tree))
+		if (isset($this->tree))
 		{
 			//The current page/record segment
-			$current_page = $this->_CI->tree->current_page_uri;
+			$current_page = $this->tree->current_page_uri;
 		}
 
-		$current_request = $this->_CI->uri->uri_string();
+		$current_request = $this->uri->uri_string();
 
 		$result = array();
-		if (isset($this->_CI->records))
+		if (isset($this->records))
 		{
 			//We extract a page based on the full request url
-			$result = $this->_CI->records->set_type()
+			$result = $this->records->set_type()
 										 ->set_list(FALSE)
 										 ->full_uri($current_request)
 										 ->documents(FALSE)
-										 ->where('lang', $this->_CI->lang->current_language)
+										 ->where('lang', $this->lang->current_language)
 										 ->limit(1)->get();
 		}
 
@@ -425,7 +419,7 @@ Class Dispatcher_default
 		{
 			//If not found, let's search for the parent page
 			$parent_page_uri = str_replace('/'.$current_page, '', $current_request);
-			$result_pages = $this->_CI->records->full_uri($parent_page_uri)->documents(FALSE)->limit(1)->get();
+			$result_pages = $this->records->full_uri($parent_page_uri)->documents(FALSE)->limit(1)->get();
 
 			if (count($result_pages))
 			{
@@ -435,7 +429,7 @@ Class Dispatcher_default
 				if (in_array($page->get('action'), array('list', 'single')))
 				{
 					$child_type = $page->get('action_list_type');
-					$result_childs = $this->_CI->records->type($child_type)->where('uri', $current_page)->documents(FALSE)->limit(1)->get();
+					$result_childs = $this->records->type($child_type)->where('uri', $current_page)->documents(FALSE)->limit(1)->get();
 
 					if (count($result_childs))
 					{

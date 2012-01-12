@@ -14,15 +14,8 @@ if ( ! defined('CUSTOM_TRIGGER')) exit('You cannot call the triggers directly');
  *
  */
 
-Class Core_Triggers
+Class Core_Triggers extends Core
 {
-	public $CI;
-
-	public function __construct()
-	{
-		$this->CI = & get_instance();
-	}
-
 	/**
 	 * Trigger/attivatore dimostrativo
 	 */

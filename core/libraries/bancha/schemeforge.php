@@ -13,19 +13,12 @@
  *
  */
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-Class Schemeforge
+Class Schemeforge extends Core
 {
-	/**
-	 * @var mixed Bancha instance
-	 */
-	private $B;
 
 	public function __construct()
 	{
-		$this->B = & get_instance();
-		$this->B->load->dbforge();
+		$this->load->dbforge();
 	}
 
 	/**
@@ -110,7 +103,7 @@ Class Schemeforge
 	 */
     public function recreate_by_scheme($type)
     {
-    	$DB = & $this->B->db;
+    	$DB = & $this->db;
 
     	$table = $type['table'];
     	$fields = $this->get_tablescheme($type);
@@ -146,7 +139,7 @@ Class Schemeforge
     {
     	if ($stage && !$type['stage']) return TRUE;
 
-		$FORGE = & $this->B->dbforge;
+		$FORGE = & $this->dbforge;
 
     	if ($stage && $type['stage'])
 		{
@@ -160,7 +153,7 @@ Class Schemeforge
 			}
 		}
 
-    	$scheme = $this->B->db->field_data($table);
+    	$scheme = $this->db->field_data($table);
 
     	$existing_fields = array();
     	$new_fields = array();
@@ -178,7 +171,7 @@ Class Schemeforge
     			//we need to check if this field is used
     			//by other content types
     			$found = FALSE;
-    			$all_types = & $this->B->content->types();
+    			$all_types = & $this->content->types();
     			foreach ($all_types as $ctype)
     			{
     				$tbl = $stage ? $ctype['table_stage'] : $ctype['table'];
@@ -254,7 +247,7 @@ Class Schemeforge
     {
     	if ($stage && !$type['stage']) return TRUE;
 
-    	$FORGE = & $this->B->dbforge;
+    	$FORGE = & $this->dbforge;
 		$FORGE->add_key($type['primary_key'], TRUE);
 
 		if (isset($type['fields']['id_type']))

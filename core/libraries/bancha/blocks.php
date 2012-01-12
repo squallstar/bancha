@@ -12,7 +12,7 @@
  *
  */
 
-Class Blocks
+Class Blocks extends Core
 {
 	/**
   	* @var mixed Code Igniter instance
@@ -21,7 +21,7 @@ Class Blocks
 
  	public function __construct()
  	{
-		$this->_CI = & get_instance();
+		//Nothing
 	}
 
 	/**
@@ -32,11 +32,11 @@ Class Blocks
 	*/
 	public function load($block_id = '')
 	{
-    	$page = & $this->_CI->view->get('page');
+    	$page = & $this->view->get('page');
     	if ($page instanceof Record && $block_id)
     	{
-      		$view_template = $this->_CI->view->current_view;
-      		$theme = $this->_CI->view->theme;
+      		$view_template = $this->view->current_view;
+      		$theme = $this->view->theme;
 
       		//We remove the un-necessary path
       		$view_template = str_replace(THEMESPATH . $theme . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR, '', $view_template);
@@ -104,7 +104,7 @@ Class Blocks
   	 */
 	public function fill_block($block, $theme, $template = 'default')
 	{
-		return $this->_CI->settings->get_block($block, $theme, $template);
+		return $this->settings->get_block($block, $theme, $template);
 	}
 
 	public function get_section_preview($section, $pos = 0)

@@ -12,7 +12,7 @@
  *
  */
 
-Class Record {
+Class Record extends Core {
 
 	/**
 	 * @var array Contains all the data of the record
@@ -60,8 +60,7 @@ Class Record {
           return;
   			} else if (!is_numeric($type))
   			{
-  				$CI = & get_instance();
-  				$type = $CI->content->type_id($type);
+  				$type = $this->content->type_id($type);
   			}
   			$this->_tipo = $type;
   		}
@@ -78,11 +77,9 @@ Class Record {
    	*/
   	public function set_data($data)
   	{
-  		$CI = & get_instance();
-
     	if (!$this->_tipo_def)
     	{
-    		$tipo = & $CI->content->type($this->_tipo);
+    		$tipo = & $this->content->type($this->_tipo);
     		if (!$tipo) return;
     	} else {
     		$tipo = $this->_tipo_def;
@@ -94,7 +91,7 @@ Class Record {
 
         $value = $data[$field_name];
             
-    		if ($CI->config->item('strip_website_url')
+    		if ($this->config->item('strip_website_url')
                 && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
     		{
     			//We strip the website url from the textarea fields
@@ -179,7 +176,7 @@ Class Record {
       //We set the default language if is possible
       if (!isset($this->_data['lang']) && isset($tipo['fields']['lang']))
       {
-        $langs = array_keys($CI->lang->languages);
+        $langs = array_keys($this->lang->languages);
         $this->_data['lang'] = $langs[0];
       }
   	}
@@ -232,8 +229,7 @@ Class Record {
    	*/
   	public function is_page()
   	{
-  		$CI = & get_instance();
-	  	$tipo = $CI->content->type($this->_tipo);
+	  	$tipo = $this->content->type($this->_tipo);
 	  	if ($tipo['tree'] == TRUE)
 	  	{
 	  		return TRUE;
@@ -248,9 +244,8 @@ Class Record {
    	*/
   	public function build_xml()
   	{
-    	$CI = & get_instance();
     	if (count($this->_data)) {
-     		$this->xml = $CI->xml->get_record_xml($this->_tipo_def ? $this->_tipo_def : $this->_tipo, $this->_data);
+     		$this->xml = $this->xml->get_record_xml($this->_tipo_def ? $this->_tipo_def : $this->_tipo, $this->_data);
 
       		//We strip the newline and return characters
       		$this->xml = str_replace(array("\r\n", "\r", "\n"), "", $this->xml);
@@ -264,8 +259,7 @@ Class Record {
 	{
     	if ($this->xml || $this->xml == '')
     	{
-    		$CI = & get_instance();
-    		$tipo = & $CI->content->type($this->_tipo);
+    		$tipo = & $this->content->type($this->_tipo);
     		if (!$tipo) return;
 
 	      	$xmltree = @simplexml_load_string($this->xml, 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -313,8 +307,7 @@ Class Record {
 			//If a page hasn't the template, we will use the default one
 			if ($tipo['tree'] && !$this->get('view_template'))
 			{
-	      		$CI = & get_instance();
-	      		$this->set('view_template', $CI->config->item('default_view_template'));
+	      		$this->set('view_template', $this->config->item('default_view_template'));
 	      	}
 
 	      	$this->xml = '';
@@ -331,12 +324,11 @@ Class Record {
 	{
 		if ($this->documents_extracted) return;
 
-		$CI = & get_instance();
-		if (!isset($CI->documents))
+		if (!isset($this->documents))
 		{
-			$CI->load->documents();
+			$this->load->documents();
 		}
-   		$tipo = & $CI->content->type($this->_tipo);
+   		$tipo = & $this->content->type($this->_tipo);
 
    		$has_attachments = FALSE;
 
@@ -352,7 +344,7 @@ Class Record {
 		if ($has_attachments)
 		{
 			//Estraggo tutti gli allegati di questo record
-			$all_attachs = $CI->documents->table($tipo['table'])->id($this->id)->get();
+			$all_attachs = $this->documents->table($tipo['table'])->id($this->id)->get();
 
 			foreach ($tipo['fields'] as $field_name => $field_value)
 			{
@@ -390,11 +382,9 @@ Class Record {
             return $this->_related_objects[$relation_name];
         }
 
-        $CI = & get_instance();
-
         if (!$this->_tipo_def)
         {
-            $tipo = & $CI->content->type($this->_tipo);
+            $tipo = & $this->content->type($this->_tipo);
             if (!$tipo) return FALSE;
         } else {
             $tipo = $this->_tipo_def;
@@ -409,16 +399,16 @@ Class Record {
             	log_message('error', 'The relation ' . $relation_name . ' is incomplete Please check your scheme.');
             }
 
-            $CI->records->type($rel['with'])
+            $this->records->type($rel['with'])
                         ->where($rel['to'], $this->get($rel['from']));
 
             $type = strtolower($rel['type']);
 
             if (in_array($type, array('1-0', '1-1', '0-1')))
             {
-                $this->_related_objects[$relation_name] = $CI->records->get_first();
+                $this->_related_objects[$relation_name] = $this->records->get_first();
             } else {
-                $this->_related_objects[$relation_name] = $CI->records->get();
+                $this->_related_objects[$relation_name] = $this->records->get();
             }
 
             return $this->_related_objects[$relation_name];

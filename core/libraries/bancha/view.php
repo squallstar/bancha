@@ -16,11 +16,6 @@ Class View
 {
 
 	/**
-	 * @var mixed CodeIgniter instance
-	 */
-	private $_CI;
-
-	/**
 	 * @var array The variables that will be passed to the view
 	 */
 	private $_data = array();
@@ -123,7 +118,6 @@ Class View
 
 	public function __construct()
 	{
-		$this->_CI = & get_instance();
 		$this->load_theme();
 	}
 
@@ -135,14 +129,14 @@ Class View
 		$this->theme = isset($_SESSION['_website_theme']) ? $_SESSION['_website_theme'] : FALSE;
 		if (!$this->theme && !defined('DISABLE_SETTINGS'))
 		{
-			$this->_CI->load->library('user_agent');
-			$this->_CI->load->settings();
+			$this->load->library('user_agent');
+			$this->load->settings();
 
-			if (!$this->_CI->agent->is_mobile())
+			if (!$this->agent->is_mobile())
 			{
-				$this->theme = $this->_CI->settings->get('website_desktop_theme');
+				$this->theme = $this->settings->get('website_desktop_theme');
 			} else {
-				$this->theme = $this->_CI->settings->get('website_mobile_theme');
+				$this->theme = $this->settings->get('website_mobile_theme');
 			}
 
 			$this->store_theme();
@@ -156,16 +150,16 @@ Class View
 	 */
 	public function set_theme($new_theme)
 	{
-		$this->_CI->load->settings();
+		$this->load->settings();
 
 		switch ($new_theme)
 		{
 			case 'desktop':
 			case 'tablet':
-				$this->theme = $this->_CI->settings->get('website_desktop_theme');
+				$this->theme = $this->settings->get('website_desktop_theme');
 				break;
 			case 'mobile':
-				$this->theme = $this->_CI->settings->get('website_mobile_theme');
+				$this->theme = $this->settings->get('website_mobile_theme');
 				break;
 		}
 
@@ -190,7 +184,7 @@ Class View
 	{
 		$theme_path = THEMESPATH . $this->theme . '/';
 		$this->theme_path = site_url(null, FALSE) . $theme_path;
-		$this->_CI->load->add_view_path($theme_path . 'views/');
+		$this->load->add_view_path($theme_path . 'views/');
 
 		if (!defined('THEME_PUB_PATH'))
 		{
@@ -246,7 +240,7 @@ Class View
 	*/
 	public function render_layout($view_file, $header=true)
 	{
-		return $this->_CI->load->view($this->base.$this->_layout_dir, array(
+		return $this->load->view($this->base.$this->_layout_dir, array(
 			'base'		=> $this->base,
 			'content'	=> & $this->_data,
 			'view'		=> $this->base.$view_file,
@@ -271,7 +265,7 @@ Class View
 		}
 		if (is_numeric($code))
 		{
-			$this->_CI->output->set_status_header($code);
+			$this->output->set_status_header($code);
 			if ($code == 404)
 			{
 				log_message('error', 'Page not found: '.current_url());
@@ -280,9 +274,9 @@ Class View
 		if ($layout)
 		{
 			$this->set('_template_file', $this->_template_dir.$template_file);
-			return $this->_CI->load->view('layout', $this->_data, $return);
+			return $this->load->view('layout', $this->_data, $return);
 		} else {
-			return $this->_CI->load->view($this->_template_dir.$template_file, $this->_data, $return);
+			return $this->load->view($this->_template_dir.$template_file, $this->_data, $return);
 		}
 	}
 
@@ -299,18 +293,18 @@ Class View
 			show_error('Content type or view name not set (view/render_type_template');
 		}
 
-		$type_templates = THEMESPATH . $this->theme . '/views/' . $this->_CI->config->item('views_templates_folder');
+		$type_templates = THEMESPATH . $this->theme . '/views/' . $this->config->item('views_templates_folder');
 
 
 		if (file_exists($type_templates . $type_name . '/' . $view_file . '.php'))
 		{
-			$view_path = $this->_CI->config->item('views_templates_folder') . $type_name . '/' . $view_file;
+			$view_path = $this->config->item('views_templates_folder') . $type_name . '/' . $view_file;
 		} else {
-			$type = $this->_CI->content->type($type_name);
-			$view_path = $this->_CI->config->item('views_templates_folder') . 'Default-' . ($type['tree'] ? 'Page' : 'Content') . '/' . $view_file;
+			$type = $this->content->type($type_name);
+			$view_path = $this->config->item('views_templates_folder') . 'Default-' . ($type['tree'] ? 'Page' : 'Content') . '/' . $view_file;
 		}
 			
-		$this->_CI->load->view($view_path, $propagate_data ? $this->_data : '');
+		$this->load->view($view_path, $propagate_data ? $this->_data : '');
 	}
 
 	/**
@@ -319,7 +313,7 @@ Class View
 	 */
 	public function render($view_file, $data = array())
 	{
-		$this->_CI->load->view($view_file, $data);
+		$this->load->view($view_file, $data);
 	}
 
 	/**
@@ -358,13 +352,13 @@ Class View
 	 */
 	public function live_tags($field, $record)
 	{
- 		if ($this->_CI->output->has_profiler()
- 			&& $this->_CI->auth->has_permission('content', $record->tipo))
+ 		if ($this->output->has_profiler()
+ 			&& $this->auth->has_permission('content', $record->tipo))
  		{
  			return ' data-mode="edit" data-field="'.$field.'" data-type="'
  				   . $record->tipo
  				   . '" data-key="'.$record->id.'" data-fieldtype="'
- 				   . $this->_CI->content->content_types[$record->_tipo]['fields'][$field]['type'].'"';
+ 				   . $this->content->content_types[$record->_tipo]['fields'][$field]['type'].'"';
  		} else {
  			return '';
  		}

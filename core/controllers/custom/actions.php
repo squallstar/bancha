@@ -14,15 +14,8 @@ if ( ! defined('CUSTOM_ACTION')) exit('This controller should be called only fro
  *
  */
 
-Class Core_Actions
+Class Core_Actions extends Core
 {
-	public $CI;
-
-	public function __construct()
-	{
-		$this->CI = & get_instance();
-	}
-
 	/**
 	 * Demo action. Feel free to remove it!
 	 */
@@ -31,7 +24,7 @@ Class Core_Actions
 		if ($who_calls == 'dispatcher')
 		{
 			//We just render the default template
-			$this->CI->view->render_template('default');
+			$this->view->render_template('default');
 		}
 		else if ($who_calls == 'content_render')
 		{
@@ -53,6 +46,6 @@ Class Core_Actions
 			'subject'	=> 'New request received'
 		);
 
-		echo $this->CI->load->module('contact_form', $config)->render();
+		echo $this->load->module('contact_form', $config)->render();
 	}
 }

@@ -218,7 +218,7 @@ Class Bancha_Loader extends CI_Loader {
 		if (file_exists($user_dispatcher)) {
 			require_once($user_dispatcher);
 		} else {
-			require_once(APPPATH . 'libraries/bancha/dispatchers/dispatcher_' . $name . '.php');
+			require_once(APPPATH . 'dispatchers/dispatcher_' . $name . '.php');
 		}
 
 		$class_name = 'Dispatcher_' . $name;

@@ -14,13 +14,8 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-abstract class Bancha_Module
+abstract class Bancha_Module extends Core
 {
-	/**
-	 * @var mixed Reference alla View Library
-	 */
-	public $view;
-
 	/**
 	 * @var string The path of the files for this module
 	 */
@@ -35,8 +30,7 @@ abstract class Bancha_Module
 
 	public function __construct()
 	{
-		$CI = & get_instance();
-		$this->view = & $CI->view;
+		
 	}
 
 	/**
@@ -55,14 +49,13 @@ abstract class Bancha_Module
 	 */
 	public function render($view = 'view')
 	{
-		$CI = & get_instance();
 		$module_name = strtolower(str_replace('_Module', '', get_class($this)));
 		if (!$this->_view_path_added)
 		{
 			$this->_view_path_added = TRUE;
-			$CI->load->add_view_path($CI->config->item('modules_folder'));
+			$this->load->add_view_path($this->config->item('modules_folder'));
 		}
-		return $CI->load->view($module_name.DIRECTORY_SEPARATOR.$module_name.'_'.$view, $CI->view->get_data(), TRUE);
+		return $this->load->view($module_name.DIRECTORY_SEPARATOR.$module_name.'_'.$view, $this->view->get_data(), TRUE);
 	}
 
 	/**

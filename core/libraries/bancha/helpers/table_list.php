@@ -1,5 +1,5 @@
 <?php
-Class Table_list {
+Class Table_list extends Core {
 	
 	private $CI;
 
@@ -9,8 +9,7 @@ Class Table_list {
 
 	public function __construct()
 	{
-		$this->CI = get_instance();
-		$this->xml_folder = $this->CI->config->item('xml_folder'); 
+		$this->xml_folder = $this->config->item('xml_folder'); 
 	}
 
 	public function set_scheme($scheme)

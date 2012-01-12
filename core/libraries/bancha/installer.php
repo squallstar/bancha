@@ -12,15 +12,8 @@
  *
  */
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-Class Installer
+Class Installer extends Core
 {
-	/**
-	 * @var mixed Code Igniter instance
-	 */
-	private $CI;
-
 	/**
 	 * @var mixed Reference to the Code Igniter DB Forge
 	 */
@@ -38,20 +31,19 @@ Class Installer
 
 	public function __construct()
 	{
-		$this->CI = & get_instance();
-		$this->CI->load->dbforge();
-		$this->CI->load->users();
+		$this->load->dbforge();
+		$this->load->users();
 
-		$this->CI->load->helper('directories');
-		$this->CI->load->helper('directory');
+		$this->load->helper('directories');
+		$this->load->helper('directory');
 
-		$this->dbforge = & $this->CI->dbforge;
-		$this->users = & $this->CI->users;
+		$this->dbforge = & $this->dbforge;
+		$this->users = & $this->users;
 	}
 
 	public function is_already_installed()
 	{
-		return $this->CI->db->table_exists('settings');
+		return $this->db->table_exists('settings');
 	}
 
 	/**
@@ -296,7 +288,7 @@ Class Installer
 
 		$this->dbforge->drop_table('api_tokens');
 		$this->dbforge->add_field($api_tokens);
-		if (strpos($this->CI->db->database, 'sqlite:') === FALSE)
+		if (strpos($this->db->database, 'sqlite:') === FALSE)
 		{
 			//We create the index only if the Database driver is not SQLite
 			$this->dbforge->add_key('token');
@@ -328,7 +320,7 @@ Class Installer
 		//These strings are here just for translations
 		$dummy = _('Administrators') . _('Editors');
 
-		$this->CI->auth->update_permissions($acls, $this->group_id);
+		$this->auth->update_permissions($acls, $this->group_id);
 
 	}
 
@@ -349,7 +341,7 @@ Class Installer
 			'username' => $username,
 			'password' => $password,
 			'id_group' => $this->group_id,
-			'admin_lang' => $lang =! '' ? $lang : $this->CI->lang->current_language
+			'admin_lang' => $lang =! '' ? $lang : $this->lang->current_language
 		);
 		return $this->users->add_user($data);
 	}
@@ -359,17 +351,17 @@ Class Installer
 	 */
 	public function create_types()
 	{
-		$default = $this->CI->config->item('default_tree_types');
+		$default = $this->config->item('default_tree_types');
 		if (count($default))
 		{
 			foreach ($default as $type)
 			{
-				$this->CI->content->add_type($type, $type, 'true', TRUE, $type == 'Menu' ? 'New page' : 'New ' . $type);
+				$this->content->add_type($type, $type, 'true', TRUE, $type == 'Menu' ? 'New page' : 'New ' . $type);
 			}
 		} else {
 			show_error(_('Default content type not defined'));
 		}
-		$this->CI->content->rebuild();
+		$this->content->rebuild();
 	}
 
 	/**
@@ -411,8 +403,8 @@ Class Installer
 			}
 
 			//TODO: move this query into DB forge to let it change between different Databases
-			$sql = 'CREATE INDEX idx_bancha_'.$index_name.' ON '.$this->CI->db->dbprefix.$table.' ('.$column.');';
-			$this->CI->db->query($sql);
+			$sql = 'CREATE INDEX idx_bancha_'.$index_name.' ON '.$this->db->dbprefix.$table.' ('.$column.');';
+			$this->db->query($sql);
 		}
 
 	}
@@ -423,18 +415,18 @@ Class Installer
 	public function create_directories()
 	{
 		$directories = array(
-			$this->CI->config->item('attach_folder'),					//Attachs directory
-			$this->CI->config->item('xml_typefolder'),					//XML Types schemes
-			//$this->CI->config->item('views_absolute_templates_folder'),	//Content type Views - DEPRECATED,
-			$this->CI->config->item('fr_cache_folder'),					//Bancha Cache files,
-			$this->CI->config->item('cache_path')						//CI Cache folder
+			$this->config->item('attach_folder'),					//Attachs directory
+			$this->config->item('xml_typefolder'),					//XML Types schemes
+			//$this->config->item('views_absolute_templates_folder'),	//Content type Views - DEPRECATED,
+			$this->config->item('fr_cache_folder'),					//Bancha Cache files,
+			$this->config->item('cache_path')						//CI Cache folder
 		);
 
 		foreach ($directories as $dir)
 		{
 			delete_directory($dir);
 			@mkdir($dir, DIR_WRITE_MODE, TRUE);
-			if ($dir != $this->CI->config->item('xml_typefolder'))
+			if ($dir != $this->config->item('xml_typefolder'))
 			{
 				write_file($dir.'index.html', CMS.' does not allow directory listing.');
 			}
@@ -446,25 +438,25 @@ Class Installer
 	 */
 	public function populate_settings($theme = '')
 	{
-		$this->CI->load->settings();
-		$this->CI->settings->set('is_installed', 'T');
+		$this->load->settings();
+		$this->settings->set('is_installed', 'T');
 
-		$this->CI->settings->set('website_name', 'My website');
-		$this->CI->settings->set('website_claim', 'This is my first website!');
+		$this->settings->set('website_name', 'My website');
+		$this->settings->set('website_claim', 'This is my first website!');
 
-		$this->CI->settings->set('website_desktop_theme', $theme);
-		$this->CI->settings->set('website_mobile_theme', $theme);
-		$this->CI->settings->set('website_active_languages', array_keys($this->CI->config->item('website_languages_select')));
+		$this->settings->set('website_desktop_theme', $theme);
+		$this->settings->set('website_mobile_theme', $theme);
+		$this->settings->set('website_active_languages', array_keys($this->config->item('website_languages_select')));
 	}
 
 	public function create_homepages()
 	{
-		if (!isset($this->CI->settings))
+		if (!isset($this->settings))
 		{
-			$this->CI->load->settings();
+			$this->load->settings();
 		}
 
-		$languages = array_keys($this->CI->config->item('website_languages'));
+		$languages = array_keys($this->config->item('website_languages'));
 
 		//We make an homepage for each language we found
 		foreach ($languages as $lang)
@@ -476,10 +468,10 @@ Class Installer
 				 ->set('action', 'text')
 				 ->set('view_template', 'home')
 			;
-			$page_id = $this->CI->records->save($page);
-			$this->CI->records->publish($page_id, 'Menu');
-			$this->CI->pages->publish($page_id);
-			$this->CI->settings->set('website_homepage_' . $lang, 'home');
+			$page_id = $this->records->save($page);
+			$this->records->publish($page_id, 'Menu');
+			$this->pages->publish($page_id);
+			$this->settings->set('website_homepage_' . $lang, 'home');
 		}
 	}
 
@@ -495,7 +487,7 @@ Class Installer
 		}
 
 		//This directory contains the premade schemes of the chosen type
-		$folder = $this->CI->config->item('templates_folder') . 'premades' . DIRECTORY_SEPARATOR
+		$folder = $this->config->item('templates_folder') . 'premades' . DIRECTORY_SEPARATOR
 				. $type . DIRECTORY_SEPARATOR;
 
 		$premades_xml = array();
@@ -508,15 +500,15 @@ Class Installer
 				foreach ($premades_xml as $file_name)
 				{
 					$name = str_replace('.xml', '', $file_name);
-					$type_id = $this->CI->content->add_type($name, $name, 'false', TRUE);
+					$type_id = $this->content->add_type($name, $name, 'false', TRUE);
 					$this->copy_premade_xml($folder.$file_name, $name, $type_id);
 				}
 			}
 		}
 
 		//Let the framework rebuild the content types cache
-		$this->CI->content->rebuild();
-		$this->CI->content->read();
+		$this->content->rebuild();
+		$this->content->read();
 
 		switch (strtolower($type))
 		{
@@ -532,35 +524,35 @@ Class Installer
 				$post = new Record('Blog');
 				$post->set('title', _('My first post'))
 					 ->set('content', _('Hello world'))
-					 ->set('lang', $this->CI->lang->default_language)
+					 ->set('lang', $this->lang->default_language)
 					 ->set('date_publish', time())
 				;
-				$post_id = $this->CI->records->save($post);
-				$this->CI->records->publish($post_id, 'Blog');
+				$post_id = $this->records->save($post);
+				$this->records->publish($post_id, 'Blog');
 
 				//A sample comment linked to this post
 				$comment = new Record('Comments');
 				$comment->set('author', 'Nicholas')
 						->set('www', 'http://getbancha.com')
 						->set('post_id', $post_id)
-						->set('lang', $this->CI->lang->default_language)
+						->set('lang', $this->lang->default_language)
 						->set('content', 'I am cool.')
 				;
-				$this->CI->records->set_type('Comments')->save($comment);
+				$this->records->set_type('Comments')->save($comment);
 
 				//And a simple page that lists the posts
 				$page = new Record('Menu');
 				$page->set('title', 'Blog')
 					 ->set('uri', 'blog')
 					 ->set('action', 'list')
-					 ->set('lang', $this->CI->lang->default_language)
+					 ->set('lang', $this->lang->default_language)
 					 ->set('show_in_menu', 'T')
-					 ->set('action_list_type', $this->CI->content->type_id('Blog'))
+					 ->set('action_list_type', $this->content->type_id('Blog'))
 					 ->set('action_list_order_by', 'date_publish DESC');
 
-				$page_id = $this->CI->records->save($page);
-				$this->CI->records->publish($page_id, 'Menu');
-				$this->CI->pages->publish($page_id);
+				$page_id = $this->records->save($page);
+				$this->records->publish($page_id, 'Menu');
+				$this->pages->publish($page_id);
 
 				//break; < no break! we will build also default pages
 
@@ -569,19 +561,19 @@ Class Installer
 				$page = new Record('Menu');
 				$page->set('title', 'About us')
 				->set('action', 'text')
-				->set('lang', $this->CI->lang->default_language)
+				->set('lang', $this->lang->default_language)
 				->set('show_in_menu', 'T')
 				->set('child_count', 0)
 				->set('uri', 'about-us')
 				->set('content', _('Hello world by a sample page.'))
 				;
-				$this->CI->records->save($page);
+				$this->records->save($page);
 
 				break;
 		}
 
 		//This tree needs to be cleared because we added some pages few lines above
-		$this->CI->tree->clear_cache('Menu');
+		$this->tree->clear_cache('Menu');
 	}
 
 	/**
@@ -596,12 +588,12 @@ Class Installer
 		$xml = read_file($path);
 
 		//We parse the file with some pseudovariables
-		$xml = $this->CI->parser->parse_string($xml, array(
+		$xml = $this->parser->parse_string($xml, array(
 		          'id'			=> $type_id,
 		          'version'		=> BANCHA_VERSION
 		),TRUE);
 
-		$storage_path = $this->CI->config->item('xml_typefolder').$type_name.'.xml';
+		$storage_path = $this->config->item('xml_typefolder').$type_name.'.xml';
 		return write_file($storage_path, $xml);
 	}
 }
