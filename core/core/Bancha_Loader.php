@@ -211,14 +211,14 @@ Class Bancha_Loader extends CI_Loader {
 	function dispatcher($name = 'default', $obj_name = 'dispatcher')
 	{
 		$name = strtolower($name);
-		$CI = & get_instance();
+		$CI =& get_instance();
 
 		//We first look into the user dispatchers folder
 		$user_dispatcher = USERPATH . 'dispatchers/dispatcher_' . $name . '.php';
 		if (file_exists($user_dispatcher)) {
 			require_once($user_dispatcher);
 		} else {
-			require_once(APPPATH . 'libraries/bancha/dispatchers/dispatcher_' . $name . '.php');
+			require_once(APPPATH . 'dispatchers/dispatcher_' . $name . '.php');
 		}
 
 		$class_name = 'Dispatcher_' . $name;
