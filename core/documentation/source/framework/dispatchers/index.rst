@@ -5,7 +5,7 @@ Dispatchers
 Dispatchers are classes that performs many operation before the rendering process. They are tipically fired by the controllers.
 As example, the **Website** controller fires many of the dispatchers described below.
 
-The Bancha core dispatcher are located inside the **core/libraries/bancha/dispatchers** directory.
+The Bancha core dispatcher are located inside the **core/dispatchers** directory.
 
 Instead, the folder for the dispatchers of your application (if you need to create a new one), is **application/dispatchers**.
 To add a new dispatcher, create a new file in that directory using **dispatcher_name.php** as filename and **Dispatcher_name** as **class name**.
