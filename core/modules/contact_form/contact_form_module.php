@@ -46,35 +46,35 @@ Class Contact_form_Module extends Bancha_Module
 	 */
 	public function render()
 	{
-		$CI = & get_instance();
+		$B =& get_instance();
 
-		$act = $CI->input->post('_contactform');
+		$act = $B->input->post('_contactform');
 		if ($act)
 		{
-			$data = $CI->input->post();
+			$data = $B->input->post();
 
 			switch ($this->action)
 			{
 				case 'email':
-					$CI->load->library('email', array('mailtype' => 'html'));
-					$CI->load->library('parser');
+					$B->load->library('email', array('mailtype' => 'html'));
+					$B->load->library('parser');
 
-					$CI->email->from($this->from, 'Bancha contact form');
-					$CI->email->to($this->to);
-					$CI->email->subject($this->subject);
+					$B->email->from($this->from, 'Bancha contact form');
+					$B->email->to($this->to);
+					$B->email->subject($this->subject);
 
 					$msg = parent::render('template_email');
 
-					$parsed_msg = $CI->parser->parse_string($msg, array(
-						'firstname'	=> $CI->input->post('firstname'),
-						'lastname'	=> $CI->input->post('lastname'),
-						'email'		=> $CI->input->post('email'),
-						'message'	=> $CI->input->post('message')
+					$parsed_msg = $B->parser->parse_string($msg, array(
+						'firstname'	=> $B->input->post('firstname'),
+						'lastname'	=> $B->input->post('lastname'),
+						'email'		=> $B->input->post('email'),
+						'message'	=> $B->input->post('message')
 					), TRUE);
 
-					$CI->email->message($parsed_msg);	
+					$B->email->message($parsed_msg);	
 
-					$done = $CI->email->send();
+					$done = $B->email->send();
 					break;
 				default:
 					show_error('Contact form Module action not set.');
