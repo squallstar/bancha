@@ -103,11 +103,12 @@ api/record/:action/:type
 * Method: **GET/POST**
 * Response: **Json**
 
-URI Params
+**URI Params:**
+
 * action: "save", "publish", "depublish"
 * type: The type id or name
 
-Any other **appended parameter** will be used for the **record data**. Below you can see an example of how looks like a sample call::
+Any other **appended parameter** will be used for the **record data**. Below you can see an example of how a sample call looks like::
 
     http://example.org/admin/api/record/save/Blog?title=Hello&content=World
 
@@ -130,7 +131,9 @@ api/logout
 
 * Method: **GET/POST**
 * Response: **Json**
-* Param: **token**::
+* Params: **token** (string)
+
+::
 
     token = abcdefg123456789
 
