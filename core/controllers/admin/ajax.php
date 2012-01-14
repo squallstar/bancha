@@ -115,7 +115,7 @@ Class Core_Ajax extends Bancha_Controller
 
 		$this->view->set('repository_files', $repository);
 
-		$this->view->render_layout('content/documents_finder', FALSE);
+		$this->view->render_layout('repository/ajax-finder', FALSE);
 	}
 
 	public function get_relation()
