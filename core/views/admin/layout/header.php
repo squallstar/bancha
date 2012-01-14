@@ -98,6 +98,11 @@ $menu = array(
 				'acl'	=> 'types|manage',
 			),
 			array(
+				'name'	=> _('Repository'),
+				'url'	=> $_admin_url . 'repository',
+				'segment' => 'repository',
+			),
+			array(
 				'name'	=> _('Settings'),
 				'url'	=> $_admin_url . 'settings',
 				'acl'	=> 'settings|manage',
