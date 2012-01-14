@@ -14,8 +14,9 @@ $my_iduser = $this->auth->user('id');
 		<h2><?php echo _('Users list')?></h2>
 
 		<ul>
+			<?php if ($acl_edit) { ?>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url('users/edit/'); ?>"><?php echo _('Add new user'); ?></a></li>
-			<?php if ($acl_groups) { ?>
+			<?php } if ($acl_groups) { ?>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/bookmark.png'); ?>" /> <a href="<?php echo admin_url('users/groups/'); ?>"><?php echo _('Groups and permissions'); ?></a></li>
 			<?php } ?>
 		</ul>
@@ -57,10 +58,10 @@ $my_iduser = $this->auth->user('id');
 				.'<td>'.$user->name.'</td>'
 				.'<td>'.$user->surname.'</td>'
 				.'<td>'.$user->email.'</td>'
-				.($acl_groups ? '<td>'.($user->id_group ? '<a href="'.admin_url('users/groups/edit/'.$user->id_group).'">'._($user->group_name).'</a>' : '') . '</td>' : ($user->id_group ? _($user->group_name) : ''));
+				.'<td>'.($acl_groups ? ($user->id_group ? '<a href="'.admin_url('users/groups/edit/'.$user->id_group).'">'._($user->group_name).'</a>' : '') : ($user->id_group ? _($user->group_name) : '')) . '</td>';
 
 			echo '<td class="delete">'
-					.($acl_edit ? '<a href="'.admin_url('users/delete/'.$user->id_user).'" onclick="return confirm(\''._('Do you want to delete this user?').'\');">'._('Delete').'</a>' : '')
+					.($acl_edit && $user->id_user != $this->auth->user('id') ? '<a href="'.admin_url('users/delete/'.$user->id_user).'" onclick="return confirm(\''._('Do you want to delete this user?').'\');">'._('Delete').'</a>' : '')
 				.'</td>';
 		echo '</tr>';
 	}

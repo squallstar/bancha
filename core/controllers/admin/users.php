@@ -33,7 +33,7 @@ Class Core_Users extends Bancha_Controller
 	}
 
 	public function type() {
-		//Legacy: breadcrumbs in edit_user will use this route to go back to list
+		//Breadcrumbs in edit_user uses this route to go back to list
 		$this->lista();
 	}
 
@@ -77,7 +77,11 @@ Class Core_Users extends Bancha_Controller
 	public function edit($id_username='')
 	{
 		$this->auth->check_permission('users', 'list');
-		$this->auth->check_permission('users', 'add');
+
+		//A user can always edit itself
+		if ($id_username != $this->auth->user('id')) {
+			$this->auth->check_permission('users', 'add');	
+		}
 
 		$this->load->categories();
         $this->load->hierarchies();
@@ -103,8 +107,10 @@ Class Core_Users extends Bancha_Controller
 					$user->set('password', $tmp_user->get('password'));
 				}
 
+			} else {
+				$user->set('password', md5($user->get('password')));
 			}
-			$user->set('password', md5($user->get('password')));
+			
 
 			if ($id_username != '' && !$this->auth->has_permission('users', 'groups')) {
 				//User can't edit groups
@@ -148,6 +154,8 @@ Class Core_Users extends Bancha_Controller
 					$user = $users[0];
 				}
 			}	
+			$user->set('password', '');
+			$user->set('password_confirm', '');
 		} else {
 			//New user
 			$this->view->set('user', FALSE);
@@ -162,6 +170,18 @@ Class Core_Users extends Bancha_Controller
     			$type_definition['fields'][$field_name]['options'] = $this->records->get_field_options($field_value);
         	}
         }
+
+        //Normal users can't edit the group
+		if (! $this->auth->has_permission('users', 'groups')) {
+			$i = 0;
+			foreach ($type_definition['fieldsets'] as $fieldset) {
+				if ($fieldset['name'] == 'Groups') {
+					unset($type_definition['fieldsets'][$i]);
+					break;
+				}
+				$i++;
+			}
+		}
 
 		$this->view->set('tipo', $type_definition);
 		$this->view->set('_section', 'users');

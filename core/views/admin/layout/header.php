@@ -81,6 +81,7 @@ $menu = array(
 			array(
 				'name'	=> _('Groups and permissions'),
 				'url'	=> $_admin_url . 'users/groups',
+				'acl'	=> 'users|groups',
 				'altsegment' => 'groups'
 			)
 		)
