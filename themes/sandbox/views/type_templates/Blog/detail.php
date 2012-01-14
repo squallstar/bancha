@@ -19,7 +19,13 @@ if ($this->input->post('message')) {
  			->set('date_insert', time())
  			->set('post_id', $record->id);
  	
- 	$ok = $this->records->save($comment);
+ 	//We save the comment
+ 	$pkey = $this->records->save($comment);
+
+ 	//And here we publish it
+ 	if ($pkey) {
+ 		$this->records->publish($pkey, 'Comments');
+ 	}
 }
 
 //Then we get the comments linked to the current post that we are viewing
@@ -38,7 +44,7 @@ $comments =& $record->related('comments');
 
 <h3><?php echo count($comments); ?> Comments</h3>
 <?php
-//We display the comments
+//Here we display the comments
 if (is_array($comments) && count($comments)) {
 	echo '<ul>';
 	foreach ($comments as $comment) {

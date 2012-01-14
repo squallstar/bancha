@@ -8,6 +8,7 @@ ChangeLog
 - Big refactor and improvements on the Users and Groups ACL.
 - More documentation on the database application config file.
 - Added a remove() function that deletes a single key on the Record Object class.
+- Comments on the sandbox blog post detail are now automatically published.
 
 
 **v 1.0.5** (2012-01-09)
