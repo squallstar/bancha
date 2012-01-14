@@ -4,12 +4,14 @@ ChangeLog
 
 **v 1.0.6** (2012-01-14)
 
+- New administration page: Image repository (to manage your media files)
 - Password are now stored with standard md5 encryption.
 - Big refactor and improvements on the Users and Groups ACL.
+- Issue #92 corrected (users can delete the user's own)
 - More documentation on the database application config file.
 - Added a remove() function that deletes a single key on the Record Object class.
 - Comments on the sandbox blog post detail are now automatically published.
-- Core dispatchers have been moved outside the library folder.
+- Core dispatchers have been moved outside the library folder and can now be extended such as other classes.
 
 
 **v 1.0.5** (2012-01-09)
@@ -22,6 +24,7 @@ ChangeLog
 - Now you can select to serve the homepage without the initial 301 redirect: this results in a big speed improvement (active by default - you can disable it on a variable placed into the website config file).
 - New method on the tree models: set_request_uri()
 - New blog detail view (with comments) added to the boilerplate
+
 
 **v 1.0.4** (2012-01-07)
 
