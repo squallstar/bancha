@@ -2,6 +2,12 @@
 ChangeLog
 ######################
 
+**v 1.0.7** (Planned)
+
+- IMPORTANT: The home template has been renamed to homepage.php (from home.php) - check out your content types schemes and view files.
+- Removed some old english localizations
+
+
 **v 1.0.6** (2012-01-14)
 
 - New administration page: Image repository (to manage your media files)
