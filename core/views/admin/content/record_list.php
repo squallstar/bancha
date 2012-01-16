@@ -20,7 +20,7 @@ $fields = array_keys($tipo['fields']);
 
 	<div class="block_content">
 
-	<p class="breadcrumb"><a href="<?php echo admin_url($_section); ?>"><?php echo $tipo['tree']?'Pagine':'Contenuti'; ?></a> &raquo; <?php echo $tipo['description']; ?></p>
+	<p class="breadcrumb"><a href="<?php echo admin_url($_section); ?>"><?php echo $tipo['tree']?_('Pages'):_('Contents'); ?></a> &raquo; <?php echo $tipo['description']; ?></p>
 
 	<?php echo $this->view->get_messages(); ?>
 
