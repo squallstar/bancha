@@ -67,6 +67,7 @@ function tree($which='')
 	switch($which)
 	{
 		case '':
+		case 'default':
 			$tree = $B->view->get('tree');
 			if (!$tree) {
 				return $B->tree->get_default();
