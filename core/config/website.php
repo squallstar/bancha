@@ -56,7 +56,7 @@ $config['admin_languages'] = array(
 /* ENCRYPT PASSWORDS
  * Select if the user passwords needs to be encrypted
  */
-$config['encrypt_password'] = TRUE;
+$config['encrypt_password'] = FALSE;
 
 /*
  * PREPEND URI LANGUAGE

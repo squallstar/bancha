@@ -54,6 +54,10 @@ $config['prepend_uri_language'] = FALSE;
 /* --------------------- SECONDARY SETTINGS ------------------------------- */
 /* ------------------------------------------------------------------------ */
 
+/* ENCRYPT PASSWORDS
+ * Select if the user passwords needs to be encrypted
+ */
+$config['encrypt_password'] = TRUE;
 
 /*
 * SHARED API TOKEN
