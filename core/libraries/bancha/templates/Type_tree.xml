@@ -111,7 +111,7 @@
 			<list>true</list>
 			<options>
 				<option value="default">Default</option>
-				<option value="home">Homepage</option>
+				<option value="homepage">Homepage</option>
 			</options>
 			<default>default</default>
 		</field>
