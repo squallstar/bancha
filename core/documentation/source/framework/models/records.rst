@@ -2,7 +2,7 @@
 Records (Contents)
 ==================
 
-Records model is used to extract the records of Bancha. Is automatically loaded by the framework, and you can access it on the MVC in these two simple ways::
+The **Records model** is the heart of Bancha! Is used to extract the records of Bancha. Is automatically loaded by the framework, and you can access it on the MVC in these two simple ways::
 
     // 1. Around the MVC
     $this->records

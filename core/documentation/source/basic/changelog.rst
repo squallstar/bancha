@@ -6,6 +6,8 @@ ChangeLog
 
 - IMPORTANT: The home template has been renamed to homepage.php (from home.php) - check out your content types schemes and view files.
 - Removed some old english localizations
+- Pages and tree documentation added
+- Added a "default" switch on the tree() function (frontend helper)
 
 
 **v 1.0.6** (2012-01-14)

@@ -22,6 +22,8 @@ Models
    :maxdepth: 1
 
    models/records
+   models/pages
+   models/tree
    models/settings
 
 
