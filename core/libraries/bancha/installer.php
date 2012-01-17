@@ -474,7 +474,7 @@ Class Installer
 				 ->set('uri', 'home')
 				 ->set('lang', $lang)
 				 ->set('action', 'text')
-				 ->set('view_template', 'home')
+				 ->set('view_template', 'homepage')
 			;
 			$page_id = $this->CI->records->save($page);
 			$this->CI->records->publish($page_id, 'Menu');
