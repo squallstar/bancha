@@ -53,8 +53,8 @@ if (is_array($comments) && count($comments)) {
 		<label for="author"><?php echo _('Name'); ?></label><br />
 		<input type="text" id="author" name="author" /><br /><br />
 
-		<label for="author"><?php echo _('E-mail address'); ?></label><br />
-		<input type="text" id="author" name="author" /><br /><br />
+		<label for="email"><?php echo _('E-mail address'); ?></label><br />
+		<input type="text" id="email" name="email" /><br /><br />
 
 		<label for="message"><?php echo _('Message'); ?></label><br />
 		<textarea id="name" name="message"></textarea><br /><br />
