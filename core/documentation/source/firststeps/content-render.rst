@@ -40,6 +40,8 @@ In our example, these are the operations performed under the hood:
 
 When you click on a record (a post), the differences are that only the chosen record will be extracted, and the rendered view will be **Blog/detail.php** instead of **Blog/list.php**.
 
+More information can be found here (on the **Content-Types templates** section): :doc:`/themes/create/index`.
+
 
 -------------
 External link
