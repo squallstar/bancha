@@ -21,14 +21,14 @@ $is_spam = FALSE;
 $akismet_key = $this->settings->get('akismet_key', 'Services');
 if (strlen($akismet_key))
 {	
-	$this->load->library('external/akismet', array(
+	$this->load->extlibrary('akismet', array(
 		'key'		=> $akismet_key,
 		'author'	=> $author,
 		'message'	=> $message,
 		'email'		=> $email
 	));
 
-	$is_spam = $this->akismet->is_spam();
+	$is_spam = bancha()->akismet->is_spam();
 }
 
 if (!$is_spam)
