@@ -80,3 +80,30 @@ As you can see opening the **core/views/content_render.php** file, basically the
 When the case is **single** or **list**, the **views/type_templates** will be used.
 
 **Note:** between the **layout** and the **content_render**, there's the **template** (next section).
+
+
+^^^^^^^^^^^^
+3) Templates
+^^^^^^^^^^^^
+
+Each Page record has a **view_template** attribute that decide which template should be rendered for that page.
+Templates are contained inside the folder **views/templates**.
+
+Take a look at the following example that implements a basic template::
+
+    render('header');
+
+    echo page('title');
+    echo '<p>' . page('content') . '</p>';
+
+    render('footer');
+
+
+The **sandbox** theme ships with two templates: the **home.php** template and the **default.php** template.
+This second one, is the heart of the theme because it calls the Content render::
+
+    render('header');
+
+    content_render();
+
+    render('footer');
