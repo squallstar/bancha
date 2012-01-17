@@ -4,10 +4,14 @@ ChangeLog
 
 **v 1.0.7** (Planned)
 
+- UPDATING FROM PREVIOUS VERSIONS: add the new "Services" fieldset on your application/xml/Settings.xml to include the Akismet support that we added
 - IMPORTANT: The home template has been renamed to homepage.php (from home.php) - check out your content types schemes and view files.
 - Removed some old english localizations
 - Pages and tree documentation added
 - Added a "default" switch on the tree() function (frontend helper)
+- Akismet anti-spam library added (libraries/external/akismet.php)
+- Akismet support is now included on the comments saving script (sandbox theme)
+- The comments saving script has been moved outside the type_templates. Now the script is located in views/extra/comments-save.php
 
 
 **v 1.0.6** (2012-01-14)
