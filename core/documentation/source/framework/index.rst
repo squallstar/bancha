@@ -10,6 +10,7 @@ Core
    :maxdepth: 1
 
    core/controllers
+   core/dispatchers
    core/record
    core/imagepresets
 
@@ -39,6 +40,7 @@ Helpers
    helpers/menu
    helpers/breadcrumbs
 
+
 ---
 API
 ---
@@ -50,11 +52,3 @@ Bancha has a bunch of **Application programming interfaces** that helps you whil
 
    api/index
 
--------
-Other
--------
-
-.. toctree::
-   :maxdepth: 1
-
-   dispatchers/index
