@@ -50,25 +50,25 @@ class Akismet extends Core
 		}
 
 		if (isset($config['author'])) {
-			$akismet->setCommentAuthor($config['author']);
+			$this->setCommentAuthor($config['author']);
 		}
 
 		if (isset($config['website'])) {
-			$akismet->setCommentAuthorURL($config['website']);
+			$this->setCommentAuthorURL($config['website']);
 		}
 
 		if (isset($config['email'])) {
-			$akismet->setCommentAuthorEmail($config['email']);
+			$this->setCommentAuthorEmail($config['email']);
 		}
 
 		if (isset($config['message'])) {
-			$akismet->setCommentContent($config['message']);
+			$this->setCommentContent($config['message']);
 		}
 
 		if (isset($config['permalink'])) {
-			$akismet->setPermalink($config['permalink']);
+			$this->setPermalink($config['permalink']);
 		} else {
-			$akismet->setPermalink(current_url());
+			$this->setPermalink(current_url());
 		}
 		
 		// Set some default values
@@ -77,7 +77,7 @@ class Akismet extends Core
 		$this->akismetVersion = '1.1';
 		
 		// Start to populate the comment data
-		$this->comment['blog'] = $websiteURL;
+		$this->comment['blog'] = $this->websiteURL;
 		$this->comment['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
 		
 		if(isset($_SERVER['HTTP_REFERER'])) {
@@ -147,7 +147,8 @@ class Akismet extends Core
 	 *	@return		bool	True if the comment is spam, false if not
 	 *  @throws		Will throw an exception if the API key passed to the constructor is invalid.
 	 */
-	public function is_spam() {
+	public function is_spam()
+	{
 		$response = $this->sendRequest($this->getQueryString(), $this->banchaApiKey . '.rest.akismet.com', '/' . $this->akismetVersion . '/comment-check');
 		
 		if($response[1] == 'invalid' && !$this->isKeyValid()) {
