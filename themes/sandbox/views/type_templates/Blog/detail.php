@@ -12,23 +12,13 @@
  */
 
 //Here you can save a new comment when a form is posted
-if ($this->input->post('message')) {
- 	$comment = new Record('Comments');
- 	$comment->set('content', $this->input->post('message'))
- 			->set('author', $this->input->post('author'))
- 			->set('date_insert', time())
- 			->set('post_id', $record->id);
- 	
- 	//We save the comment
- 	$pkey = $this->records->save($comment);
-
- 	//And here we publish it
- 	if ($pkey) {
- 		$this->records->publish($pkey, 'Comments');
- 	}
+if ($this->input->post('message') && $this->input->post('author'))
+{
+	//Check the sandbox/views/extra/comments-save.php file
+	render('extra/comments-save');	
 }
 
-//Then we get the comments linked to the current post that we are viewing
+//Finally we get the comments linked to the current post that we are viewing
 $comments =& $record->related('comments');
 
 ?>
@@ -60,10 +50,13 @@ if (is_array($comments) && count($comments)) {
 <h3>Add a new comment</h3>
 <form action="<?php echo current_url(); ?>" method="post">
 	<fieldset>
-		<label for="author">Name</label><br />
+		<label for="author"><?php echo _('Name'); ?></label><br />
 		<input type="text" id="author" name="author" /><br /><br />
 
-		<label for="message">Message</label><br />
+		<label for="author"><?php echo _('E-mail address'); ?></label><br />
+		<input type="text" id="author" name="author" /><br /><br />
+
+		<label for="message"><?php echo _('Message'); ?></label><br />
 		<textarea id="name" name="message"></textarea><br /><br />
 
 		<input type="submit" value="<?php echo _('Send'); ?>" />
