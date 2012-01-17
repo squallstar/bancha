@@ -34,7 +34,7 @@ if (strlen($akismet_key))
 if (!$is_spam)
 {
 	$comment = new Record('Comments');
-	$comment->set('content', $message))
+	$comment->set('content', $message)
 			->set('author', $author)
 			->set('email', $email)
 			->set('date_insert', time())
