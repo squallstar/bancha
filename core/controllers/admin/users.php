@@ -280,7 +280,12 @@ Class Core_Users extends Bancha_Controller
 	 */
 	public function group_delete($group_id = '')
 	{
-		$done = $this->users->delete_group($group_id);
+		$done = FALSE;
+		if ($this->auth->user('group_id') == $group_id) {
+			$this->view->message('warning', _('You cannot delete your own group.'));
+		} else {
+			$done = $this->users->delete_group($group_id);
+		}
 
 		if ($done)
 		{
