@@ -12,6 +12,9 @@ ChangeLog
 - Akismet anti-spam library added (libraries/external/akismet.php)
 - Akismet support is now included on the comments saving script (sandbox theme)
 - The comments saving script has been moved outside the type_templates. Now the script is located in views/extra/comments-save.php
+- Deutsch translation added (thanks to Patrick Kriechbaumer @pk-informatics)
+- Issue #92 resolved
+- Groups/permissions view messages now should be working back again
 
 
 **v 1.0.6** (2012-01-14)

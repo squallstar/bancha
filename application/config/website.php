@@ -24,7 +24,8 @@ $config['installed_themes'] = array(
 | 2. Website languages
 |--------------------------------------------------------------------------
 |
-| Here goes all the website available languages
+| Here goes all the website available languages.
+| You can copy this array from the core/config/website.php file.
 |
 */
 $config['website_languages'] = array(
