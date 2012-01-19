@@ -45,6 +45,12 @@ $config['admin_languages'] = array(
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
 	),
+	'de' => array(
+		'name'			=> 'german',
+		'locale'		=> 'de_DE',
+		'description'	=> 'Deutsch',
+		'date_format'	=> 'd/m/Y'
+	),
 	'it' => array(
 		'name'			=> 'italian',
 		'locale'		=> 'it_IT',
