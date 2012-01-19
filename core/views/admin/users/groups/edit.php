@@ -4,8 +4,6 @@ $this->load->helper('form');
 <div class="block withsidebar">
 
 	<div class="block_head">
-		<div class="bheadl"></div>
-		<div class="bheadr"></div>
 
 		<h2><?php echo $group ? _('Manage group').': '._($group->group_name) : _('Add group'); ?></h2>
 
@@ -56,6 +54,4 @@ echo form_close();
 ?>
 		</div>
 	</div>
-	<div class="bendl"></div>
-	<div class="bendr"></div>
 </div>

@@ -6,8 +6,6 @@ $this->load->helper('text');
 <div class="block">
 
 	<div class="block_head">
-		<div class="bheadl"></div>
-		<div class="bheadr"></div>
 
 		<h2><?php echo _('Groups and permissions'); ?></h2>
 
@@ -21,8 +19,7 @@ $this->load->helper('text');
 	
 	<p class="breadcrumb"><a href="<?php echo admin_url('users/groups'); ?>"><?php echo _('Groups and permissions'); ?></a> &raquo; <?php echo _('List'); ?></p>
 
-	<?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
-
+	<?php echo $this->view->get_messages(); ?>
 
 		<form action="" method="post">
 
@@ -42,12 +39,10 @@ $this->load->helper('text');
 <?php
 	foreach ($groups as $group) {
 		echo '<tr>';
-
-			//Campi ricorrenti
 			echo '<td>'.$group->id_group.'</td>'
 				.'<td><a href="'.admin_url('users/groups/edit/'.$group->id_group).'">'._($group->group_name).'</a></td>';
 			echo '<td class="delete">'
-					.'<a href="'.admin_url('users/group_delete/'.$group->id_group).'" onclick="return confirm(\''._('Do you want to delete this group?').'\');">'._('Delete group').'</a>'
+					.($this->auth->user('group_id') != $group->id_group ? '<a href="'.admin_url('users/group_delete/'.$group->id_group).'" onclick="return confirm(\''._('Do you want to delete this group?').'\');">'._('Delete group').'</a>' : '')
 				.'</td>';
 		echo '</tr>';
 	}
@@ -61,9 +56,6 @@ $this->load->helper('text');
 	</form>
 
 	</div>
-
-	<div class="bendl"></div>
-	<div class="bendr"></div>
 </div>
 
 <?php
