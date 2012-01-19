@@ -64,6 +64,16 @@
 				<order_by>full_uri ASC</order_by>
 			</sql>
 		</field>
+		<field id="website_homepage_de">
+			<type>select</type>
+			<description>Website homepage (Deutsch)</description>
+			<sql cache="false">
+				<select>full_uri as name, full_uri as value</select>
+				<from>pages</from>
+				<where>lang = 'de'</where>
+				<order_by>full_uri ASC</order_by>
+			</sql>
+		</field>
 	</fieldset>
 	<fieldset name="Services" icon="user_comment">
 		<field id="akismet_key">
