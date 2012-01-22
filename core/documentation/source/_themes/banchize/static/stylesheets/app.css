@@ -3,20 +3,24 @@
 ----------------------------------------- */
 
 body, html {
-	background:#F5F5F5; 
+	background:url(../asset/bg.jpg) repeat #F5F5F5; 
 	color:#000;
 }
 a {
 	color:#20834a;
 }
 h1 {
-	font-size:38px;
+	font-size:34px;
 }
 h2 {
-	font-size:32px;
+	font-size:30px;
 }
 h3 {
 	font-size:26px;
+}
+h1, h2, h3, h4 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight:400;
 }
 .headerlink {
 	display:none;
