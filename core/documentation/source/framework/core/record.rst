@@ -68,4 +68,16 @@ If you set up a relation between two records (Read: :doc:`../../content-types/re
 More info: :doc:`../../content-types/relations/define` or :doc:`../../content-types/relations/use`.
 
 
+----------------------
+How to create reecords
+----------------------
+
+You can easily create, edit, publish, depublish and delete Record objects reading the following tutorial:
+
+.. toctree::
+   :maxdepth: 1
+
+   record-create
+
+
 Back to :doc:`../index`
