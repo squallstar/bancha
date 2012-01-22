@@ -206,25 +206,6 @@ Class Xml
       	show_error($this->CI->lang->_trans('Primary key or table not defined for the content type %n.', array('n' => '['.$safe_filename.']')), 500, _('XML parser: Error'));
     	}
 
-    	//Orderby condition
-    	if (isset($node->order_by)) {
-    		$orderby_attr = $node->order_by->attributes();
-    		$orderby_sort = strtoupper((string)$orderby_attr->sort);
-    		if ($orderby_sort != 'ASC' && $orderby_sort != 'DESC')
-    		{
-    			$orderby_sort = 'DESC';
-    		}
-    		$content['order_by'] = array(
-    			'field' => (string) $orderby_attr->field,
-    			'sort'	=> (string) $orderby_sort
-			);
-    	} else {
-    		$content['order_by'] = array(
-    			'field' => 'date_update',
-    			'sort'	=> 'DESC'
-			);
-    	}
-
     	//Parent types
     	if (isset($node->parents))
     	{
@@ -535,6 +516,33 @@ Class Xml
       		$content['fieldsets'][] = $fieldset;
 
     	} //end foreach fieldsets
+
+    	//Orderby condition
+    	if (isset($node->order_by)) {
+    		$orderby_attr = $node->order_by->attributes();
+
+    		$orderby_sort = strtoupper((string)$orderby_attr->sort);
+    		if ($orderby_sort != 'ASC' && $orderby_sort != 'DESC')
+    		{
+    			$orderby_sort = 'DESC';
+    		}
+
+    		$orderby_field = (string)$orderby_attr->field;
+    		if (!in_array($orderby_field, $content['columns'])) {
+    			$orderby_field = 'date_update';
+    		}
+
+    		$content['order_by'] = array(
+    			'field' => (string) $orderby_field,
+    			'sort'	=> (string) $orderby_sort
+			);
+    	} else {
+    		$content['order_by'] = array(
+    			'field' => 'date_update',
+    			'sort'	=> 'DESC'
+			);
+    	}
+
     	return $content;
   	}
 
