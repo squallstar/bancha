@@ -38,6 +38,7 @@ If you need you are free to create more tables in addition to the records table.
 When you use external tables, Bancha can generate and keep updated these tables automatically for you (added in **v1.0.2**): click on the **Rebuild tables** link on the **Content list** view and you're done!
 
 The **order_by** node, define the order of the records on the administration list views. By default, is set to **date_update** so the records are ordered by their last update date. You may change it to **date_update** if you are managing the posts of a blog, 'cos you can see the real order of the posts on the website.
+**Note: you can order records only by a table physical column**.
 
 The **<categories>** and **<hierarchies>** nodes says if content type has to show the Categories and Hierarchies sections. These sections makes you able to make sub-groups of records, such as the categories of a blog.
 
