@@ -5,6 +5,7 @@
 	<descriptions label="{description}" new="{label_new}"/>
 	<tree>false</tree>
 	<table key="id_record" production="records" stage="records_stage" />
+	<order_by field="date_update" sort="DESC" />
 	<categories>true</categories>
 	<hierarchies>true</hierarchies>
 	<fieldset name="General informations" icon="page">

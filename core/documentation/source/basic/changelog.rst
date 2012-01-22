@@ -13,9 +13,10 @@ ChangeLog
 - Akismet support is now included on the comments saving script (sandbox theme)
 - The comments saving script has been moved outside the type_templates. Now the script is located in views/extra/comments-save.php
 - Deutsch translation added (thanks to Patrick Kriechbaumer @pk-informatics)
-- Issue #92 resolved
+- Issue #92 resolved (users/groups)
 - Groups/permissions view messages now should be working back again
 - Issue #94 resolved (cached page encoding bug)
+- Added an "order_by" condition on the content types xml scheme (issue #88). Please check the documentation to see how to implement it.
 
 
 **v 1.0.6** (2012-01-14)

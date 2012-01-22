@@ -213,7 +213,7 @@ Class Core_Contents extends Bancha_Controller
         //We get the records
         $records = $this->records->type($tipo)
         						 ->set_adminlist(TRUE)
-        						 ->order_by('date_update', 'DESC')
+        						 ->order_by($type['order_by']['field'], $type['order_by']['sort'])
         						 ->limit($pagination['per_page'], $page)
         						 ->get();
 

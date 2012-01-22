@@ -14,6 +14,7 @@ You can edit this file from the administration section (click on the type name o
         <descriptions label="Website pages" new="New page" />
         <tree>true</tree>
         <table key="id_record" production="records" stage="records_stage" />
+        <order_by field="date_update" sort="DESC" />
         <fieldset name="Sample fields">
             <field id="first"></field>
             <field id="second"></field>
@@ -35,6 +36,8 @@ The **<table>** node defines the production table, the staging table and the pri
 If you need you are free to create more tables in addition to the records table. If you define stage table (attribute), the content type will use that table as staging for the records (that table needs also to include a column named "published" defined as INT(1) DEFAULT 0).
 
 When you use external tables, Bancha can generate and keep updated these tables automatically for you (added in **v1.0.2**): click on the **Rebuild tables** link on the **Content list** view and you're done!
+
+The **order_by** node, define the order of the records on the administration list views. By default, is set to **date_update** so the records are ordered by their last update date. You may change it to **date_update** if you are managing the posts of a blog, 'cos you can see the real order of the posts on the website.
 
 The **<categories>** and **<hierarchies>** nodes says if content type has to show the Categories and Hierarchies sections. These sections makes you able to make sub-groups of records, such as the categories of a blog.
 
