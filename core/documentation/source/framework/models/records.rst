@@ -2,7 +2,7 @@
 Records (Contents)
 ==================
 
-The **Records model** is the heart of Bancha! Is used to extract the records of Bancha. Is automatically loaded by the framework, and you can access it on the MVC in these two simple ways::
+The **Records model** is the heart of Bancha! Is used to extract the :doc:`/framework/core/record` of Bancha. Is automatically loaded by the framework, and you can access it on the MVC in these two simple ways::
 
     // 1. Around the MVC
     $this->records
@@ -10,6 +10,8 @@ The **Records model** is the heart of Bancha! Is used to extract the records of 
     // 2. Inside the views of a theme using the find() function
     //    of the frontend helper that is automatically loaded by the themes.
     find()
+
+**Note:** to learn how to create or edit Records objects, read :doc:`/framework/core/record-create`.
 
 
 The model has a big number of functions that you can use to refine your extractions. First of all, you need to filter by one or more **Content types** as follows::

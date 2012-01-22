@@ -18,11 +18,9 @@ Then, you can set the values to the record using the **set** instance method::
     $post->set('title', 'My first post')->set('author', 'Nicholas');
 
 
-Finally, to **save a record** you can pass it to the :doc:`/framework/models/records` model::
+Finally, to **save a record** you can use the **save()** function, or you pass it to the :doc:`/framework/models/records` model (both solutions are equals)::
 
-    $pKey = $this->records->save($post, 'Blog');
-
-    $pKey = $this->records->save($comment, 'Comments');
+    $done = $post->save();
 
 
 Let's look at a further example. Here we create a new blog post and we link to that post a comment::
@@ -30,34 +28,25 @@ Let's look at a further example. Here we create a new blog post and we link to t
     $post = new Record('Blog');
     $post->set('title', 'My second post')->set('date_publish', time());
 
-    $pKey = $this->records->save($post, 'Blog');
+    $done = $post->save();
 
-    if ($pKey)
+    if ($done)
     {
     	$comment = new Record('Comments');
-    	$comment->set('author', 'Nicholas')->set('content', 'Hello!')->set('post_id', $pKey);
-
-    	$pKeyComment = $this->records->save($comment, 'Comments');
+    	$comment->set('author', 'Nicholas')->set('content', 'Hello!')->set('post_id', $post->id);
+    	$comment->save();
 
     	//We can also publish both records
-    	$this->records->publish($pKey, 'Blog');
-    	$this->records->publish($pKey, 'Comments');
+    	$post->publish();
+    	$comment->publish();
     }
 
 
 Finally, we delete all the things we created::
 
-    $comments = $post->related('comments');
+    $post->delete_related('comments');
+    $post->delete();
 
-    $this->records->delete_by_id($post->id, 'Blog');
-
-    if (count($comments))
-    {
-    	foreach ($comments as $comment)
-    	{
-    		$this->records->delete_by_id($comment->id, 'Comments');
-    	}
-    }
 
 See also: :doc:`/framework/models/records` model.
 

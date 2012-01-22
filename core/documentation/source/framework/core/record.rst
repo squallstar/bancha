@@ -31,6 +31,8 @@ Below you can find a sample implementation of the :doc:`../models/records` model
     	}
     }
 
+To learn how to create or edit Records objects, read :doc:`record-create`.
+
 
 ----------------
 Linked documents

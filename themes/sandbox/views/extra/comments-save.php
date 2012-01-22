@@ -41,11 +41,11 @@ if (!$is_spam)
 			->set('post_id', $record->id);
 
 	//We save the comment
-	$pkey = $this->records->save($comment);
+	$done = $comment->save();
 
 	//And here we publish it
-	if ($pkey) {
-		$this->records->publish($pkey, 'Comments');
+	if ($done) {
+		$comment->publish();
 	}
 }
 
