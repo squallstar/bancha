@@ -17,6 +17,7 @@ ChangeLog
 - Groups/permissions view messages now should be working back again
 - Issue #94 resolved (cached page encoding bug)
 - Added an "order_by" condition on the content types xml scheme (issue #88). Please check the documentation to see how to implement it.
+- Added a "View content" button on the flashmessage after saving a record throught the administration: click it to be redirected to that record on the website (needs a page that is listing content types of the same type of the record)
 
 
 **v 1.0.6** (2012-01-14)

@@ -363,18 +363,21 @@ Class Core_Contents extends Bancha_Controller
           			$this->pages->publish($record->id);
           		}
                 $msg = $this->lang->_trans('The content %n has been published.', array('n' => $content_edit_link));
+                $msg .= ' <a target="_blank" href="' . admin_url('preview/content/' . $tipo['name'] . '/' . $record->id) . '">' . _('View content') . ' &rarr;</a>';
                 $this->session->set_flashdata('message', $msg);
                 redirect(ADMIN_PUB_PATH.$this->_section.'/type/' . $tipo['name']);
             } else {
 
+            	//We add the preview link
+            	$saved_msg = _('The content has been saved.') . ' <a target="_blank" href="' . admin_url('preview/content/' . $tipo['name'] . '/' . $record->id) . '">' . _('View content') . ' &rarr;</a>';
 
                 if ($record_id == '')
                 {
                     //If it's a new record, we redirect to the same page (F5 refresh fix for duplicate records)
-                    $this->session->set_flashdata('message', _('The content has been saved.'));
+                    $this->session->set_flashdata('message', $saved_msg);
                     redirect(ADMIN_PUB_PATH.$this->_section.'/edit_record/' . $tipo['name'] . '/' . $record->id);
                 } else {
-                    $this->view->message('success', _('The content has been saved.'));
+                    $this->view->message('success', $saved_msg);
                 }
             }
 
