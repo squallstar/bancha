@@ -56,12 +56,12 @@ Class Record {
   			if (is_array($type))
   			{
   				$this->_tipo_def = $type;
-          $this->_tipo = $type['id'];
-          return;
+	            $this->_tipo = $type['id'];
+	            return;
   			} else if (!is_numeric($type))
   			{
-  				$CI = & get_instance();
-  				$type = $CI->content->type_id($type);
+  				$B =& get_instance();
+  				$type = $B->content->type_id($type);
   			}
   			$this->_tipo = $type;
   		}
@@ -434,5 +434,98 @@ Class Record {
     public function remove($key = '')
     {
         unset($this->_data[$key]);
+    }
+
+    public function save()
+    {
+    	$B =& get_instance();
+    	if (!isset($B->records))
+    	{
+    		$B->load->records();
+    	}
+    	$type_name = $B->content->type_name($this->_tipo);
+    	$this->id = $B->records->save($this, $type_name);
+    	return $this->id ? TRUE : FALSE;
+    }
+
+    public function publish()
+    {
+    	if (!$this->id) return FALSE;
+
+    	$B =& get_instance();
+    	if (!isset($B->records))
+    	{
+    		$B->load->records();
+    	}
+    	$type_name = $B->content->type_name($this->_tipo);
+    	return $B->records->publish($this->id, $type_name);
+    }
+
+    public function depublish()
+    {
+    	if (!$this->id) return FALSE;
+
+    	$B =& get_instance();
+    	if (!isset($B->records))
+    	{
+    		$B->load->records();
+    	}
+    	$type_name = $B->content->type_name($this->_tipo);
+    	return $B->records->depublish($this->id, $type_name);
+    }
+
+    public function delete()
+    {
+    	$B =& get_instance();
+    	if (!isset($B->records))
+    	{
+    		$B->load->records();
+    	}
+    	return $B->records->delete_by_id($this->id);
+    }
+
+    public function delete_related($relation_name)
+    {
+        $B =& get_instance();
+
+        if (!$this->_tipo_def)
+        {
+            $tipo = & $B->content->type($this->_tipo);
+            if (!$tipo) return FALSE;
+        } else {
+            $tipo = $this->_tipo_def;
+        }
+
+        if (isset($tipo['relations'][$relation_name]))
+        {
+            $rel = $tipo['relations'][$relation_name];
+
+            if (!isset($rel['with']) || !isset($rel['to']) || !isset($rel['from']))
+            {
+            	log_message('error', 'The relation ' . $relation_name . ' is incomplete Please check your scheme.');
+            }
+
+            $B->records->type($rel['with'])
+                        ->where($rel['to'], $this->get($rel['from']));
+
+            $type = strtolower($rel['type']);
+
+            if (in_array($type, array('1-0', '1-1', '0-1')))
+            {
+                $obj = $B->records->get_first();
+                $obj->delete();
+            } else {
+                $objs = $B->records->get();
+                if (is_array($objs) && count($objs))
+                {
+                	foreach ($objs as $obj)
+                	{
+                		$obj->delete();
+                	}
+                }
+            }
+            return TRUE;
+        }
+        return FALSE;
     }
 }
