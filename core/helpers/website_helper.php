@@ -166,6 +166,12 @@ function semantic_url($object = '')
 		$uri = (string)$object;
 	}
 
+	if (!$page)
+	{
+		//When the page is not set, we have no informations about the record so we need to search on the DB
+		return site_url($B->pages->get_semantic_url($object->_tipo) . '/' . $uri);
+	}
+
 	if ($record)
 	{
 		if ($page->get('action') == 'single')
