@@ -2,7 +2,7 @@ var myApp = myApp || {};
 
 myApp = (function () {
     // All here is PRIVATE
-	var bindHooks = function (hooks, context) {
+    var bindHooks = function (hooks, context) {
 		var c = context || this,
 			h;
 		if (!hooks) {
@@ -15,12 +15,25 @@ myApp = (function () {
 				hooks[h].call(c, h);
 			}
 		}
-	};
+	},
+    config = {
+		// Your configuration
+        language: 'en',
+	    defaults: {
+	        // Your default values
+	    }
+    },
+    helper = {
+        // Your helpers
+    },
+    handler = {
+        // Your handlers
+    };
     return {
         // All here is PUBLIC
         init: function () {
             var hooks = {
-            	// Usage Sample
+                // Usage Sample
 				//'#wrapper' : function () {
 				//	$('#wrapper').hide().fadeIn();
 				//}
@@ -31,18 +44,6 @@ myApp = (function () {
         }
     };
 })();
-
-myApp.config = {
-	// Your configuration
-};
-
-myApp.helper = {
-	// Your helpers
-};
-
-myApp.handler = {
-	// Your handlers
-};
 
 
 (function(){ 
