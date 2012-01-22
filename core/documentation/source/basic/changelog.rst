@@ -15,6 +15,7 @@ ChangeLog
 - Deutsch translation added (thanks to Patrick Kriechbaumer @pk-informatics)
 - Issue #92 resolved
 - Groups/permissions view messages now should be working back again
+- Issue #94 resolved (cached page encoding bug)
 
 
 **v 1.0.6** (2012-01-14)

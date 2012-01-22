@@ -161,6 +161,12 @@ class Bancha_Output extends CI_Output
 			}
 		}
 
+		//Sets the default content-type and charset
+		if (!count($this->headers))
+		{
+			$this->set_header('Content-Type: text/html; charset=UTF-8');
+		}
+
 		// Display the cache
 		$this->_display(str_replace($match['0'], '', $cache));
 		return TRUE;
