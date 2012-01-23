@@ -1,9 +1,9 @@
-var myApp = myApp || {};
-
-myApp = (function () {
+var myApp = (function ($) {
+    // Thank you @dwightjack for the binghooks
     // All here is PRIVATE
+    
     var bindHooks = function (hooks, context) {
-		var c = context || this,
+    	var c = context || this,
 			h;
 		if (!hooks) {
 			return;
@@ -43,9 +43,5 @@ myApp = (function () {
 			return this;
         }
     };
-})();
-
-
-(function(){ 
-	myApp.init(); 
-})(); 
+})(jQuery);
+$(document).ready(myApp.init());
