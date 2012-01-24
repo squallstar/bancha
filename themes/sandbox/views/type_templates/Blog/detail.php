@@ -40,7 +40,7 @@ if (is_array($comments) && count($comments)) {
 	foreach ($comments as $comment) {
 		echo '<li>' . date('d/m/Y H:i', $comment->get('date_insert'))
 		   . ' by <strong>' . $comment->get('author') . '</strong>'
-		   . '<p>' . $comment->get('content') . '</p></li>';
+		   . '<p>' . htmlentities($comment->get('content')) . '</p></li>';
 	}
 	echo '</ul>';
 }
