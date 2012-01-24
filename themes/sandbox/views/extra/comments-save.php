@@ -12,9 +12,9 @@
  *
  */
 
-$author = $this->input->post('author');
-$message = $this->input->post('message');
-$email = $this->input->post('email');
+$author = $this->input->post('author', TRUE);
+$message = strip_tags($this->input->post('message', TRUE));
+$email = $this->input->post('email', TRUE);
 
 $is_spam = FALSE;
 

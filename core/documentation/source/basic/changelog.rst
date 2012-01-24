@@ -2,7 +2,7 @@
 ChangeLog
 ######################
 
-**v 1.0.7** (2012-01-22)
+**v 1.0.7** (2012-01-24)
 
 - UPDATING FROM PREVIOUS VERSIONS: add the new "Services" fieldset on your application/xml/Settings.xml to include the Akismet support that we added
 - IMPORTANT: The home template has been renamed to homepage.php (from home.php) - check out your content types schemes and view files.
@@ -20,6 +20,7 @@ ChangeLog
 - Added a "View content" button on the flashmessage after saving a record throught the administration: click it to be redirected to that record on the website (needs a page that is listing content types of the same type of the record)
 - New methods added to the Record Objects: save(), publish(), depublish(), delete(), delete_related($relation_name);
 - Records documentation has been improved with the "Create record objects" page.
+- XSS Filter added on the login and the comments saving script.
 
 
 **v 1.0.6** (2012-01-14)
