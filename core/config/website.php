@@ -20,7 +20,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Bancha primary version
  */
-define('BANCHA_VERSION', '1.0.7');
+define('BANCHA_VERSION', '1.0.8');
 
 
 /* WEBSITE LANGUAGES
