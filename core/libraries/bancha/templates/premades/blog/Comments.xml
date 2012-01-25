@@ -7,7 +7,7 @@
 	<table key="id_record" production="records" stage="records_stage" />
 	<relation name="blog" type="1-1" with="Blog" from="post_id" to="id_record" />
 	<triggers>
-		<trigger on="insert, update, delete" field="post_id">
+		<trigger on="insert, update, delete, publish, depublish" field="post_id">
 			<sql action="recount" type="Blog" target="child_count" />
 		</trigger>
 	</triggers>
