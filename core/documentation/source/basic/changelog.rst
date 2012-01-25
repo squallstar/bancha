@@ -2,6 +2,12 @@
 ChangeLog
 ######################
 
+**v 1.0.8** (Planned)
+- Strip tags added on the events log (title field)
+- Triggers on publish/depublish now triggers the production tables instead of the stage ones
+- Comments count fix (triggers added on publish)
+
+
 **v 1.0.7** (2012-01-24)
 
 - UPDATING FROM PREVIOUS VERSIONS: add the new "Services" fieldset on your application/xml/Settings.xml to include the Akismet support that we added

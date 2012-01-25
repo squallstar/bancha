@@ -30,7 +30,7 @@ Class Model_events extends CI_Model {
 	{
 		$data = array(
 			'user_id'		=> $this->auth->user('id'),
-			'event'			=> $event,
+			'event'			=> strip_tags($event),
 			'content_id'	=> $content_id,
 			'content_name'	=> $content_name,
 			'content_type'	=> $content_type,
