@@ -737,7 +737,8 @@ Class Model_records extends CI_Model {
 		  		if (isset($tipo['triggers']) && count($tipo['triggers']))
 		  		{
 		  			$this->load->triggers();
-		  			$this->triggers->delegate($record)
+		  			$this->triggers->set_stage(TRUE)
+		  						   ->delegate($record)
 		  						   ->operation($action)
 		  						   ->add($tipo['triggers'][$action])
 		  						   ->fire();
@@ -891,7 +892,8 @@ Class Model_records extends CI_Model {
 	  		if (isset($this->_single_type['triggers']['publish']))
 	  		{
 	  			$this->load->triggers();
-	  			$this->triggers->delegate($this->get($stage_record[$this->primary_key]))
+	  			$this->triggers->set_stage(FALSE)
+	  						   ->delegate($this->get($stage_record[$this->primary_key]))
 	  						   ->operation('publish')
 	  						   ->add($this->_single_type['triggers']['publish'])
 	  						   ->fire();
@@ -956,7 +958,8 @@ Class Model_records extends CI_Model {
 	  		if (isset($this->_single_type['triggers']['depublish']))
 	  		{
 	  			$this->load->triggers();
-	  			$this->triggers->delegate($this->get($id))
+	  			$this->triggers->set_stage(FALSE)
+	  						   ->delegate($this->get($id))
 	  						   ->operation('publish')
 	  						   ->add($this->_single_type['triggers']['depublish'])
 	  						   ->fire();
