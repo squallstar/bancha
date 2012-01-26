@@ -528,7 +528,7 @@ Class Core_Contents extends Bancha_Controller
 
     			if (!$callback)
     			{
-    				$this->session->set_flashdata('message', 'Il record ['.$id_record.'] &egrave; stato eliminato.');
+    				$this->session->set_flashdata('message', $this->lang->_trans('The record %n has been deleted.', array('n' => $id_record)));
     				redirect(ADMIN_PUB_PATH.$this->_section.'/type/' . $tipo['name']);
     			} else {
                     return true;
