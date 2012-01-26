@@ -12,7 +12,7 @@ A Record is composed by some standard attributes such as its unique id and many 
     //Contains the record content type id
     $record->_tipo
 
-    //You can then retrieve the content type definition using the contents type() function
+    //You can then retrieve the content type definition of the record using the Content Class type() method:
     $type_def = $this->content->type( $record->_tipo );
 
     //Other values (physical of xml) can be retrieved using the get function:
@@ -46,6 +46,7 @@ If you need to manually extract the **documents** linked to a record, you can us
     $files = $record->get('files');
     $images = $record->get('images');
 
+
 **Note:** if you are extracting many records, use the **documents** method of the :doc:`../models/records` model for better query performances::
 
     $posts = find('Blog')->documents(TRUE)->limit(10)->get();
@@ -71,7 +72,7 @@ More info: :doc:`../../content-types/relations/define` or :doc:`../../content-ty
 
 
 ----------------------
-How to create reecords
+How to create records
 ----------------------
 
 You can easily create, edit, publish, depublish and delete Record objects reading the following tutorial:
