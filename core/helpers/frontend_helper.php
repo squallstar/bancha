@@ -64,6 +64,12 @@ function page($what='')
 function tree($which='')
 {
 	global $B;
+
+	if (is_numeric($which))
+	{
+		return $B->tree->get_default_branch($which);
+	}
+
 	switch($which)
 	{
 		case '':
@@ -76,11 +82,9 @@ function tree($which='')
 
 		case 'current':
 			return $B->tree->get_current_branch();
-			break;
 		
 		case 'breadcrumbs':
 			return $B->tree->breadcrumbs;
-			break;
 	}
 }
 

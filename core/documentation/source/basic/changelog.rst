@@ -6,6 +6,7 @@ ChangeLog
 - Strip tags added on the events log (title field)
 - Triggers on publish/depublish now triggers the production tables instead of the stage ones
 - Comments count fix (triggers added on publish)
+- the tree() function now accept also the starting page record id
 
 
 **v 1.0.7** (2012-01-24)
