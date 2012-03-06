@@ -56,7 +56,7 @@ class Bancha_Profiler extends CI_Profiler {
 		{
 			$output .= "\n\n<table style='width:100%; border:none'>\n";
 
-			foreach (array_reverse($rendered) as $val)
+			foreach ($rendered as $val)
 			{
 				$output .= "<tr><td style='width:100%;color:#000;background-color:#ddd;padding:5px'>".$val."&nbsp;&nbsp; </td></tr>\n";
 			}
