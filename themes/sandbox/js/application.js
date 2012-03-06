@@ -1,41 +1,41 @@
 var myApp = (function ($) {
-    // Thank you @dwightjack for the binghooks
+    // Thank you @dwightjack for the bindhooks
     // All here is PRIVATE
     
     var bindHooks = function (hooks, context) {
-    	var c = context || this,
-			h;
-		if (!hooks) {
-			return;
-		}
-		
-		for (h in hooks) {
-			var els = $(h) || [];
-			if (els.length > 0) {
-				hooks[h].call(c, h);
+			var c = context || this,
+				h;
+			if (!hooks) {
+				return;
 			}
-		}
-	},
-    config = {
-		// Your configuration
-        language: 'en',
-	    defaults: {
-	        // Your default values
-	    }
-    },
-    helper = {
-        // Your helpers
-    },
-    handler = {
-        // Your handlers
-    };
+			
+			for (h in hooks) {
+				var $els = $(h) || [];
+				if (els.length > 0) {
+					hooks[h].call(c, h, $els);
+				}
+			}
+		},
+		config = {
+			// Your configuration
+			language: 'en',
+			defaults: {
+				// Your default values
+			}
+		},
+		helper = {
+			// Your helpers
+		},
+		handler = {
+			// Your handlers
+		};
     return {
         // All here is PUBLIC
         init: function () {
             var hooks = {
                 // Usage Sample
-				//'#wrapper' : function () {
-				//	$('#wrapper').hide().fadeIn();
+				//'#wrapper' : function (sl, $el) {
+				//	$el.hide().fadeIn();
 				//}
 			 
 			};
@@ -44,4 +44,4 @@ var myApp = (function ($) {
         }
     };
 })(jQuery);
-$(document).ready(myApp.init());
+$(document).ready(myApp.init);
