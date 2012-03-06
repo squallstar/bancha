@@ -357,7 +357,7 @@ $config['array_field_types'] = array('multiselect', 'hierarchy');
  * CONTENT TYPE CUSTOM FEED
  * When is set to TRUE, type template file "feed.php" will be used to render the feeds
  */
-$config['type_custom_feeds'] = TRUE;
+$config['type_custom_feeds'] = FALSE;
 
 
 /* End of file website.php */

@@ -316,6 +316,7 @@ Class Dispatcher_default
 
 			if ($this->_CI->config->item('type_custom_feeds') && isset($type['name']))
 			{
+				$this->_CI->output->enable_profiler(FALSE);
 				$page->set('records', $records);
 				$this->_CI->view->set('page', $page);
 				$GLOBALS['page'] = & $page;
@@ -333,6 +334,7 @@ Class Dispatcher_default
 
 			if (count($records))
 			{
+				$url = site_url();
 				foreach ($records as $record)
 				{
 					$date_pub = $record->get('_date_publish');
