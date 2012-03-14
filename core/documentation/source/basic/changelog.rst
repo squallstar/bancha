@@ -3,6 +3,7 @@ ChangeLog
 ######################
 
 **v 1.0.8** (2012-01-02)
+
 - Strip tags added on the events log (title field)
 - Triggers on publish/depublish now triggers the production tables instead of the stage ones
 - Comments count fix (triggers added on publish)
