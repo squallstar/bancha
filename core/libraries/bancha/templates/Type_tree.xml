@@ -26,7 +26,7 @@
 		<field id="id_type" column="true" kind="numeric">
 			<type>hidden</type>
 			<list>true</list>
-			<default>1</default>
+			<default>{id}</default>
 		</field>
 		<field id="published" column="true" kind="numeric">
 			<type>hidden</type>

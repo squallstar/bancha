@@ -2,6 +2,22 @@
 ChangeLog
 ######################
 
+**v 1.1** (2012-03-19)
+
+- Bugfix corrected on the Type tree scheme
+- New Javascript application file by @domsmasher (html5 boilerplate)
+- Custom feed template is now available on the core/views/type_templates folder
+- Htaccess file now correctly supports subdirectories
+- Some fixes on the rss+json feeds
+- The tree() function now accepts also the starting page record id
+- XSS clean added on user inputs (such as the comments script on the sandbox theme)
+- Strip tags added on the event name when is displayed on the "Last events" page of the admin
+- Merge of the development branch (security fixes)
+- Some italian localizations
+- Rendered views array reversed to reflect their real order (on the website profiler)
+- Doc: 1.0.8 changelog list slightly changed
+
+
 **v 1.0.8** (2012-01-02)
 
 - Strip tags added on the events log (title field)

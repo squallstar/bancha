@@ -33,6 +33,10 @@
 						$link = '#';
 					}
 
+					if (isset($event->content_name)) {
+						$event->content_name = strip_tags($event->content_name);
+					}
+
 					switch ($event->event)
 					{
 						case 'update':

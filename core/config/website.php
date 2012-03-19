@@ -2,10 +2,10 @@
 /**
  * Bancha main configuration file.
  *
- * >>> WARNING: THIS SETTINGS ARE OVERWRITTEN BY THE APPLICATION CONFIG FILE <<<
+ * >>> WARNING: ALL THESE SETTINGS CAN BE OVERWRITTEN ON THE APPLICATION CONFIG FILE <<<
  *
  * This means that you can copy one of the following configs on the application
- * config file to extend or change the values.
+ * config file to extend or change its value.
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -20,7 +20,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Bancha primary version
  */
-define('BANCHA_VERSION', '1.0.8');
+define('BANCHA_VERSION', '1.1');
 
 
 /* WEBSITE LANGUAGES
