@@ -131,7 +131,7 @@ Class Installer
 		//Users table
 		$user_fields = array(
 		    'id_user'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
-			'date_update'	=> array('type'	=> 'INT'),
+			'date_update'	=> array('type'	=> 'INT', 'null' => TRUE),
             'id_type'		=> array('type'	=> 'INT', 'null' => TRUE),
             'xml'			=> array('type'	=> 'TEXT', 'null' => TRUE),
 		    'id_group'	=> array('type'	=> 'INT', 'unsigned'	=> TRUE, 'constraint' => 3, 'null' => FALSE),

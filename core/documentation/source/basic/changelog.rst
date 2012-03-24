@@ -2,6 +2,11 @@
 ChangeLog
 ######################
 
+**v 1.1.1** (2012-03-24)
+
+- Corrected a little "not null" bug while installing the DB on Postgres SQL
+
+
 **v 1.1** (2012-03-19)
 
 - Bugfix corrected on the Type tree scheme
