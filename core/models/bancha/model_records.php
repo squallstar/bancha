@@ -651,25 +651,44 @@ Class Model_records extends CI_Model {
 		        }
 	        }
 
+            //Child count is always an integer
+            if (isset($tipo['fields']['child_count']))
+            {
+                $data['child_count'] = isset($data['child_count']) ? (int)$data['child_count'] : 0;
+            }
+
+            //We cast numeric fields to integer to be sure that queries on real columns doesn't fail
+            foreach ($tipo['columns'] as $col_name) {
+                if (!isset($tipo['fields'][$col_name]) || !isset($field_scheme['kind'])) continue;
+                $field_scheme = $tipo['fields'][$col_name];
+                $kind = $field_scheme['kind'];
+                if ($kind && in_array($kind, array('int', 'numeric', 'number', 'integer'))) {
+                    if (isset($data[$col_name]))
+                    {
+                        $data[$col_name] = (int)$data[$col_name];
+                    } 
+                }
+            }
+
 	    	//We set the record as not published if the type has the stage table
-        	if ($tipo['stage'])
-        	{
-        		switch ($record->get('published'))
-        		{
-        			case 1:
-        			case 2:
-        				//2 means that the record is different between the environments
-        				$data['published'] = 2;
-        				break;
+      	if ($tipo['stage'])
+      	{
+      		switch ($record->get('published'))
+      		{
+      			case 1:
+      			case 2:
+      				//2 means that the record is different between the environments
+      				$data['published'] = 2;
+      				break;
 
-        			default:
-        				//0 means that the record exists just in stage
-        				$data['published'] = 0;
-        				break;
-        		}
-        	}
+      			default:
+      				//0 means that the record exists just in stage
+      				$data['published'] = 0;
+      				break;
+      		}
+      	}
 
-		  	$done = FALSE;
+	  	$done = FALSE;
 
 		  	//We choose an action for the triggers
 			$action = $id ? 'update' : 'insert';
@@ -714,7 +733,7 @@ Class Model_records extends CI_Model {
 
 	          	if ($this->db->insert($this->table_stage, $data))
 	          	{
-		            $done = $this->db->insert_id();
+		            $done = (int)$this->db->insert_id();
                     if (isset($data[$tipo['edit_link']]))
                     {
     	            	  $this->events->log('insert', $done, $data[$tipo['edit_link']], $data['id_type']);

@@ -93,6 +93,10 @@ Class Record {
     		if (!isset($data[$field_name])) continue;
 
         $value = $data[$field_name];
+
+        if (isset($field['kind']) && $field['kind'] == 'numeric') {
+          $value = (int)$value;
+        }
             
     		if ($CI->config->item('strip_website_url')
                 && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
