@@ -659,12 +659,12 @@ Class Model_records extends CI_Model {
         			case 1:
         			case 2:
         				//2 means that the record is different between the environments
-        				$data['published'] = '2';
+        				$data['published'] = 2;
         				break;
 
         			default:
         				//0 means that the record exists just in stage
-        				$data['published'] = '0';
+        				$data['published'] = 0;
         				break;
         		}
         	}

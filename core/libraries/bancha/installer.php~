@@ -525,8 +525,8 @@ Class Installer
 				$fields = array(
 					'post_id' => array('type' => 'INT', 'null' => TRUE)
 				);
-				$this->dbforge->add_column('records', $fields);
-				$this->dbforge->add_column('records_stage', $fields);
+				$this->dbforge->add_column('records', $fields[0]);
+				$this->dbforge->add_column('records_stage', $fields[0]);
 
 				//Then, we create a dummy post
 				$post = new Record('Blog');

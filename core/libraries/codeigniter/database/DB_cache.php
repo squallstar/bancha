@@ -76,7 +76,7 @@ class CI_DB_Cache {
 		}
 
 		// Add a trailing slash to the path if needed
-		$path = preg_replace("/(.+?)\/*$/", "\\1/",  $path);
+		$path = preg_replace('/(.+?)\/*$/', '\\1/',  $path);
 
 		if ( ! is_dir($path) OR ! is_really_writable($path))
 		{
@@ -170,7 +170,7 @@ class CI_DB_Cache {
 	 * @access	public
 	 * @return	bool
 	 */
-	function delete($segment_one = '', $segment_two = '')
+	public function delete($segment_one = '', $segment_two = '')
 	{
 		if ($segment_one == '')
 		{
@@ -195,7 +195,7 @@ class CI_DB_Cache {
 	 * @access	public
 	 * @return	bool
 	 */
-	function delete_all()
+	public function delete_all()
 	{
 		delete_files($this->db->cachedir, TRUE);
 	}

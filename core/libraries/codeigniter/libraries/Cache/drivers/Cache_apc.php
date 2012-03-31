@@ -68,6 +68,7 @@ class CI_Cache_apc extends CI_Driver {
 	 */
 	public function save($id, $data, $ttl = 60)
 	{
+		$ttl = (int) $ttl;
 		return apc_store($id, array($data, time(), $ttl), $ttl);
 	}
 	
@@ -141,15 +142,17 @@ class CI_Cache_apc extends CI_Driver {
 	 * is_supported()
 	 *
 	 * Check to see if APC is available on this system, bail if it isn't.
+	 *
+	 * @return	bool
 	 */
 	public function is_supported()
 	{
-		if ( ! extension_loaded('apc') OR ini_get('apc.enabled') != "1")
+		if ( ! extension_loaded('apc') OR ! (bool) @ini_get('apc.enabled'))
 		{
 			log_message('error', 'The APC PHP extension must be loaded to use APC Cache.');
 			return FALSE;
 		}
-		
+
 		return TRUE;
 	}
 
