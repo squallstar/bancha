@@ -18,19 +18,19 @@ id  : 3
 # The content type unique name
 name: Test
 
-# Labels and description
+# Labels and description used on the administration
 descriptions:
-	label : Tests
-	new   : New Test
+	full_name  : Tests
+	new_record : New Test
 
-# Pages must use "true", while simple contents uses "false"
+# Pages must use "true" (aka "tree structure"), while simple contents uses "false"
 tree: false
 
 # The tables (and the primary key) used to save the records
 table:
-	stage      : records_stage
-	production : records
-	key        : id_record
+	stage       : records_stage
+	production  : records
+	primary_key : id_record
 
 # The order on the administration lists
 order_by:

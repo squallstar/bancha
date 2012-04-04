@@ -146,7 +146,7 @@ Class Xml
     	$node = simplexml_load_file($filepath);
     	if (!$node)
     	{
-      		show_error('File not found: '.$filepath);
+      		show_error('Cannot parse the XML scheme: '. $filepath);
     	}
       return $node;
     }
@@ -158,24 +158,79 @@ Class Xml
      */
     function parse_yamlscheme($filepath)
     {
+      require_once(APPPATH . '/libraries/externals/spyc.php');
+      
       //1. parse yaml scheme
+      $yaml = Spyc::YAMLLoad($filepath) or show_error('Cannot parse the YAML scheme: ' . $filepath);
+      //debug($yaml);
+
       //2. convert yaml scheme to a new SimpleXML object
+      $xml = new SimpleXMLElement('<content id="' . $yaml['id'] . '"></content>');
+
+      //Base level (1)
+      $xml->addChild('name', $yaml['name']);
+
+      $node_descr = $xml->addChild('descriptions');
+      $node_descr->addAttribute('label', $yaml['descriptions']['full_name']);
+      $node_descr->addAttribute('new', $yaml['descriptions']['new_record']);
+
+      $xml->addChild('tree', isset($yaml['tree']) ? ($yaml['tree'] ? 'true' : 'false') : 'false');
+
+      $node_tables = $xml->addChild('table');
+      if (isset($yaml['table']['primary_key'])) $node_tables->addAttribute('key', $yaml['table']['primary_key']);
+      if (isset($yaml['table']['stage'])) $node_tables->addAttribute('stage', $yaml['table']['stage']);
+      if (isset($yaml['table']['production'])) $node_tables->addAttribute('production', $yaml['table']['production']);
+
+      if (isset($yaml['order_by'])) {
+        $order_by = $xml->addChild('order_by');
+        $order_by->addAttribute('field', $yaml['order_by']['field']);
+        $order_by->addAttribute('sort', $yaml['order_by']['sort']);
+      }
+
+      if (isset($yaml['categories'])) $xml->addChild('categories', $yaml['categories'] ? 'true' : 'false');
+      if (isset($yaml['hierarchies'])) $xml->addChild('hierarchies', $yaml['hierarchies'] ? 'true' : 'false');
+
+      foreach ($yaml['fieldsets'] as $fieldset) {
+        $node_fieldset = $xml->addChild('fieldset');
+        $node_fieldset->addAttribute('name', $fieldset['name']);
+        $node_fieldset->addAttribute('icon', $fieldset['icon']);
+
+        if (isset($fieldset['fields']) && count($fieldset['fields'])) {
+          //Fields
+          foreach ($fieldset['fields'] as $field_name => $field) {
+            $node_field = $node_fieldset->addChild('field');
+            $node_field->addAttribute('id', $field_name);
+            if (isset($field['column'])) $node_field->addAttribute('column', $field['column'] ? 'true' : 'false');
+            if (isset($field['kind'])) $node_field->addAttribute('kind', $field['kind']);
+            if (isset($field['type'])) $node_field->addAttribute('type', $field['type']);
+
+            #warning todo
+          }
+        }
+      }
+
+      debug($xml);
+
+      die;
+      
       //3. return the SimpleXML object
+      return $xml;
     }
 
     /**
-     * Parses a scheme
+     * Parses an XML or YAML scheme
      * @param string $filepath
      */
-    function parse_scheme($filepath) {
-
-      $tmp = explode($filepath);
-      $ext = $tmp[count($tmp)-1];
-
-      if ($ext == 'xml') {
-        $node = $this->parse_xmlscheme($filepath);
-      } else {
-        $node = $this->parse_yamlscheme($filepath);
+    function parse_scheme($filepath)
+    {
+      $tmp = explode('.', $filepath);
+      switch ($tmp[count($tmp)-1]) {
+        case 'xml':
+          $node = $this->parse_xmlscheme($filepath);
+          break;
+        case 'yaml':
+          $node = $this->parse_yamlscheme($filepath);
+          break;
       }
 
     	//Gets the filename
@@ -207,15 +262,15 @@ Class Xml
     	}
 
     	$content = array(
-      		'id'				=> $type_id,
-      		'name'				=> $safe_filename,
-      		'tree'				=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
+      		'id'				      => $type_id,
+      		'name'				    => $safe_filename,
+      		'tree'				    => strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
       		'has_categories'	=> isset($node->categories) ? (strtolower((string)$node->categories) == 'true' ? TRUE : FALSE) : FALSE,
-            'has_hierarchies'	=> isset($node->hierarchies) ? (strtolower((string)$node->hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
-      		'description'		=> (string) $descr_attr->label,
-      		'label_new'			=> (string) $descr_attr->new,
-      		'primary_key'		=> (string) (isset($tables->key) ? $tables->key : 'id_record'),
-      		'table'				=> (string) (isset($tables->production) ? $tables->production : 'records')
+          'has_hierarchies'	=> isset($node->hierarchies) ? (strtolower((string)$node->hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
+      		'description'		  => (string) $descr_attr->label,
+      		'label_new'			  => (string) $descr_attr->new,
+      		'primary_key'		  => (string) (isset($tables->key) ? $tables->key : 'id_record'),
+      		'table'				    => (string) (isset($tables->production) ? $tables->production : 'records')
     	);
 
         $this->_translations[$content['description']] = TRUE;
