@@ -141,13 +141,42 @@ Class Xml
   	 * It is one of the most important functions of the framework and the content types cache uses it
    	 * @param string $filepath
    	 */
-  	function parse_scheme($filepath)
+  	function parse_xmlscheme($filepath)
   	{
     	$node = simplexml_load_file($filepath);
     	if (!$node)
     	{
       		show_error('File not found: '.$filepath);
     	}
+      return $node;
+    }
+
+    /**
+     * Parses a YAML file and converts it into an Array
+     * It is one of the most important functions of the framework and the content types cache uses it
+     * @param string $filepath
+     */
+    function parse_yamlscheme($filepath)
+    {
+      //1. parse yaml scheme
+      //2. convert yaml scheme to a new SimpleXML object
+      //3. return the SimpleXML object
+    }
+
+    /**
+     * Parses a scheme
+     * @param string $filepath
+     */
+    function parse_scheme($filepath) {
+
+      $tmp = explode($filepath);
+      $ext = $tmp[count($tmp)-1];
+
+      if ($ext == 'xml') {
+        $node = $this->parse_xmlscheme($filepath);
+      } else {
+        $node = $this->parse_yamlscheme($filepath);
+      }
 
     	//Gets the filename
     	$segments = explode(DIRECTORY_SEPARATOR, $filepath);
