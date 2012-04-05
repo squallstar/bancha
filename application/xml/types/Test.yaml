@@ -41,6 +41,24 @@ order_by:
 categories  : true
 hierarchies : true
 
+#remove!
+relations :
+    childs :
+        type : 1-n
+        with : name
+        from : id_record
+        to   : id_parent
+
+#remove!
+triggers :
+    - on : insert, update, delete
+      field : id_parent
+      sql :
+          action : recount
+          type : name
+          target : child_cound
+          
+
 fieldsets :
 
 	- name   : General informations
@@ -117,6 +135,31 @@ fieldsets :
 	  		length      : 2
 	  		options     :
 	  			custom : config_item('website_languages_select')
+
+	  	lang2 :
+	  		column      : true
+	  		description : Language
+	  		type        : select
+	  		admin       : true
+	  		list        : true
+	  		default     : eval:$this->lang->default_language
+	  		length      : 2
+	  		options     :
+	  			first  : some
+	  			second : val
+	  			custom : thing
+
+	  	lang3 :
+	  		column      : true
+	  		description : Language
+	  		type        : select
+	  		admin       : true
+	  		list        : true
+	  		default     : eval:$this->lang->default_language
+	  		length      : 2
+	  		sql         :
+	  			select : some
+	  			from : some
 
 	  	content :
 	  		description : Content

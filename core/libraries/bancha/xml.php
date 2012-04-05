@@ -195,8 +195,33 @@ Class Xml
       }
 
       #warning todo triggers
-      
-      #warning todo relations
+      if (isset($yaml['triggers'])) {
+        $node_triggers = $xml->addChild('triggers');
+        foreach ($yaml['triggers'] as $trigger) {
+            $node_trigger = $node_triggers->addChild('trigger');
+            if (isset($trigger['field'])) $node_trigger->addAttribute('field', $trigger['field']);
+            if (isset($trigger['on'])) $node_trigger->addAttribute('on', $trigger['on']);
+            if (isset($trigger['sql'])) {
+                $node_sql = $node_trigger->addChild('sql');
+                foreach(array('action', 'type', 'target', 'value') as $val) {
+                    if (isset($trigger['sql'][$val]))  $node_sql->addAttribute($val, $trigger['sql'][$val]);
+                }
+                if (isset($trigger['sql']['escape']))  $node_sql->addAttribute('escape', $trigger['sql']['escape'] ? 'true' : 'false');                
+                #warning need to finish here
+            }
+        }
+      }
+
+      //Relations
+      if (isset($yaml['relations'])) {
+        foreach ($yaml['relations'] as $relation_name => $relation_opts) {
+            $node_rel = $xml->addChild('relation');
+            $node_rel->addAttribute('name', $relation_name);
+            foreach (array('type', 'with', 'from', 'to') as $attr) {
+                if (isset($relation_opts[$attr])) $node_rel->addAttribute($attr, $relation_opts[$attr]);
+            }
+        }
+      }
 
       if (isset($yaml['categories'])) $xml->addChild('categories', $yaml['categories'] ? 'true' : 'false');
       if (isset($yaml['hierarchies'])) $xml->addChild('hierarchies', $yaml['hierarchies'] ? 'true' : 'false');
@@ -304,15 +329,15 @@ Class Xml
     	}
 
     	$content = array(
-      		'id'				      => $type_id,
-      		'name'				    => $safe_filename,
-      		'tree'				    => strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
+      		'id'				=> $type_id,
+      		'name'				=> $safe_filename,
+      		'tree'				=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
       		'has_categories'	=> isset($node->categories) ? (strtolower((string)$node->categories) == 'true' ? TRUE : FALSE) : FALSE,
-          'has_hierarchies'	=> isset($node->hierarchies) ? (strtolower((string)$node->hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
-      		'description'		  => (string) $descr_attr->label,
-      		'label_new'			  => (string) $descr_attr->new,
-      		'primary_key'		  => (string) (isset($tables->key) ? $tables->key : 'id_record'),
-      		'table'				    => (string) (isset($tables->production) ? $tables->production : 'records')
+            'has_hierarchies'	=> isset($node->hierarchies) ? (strtolower((string)$node->hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
+      		'description'		=> (string) $descr_attr->label,
+      		'label_new'			=> (string) $descr_attr->new,
+      		'primary_key'		=> (string) (isset($tables->key) ? $tables->key : 'id_record'),
+      		'table'				=> (string) (isset($tables->production) ? $tables->production : 'records')
     	);
 
         $this->_translations[$content['description']] = TRUE;
