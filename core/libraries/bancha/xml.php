@@ -187,25 +187,67 @@ Class Xml
         $order_by->addAttribute('sort', $yaml['order_by']['sort']);
       }
 
+      if (isset($yaml['parents'])) {
+        $node_parent = $xml->addChild('parents');
+        foreach ($yaml['parents'] as $parent_type) {
+            $node_parent->addChild('type', $parent_type);
+        }
+      }
+
+      #warning todo triggers
+      
+      #warning todo relations
+
       if (isset($yaml['categories'])) $xml->addChild('categories', $yaml['categories'] ? 'true' : 'false');
       if (isset($yaml['hierarchies'])) $xml->addChild('hierarchies', $yaml['hierarchies'] ? 'true' : 'false');
 
+      //Fieldsets
       foreach ($yaml['fieldsets'] as $fieldset) {
         $node_fieldset = $xml->addChild('fieldset');
         $node_fieldset->addAttribute('name', $fieldset['name']);
         $node_fieldset->addAttribute('icon', $fieldset['icon']);
 
         if (isset($fieldset['fields']) && count($fieldset['fields'])) {
-          //Fields
-          foreach ($fieldset['fields'] as $field_name => $field) {
-            $node_field = $node_fieldset->addChild('field');
-            $node_field->addAttribute('id', $field_name);
-            if (isset($field['column'])) $node_field->addAttribute('column', $field['column'] ? 'true' : 'false');
-            if (isset($field['kind'])) $node_field->addAttribute('kind', $field['kind']);
-            if (isset($field['type'])) $node_field->addAttribute('type', $field['type']);
+            //Fields
+            foreach ($fieldset['fields'] as $field_name => $field) {
+                $node_field = $node_fieldset->addChild('field');
+                $node_field->addAttribute('id', $field_name);
 
-            #warning todo
-          }
+                //Boolean options
+                foreach (array('column', 'mandatory', 'admin', 'list', 'visible', 'original', 'encrypt_name') as $option) {
+                    if (isset($field[$option])) $node_field->addAttribute($option, $field[$option] ? 'true' : 'false');
+                }
+
+                //String options
+                foreach (array('link', 'kind', 'type', 'description', 'length', 'default', 'rules', 'resized', 'thumbnail',
+                               'thumbnail_preset', 'size', 'mimes', 'max', 'onchange', 'onkeyup') as $option) {
+                    if (isset($field[$option])) $node_field->addAttribute($option, $field[$option]);
+                }
+
+                //Options
+                if (isset($field['options'])) {
+                    $node_opts = $node_field->addChild('options');
+                    if (isset($field['options']['custom']) && count($field['options']) == 1) {
+                        $node_opts->addChild('custom', $field['options']['custom']);
+                    } else {
+                        foreach ($field['options'] as $opt_key => $opt_val) {
+                            $single_opt = $node_opts->addChild('option', $opt_key);
+                            $single_opt->addAttribute('value', $opt_val);
+                        }
+                    }
+                }
+
+                //SQL
+                if (isset($field['sql'])) {
+                    $sql_node = $node_field->addChild('sql');
+                    if (isset($field['sql']['cache'])) {
+                        $sql_node->addAttribute('cache', $field['sql']['cache'] ? 'true' : 'false');
+                    }
+                    foreach (array('select', 'from', 'where', 'order_by', 'limit', 'type') as $statement) {
+                        if (isset($field['sql'][$statement])) $sql_node->addChild($statement, $field['sql'][$statement]);
+                    }
+                }
+            }
         }
       }
 
@@ -517,7 +559,7 @@ Class Xml
           			$content_field['size'] = isset($field->size) ? (int)$field->size : 102400; //max 100mb
           			$content_field['mimes'] = isset($field->mimes) ? (string)$field->mimes : '*';
           			$content_field['max'] = isset($field->max) ? (int)$field->max : 10; //max 10 files
-                $content_field['encrypt_name'] = isset($field->encrypt_name) ? (strtoupper($field->encrypt_name) == 'TRUE' ? TRUE : FALSE) : FALSE;
+                    $content_field['encrypt_name'] = isset($field->encrypt_name) ? (strtoupper($field->encrypt_name) == 'TRUE' ? TRUE : FALSE) : FALSE;
         		}
 
         		//Onchange JS
