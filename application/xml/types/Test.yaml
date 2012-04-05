@@ -115,8 +115,8 @@ fieldsets :
 	  		list        : true
 	  		default     : eval:$this->lang->default_language
 	  		length      : 2
-	  		options		:
-	  			custom  : config_item('website_languages_select')
+	  		options     :
+	  			custom : config_item('website_languages_select')
 
 	  	content :
 	  		description : Content
