@@ -232,20 +232,31 @@ Class Xml
         $node_fieldset->addAttribute('name', $fieldset['name']);
         $node_fieldset->addAttribute('icon', $fieldset['icon']);
 
-        if (isset($fieldset['fields']) && count($fieldset['fields'])) {
+        if (isset($fieldset['fields']) && is_array($fieldset['fields'])) {
             //Fields
             foreach ($fieldset['fields'] as $field_name => $field) {
+
                 $node_field = $node_fieldset->addChild('field');
                 $node_field->addAttribute('id', $field_name);
 
                 //Boolean options
-                foreach (array('column', 'mandatory', 'admin', 'list', 'visible', 'original', 'encrypt_name') as $option) {
+                //Nodes
+                foreach (array('mandatory', 'admin', 'list', 'visible', 'original', 'encrypt_name') as $option) {
+                    if (isset($field[$option])) $node_field->addChild($option, $field[$option] ? 'true' : 'false');
+                }
+                //Attributes
+                foreach (array('column') as $option) {
                     if (isset($field[$option])) $node_field->addAttribute($option, $field[$option] ? 'true' : 'false');
                 }
 
                 //String options
-                foreach (array('link', 'kind', 'type', 'description', 'length', 'default', 'rules', 'resized', 'thumbnail',
+                //Nodes
+                foreach (array('kind', 'type', 'description', 'length', 'default', 'rules', 'resized', 'thumbnail',
                                'thumbnail_preset', 'size', 'mimes', 'max', 'onchange', 'onkeyup') as $option) {
+                    if (isset($field[$option])) $node_field->addChild($option, $field[$option]);
+                }
+                //Attributes
+                foreach (array('kind', 'link') as $option) {
                     if (isset($field[$option])) $node_field->addAttribute($option, $field[$option]);
                 }
 
@@ -255,8 +266,8 @@ Class Xml
                     if (isset($field['options']['custom']) && count($field['options']) == 1) {
                         $node_opts->addChild('custom', $field['options']['custom']);
                     } else {
-                        foreach ($field['options'] as $opt_key => $opt_val) {
-                            $single_opt = $node_opts->addChild('option', $opt_key);
+                        foreach ($field['options'] as $opt_val => $opt_label) {
+                            $single_opt = $node_opts->addChild('option', $opt_label);
                             $single_opt->addAttribute('value', $opt_val);
                         }
                     }
@@ -276,9 +287,7 @@ Class Xml
         }
       }
 
-      debug($xml);
-
-      die;
+      //debug($xml);
       
       //3. return the SimpleXML object
       return $xml;
@@ -291,12 +300,16 @@ Class Xml
     function parse_scheme($filepath)
     {
       $tmp = explode('.', $filepath);
-      switch ($tmp[count($tmp)-1]) {
+      $ext = $tmp[count($tmp)-1];
+      switch ($ext) {
         case 'xml':
           $node = $this->parse_xmlscheme($filepath);
           break;
         case 'yaml':
           $node = $this->parse_yamlscheme($filepath);
+          break;
+        default:
+          show_error('Scheme format not supported. Please change the extension to [xml] or [yaml].');
           break;
       }
 
@@ -305,7 +318,7 @@ Class Xml
     	$filename = $segments[count($segments)-1];
 
     	//Filename sanitize
-    	$safe_filename = str_replace(' ', '_', str_replace('.xml', '', $filename));
+    	$safe_filename = str_replace(' ', '_', str_replace('.' . $ext, '', $filename));
 
     	//The type name
     	$name = (string) $node->name;
@@ -517,7 +530,7 @@ Class Xml
 
         		if (!in_array((string)$field->type, $field_usable_inputs))
         		{
-          			show_error($this->CI->lang->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are:', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
+          			show_error($this->CI->lang->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are: %v', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
         		}
 
         		$_note = FALSE;
