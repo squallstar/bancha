@@ -48,6 +48,11 @@ echo form_label(_('Type structure'), 'type_tree') . '<div class="right">';
 echo form_dropdown('type_tree', array('false' => _('Simple (Contents)'), 'true' => _('Tree (Pages)')), $_section == 'pages' ? 'true' : 'false', 'class="styled"');
 echo '</div></div>';
 
+echo '<div class="fieldset clearfix">';
+echo form_label(_('Scheme format'), 'scheme_format') . '<div class="right">';
+echo form_dropdown('scheme_format', array('yaml' => 'YAML', 'xml' => 'XML'), 'yaml', 'class="styled"');
+echo '</div></div>';
+
 echo '<div class="fieldset clearfix noborder"><label></label><div class="right">';
 echo form_submit('submit', _('Add'), 'class="submit mid"');
 echo '</div></div>';
