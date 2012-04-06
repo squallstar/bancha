@@ -95,14 +95,27 @@ Class Content
 
 	/**
 	 * Adds a content type to the DB
-	 * @param string $type_name
-	 * @param string $type_description
-	 * @param bool $type_structure True when pages, False when contents
+	 * @param array $options
 	 * @return int Type id (autoincrement)
 	 */
-	public function add_type($type_name, $type_description, $type_structure, $delete_if_exists=FALSE, $type_label_new='')
+	public function add_type($options)
 	{
 		$this->CI->load->library('parser');
+
+		$type_name        = $options['name'];
+		$type_description = $options['description'];
+		$type_structure   = $options['structure'];
+		$delete_if_exists = isset($options['delete_if_exists']) ? $options['delete_if_exists'] : FALSE;
+		$type_label_new   = isset($options['label_new']) ? $options['label_new'] : '';
+		$scheme_format    = isset($options['scheme_format']) ? $options['scheme_format'] : 'yaml';
+
+		switch (strtolower($scheme_format)) {
+			case 'xml':
+				$scheme_format = 'xml';
+				break;
+			default:
+				$scheme_format = 'yaml';
+		}
 
 		//We clears the type name
 		$type_name = url_title(convert_accented_characters($type_name), 'underscore');
@@ -114,7 +127,7 @@ Class Content
 		}
 
 		//Let's check if already exists on filesystem
-		$storage_path = $this->CI->config->item('xml_typefolder').$type_name.'.xml';
+		$storage_path = $this->CI->config->item('xml_typefolder') . $type_name . '.' . $scheme_format;
 		if (file_exists($storage_path) && !$delete_if_exists) {
 			show_error(
 				$this->CI->lang->_trans('A content type named %n already exists', array('n' => '['.$type_name.']')),
@@ -140,7 +153,7 @@ Class Content
 		} else {
 			$type_complexity = strtolower($type_structure) == 'true' ? 'tree' : 'simple';
 		}
-		$xml = read_file($this->CI->config->item('templates_folder').'Type_'.$type_complexity.'.xml');
+		$scheme = read_file($this->CI->config->item('templates_folder') . 'Type_' . $type_complexity .'.' . $scheme_format);
 
 		$type_description = strip_tags($type_description);
 		if (!$type_description)
@@ -149,7 +162,7 @@ Class Content
 		}
 
 		//Parses the base file with the content types variables
-		$xml = $this->CI->parser->parse_string($xml, array(
+		$scheme = $this->CI->parser->parse_string($scheme, array(
 		          'id'			=> $type_id,
 		          'name'		=> $type_name,
 		          'description'	=> $type_description,
@@ -157,9 +170,8 @@ Class Content
 		          'version'		=> BANCHA_VERSION
 		),TRUE);
 
-
-		//Saves the XML scheme
-		if (write_file($storage_path, $xml)) {
+		//Saves the scheme
+		if (write_file($storage_path, $scheme)) {
 
 			//We add the ACL for this content type
 			$this->CI->load->users();

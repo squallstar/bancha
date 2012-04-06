@@ -540,7 +540,7 @@ Class Core_Contents extends Bancha_Controller
     }
 
     /**
-    * Forms to insert a new content type
+    * Form to insert a new content type
     */
     public function add_type()
     {
@@ -551,13 +551,13 @@ Class Core_Contents extends Bancha_Controller
             $type_name = $this->input->post('type_name');
             if ($type_name)
             {
-            	$done = $this->content->add_type(
-            		$type_name,
-            		$this->input->post('type_description'),
-            		$this->input->post('type_tree'),
-            		FALSE,
-            		$this->input->post('type_label_new')
-            	);
+            	$done = $this->content->add_type(array(
+            		'name'          => $type_name,
+            		'description'   => $this->input->post('type_description'),
+            		'structure'     => $this->input->post('type_tree'),
+            		'label_new'     => $this->input->post('type_label_new'),
+                    'scheme_format' => $this->input->post('scheme_format')
+            	));
 
                 if ($done)
                 {
