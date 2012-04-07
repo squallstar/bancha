@@ -90,7 +90,6 @@ fieldsets :
 	  		kind    : numeric
 	  		type    : hidden
 	  		list    : true
-	  		default : {id}
 
 	  	# This field is required on this content type, because is "Tree structured" and each record can have a parent record
 	  	id_parent :

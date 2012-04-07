@@ -557,9 +557,15 @@ Class Xml
           			'mandatory'		=> isset($field->mandatory) ? (strtoupper($field->mandatory) == 'TRUE' ? TRUE : FALSE) : FALSE,
           			'admin'			=> isset($field->admin) ? (strtoupper($field->admin) == 'TRUE' ? TRUE : FALSE) : FALSE,
           			'list'			=> isset($field->list) ? (strtoupper($field->list) == 'TRUE' ? TRUE : FALSE) : FALSE,
-         			'visible'		=> isset($field->visible) ? (strtoupper($field->visible) == 'TRUE' ? TRUE : FALSE) : TRUE,
+         			  'visible'		=> isset($field->visible) ? (strtoupper($field->visible) == 'TRUE' ? TRUE : FALSE) : TRUE,
           			'default'		=> isset($field->default) ? (string)$field->default : ''
         		);
+
+
+            //We automatically add the id_type default value
+            if ($field_name == 'id_type') {
+              $content_field['default'] = (int) $content['id'];
+            }
 
         		if (isset($field->rules))
         		{

@@ -50,7 +50,7 @@ echo '</div></div>';
 
 echo '<div class="fieldset clearfix">';
 echo form_label(_('Scheme format'), 'scheme_format') . '<div class="right">';
-echo form_dropdown('scheme_format', array('yaml' => 'YAML', 'xml' => 'XML'), 'yaml', 'class="styled"');
+echo form_dropdown('scheme_format', array('yaml' => _('YAML (Recommended)'), 'xml' => 'XML'), 'yaml', 'class="styled"');
 echo '</div></div>';
 
 echo '<div class="fieldset clearfix noborder"><label></label><div class="right">';

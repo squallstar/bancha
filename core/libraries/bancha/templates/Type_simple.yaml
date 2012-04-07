@@ -63,7 +63,6 @@ fieldsets :
 	  		kind    : numeric
 	  		type    : hidden
 	  		list    : true
-	  		default : {id}
 
 	  	date_insert :
 	  		column  : true
