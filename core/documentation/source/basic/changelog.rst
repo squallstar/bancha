@@ -2,6 +2,14 @@
 ChangeLog
 ######################
 
+**v 1.2** (Planned)
+
+- UPGRADE FROM 1.x: just replace the core folder
+- YAML Schemes added. Now you can use them instead of the XML ones.
+- Fix on the install process on some database drivers
+- Currently we are having some technical problems on PostgreSQL CodeIgniter drivers, so we recommend you to use other databases such as MySQL.
+s
+
 **v 1.1** (2012-03-19)
 
 - Bugfix corrected on the Type tree scheme

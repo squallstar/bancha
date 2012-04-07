@@ -25,7 +25,7 @@ You can edit this file from the administration section (click on the type name o
         </parents>
     </content>
 
-**NOTE: Content types are cached on the file "application/_bancha/content.tmp" for faster access. After editing a xml scheme, you need to delete that file or you can just click on the "Clear cache" link on the left menu of the administration**. If you edit the scheme by the "edit scheme" section, the cache will be automatically cleared after saving the scheme.
+**NOTE: Content types are cached on the file "application/cache/_bancha/content.tmp" for faster access. After editing a xml scheme, you need to delete that file or you can just click on the "Clear cache" link on the left menu of the administration**. If you edit the scheme by the "edit scheme" section, the cache will be automatically cleared after saving the scheme.
 
 When you create a new content type, Bancha will automatically sets a value to the id attribute of the **content** node; Bancha will similarly set the values to the **<name>** and **<description>** nodes which define the value used as key and the value read by the user into the panel (the label attribute set the value which will be displayed, whereas the new attribute set the label/link used to insert a new content of the same type). 
 
