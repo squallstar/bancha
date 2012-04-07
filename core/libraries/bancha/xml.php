@@ -561,7 +561,6 @@ Class Xml
           			'default'		=> isset($field->default) ? (string)$field->default : ''
         		);
 
-
             //We automatically add the id_type default value
             if ($field_name == 'id_type') {
               $content_field['default'] = (int) $content['id'];
