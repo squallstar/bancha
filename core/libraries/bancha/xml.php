@@ -207,8 +207,13 @@ Class Xml
                     if (isset($trigger['sql'][$val]))  $node_sql->addAttribute($val, $trigger['sql'][$val]);
                 }
                 if (isset($trigger['sql']['escape']))  $node_sql->addAttribute('escape', $trigger['sql']['escape'] ? 'true' : 'false');                
-                #warning need to finish here
             }
+
+            if (isset($trigger['call'])) {
+              $node_call = $node_trigger->addChild('call');
+              $node_call->addAttribute('action', $trigger['call']);
+            }
+            #warning todo
         }
       }
 

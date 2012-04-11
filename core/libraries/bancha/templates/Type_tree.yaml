@@ -65,7 +65,11 @@ triggers :
       sql   :
           action : recount
           type   : name
-          target : child_cound
+          target : child_count
+
+# Here you can see another example of trigger
+#   - on   : "publish"
+#     call : action_name
 
 
 # Here starts the fieldsets
