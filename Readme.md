@@ -22,6 +22,11 @@ The **BANCHA documentation** is available here: **http://docs.getbancha.com**
 
 http://docs.getbancha.com/install/howtoinstall.html
 
+# Bancha Bash Utilities
+
+We also developed a **unix bash** script to help you installing/upgrading Bancha. You can install it in a minute here:
+https://github.com/squallstar/bancha-bash
+
 # Application MVC Scheme
 
 ![MVC Scheme](http://static.squallstar.it/images/bancha_mvc_scheme.png)
