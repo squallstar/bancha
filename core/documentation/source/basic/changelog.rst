@@ -10,6 +10,11 @@ ChangeLog
 - Currently we are having some technical problems on PostgreSQL CodeIgniter drivers, so we recommend you to use other databases such as MySQL.
 
 
+**v 1.1.1** (2012-03-24)
+
+- Corrected a little "not null" bug while installing the DB on Postgres SQL
+
+
 **v 1.1** (2012-03-19)
 
 - Bugfix corrected on the Type tree scheme
