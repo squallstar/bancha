@@ -530,7 +530,7 @@ Class Installer
 					$type_id = $this->CI->content->add_type($options);
 
 					$this->copy_premade_scheme($folder.$file_name, $options['name'], $type_id);
-				}die;
+				}
 			}
 		}
 
