@@ -3,15 +3,11 @@
 # Copyright 2011(C) Squallstar Studio #
 #######################################
 
-########
 # Logs #
-########
 *.log
 /application/logs/*.php
 
-######################
 # OS generated files #
-######################
 *.DS_Store
 ehthumbs.db
 Icon?
@@ -21,19 +17,14 @@ Thumbs.db
 .settings
 *.esproj
 
-########################
 # Custom install files #
-########################
 #/core/views/type_templates
 /core/views/admin/content/translations.php
 /application/xml/types/*.xml
 /core/documentation/build
 
-##############
 # Temp and Cache files #
-##############
 *.tmp
+/application/cache/_db/*
 /attach/cache/
 /attach/
-/application/cache/_bancha/*.css
-/application/cache/_bancha/*.js
