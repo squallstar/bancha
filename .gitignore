@@ -20,7 +20,7 @@ Thumbs.db
 # Custom install files #
 #/core/views/type_templates
 /core/views/admin/content/translations.php
-/application/xml/types/*.xml
+/application/xml/types/*
 /core/documentation/build
 
 # Temp and Cache files #
