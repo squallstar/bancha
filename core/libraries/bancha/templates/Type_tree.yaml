@@ -1,5 +1,5 @@
 # Bancha {version} - YAML Scheme
-# This theme was automatically generated. Feel free to extend it as you wish.
+# This scheme was automatically generated. Feel free to extend it as you wish.
 # You should read the documentation before making any changes to this file.
 # Note that you need to "Clear the cache" after saving this file to see the new differences.
 #
@@ -44,7 +44,7 @@ hierarchies : true
 # Tree structured content types can have a parent record. Here you define the accepted types.
 # You should include at least the current content type.
 parents :
-	- {name}
+	- "{name}"
 
 # Content type relations
 relations :
@@ -52,7 +52,7 @@ relations :
 	# This is the relation name
     childs :
         type : 1-n
-        with : {name}
+        with : "{name}"
         from : id_record
         to   : id_parent
 
@@ -64,7 +64,7 @@ triggers :
       field : id_parent
       sql   :
           action : recount
-          type   : name
+          type   : "{name}"
           target : child_count
 
 # Here you can see another example of trigger

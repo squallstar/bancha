@@ -364,7 +364,14 @@ Class Installer
 		{
 			foreach ($default as $type)
 			{
-				$this->CI->content->add_type($type, $type, 'true', TRUE, $type == 'Menu' ? 'New page' : 'New ' . $type);
+				$options = array(
+					'structure' 		=> 'true',
+					'name'				=> $type,
+					'description'		=> $type,
+					'delete_if_exists'	=> TRUE,
+					'label_new'			=> ($type == 'Menu' ? 'New page' : 'New' . $type)
+				);
+				$this->CI->content->add_type($options);
 			}
 		} else {
 			show_error(_('Default content type not defined'));
@@ -425,7 +432,6 @@ Class Installer
 		$directories = array(
 			$this->CI->config->item('attach_folder'),					//Attachs directory
 			$this->CI->config->item('xml_typefolder'),					//XML Types schemes
-			//$this->CI->config->item('views_absolute_templates_folder'),	//Content type Views - DEPRECATED,
 			$this->CI->config->item('fr_cache_folder'),					//Bancha Cache files,
 			$this->CI->config->item('cache_path')						//CI Cache folder
 		);
@@ -503,14 +509,23 @@ Class Installer
 		if (file_exists($folder))
 		{
 			$premades_xml = get_filenames($folder);
+
 			if (count($premades_xml))
 			{
 				foreach ($premades_xml as $file_name)
 				{
-					$name = str_replace('.xml', '', $file_name);
-					$type_id = $this->CI->content->add_type($name, $name, 'false', TRUE);
-					$this->copy_premade_xml($folder.$file_name, $name, $type_id);
-				}
+					$tmp = explode('.', $file_name);
+					$options = array(
+						'scheme_format' => $tmp[count($tmp)-1]
+					);
+
+					$options['name'] = str_replace('.' . $options['scheme_format'], '', $file_name);
+					$options['description'] = $options['name'];
+					$options['structure'] = 'false';
+					$type_id = $this->CI->content->add_type($options);
+
+					$this->copy_premade_xml($folder.$file_name, $options['name'], $type_id);
+				}die;
 			}
 		}
 
@@ -601,7 +616,7 @@ Class Installer
 		          'version'		=> BANCHA_VERSION
 		),TRUE);
 
-		$storage_path = $this->CI->config->item('xml_typefolder').$type_name.'.xml';
+		$storage_path = $this->CI->config->item('xml_typefolder').$type_name;
 		return write_file($storage_path, $xml);
 	}
 }
