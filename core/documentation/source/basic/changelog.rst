@@ -9,7 +9,9 @@ ChangeLog
 - Premade schemes converted to YAML.
 - Fix on the install process on some database drivers
 - Currently we are having some technical problems on PostgreSQL CodeIgniter drivers, so we recommend you to use other databases such as MySQL.
-- Other minor fixes
+- jQuery updated to the latest available version
+- Removed some legacy javascript code inside the admin custom.js script
+- Minor fixes
 
 
 **v 1.1.1** (2012-03-24)
