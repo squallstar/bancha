@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bancha\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-26 22:32+0100\n"
-"PO-Revision-Date: 2012-01-26 22:32+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2012-04-24 00:08+0100\n"
+"PO-Revision-Date: 2012-04-24 00:10+0100\n"
+"Last-Translator: Nicholas Valbusa <info@squallstar.it>\n"
 "Language-Team: Nicholas Valbusa <info@squallstar.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,39 +89,39 @@ msgstr "L'id del record non è stato settato."
 msgid "Please insert a name for this type."
 msgstr "Inserisci un nome per il tipo."
 
-#: controllers/admin/contents.php:592
-msgid "The xml scheme of the content type %n has been updated"
-msgstr "Lo schema XML del tipo di contenuto %n è stato aggiornato."
+#: controllers/admin/contents.php:594
+msgid "The scheme of the content type %n has been updated"
+msgstr "Lo schema del tipo di contenuto %n è stato aggiornato."
 
-#: controllers/admin/contents.php:598
-msgid "Cannot save that XML scheme."
-msgstr "Impossibile salvare lo schema XML."
+#: controllers/admin/contents.php:600
+msgid "Cannot save that scheme."
+msgstr "Impossibile salvare lo schema."
 
-#: controllers/admin/contents.php:598
+#: controllers/admin/contents.php:600
 msgid "Saving error"
 msgstr "Errore di salvataggio"
 
-#: controllers/admin/contents.php:602
-msgid "Cannot read the XML file."
-msgstr "Impossibile leggere il file XML."
+#: controllers/admin/contents.php:604
+msgid "Cannot read the file."
+msgstr "Impossibile leggere il file xml/yaml."
 
-#: controllers/admin/contents.php:629
+#: controllers/admin/contents.php:631
 msgid "The category %n has been added."
 msgstr "La categoria %n è stata aggiunta."
 
-#: controllers/admin/contents.php:631
+#: controllers/admin/contents.php:633
 msgid "Cannot insert the category %n."
 msgstr "Impossibile inserire la categoria %n."
 
-#: controllers/admin/contents.php:634
+#: controllers/admin/contents.php:636
 msgid "A category named %n already exists."
 msgstr "Esiste già una categoria chiamata %n."
 
-#: controllers/admin/contents.php:658
+#: controllers/admin/contents.php:660
 msgid "The category %n has been deleted."
 msgstr "La categoria %n è stata eliminata."
 
-#: controllers/admin/contents.php:713
+#: controllers/admin/contents.php:715
 msgid "The type named %n has been removed."
 msgstr "Il tipo %n è stato rimosso."
 
@@ -267,27 +267,27 @@ msgstr "Apri profiler"
 msgid "Delete section"
 msgstr "Elimina sezione"
 
-#: libraries/bancha/content.php:113
+#: libraries/bancha/content.php:126
 msgid "You cannot create a content type named [cache]."
 msgstr "Non puoi creare un tipo di contenuto chiamato [cache]."
 
-#: libraries/bancha/content.php:113
+#: libraries/bancha/content.php:126
 msgid "Name reserved"
 msgstr "Nome riservato"
 
-#: libraries/bancha/content.php:120
+#: libraries/bancha/content.php:133
 msgid "A content type named %n already exists"
 msgstr "Esiste già un tipo di contenuto chiamato %n."
 
-#: libraries/bancha/content.php:121
+#: libraries/bancha/content.php:134
 msgid "Cannot create that type"
 msgstr "Impossibile creare il tipo di contenuto."
 
-#: libraries/bancha/content.php:132
+#: libraries/bancha/content.php:145
 msgid "Cannot insert that content type."
 msgstr "Impossibile inserire questo tipo di contenuto."
 
-#: libraries/bancha/content.php:178
+#: libraries/bancha/content.php:190
 msgid "Cannot delete the template view directory for the content type %n."
 msgstr "Impossibile eliminare la directory delle view di template per il tipo di contenuto %n."
 
@@ -311,19 +311,19 @@ msgstr "Amministratore"
 msgid "Editors"
 msgstr "Editor"
 
-#: libraries/bancha/installer.php:370
+#: libraries/bancha/installer.php:378
 msgid "Default content type not defined"
 msgstr "Tipo predefinito non definito."
 
-#: libraries/bancha/installer.php:533
+#: libraries/bancha/installer.php:553
 msgid "My first post"
 msgstr "Il mio primo post"
 
-#: libraries/bancha/installer.php:534
+#: libraries/bancha/installer.php:554
 msgid "Hello world"
 msgstr "Ciao mondo"
 
-#: libraries/bancha/installer.php:576
+#: libraries/bancha/installer.php:596
 msgid "Hello world by a sample page."
 msgstr "Ciao mondo! Questa è una pagina di prova."
 
@@ -331,42 +331,42 @@ msgstr "Ciao mondo! Questa è una pagina di prova."
 msgid "Type not set."
 msgstr "Tipo non settato."
 
-#: libraries/bancha/xml.php:206
+#: libraries/bancha/xml.php:371
 msgid "Primary key or table not defined for the content type %n."
 msgstr "Chiave primaria o tabella non definita per il tipo di contenuto %n."
 
-#: libraries/bancha/xml.php:206
-#: libraries/bancha/xml.php:320
-#: libraries/bancha/xml.php:322
-#: libraries/bancha/xml.php:338
-#: libraries/bancha/xml.php:364
-#: libraries/bancha/xml.php:369
+#: libraries/bancha/xml.php:371
+#: libraries/bancha/xml.php:485
+#: libraries/bancha/xml.php:487
+#: libraries/bancha/xml.php:503
+#: libraries/bancha/xml.php:529
+#: libraries/bancha/xml.php:534
 msgid "XML parser: Error"
 msgstr "Errore durante il parsing XML"
 
-#: libraries/bancha/xml.php:310
+#: libraries/bancha/xml.php:475
 msgid "Untitled"
 msgstr "Senza titolo"
 
-#: libraries/bancha/xml.php:320
+#: libraries/bancha/xml.php:485
 msgid "One of the fieldsets of type %n does not have the name attribute (mandatory)."
 msgstr "One dei fieldset di tipo %n non presenta l'attributo obbligatorio \"name\"."
 
-#: libraries/bancha/xml.php:322
+#: libraries/bancha/xml.php:487
 msgid "The type %t has more than one fieldset named %n."
 msgstr "Il tipo %t ha più di un fieldset chiamato %n."
 
-#: libraries/bancha/xml.php:338
+#: libraries/bancha/xml.php:503
 msgid "One of the fields of type %t does not have a name."
 msgstr "One dei campi del tipo %t è senza nome."
 
-#: libraries/bancha/xml.php:364
+#: libraries/bancha/xml.php:529
 msgid "The field name %n is reserved (Type: %t) and needs to be changed!"
 msgstr "Il campo %n di tipo %t utilizza un nome riservato che deve essere necessariamente cambiato."
 
-#: libraries/bancha/xml.php:369
-msgid "The value of the node named type (field: %n, type %t) does not exists. Allowed values are:"
-msgstr "Il valore inserito nel nodo type del campo %n di tipo %t non è ammesso. I valori consentiti sono:"
+#: libraries/bancha/xml.php:534
+msgid "The value of the node named type (field: %n, type %t) does not exists. Allowed values are: %v"
+msgstr "Il valore inserito nel nodo type del campo %n di tipo %t non è ammesso. I valori consentiti sono: %v"
 
 #: libraries/bancha/adapters/adapter_wordpress.php:87
 msgid "Without title"
@@ -462,7 +462,6 @@ msgid "Choose"
 msgstr "Scegli"
 
 #: views/admin/content/documents_finder.php:54
-#: views/admin/content/record_list.php:228
 msgid "Actions"
 msgstr "Azioni"
 
@@ -521,14 +520,10 @@ msgid "Back to list"
 msgstr "Torna alla lista"
 
 #: views/admin/content/record_edit.php:40
-#: views/admin/content/record_list.php:13
-#: views/admin/content/record_list.php:23
 msgid "Contents"
 msgstr "Contenuti"
 
 #: views/admin/content/record_edit.php:40
-#: views/admin/content/record_list.php:13
-#: views/admin/content/record_list.php:23
 msgid "Pages"
 msgstr "Pagine"
 
@@ -608,6 +603,7 @@ msgid "Close"
 msgstr "Chiudi"
 
 #: views/admin/content/record_list.php:17
+#: views/admin/content/type_list.php:44
 msgid "Manage categories"
 msgstr "Gestione categorie"
 
@@ -648,6 +644,7 @@ msgstr "Visualizza pagine figlie"
 
 #: views/admin/content/record_list.php:217
 #: views/admin/content/record_list.php:232
+#: views/admin/content/type_list.php:53
 msgid "Delete"
 msgstr "Elimina"
 
@@ -676,6 +673,7 @@ msgid "There are"
 msgstr "Ci sono"
 
 #: views/admin/content/record_list.php:244
+#: views/admin/content/type_list.php:67
 msgid "add a new one"
 msgstr "aggiungine uno"
 
@@ -728,7 +726,6 @@ msgid "Page URL"
 msgstr "Parte finale URL"
 
 #: views/admin/content/translations.php:10
-#: views/admin/installer/request.php:37
 msgid "Language"
 msgstr "Lingua"
 
@@ -974,7 +971,6 @@ msgstr "Aggiungi nuovo tipo"
 #: views/admin/content/type_add.php:24
 #: views/admin/content/type_delete.php:31
 #: views/admin/content/type_edit_xml.php:22
-#: views/admin/installer/request.php:12
 msgid "WARNING"
 msgstr "ATTENZIONE"
 
@@ -1011,6 +1007,14 @@ msgstr "Semplice (Contenuti)"
 #: views/admin/content/type_add.php:48
 msgid "Tree (Pages)"
 msgstr "Ad albero (Pagine)"
+
+#: views/admin/content/type_add.php:52
+msgid "Scheme format"
+msgstr "Formato schema"
+
+#: views/admin/content/type_add.php:53
+msgid "YAML (Recommended)"
+msgstr "YAML (Raccomandato)"
 
 #: views/admin/content/type_categories.php:11
 msgid "Back to contents"
@@ -1103,12 +1107,12 @@ msgid "Discard all"
 msgstr "Scarta tutto"
 
 #: views/admin/content/type_edit_xml.php:22
-msgid "A wrong compilation of the XML tree could cause a malfunction of the website."
-msgstr "Una compilazione errata dello schema XML potrebbe causare un malfunzionamento del sito internet."
+msgid "A wrong compilation of the scheme may cause a malfunction of the website."
+msgstr "Una compilazione errata dello schema potrebbe causare un malfunzionamento del sito internet."
 
 #: views/admin/content/type_edit_xml.php:43
-msgid "XML Structure"
-msgstr "Struttura XML"
+msgid "Structure"
+msgstr "Struttura"
 
 #: views/admin/content/type_edit_xml.php:47
 msgid "Save scheme"
@@ -1147,34 +1151,34 @@ msgstr "alle %time"
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: views/admin/dashboard/events.php:39
+#: views/admin/dashboard/events.php:43
 msgid "%u updated the content %c of type %t."
 msgstr "%u ha aggiornato il contenuto %c di tipo %t."
 
-#: views/admin/dashboard/events.php:47
+#: views/admin/dashboard/events.php:51
 msgid "%u created a new content of type %t named %c."
 msgstr "%u ha creato un nuovo contenuto di tipo %t chiamato %c."
 
-#: views/admin/dashboard/events.php:56
+#: views/admin/dashboard/events.php:60
 msgid "%u published the content %c of type %t."
 msgstr "%u ha pubblicato il contenuto %c di tipo %t."
 
-#: views/admin/dashboard/events.php:65
+#: views/admin/dashboard/events.php:69
 #, php-format
 msgid "%u depublished the content %c."
 msgstr "%u ha depubblicato il contenuto %c."
 
-#: views/admin/dashboard/events.php:73
+#: views/admin/dashboard/events.php:77
 #, php-format
 msgid "%u installed %c."
 msgstr "%u ha installato %c."
 
-#: views/admin/dashboard/events.php:81
+#: views/admin/dashboard/events.php:85
 #, php-format
 msgid "%u login."
 msgstr "%u ha effettuato l'accesso."
 
-#: views/admin/dashboard/events.php:85
+#: views/admin/dashboard/events.php:89
 #, php-format
 msgid "%u logout."
 msgstr "%u ha effettuato l'uscita."
@@ -1239,6 +1243,7 @@ msgid "Import report"
 msgstr "Report importazione dati"
 
 #: views/admin/installer/request.php:7
+#: views/admin/installer/success.php:4
 msgid "%n Installer"
 msgstr "Installazione di %n"
 
@@ -1282,6 +1287,10 @@ msgstr "Svuota e ricrea cache"
 msgid "Enable event logging"
 msgstr "Abilita logging degli eventi"
 
+#: views/admin/installer/request.php:37
+msgid "Admin default language"
+msgstr "Lingua default amministrazione"
+
 #: views/admin/installer/request.php:44
 msgid "Install type"
 msgstr "Tipo di installazione"
@@ -1298,7 +1307,11 @@ msgstr "Minimale"
 msgid "Theme"
 msgstr "Tema"
 
-#: views/admin/installer/request.php:63
+#: views/admin/installer/request.php:62
+msgid "Preinstalled schemes format"
+msgstr "Formato iniziale schemi"
+
+#: views/admin/installer/request.php:74
 msgid "Install"
 msgstr "Installa"
 
