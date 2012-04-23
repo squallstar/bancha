@@ -5,7 +5,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -159,6 +159,12 @@ class Bancha_Output extends CI_Output
 				@unlink($filepath);
 				return FALSE;
 			}
+		}
+
+		//Sets the default content-type and charset
+		if (!count($this->headers))
+		{
+			$this->set_header('Content-Type: text/html; charset=UTF-8');
 		}
 
 		// Display the cache

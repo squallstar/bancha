@@ -2,7 +2,7 @@
 Create a new theme
 ==================
 
-To create a new theme, you can duplicate one of the default themes shipped with Bancha (default and minimal) or you can make a new theme from scratch.
+To create a new theme, you can duplicate the default theme shipped with Bancha (**sandbox**) or you can make a new theme from scratch.
 
 This tutorial helps you creating a theme from scratch, so you can fully understand all the components of a theme.
 
@@ -80,3 +80,66 @@ As you can see opening the **core/views/content_render.php** file, basically the
 When the case is **single** or **list**, the **views/type_templates** will be used.
 
 **Note:** between the **layout** and the **content_render**, there's the **template** (next section).
+
+
+^^^^^^^^^^^^
+3) Templates
+^^^^^^^^^^^^
+
+Each Page record has a **view_template** attribute that decide which template should be rendered for that page.
+Templates are contained inside the folder **views/templates**.
+
+Take a look at the following example that implements a basic template::
+
+    render('header');
+
+    echo page('title');
+    echo '<p>' . page('content') . '</p>';
+
+    render('footer');
+
+
+The **sandbox** theme ships with two templates: the **home.php** template and the **default.php** template.
+This second one, is the heart of the theme because it calls the Content render::
+
+    render('header');
+
+    content_render();
+
+    render('footer');
+
+To add a new template, first of all you need to create the template file inside your theme, for example **views/templates/my_template.php**.
+After adding a new template, you need to add that template also to the **view_template field** of the content types (tipically just the "Menu" only). On the XML Scheme, edit the field as follows::
+
+    <field id="view_template"><description>View template</description>
+        <type>select</type>
+        <options>
+            <option value="default">Default</option>
+            <option value="homepage">Homepage</option>
+            <option value="my_template">My template</option>
+        </options>
+    </field>
+
+
+Then, when you create a page you can also select that template from the **View template** dropdown menu of the **Aspect** section.
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^
+4) Content-Type templates
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In Bancha, each theme can define custom templates for every content type. Each content type can have two different views: **list** and **detail**.
+If you are creating a new theme, you need to define at least two content type templates: **Default-Content** and **Default-Pages**. They are used to render the content types if a better choice is not available.
+
+Example: if your page is listing articles of type **Blog**, Bancha will look for this file inside this theme::
+
+    themes/sandbox/views/type_templates/Blog/list.php
+
+If that file does not exists, the default one will be used::
+
+    themes/sandbox/views/type_templates/Default-Content/list.php
+
+
+So, be sure to create the **Default-Content** and **Default-Pages** folders!
+
+More informations are available on the **Content list** section of the :doc:`/firststeps/content-render`.

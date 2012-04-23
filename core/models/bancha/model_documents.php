@@ -2,11 +2,9 @@
 /**
  * Documents Model
  *
- * Classe per estrarre e inserire files e immagini
- *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -15,22 +13,22 @@
 Class Model_Documents extends CI_Model
 {
 	/**
-	 * @var string Directory che contiene gli allegati
+	 * @var string Directory that contains the attachments
 	 */
 	public $attach_folder;
 
 	/**
-	 * @var string Tabella di produzione
+	 * @var string Production table
 	 */
 	public $table = 'documents';
 
 	/**
-	 * @var string Tabella di stage
+	 * @var string Stage table
 	 */
 	public $table_stage = 'documents_stage';
 
 	/**
-	 * @var string Tabella corrente per le estrazioni
+	 * @var string Current table
 	 */
 	public $table_current = '';
 
@@ -42,7 +40,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Imposta se siamo in stage
+	 * Sets the stage
 	 * @param bool $is_stage
 	 */
 	public function set_stage($is_stage)
@@ -52,7 +50,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Salva un documento su DB (solo record) nella tabella di stage
+	 * Save a document record on the stage table
 	 * @param array $data
 	 */
 	public function save($data = array())
@@ -160,7 +158,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Imposta la tabella esterna per l'estrazione dei documenti
+	 * Sets the external table while extracting the documents
 	 * @param string $table_name Nome tabella esterna
 	 */
 	public function table($table_name)
@@ -170,14 +168,14 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Imposta l'id della tabella esterna su cui estrarre i documenti
+	 * Sets the external key of the record linked to the documents
 	 * @param int $table_id Chiave primaria tabella esterna
 	 */
 	public function id($table_id = '')
 	{
 		if ($table_id == '' || !is_numeric($table_id))
 		{
-			show_error('ID tabella esterna non settato correttamente. (documents/id)');
+			log_message('error', 'External ID key is not valid. (documents/id)');
 		} else {
 			$this->db->where('bind_id', (int)$table_id);
 		}
@@ -191,7 +189,7 @@ Class Model_Documents extends CI_Model
 	public function field($field_id = '')
 	{
 		if ($field_id == '') {
-			show_error('Nome del campo su tabella esterna non settato (documents/field)');
+			log_message('error', 'Field name is not valid. (documents/field)');
 		} else {
 			$this->db->where('bind_field', $field_id);
 		}
@@ -210,7 +208,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Estrae i documenti richiesti
+	 * Extracts the documents
 	 * @return array
 	 */
 	public function get()
@@ -230,7 +228,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Imposta una clausola di where nelle estrazioni
+	 * Sets a where condition
 	 * @param string $column colonna
 	 * @param string $value valore
 	 */
@@ -241,7 +239,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Imposta una clausola di "where in" nelle estrazioni
+	 * Sets a where_in condition
 	 * @param string $column colonna
 	 * @param string $value valore
 	 */
@@ -252,7 +250,7 @@ Class Model_Documents extends CI_Model
 	}	
 
 	/**
-	 * Imposta la clausola di limit nelle estrazioni
+	 * Sets a limit clause
 	 * @param int $a numero di record da estrarre
 	 * @param int $b offset
 	 */
@@ -266,7 +264,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Elimina un documento dal DB (stage) e dal file system
+	 * Delete a document (db record + file) given its id
 	 * @param int $document_id
 	 * @return bool success
 	 */
@@ -296,10 +294,10 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Elimina tutti gli allegati di un determinato record collegato
+	 * Deletes all the attachments linked to a record
 	 * @param string $table
 	 * @param int $id
-	 * @param bool $stage imposta se utilizzare come ricerca la tabella di produzione
+	 * @param bool $production
 	 * @return bool success
 	 */
 	public function delete_by_binds($table, $id, $production=FALSE, $delete_files = TRUE)
@@ -328,7 +326,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Elimina solo i record su db dei documenti, e non i file fisici
+	 * Deletes the record of the given document
 	 * @param unknown_type $table
 	 * @param unknown_type $id
 	 */
@@ -341,7 +339,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Metodo che porta in produzione dei documenti
+	 * The documents "publishing" method
 	 * Elimina anche i dead-records e dead-files
 	 * @param string $table
 	 * @param int $id
@@ -393,7 +391,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Metodo per ridimensionare le immagini
+	 * Method that resizes the images during the upload
 	 * @param string $path Full path dell'immagine
 	 * @param string $resize_to Dimensioni immagine ridimensionata. Esempio: 100x?
 	 * @param unknown_type $marker Marcatore da prependere al nome dell'immagine salvata
@@ -442,7 +440,7 @@ Class Model_Documents extends CI_Model
 	}
 
 	/**
-	 * Aggiorna il testo alternativo di un documento
+	 * Updates the alternative text of a document
 	 * @param int $document_id
 	 * @param string $alt_text
 	 * @return bool success
@@ -457,6 +455,11 @@ Class Model_Documents extends CI_Model
 		}
 	}
 
+	/**
+	 * Uploads one or more image files on the repository
+	 * @param array $files (use the $_FILES format)
+	 * @return bool success
+	 */
 	public function upload_to_repository($files)
 	{
 		if (count($files))

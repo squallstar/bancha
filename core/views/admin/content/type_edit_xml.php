@@ -19,7 +19,7 @@ $this->load->helper('form');
 
 	<p class="breadcrumb"><a href="<?php echo admin_url($_section); ?>"><?php echo _('Contents'); ?></a> &raquo; <a href="<?php echo admin_url($_section.'/type/'.$tipo['id'])?>"><?php echo $tipo['description']; ?></a> &raquo; <strong><?php echo _('Edit scheme'); ?></strong></p>
 
-	<div class="message warning"><p><?php echo _('WARNING').': '._('A wrong compilation of the XML tree could cause a malfunction of the website.')?></p></div>
+	<div class="message warning"><p><?php echo _('WARNING').': '._('A wrong compilation of the scheme may cause a malfunction of the website.')?></p></div>
 
 <?php
 
@@ -40,7 +40,7 @@ $attributes['class'] = 'scheme code';
 $attributes['value'] = $xml;
 $attributes['style'] = 'height:400px;';
 echo '<div class="fieldset clearfix">';
-echo form_label(_('XML Structure'), 'xml') . '<div class="right">';
+echo form_label(_('Structure'), 'xml') . '<div class="right">';
 echo form_textarea($attributes) . '</div></div>';
 
 echo '<div class="fieldset clearfix noborder"><label></label><div class="right">';

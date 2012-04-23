@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -121,7 +121,7 @@ Class Core_Contents extends Bancha_Controller
         if ($this->input->post('action'))
         {
         	$records = $this->input->post('record');
-        	if (count($records))
+        	if (is_array($records) && count($records))
         	{
             	switch ($this->input->post('action'))
             	{
@@ -213,7 +213,7 @@ Class Core_Contents extends Bancha_Controller
         //We get the records
         $records = $this->records->type($tipo)
         						 ->set_adminlist(TRUE)
-        						 ->order_by('date_update', 'DESC')
+        						 ->order_by($type['order_by']['field'], $type['order_by']['sort'])
         						 ->limit($pagination['per_page'], $page)
         						 ->get();
 
@@ -363,18 +363,21 @@ Class Core_Contents extends Bancha_Controller
           			$this->pages->publish($record->id);
           		}
                 $msg = $this->lang->_trans('The content %n has been published.', array('n' => $content_edit_link));
+                $msg .= ' <a target="_blank" href="' . admin_url('preview/content/' . $tipo['name'] . '/' . $record->id) . '">' . _('View content') . ' &rarr;</a>';
                 $this->session->set_flashdata('message', $msg);
                 redirect(ADMIN_PUB_PATH.$this->_section.'/type/' . $tipo['name']);
             } else {
 
+            	//We add the preview link
+            	$saved_msg = _('The content has been saved.') . ' <a target="_blank" href="' . admin_url('preview/content/' . $tipo['name'] . '/' . $record->id) . '">' . _('View content') . ' &rarr;</a>';
 
                 if ($record_id == '')
                 {
                     //If it's a new record, we redirect to the same page (F5 refresh fix for duplicate records)
-                    $this->session->set_flashdata('message', _('The content has been saved.'));
+                    $this->session->set_flashdata('message', $saved_msg);
                     redirect(ADMIN_PUB_PATH.$this->_section.'/edit_record/' . $tipo['name'] . '/' . $record->id);
                 } else {
-                    $this->view->message('success', _('The content has been saved.'));
+                    $this->view->message('success', $saved_msg);
                 }
             }
 
@@ -525,7 +528,7 @@ Class Core_Contents extends Bancha_Controller
 
     			if (!$callback)
     			{
-    				$this->session->set_flashdata('message', 'Il record ['.$id_record.'] &egrave; stato eliminato.');
+    				$this->session->set_flashdata('message', $this->lang->_trans('The record %n has been deleted.', array('n' => $id_record)));
     				redirect(ADMIN_PUB_PATH.$this->_section.'/type/' . $tipo['name']);
     			} else {
                     return true;
@@ -537,7 +540,7 @@ Class Core_Contents extends Bancha_Controller
     }
 
     /**
-    * Forms to insert a new content type
+    * Form to insert a new content type
     */
     public function add_type()
     {
@@ -548,13 +551,13 @@ Class Core_Contents extends Bancha_Controller
             $type_name = $this->input->post('type_name');
             if ($type_name)
             {
-            	$done = $this->content->add_type(
-            		$type_name,
-            		$this->input->post('type_description'),
-            		$this->input->post('type_tree'),
-            		FALSE,
-            		$this->input->post('type_label_new')
-            	);
+            	$done = $this->content->add_type(array(
+            		'name'          => $type_name,
+            		'description'   => $this->input->post('type_description'),
+            		'structure'     => $this->input->post('type_tree'),
+            		'label_new'     => $this->input->post('type_label_new'),
+                    'scheme_format' => $this->input->post('scheme_format')
+            	));
 
                 if ($done)
                 {
@@ -575,28 +578,30 @@ Class Core_Contents extends Bancha_Controller
     public function type_edit_xml($type = '') {
   		$tipo = $this->content->type($type);
 
+        $source = isset($tipo['source']) ? $tipo['source'] : 'xml';
+
         //ACL Check
         $this->auth->check_permission('types', 'manage');
         $this->auth->check_permission('content', $tipo['name']);
 
-  		$xml_path = $this->config->item('xml_typefolder').$tipo['name'].'.xml';
+  		$xml_path = $this->config->item('xml_typefolder') . $tipo['name'] . '.' . $source;
 
   		if ($this->input->post('xml')) {
 			$done = write_file($xml_path, $this->input->post('xml'));
 			if ($done) {
 
 				$link = '<a href="'.admin_url('contents/type/'.$tipo['name']).'">'.$tipo['name'].'</a>';
-                $msg = $this->lang->_trans('The xml scheme of the content type %n has been updated', array('n' => $link));
+                $msg = $this->lang->_trans('The scheme of the content type %n has been updated', array('n' => $link));
 				$this->session->set_flashdata('message', $msg);
 
 				$this->content->rebuild();
 				redirect(admin_url('schemes'));
 			} else {
-				show_error(_('Cannot save that XML scheme.'), 500, _('Saving error'));
+				show_error(_('Cannot save that scheme.'), 500, _('Saving error'));
 			}
   		}
 
-  		$xml = read_file($xml_path) OR show_error(_('Cannot read the XML file.'));
+  		$xml = read_file($xml_path) OR show_error(_('Cannot read the file.'));
 
   		$this->view->set('tipo', $tipo);
   		$this->view->set('xml', $xml);
@@ -632,7 +637,7 @@ Class Core_Contents extends Bancha_Controller
 			}
 		}
 
-		$categories = $this->categories->type($tipo['id'])->get();
+		$categories = $this->categories->type($tipo['id'])->order_by('name')->get();
 
 		$this->view->set('tipo', $tipo);
 		$this->view->set('categories', $categories);
@@ -677,7 +682,7 @@ Class Core_Contents extends Bancha_Controller
   		    redirect(ADMIN_PUB_PATH.'contents');
   		} else if ($this->input->post('delete'))
         {
-	  		$xml_path = $this->config->item('xml_typefolder').$tipo['name'].'.xml';
+	  		$xml_path = $this->config->item('xml_typefolder') . $tipo['name'] . '.' . (isset($tipo['source']) ? $tipo['source'] : 'xml');
 	  		$done = file_exists($xml_path) ? @unlink($xml_path) : TRUE;
 	  		if ($done)
             {

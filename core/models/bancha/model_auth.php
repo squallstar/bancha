@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -101,11 +101,13 @@ Class Model_auth extends CI_Model {
 		{
 			return FALSE;
 		}
+
+		$enc_password = $this->config->item('encrypt_password') ? md5($password) : $password;
 		
 		$result = $this->db->select('id_user, name, surname, id_group, admin_lang')
 					   	   ->from('users')
 					       ->where('username', $username)
-					       ->where('password', $password)
+					       ->where('password', $enc_password)
 					       ->limit(1)->get();
 
 		if ($result->num_rows())

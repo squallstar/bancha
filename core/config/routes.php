@@ -31,6 +31,9 @@ $route['^go-([a-zA-Z_-]+)$'] = "website/change_theme/$1";
 //Change language route
 $route['^change-language/([a-z]+)$'] = "website/change_language/$1";
 
+//Change environment route
+$route['^change-env/([a-z]+)$'] = "website/change_environment/$1";
+
 //Minified resources route
 $route['^attach/cache/resources-([a-z]{1,3})/(.+)'] = "website/minify";
 

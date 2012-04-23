@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -131,7 +131,7 @@ Class Installer
 		//Users table
 		$user_fields = array(
 		    'id_user'	=> array('type'	=> 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
-			'date_update'	=> array('type'	=> 'INT'),
+			'date_update'	=> array('type'	=> 'INT', 'null' => TRUE),
             'id_type'		=> array('type'	=> 'INT', 'null' => TRUE),
             'xml'			=> array('type'	=> 'TEXT', 'null' => TRUE),
 		    'id_group'	=> array('type'	=> 'INT', 'unsigned'	=> TRUE, 'constraint' => 3, 'null' => FALSE),
@@ -314,7 +314,7 @@ Class Installer
 		//We insert the default ACLs
 		$acls = array();
 		$acls[]= $this->users->add_acl('users', 'list', 'Users list');
-		$acls[]= $this->users->add_acl('users', 'add', 'Create users');
+		$acls[]= $this->users->add_acl('users', 'add', 'Create/Edit users');
 		$acls[]= $this->users->add_acl('users', 'groups', 'Manage groups and permissions');
 		$acls[]= $this->users->add_acl('types', 'add', 'Add content types');
 		$acls[]= $this->users->add_acl('types', 'manage', 'Edit XML schemes');
@@ -357,14 +357,22 @@ Class Installer
 	/**
 	 * Create the default content types
 	 */
-	public function create_types()
+	public function create_types($scheme_format = 'yaml')
 	{
 		$default = $this->CI->config->item('default_tree_types');
 		if (count($default))
 		{
 			foreach ($default as $type)
 			{
-				$this->CI->content->add_type($type, $type, 'true', TRUE, $type == 'Menu' ? 'New page' : 'New ' . $type);
+				$options = array(
+					'structure' 		=> 'true',
+					'name'				=> $type,
+					'description'		=> $type,
+					'delete_if_exists'	=> TRUE,
+					'label_new'			=> ($type == 'Menu' ? 'New page' : 'New' . $type),
+					'scheme_format'		=> $scheme_format
+				);
+				$this->CI->content->add_type($options);
 			}
 		} else {
 			show_error(_('Default content type not defined'));
@@ -425,7 +433,6 @@ Class Installer
 		$directories = array(
 			$this->CI->config->item('attach_folder'),					//Attachs directory
 			$this->CI->config->item('xml_typefolder'),					//XML Types schemes
-			//$this->CI->config->item('views_absolute_templates_folder'),	//Content type Views - DEPRECATED,
 			$this->CI->config->item('fr_cache_folder'),					//Bancha Cache files,
 			$this->CI->config->item('cache_path')						//CI Cache folder
 		);
@@ -474,7 +481,7 @@ Class Installer
 				 ->set('uri', 'home')
 				 ->set('lang', $lang)
 				 ->set('action', 'text')
-				 ->set('view_template', 'home')
+				 ->set('view_template', 'homepage')
 			;
 			$page_id = $this->CI->records->save($page);
 			$this->CI->records->publish($page_id, 'Menu');
@@ -503,13 +510,26 @@ Class Installer
 		if (file_exists($folder))
 		{
 			$premades_xml = get_filenames($folder);
+
 			if (count($premades_xml))
 			{
 				foreach ($premades_xml as $file_name)
 				{
-					$name = str_replace('.xml', '', $file_name);
-					$type_id = $this->CI->content->add_type($name, $name, 'false', TRUE);
-					$this->copy_premade_xml($folder.$file_name, $name, $type_id);
+					$tmp = explode('.', $file_name);
+					$options = array(
+						'scheme_format' => $tmp[count($tmp)-1]
+					);
+
+					if (!in_array($options['scheme_format'], array('xml', 'yaml'))) {
+						continue;
+					}
+
+					$options['name'] = str_replace('.' . $options['scheme_format'], '', $file_name);
+					$options['description'] = $options['name'];
+					$options['structure'] = 'false';
+					$type_id = $this->CI->content->add_type($options);
+
+					$this->copy_premade_scheme($folder.$file_name, $options['name'], $type_id);
 				}
 			}
 		}
@@ -521,7 +541,7 @@ Class Installer
 		switch (strtolower($type))
 		{
 			case 'blog':
-				//We add the columns that we need
+				//We add custom database columns on the tables
 				$fields = array(
 					'post_id' => array('type' => 'INT', 'null' => TRUE)
 				);
@@ -562,46 +582,46 @@ Class Installer
 				$this->CI->records->publish($page_id, 'Menu');
 				$this->CI->pages->publish($page_id);
 
-				//break; < no break! we will build also default pages
-
-			case 'default':
-				//We create a dummy page
-				$page = new Record('Menu');
-				$page->set('title', 'About us')
-				->set('action', 'text')
-				->set('lang', $this->CI->lang->default_language)
-				->set('show_in_menu', 'T')
-				->set('child_count', 0)
-				->set('uri', 'about-us')
-				->set('content', _('Hello world by a sample page.'))
-				;
-				$this->CI->records->save($page);
-
 				break;
 		}
+
+		//We finally create a dummy page
+		$page = new Record('Menu');
+		$page->set('title', 'About us')
+			 ->set('action', 'text')
+			 ->set('lang', $this->CI->lang->default_language)
+			 ->set('show_in_menu', 'T')
+			 ->set('child_count', 0)
+			 ->set('uri', 'about-us')
+			 ->set('content', _('Hello world by a sample page.'))
+		;
+		$this->CI->records->save($page);
 
 		//This tree needs to be cleared because we added some pages few lines above
 		$this->CI->tree->clear_cache('Menu');
 	}
 
 	/**
-	 * Duplicates an XML from a premade overriding the default one
-	 * @param string $path Source of the XML scheme
+	 * Duplicates a scheme from a premade overriding the default one
+	 * @param string $path Source of the scheme
 	 * @param string $type_name Type name
 	 * @param int $type_id Primary key of this type
 	 * @return bool
 	 */
-	public function copy_premade_xml($path, $type_name, $type_id)
+	public function copy_premade_scheme($path, $type_name, $type_id)
 	{
-		$xml = read_file($path);
+		$scheme = read_file($path);
 
 		//We parse the file with some pseudovariables
-		$xml = $this->CI->parser->parse_string($xml, array(
+		$scheme = $this->CI->parser->parse_string($scheme, array(
 		          'id'			=> $type_id,
 		          'version'		=> BANCHA_VERSION
 		),TRUE);
 
-		$storage_path = $this->CI->config->item('xml_typefolder').$type_name.'.xml';
-		return write_file($storage_path, $xml);
+		$tmp = explode('.', $path);
+		$ext = $tmp[count($tmp)-1];
+
+		$storage_path = $this->CI->config->item('xml_typefolder') . $type_name . '.' . $ext;
+		return write_file($storage_path, $scheme);
 	}
 }

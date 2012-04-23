@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -115,7 +115,7 @@ Class Core_Ajax extends Bancha_Controller
 
 		$this->view->set('repository_files', $repository);
 
-		$this->view->render_layout('content/documents_finder', FALSE);
+		$this->view->render_layout('repository/ajax-finder', FALSE);
 	}
 
 	public function get_relation()

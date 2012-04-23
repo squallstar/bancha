@@ -14,6 +14,7 @@ You can edit this file from the administration section (click on the type name o
         <descriptions label="Website pages" new="New page" />
         <tree>true</tree>
         <table key="id_record" production="records" stage="records_stage" />
+        <order_by field="date_update" sort="DESC" />
         <fieldset name="Sample fields">
             <field id="first"></field>
             <field id="second"></field>
@@ -24,7 +25,7 @@ You can edit this file from the administration section (click on the type name o
         </parents>
     </content>
 
-**NOTE: Content types are cached on the file "application/_bancha/content.tmp" for faster access. After editing a xml scheme, you need to delete that file or you can just click on the "Clear cache" link on the left menu of the administration**. If you edit the scheme by the "edit scheme" section, the cache will be automatically cleared after saving the scheme.
+**NOTE: Content types are cached on the file "application/cache/_bancha/content.tmp" for faster access. After editing a xml scheme, you need to delete that file or you can just click on the "Clear cache" link on the left menu of the administration**. If you edit the scheme by the "edit scheme" section, the cache will be automatically cleared after saving the scheme.
 
 When you create a new content type, Bancha will automatically sets a value to the id attribute of the **content** node; Bancha will similarly set the values to the **<name>** and **<description>** nodes which define the value used as key and the value read by the user into the panel (the label attribute set the value which will be displayed, whereas the new attribute set the label/link used to insert a new content of the same type). 
 
@@ -35,6 +36,9 @@ The **<table>** node defines the production table, the staging table and the pri
 If you need you are free to create more tables in addition to the records table. If you define stage table (attribute), the content type will use that table as staging for the records (that table needs also to include a column named "published" defined as INT(1) DEFAULT 0).
 
 When you use external tables, Bancha can generate and keep updated these tables automatically for you (added in **v1.0.2**): click on the **Rebuild tables** link on the **Content list** view and you're done!
+
+The **order_by** node, define the order of the records on the administration list views. By default, is set to **date_update** so the records are ordered by their last update date. You may change it to **date_update** if you are managing the posts of a blog, 'cos you can see the real order of the posts on the website.
+**Note: you can order records only by a table physical column**.
 
 The **<categories>** and **<hierarchies>** nodes says if content type has to show the Categories and Hierarchies sections. These sections makes you able to make sub-groups of records, such as the categories of a blog.
 

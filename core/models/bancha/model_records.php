@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -106,11 +106,29 @@ Class Model_records extends CI_Model {
 
   	/**
    	* Sets a where filter on the content type
-   	* @param int|string $type
+   	* @param int|string|array $type
    	*/
   	public function type($type='')
   	{
-    	if ($type != '')
+  		if (is_array($type))
+  		{
+  			$tipi_id = array();
+  			$tipi = array();
+  			foreach ($type as $tipo) {
+  				$tmp = $this->content->type($tipo);
+  				$tipi_id[] = $tmp['id'];
+  				$tipi[] = $tmp;
+  			}
+ 
+  			if ($tipi[0]['tree'])
+	        {
+	        	$this->last_search_has_tree = TRUE;
+	        }else{
+	       		$this->last_search_has_tree = FALSE;
+	        }
+	        $this->db->where_in('id_type', $tipi_id);
+  		}
+    	else if ($type != '')
     	{
     		$this->_single_type = FALSE;
 	    	$this->set_type($type);
@@ -201,7 +219,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-  	 * Imposta un filtro where (anche sui campi xml del record)
+  	 * Sets an "AND WHERE" condition
   	 * @param string $field
   	 * @param int|string $value
   	 */
@@ -214,23 +232,55 @@ Class Model_records extends CI_Model {
   		{
   			if ($field == 'id' || $field == $this->primary_key)
   			{
-				$this->db->where($this->table_current.'.'.$this->primary_key, $value);
-				$this->db->limit(1);
+  				$this->db->where($this->table_current.'.'.$this->primary_key, $value);
+  				$this->db->limit(1);
   			}
   			else if ($field == 'id_type' || $field == 'type' || $field == 'id_tipo' || $field == 'tipo')
   			{
-				$this->type($value);
+				  $this->type($value);
   			}
   			else if (is_array($this->columns) && in_array($field, $this->columns))
   			{
-				$this->db->where($this->table_current.'.'.$field, $value);
+				  $this->db->where($this->table_current.'.'.$field, $value);
   			} else {
-				//Xml search by tag content
-				$this->db->like($this->table_current.'.xml', '%<'.$field.'>'.CDATA_START.$value.CDATA_END.'</'.$field.'>%');
+				  //Xml search by tag content
+				  $this->db->like($this->table_current.'.xml', '%<'.$field.'>'.CDATA_START.$value.CDATA_END.'</'.$field.'>%');
   			}
     	}
     	return $this;
   	}
+
+    /**
+     * Sets an "OR WHERE" condition
+     * @param string $field
+     * @param int|string $value
+     */
+    public function or_where($field='', $value=null)
+    {
+      if ($value == null)
+      {
+        $this->db->or_where($field);
+      } else if ($field != '')
+      {
+        if ($field == 'id' || $field == $this->primary_key)
+        {
+          $this->db->or_where($this->table_current.'.'.$this->primary_key, $value);
+          $this->db->limit(1);
+        }
+        else if ($field == 'id_type' || $field == 'type' || $field == 'id_tipo' || $field == 'tipo')
+        {
+          $this->type($value);
+        }
+        else if (is_array($this->columns) && in_array($field, $this->columns))
+        {
+          $this->db->or_where($this->table_current.'.'.$field, $value);
+        } else {
+          //Xml search by tag content
+          $this->db->or_like($this->table_current.'.xml', '%<'.$field.'>'.CDATA_START.$value.CDATA_END.'</'.$field.'>%');
+        }
+      }
+      return $this;
+    }
 
   	/**
    	* Sets a "where in" condition for the primary key
@@ -306,7 +356,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-  	 * Imposta un limite sui risultati
+  	 * Sets a sql limit
   	 * @param start $a start
   	 * @param string $b howmany
   	 */
@@ -320,7 +370,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-  	 * Imposta l'ordine dei risultati
+  	 * Sets the results order
   	 * @param string $a field name
   	 * @param string $b ASC|DESC
   	 */
@@ -331,7 +381,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-  	 * Conta i records anziché estrarli
+  	 * Counts the record instead of extracting them
   	 * @return int
   	 */
   	public function count()
@@ -345,7 +395,7 @@ Class Model_records extends CI_Model {
   	}
 
   	/**
-  	 * Imposta se estrarre solo record pubblicati o depubblicati
+  	 * Filter the results by published or staged records
   	 * @param bool $published
   	 */
   	public function published($published = TRUE)
@@ -687,7 +737,8 @@ Class Model_records extends CI_Model {
 		  		if (isset($tipo['triggers']) && count($tipo['triggers']))
 		  		{
 		  			$this->load->triggers();
-		  			$this->triggers->delegate($record)
+		  			$this->triggers->set_stage(TRUE)
+		  						   ->delegate($record)
 		  						   ->operation($action)
 		  						   ->add($tipo['triggers'][$action])
 		  						   ->fire();
@@ -841,7 +892,8 @@ Class Model_records extends CI_Model {
 	  		if (isset($this->_single_type['triggers']['publish']))
 	  		{
 	  			$this->load->triggers();
-	  			$this->triggers->delegate($this->get($stage_record[$this->primary_key]))
+	  			$this->triggers->set_stage(FALSE)
+	  						   ->delegate($this->get($stage_record[$this->primary_key]))
 	  						   ->operation('publish')
 	  						   ->add($this->_single_type['triggers']['publish'])
 	  						   ->fire();
@@ -906,7 +958,8 @@ Class Model_records extends CI_Model {
 	  		if (isset($this->_single_type['triggers']['depublish']))
 	  		{
 	  			$this->load->triggers();
-	  			$this->triggers->delegate($this->get($id))
+	  			$this->triggers->set_stage(FALSE)
+	  						   ->delegate($this->get($id))
 	  						   ->operation('publish')
 	  						   ->add($this->_single_type['triggers']['depublish'])
 	  						   ->fire();

@@ -1,0 +1,359 @@
+# Bancha {version} - YAML Scheme
+# This scheme was automatically generated. Feel free to extend it as you wish.
+# You should read the documentation before making any changes to this file.
+# Note that you need to "Clear the cache" after saving this file to see the new differences.
+#
+# @author    Nicholas Valbusa
+# @license   GNU/GPL (General Public License)
+# @copyright Copyright (c) 2011-2012, Squallstar Studio
+# @see       http://docs.getbancha.com
+
+
+# ----- content type declarations starts here below -----
+
+# The content type unique ID
+# This number must match the one on the database
+id  : {id}
+
+# The content type unique name
+name: "{name}"
+
+# Labels and description used on the administration
+descriptions:
+	full_name  : "{description}"
+	new_record : "{label_new}"
+
+# Pages must use "true" (aka "tree structure"), while simple contents uses "false"
+tree: true
+
+# The tables (and the primary key) used to save the records
+table:
+	stage       : records_stage
+	production  : records
+	primary_key : id_record
+
+# The order used on the administration lists
+order_by:
+	field : date_update
+	sort  : DESC
+
+# Whether categories and hierarchies should be enabled for this content type
+categories  : true
+hierarchies : true
+
+# Tree structured content types can have a parent record. Here you define the accepted types.
+# You should include at least the current content type.
+parents :
+	- "{name}"
+
+# Content type relations
+relations :
+
+	# This is the relation name
+    childs :
+        type : 1-n
+        with : "{name}"
+        from : id_record
+        to   : id_parent
+
+# Content type triggers
+triggers :
+
+	# This trigger, recounts the childs of each record
+    - on    : "insert, update, delete"
+      field : id_parent
+      sql   :
+          action : recount
+          type   : "{name}"
+          target : child_count
+
+# Here you can see another example of trigger
+#   - on   : "publish"
+#     call : action_name
+
+
+# Here starts the fieldsets
+fieldsets :
+
+	- name   : General informations
+	  icon   : page
+	  fields :
+
+	  	# Every record should have a unique id
+	  	# You can change the name if you are using a custom primary key
+	  	id_record :
+	  		column : true
+	  		kind   : numeric
+	  		type   : hidden
+	  		list   : true
+	  		admin  : true
+
+	  	# This field is required to bind records to the owner content type
+	  	id_type :
+	  		column  : true
+	  		kind    : numeric
+	  		type    : hidden
+	  		list    : true
+
+	  	# This field is required on this content type, because is "Tree structured" and each record can have a parent record
+	  	id_parent :
+	  		column  : true
+	  		kind    : numeric
+	  		type    : select
+	  		list    : true
+	  		options :
+	  		    custom : $this->view->get('parent_tree');
+
+	  	date_insert :
+	  		column  : true
+	  		kind    : numeric
+	  		type    : hidden
+	  		list    : true
+	  		default : eval:time()
+
+	  	date_publish :
+	  		column      : true
+	  		description : Visibility date
+	  		type        : datetime
+
+	  	# Required if your records needs the stage-production workflow
+	  	published :
+	  		column  : true
+	  		kind    : numeric
+	  		type    : hidden
+	  		list    : true
+	  		default : 0
+	  		length  : 1
+
+	  	# Yes, each record should have a title
+	  	title :
+	  		column      : true
+	  		link        : edit
+	  		description : Title
+	  		type        : text
+	  		admin       : true
+	  		list        : true
+	  		rules       : required
+
+	  	# Every record should have a slug, and this will be used in the url to reach the record
+	  	# If blank, will be automatically set with the content of the "title" field
+	  	uri :
+	  		column      : true
+	  		description : Page URL
+	  		type        : text
+	  		admin       : true
+	  		list        : true
+
+	  	# If your website is multilanguage, this field is required
+	  	lang :
+	  		column      : true
+	  		description : Language
+	  		type        : select
+	  		admin       : true
+	  		list        : true
+	  		default     : eval:$this->lang->default_language
+	  		length      : 2
+	  		options     :
+	  			custom : config_item('website_languages_select')
+
+	  	content :
+	  		description : Content
+	  		type        : textarea_full
+	  		list        : true
+
+	  	child_count :
+	  		column       : true
+	  		kind         : numeric
+	  		description  : Child no.
+	  		type         : hidden
+	  		list         : true
+	  		admin        : true
+	  		default      : 0
+	  		length       : 5
+
+
+	- name   : Aspect
+	  icon   : code
+	  fields :
+
+	  	show_in_menu :
+	  		column : true
+	  		description : Show in menu
+	  		type        : radio
+	  		rules       : required
+	  		admin       : true
+	  		list        : true
+	  		default     : T
+	  		length      : 1
+	  		options     :
+	  		    T : Main menu
+	  		    S : Sitemap
+	  		    F : Don't show
+
+	  	view_template : 
+	  		description : View template
+	  		type        : select
+	  		rules       : required
+	  		admin       : false
+	  		list        : true
+	  		default     : default
+	  		options     :
+	  			default  : Default
+	  			homepage : Homepage
+
+	  	view_css :
+	  		description : CSS Stylesheet
+	  		type        : textarea_code
+
+	  	view_js :
+	  		description : Javascript code
+	  		type        : textarea_code
+
+
+	# Page actions fieldset
+	- name   : Actions
+	  icon   : lightning
+	  fields :
+
+	  	page_cache :
+	  		description : Page cache (minutes)
+	  		type        : number
+	  		default     : 0
+
+	  	priority :
+	  		column      : true
+	  		kind        : numeric
+	  		description : Priority
+	  		type        : number
+	  		default     : 0
+	  		length      : 3
+
+	  	action :
+	  		description : Page action
+	  		type        : select
+	  		onchange    : "bancha.actions.record_act();" # Javascript
+	  		options     :
+	  			text    : Single text
+	  			list    : Content list
+	  			action  : Custom action
+	  			link    : External link
+
+	  	action_list_type :
+	  		description : Content type
+	  		visible     : false
+	  		type        : select
+	  		sql         :
+	  			cache    : true
+	  			select   : "id_type AS value, name"
+	  			from     : types
+	  			order_by : name ASC
+
+	  	action_list_categories :
+	  		description : "Categories (A, B, C)"
+	  		visible     : false
+	  		type        : text
+
+	  	action_list_hierarchies :
+	  		description : "Hierarchies (A, B, C)"
+	  		visible     : false
+	  		type        : text
+
+	  	action_list_where :
+	  		description : "SQL WHERE (Condition)"
+	  		visible     : false
+	  		type        : text
+
+	  	action_list_limit :
+	  		description : Results per page
+	  		visible     : false
+	  		type        : number
+
+	  	action_list_order_by :
+	  		description : Results order
+	  		visible     : false
+	  		type        : select
+	  		options     :
+	  			"id_record DESC"    : "Record ID (descending)"
+	  			"id_record ASC"     : "Record ID (ascending)"
+	  			"date_publish DESC" : "Publish date (descending)"
+	  			"date_publish ASC"  : "Publish date (descending)"
+
+	  	action_list_has_feed :
+	  		description : RSS/JSON feeds
+	  		visible     : false
+	  		type        : select
+	  		options     :
+	  			T : Yes
+	  			F : No
+
+	  	action_custom_name :
+	  		description : "Method/Function name"
+	  		visible     : false
+	  		type        : text
+
+	  	action_custom_mode :
+	  		description : Action called at
+	  		visible     : false
+	  		type        : select
+	  		options     :
+	  			D : Dispatcher (before rendering)
+	  			C : Inside the theme (while rendering)
+
+	  	action_link_url :
+	  		description : Redirect URL
+	  		visible     : false
+	  		type        : text
+
+
+	# Here we declare another fieldset
+	- name   : Attachments
+	  icon   : images
+	  fields :
+
+		files :
+			description  : Files
+			type         : files
+			size         : 4096
+			mimes        : *
+			max          : 10
+			list         : true
+
+		images :
+			description  : Images
+			type         : images
+			size         : 4096
+			mimes        : jpg|gif|png|jpeg
+			original     : true
+			encrypt_name : true
+			resized      : 640x?
+			thumbnail    : 60x?
+			max          : 3
+			list         : true
+
+
+	# The following fields are used to improve the SEO
+	# Themes should implement them in the <head> section
+	- name   : Meta tags
+	  icon   : tag
+	  fields :
+
+		# If blank, the "title" field will be used
+		meta_title :
+			description : title
+			type        : text
+			length      : 128
+
+		# If blank, the "content" field will be used
+		meta_description :
+			description : title
+			type        : text
+			length      : 160
+
+		meta_keywords :
+			description : title
+			type        : text
+			length      : 128
+
+
+# -- generated by bancha {version} --
+# -- end of yaml scheme --

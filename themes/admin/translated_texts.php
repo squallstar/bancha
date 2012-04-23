@@ -2,11 +2,11 @@
 /**
  * Front-end translated texts
  *
- * This file is needed by some softwares sush as POEdit to find and parse the front-end labels
+ * This file is needed by some softwares such as POEdit to find and parse the front-end labels
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *

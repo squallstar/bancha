@@ -7,7 +7,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -61,8 +61,10 @@ Class Core_Install extends Bancha_Controller
 				//We create a defaut user
 				$username = 'admin';
 				$password = 'admin';
+
+				$enc_password = $this->config->item('encrypt_password') ? md5($password) : $password;
 				$this->installer->create_groups();
-				$this->installer->create_user($username, $password, 'Super', 'User', $language);
+				$this->installer->create_user($username, $enc_password, 'Super', 'User', $language);
 				$this->auth->login($username, $password);
 				$this->view->set('username', $username);
 				$this->view->set('password', $password);
@@ -82,7 +84,7 @@ Class Core_Install extends Bancha_Controller
 			if ($this->input->post('create_types'))
 			{
 				//We create the default types
-				$this->installer->create_types();
+				$this->installer->create_types( $this->input->post('scheme_format') );
 			}
 
 			if ($this->input->post('create_types') || $this->input->post('clear_cache'))

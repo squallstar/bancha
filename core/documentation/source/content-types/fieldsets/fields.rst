@@ -16,8 +16,11 @@ Below you can see the definition of a simple **input field**::
     </field>
 
 Let's talk about it: first of all, a field must have a **unique id** that will be used as **key** to store the value.
+
 Second, you will see the **column** attribute: this boolean describes if this attribute needs to be saved into a physical or logical column. Choose **true** if the table of your content type (the default is **records**) contains a column named as the **id** attribute. Otherwise, the value will be stored in the **xml** column, serialized with some other fields into a XML.
 If you are planning to do many intense query operations on this field, using a physical column will greatly improves your performances.
+
+**Note:** you don't have to add/remove the physical columns by hand: after changing a scheme, go on the **Content types** page of the administration and click **Rebuild tables** on the content type. Bancha will automatically alter the tables for you.
 
 The **<type>** node describes what kind of field, this field will be. The other fields are optional, and you can easily see the meanings reading them.
 

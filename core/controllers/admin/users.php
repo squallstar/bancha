@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -33,7 +33,7 @@ Class Core_Users extends Bancha_Controller
 	}
 
 	public function type() {
-		//Legacy: breadcrumbs in edit_user will use this route to go back to list
+		//Breadcrumbs in edit_user uses this route to go back to list
 		$this->lista();
 	}
 
@@ -78,6 +78,11 @@ Class Core_Users extends Bancha_Controller
 	{
 		$this->auth->check_permission('users', 'list');
 
+		//A user can always edit itself
+		if ($id_username != $this->auth->user('id')) {
+			$this->auth->check_permission('users', 'add');	
+		}
+
 		$this->load->categories();
         $this->load->hierarchies();
         $this->load->documents();
@@ -91,6 +96,34 @@ Class Core_Users extends Bancha_Controller
 		if ($this->input->post())
 		{
 			$user->set_data($this->input->post());
+
+			$pwd = $this->input->post('password');
+			if ($id_username != '' && !strlen($pwd) || $pwd != $this->input->post('password_confirm')) {
+				//We don't need to update the password
+				$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
+
+				if ($users) {
+					$tmp_user = $users[0];
+					$user->set('password', $tmp_user->get('password'));
+				}
+
+			} else {
+				$user->set('password', md5($user->get('password')));
+			}
+			
+
+			if ($id_username != '' && !$this->auth->has_permission('users', 'groups')) {
+				//User can't edit groups
+				if (!isset($users)) {
+					$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
+				}
+				
+				if ($users) {
+					$tmp_user = $users[0];
+					$user->set('id_group', $tmp_user->get('id_group'));
+				}	
+			}
+
 			$done = $this->records->save($user);
 
 			if ($done)
@@ -108,15 +141,21 @@ Class Core_Users extends Bancha_Controller
 
 		if ($id_username != '')
 		{
-			//We search for this user
-			$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
-
-			if (!$users)
-			{
-				show_error(_('User not found'));
+			if ($user->id) {
+				//We already have the user
 			} else {
-				$user = $users[0];
-			}
+				//We search for this user
+				$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
+
+				if (!$users)
+				{
+					show_error(_('User not found'));
+				} else {
+					$user = $users[0];
+				}
+			}	
+			$user->set('password', '');
+			$user->set('password_confirm', '');
 		} else {
 			//New user
 			$this->view->set('user', FALSE);
@@ -131,6 +170,18 @@ Class Core_Users extends Bancha_Controller
     			$type_definition['fields'][$field_name]['options'] = $this->records->get_field_options($field_value);
         	}
         }
+
+        //Normal users can't edit the group
+		if (! $this->auth->has_permission('users', 'groups')) {
+			$i = 0;
+			foreach ($type_definition['fieldsets'] as $fieldset) {
+				if ($fieldset['name'] == 'Groups') {
+					unset($type_definition['fieldsets'][$i]);
+					break;
+				}
+				$i++;
+			}
+		}
 
 		$this->view->set('tipo', $type_definition);
 		$this->view->set('_section', 'users');
@@ -229,7 +280,12 @@ Class Core_Users extends Bancha_Controller
 	 */
 	public function group_delete($group_id = '')
 	{
-		$done = $this->users->delete_group($group_id);
+		$done = FALSE;
+		if ($this->auth->user('group_id') == $group_id) {
+			$this->view->message('warning', _('You cannot delete your own group.'));
+		} else {
+			$done = $this->users->delete_group($group_id);
+		}
 
 		if ($done)
 		{

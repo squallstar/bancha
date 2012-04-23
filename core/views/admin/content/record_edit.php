@@ -4,7 +4,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -510,7 +510,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 	echo '<div class="fieldset noborder"><label></label><div class="right">'
 		 . form_submit('_bt_save', _('Save'), 'class="submit"')
 		 . form_submit('_bt_save_list', _('Save and go to list'), 'class="submit long"')
-		 . ($tipo['stage'] ? form_submit('_bt_publish', _('Publish'), 'class="submit"') : '')
+		 . ($tipo['stage'] ? form_submit('_bt_publish', _('Publish and go to list'), 'class="submit long"') : '')
 		 . '</div><div class="clear"></div></div>';
 
 echo form_close();

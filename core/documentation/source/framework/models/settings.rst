@@ -44,3 +44,6 @@ To delete a key from the settings, use the **delete** function that accepts the 
 
     //Or from your custom namespace
     $this->settings->delete('foo', 'mynamespace');
+
+
+Back to :doc:`../index`

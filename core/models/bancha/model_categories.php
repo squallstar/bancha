@@ -4,7 +4,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -156,8 +156,9 @@ Class Model_categories extends CI_Model
 						'id_record'		=> $record_id,
 						'id_category'	=> $category
 					);
-					return $this->db->insert('record_categories', $data);
+					$this->db->insert('record_categories', $data);
 				}
+				return TRUE;
 			}
 		}
 	}
@@ -234,5 +235,16 @@ Class Model_categories extends CI_Model
 			$ids[] = (int)$record['id_record'];
 		}
 		return $ids;
+  	}
+
+  	/**
+   	* Adds an order_by clause
+   	* @param string $field
+   	* @param ASC|DESC $order
+   	* @return $this
+   	*/
+  	public function order_by($field = 'name', $order = 'ASC') {
+  		$this->db->order_by($field, $order);
+  		return $this;
   	}
 }

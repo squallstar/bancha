@@ -42,3 +42,9 @@ hr {
 h1, h2 {
 	font-weight:normal;
 }
+input[type="text"], textarea {
+	width:300px;
+	padding:6px;
+	border:1px dotted #AAA;
+	margin:5px 0;
+}

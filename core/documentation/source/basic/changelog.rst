@@ -2,6 +2,102 @@
 ChangeLog
 ######################
 
+**v 1.2** (Planned)
+
+- UPGRADE FROM 1.x: just replace the core folder
+- YAML Schemes added!! Now you can use them instead of the XML ones.
+- Premade schemes converted to YAML.
+- Fix on the install process on some database drivers
+- Currently we are having some technical problems on PostgreSQL CodeIgniter drivers, so we recommend you to use other databases such as MySQL.
+- jQuery updated to the latest available version
+- Removed some legacy javascript code inside the admin custom.js script
+- Minor fixes
+
+
+**v 1.1.1** (2012-03-24)
+
+- Corrected a little "not null" bug while installing the DB on Postgres SQL
+
+
+**v 1.1** (2012-03-19)
+
+- Bugfix corrected on the Type tree scheme
+- New Javascript application file by @domsmasher (html5 boilerplate)
+- Custom feed template is now available on the core/views/type_templates folder
+- Htaccess file now correctly supports subdirectories
+- Some fixes on the rss+json feeds
+- The tree() function now accepts also the starting page record id
+- XSS clean added on user inputs (such as the comments script on the sandbox theme)
+- Strip tags added on the event name when is displayed on the "Last events" page of the admin
+- Merge of the development branch (security fixes)
+- Some italian localizations
+- Rendered views array reversed to reflect their real order (on the website profiler)
+- Doc: 1.0.8 changelog list slightly changed
+
+
+**v 1.0.8** (2012-01-02)
+
+- Strip tags added on the events log (title field)
+- Triggers on publish/depublish now triggers the production tables instead of the stage ones
+- Comments count fix (triggers added on publish)
+- the tree() function now accept also the starting page record id
+
+
+**v 1.0.7** (2012-01-24)
+
+- UPDATING FROM PREVIOUS VERSIONS: add the new "Services" fieldset on your application/xml/Settings.xml to include the Akismet support that we added
+- IMPORTANT: The home template has been renamed to homepage.php (from home.php) - check out your content types schemes and view files.
+- Removed some old english localizations
+- Pages and tree documentation added
+- Added a "default" switch on the tree() function (frontend helper)
+- Akismet anti-spam library added (libraries/external/akismet.php)
+- Akismet support is now included on the comments saving script (sandbox theme)
+- The comments saving script has been moved outside the type_templates. Now the script is located in views/extra/comments-save.php
+- Deutsch translation added (thanks to Patrick Kriechbaumer @pk-informatics)
+- Issue #92 resolved (users/groups)
+- Groups/permissions view messages now should be working back again
+- Issue #94 resolved (cached page encoding bug)
+- Added an "order_by" condition on the content types xml scheme (issue #88). Please check the documentation to see how to implement it.
+- Added a "View content" button on the flashmessage after saving a record throught the administration: click it to be redirected to that record on the website (needs a page that is listing content types of the same type of the record)
+- New methods added to the Record Objects: save(), publish(), depublish(), delete(), delete_related($relation_name);
+- Records documentation has been improved with the "Create record objects" page.
+- XSS Filter added on the login and the comments saving script.
+
+
+**v 1.0.6** (2012-01-14)
+
+- New administration page: Image repository (to manage your media files)
+- Password are now stored with standard md5 encryption.
+- Big refactor and improvements on the Users and Groups ACL.
+- Issue #92 corrected (users can delete the user's own)
+- More documentation on the database application config file.
+- Added a remove() function that deletes a single key on the Record Object class.
+- Comments on the sandbox blog post detail are now automatically published.
+- Core dispatchers have been moved outside the library folder and can now be extended such as other classes.
+
+
+**v 1.0.5** (2012-01-09)
+
+- Now you can search for more than one content types as time! The find() and records->type() functions accepts an array of content types (names).
+- Added an order_by function to the categories model. That function has also been used on the categories view of content types.
+- Wordpress adapter now can link each post to its categories (they must be created before importing the posts).
+- Added an "or_where" method on the records model.
+- Added the documentation on the Record Objects and the records model.
+- Now you can select to serve the homepage without the initial 301 redirect: this results in a big speed improvement (active by default - you can disable it on a variable placed into the website config file).
+- New method on the tree models: set_request_uri()
+- New blog detail view (with comments) added to the boilerplate
+
+
+**v 1.0.4** (2012-01-07)
+
+- Fixed a bug on the categories update script (return removed in a foreach cycle)
+- Tree helper now extracts the tree when is not already loaded (so the tree is now loaded also on the 404 error page)
+- New feature (based on issue #86): now you can switch between the preview and the live website from the profiler topbar without logging out of the administration
+- Issue #85: now you can create your dispatchers inside the application/dispatchers folder. For further information take a look at the dispatchers documentation
+- An example dispatcher has been added inside the application/dispatchers folder.
+- Issue #87: your application routes can now be extended using the application/config/routes.php file
+
+
 **v 1.0.3** (2011-12-27)
 
 - New API added: Save records

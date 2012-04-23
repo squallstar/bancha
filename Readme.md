@@ -6,7 +6,7 @@ BANCHA is a Content Management System made with PHP5 and Code Igniter, a light a
 It is capable to manage any kind of project/website, specially when it have many different types of contents.
 
 BANCHA bases its power on some pillars that make it different from other CMS:
-It allows you to handle any type of content: pages, news, photo galleries, products, etc ... through XML schemas.
+It allows you to handle any type of content: pages, news, photo galleries, products, etc ... through XML schemes.
 In 10 minutes, you can configure a website to manage, list and view any kind of thing you want.
 
  * It doesn't sacrifice the performance of a static site, because under the hood it uses many different caching systems.
@@ -22,6 +22,11 @@ The **BANCHA documentation** is available here: **http://docs.getbancha.com**
 
 http://docs.getbancha.com/install/howtoinstall.html
 
+# Bancha Bash Utilities
+
+We also developed a **unix bash** script to help you installing/upgrading Bancha. You can install it in a minute here:
+https://github.com/squallstar/bancha-bash
+
 # Application MVC Scheme
 
 ![MVC Scheme](http://static.squallstar.it/images/bancha_mvc_scheme.png)
@@ -32,7 +37,9 @@ See **http://docs.getbancha.com/basic/changelog.html**
 
 # Resources
 
- * [Project homepage](https://github.com/squallstar/bancha)
+ * [Official website](http://getbancha.com)
+ * [Documentation](http://docs.getbancha.com)
+ * [GitHub project homepage](https://github.com/squallstar/bancha)
  * [Open issues](https://github.com/squallstar/bancha/issues)
 
 # Contribute via GitHub

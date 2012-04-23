@@ -7,7 +7,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -56,7 +56,7 @@ class Bancha_Profiler extends CI_Profiler {
 		{
 			$output .= "\n\n<table style='width:100%; border:none'>\n";
 
-			foreach (array_reverse($rendered) as $val)
+			foreach ($rendered as $val)
 			{
 				$output .= "<tr><td style='width:100%;color:#000;background-color:#ddd;padding:5px'>".$val."&nbsp;&nbsp; </td></tr>\n";
 			}
@@ -92,11 +92,14 @@ class Bancha_Profiler extends CI_Profiler {
 			}
 		}
 
+		$environment = $this->CI->session->userdata('environment');
+
 		$output = link_tag(site_url(THEMESPATH . 'admin/css/profiler.css', FALSE)).
 			'<script type="text/javascript" src="'.site_url(THEMESPATH . 'admin/js/profiler.js', FALSE).'"></script>'.
-			'<a id="bancha_profiler_preview" onclick="_show_profiler();" href="#">'._('Preview').'</a>'.
+			'<a id="bancha_profiler_preview" onclick="return _show_profiler();" href="#">'.($environment == 'live' ? _('Live') : _('Preview')).'</a>'.
 			'<div id="bancha_profiler"><div id="bancha_profiler_content">'.
 			'BANCHA&nbsp; &nbsp; <a href="'.admin_url().'">'._('Back to admin').'</a> - '.
+			($environment == 'live' ? '<a href="' . site_url('/change-env/preview') . '">' . _('Switch to preview') . '</a>' : '<a href="' . site_url('/change-env/live') . '">' . _('Switch to published contents') . '</a>'). ' - ' .
 			(isset($edit_link) ? '<a href="'.admin_url($edit_link).'">'.$edit_name.'</a> - ' : '').
 			'<a href="#" onclick="_show_ciprofiler();">'._('Open profiler').'</a>'
 			.'<div id="bancha_profiler_ci">'
@@ -118,4 +121,4 @@ class Bancha_Profiler extends CI_Profiler {
 }
 
 /* End of file Bancha_Profiler.php */
-/* Location: /libraries/bancha/Bancha_Profiler.php */
+/* Location: /core/libraries/Bancha_Profiler.php */

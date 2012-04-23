@@ -34,7 +34,7 @@ $this->load->helper('form');
 				</div>
 
 				<div class="fieldset clearfix">
-		  			<label><?php echo _('Language'); ?></label>
+		  			<label><?php echo _('Admin default language'); ?></label>
 				  	<div class="right">
 						<?php echo form_dropdown('language', $this->config->item('languages_select'), $this->lang->current_language, 'class="styled"'); ?>
 					</div>
@@ -54,6 +54,17 @@ $this->load->helper('form');
 		  			<label><?php echo _('Theme'); ?></label>
 				  	<div class="right">
 						<?php echo form_dropdown('theme', $this->config->item('installed_themes'), null, 'class="styled"'); ?>
+						(you can change it later)
+					</div>
+				</div>
+
+				<div class="fieldset clearfix">
+		  			<label><?php echo _('Preinstalled schemes format'); ?></label>
+				  	<div class="right">
+						<select class="styled" name="scheme_format">
+							<option value="yaml">YAML (Recommended)</option>
+							<option value="xml">XML</option>
+						</select>
 					</div>
 				</div>
 

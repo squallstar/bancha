@@ -6,9 +6,9 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
- * @link		http://squallstar.it
+ * @link		  http://squallstar.it
  *
  */
 
@@ -141,25 +141,189 @@ Class Xml
   	 * It is one of the most important functions of the framework and the content types cache uses it
    	 * @param string $filepath
    	 */
-  	function parse_scheme($filepath)
+  	function parse_xmlscheme($filepath)
   	{
     	$node = simplexml_load_file($filepath);
     	if (!$node)
     	{
-      		show_error('File not found: '.$filepath);
+      		show_error('Cannot parse the XML scheme: '. $filepath);
     	}
+      return $node;
+    }
+
+    /**
+     * Parses a YAML file and converts it into an Array
+     * It is one of the most important functions of the framework and the content types cache uses it
+     * @param string $filepath
+     */
+    function parse_yamlscheme($filepath)
+    {
+      require_once(APPPATH . '/libraries/externals/spyc.php');
+      
+      //1. parse yaml scheme
+      $yaml = Spyc::YAMLLoad($filepath) or show_error('Cannot parse the YAML scheme: ' . $filepath);
+
+      //2. convert yaml scheme to a new SimpleXML object
+      $xml = new SimpleXMLElement('<content id="' . $yaml['id'] . '"></content>');
+
+      //Base level
+      $xml->addChild('name', $yaml['name']);
+
+      $node_descr = $xml->addChild('descriptions');
+      $node_descr->addAttribute('label', $yaml['descriptions']['full_name']);
+      $node_descr->addAttribute('new', $yaml['descriptions']['new_record']);
+
+      $xml->addChild('tree', isset($yaml['tree']) ? ($yaml['tree'] ? 'true' : 'false') : 'false');
+
+      $node_tables = $xml->addChild('table');
+      if (isset($yaml['table']['primary_key'])) $node_tables->addAttribute('key', $yaml['table']['primary_key']);
+      if (isset($yaml['table']['stage'])) $node_tables->addAttribute('stage', $yaml['table']['stage']);
+      if (isset($yaml['table']['production'])) $node_tables->addAttribute('production', $yaml['table']['production']);
+
+      if (isset($yaml['order_by'])) {
+        $order_by = $xml->addChild('order_by');
+        $order_by->addAttribute('field', $yaml['order_by']['field']);
+        $order_by->addAttribute('sort', $yaml['order_by']['sort']);
+      }
+
+      if (isset($yaml['parents'])) {
+        $node_parent = $xml->addChild('parents');
+        foreach ($yaml['parents'] as $parent_type) {
+            $node_parent->addChild('type', $parent_type);
+        }
+      }
+
+      #warning todo triggers
+      if (isset($yaml['triggers'])) {
+        $node_triggers = $xml->addChild('triggers');
+        foreach ($yaml['triggers'] as $trigger) {
+            $node_trigger = $node_triggers->addChild('trigger');
+            if (isset($trigger['field'])) $node_trigger->addAttribute('field', $trigger['field']);
+            if (isset($trigger['on'])) $node_trigger->addAttribute('on', $trigger['on']);
+            if (isset($trigger['sql'])) {
+                $node_sql = $node_trigger->addChild('sql');
+                foreach(array('action', 'type', 'target', 'value') as $val) {
+                    if (isset($trigger['sql'][$val]))  $node_sql->addAttribute($val, $trigger['sql'][$val]);
+                }
+                if (isset($trigger['sql']['escape']))  $node_sql->addAttribute('escape', $trigger['sql']['escape'] ? 'true' : 'false');                
+            }
+
+            if (isset($trigger['call'])) {
+              $node_call = $node_trigger->addChild('call');
+              $node_call->addAttribute('action', $trigger['call']);
+            }
+            #warning todo
+        }
+      }
+
+      //Relations
+      if (isset($yaml['relations'])) {
+        foreach ($yaml['relations'] as $relation_name => $relation_opts) {
+            $node_rel = $xml->addChild('relation');
+            $node_rel->addAttribute('name', $relation_name);
+            foreach (array('type', 'with', 'from', 'to') as $attr) {
+                if (isset($relation_opts[$attr])) $node_rel->addAttribute($attr, $relation_opts[$attr]);
+            }
+        }
+      }
+
+      if (isset($yaml['categories'])) $xml->addChild('categories', $yaml['categories'] ? 'true' : 'false');
+      if (isset($yaml['hierarchies'])) $xml->addChild('hierarchies', $yaml['hierarchies'] ? 'true' : 'false');
+
+      //Fieldsets
+      foreach ($yaml['fieldsets'] as $fieldset) {
+        $node_fieldset = $xml->addChild('fieldset');
+        $node_fieldset->addAttribute('name', $fieldset['name']);
+        $node_fieldset->addAttribute('icon', $fieldset['icon']);
+
+        if (isset($fieldset['fields']) && is_array($fieldset['fields'])) {
+            //Fields
+            foreach ($fieldset['fields'] as $field_name => $field) {
+
+                $node_field = $node_fieldset->addChild('field');
+                $node_field->addAttribute('id', $field_name);
+
+                //Boolean options
+                //Nodes
+                foreach (array('mandatory', 'admin', 'list', 'visible', 'original', 'encrypt_name') as $option) {
+                    if (isset($field[$option])) $node_field->addChild($option, $field[$option] ? 'true' : 'false');
+                }
+                //Attributes
+                foreach (array('column') as $option) {
+                    if (isset($field[$option])) $node_field->addAttribute($option, $field[$option] ? 'true' : 'false');
+                }
+
+                //String options
+                //Nodes
+                foreach (array('kind', 'type', 'description', 'length', 'default', 'rules', 'resized', 'thumbnail',
+                               'thumbnail_preset', 'size', 'mimes', 'max', 'onchange', 'onkeyup') as $option) {
+                    if (isset($field[$option])) $node_field->addChild($option, $field[$option]);
+                }
+                //Attributes
+                foreach (array('kind', 'link') as $option) {
+                    if (isset($field[$option])) $node_field->addAttribute($option, $field[$option]);
+                }
+
+                //Options
+                if (isset($field['options'])) {
+                    $node_opts = $node_field->addChild('options');
+                    if (isset($field['options']['custom']) && count($field['options']) == 1) {
+                        $node_opts->addChild('custom', $field['options']['custom']);
+                    } else {
+                        foreach ($field['options'] as $opt_val => $opt_label) {
+                            $single_opt = $node_opts->addChild('option', $opt_label);
+                            $single_opt->addAttribute('value', $opt_val);
+                        }
+                    }
+                }
+
+                //SQL
+                if (isset($field['sql'])) {
+                    $sql_node = $node_field->addChild('sql');
+                    if (isset($field['sql']['cache'])) {
+                        $sql_node->addAttribute('cache', $field['sql']['cache'] ? 'true' : 'false');
+                    }
+                    foreach (array('select', 'from', 'where', 'order_by', 'limit', 'type') as $statement) {
+                        if (isset($field['sql'][$statement])) $sql_node->addChild($statement, $field['sql'][$statement]);
+                    }
+                }
+            }
+        }
+      }
+      
+      //3. return the SimpleXML object
+      return $xml;
+    }
+
+    /**
+     * Parses an XML or YAML scheme
+     * @param string $filepath
+     */
+    function parse_scheme($filepath)
+    {
+      $tmp = explode('.', $filepath);
+      $ext = $tmp[count($tmp)-1];
+      switch ($ext) {
+        case 'xml':
+          $node = $this->parse_xmlscheme($filepath);
+          break;
+        case 'yaml':
+          $node = $this->parse_yamlscheme($filepath);
+          break;
+        default:
+          show_error('Scheme format not supported. Please change the extension to [xml] or [yaml].');
+          break;
+      }
 
     	//Gets the filename
     	$segments = explode(DIRECTORY_SEPARATOR, $filepath);
     	$filename = $segments[count($segments)-1];
 
     	//Filename sanitize
-    	$safe_filename = str_replace(' ', '_', str_replace('.xml', '', $filename));
+    	$safe_filename = str_replace(' ', '_', str_replace('.' . $ext, '', $filename));
 
     	//The type name
     	$name = (string) $node->name;
-
-    	
 
     	//Allowed types of field
     	$field_usable_inputs = array(
@@ -178,15 +342,16 @@ Class Xml
     	}
 
     	$content = array(
-      		'id'				=> $type_id,
-      		'name'				=> $safe_filename,
-      		'tree'				=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
-      		'has_categories'	=> isset($node->categories) ? (strtolower((string)$node->categories) == 'true' ? TRUE : FALSE) : FALSE,
-            'has_hierarchies'	=> isset($node->hierarchies) ? (strtolower((string)$node->hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
-      		'description'		=> (string) $descr_attr->label,
-      		'label_new'			=> (string) $descr_attr->new,
-      		'primary_key'		=> (string) (isset($tables->key) ? $tables->key : 'id_record'),
-      		'table'				=> (string) (isset($tables->production) ? $tables->production : 'records')
+          'id'              => $type_id,
+          'source'          => $ext,
+          'name'            => $safe_filename,
+          'tree'            => strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
+          'has_categories'  => isset($node->categories) ? (strtolower((string)$node->categories) == 'true' ? TRUE : FALSE) : FALSE,
+          'has_hierarchies' => isset($node->hierarchies) ? (strtolower((string)$node->hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
+          'description'     => (string) $descr_attr->label,
+          'label_new'       => (string) $descr_attr->new,
+          'primary_key'     => (string) (isset($tables->key) ? $tables->key : 'id_record'),
+          'table'           => (string) (isset($tables->production) ? $tables->production : 'records')
     	);
 
         $this->_translations[$content['description']] = TRUE;
@@ -366,7 +531,7 @@ Class Xml
 
         		if (!in_array((string)$field->type, $field_usable_inputs))
         		{
-          			show_error($this->CI->lang->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are:', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
+          			show_error($this->CI->lang->_trans('The value of the node named type (field: %n, type %t) does not exists. Allowed values are: %v', array('n' => $field_name, 't' => $safe_filename, 'v' => ' '.implode(', ', $field_usable_inputs))), 500, _('XML parser: Error'));
         		}
 
         		$_note = FALSE;
@@ -393,9 +558,14 @@ Class Xml
           			'mandatory'		=> isset($field->mandatory) ? (strtoupper($field->mandatory) == 'TRUE' ? TRUE : FALSE) : FALSE,
           			'admin'			=> isset($field->admin) ? (strtoupper($field->admin) == 'TRUE' ? TRUE : FALSE) : FALSE,
           			'list'			=> isset($field->list) ? (strtoupper($field->list) == 'TRUE' ? TRUE : FALSE) : FALSE,
-         			'visible'		=> isset($field->visible) ? (strtoupper($field->visible) == 'TRUE' ? TRUE : FALSE) : TRUE,
+         			  'visible'		=> isset($field->visible) ? (strtoupper($field->visible) == 'TRUE' ? TRUE : FALSE) : TRUE,
           			'default'		=> isset($field->default) ? (string)$field->default : ''
         		);
+
+            //We automatically add the id_type default value
+            if ($field_name == 'id_type') {
+              $content_field['default'] = (int) $content['id'];
+            }
 
         		if (isset($field->rules))
         		{
@@ -433,7 +603,7 @@ Class Xml
           			$content_field['size'] = isset($field->size) ? (int)$field->size : 102400; //max 100mb
           			$content_field['mimes'] = isset($field->mimes) ? (string)$field->mimes : '*';
           			$content_field['max'] = isset($field->max) ? (int)$field->max : 10; //max 10 files
-                $content_field['encrypt_name'] = isset($field->encrypt_name) ? (strtoupper($field->encrypt_name) == 'TRUE' ? TRUE : FALSE) : FALSE;
+                    $content_field['encrypt_name'] = isset($field->encrypt_name) ? (strtoupper($field->encrypt_name) == 'TRUE' ? TRUE : FALSE) : FALSE;
         		}
 
         		//Onchange JS
@@ -516,6 +686,33 @@ Class Xml
       		$content['fieldsets'][] = $fieldset;
 
     	} //end foreach fieldsets
+
+    	//Orderby condition
+    	if (isset($node->order_by)) {
+    		$orderby_attr = $node->order_by->attributes();
+
+    		$orderby_sort = strtoupper((string)$orderby_attr->sort);
+    		if ($orderby_sort != 'ASC' && $orderby_sort != 'DESC')
+    		{
+    			$orderby_sort = 'DESC';
+    		}
+
+    		$orderby_field = (string)$orderby_attr->field;
+    		if (!in_array($orderby_field, $content['columns'])) {
+    			$orderby_field = 'date_update';
+    		}
+
+    		$content['order_by'] = array(
+    			'field' => (string) $orderby_field,
+    			'sort'	=> (string) $orderby_sort
+			);
+    	} else {
+    		$content['order_by'] = array(
+    			'field' => 'date_update',
+    			'sort'	=> 'DESC'
+			);
+    	}
+
     	return $content;
   	}
 

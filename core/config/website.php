@@ -2,14 +2,14 @@
 /**
  * Bancha main configuration file.
  *
- * >>> WARNING: THIS SETTINGS ARE OVERWRITTEN BY THE APPLICATION CONFIG FILE <<<
+ * >>> WARNING: ALL THESE SETTINGS CAN BE OVERWRITTEN ON THE APPLICATION CONFIG FILE <<<
  *
  * This means that you can copy one of the following configs on the application
- * config file to extend or change the values.
+ * config file to extend or change its value.
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -20,7 +20,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Bancha primary version
  */
-define('BANCHA_VERSION', '1.0.3');
+define('BANCHA_VERSION', '1.2');
 
 
 /* WEBSITE LANGUAGES
@@ -45,6 +45,12 @@ $config['admin_languages'] = array(
 		'description'	=> 'English',
 		'date_format'	=> 'Y-m-d'
 	),
+	'de' => array(
+		'name'			=> 'german',
+		'locale'		=> 'de_DE',
+		'description'	=> 'Deutsch',
+		'date_format'	=> 'd/m/Y'
+	),
 	'it' => array(
 		'name'			=> 'italian',
 		'locale'		=> 'it_IT',
@@ -52,6 +58,11 @@ $config['admin_languages'] = array(
 		'date_format'	=> 'd/m/Y'
 	)
 );
+
+/* ENCRYPT PASSWORDS
+ * Select if the user passwords needs to be encrypted
+ */
+$config['encrypt_password'] = FALSE;
 
 /*
  * PREPEND URI LANGUAGE
@@ -110,6 +121,16 @@ if (!defined('API_ENABLED'))
 * Set to TRUE to enable multiple tokens.
 */
 $config['shared_api_token'] = FALSE;
+
+/*
+* HOMEPAGE 301 REDIRECT
+* Only available when the "prepend_uri_language" (few lines above) is set to FALSE.
+* Let this set to FALSE is you want better performances on the website homepage.
+
+* - FALSE: the homepage will be served without a redirect
+* - TRUE: the homepage will be served after a 301 redirect appending the homepage slug to the URL
+*/
+$config['homepage_redirect'] = FALSE;
 
 /*
 * RECORDS PER PAGE
@@ -254,7 +275,8 @@ $config['delete_dead_records'] = FALSE;
  * RECORD COLUMNS
  * The physical columns of the records table.
  * The website router uses it when extracts the records when it doesn't know the type.
- * Keep it updated when you add columns that you want to extract without knowing the content type.
+ * Keep it updated when you add columns that you want to extract without knowing the content type
+ * or when you are extracting more then one content type at time.
  */
 $config['record_columns'] = array(
 	'id_record',
@@ -327,7 +349,7 @@ $config['record_select_tree_fields'] = array('id_parent');
 
 /*
  * ARRAY FIELD TYPES
- * These kind of fields will be store as arrays values
+ * These kind of fields will be stored as arrays values
  */
 $config['array_field_types'] = array('multiselect', 'hierarchy');
 
@@ -335,7 +357,7 @@ $config['array_field_types'] = array('multiselect', 'hierarchy');
  * CONTENT TYPE CUSTOM FEED
  * When is set to TRUE, type template file "feed.php" will be used to render the feeds
  */
-$config['type_custom_feeds'] = TRUE;
+$config['type_custom_feeds'] = FALSE;
 
 
 /* End of file website.php */

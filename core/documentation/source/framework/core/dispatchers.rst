@@ -5,8 +5,12 @@ Dispatchers
 Dispatchers are classes that performs many operation before the rendering process. They are tipically fired by the controllers.
 As example, the **Website** controller fires many of the dispatchers described below.
 
-They are located inside the **core/libraries/bancha/dispatchers** directory.
+The Bancha core dispatcher are located inside the **core/dispatchers** directory.
+
+Instead, the folder for the dispatchers of your application (if you need to create a new one), is **application/dispatchers**.
 To add a new dispatcher, create a new file in that directory using **dispatcher_name.php** as filename and **Dispatcher_name** as **class name**.
+
+You can find a sample dispatcher here: **application/dispathcers/dispatcher_example.php**
 
 You can load a dispatcher using the following function::
 
@@ -35,7 +39,7 @@ Called from the **router** action of the **Website** controller::
 Image dispatcher
 ----------------
 
-This dispatcher handles the :doc:`/framework/core/image-presets.rst`. When a preset cached file does not exists, an action on the **website controller** will be called and that action then fires the image dispatcher. This, will performs all the graphical preset operations and after saving the file on the disk (to cache the next request) will output the content to the client.
+This dispatcher handles the :doc:`/framework/core/imagepresets`. When a preset cached file does not exists, an action on the **website controller** will be called and that action then fires the image dispatcher. This, will performs all the graphical preset operations and after saving the file on the disk (to cache the next request) will output the content to the client.
 Called from the **image_router** action of the **Website** controller::
 
     $this->load->dispatcher('images');
@@ -51,7 +55,7 @@ Called from the **image_router** action of the **Website** controller::
 
     $this->dispatcher->retrieve($data);
 
-Read more about the :doc:`/framework/core/image-presets.rst`.
+Read more about the :doc:`/framework/core/imagepresets`.
 
 
 --------------------

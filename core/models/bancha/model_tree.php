@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -526,7 +526,8 @@ Class Model_tree extends CI_Model
 		$link .= $page->uri . '/';
 		$alias = $page->uri;
 		$page->link = $link;
-		$open = in_array($page->uri, $this->_uri_segments) ? TRUE : FALSE;
+
+		$open = in_array($page->uri, $this->_uri_segments);
 		$arr['sons'][$id] = array(
 			'title' => $page->title,
 			'link' => $link,
@@ -552,11 +553,11 @@ Class Model_tree extends CI_Model
 
 	/**
 	 * Deletes a tree cached file, given the type (when not given, it deletes the default one)
-	 * @param int|string $tipo
+	 * @param int|string $type
 	 */
-	public function clear_cache($tipo='')
+	public function clear_cache($type='')
 	{
-		$paths = $this->get_type_cachepaths($tipo);
+		$paths = $this->get_type_cachepaths($type);
 
 		foreach ($paths as $path)
 		{
@@ -565,6 +566,33 @@ Class Model_tree extends CI_Model
 				unlink($path);
 			}
 		}
+	}
+
+	/**
+	 * Sets a new Request URI
+	 * This method is useful to make a fake URI and let Bancha interpret it
+	 * such as the home() action when the 301 redirect is disabled.
+	 * @param string $new_request_uri
+	 */
+	public function set_request_uri($new_request_uri)
+	{
+		$segments = explode('/', $new_request_uri);
+
+		$this->uri->uri_string = trim($new_request_uri, '/');
+		$this->uri->segments = $segments;
+		$i = 1;
+		$rsegments = array();
+		foreach ($segments as $segment) {
+			$rsegments[$i] = $segment;
+			$i++;
+		}
+		$this->uri->rsegments = $rsegments;
+
+		//We set the URI segments
+		$this->_uri_segments = $this->uri->segment_array();
+
+		$this->current_page_uri = $this->uri->segment($this->uri->total_segments());
+		$this->parent_page_uri = $this->uri->segment($this->uri->total_segments() - 1);
 	}
 
 

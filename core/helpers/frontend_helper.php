@@ -11,7 +11,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -64,19 +64,27 @@ function page($what='')
 function tree($which='')
 {
 	global $B;
+
+	if (is_numeric($which))
+	{
+		return $B->tree->get_default_branch($which);
+	}
+
 	switch($which)
 	{
 		case '':
-			return $B->view->get('tree');
-			break;
+		case 'default':
+			$tree = $B->view->get('tree');
+			if (!$tree) {
+				return $B->tree->get_default();
+			}
+			return $tree;
 
 		case 'current':
 			return $B->tree->get_current_branch();
-			break;
 		
 		case 'breadcrumbs':
 			return $B->tree->breadcrumbs;
-			break;
 	}
 }
 

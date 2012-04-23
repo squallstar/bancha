@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -48,10 +48,20 @@ Class Adapter_wordpress implements Adapter
 	 */
 	public function parse_stream($stream, $to_record = TRUE, $type = '', $autosave = FALSE)
 	{
+		$categories = array();
 		if ($autosave)
 		{
-			$CI = & get_instance();
-			$can_save_comments = $CI->content->type_id($this->comment_type);
+			$B =& get_instance();
+			$can_save_comments = $B->content->type_id($this->comment_type);
+
+			//Available categories
+			$B->load->categories();
+			$blog_categories = $B->categories->type($type)->get();
+			if (is_array($blog_categories) && count($blog_categories)) {
+				foreach ($blog_categories as $cat) {
+					$categories[ strtolower($cat->name) ] = $cat->id;
+				}
+			}
 		}
 
 		//We need to normalize some of the Wordpress nodes
@@ -78,12 +88,18 @@ Class Adapter_wordpress implements Adapter
 				'date_publish'	=> date(LOCAL_DATE_FORMAT . ' H:i', strtotime((string)$item->pubDate)),
 				'content'		=> (string)$item->content,
 				'abstract'		=> (string)$item->description,
-				'lang'			=> $CI->lang->default_language
+				'lang'			=> $B->lang->default_language,
+				'categories'	=> array()
 			);
+			
 			if (isset($item->category[0]))
 			{
-				$categories_array = (array)$item->category;
-				$data['category'] = $categories_array[0];
+				foreach ($item->category as $cat) {
+					$cat = strtolower((string)$cat);
+					if ( in_array($cat, array_keys($categories))) {
+						$post['categories'][] = $categories[$cat];
+					}
+				}		
 			}
 			if (count($item->comments))
 			{
@@ -97,7 +113,7 @@ Class Adapter_wordpress implements Adapter
 						'date_publish'	=> (string)$comment->date_publish,
 						'content'		=> (string)$comment->content,
 						'email'			=> (string)$comment->email,
-						'lang'			=> $CI->lang->default_language
+						'lang'			=> $B->lang->default_language
 					);
 				}
 				$post['comments'] = $comments;
@@ -126,9 +142,14 @@ Class Adapter_wordpress implements Adapter
 				}
 				if ($autosave)
 				{
-					$id = $CI->records->save($post);
+					$id = $B->records->save($post);
 					$post->id = $id;
 					$post->set('id_record', $id);
+
+					//Categories
+					if (count($row['categories'])) {
+						$B->categories->set_record_categories($id, $row['categories']);
+					}
 
 					//Now we can try to save the comments
 					$comments = isset($row['comments']) ? $row['comments'] : FALSE;
@@ -141,7 +162,7 @@ Class Adapter_wordpress implements Adapter
 							$post_comment = new Record($this->comment_type);
 							$post_comment->set_data($comment);
 							$post_comment->set('post_id', $post->id);
-							$comment_id = $CI->records->save($post_comment);
+							$comment_id = $B->records->save($post_comment);
 
 							if ($comment_id)
 							{
@@ -158,7 +179,7 @@ Class Adapter_wordpress implements Adapter
 						if ($post_comments_count > 0)
 						{
 							//$post->set('child_count', $post_comments_count);
-							//$CI->records->save($post);
+							//$B->records->save($post);
 						}
 					}
 				}

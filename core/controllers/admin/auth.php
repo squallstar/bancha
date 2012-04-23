@@ -2,11 +2,11 @@
 /**
  * Auth Controller
  *
- * Login/Logout (amministrazione)
+ * Login/Logout (admin)
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -14,8 +14,8 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class Core_Auth extends Bancha_Controller {
-
+Class Core_Auth extends Bancha_Controller
+{
 	public function __construct()
 	{
 	    parent::__construct();
@@ -38,8 +38,8 @@ Class Core_Auth extends Bancha_Controller {
 		if ($this->input->post('username'))
 		{
 			$logged = $this->auth->login(
-				$this->input->post('username'),
-				$this->input->post('password')
+				$this->input->post('username', TRUE),
+				$this->input->post('password', TRUE)
 			);
 
 			if ($logged)

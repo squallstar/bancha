@@ -28,7 +28,7 @@ Simple usage::
 
 The thumbnail will be also used as a preview of the image in the administration.
 
-Later, you could also define many :doc:`/framework/core/image-presets.rst` to apply to these files.
+Later, you could also define many :doc:`/framework/core/imagepresets` to apply to these files.
 
 Note: images (as the files fields) are **not** always loaded on a record. To manually load the documents, use the **set_documents()** function such as the following example::
 

@@ -9,7 +9,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -164,6 +164,12 @@ function semantic_url($object = '')
 		$uri = $object->get('uri');
 	} else {
 		$uri = (string)$object;
+	}
+
+	if (!$page)
+	{
+		//When the page is not set, we have no informations about the record so we need to search on the DB
+		return site_url($B->pages->get_semantic_url($object->_tipo) . '/' . $uri);
 	}
 
 	if ($record)

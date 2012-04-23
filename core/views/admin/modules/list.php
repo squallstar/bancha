@@ -13,7 +13,7 @@
 
 		<?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
 
-		<div class="message info"><?php echo _('This are the currently installed modules. To install a module, just place it in the application/modules folder.'); ?></div>
+		<div class="message info"><?php echo _('These are the currently installed modules. To install a module, just place it in the application/modules folder.'); ?></div>
 
 		<?php if (count($modules)) { ?>
 		<table cellpadding="0" cellspacing="0" width="100%" class="sortable">

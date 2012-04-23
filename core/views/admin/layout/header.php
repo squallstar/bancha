@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -81,6 +81,7 @@ $menu = array(
 			array(
 				'name'	=> _('Groups and permissions'),
 				'url'	=> $_admin_url . 'users/groups',
+				'acl'	=> 'users|groups',
 				'altsegment' => 'groups'
 			)
 		)
@@ -95,6 +96,11 @@ $menu = array(
 				'url'	=> $_admin_url . 'schemes',
 				'segment' => 'schemes',
 				'acl'	=> 'types|manage',
+			),
+			array(
+				'name'	=> _('Repository'),
+				'url'	=> $_admin_url . 'repository',
+				'segment' => 'repository',
 			),
 			array(
 				'name'	=> _('Settings'),

@@ -4,6 +4,7 @@
 
    Main Developer: Nicholas Valbusa
    Site: www.squallstar.it
+   Mail: info@squallsar.it
    Twitter: @squallstar
    Github: @squallstar
    Location: Verona, IT
@@ -11,6 +12,7 @@
    Logo Design: Michela Tannoia
    Site: www.mint-sugar.com
    Twitter: @mintsugar
+   GitHub: @MintSugar
    Location: Verona, IT
 
    Developer: Alessandro Maroldi
@@ -26,12 +28,9 @@
    Github: @dwightjack
    Location: Verona, IT
 
-   Contributor (Developer): Umberto Gariggio
-   Github: @gariggio
-   Location: Verona, IT
-
-   Contributor (Part of english documentation): Enrico Oliosi
-   Location: Verona, IT
+   Contributor (German translation): Patrick Kriechbaumer
+   E-mail: office@pk-informatics.com
+   Location: Linz, Austria
 
 /* TECHNOLOGIES */
    Standards: HTML5, CSS3 - Works on IE7+, FF3.6+, Chrome, Safari and Opera

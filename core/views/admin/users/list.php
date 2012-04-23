@@ -1,6 +1,10 @@
 <?php
 $this->load->helper('text');
 
+$acl_groups = $this->auth->has_permission('users', 'groups');
+$acl_edit = $this->auth->has_permission('users', 'add');
+$my_iduser = $this->auth->user('id');
+
 ?>
 
 <div class="block">
@@ -10,8 +14,11 @@ $this->load->helper('text');
 		<h2><?php echo _('Users list')?></h2>
 
 		<ul>
+			<?php if ($acl_edit) { ?>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/plus.png'); ?>" /> <a href="<?php echo admin_url('users/edit/'); ?>"><?php echo _('Add new user'); ?></a></li>
+			<?php } if ($acl_groups) { ?>
 			<li><img class="middle" src="<?php echo site_url(THEMESPATH.'admin/widgets/icns/bookmark.png'); ?>" /> <a href="<?php echo admin_url('users/groups/'); ?>"><?php echo _('Groups and permissions'); ?></a></li>
+			<?php } ?>
 		</ul>
 	</div>
 
@@ -45,18 +52,16 @@ $this->load->helper('text');
 <?php
 	foreach ($users as $user) {
 		echo '<tr>';
-
-			//Campi ricorrenti
 			echo '<td><input type="checkbox" /></td>';
 			echo '<td>'.$user->id_user.'</td>'
-				.'<td><a href="'.admin_url('users/edit/'.$user->id_user).'">'.$user->username.'</a></td>'
+				.($acl_edit || $user->id_user == $my_iduser ? '<td><a href="'.admin_url('users/edit/'.$user->id_user).'">'.$user->username.'</a></td>' : '<td>'.$user->username.'</td>')
 				.'<td>'.$user->name.'</td>'
 				.'<td>'.$user->surname.'</td>'
 				.'<td>'.$user->email.'</td>'
-				.'<td>'.($user->id_group ? '<a href="'.admin_url('users/groups/edit/'.$user->id_group).'">'._($user->group_name).'</a>' : '') . '</td>';
+				.'<td>'.($acl_groups ? ($user->id_group ? '<a href="'.admin_url('users/groups/edit/'.$user->id_group).'">'._($user->group_name).'</a>' : '') : ($user->id_group ? _($user->group_name) : '')) . '</td>';
 
 			echo '<td class="delete">'
-					.'<a href="'.admin_url('users/delete/'.$user->id_user).'" onclick="return confirm(\''._('Do you want to delete this user?').'\');">'._('Delete').'</a>'
+					.($acl_edit && $user->id_user != $this->auth->user('id') ? '<a href="'.admin_url('users/delete/'.$user->id_user).'" onclick="return confirm(\''._('Do you want to delete this user?').'\');">'._('Delete').'</a>' : '')
 				.'</td>';
 		echo '</tr>';
 	}
@@ -66,7 +71,7 @@ $this->load->helper('text');
 		<div class="tableactions">
 			<select>
 				<option><?php echo _('Actions'); ?></option>
-				<option><?php echo _('Delete'); ?></option>
+				<?php if ($acl_edit) { ?><option><?php echo _('Delete'); ?></option><?php } ?>
 			</select>
 
 			<input type="submit" class="submit tiny" value="<?php echo _('Apply to selected'); ?>" />

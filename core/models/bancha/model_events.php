@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -30,7 +30,7 @@ Class Model_events extends CI_Model {
 	{
 		$data = array(
 			'user_id'		=> $this->auth->user('id'),
-			'event'			=> $event,
+			'event'			=> strip_tags($event),
 			'content_id'	=> $content_id,
 			'content_name'	=> $content_name,
 			'content_type'	=> $content_type,

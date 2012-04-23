@@ -22,7 +22,7 @@
  * @license
  * @version     2.0.0
  */
-class Unzip {
+class Unzip extends Core {
 
 	private $compressed_list = array();
 

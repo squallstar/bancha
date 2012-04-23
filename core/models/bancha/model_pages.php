@@ -2,11 +2,9 @@
 /**
  * Pages Model
  *
- * Classe per lavorare con le pagine
- *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -95,7 +93,7 @@ Class Model_Pages extends CI_Model {
 			$done = $this->db->where('id_record', $id_record)
 							 ->update($this->table_current, $to_save);
 
-			//Cancello la cache della pagina
+			//We clear the page cache
 			$this->clear_cache($full_uri);
 
 
@@ -107,14 +105,14 @@ Class Model_Pages extends CI_Model {
 		if ($done && count($exist))
 		{
 			$old_full_uri = $exist[0]['full_uri'];
-			//Aggiorno tutti i figli
+			//We update the childs
 			$this->update_uris($old_full_uri, $full_uri, $this->table_current, $id_record);
 		}
 
     }
 
     /**
-     * Aggiorno tutti gli URI delle pagine figlie
+     * We update the slugs of the child pages
      * @param string $from_uri
      * @param string $to_uri
      * @param string $table

@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -74,9 +74,9 @@ Class Bancha_Loader extends CI_Loader {
 	 * @param string $library
 	 * @param string $name
 	 */
-	function extlibrary($library, $name = NULL)
+	function extlibrary($library, $params = array(), $name = NULL)
 	{
-		$this->library('external/'.$library, NULL, $name);
+		$this->library('externals/'.$library, $params, $name);
 	}
 
 	/**
@@ -181,8 +181,8 @@ Class Bancha_Loader extends CI_Loader {
 		$module_name = strtolower($module_name);
 		if (!isset($this->_loaded_modules[$module_name]))
 		{
-			$CI = & get_instance();
-			require_once($CI->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR.$module_name.'_module.php');
+			$B =& get_instance();
+			require_once($B->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR.$module_name.'_module.php');
 			$this->_loaded_modules[$module_name] = TRUE;
 		}
 		$class_name = ucfirst($module_name).'_Module';
@@ -198,7 +198,7 @@ Class Bancha_Loader extends CI_Loader {
 		}
 
 		$tmp->module_name = ucfirst($module_name);
-		$tmp->module_filespath = $CI->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR;
+		$tmp->module_filespath = config_item('modules_folder').$module_name.DIRECTORY_SEPARATOR;
 
 		return $tmp;
 	}
@@ -210,7 +210,25 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function dispatcher($name = 'default', $obj_name = 'dispatcher')
 	{
-		$this->library(FRNAME.'/dispatchers/dispatcher_'.$name, NULL, $obj_name);
+		$name = strtolower($name);
+		$B =& get_instance();
+
+		//We first look into the user dispatchers folder
+		$user_dispatcher = USERPATH . 'dispatchers/dispatcher_' . $name . '.php';
+		if (file_exists($user_dispatcher)) {
+			require_once($user_dispatcher);
+		} else {
+			require_once(APPPATH . 'dispatchers/dispatcher_' . $name . '.php');
+		}
+
+		$class_name = 'Dispatcher_' . $name;
+
+		if (!isset($obj_name))
+		{
+			$obj_name = 'dispatcher';
+		}
+
+		$B->$obj_name = new $class_name();
 	}
 
 	/**

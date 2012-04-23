@@ -25,14 +25,13 @@
 			<rules>required|valid_email</rules>
 		</field>
 		<field id="password" column="true">
-			<description>Password</description>
+			<description>New Password</description>
 			<type>password</type>
-			<rules>required|min_length[6]</rules>
 		</field>
 		<field id="password_confirm">
-			<description>Confirm password</description>
+			<description>Confirm new password</description>
 			<type>password</type>
-			<rules>required|matches[password]</rules>
+			<rules>matches[password]</rules>
 		</field>
 		<field id="name" column="true">
 			<description>Name</description>

@@ -5,6 +5,7 @@
 	<descriptions label="{description}" new="{label_new}"/>
 	<tree>true</tree>
 	<table key="id_record" production="records" stage="records_stage" />
+	<order_by field="date_update" sort="DESC" />
 	<parents>
 		<type>{name}</type>
 	</parents>
@@ -25,7 +26,6 @@
 		<field id="id_type" column="true" kind="numeric">
 			<type>hidden</type>
 			<list>true</list>
-			<default>1</default>
 		</field>
 		<field id="published" column="true" kind="numeric">
 			<type>hidden</type>
@@ -111,7 +111,7 @@
 			<list>true</list>
 			<options>
 				<option value="default">Default</option>
-				<option value="home">Homepage</option>
+				<option value="homepage">Homepage</option>
 			</options>
 			<default>default</default>
 		</field>

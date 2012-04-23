@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -25,7 +25,11 @@ Class Core_Website extends Bancha_Controller
 		//so he/she can surf on the stage pages and records
 		if ($this->auth->is_logged())
 		{
-			$this->content->set_stage(TRUE);
+			if ($this->session->userdata('environment')) {
+				$this->content->set_stage(FALSE);
+			} else {
+				$this->content->set_stage(TRUE);
+			}
 
 			//We add also the preview bar
 			$this->output->enable_profiler();
@@ -62,8 +66,17 @@ Class Core_Website extends Bancha_Controller
 			if ($this->config->item('prepend_uri_language'))
 			{
 				$this->config->prepend_language = $this->lang->current_language;
+			} else if ($this->config->item('homepage_redirect') == FALSE)
+			{
+				//Homepage served without the 301 redirect for faster performances
+				$this->tree->set_request_uri($home);
+				$this->router();
+				return;
 			}
+
+			//Homepage served after a 301 redirect
 			redirect(site_url($home), 'location', 301);
+
 		} else {
 			if (!$this->settings->get('is_installed'))
 			{
@@ -95,6 +108,21 @@ Class Core_Website extends Bancha_Controller
 		$this->lang->set_lang($new_language);
 		$this->lang->set_cookie();
 		$this->home();
+	}
+
+	/**
+	 * Changes the current environment
+	 * Called by: /change-env/{environment}
+	 * @param string $new_environment
+	 */
+	function change_environment($new_environment)
+	{
+		if ($new_environment == 'live') {
+			$this->session->set_userdata('environment', TRUE);
+		} else {
+			$this->session->unset_userdata('environment');
+		}
+		redirect(site_url());
 	}
 
 	/**

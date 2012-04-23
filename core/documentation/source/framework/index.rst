@@ -9,7 +9,10 @@ Core
 .. toctree::
    :maxdepth: 1
 
-   core/image-presets
+   core/controllers
+   core/dispatchers
+   core/record
+   core/imagepresets
 
 
 ------
@@ -19,6 +22,9 @@ Models
 .. toctree::
    :maxdepth: 1
 
+   models/records
+   models/pages
+   models/tree
    models/settings
 
 
@@ -34,6 +40,7 @@ Helpers
    helpers/menu
    helpers/breadcrumbs
 
+
 ---
 API
 ---
@@ -45,11 +52,3 @@ Bancha has a bunch of **Application programming interfaces** that helps you whil
 
    api/index
 
--------
-Other
--------
-
-.. toctree::
-   :maxdepth: 1
-
-   dispatchers/index

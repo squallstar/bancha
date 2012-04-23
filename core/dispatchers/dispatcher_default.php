@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011, Squallstar
+ * @copyright	Copyright (c) 2011-2012, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -316,6 +316,7 @@ Class Dispatcher_default
 
 			if ($this->_CI->config->item('type_custom_feeds') && isset($type['name']))
 			{
+				$this->_CI->output->enable_profiler(FALSE);
 				$page->set('records', $records);
 				$this->_CI->view->set('page', $page);
 				$GLOBALS['page'] = & $page;
@@ -333,6 +334,7 @@ Class Dispatcher_default
 
 			if (count($records))
 			{
+				$url = site_url();
 				foreach ($records as $record)
 				{
 					$date_pub = $record->get('_date_publish');
@@ -345,7 +347,7 @@ Class Dispatcher_default
 						'link'			=> current_url().'/'.$record->get('uri'),
 						'guid'			=> current_url().'/'.$record->get('uri'),
 						'pubDate'		=> date(DATE_RFC822, (int)$date_pub),
-						'description'	=> $record->get('content')
+						'description'	=> str_replace('src="/attach', 'src="'.$url.'attach', $record->get('content'))
 					);
 					$this->_CI->feed->add_item($item, array('title', 'description'));
 				}
