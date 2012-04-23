@@ -578,28 +578,30 @@ Class Core_Contents extends Bancha_Controller
     public function type_edit_xml($type = '') {
   		$tipo = $this->content->type($type);
 
+        $source = isset($tipo['source']) ? $tipo['source'] : 'xml';
+
         //ACL Check
         $this->auth->check_permission('types', 'manage');
         $this->auth->check_permission('content', $tipo['name']);
 
-  		$xml_path = $this->config->item('xml_typefolder').$tipo['name'].'.xml';
+  		$xml_path = $this->config->item('xml_typefolder') . $tipo['name'] . '.' . $source;
 
   		if ($this->input->post('xml')) {
 			$done = write_file($xml_path, $this->input->post('xml'));
 			if ($done) {
 
 				$link = '<a href="'.admin_url('contents/type/'.$tipo['name']).'">'.$tipo['name'].'</a>';
-                $msg = $this->lang->_trans('The xml scheme of the content type %n has been updated', array('n' => $link));
+                $msg = $this->lang->_trans('The scheme of the content type %n has been updated', array('n' => $link));
 				$this->session->set_flashdata('message', $msg);
 
 				$this->content->rebuild();
 				redirect(admin_url('schemes'));
 			} else {
-				show_error(_('Cannot save that XML scheme.'), 500, _('Saving error'));
+				show_error(_('Cannot save that scheme.'), 500, _('Saving error'));
 			}
   		}
 
-  		$xml = read_file($xml_path) OR show_error(_('Cannot read the XML file.'));
+  		$xml = read_file($xml_path) OR show_error(_('Cannot read the file.'));
 
   		$this->view->set('tipo', $tipo);
   		$this->view->set('xml', $xml);
@@ -680,7 +682,7 @@ Class Core_Contents extends Bancha_Controller
   		    redirect(ADMIN_PUB_PATH.'contents');
   		} else if ($this->input->post('delete'))
         {
-	  		$xml_path = $this->config->item('xml_typefolder').$tipo['name'].'.xml';
+	  		$xml_path = $this->config->item('xml_typefolder') . $tipo['name'] . '.' . (isset($tipo['source']) ? $tipo['source'] : 'xml');
 	  		$done = file_exists($xml_path) ? @unlink($xml_path) : TRUE;
 	  		if ($done)
             {

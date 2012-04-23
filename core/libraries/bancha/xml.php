@@ -328,8 +328,6 @@ Class Xml
     	//The type name
     	$name = (string) $node->name;
 
-    	
-
     	//Allowed types of field
     	$field_usable_inputs = array(
       		'text', 'textarea', 'date', 'checkbox', 'select', 'multiselect', 'radio', 'password',
@@ -347,15 +345,16 @@ Class Xml
     	}
 
     	$content = array(
-      		'id'				=> $type_id,
-      		'name'				=> $safe_filename,
-      		'tree'				=> strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
-      		'has_categories'	=> isset($node->categories) ? (strtolower((string)$node->categories) == 'true' ? TRUE : FALSE) : FALSE,
-            'has_hierarchies'	=> isset($node->hierarchies) ? (strtolower((string)$node->hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
-      		'description'		=> (string) $descr_attr->label,
-      		'label_new'			=> (string) $descr_attr->new,
-      		'primary_key'		=> (string) (isset($tables->key) ? $tables->key : 'id_record'),
-      		'table'				=> (string) (isset($tables->production) ? $tables->production : 'records')
+          'id'              => $type_id,
+          'source'          => $ext,
+          'name'            => $safe_filename,
+          'tree'            => strtolower((string)$node->tree) == 'true' ? TRUE : FALSE,
+          'has_categories'  => isset($node->categories) ? (strtolower((string)$node->categories) == 'true' ? TRUE : FALSE) : FALSE,
+          'has_hierarchies' => isset($node->hierarchies) ? (strtolower((string)$node->hierarchies) == 'true' ? TRUE : FALSE) : FALSE,
+          'description'     => (string) $descr_attr->label,
+          'label_new'       => (string) $descr_attr->new,
+          'primary_key'     => (string) (isset($tables->key) ? $tables->key : 'id_record'),
+          'table'           => (string) (isset($tables->production) ? $tables->production : 'records')
     	);
 
         $this->_translations[$content['description']] = TRUE;

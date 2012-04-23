@@ -42,7 +42,7 @@ $tipi = $this->content->types();
 						?>
 					<tr>
 						<td><?php echo $content['id']; ?></td>
-						<td><a href="<?php echo admin_url(($content['tree'] ? 'pages' : 'contents') . '/type_edit_xml/'.$content['name']); ?>"><?php echo $content['name']; ?>.xml</a></td>
+						<td><a href="<?php echo admin_url(($content['tree'] ? 'pages' : 'contents') . '/type_edit_xml/'.$content['name']); ?>"><?php echo $content['name'].'.'.(isset($content['source']) ? $content['source'] : 'xml'); ?></a></td>
 						<td><?php echo $content['description']; ?></td>
 						<td><?php echo $content['label_new']; ?></td>
 						<td><?php echo $content['tree'] ? _('Tree') : _('Simple'); ?></td>
