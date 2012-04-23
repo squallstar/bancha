@@ -8,49 +8,6 @@ $(function () {
 	// CSS tweaks
 	$('#nav').find('li:last').addClass('nobg');
 	$('.block_head ul').each(function() { $('li:first', this).addClass('nobg'); });
-	
-	// Web stats
-	$('table.stats').each(function() {
-			var statsType = '',
-				chart_width = ($(this).parent('div').width()) - 60;
-		
-		if($(this).attr('rel')) {
-			statsType = $(this).attr('rel');
-		} else {
-			statsType = 'area';
-		}
-
-
-		if(statsType == 'line' || statsType == 'pie') {
-			$(this).hide().visualize({
-				type: statsType,	// 'bar', 'area', 'pie', 'line'
-				width: chart_width,
-				height: '240px',
-				colors: ['#6fb9e8', '#ec8526', '#9dc453', '#ddd74c'],
-
-				lineDots: 'double',
-				interaction: true,
-				multiHover: 5,
-				tooltip: true,
-				tooltiphtml: function(data) {
-					var html ='',
-						$dataLength = data.point.length;
-					for(var i=0; i<$dataLength; i++){
-						html += '<p class="chart_tooltip"><strong>'+data.point[i].value+'</strong> '+data.point[i].yLabels[0]+'</p>';
-					}
-					return html;
-				}
-			});
-		} else {
-			$(this).hide().visualize({
-				type: statsType,	// 'bar', 'area', 'pie', 'line'
-				width: chart_width,
-				height: '240px',
-				colors: ['#6fb9e8', '#ec8526', '#9dc453', '#ddd74c']
-			});
-		}
-	});
-
 
 
 	// Sort table
@@ -80,12 +37,6 @@ $(function () {
 		        exec:  function() { alert('Hello World'); }
 		    }
 		);
-
-
-	// Modal boxes - to all links with rel="facebox"
-	//$('a[rel*=facebox]').facebox()
-
-
 
 	// Messages
 	$('.block .message').hide().append('<span class="close" title="Dismiss"></span>').fadeIn('slow');
@@ -120,8 +71,6 @@ $(function () {
 		return false;
 	});
 
-
-
 	// Sidebar Tabs
 	$(".sidebar_content").hide();
 
@@ -147,8 +96,6 @@ $(function () {
 		return false;
 	});
 
-
-
 	// Block search
 	$('.block .block_head form .text').bind('click', function() { $(this).attr('value', ''); });
 
@@ -160,53 +107,8 @@ $(function () {
 		function() { $(this).find('ul').fadeOut(100); }
 	);
 
-
-
-	// Image delete confirmation
-	$('ul.imglist .delete a').click(function() {
-		if (confirm("Are you sure you want to delete this image?")) {
-			return true;
-		} else {
-			return false;
-		}
-	});
-
-	// File upload
-	if ($('#fileupload').length) {
-		new AjaxUpload('fileupload', {
-			action: 'upload-handler.php',
-			autoSubmit: true,
-			name: 'userfile',
-			responseType: 'text/html',
-			onSubmit : function(file , ext) {
-					$('.fileupload #uploadmsg').addClass('loading').text('Uploading...');
-					this.disable();
-				},
-			onComplete : function(file, response) {
-					$('.fileupload #uploadmsg').removeClass('loading').text(response);
-					this.enable();
-				}
-		});
-	}
-
-
-
 	// Date picker
 	$('input.date_picker').date_input();
-
-
-
-	// Navigation dropdown fix for IE6
-	if(jQuery.browser.version.substr(0,1) < 7) {
-		$('#nav').find('li').hover(
-			function() { $(this).addClass('iehover'); },
-			function() { $(this).removeClass('iehover'); }
-		);
-	}
-
-
-	// IE6 PNG fix
-	$(document).pngFix();
 
 });
 
