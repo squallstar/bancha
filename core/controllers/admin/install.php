@@ -84,7 +84,7 @@ Class Core_Install extends Bancha_Controller
 			if ($this->input->post('create_types'))
 			{
 				//We create the default types
-				$this->installer->create_types();
+				$this->installer->create_types( $this->input->post('scheme_format') );
 			}
 
 			if ($this->input->post('create_types') || $this->input->post('clear_cache'))

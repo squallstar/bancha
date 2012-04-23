@@ -111,6 +111,11 @@ fieldsets :
 	  		list    : true
 	  		default : eval:time()
 
+	  	date_publish :
+	  		column      : true
+	  		description : Visibility date
+	  		type        : datetime
+
 	  	# Required if your records needs the stage-production workflow
 	  	published :
 	  		column  : true
@@ -129,13 +134,6 @@ fieldsets :
 	  		admin       : true
 	  		list        : true
 	  		rules       : required
-
-	  	date_publish :
-	  		column      : true
-	  		description : Visibility date
-	  		type        : datetime
-	  		admin       : true
-	  		list        : true
 
 	  	# Every record should have a slug, and this will be used in the url to reach the record
 	  	# If blank, will be automatically set with the content of the "title" field
@@ -163,6 +161,21 @@ fieldsets :
 	  		type        : textarea_full
 	  		list        : true
 
+	  	child_count :
+	  		column       : true
+	  		kind         : numeric
+	  		description  : Child no.
+	  		type         : hidden
+	  		list         : true
+	  		admin        : true
+	  		default      : 0
+	  		length       : 5
+
+
+	- name   : Aspect
+	  icon   : code
+	  fields :
+
 	  	show_in_menu :
 	  		column : true
 	  		description : Show in menu
@@ -176,6 +189,121 @@ fieldsets :
 	  		    T : Main menu
 	  		    S : Sitemap
 	  		    F : Don't show
+
+	  	view_template : 
+	  		description : View template
+	  		type        : select
+	  		rules       : required
+	  		admin       : false
+	  		list        : true
+	  		default     : default
+	  		options     :
+	  			default  : Default
+	  			homepage : Homepage
+
+	  	view_css :
+	  		description : CSS Stylesheet
+	  		type        : textarea_code
+
+	  	view_js :
+	  		description : Javascript code
+	  		type        : textarea_code
+
+
+	# Page actions fieldset
+	- name   : Actions
+	  icon   : lightning
+	  fields :
+
+	  	page_cache :
+	  		description : Page cache (minutes)
+	  		type        : number
+	  		default     : 0
+
+	  	priority :
+	  		column      : true
+	  		kind        : numeric
+	  		description : Priority
+	  		type        : number
+	  		default     : 0
+	  		length      : 3
+
+	  	action :
+	  		description : Page action
+	  		type        : select
+	  		onchange    : "bancha.actions.record_act();" # Javascript
+	  		options     :
+	  			text    : Single text
+	  			list    : Content list
+	  			action  : Custom action
+	  			link    : External link
+
+	  	action_list_type :
+	  		description : Content type
+	  		visible     : false
+	  		type        : select
+	  		sql         :
+	  			cache    : true
+	  			select   : "id_type AS value, name"
+	  			from     : types
+	  			order_by : name ASC
+
+	  	action_list_categories :
+	  		description : "Categories (A, B, C)"
+	  		visible     : false
+	  		type        : text
+
+	  	action_list_hierarchies :
+	  		description : "Hierarchies (A, B, C)"
+	  		visible     : false
+	  		type        : text
+
+	  	action_list_where :
+	  		description : "SQL WHERE (Condition)"
+	  		visible     : false
+	  		type        : text
+
+	  	action_list_limit :
+	  		description : Results per page
+	  		visible     : false
+	  		type        : number
+
+	  	action_list_order_by :
+	  		description : Results order
+	  		visible     : false
+	  		type        : select
+	  		options     :
+	  			"id_record DESC"    : "Record ID (descending)"
+	  			"id_record ASC"     : "Record ID (ascending)"
+	  			"date_publish DESC" : "Publish date (descending)"
+	  			"date_publish ASC"  : "Publish date (descending)"
+
+	  	action_list_has_feed :
+	  		description : RSS/JSON feeds
+	  		visible     : false
+	  		type        : select
+	  		options     :
+	  			T : Yes
+	  			F : No
+
+	  	action_custom_name :
+	  		description : "Method/Function name"
+	  		visible     : false
+	  		type        : text
+
+	  	action_custom_mode :
+	  		description : Action called at
+	  		visible     : false
+	  		type        : select
+	  		options     :
+	  			D : Dispatcher (before rendering)
+	  			C : Inside the theme (while rendering)
+
+	  	action_link_url :
+	  		description : Redirect URL
+	  		visible     : false
+	  		type        : text
+
 
 	# Here we declare another fieldset
 	- name   : Attachments

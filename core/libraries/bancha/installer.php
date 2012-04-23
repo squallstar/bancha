@@ -357,7 +357,7 @@ Class Installer
 	/**
 	 * Create the default content types
 	 */
-	public function create_types()
+	public function create_types($scheme_format = 'yaml')
 	{
 		$default = $this->CI->config->item('default_tree_types');
 		if (count($default))
@@ -370,7 +370,7 @@ Class Installer
 					'description'		=> $type,
 					'delete_if_exists'	=> TRUE,
 					'label_new'			=> ($type == 'Menu' ? 'New page' : 'New' . $type),
-					'scheme_format'		=> 'xml'
+					'scheme_format'		=> $scheme_format
 				);
 				$this->CI->content->add_type($options);
 			}
