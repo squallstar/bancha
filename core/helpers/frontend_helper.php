@@ -168,6 +168,24 @@ function categories($type = '')
 	return $B->categories;
 }
 
+function related_records($record, $limit = 5)
+{
+	if (! $record instanceof Record) return array();
+
+	$record_categories = categories()->get_record_categories($record->id);
+
+	$records_ids = categories()->get_records_for_categories($record_categories);
+
+	$ids_to_extract = array();
+	foreach ($records_ids as $record_id) {
+		if ($record_id != $record->id && count($ids_to_extract) <= $limit) {
+			$ids_to_extract[] = $record_id;
+		}
+	}
+
+	return find($record->_tipo)->id_in($ids_to_extract)->limit($limit)->get();
+}
+
 function page_author()
 {
 	global $B;
