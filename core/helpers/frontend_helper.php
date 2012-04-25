@@ -182,6 +182,7 @@ function related_records($record, $limit = 5)
 			$ids_to_extract[] = $record_id;
 		}
 	}
+	if (!count($ids_to_extract)) return array();
 
 	return find($record->_tipo)->id_in($ids_to_extract)->limit($limit)->get();
 }
