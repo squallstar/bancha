@@ -131,6 +131,21 @@ You can easily get the categories of a content type using the categories model i
     $categories = categories( page('action_list_type') )->get();
 
 
+--------------------------------------
+Get records related of a Record Object
+--------------------------------------
+
+**related_records ( $record [, $limit = 5] )**
+
+Returns records of the same categories of the given **Record Object**. Usage::
+
+    //We get the post with id "123"
+    $post = find('Blog')->get(123);
+
+    //Gets other posts of the same category of the post
+    $some_posts = related_records($post, 10);
+
+
 ---------------------------------
 Get a field from the current page
 ---------------------------------
