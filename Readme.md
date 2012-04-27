@@ -1,4 +1,4 @@
-![Logo](http://static.squallstar.it/images/bancha-trasp.png)
+![Logo](http://getbancha.com/attach/logos/logo.png)
 
 # BANCHA - Open-source CMS
 
