@@ -201,5 +201,5 @@ $menu = array(
 
 	</ul>
 	<p class="copyright"><a href="http://getbancha.com"><?php echo CMS . ' v' . BANCHA_VERSION; ?></a>
-	<br /><a href="http://www.squallstar.it">Squallstar Studio</a> &copy; 2011</p>
+	<br /><a href="http://www.squallstar.it">Squallstar Studio</a> &copy; 2011-2012</p>
 </div>

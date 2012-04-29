@@ -311,7 +311,7 @@ Class Model_Pages extends CI_Model {
 				return $url;
 			}
 		}
-    }
+  }
 }
 
 
