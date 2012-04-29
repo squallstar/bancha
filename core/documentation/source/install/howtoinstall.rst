@@ -2,7 +2,11 @@
 How to install
 ##############
 
-Download Bancha from the official GitHub repository https://github.com/squallstar/bancha and unzip it into the root of your virtualhost.
+If you installed :doc:`bash`, you can write the following line on your unix shell::
+
+	bancha install
+
+If you **don't have** :doc:`bash`, download Bancha from the official GitHub repository https://github.com/squallstar/bancha and unzip it into the root of your virtualhost.
 Normally the index.php file will be at your root.
 
 The base structure is composed as follows::
