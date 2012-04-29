@@ -27,7 +27,46 @@ Class Core_Modules extends Bancha_Controller
 	public function index()
 	{
 		$this->load->helper('directory');
-		$modules = directory_map($this->config->item('modules_folder'), 1);
+
+		$modules_dir = USERPATH . 'modules';
+
+		$package = $this->input->post('package');
+		$slug = $this->input->post('slug');
+		if ($package && $slug)
+		{
+			$this->load->helper('file');
+
+			$module_dir = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $slug;
+			$package_file = $module_dir . DIRECTORY_SEPARATOR . 'package.zip';
+			if (!is_dir($module_dir)) {
+				@mkdir($module_dir, DIR_WRITE_MODE, TRUE);
+			}
+
+			$data = getter($package);
+
+			if (write_file($package_file, $data)) {
+				$this->load->extlibrary('unzip');
+				$this->unzip->extract($package_file, $module_dir);
+				@unlink($package_file);
+
+				$this->view->message('success', _('The module has been installed.'));
+			} else {
+				$this->view->message('warning', 'Cannot write package to ' . $module_dir);
+			}
+		} else {
+			if (!is_dir($modules_dir)) {
+				@mkdir($modules_dir, DIR_WRITE_MODE, TRUE);
+			}
+		}
+
+		$modules = directory_map($modules_dir, 1);	
+
+		//Remove non-directories
+		foreach ($modules as $pos => $module) {
+			if (!is_dir($modules_dir . DIRECTORY_SEPARATOR . $module)) {
+				unset($modules[$pos]);
+			}
+		}
 		$this->view->set('modules', $modules);
 		$this->view->render_layout('modules/list');
 	}
