@@ -4,6 +4,10 @@
 * Riga 300: modificato comportamento like
 */
 
+$error = 'PostgreSQL driver are having some technical problems on Bancha. We currently disabled it. Please use some other drivers such as "MySQL" one.';
+if (function_exists('show_error')) show_error($error);
+else die($error);
+
 
 /**
  * CodeIgniter

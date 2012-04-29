@@ -13,7 +13,7 @@ $db['default']['password'] = 'root';
 $db['default']['database'] = 'demo';
 
 /* Database Driver
- * Available drivers are: mssql, mysql, mysqli, oci8, odbc, pdo, postgre, sqlite, sqlsrv.
+ * Available drivers are: mssql, mysql, mysqli, oci8, odbc, pdo, sqlite, sqlsrv.
  */
 $db['default']['dbdriver'] = 'mysql';
 
