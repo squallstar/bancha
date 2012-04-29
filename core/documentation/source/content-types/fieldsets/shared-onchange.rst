@@ -2,9 +2,16 @@
 Javascript "onchange" event
 ===========================
 
-With the **<onchange>** node, you can define some javascript code that will be executed on the field **onchange** dom event.
+With the **onchange** node, you can define some javascript code that will be executed on the field **onchange** event.
 
-Basic usage::
+Basic usage using YAML::
+
+	title :
+		...
+		onchange : myJsFunction();
+		...
+
+or using XML::
 
     <field id="title">
     	....
@@ -12,7 +19,7 @@ Basic usage::
         ....
     </field>
 
-This event will be triggered on **select**, **radio**, **checkboxes** and other "click-fired" fields.
+This event will be triggered using the **jQuery .change() method** on **select**, **radio**, **checkboxes** and other similar fields.
 
 
 Back to :doc:`fields`.

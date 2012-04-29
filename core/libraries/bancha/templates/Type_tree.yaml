@@ -6,7 +6,7 @@
 # @author    Nicholas Valbusa
 # @license   GNU/GPL (General Public License)
 # @copyright Copyright (c) 2011-2012, Squallstar Studio
-# @see       http://docs.getbancha.com
+# @see       http://docs.getbancha.com/content-types
 
 
 # ----- content type declarations starts here below -----
@@ -89,6 +89,7 @@ fieldsets :
 	  		admin  : true
 
 	  	# This field is required to bind records to the owner content type
+	  	# You don't need to provide the default value, the system will automatically recognize it
 	  	id_type :
 	  		column  : true
 	  		kind    : numeric

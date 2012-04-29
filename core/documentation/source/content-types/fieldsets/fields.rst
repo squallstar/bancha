@@ -51,7 +51,7 @@ Field types
 
 
 ---------------
-Shared features
+Field shared features
 ---------------
 
 Each kind of field can implement these features:
