@@ -41,6 +41,18 @@ Helpers
    helpers/breadcrumbs
 
 
+-----
+Feeds
+-----
+
+.. toctree::
+   :maxdepth: 1
+
+   feeds/xml
+   feeds/json
+   feeds/pdf
+
+
 ---
 API
 ---

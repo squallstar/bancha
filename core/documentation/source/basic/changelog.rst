@@ -2,17 +2,18 @@
 ChangeLog
 ######################
 
-**v 1.2** (Planned)
+**v 1.2** (2012-04-30)
 
-- UPGRADE FROM 1.x: just replace the core folder.
-- YAML Schemes added!! Now you can use them instead of the XML ones.
-- Premade schemes converted to YAML.
+- UPGRADE FROM 1.x: just replace the core folder
+- YAML Schemes added!! Now you can use them instead of the XML ones
+- Premade schemes converted to YAML
+- Documentation for YAML schemes
 - Fix on the install process on some database drivers
 - Initial "bindtextdomain" Gettext check
-- "related_records" function added to the Frontend helper. Please read the doc for further informations about this function.
+- "related_records" function added to the Frontend helper. Please read the doc for further informations about this function
 - Categories on Record edit form are now ordered by name and displayed one per line
 - Currently we are having some technical problems on PostgreSQL CodeIgniter drivers, so we recommend you to use other databases such as MySQL.
-- Now the semantic_url function works also on "tree structured" Content types (such as the website pages).
+- Now the semantic_url function works also on "tree structured" Content types (such as the website pages)
 - jQuery updated to the latest available version
 - Removed some legacy javascript code inside the admin custom.js script
 - Minor fixes
