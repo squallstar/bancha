@@ -6,7 +6,15 @@ With the hidden type, you can specify an hidden field. Bancha, uses them for the
 
 These fields are declared as **input** of type **hidden**.
 
-Below you can find a sample implementation::
+Below you can find a sample implementation using YAML::
+
+	id_type :
+  		column  : true
+  		kind    : numeric
+  		type    : hidden
+  		list    : true
+
+or using XML::
 
     <field id="id_type" column="true">
         <type>hidden</type>

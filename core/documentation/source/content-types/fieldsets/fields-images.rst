@@ -10,7 +10,21 @@ An image field will always store the original image and each one can also be res
 
 As resizing pattern, you can define a string with the desired width and height, or a question mark on one of these two as an "auto" placeholder, such as "640x?" or "?x300".
 
-Simple usage::
+Simple usage using YAML::
+
+    gallery :
+        description  : Gallery images
+        type         : images
+        size         : 4096
+        mimes        : jpg|gif|png|jpeg
+        original     : true
+        encrypt_name : true
+        resized      : 640x?
+        thumbnail    : 60x?
+        max          : 3
+        list         : true
+
+or using XML::
 
     <field id="gallery">
         <description>Gallery images</description>
@@ -32,9 +46,9 @@ Later, you could also define many :doc:`/framework/core/imagepresets` to apply t
 
 Note: images (as the files fields) are **not** always loaded on a record. To manually load the documents, use the **set_documents()** function such as the following example::
 
-    $record->set_documents();
+    if ( ! $record->get('gallery') ) $record->set_documents();
 
     //Gets the files
-    $files = $record->get('my_files');
+    $files = $record->get('gallery');
 
 Back to :doc:`fields`.

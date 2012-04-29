@@ -6,7 +6,17 @@ File fields are used to display an input "file" and let the users to upload one 
 
 Think about a "Portfolio" content type: your records (projects), will likely have some images or files linked, and for this things you have to use this (or the image) field.
 
-Simple usage::
+Simple usage using YAML::
+
+    my_files :
+        description : Some files
+        type        : files
+        size        : 4096
+        mimes       : zip|doc|xls
+        max         : 3
+        list        : true
+
+and using XML::
 
     <field id="my_files">
         <description>Some files</description>
@@ -20,7 +30,7 @@ Simple usage::
 
 Note: documents are **not** always loaded on a record. To manually load the documents, use the **set_documents()** function such as the following example::
 
-    $record->set_documents();
+    if ( ! $record->get('my_files') ) $record->set_documents();
 
     //Gets the files
     $files = $record->get('my_files');

@@ -8,12 +8,24 @@ The **Datetime** fields is similar, because it just adds a number field on the r
 
 These fields are declared as **date** and *datetime**.
 
-Below you can find a sample implementation::
+Below you can find a sample implementation.
 
-    <field id="date_publish" column="true">
+YAML::
+
+	date_publish :
+  		column  : true
+  		kind    : numeric
+  		type    : hidden
+  		list    : true
+  		default : eval:time()
+
+XML::
+
+    <field id="date_publish" column="true" kind="numeric">
         <description>Visibility date</description>
         <type>datetime</type>
         <list>true</list>
+        <default>eval:time()</default>
     </field>
 
 Inside of the framework, these fields will be saved using the **UNIX timestamp** format.
