@@ -231,7 +231,7 @@ fieldsets :
 	  	action :
 	  		description : Page action
 	  		type        : select
-	  		onchange    : "bancha.actions.record_act();" # Javascript
+	  		onchange    : bancha.actions.record_act() # Javascript
 	  		options     :
 	  			text    : Single text
 	  			list    : Content list
