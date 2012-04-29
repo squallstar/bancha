@@ -21,6 +21,7 @@ Thumbs.db
 /core/views/admin/content/translations.php
 /core/documentation/build
 /application/xml/types/*
+/application/modules/*
 
 
 # Temp and cache files #
