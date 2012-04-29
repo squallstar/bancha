@@ -256,7 +256,7 @@ fieldsets :
 	  	action_list_hierarchies :
 	  		description : "Hierarchies (A, B, C)"
 	  		visible     : false
-	  		type        : text
+	  		type        : hierarchy
 
 	  	action_list_where :
 	  		description : "SQL WHERE (Condition)"

@@ -130,7 +130,7 @@ fieldsets :
 	  fields :
 
 	  	images :
-	  		description  : images
+	  		description  : Images
 	  		type         : images
 	  		size         : 4096
 	  		mimes        : jpg|gif|png|jpeg
