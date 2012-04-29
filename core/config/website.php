@@ -359,6 +359,13 @@ $config['array_field_types'] = array('multiselect', 'hierarchy');
  */
 $config['type_custom_feeds'] = FALSE;
 
+/*
+ * BANCHA REPOSITORY URL
+ * Added on Bancha v1.2
+ * The repository contains various modules that can be installed in one-click.
+ */
+$config['repository_url'] = 'http://getbancha.com/repo/v1/';
+
 
 /* End of file website.php */
 /* Location: ./core/config/website.php */
