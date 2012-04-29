@@ -53,7 +53,7 @@
 				</tbody>
 			</table>
 			<?php } else { ?>
-			<p><?php echo _('This content type has no categories.'); ?></p>
+			<div class="internal_padding"><h3><?php echo _('This content type has no categories.'); ?></h3></div>
 			<?php } ?>
 
 
