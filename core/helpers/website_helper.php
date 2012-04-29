@@ -153,7 +153,7 @@ function minify($files = array(), $version='')
 function semantic_url($object = '')
 {
 	global $B;
-	$view = & $B->view;
+	$view =& $B->view;
 	$record = $view->get('record');
 	$page = $view->get('page');
 
@@ -161,6 +161,16 @@ function semantic_url($object = '')
 
 	if ($object instanceof Record)
 	{
+		$type =& $B->content->type($object->_tipo);
+		if ($type['tree']) {
+			//Is a page
+			$tree = $B->tree->get_linear();
+			foreach ($tree as $single_page) {
+				if ($single_page->id_record == $object->id) {
+					return site_url($single_page->full_uri);
+				}
+			}
+		}
 		$uri = $object->get('uri');
 	} else {
 		$uri = (string)$object;
