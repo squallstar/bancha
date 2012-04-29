@@ -57,9 +57,9 @@ Each record of the tree structured content types can have a unique parent and in
 The scheme
 ==========
 
-After click the **Add** button, Bancha will generate a new XML scheme based on the options you selected above. The generated scheme will have the **Name** of the content type plus the **.xml** extension, and will be stored here::
+After click the **Add** button, Bancha will generate a new scheme based on the options you selected above. The generated scheme will have the **Name** of the content type plus the **.yaml** or **.xml** extension, and will be stored here::
 
-    application/xml/Name.xml
+    application/xml/<Name>.<extension>
 
 On the next chapter you will understand how to **edit and extend** this base scheme to virtually create whatever you want.
 

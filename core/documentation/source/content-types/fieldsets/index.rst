@@ -12,6 +12,17 @@ The available icons are included under **themes/admin/widgets/schemes_icons**. F
 
 This will be a tipical structure of a **fieldset** node::
 
+	fieldsets :
+		- name   : General informations
+		  icon   : page
+		  fields :
+		  	my_field : ...
+		  	other_field : ...
+		  	third_field : ...
+
+
+or, if you're using XML schemes::
+
     <fieldset name="General informations" icon="page">
         <field></field>
         <field></field>
