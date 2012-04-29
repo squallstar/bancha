@@ -11,6 +11,15 @@ After setting up a relation (:doc:`define`), you can easily get the related reco
 
 Set up the following relation on the "Blog" content type::
 
+	relations :
+		post_comments :
+			type : 1-n
+			with : Comments
+			from : id_record
+			to   : post_id
+
+or using XML::
+
     <relation name="post_comments" type="1-n" with="Comments" from="id_record" to="post_id" />
 
 Then, access the comments of a post like this::

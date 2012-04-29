@@ -3,7 +3,16 @@ Defining a relation
 ###################
 
 Sometimes you will need to set-up a relation between two different content types. Bancha XML schemes permits you to define 1-0, 1-1 and 1-n relations.
-Relations are defined inside the **<content>** node of the content type as follows::
+Relations are defined inside the **content** node of the content type as follows::
+
+    relations :
+        relation_name :
+            type : 1-n|1-0|1-1
+            with : Destination content type name
+            from : Fieldname of source content type
+            to   : Fieldname of destination content type
+
+or using XML::
 
     <?xml version="1.0" encoding="utf-8"?>
     <content id="1">
@@ -21,6 +30,15 @@ Used when each record of the content type can be linked to none or just one reco
 
 Definition example::
 
+    relations:
+        color:
+            type : 1-1
+            with : Colors
+            from : id_record
+            to   : id_color
+
+or using XML::
+
     <relation name="color" type="1-1" with="Colors" from="id_record" to="id_color" />
 
 ------------
@@ -30,11 +48,29 @@ Definition example::
 Used when the record can have more than one childs, such as the **comments of blog posts**.
 Example: we will define this relation on the content type "Blog"::
 
+    relations :
+        comments :
+            type : 1-n
+            with : Comments
+            from : id_record
+            to   : post_id
+
+or using XML::
+
     <relation name="comments" type="1-n" with="Comments" from="id_record" to="post_id" />
 
 In the above example, we are setting a relation named **comments** of type **1-n**, between the field **id_record** of the content type "Blog" to the field **post_id** of the content type named **Comments**.
 
 Likewise, on the **Comments** scheme you will define the opposite relation as follows::
+
+    relations :
+        post :
+            type : 1-1
+            with : Blog
+            from : post_id
+            to   : id_record
+
+or using XML::
 
     <relation name="post" type="1-1" with="Blog" from="post_id" to="id_record" />
 
