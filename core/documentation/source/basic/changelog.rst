@@ -9,6 +9,7 @@ ChangeLog
 - Premade schemes converted to YAML.
 - Fix on the install process on some database drivers
 - "related_records" function added to the Frontend helper. Please read the doc for further informations about this function.
+- Categories on Record edit form are now ordered by name and displayed one per line
 - Currently we are having some technical problems on PostgreSQL CodeIgniter drivers, so we recommend you to use other databases such as MySQL.
 - jQuery updated to the latest available version
 - Removed some legacy javascript code inside the admin custom.js script

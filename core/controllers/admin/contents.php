@@ -430,7 +430,7 @@ Class Core_Contents extends Bancha_Controller
 
         if ($tipo['has_categories'])
         {
-        	$this->view->set('categories', $this->categories->type($tipo['id'])->get());
+        	$this->view->set('categories', $this->categories->type($tipo['id'])->order_by('name', 'ASC')->get());
     		$record->set('categories', $this->categories->get_record_categories($record->id));
         }
 

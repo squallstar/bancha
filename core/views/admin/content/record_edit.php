@@ -437,7 +437,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				$data['checked'] = is_array($record->get('categories')) ? in_array($category->id, $record->get('categories')) : FALSE;
 				$data['value'] = $category->id;
 
-				echo form_checkbox($data).form_label(' '.$category->name, 'categories[]');
+				echo form_checkbox($data).form_label(' '.$category->name, 'categories[]').'<br />';
 			}
 
 		} else {
