@@ -2,7 +2,7 @@
 /**
  * Module Class
  *
- * Libreria per gestire un modulo
+ * Abstract class to implement a Module
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -17,7 +17,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 abstract class Bancha_Module
 {
 	/**
-	 * @var mixed Reference alla View Library
+	 * @var mixed Reference to the view class
 	 */
 	public $view;
 
