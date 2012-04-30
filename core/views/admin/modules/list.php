@@ -3,16 +3,19 @@
 	<div class="block_head">
 
 		<h2><?php echo _('Modules'); ?></h2>
-
-
 	</div>
 
 	<div class="block_content">
 
-		<?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
-
-		<!--<div class="message info"><?php echo _('These are the currently installed modules. To install a module, just place it in the application/modules folder.'); ?></div>-->
 		<?php echo $this->view->get_messages(); ?>
+
+		<div class="internal_padding">
+			<?php echo _('You can manually upload a package to install it.'); ?><hr />
+			<form action="" method="post" enctype="multipart/form-data">
+				<input type="file" name="package" /><input type="submit" class="submit tiny" value="Install" />
+			</form>
+		</div>
+		<hr />
 
 		<div class="internal_padding">
 			<h3><?php echo _('Installed modules'); ?></h3><hr />

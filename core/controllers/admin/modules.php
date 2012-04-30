@@ -41,12 +41,12 @@ Class Core_Modules extends Bancha_Controller
 			$data = getter($package);
 			$done = $this->packages->install_data($slug, $data);
 		} else if (isset($_FILES['package'])) {
-			debug($_FILES['package']);die;
+			$slug = str_replace('.zip', '', $_FILES['package']['name']);
 			$done = $this->packages->install_file($slug, $_FILES['package']['tmp_name']);
 		}
 
 		//Alerts
-		if ($done != -1) {
+		if ($done !== -1) {
 			if ($done) {
 				$this->view->message('success', _('The module has been installed.'));
 			} else {

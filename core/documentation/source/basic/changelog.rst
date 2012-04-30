@@ -13,7 +13,7 @@ ChangeLog
 - Initial "bindtextdomain" Gettext check
 - New core class: Packages
 - Modules have been moved from core/modules to application/modules
-- Modules now can be installed from the **Bancha online Repository** or by uploading a zip file
+- Modules now can be installed from the **Bancha Modules Repository** or by uploading a zip file
 - Modules install file: modules now can implement a "<modulename>_package.php" class with various methods called on modoule install/uninstall
 - "related_records" function added to the Frontend helper. Please read the doc for further informations about this function
 - Categories on Record edit form are now ordered by name and displayed one per line
