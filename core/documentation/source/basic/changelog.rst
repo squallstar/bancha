@@ -2,17 +2,20 @@
 ChangeLog
 ######################
 
-**v 1.2** (2012-04-30)
+**v 1.2 - MAJOR UPDATE** (2012-04-30)
 
-- UPGRADE FROM 1.x: just replace the core folder
+- UPGRADE FROM 1.1: replace the core folder and you're done
+- PostgreSQL drivers temporarily disabled due to core incompatibilities
 - YAML Schemes added!! Now you can use them instead of the XML ones
 - Premade schemes converted to YAML
 - Documentation for YAML schemes
 - Fix on the install process on some database drivers
 - Initial "bindtextdomain" Gettext check
+- New core class: Packages
+- Modules now can be installed from the Bancha online Repository
+- Modules install file: modules now can implement a "<modulename>_package.php" class with various methods called on modoule install/uninstall
 - "related_records" function added to the Frontend helper. Please read the doc for further informations about this function
 - Categories on Record edit form are now ordered by name and displayed one per line
-- Currently we are having some technical problems on PostgreSQL CodeIgniter drivers, so we recommend you to use other databases such as MySQL.
 - Now the semantic_url function works also on "tree structured" Content types (such as the website pages)
 - jQuery updated to the latest available version
 - Removed some legacy javascript code inside the admin custom.js script
@@ -45,7 +48,7 @@ ChangeLog
 - Strip tags added on the events log (title field)
 - Triggers on publish/depublish now triggers the production tables instead of the stage ones
 - Comments count fix (triggers added on publish)
-- the tree() function now accept also the starting page record id
+- The tree() function now accepts also the starting page record id
 
 
 **v 1.0.7** (2012-01-24)
