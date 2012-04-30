@@ -4,15 +4,16 @@ ChangeLog
 
 **v 1.2 - MAJOR UPDATE** (2012-04-30)
 
-- UPGRADE FROM 1.1: replace the core folder and you're done
+- UPGRADE FROM 1.1: replace the core folder and move your modules from **core/modules** to **application/modules**
 - PostgreSQL drivers temporarily disabled due to core incompatibilities
-- YAML Schemes added!! Now you can use them instead of the XML ones
+- **YAML Schemes added!!** Now you can use them instead of the XML ones
 - Premade schemes converted to YAML
 - Documentation for YAML schemes
 - Fix on the install process on some database drivers
 - Initial "bindtextdomain" Gettext check
 - New core class: Packages
-- Modules now can be installed from the Bancha online Repository
+- Modules have been moved from core/modules to application/modules
+- Modules now can be installed from the **Bancha online Repository** or by uploading a zip file
 - Modules install file: modules now can implement a "<modulename>_package.php" class with various methods called on modoule install/uninstall
 - "related_records" function added to the Frontend helper. Please read the doc for further informations about this function
 - Categories on Record edit form are now ordered by name and displayed one per line

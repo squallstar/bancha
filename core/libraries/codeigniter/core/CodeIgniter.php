@@ -1,4 +1,15 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+/*
+ *---------------------------------------------------------------
+ * FRAMEWORK NAME
+ *---------------------------------------------------------------
+ *
+ * Will be used around the framework for the directory paths
+ *
+ */
+define('BANCHA', 'bancha');
+
+
 /**
  * CodeIgniter
  *

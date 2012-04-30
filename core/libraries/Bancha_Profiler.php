@@ -15,8 +15,8 @@
 
 if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Bancha_Profiler extends CI_Profiler {
-
+class Bancha_Profiler extends CI_Profiler
+{
 	/**
 	 * @var array Sections to print
 	 */
