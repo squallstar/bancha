@@ -22,6 +22,9 @@ Class Packages extends Core
 	{
 		$this->load->helper('file');
 
+		//Package interface
+	    require_once(APPPATH . 'libraries/bancha/package.php');
+
 		$this->_modules_dir = USERPATH . 'modules';
 		$this->_check_moduledir();
 	}
@@ -66,15 +69,23 @@ Class Packages extends Core
 	 * @param stream $file
 	 * @return bool
 	 */
-	public function install_file($name, $file)
+	public function install_file($file)
 	{
-		$name = (string)$name;
-		$this->_check_moduledir($name);
-		$module_dir = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $name;
+		if (!file_exists($file)) return FALSE;
+
+		$tmp_name = 'tmp' . date('YmdHis');
+		$module_dir = USERPATH . 'modules' . DIRECTORY_SEPARATOR;
+		$tmp_dir = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $tmp_name;
+
+		$this->_check_moduledir($tmp_name);
 
 		$this->load->extlibrary('unzip');
-		$this->unzip->extract($file, $module_dir);
+		$this->unzip->extract($file, $tmp_dir);
 		@unlink($file);
+
+		$package = $this->get_module_package($tmp_name, TRUE);
+
+		rename($tmp_dir, $module_dir . $package->name());
 
 		return $this->_install($name);
 	}
@@ -87,18 +98,68 @@ Class Packages extends Core
 	 */
 	private function _install($name)
 	{
-		$module_dir = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR;
-
-		$installer = $module_dir . $name . '_package.php';
-		if (file_exists($installer)) {
-			require_once($installer);
-			$classname = ucfirst($name) . '_Package';
-			$package = new $classname();
+		$package = $this->get_module_package($name);
+		if ($package) {
 			if (method_exists($package, 'install')) {
 				$package->install();
 			}
 		}
 		return TRUE;
+	}
+
+	/**
+	 * Uninstall a package
+	 * @param string $name
+	 * @param stream $file
+	 * @return bool
+	 */
+	public function uninstall($name)
+	{
+		$package = $this->get_module_package($name);
+		if ($package) {
+			if (method_exists($package, 'uninstall')) {
+				$package->uninstall();
+			}
+		}
+
+		return delete_files($this->_modules_dir . DIRECTORY_SEPARATOR . $name, true);
+	}
+
+	/**
+	 * Gets the package class of a module
+	 * @param string $name
+	 * @return Package Object
+	 */
+	public function get_module_package($name, $first_found = FALSE)
+	{
+		$module_dir = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR;
+		$installer = $module_dir . 'package.php';
+
+		if (file_exists($installer)) {
+			require_once($installer);
+
+			if ($first_found) {
+				$classes = get_declared_classes();
+				foreach ($classes as $class) {
+					if (strpos($class, '_Package') !== FALSE) {
+						$classname = str_replace('_Package', '', $class);
+						break;
+					}
+				}
+			} else }
+				$classname = ucfirst($name) . '_Package';
+			}
+
+			if (!isset($classname)) {
+				show_error("Package class not found inside $name");
+			}
+
+			$package = new $classname();
+			return $package;
+		} else {
+			show_error("The module $name does not implement the Package class.");
+		}
+		return FALSE;
 	}
 
 }

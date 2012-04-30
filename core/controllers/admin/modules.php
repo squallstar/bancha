@@ -40,7 +40,7 @@ Class Core_Modules extends Bancha_Controller
 		{
 			$data = getter($package);
 			$done = $this->packages->install_data($slug, $data);
-		} else if (isset($_FILES['package'])) {
+		} else if (count($_FILES) && isset($_FILES['package']['tmp_name'])) {
 			$slug = str_replace('.zip', '', $_FILES['package']['name']);
 			$done = $this->packages->install_file($slug, $_FILES['package']['tmp_name']);
 		}
@@ -58,12 +58,14 @@ Class Core_Modules extends Bancha_Controller
 		$modules = directory_map($modules_dir, 1);	
 
 		//Filter non-directories
+		$compiled_modules = array();
 		foreach ($modules as $pos => $module) {
-			if (!is_dir($modules_dir . DIRECTORY_SEPARATOR . $module)) {
-				unset($modules[$pos]);
+			if (is_dir($modules_dir . DIRECTORY_SEPARATOR . $module)) {
+				$package = $this->packages->get_module_package($module);
+				$compiled_modules[$module] = $package;
 			}
 		}
-		$this->view->set('modules', $modules);
+		$this->view->set('modules', $compiled_modules);
 		$this->view->render_layout('modules/list');
 	}
 

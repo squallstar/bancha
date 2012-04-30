@@ -25,15 +25,17 @@
 					<tr>
 						<th><?php echo _('Name'); ?></th>
 						<th><?php echo _('Version'); ?></th>
+						<th><?php echo _('Author'); ?></th>
 						<th><?php echo _('Documentation'); ?></th>
 					</tr>
 				</thead>
 				<tbody>
-						<?php foreach ($modules as $module) {
+						<?php foreach ($modules as $module => $package) {
 							?>
 						<tr data-key="<?php echo $module; ?>">
-							<td><?php echo ucfirst(str_replace('_', ' ', $module)); ?></td>
-							<td data-type="version">0.4v</td>
+							<td><?php echo $package->title(); ?></td>
+							<td data-type="version"><?php echo $package->version(); ?></td>
+							<td><?php echo $package->author(); ?></td>
 							<td><a href="<?php echo admin_url('modules/docs/'.$module); ?>"><?php echo _('View'); ?></a></td>
 
 						</tr>

@@ -12,8 +12,6 @@
  *
  */
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 abstract class Bancha_Module
 {
 	/**
@@ -62,18 +60,18 @@ abstract class Bancha_Module
 			$this->_view_path_added = TRUE;
 			$CI->load->add_view_path($CI->config->item('modules_folder'));
 		}
-		return $CI->load->view($module_name.DIRECTORY_SEPARATOR.$module_name.'_'.$view, $CI->view->get_data(), TRUE);
+		return $CI->load->view($module_name.DIRECTORY_SEPARATOR.$view, $CI->view->get_data(), TRUE);
 	}
 
 	/**
 	 * Loads a single class inside this module
-	 * @param string $module_file The name of the class to load: Modulename_$classname
+	 * @param string $module_file The name of the class to load
 	 */
 	public function load($classname)
 	{
 		$lower_name = strtolower($classname);
 
-		$file_name = strtolower($this->module_name) . '_' . $lower_name . '.php';
+		$file_name = $lower_name . '.php';
 		require_once $this->module_filespath . $file_name;
 
 		$compiled_name = $this->module_name . '_' . ucfirst($classname);
