@@ -33,26 +33,34 @@ Class Core_Modules extends Bancha_Controller
 
 		$package = $this->input->post('package');
 		$slug = $this->input->post('slug');
+		$uninstall = $this->input->post('uninstall');
 
 		$done = -1;
 
-		if ($package && $slug)
-		{
-			$data = getter($package);
-			$done = $this->packages->install_data($slug, $data);
-		} else if (count($_FILES) && isset($_FILES['package']['tmp_name'])) {
-			$slug = str_replace('.zip', '', $_FILES['package']['name']);
-			$done = $this->packages->install_file($_FILES['package']['tmp_name']);
-		}
+		if ($uninstall) {
+			if ($this->packages->uninstall($uninstall)) {
+				$this->view->message('success', _('The module has been removed.'));
+			}
+		} else {
+			if ($package && $slug)
+			{
+				$data = getter($package);
+				$done = $this->packages->install_data($slug, $data);
+			} else if (count($_FILES) && isset($_FILES['package']['tmp_name'])) {
+				$slug = str_replace('.zip', '', $_FILES['package']['name']);
+				$done = $this->packages->install_file($_FILES['package']['tmp_name']);
+			}
 
-		//Alerts
-		if ($done !== -1) {
-			if ($done) {
-				$this->view->message('success', _('The module has been installed.'));
-			} else {
-				$this->view->message('warning', _('The module can not be installed right now.'));
+			//Alerts
+			if ($done !== -1) {
+				if ($done) {
+					$this->view->message('success', _('The module has been installed.'));
+				} else {
+					$this->view->message('warning', _('The module can not be installed right now.'));
+				}
 			}
 		}
+		
 
 
 		$modules = directory_map($modules_dir, 1);	

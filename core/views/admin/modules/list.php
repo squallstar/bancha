@@ -39,7 +39,7 @@
 							<td><a href="<?php echo admin_url('modules/docs/'.$module); ?>"><?php echo _('View'); ?></a></td>
 							<td data-type="version"><?php echo $package->version(); ?></td>
 							<td><?php echo $package->author(); ?></td>
-							<td><form action="" method="post"><input type="hidden" name="delete" value="<?php echo $module; ?>" /><input class="submit tiny" type="submit" value="<?php echo _('Uninstall'); ?>" /></form></td>
+							<td><form action="" method="post"><input type="hidden" name="uninstall" value="<?php echo $module; ?>" /><input class="submit tiny" type="submit" value="<?php echo _('Uninstall'); ?>" /></form></td>
 						</tr>
 						<?php }
 						?>
