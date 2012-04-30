@@ -24,9 +24,11 @@
 				<thead>
 					<tr>
 						<th><?php echo _('Name'); ?></th>
+						<th><?php echo _('Documentation'); ?></th>
 						<th><?php echo _('Version'); ?></th>
 						<th><?php echo _('Author'); ?></th>
-						<th><?php echo _('Documentation'); ?></th>
+						
+						<th><?php echo _('Actions'); ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,10 +36,10 @@
 							?>
 						<tr data-key="<?php echo $module; ?>">
 							<td><?php echo $package->title(); ?></td>
+							<td><a href="<?php echo admin_url('modules/docs/'.$module); ?>"><?php echo _('View'); ?></a></td>
 							<td data-type="version"><?php echo $package->version(); ?></td>
 							<td><?php echo $package->author(); ?></td>
-							<td><a href="<?php echo admin_url('modules/docs/'.$module); ?>"><?php echo _('View'); ?></a></td>
-
+							<td><form action="" method="post"><input type="hidden" name="delete" value="<?php echo $module; ?>" /><input class="submit tiny" type="submit" value="<?php echo _('Uninstall'); ?>" /></form></td>
 						</tr>
 						<?php }
 						?>
@@ -50,7 +52,7 @@
 		<hr />
 
 		<div class="internal_padding">
-			<h3><img align="absmiddle" src="<?php echo site_url(THEMESPATH . 'admin/widgets/icns/resources.png'); ?>" border="0" alt=""/> <?php echo _('Available modules on Bancha Repository'); ?></h3><hr />
+			<h3><img align="absmiddle" src="<?php echo site_url(THEMESPATH . 'admin/widgets/icns/resources.png'); ?>" border="0" alt=""/> <?php echo _('Available modules on Bancha Modules Repository'); ?></h3><hr />
 
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable" id="available-modules">
 				<thead>
@@ -62,7 +64,7 @@
 						<th><?php echo _('Actions'); ?></th>
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody><tr><td colspan="5"><img src="<?php echo site_url(THEMESPATH . 'admin/widgets/loading.gif'); ?>" border="0" alt="" /></tbody>
 			</table>
 		</div>
 	</div>
@@ -76,6 +78,7 @@
 			dataType: 'jsonp',
 			success: function (data) {
 				var tbl = $('#available-modules tbody'), instbl = $('#installed-modules tbody'), action = '';
+				tbl.html('');
 				$.each(data, function(index) {
 					var instrow = $('tr[data-key="'+this.slug+'"]', instbl);
 

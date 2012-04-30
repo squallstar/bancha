@@ -18,9 +18,13 @@ Class Packages extends Core
 {
 	private $_modules_dir;
 
+	private $_loaded_modules_packages;
+
 	public function __construct()
 	{
 		$this->load->helper('file');
+
+		$this->_loaded_modules_packages = array();
 
 		//Package interface
 	    require_once(APPPATH . 'libraries/bancha/package.php');
@@ -85,9 +89,19 @@ Class Packages extends Core
 
 		$package = $this->get_module_package($tmp_name, TRUE);
 
-		rename($tmp_dir, $module_dir . $package->name());
+		$module_dir .= $package->name() . DIRECTORY_SEPARATOR;
 
-		return $this->_install($name);
+		$this->load->helper('directory');
+		$this->load->helper('directories');
+		if (!is_dir($module_dir)) @mkdir($module_dir, DIR_WRITE_MODE, TRUE);
+		$files = directory_map($tmp_dir, 1);
+		foreach ($files as $file) {
+			copy($tmp_dir . DIRECTORY_SEPARATOR . $file, $module_dir . $file);
+			@unlink($tmp_dir . DIRECTORY_SEPARATOR . $file);
+		}
+		delete_directory($tmp_dir);
+
+		return $this->_install($package->name());
 	}
 
 	/**
@@ -122,7 +136,8 @@ Class Packages extends Core
 			}
 		}
 
-		return delete_files($this->_modules_dir . DIRECTORY_SEPARATOR . $name, true);
+		$this->load->helper('directories');
+		return delete_directory($this->_modules_dir . DIRECTORY_SEPARATOR . $name);
 	}
 
 	/**
@@ -132,21 +147,27 @@ Class Packages extends Core
 	 */
 	public function get_module_package($name, $first_found = FALSE)
 	{
+		if (isset($this->_loaded_modules_packages[$name])) {
+			return $this->_loaded_modules_packages[$name];
+		}
+
 		$module_dir = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR;
 		$installer = $module_dir . 'package.php';
 
 		if (file_exists($installer)) {
-			require_once($installer);
+			if (!class_exists(ucfirst($name) . '_Package')) {
+				require_once($installer);
+			}
 
 			if ($first_found) {
 				$classes = get_declared_classes();
 				foreach ($classes as $class) {
 					if (strpos($class, '_Package') !== FALSE) {
-						$classname = str_replace('_Package', '', $class);
+						$classname = $class;
 						break;
 					}
 				}
-			} else }
+			} else {
 				$classname = ucfirst($name) . '_Package';
 			}
 
@@ -155,6 +176,7 @@ Class Packages extends Core
 			}
 
 			$package = new $classname();
+			$this->_loaded_modules_packages[$name] = $package;
 			return $package;
 		} else {
 			show_error("The module $name does not implement the Package class.");

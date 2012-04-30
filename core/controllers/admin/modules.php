@@ -42,7 +42,7 @@ Class Core_Modules extends Bancha_Controller
 			$done = $this->packages->install_data($slug, $data);
 		} else if (count($_FILES) && isset($_FILES['package']['tmp_name'])) {
 			$slug = str_replace('.zip', '', $_FILES['package']['name']);
-			$done = $this->packages->install_file($slug, $_FILES['package']['tmp_name']);
+			$done = $this->packages->install_file($_FILES['package']['tmp_name']);
 		}
 
 		//Alerts
@@ -77,8 +77,7 @@ Class Core_Modules extends Bancha_Controller
 			return;
 		}
 
-		$folder = $this->config->item('modules_folder') . $module;
-		$doc_file = $folder . '/' . $module . '_docs'.EXT;
+		$doc_file = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'documentation.html';
 
 		if (file_exists($doc_file))
 		{
@@ -87,7 +86,7 @@ Class Core_Modules extends Bancha_Controller
 			$this->view->set('module', $module);
 			$this->view->render_layout('modules/docs');
 		} else {
-			show_error($this->lang->_trans('The module %m has no documentation or not exists.', array('m' => $module)));
+			show_error($this->lang->_trans('The module %m has no documentation.', array('m' => $module)));
 		}
 	}
 

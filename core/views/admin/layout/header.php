@@ -98,6 +98,11 @@ $menu = array(
 				'acl'	=> 'types|manage',
 			),
 			array(
+				'name'	=> _('Modules'),
+				'url'	=> $_admin_url . 'modules',
+				'segment' => 'modules'
+			),
+			array(
 				'name'	=> _('Repository'),
 				'url'	=> $_admin_url . 'repository',
 				'segment' => 'repository',
@@ -107,11 +112,6 @@ $menu = array(
 				'url'	=> $_admin_url . 'settings',
 				'acl'	=> 'settings|manage',
 				'segment' => 'settings'
-			),
-			array(
-				'name'	=> _('Modules'),
-				'url'	=> $_admin_url . 'modules',
-				'segment' => 'modules'
 			),
 			array(
 				'name'	=> _('Themes'),
