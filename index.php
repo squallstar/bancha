@@ -51,7 +51,7 @@ if (defined('ENVIRONMENT'))
  * Will be used around the framework for the directory paths
  *
  */
-	define('FRNAME', 'bancha');
+	define('BANCHA', 'bancha');
 
 /*
  *---------------------------------------------------------------

@@ -906,7 +906,7 @@ Simile a poco prima, l'indirizzo della nostra immagine con il preset <strong>use
 				<li><strong>Print Dispatcher</strong> - il dispatcher che tramite la libreria DOMPDF, genera file pdf partendo dalle pagine del sito.</li>
 			</ul>
 
-			<p>Per aggiungere un dispatcher, aggiungilo alla cartella <strong>core/libraries/<?php echo FRNAME; ?>/dispatchers/</strong> chiamandolo <strong>dispatcher_&lt;nome&gt;.php</strong> ed utilizzando come nome della classe <strong>Dispatcher_&lt;nome&gt;</strong>. Dopodich&egrave;, potrai invocare un dispatcher in questo modo:</p>
+			<p>Per aggiungere un dispatcher, aggiungilo alla cartella <strong>core/libraries/<?php echo BANCHA; ?>/dispatchers/</strong> chiamandolo <strong>dispatcher_&lt;nome&gt;.php</strong> ed utilizzando come nome della classe <strong>Dispatcher_&lt;nome&gt;</strong>. Dopodich&egrave;, potrai invocare un dispatcher in questo modo:</p>
 <pre class="prettyprint"><code>$this->load->dispatcher('nome');
 
 //Ed otterrai l'oggetto utilizzabile:

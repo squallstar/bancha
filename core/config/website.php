@@ -143,7 +143,7 @@ $config['records_per_page'] = 15;
  */
 if (!defined('FRPATH'))
 {
-	define('FRPATH', APPPATH . 'libraries' . $sep . FRNAME . $sep);
+	define('FRPATH', APPPATH . 'libraries' . $sep . BANCHA . $sep);
 }
 
 /*
@@ -166,7 +166,7 @@ $config['modules_folder'] = APPPATH . 'modules' . $sep;
 /*
  * CACHE FOLDER
  */
-$config['fr_cache_folder'] = USERPATH . 'cache' . $sep . '_' . FRNAME. $sep;
+$config['fr_cache_folder'] = USERPATH . 'cache' . $sep . '_' . BANCHA. $sep;
 
 /*
  * TYPES CACHE FILE

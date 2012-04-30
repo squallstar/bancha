@@ -27,7 +27,7 @@ Class Bancha_Loader extends CI_Loader {
 		//Standard Bancha Libraries
 		$this->library(
 			array(
-				FRNAME . '/content', FRNAME . '/xml', FRNAME . '/view'
+				BANCHA . '/content', BANCHA . '/xml', BANCHA . '/view'
 			)
 		);
 
@@ -56,7 +56,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function frmodel($model, $name = '', $db_conn = FALSE)
 	{
-		$this->model(FRNAME.'/'.$model, $name, $db_conn);
+		$this->model(BANCHA.'/'.$model, $name, $db_conn);
 	}
 
 	/**
@@ -66,7 +66,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function frlibrary($library, $name = NULL)
 	{
-		$this->library(FRNAME.'/'.$library, NULL, $name);
+		$this->library(BANCHA.'/'.$library, NULL, $name);
 	}
 
 	/**
@@ -84,7 +84,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function records()
 	{
-		$this->model(FRNAME.'/model_records', 'records');
+		$this->model(BANCHA.'/model_records', 'records');
 	}
 
 	/**
@@ -92,7 +92,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function tree()
 	{
-		$this->model(FRNAME.'/model_tree', 'tree');
+		$this->model(BANCHA.'/model_tree', 'tree');
 	}
 
 	/**
@@ -100,7 +100,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function documents()
 	{
-		$this->model(FRNAME.'/model_documents', 'documents');
+		$this->model(BANCHA.'/model_documents', 'documents');
 	}
 
 	/**
@@ -108,7 +108,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function categories()
 	{
-		$this->model(FRNAME.'/model_categories', 'categories');
+		$this->model(BANCHA.'/model_categories', 'categories');
 	}
 
 	/**
@@ -116,7 +116,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function auth()
 	{
-		$this->model(FRNAME.'/model_auth', 'auth');
+		$this->model(BANCHA.'/model_auth', 'auth');
 	}
 
 	/**
@@ -124,7 +124,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function users()
 	{
-		$this->model(FRNAME.'/model_users', 'users');
+		$this->model(BANCHA.'/model_users', 'users');
 	}
 
 	/**
@@ -132,7 +132,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function pages()
 	{
-		$this->model(FRNAME.'/model_pages', 'pages');
+		$this->model(BANCHA.'/model_pages', 'pages');
 	}
 
 	/**
@@ -140,7 +140,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function events()
 	{
-		$this->model(FRNAME.'/model_events', 'events');
+		$this->model(BANCHA.'/model_events', 'events');
 	}
 
 	/**
@@ -148,7 +148,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function triggers()
 	{
-		$this->model(FRNAME.'/model_triggers', 'triggers');
+		$this->model(BANCHA.'/model_triggers', 'triggers');
 	}
 
 	/**
@@ -156,7 +156,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function hierarchies()
 	{
-		$this->model(FRNAME.'/model_hierarchies', 'hierarchies');
+		$this->model(BANCHA.'/model_hierarchies', 'hierarchies');
 	}
 
 	/**
@@ -164,7 +164,7 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function settings()
 	{
-		$this->model(FRNAME.'/model_settings', 'settings');
+		$this->model(BANCHA.'/model_settings', 'settings');
 	}
 
 	/**
@@ -243,8 +243,8 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function adapter($name = '', $obj_name = 'adapter')
 	{
-		require_once(APPPATH . '/libraries/' . FRNAME . '/adapter.php');
-		$this->library(FRNAME.'/adapters/adapter_'.$name, NULL, $obj_name);
+		require_once(APPPATH . '/libraries/' . BANCHA . '/adapter.php');
+		$this->library(BANCHA.'/adapters/adapter_'.$name, NULL, $obj_name);
 	}
 
 	// --------------------------------------------------------------------

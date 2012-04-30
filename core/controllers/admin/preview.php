@@ -10,7 +10,7 @@
  *
  */
 
-defined('FRNAME') or die;
+defined('BANCHA') or die;
 
 Class Core_Preview extends Bancha_Controller
 {

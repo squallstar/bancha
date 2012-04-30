@@ -285,11 +285,11 @@ class Bancha_Lang extends CI_Lang {
 		setlocale(LC_ALL, $this->gettext_language);
 
 		// Specify location of translation tables
-		bindtextdomain(FRNAME, $this->gettext_path);
-		bind_textdomain_codeset(FRNAME, 'UTF-8');
+		bindtextdomain(BANCHA, $this->gettext_path);
+		bind_textdomain_codeset(BANCHA, 'UTF-8');
 
 		// Choose domain
-		textdomain(FRNAME);
+		textdomain(BANCHA);
     }
 
     /**
