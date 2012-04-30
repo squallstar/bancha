@@ -58,7 +58,7 @@ abstract class Bancha_Module
 		if (!$this->_view_path_added)
 		{
 			$this->_view_path_added = TRUE;
-			$CI->load->add_view_path($CI->config->item('modules_folder'));
+			$CI->load->add_view_path(USERPATH . 'modules' . DIRECTORY_SEPARATOR);
 		}
 		return $CI->load->view($module_name.DIRECTORY_SEPARATOR.$view, $CI->view->get_data(), TRUE);
 	}
