@@ -184,9 +184,9 @@ Class Bancha_Loader extends CI_Loader {
 			$B =& get_instance();
 			$user_modules = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $module_name;
 			if (is_dir($user_modules)) {
-				require_once($user_modules.DIRECTORY_SEPARATOR.$module_name.'_module.php');
+				require_once($user_modules.DIRECTORY_SEPARATOR.'module.php');
 			} else {
-				require_once($B->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR.$module_name.'_module.php');
+				require_once($B->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR.'module.php');
 			}
 			$this->_loaded_modules[$module_name] = TRUE;
 		}

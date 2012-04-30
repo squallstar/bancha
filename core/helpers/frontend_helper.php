@@ -145,10 +145,10 @@ function title($sep = ' - ')
 	return $B->view->title ? $B->view->title . $sep : '';
 }
 
-function module($name)
+function module($name, $config = array())
 {
 	global $B;
-	return $B->load->module($name);
+	return $B->load->module($name, $config);
 }
 
 function find($type = '')
