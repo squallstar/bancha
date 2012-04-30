@@ -10,7 +10,7 @@
 		<?php echo $this->view->get_messages(); ?>
 
 		<div class="internal_padding">
-			<?php echo _('You can manually upload a package to install it.'); ?><hr />
+			<img align="absmiddle" src="<?php echo site_url(THEMESPATH . 'admin/widgets/icns/plugin_add.png'); ?>" border="0" alt=""/> <?php echo _('You can manually upload a package to install it.'); ?><hr />
 			<form action="" method="post" enctype="multipart/form-data">
 				<input type="file" name="package" /><input type="submit" class="submit tiny" value="Install" />
 			</form>
@@ -18,7 +18,7 @@
 		<hr />
 
 		<div class="internal_padding">
-			<h3><?php echo _('Installed modules'); ?></h3><hr />
+			<h3><img align="absmiddle" src="<?php echo site_url(THEMESPATH . 'admin/widgets/icns/plugin.png'); ?>" border="0" alt=""/> <?php echo _('Installed modules'); ?></h3><hr />
 			<?php if (count($modules)) { ?>
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
 				<thead>
@@ -46,7 +46,7 @@
 		<hr />
 
 		<div class="internal_padding">
-			<h3><?php echo _('Available modules on Bancha Repository'); ?></h3><hr />
+			<h3><img align="absmiddle" src="<?php echo site_url(THEMESPATH . 'admin/widgets/icns/resources.png'); ?>" border="0" alt=""/> <?php echo _('Available modules on Bancha Repository'); ?></h3><hr />
 
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable" id="available-modules">
 				<thead>
