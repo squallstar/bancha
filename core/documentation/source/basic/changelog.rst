@@ -4,7 +4,8 @@ ChangeLog
 
 **v 1.2 - MAJOR UPDATE** (2012-04-30)
 
-- UPGRADE FROM 1.1: replace the core folder and move your modules from **core/modules** to **application/modules**
+- AUTO UPGRADE FROM 1.x: run "bancha update" from the bash
+- MANUAL UPGRADE FROM 1.x: replace the core folder, the themes/admin/widgets folder and move your modules from **core/modules** to **application/modules**
 - PostgreSQL drivers temporarily disabled due to core incompatibilities
 - **YAML Schemes added!!** Now you can use them instead of the XML ones
 - Premade schemes converted to YAML
