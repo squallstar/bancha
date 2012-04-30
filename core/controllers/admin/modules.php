@@ -1,8 +1,8 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BANCHA') or exit;
 /**
  * Modules Controller
  *
- * Lista e operazioni sui moduli installati
+ * See: http://docs.getbancha.com/modules
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
@@ -27,41 +27,37 @@ Class Core_Modules extends Bancha_Controller
 	public function index()
 	{
 		$this->load->helper('directory');
+		$this->load->frlibrary('packages');
 
 		$modules_dir = USERPATH . 'modules';
 
 		$package = $this->input->post('package');
 		$slug = $this->input->post('slug');
+
+		$done = -1;
+
 		if ($package && $slug)
 		{
-			$this->load->helper('file');
-
-			$module_dir = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $slug;
-			$package_file = $module_dir . DIRECTORY_SEPARATOR . 'package.zip';
-			if (!is_dir($module_dir)) {
-				@mkdir($module_dir, DIR_WRITE_MODE, TRUE);
-			}
-
 			$data = getter($package);
+			$done = $this->packages->install_data($slug, $data);
+		} else if (isset($_FILES['package'])) {
+			debug($_FILES['package']);die;
+			$done = $this->packages->install_file($slug, $_FILES['package']['tmp_name']);
+		}
 
-			if (write_file($package_file, $data)) {
-				$this->load->extlibrary('unzip');
-				$this->unzip->extract($package_file, $module_dir);
-				@unlink($package_file);
-
+		//Alerts
+		if ($done != -1) {
+			if ($done) {
 				$this->view->message('success', _('The module has been installed.'));
 			} else {
-				$this->view->message('warning', 'Cannot write package to ' . $module_dir);
-			}
-		} else {
-			if (!is_dir($modules_dir)) {
-				@mkdir($modules_dir, DIR_WRITE_MODE, TRUE);
+				$this->view->message('warning', _('The module can not be installed right now.'));
 			}
 		}
 
+
 		$modules = directory_map($modules_dir, 1);	
 
-		//Remove non-directories
+		//Filter non-directories
 		foreach ($modules as $pos => $module) {
 			if (!is_dir($modules_dir . DIRECTORY_SEPARATOR . $module)) {
 				unset($modules[$pos]);
@@ -69,26 +65,6 @@ Class Core_Modules extends Bancha_Controller
 		}
 		$this->view->set('modules', $modules);
 		$this->view->render_layout('modules/list');
-	}
-
-	public function install()
-	{
-		if (count($_FILES) && isset($_FILES['zip_module']))
-		{
-			$this->load->extlibrary('unzip');
-			$this->unzip->allow(array('php'));
-
-			$zip_file = $_FILES['zip_module'];
-			$modules_folder = $this->config->item('modules_folder');
-			$tmp_dirname = date('YmdHis');
-
-			if ($this->unzip->extract($zip_file['tmp_name'], $modules_folder . $tmp_dirname))
-			{
-
-			} else {
-				//Errors here
-			}
-		}
 	}
 
 	public function docs($module = '')
