@@ -11,3 +11,4 @@ You can add new modules manully, or using the **Bancha Module Repository** (adde
 
    create
    install
+   submit

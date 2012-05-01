@@ -23,6 +23,7 @@ ChangeLog
 - Now the semantic_url function works also on "tree structured" Content types (such as the website pages)
 - jQuery updated to the latest available version
 - Removed some legacy javascript code inside the admin custom.js script
+- Constants: FRPATH renamed to BANCHALIB, FRNAME renamed to BANCHA
 - Minor fixes
 
 
