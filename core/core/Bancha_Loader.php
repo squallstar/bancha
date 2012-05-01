@@ -32,7 +32,7 @@ Class Bancha_Loader extends CI_Loader {
 		);
 
 		//Class that create instances of records
-		require_once(FRPATH . 'record.php');
+		require_once(BANCHALIB . 'record.php');
 
 		//Generic helpers
 		$this->helper(
@@ -176,7 +176,7 @@ Class Bancha_Loader extends CI_Loader {
 	{
 		if (!count($this->_loaded_modules))
 		{
-			require_once(FRPATH . 'module.php');
+			require_once(BANCHALIB . 'module.php');
 		}
 
 		$module_name = strtolower($module_name);

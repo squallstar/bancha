@@ -141,9 +141,9 @@ $config['records_per_page'] = 15;
 /* FRAMEWORK PATH
  * The library path where Bancha classes are stored
  */
-if (!defined('FRPATH'))
+if (!defined('BANCHALIB'))
 {
-	define('FRPATH', APPPATH . 'libraries' . $sep . BANCHA . $sep);
+	define('BANCHALIB', APPPATH . 'libraries' . $sep . BANCHA . $sep);
 }
 
 /*
@@ -179,7 +179,7 @@ $config['tree_cache_folder'] = $config['fr_cache_folder'] . 'tree-{name}.tmp';
  * TEMPLATES DIRECTORY
  * The templates that Bancha uses to generate many kind of things
  */
-$config['templates_folder'] = FRPATH . 'templates' . $sep;
+$config['templates_folder'] = BANCHALIB . 'templates' . $sep;
 
 /*
 * CUSTOM CONTROLLERS DIRECTORY
