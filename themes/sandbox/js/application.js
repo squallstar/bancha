@@ -11,7 +11,7 @@ var myApp = (function ($) {
 			
 			for (h in hooks) {
 				var $els = $(h) || [];
-				if (els.length > 0) {
+				if ($els.length > 0) {
 					hooks[h].call(c, h, $els);
 				}
 			}
