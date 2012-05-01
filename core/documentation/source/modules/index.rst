@@ -9,6 +9,6 @@ You can add new modules manully, or using the **Bancha Module Repository** (adde
 .. toctree::
    :maxdepth: 1
 
-   create
    install
+   create
    submit

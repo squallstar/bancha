@@ -4,4 +4,6 @@ Create a module
 
 **Documentation coming soon**
 
-Back to :doc:`index`.
+See also: :doc:`install`
+
+Back to :doc:`index`
