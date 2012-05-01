@@ -178,15 +178,18 @@ Class Bancha_Loader extends CI_Loader {
 		{
 			require_once(FRPATH . 'module.php');
 		}
+
 		$module_name = strtolower($module_name);
+		$user_modules = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $module_name;
+
 		if (!isset($this->_loaded_modules[$module_name]))
 		{
 			$B =& get_instance();
-			$user_modules = USERPATH . 'modules' . DIRECTORY_SEPARATOR . $module_name;
+			
 			if (is_dir($user_modules)) {
 				require_once($user_modules.DIRECTORY_SEPARATOR.'module.php');
 			} else {
-				require_once($B->config->item('modules_folder').$module_name.DIRECTORY_SEPARATOR.'module.php');
+				show_error("Module $module_name not found.");
 			}
 			$this->_loaded_modules[$module_name] = TRUE;
 		}
@@ -203,7 +206,7 @@ Class Bancha_Loader extends CI_Loader {
 		}
 
 		$tmp->module_name = ucfirst($module_name);
-		$tmp->module_filespath = config_item('modules_folder').$module_name.DIRECTORY_SEPARATOR;
+		$tmp->module_filespath = $user_modules.DIRECTORY_SEPARATOR;
 
 		return $tmp;
 	}

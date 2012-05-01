@@ -159,11 +159,6 @@ $config['xml_folder'] = USERPATH . 'xml' . $sep;
 $config['xml_typefolder'] = USERPATH . 'xml' . $sep . 'types' . $sep;
 
 /*
- * MODULES FOLDER
- */
-$config['modules_folder'] = APPPATH . 'modules' . $sep;
-
-/*
  * CACHE FOLDER
  */
 $config['fr_cache_folder'] = USERPATH . 'cache' . $sep . '_' . BANCHA. $sep;
