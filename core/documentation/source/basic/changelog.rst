@@ -2,6 +2,11 @@
 ChangeLog
 ######################
 
+**v 1.2.1** (2012-05-02)
+
+- Added a cURL extension check on the getter() function (website_helper)
+
+
 **v 1.2 - MAJOR UPDATE** (2012-04-30)
 
 - AUTO UPGRADE FROM 1.x: run "bancha update" from the bash

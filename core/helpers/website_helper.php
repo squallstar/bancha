@@ -58,6 +58,9 @@ function show_400()
  */
 function getter($url)
 {
+	if (!function_exists('curl_init')) {
+		show_error('cURL PHP extension not found');
+	}
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
