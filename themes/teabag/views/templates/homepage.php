@@ -32,7 +32,7 @@ if (type('Blog')) {
 	$posts = find('Blog')->limit(10)->order_by('date_publish', 'DESC')->get(); ?>
 
 	<div class="container">
-		<div class="row cleafix">
+		<div class="row clearfix">
 			<div class="grid_12 margin_bottom_30">
 				<h2>Latest blog posts</h2>
 				<ul>
