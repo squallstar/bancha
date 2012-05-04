@@ -6,21 +6,6 @@
 
 /*
 |--------------------------------------------------------------------------
-| 1. Installed themes
-|--------------------------------------------------------------------------
-|
-| Here you can set the themes that you want to use.
-| The key must be the exact name of the folder under the themes directory.
-| To activate a theme, go to the "Theme" or "Settings" page on the admin.
-|
-*/
-$config['installed_themes'] = array(
-	'sandbox' => 'Sandbox'
-);
-
-
-/*
-|--------------------------------------------------------------------------
 | 2. Website languages
 |--------------------------------------------------------------------------
 |

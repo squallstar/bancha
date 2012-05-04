@@ -53,7 +53,7 @@ $this->load->helper('form');
 				<div class="fieldset clearfix">
 		  			<label><?php echo _('Theme'); ?></label>
 				  	<div class="right">
-						<?php echo form_dropdown('theme', $this->config->item('installed_themes'), null, 'class="styled"'); ?>
+						<?php echo form_dropdown('theme', $this->view->get_available_themes(), null, 'class="styled"'); ?>
 						(you can change it later)
 					</div>
 				</div>

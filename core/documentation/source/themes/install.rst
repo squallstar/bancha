@@ -3,23 +3,9 @@ Install a theme
 ===============
 
 The process of installing an **existing theme** to a website made with Bancha is very simple.
-First of all, locate the **themes directory** and place the theme folder here.
+To **add a new theme**, locate the **/themes** directory and place the new theme folder inside that directory.
 
-By default, the Bancha theme directory is **/themes**.
-Here you will find two pre-installed themes: **/themes/default** and **/themes/minimal**.
-
-First of all, you have to locate and open with a text editor your website configuration file **application/config/website.php**.
-
-On the first lines, you will find an array containing the list of available themes::
-
-	$config['installed_themes'] = array(
-
-		  'sandbox'	=>	'Default sandbox theme'
-		, 'mytheme'	=>	'A cool theme'
-	);
-
-To add a new theme, write a new line using the **folder name as key**, and a **short description** of the theme as **value**.
-Now, you need to **activate the theme**.
+In that directory you will find also two pre-installed themes: **/themes/sandbox** and **/themes/teabag**.
 
 
 ----------------

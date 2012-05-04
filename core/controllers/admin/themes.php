@@ -28,7 +28,7 @@ Class Core_Themes extends Bancha_Controller
 	    //$this->auth->check_permission('themes', 'manage');
 
 	    $this->load->settings();
-	    $this->themes = $this->config->item('installed_themes');
+	    $this->themes = $this->view->get_available_themes();
 	}
 
 	/**

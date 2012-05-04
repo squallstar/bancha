@@ -131,7 +131,8 @@ Class View
 	 * Loads the current theme
 	 * If it not exists in the session, will be loaded the default one (desktop or mobile)
 	 */
-	public function load_theme() {
+	public function load_theme()
+	{
 		$this->theme = isset($_SESSION['_website_theme']) ? $_SESSION['_website_theme'] : FALSE;
 		if (!$this->theme && !defined('DISABLE_SETTINGS'))
 		{
@@ -148,6 +149,30 @@ Class View
 			$this->store_theme();
 		}
 		$this->update_ci_path();
+	}
+
+	public function get_available_themes($full_ini = FALSE)
+	{
+		if (!function_exists('directory_map')) $this->_CI->load->helper('directory');
+		$dirs = directory_map(THEMESPATH, 1);
+		$themes = array();
+		foreach ($dirs as $dir) {
+			if (!is_dir(THEMESPATH . $dir) || $dir == 'admin') continue;
+			
+			$ini = THEMESPATH . $dir . DIRECTORY_SEPARATOR . 'description.ini';
+			if (file_exists($ini)) {
+				$description = parse_ini_file($ini);
+
+				if ($full_ini) {
+					$themes[$dir] = $description;
+				} else {
+					$themes[$dir] = $description['description'];
+				}
+			} else {
+				$themes[$dir] = $dir;
+			}
+		}
+		return $themes;
 	}
 
 	/**

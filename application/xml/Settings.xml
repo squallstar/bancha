@@ -24,18 +24,12 @@
 			<default>F</default>
 		</field>
 		<field id="website_desktop_theme">
-			<type>radio</type>
+			<type>hidden</type>
 			<description>Website desktop theme</description>
-			<options>
-				<custom>config_item('installed_themes');</custom>
-			</options>
 		</field>
 		<field id="website_mobile_theme">
-			<type>radio</type>
+			<type>hidden</type>
 			<description>Website mobile theme</description>
-			<options>
-				<custom>config_item('installed_themes');</custom>
-			</options>
 		</field>
 		<field id="website_active_languages">
 			<type>checkbox</type>

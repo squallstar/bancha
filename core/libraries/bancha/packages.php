@@ -91,7 +91,7 @@ Class Packages extends Core
 
 		$module_dir .= $package->name() . DIRECTORY_SEPARATOR;
 
-		$this->load->helper('directory');
+		if (!function_exists('directory_map')) $this->_CI->load->helper('directory');
 		$this->load->helper('directories');
 		if (!is_dir($module_dir)) @mkdir($module_dir, DIR_WRITE_MODE, TRUE);
 		$files = directory_map($tmp_dir, 1);
