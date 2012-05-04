@@ -6,6 +6,7 @@ ChangeLog
 
 - Installed themes config variable removed
 - Now you can just place a theme in the themes directory to install it
+- New theme added: teabag
 
 
 **v 1.2.1** (2012-05-02)

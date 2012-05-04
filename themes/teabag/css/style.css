@@ -1,0 +1,105 @@
+html, body {
+	font-family:'Bitter', 'Georgia', 'Baskerville', serif;
+	font-size:14px;
+}
+p {
+	font-family:sans-serif;
+	color:#777;
+	margin:0 0 20px 0;
+}
+
+a:link, a:visited {
+	color:#555;
+}
+a:hover, li.selected a {
+	color:#6BAE8E;
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+hr.styled {
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr.styled:after {
+    content: "§";
+    display: inline-block;
+    position: relative; 
+    top: -0.7em;  
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+.logo {
+	font-size:34px;
+}
+.logo:link, .logo:visited {
+	color:#6BAE8E;
+	text-decoration:none;
+}
+header {
+	margin:30px 0 20px 0;
+}
+nav ul {
+	text-align:right;
+	margin-top:10px;
+}
+nav ul > li {
+	display:inline;
+	margin:0 20px;
+}
+nav ul > li:last-child {
+	margin-right:0;
+}
+nav ul li a {
+	text-decoration:none;
+}
+.footer-copy, .uhere {
+	font-family:'Bitter', 'Georgia', 'Baskerville', serif;
+	font-size:12px;
+	color:#000;
+}
+.breadcrumbs {
+	display:inline;
+	font-size:12px;
+	margin-right:20px;
+}
+
+h1, h2, h3, .logo {
+	font-weight:normal;
+}
+h1 {
+	font-size:34px;
+	margin:0px 0 20px 0;
+	padding:0;
+}
+h2 {
+	font-size:24px;
+	margin:25px 0 20px 0;
+	padding:0;
+}
+h3 {
+	font-size:19px;
+	margin:0 0 5px 0;
+}
+input[type="text"], textarea {
+	width:300px;
+	padding:6px;
+	border:1px dotted #AAA;
+	margin:5px 0;
+}
+.footer-margin {
+	margin-top:35px;
+}
+article p {
+	margin:20px 0 20px 0;
+}
