@@ -40,7 +40,7 @@ if ($this->input->is_ajax_request())
 		<div id="hld">
 			<div class="wrapper">
 				<?php if ($header) { $this->load->view($base.'layout/header', $content); } ?>
-				<!--<div id="content_wrapper">--><?php $this->load->view($view, $content); ?><!--</div>-->
+				<?php $this->load->view($view, $content); ?>
 				<div class="clear"></div>
 				<?php if ($header) { $this->load->view($base.'layout/footer', $content); } ?>
 			</div>
@@ -57,7 +57,7 @@ if ($this->input->is_ajax_request())
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.date_input.pack.js"></script>
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.select_skin.js"></script>
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.tablesorter.min.js"></script>
-		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.pngfix.js"></script>
+		<!--<script type="text/javascript" src="<?php echo $js_url; ?>jquery.pngfix.js"></script>-->
 		<script type="text/javascript" src="<?php echo $js_url; ?>custom.js"></script>
 	</body>
 </html><?php } ?>
