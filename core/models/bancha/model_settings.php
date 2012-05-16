@@ -43,6 +43,11 @@ Class Model_settings extends CI_Model
 			$this->_items = $this->build_cache();
 		}
 
+		$this->prepare_packages();
+	}
+
+	public function prepare_packages()
+	{
 		//Third party (Modules/packages) package path
 		$packages = $this->get_namespace('Packages');
 		if (is_array($packages) && count($packages)) {
