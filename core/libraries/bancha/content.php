@@ -385,14 +385,21 @@ Class Content
 		}
 	}
 
-	/**
-	 * FUNZIONE NON ANCORA IMPLEMENTATA
-	 * In futuro verra' implementata la creazione automatica
-	 * delle tabelle dei tipi su tabelle esterne
-	 * @param int|string $type
-	 */
-	function build_type_table($type)
+	public function register_package($package = '')
 	{
-		//Blah blah blash
+		$this->CI->load->settings();
+		if ($package != '' && $package instanceof Bancha_Package) {
+			$this->CI->settings->set($package->name(), $package->title(), 'Packages');
+			$this->CI->settings->clear_cache();
+		}
+	}
+
+	public function unregister_package($package = '')
+	{
+		$this->CI->load->settings();
+		if ($package != '' && $package instanceof Bancha_Package) {
+			$this->CI->settings->delete($package->name(), 'Packages');
+			$this->CI->settings->clear_cache();
+		}
 	}
 }

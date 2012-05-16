@@ -7,6 +7,9 @@ ChangeLog
 - Installed themes config variable removed
 - Now you can just place a theme in the themes directory to install it
 - New theme added: teabag
+- register_package and unregister_package methods added to the Content Library Class
+- Now modules can registers theirself to add their package path to extend core classes, helpers, etc.. inside their "extend" folder, such as **application/modules/mymodule/extend/helper/some_helper.php**
+- Fixed a bug on the settings "delete" method
 
 
 **v 1.2.1** (2012-05-02)
