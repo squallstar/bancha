@@ -385,21 +385,40 @@ Class Content
 		}
 	}
 
+	/**
+	 * Register a new package to be used inside the core of Bancha
+	 * @param string $package
+	 */
 	public function register_package($package = '')
 	{
 		$this->CI->load->settings();
 		if ($package != '' && $package instanceof Bancha_Package) {
 			$this->CI->settings->set($package->name(), $package->title(), 'Packages');
-			$this->CI->settings->clear_cache();
+			$this->refresh_packages();
 		}
 	}
 
+	/**
+	 * Unregister a previously installed package
+	 * @param string $package
+	 */
 	public function unregister_package($package = '')
 	{
 		$this->CI->load->settings();
 		if ($package != '' && $package instanceof Bancha_Package) {
 			$this->CI->settings->delete($package->name(), 'Packages');
-			$this->CI->settings->clear_cache();
+			$this->refresh_packages();
 		}
+	}
+
+	/**
+	 * Refreshes the settings cache and the core packages
+	 * Useful to update the menu after installing/removing a package
+	 */
+	public function refresh_packages()
+	{
+		$this->CI->app_packages = false;
+		$this->CI->settings->clear_cache();
+		$this->CI->settings->prepare_packages();
 	}
 }
