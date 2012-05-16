@@ -9,6 +9,7 @@ ChangeLog
 - New theme added: teabag
 - register_package and unregister_package methods added to the Content Library Class
 - Now modules can registers theirself to add their package path to extend core classes, helpers, etc.. inside their "extend" folder, such as **application/modules/mymodule/extend/helper/some_helper.php**
+- Modules now can also implement a dedicated menu on the administration if they registers as "package" on the settings. Please read more on the documentation
 - Fixed a bug on the settings "delete" method
 
 

@@ -150,6 +150,23 @@ $menu = array(
 	)
 );
 
+
+if (isset(bancha()->app_packages)) {
+	$packages = array(
+		'name'		=> _('Extensions'),
+		'url'		=> $_admin_url . 'extensions',
+		'segment'	=> 'extensions',
+		'sons'		=> array()
+	);
+	foreach (bancha()->app_packages as $module_name => $module_label) {
+		$packages['sons'][] = array(
+			'name'	=> $module_label,
+			'url'	=> $_admin_url . $packages['segment'] . '/package/' . $module_name
+		);		
+	}
+	array_splice($menu, 3, 0, array($packages));
+}
+
 ?><div id="header">
 	
 	<a href="<?php echo admin_url(); ?>"><h1 class="logo_img"></h1></a>

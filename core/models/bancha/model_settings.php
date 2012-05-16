@@ -50,6 +50,7 @@ Class Model_settings extends CI_Model
 			foreach ($packages as $module_name => $module_key) {
 				$this->load->add_package_path($user_modules . strtolower($module_name) . DIRECTORY_SEPARATOR . 'extend');
 			}
+			get_instance()->app_packages = $packages;
 		}
 	}
 
