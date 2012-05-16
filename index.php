@@ -173,11 +173,6 @@ if (defined('ENVIRONMENT'))
 	//New constant added in CI 2.1
 	define ('VIEWPATH', APPPATH.'views/' );
 
-	//Gettext support check
-	if (!function_exists('bindtextdomain')) {
-		die('Gettext library is required. Please enable it before using Bancha!');
-	}
-
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

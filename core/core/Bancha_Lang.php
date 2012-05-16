@@ -284,6 +284,11 @@ class Bancha_Lang extends CI_Lang {
     	putenv('LC_ALL='.$this->gettext_language);
 		setlocale(LC_ALL, $this->gettext_language);
 
+        //Gettext support check
+        if (!function_exists('bindtextdomain')) {
+            die('Gettext library is required. Please enable it before using Bancha!');
+        }
+
 		// Specify location of translation tables
 		bindtextdomain(BANCHA, $this->gettext_path);
 		bind_textdomain_codeset(BANCHA, 'UTF-8');
