@@ -42,6 +42,15 @@ Class Model_settings extends CI_Model
 			//Rebuilds it
 			$this->_items = $this->build_cache();
 		}
+
+		//Third party (Modules/packages) package path
+		$packages = $this->get_namespace('Packages');
+		if (is_array($packages) && count($packages)) {
+			$user_modules = USERPATH . 'modules' . DIRECTORY_SEPARATOR;
+			foreach ($packages as $module_name => $module_key) {
+				$this->load->add_package_path($user_modules . strtolower($module_name) . DIRECTORY_SEPARATOR . 'extend');
+			}
+		}
 	}
 
 	/**
@@ -122,6 +131,20 @@ Class Model_settings extends CI_Model
 	}
 
 	/**
+	 * Returns a single namespace from the settings
+	 * @param string $namespace
+	 * @return array settings
+	 */
+	public function get_namespace($namespace = 'General')
+	{
+		if (isset($this->_items[$namespace]))
+		{
+			return $this->_items[$namespace];
+		}
+		return FALSE;
+	}
+
+	/**
 	 * Deletes a value from the settings table
 	 * @param string $key
 	 * @param string $namespace
@@ -130,7 +153,7 @@ Class Model_settings extends CI_Model
 	public function delete($key, $namespace = 'General')
 	{
 		$namespace = strtolower($namespace);
-		return $this->db->where('name', $name)->where('module', $namespace)->delete($this->table);
+		return $this->db->where('name', $key)->where('module', $namespace)->delete($this->table);
 	}
 
 	/**
@@ -171,5 +194,4 @@ Class Model_settings extends CI_Model
 		write_file($this->_cachefile, serialize($this->_items));
 		return $this->_items;
 	}
-
 }
