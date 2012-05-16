@@ -24,6 +24,10 @@ Class Bancha_Loader extends CI_Loader {
 	 */
 	function bancha()
 	{
+		if (get_instance()->router->class != 'install') {
+			$this->settings();
+		}
+		
 		//Standard Bancha Libraries
 		$this->library(
 			array(
