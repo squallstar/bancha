@@ -91,16 +91,9 @@ Class Packages extends Core
 
 		$module_dir .= $package->name() . DIRECTORY_SEPARATOR;
 
-		if (!function_exists('directory_map')) $this->_CI->load->helper('directory');
-		$this->load->helper('directories');
-		if (!is_dir($module_dir)) @mkdir($module_dir, DIR_WRITE_MODE, TRUE);
-		$files = directory_map($tmp_dir, 1);
-		foreach ($files as $file) {
-			copy($tmp_dir . DIRECTORY_SEPARATOR . $file, $module_dir . $file);
-			@unlink($tmp_dir . DIRECTORY_SEPARATOR . $file);
+		if ( !rename($tmp_dir, $module_dir) ) {
+			show_error("Cannot rename $tmp_dir to $module_dir");
 		}
-		delete_directory($tmp_dir);
-
 		return $this->_install($package->name());
 	}
 
