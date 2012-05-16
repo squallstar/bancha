@@ -19,7 +19,6 @@ Class Core_Website extends Bancha_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->settings();
 
 		//If the user is logged in, we set the stage to true
 		//so he/she can surf on the stage pages and records
