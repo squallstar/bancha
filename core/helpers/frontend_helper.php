@@ -172,7 +172,7 @@ function related_records($record, $limit = 5)
 {
 	if (! $record instanceof Record) return array();
 
-	$record_categories = categories()->get_record_categories($record->id);
+	$record_categories = $record->categories();
 
 	$records_ids = categories()->get_records_for_categories($record_categories);
 

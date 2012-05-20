@@ -49,6 +49,11 @@ Class Record {
      */
     private $_related_objects = array();
 
+    /**
+     * @var -1|array Contains the record categories
+     */
+    private $_categories = -1;
+
   	public function __construct($type='')
   	{
   		if ($type != '')
@@ -376,6 +381,20 @@ Class Record {
 		$this->documents_extracted = TRUE;
 	}
 
+  /**
+   * Extracts an array of the record categories
+   * @return array
+   */
+  public function categories()
+  {
+    if ($this->_categories == -1) {
+      $B =& get_instance();
+      $b->load->categories();
+      $this->_categories = $B->categories->get_record_categories($this->id);
+    }
+    return $this->_categories;
+  }
+
     /**
      * When the record has a relation, calling this function will returns its
      * related records
@@ -390,7 +409,7 @@ Class Record {
             return $this->_related_objects[$relation_name];
         }
 
-        $CI = & get_instance();
+        $CI =& get_instance();
 
         if (!$this->_tipo_def)
         {

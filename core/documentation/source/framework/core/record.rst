@@ -70,6 +70,25 @@ If you set up a relation between two records (Read: :doc:`../../content-types/re
 
 More info: :doc:`../../content-types/relations/define` or :doc:`../../content-types/relations/use`.
 
+-----------------
+Record categories
+-----------------
+
+To get an array of the record categories, use the categories() method as follows::
+
+    $categories_array = $post->categories();
+
+
+---------------------
+Extract the documents
+---------------------
+
+To extract the documents linked to a record, use the set_documents() method::
+
+    $post->set_documents();
+
+    $images = $post->get('images');
+
 
 ----------------------
 How to create records
