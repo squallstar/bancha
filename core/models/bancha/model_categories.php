@@ -175,7 +175,9 @@ Class Model_categories extends CI_Model
 		{
 			$cleaned[] = trim($name);
 		}
-		$this->db->where_in('category_name', $cleaned);
+		if (!empty($cleaned)) {
+			$this->db->where_in('category_name', $cleaned);
+		}
 		return $this;
 	}
 
@@ -186,7 +188,9 @@ Class Model_categories extends CI_Model
 	*/
 	public function category_id_in($ids)
 	{
-		$this->db->where_in('id_category', $ids);
+		if (!empty($ids)) {
+			$this->db->where_in('id_category', $ids);
+		}
 		return $this;
 	}
 
