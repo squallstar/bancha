@@ -291,13 +291,13 @@ class CI_Router {
 		}
 
 		// Does the requested controller exist in the root folder?
-		if (file_exists(APPPATH.'controllers/'.$segments[0].'.php'))
+		if (file_exists(APPPATH.'controllers/'.$segments[0].'.php') || file_exists(USERPATH.'controllers/'.$segments[0].'.php'))
 		{
 			return $segments;
 		}
 
 		// Is the controller in a sub-folder?
-		if (is_dir(APPPATH.'controllers/'.$segments[0]))
+		if (is_dir(APPPATH.'controllers/'.$segments[0]) || is_dir(USERPATH.'controllers/'.$segments[0]))
 		{
 			// Set the directory and remove it from the segment array
 			$this->set_directory($segments[0]);
@@ -306,7 +306,8 @@ class CI_Router {
 			if (count($segments) > 0)
 			{
 				// Does the requested controller exist in the sub-folder?
-				if ( ! file_exists(APPPATH.'controllers/'.$this->fetch_directory().$segments[0].'.php'))
+				$f = 'controllers/'.$this->fetch_directory().$segments[0].'.php';
+				if ( !file_exists(APPPATH.$f) && !file_exists(USERPATH.$f))
 				{
 					if ( ! empty($this->routes['404_override']))
 					{
@@ -407,7 +408,6 @@ class CI_Router {
 				{
 					$val = preg_replace('#^'.$key.'$#', $val, $uri);
 				}
-
 				return $this->_set_request(explode('/', $val));
 			}
 		}
