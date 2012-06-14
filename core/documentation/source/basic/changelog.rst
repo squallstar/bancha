@@ -2,17 +2,19 @@
 ChangeLog
 #########
 
-**v 1.2.2** (Planned)
+**v 1.2.2** (2012-06-14)
 
 - Installed themes config variable removed
 - Now you can just place a theme in the themes directory to install it
 - New theme added: teabag
+- Now you can correctly create new controllers inside the application controllers folder
 - register_package and unregister_package methods added to the Content Library Class
 - Now modules can registers theirself to add their package path to extend core classes, helpers, etc.. inside their "extend" folder, such as **application/modules/mymodule/extend/helper/some_helper.php**
 - Modules now can also implement a dedicated menu on the administration if they registers as "package" on the settings. Please read more on the documentation
 - Fixed a bug on the settings "delete" method
 - New categories() method on the record object to extract an array of the record categories
 - Speed improvements on the related_records() function of the frontend helper
+- Added an example controller: application/controllers/example.php
 
 
 **v 1.2.1** (2012-05-02)
