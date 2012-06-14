@@ -50,9 +50,9 @@ Field types
    fields-number
 
 
----------------
+---------------------
 Field shared features
----------------
+---------------------
 
 Each kind of field can implement these features:
 

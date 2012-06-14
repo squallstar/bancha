@@ -2,11 +2,13 @@
 Controllers
 ===========
 
+This section shows you how to create new controllers or extend existing ones.
+
 -----------------------
 Create a new controller
 -----------------------
 
-There are no difference to the standard CodeIgniter documentation.
+There are no differences to the standard CodeIgniter documentation about creating controllers.
 You will find an "Example" controller inside the application/controllers directory.
 
 Basically, you just need to create a controller that extends the **Bancha_Controller** class::
@@ -18,6 +20,8 @@ Basically, you just need to create a controller that extends the **Bancha_Contro
             //Do some things...
         }
     }
+
+And place it anywhere inside the application/controllers directory.
 
 
 ------------------------

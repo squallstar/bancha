@@ -15,6 +15,7 @@ ChangeLog
 - New categories() method on the record object to extract an array of the record categories
 - Speed improvements on the related_records() function of the frontend helper
 - Added an example controller: application/controllers/example.php
+- Better controllers documentation http://docs.getbancha.com/framework/core/controllers.html
 
 
 **v 1.2.1** (2012-05-02)
