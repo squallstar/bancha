@@ -62,8 +62,8 @@ $this->load->helper('form');
 		  			<label><?php echo _('Preinstalled schemes format'); ?></label>
 				  	<div class="right">
 						<select class="styled" name="scheme_format">
-							<option value="yaml">YAML (Recommended)</option>
-							<option value="xml">XML</option>
+							<option value="yaml">YAML (Expert)</option>
+							<option value="xml">XML (Novice)</option>
 						</select>
 					</div>
 				</div>
