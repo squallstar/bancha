@@ -169,7 +169,7 @@ if (isset(bancha()->app_packages)) {
 
 ?><div id="header">
 	
-	<a href="<?php echo admin_url(); ?>"><h1 class="logo_img"></h1></a>
+	<a href="<?php echo admin_url(); ?>"><?php echo function_exists('hook_admin_logo') ? hook_admin_logo() : '<h1 class="logo_img"></h1>'; ?></a>
 	<hr />
 
 	<ul id="nav">

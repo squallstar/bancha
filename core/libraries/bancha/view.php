@@ -148,6 +148,14 @@ Class View
 
 			$this->store_theme();
 		}
+
+		//Theme hooks - added in Bancha 2.0
+		$hooks = THEMESPATH . $this->theme . DIRECTORY_SEPARATOR . 'hooks.php';
+		if (file_exists($hooks)) {
+			include_once($hooks);
+		}
+
+
 		$this->update_ci_path();
 	}
 
