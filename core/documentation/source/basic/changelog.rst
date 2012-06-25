@@ -2,6 +2,10 @@
 ChangeLog
 #########
 
+**v 2.0** (Not planned - development version)
+
+- Added an install autoredirect on the settings model
+
 **v 1.2.2** (2012-06-14)
 
 - Installed themes config variable removed

@@ -181,6 +181,10 @@ Class Model_settings extends CI_Model
 	public function build_cache()
 	{
 		$this->load->database();
+		if ( !defined('DISABLE_SETTINGS') && !$this->db->table_exists('settings') ) {
+			//If the settings table is not found, maybe Bancha is not installed.
+			redirect(ADMIN_PUB_PATH . 'install');
+		}
 		$res = $this->db->select('name, value, module')->from($this->table)->get()->result();
 		$this->_items = array();
 		if (count($res))
