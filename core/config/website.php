@@ -20,7 +20,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Bancha primary version
  */
-define('BANCHA_VERSION', '1.2.2');
+define('BANCHA_VERSION', '2.0');
 
 
 /* WEBSITE LANGUAGES
@@ -85,15 +85,6 @@ define('CMS', 'BANCHA');
  * This variabile will be used just in this file
  */
 $sep = DIRECTORY_SEPARATOR;
-
-/*
- * WEBSITE INSTALLED THEMES
- * Here you can set the themes to use.
- * To activate a theme, go to the settings section under "Manage".
- */
-$config['installed_themes'] = array(
-	'sandbox' => 'This feature is deprecated. Please use the "themes" section of the administration.'
-);
 
 /*
 * CACHE - CATEGORIES, HIERARCHIES, CSS+JS MINIFIED FILES
@@ -356,7 +347,6 @@ $config['type_custom_feeds'] = FALSE;
 
 /*
  * BANCHA REPOSITORY URL
- * Added on Bancha v1.2
  * The repository contains various modules that can be installed in one-click.
  */
 $config['repository_url'] = 'http://getbancha.com/repo/v1/';
