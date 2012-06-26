@@ -7,6 +7,7 @@ ChangeLog
 - Theme hooks: now themes can register many functions as hooks that will be called like Wordpress do
 - Added an install autoredirect on the settings model
 
+
 **v 1.2.2** (2012-06-14)
 
 - Installed themes config variable removed

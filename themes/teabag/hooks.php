@@ -33,3 +33,18 @@ function hook_ondestruct() {
 function hook_admin_logo() {
 	//return 'Hello world';
 }
+
+/**
+ * Administration html head declarations
+ * @return string
+ */
+function hook_admin_html_head() {
+	//return '<link rel="stylesheet" href="..." type="text/css" />';
+}
+/**
+ * Administration html body class
+ * @return string
+ */
+function hook_admin_html_body_class() {
+	//return 'some-class';
+}

@@ -35,8 +35,9 @@ if ($this->input->is_ajax_request())
 			@import url("<?php echo $css_url; ?>date_input.css");
    		</style>
    		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.js"></script>
+   		<?php if (function_exists('hook_admin_html_head')) echo hook_admin_html_head(); ?>
 	</head>
-	<body<?php echo $header ? '' : ' class="no-header"'; ?>>
+	<body class="<?php if (function_exists('hook_admin_html_body_class')) echo hook_admin_html_body_class(); echo $header ? '' : ' no-header'; ?>">
 		<div id="hld">
 			<div class="wrapper">
 				<?php if ($header) { $this->load->view($base.'layout/header', $content); } ?>
