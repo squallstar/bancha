@@ -9,3 +9,4 @@ Bancha uses a **front-end theme architecture** that gives you the possibility to
 
    install
    create/index
+   hooks
