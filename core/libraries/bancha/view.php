@@ -151,7 +151,8 @@ Class View
 
 		//Theme hooks - added in Bancha 2.0
 		$hooks = THEMESPATH . $this->theme . DIRECTORY_SEPARATOR . 'hooks.php';
-		if (THEME_HOOKS && file_exists($hooks)) {
+		if (file_exists($hooks)) {
+			define('THEME_HOOKS', TRUE);
 			include_once($hooks);
 			if (function_exists('hook_onconstruct')) {
 				hook_onconstruct();

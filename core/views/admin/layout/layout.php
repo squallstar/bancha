@@ -35,9 +35,9 @@ if ($this->input->is_ajax_request())
 			@import url("<?php echo $css_url; ?>date_input.css");
    		</style>
    		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.js"></script>
-   		<?php if (function_exists('hook_admin_html_head')) echo hook_admin_html_head(); ?>
+   		<?php if (THEME_HOOKS && function_exists('hook_admin_html_head')) echo hook_admin_html_head(); ?>
 	</head>
-	<body class="<?php if (function_exists('hook_admin_html_body_class')) echo hook_admin_html_body_class(); echo $header ? '' : ' no-header'; ?>">
+	<body class="<?php if (THEME_HOOKS && function_exists('hook_admin_html_body_class')) echo hook_admin_html_body_class(); echo $header ? '' : ' no-header'; ?>">
 		<div id="hld">
 			<div class="wrapper">
 				<?php if ($header) { $this->load->view($base.'layout/header', $content); } ?>
@@ -58,7 +58,7 @@ if ($this->input->is_ajax_request())
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.date_input.pack.js"></script>
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.select_skin.js"></script>
 		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.tablesorter.min.js"></script>
-		<!--<script type="text/javascript" src="<?php echo $js_url; ?>jquery.pngfix.js"></script>-->
 		<script type="text/javascript" src="<?php echo $js_url; ?>custom.js"></script>
+		<?php if (THEME_HOOKS && function_exists('hook_admin_html_body_closure')) echo hook_admin_html_body_closure(); ?>
 	</body>
 </html><?php } ?>
