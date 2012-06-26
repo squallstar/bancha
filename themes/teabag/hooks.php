@@ -32,7 +32,7 @@ function hook_ondestruct() {
  * @return string
  */
 function hook_admin_logo() {
-	//return 'Hello world';
+	//return '<img src="' . theme_url('img/mylogo.png') . '" />';
 }
 
 /**
