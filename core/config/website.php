@@ -107,6 +107,15 @@ if (!defined('API_ENABLED'))
 }
 
 /*
+* THEME HOOKS
+* Enable/Disable the theme hooks
+*/
+if (!defined('THEME_HOOKS'))
+{
+	define('THEME_HOOKS', TRUE);
+}
+
+/*
 * SHARED API TOKEN
 * Defines whether a single username can handle multiple tokens or not.
 * Set to TRUE to enable multiple tokens.

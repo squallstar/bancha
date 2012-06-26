@@ -3,8 +3,8 @@
 | -------------------------------------------------------------------------
 | Hooks
 | -------------------------------------------------------------------------
-| This file lets you define "hooks" to extend CI without hacking the core
-| files.  Please see the user guide for info:
+| This file lets you define "hooks" to extend Bancha without hacking the core
+| files. Please see the CodeIgniter user guide for info:
 |
 |	http://codeigniter.com/user_guide/general/hooks.html
 |
@@ -13,4 +13,4 @@
 
 
 /* End of file hooks.php */
-/* Location: ./application/config/hooks.php */
+/* Location: ./core/config/hooks.php */

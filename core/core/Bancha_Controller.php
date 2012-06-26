@@ -28,4 +28,11 @@ Class Bancha_Controller extends CI_Controller
 		//Loads the framework :)
 		$this->load->bancha();
 	}
+
+	public function __destruct()
+	{
+		if (THEME_HOOKS && function_exists('hook_ondestruct')) {
+			hook_ondestruct();
+		}
+	}
 }
