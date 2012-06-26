@@ -21,6 +21,7 @@ function hook_onconstruct() {
 
 /**
  * Called when the controller is destructed
+ * You can use this hook to perform operations at the end of the script
  */
 function hook_ondestruct() {
 	//echo 'Hello world';
@@ -35,16 +36,25 @@ function hook_admin_logo() {
 }
 
 /**
- * Administration html head declarations
+ * Administration html, called just before </head>
  * @return string
  */
 function hook_admin_html_head() {
 	//return '<link rel="stylesheet" href="..." type="text/css" />';
 }
+
 /**
  * Administration html body class
  * @return string
  */
 function hook_admin_html_body_class() {
 	//return 'some-class';
+}
+
+/**
+ * Administration html, called just before </body>
+ * @return string
+ */
+function hook_admin_html_body_closure() {
+	//return '<script type="text/javascript" src="..."></script>';
 }
