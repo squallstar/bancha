@@ -26,14 +26,20 @@ if ($this->input->is_ajax_request())
 	<head>
 		<title><?php echo $title != '' ? $title . ' &bull; ' : ''; ?>Bancha</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-		<meta http-equiv="X-UA-Compatible" content="IE=7" />
+		
 		<style type="text/css" media="all">
-			@import url("<?php echo $css_url; ?>style.css");
+			@import url("<?php echo $css_url; ?>skeleton.css");
+			@import url("<?php echo $css_url; ?>style.new.css");
 			@import url("<?php echo $css_url; ?>jquery.wysiwyg.css");
 			@import url("<?php echo $css_url; ?>facebox.css");
 			@import url("<?php echo $css_url; ?>visualize.css");
 			@import url("<?php echo $css_url; ?>date_input.css");
    		</style>
+
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
    		<script type="text/javascript" src="<?php echo $js_url; ?>jquery.js"></script>
    		<?php if (THEME_HOOKS && function_exists('hook_admin_html_head')) echo hook_admin_html_head(); ?>
 	</head>

@@ -1,81 +1,69 @@
-<?php
-$this->load->helper('form');
-?><div class="block small center login">
-        <div class="block_head">
-          <div class="bheadl"></div>
-          <div class="bheadr"></div>
-          <h2><?php echo $this->lang->_trans('%n Installer', array('n'=>CMS)); ?></h2>
-        </div>
-		<div class="block_content">
+<?php $this->load->helper('form');
 
-<?php if ($already_installed === 'T') { ?>
-		<div class="warning message"><?php echo _('WARNING').': '._('Bancha is already installed on this database!'); ?></div>
-		<form><div class="fieldset clearfix"><label class="full"><?php echo _('To reinstall Bancha, you need to delete the "is_installed" key on the "settings" table.'); ?></label></div></form>
-<?php } else { ?>
 
-          <?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
+?><div class="container">
+	<div class="sixteen columns bancha-green-logo"></div>
+	<div class="sixteen columns clearfix">
+		<?php if ($already_installed === 'T') { ?>
+				<div class="warning message"><?php echo _('WARNING').': '._('Bancha is already installed on this database!'); ?></div>
+				<form><div class="fieldset clearfix"><label class="full"><?php echo _('To reinstall Bancha, you need to delete the "is_installed" key on the "settings" table.'); ?></label></div></form>
+		<?php } else { ?>
+		<h1><?php echo $this->lang->_trans('%n Installer', array('n'=>'Bancha ' . BANCHA_VERSION)); ?></h1>
 
-		  	<form action="<?php echo admin_url('install'); ?>" method="POST">
+		<?php if (isset($message)) { ?><div class="message success"><p><?php echo $message; ?></p></div><?php } ?>
 
-		  		<div class="fieldset noborder clearfix">
-			  		<label class="full"><?php echo _('Bancha will be installed on the current host. Please select the operations that you want to perform'); ?>:</label>
-			  </div>
+	  	<form action="<?php echo admin_url('install'); ?>" method="POST">
 
-		  		<div class="fieldset clearfix">
-		  			<label><?php echo _('Select operations'); ?></label>
-				  	<div class="right">
-				  		<input type="checkbox" checked="checked" name="create_directories" value="T" /> <?php echo _('Remove/Create directories'); ?><br />
-				  		<input type="checkbox" checked="checked" name="create_tables" value="T" /> <?php echo _('Drop records and create tables'); ?><br />
-				  		<input type="checkbox" checked="checked" name="create_types" value="T" /> <?php echo _('Restore default types'); ?><br />
-				  		<input type="checkbox" checked="checked" name="populate_settings" value="T" /> <?php echo _('Restore default settings'); ?><br />
-				  		<input type="checkbox" checked="checked" name="clear_cache" value="T" /> <?php echo _('Clear and rebuild cache'); ?><br />
-				  		<input type="checkbox" checked="checked" name="log_events" value="T" /> <?php echo _('Enable event logging'); ?><br />
-					</div>
-				</div>
+	  		<h4><?php echo _('Bancha will be installed on the current host. Please select the operations that you want to perform'); ?></h4>
 
-				<div class="fieldset clearfix">
-		  			<label><?php echo _('Admin default language'); ?></label>
-				  	<div class="right">
-						<?php echo form_dropdown('language', $this->config->item('languages_select'), $this->lang->current_language, 'class="styled"'); ?>
-					</div>
-				</div>
+		  	<div class="sixteen columns clearfix alpha omega">
+		  		<div class="one-third column alpha">
+					<h5>1. <?php echo _('Basic operations'); ?></h5>
 
-				<div class="fieldset clearfix">
-		  			<label><?php echo _('Install type'); ?></label>
-				  	<div class="right">
-						<select class="styled" name="premade">
-							<option value="blog"><?php echo _('Full'); ?></option>
-							<option value="default"><?php echo _('Minimal'); ?></option>
-						</select>
-					</div>
-				</div>
+					<input type="checkbox" checked="checked" name="create_directories" value="T" /> <?php echo _('Remove/Create directories'); ?><br />
+					<input type="checkbox" checked="checked" name="create_tables" value="T" /> <?php echo _('Drop records and create tables'); ?><br />
+					<input type="checkbox" checked="checked" name="create_types" value="T" /> <?php echo _('Restore default types'); ?><br />
+					<input type="checkbox" checked="checked" name="populate_settings" value="T" /> <?php echo _('Restore default settings'); ?><br />
+					<input type="checkbox" checked="checked" name="clear_cache" value="T" /> <?php echo _('Clear and rebuild cache'); ?><br />
+					<input type="checkbox" checked="checked" name="log_events" value="T" /> <?php echo _('Enable event logging'); ?><br />
 
-				<div class="fieldset clearfix">
-		  			<label><?php echo _('Theme'); ?></label>
-				  	<div class="right">
-						<?php echo form_dropdown('theme', $this->view->get_available_themes(), 'teabag', 'class="styled"'); ?>
-						(you can change it later)
-					</div>
-				</div>
+		  		</div>
+		  		<div class="one-third column">
+		  			<h5>2. <?php echo _('Options'); ?></h5>
+					<label><?php echo _('Admin default language'); ?></label>
+					<?php echo form_dropdown('language', $this->config->item('languages_select'), $this->lang->current_language, 'class="styled"'); ?>
 
-				<div class="fieldset clearfix">
-		  			<label><?php echo _('Preinstalled schemes format'); ?></label>
-				  	<div class="right">
-						<select class="styled" name="scheme_format">
-							<option value="yaml">YAML (Expert)</option>
-							<option value="xml">XML (Novice)</option>
-						</select>
-					</div>
-				</div>
+					<label><?php echo _('Install type'); ?></label>
+					<select class="styled" name="premade">
+					<option value="blog"><?php echo _('Full'); ?></option>
+					<option value="default"><?php echo _('Minimal'); ?></option>
+					</select>
 
-				<div class="fieldset clearfix noborder">
-					<label></label>
-					<div class="right">
-				  		<input name="install" onclick="$(this).fadeOut(200, function() {$('img.hidden').fadeIn();});" type="submit" class="submit" value="<?php echo _('Install'); ?>" />
-				  		<img class="hidden" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/loading.gif'; ?>" />
-			  		</div>
-			  	</div>
-		  	</form>
-<?php } ?>
-        </div>
-      </div>
+		  		</div>
+		  		<div class="one-third column omega">
+					<h5>3. <?php echo _('Final touches'); ?></h5>
+					<label><?php echo _('Preinstalled schemes format'); ?></label>
+					<select class="styled" name="scheme_format">
+					<option value="yaml">YAML (<?php echo _('Expert'); ?>)</option>
+					<option value="xml">XML (<?php echo _('Novice'); ?>)</option>
+					</select>
+
+					<label><?php echo _('Theme'); ?></label>
+					<?php echo form_dropdown('theme', $this->view->get_available_themes(), 'teabag', 'class="styled"'); ?>
+
+		  		</div>
+		  	</div>
+
+		  	<div class="sixteen columns clearfix alpha omega">
+		  		<div class="one-third column alpha">&nbsp;<div>
+	  			<div class="one-third column">&nbsp;<div>
+  				<div class="one-third column omega">
+  					<input name="install" onclick="$(this).fadeOut(200, function() {$('img.hidden').fadeIn();});" type="submit" class="green-box submit" value="<?php echo _('Install'); ?>" />
+			  		<img class="hidden" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/loading.gif'; ?>" />
+  				<div>
+  			</div>
+	  	</form>
+
+		<?php } ?>
+	</div>
+</div>
