@@ -93,12 +93,9 @@ Class Core_Install extends Bancha_Controller
 				$this->tree->clear_cache();
 			}
 
-			if ($this->input->post('log_events'))
-			{
-				//Let's log the first event!
-				$this->load->events();
-				$this->events->log('install', null, CMS);
-			}
+			//Let's log the first event!
+			$this->load->events();
+			$this->events->log('install', null, CMS);
 
 			$premade = $this->input->post('premade');
 			if ($premade && $premade != '')

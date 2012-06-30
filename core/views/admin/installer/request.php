@@ -6,7 +6,7 @@
 	<div class="sixteen columns clearfix">
 		<?php if ($already_installed === 'T') { ?>
 				<div class="warning message"><?php echo _('WARNING').': '._('Bancha is already installed on this database!'); ?></div>
-				<form><div class="fieldset clearfix"><label class="full"><?php echo _('To reinstall Bancha, you need to delete the "is_installed" key on the "settings" table.'); ?></label></div></form>
+				<h4><?php echo _('To reinstall Bancha, you need to delete the "is_installed" key on the "settings" table.'); ?></h4>
 		<?php } else { ?>
 		<h1><?php echo $this->lang->_trans('%n Installer', array('n'=>'Bancha ' . BANCHA_VERSION)); ?></h1>
 
@@ -25,8 +25,6 @@
 					<input type="checkbox" checked="checked" name="create_types" value="T" /> <?php echo _('Restore default types'); ?><br />
 					<input type="checkbox" checked="checked" name="populate_settings" value="T" /> <?php echo _('Restore default settings'); ?><br />
 					<input type="checkbox" checked="checked" name="clear_cache" value="T" /> <?php echo _('Clear and rebuild cache'); ?><br />
-					<input type="checkbox" checked="checked" name="log_events" value="T" /> <?php echo _('Enable event logging'); ?><br />
-
 		  		</div>
 		  		<div class="one-third column">
 		  			<h5>2. <?php echo _('Options'); ?></h5>
@@ -55,13 +53,18 @@
 		  	</div>
 
 		  	<div class="sixteen columns clearfix alpha omega">
-		  		<div class="one-third column alpha">&nbsp;<div>
-	  			<div class="one-third column">&nbsp;<div>
-  				<div class="one-third column omega">
-  					<input name="install" onclick="$(this).fadeOut(200, function() {$('img.hidden').fadeIn();});" type="submit" class="green-box submit" value="<?php echo _('Install'); ?>" />
-			  		<img class="hidden" src="<?php echo site_url() . THEMESPATH . 'admin/widgets/loading.gif'; ?>" />
-  				<div>
-  			</div>
+		  		<div class="one-third column alpha">
+					&nbsp;
+		  		</div>
+		  		<div class="one-third column">
+		  			&nbsp;
+		  		</div>
+		  		<div class="one-third column omega">
+					<input name="install" onclick="$(this).fadeOut(200, function() {$('div.hidden').fadeIn();});" type="submit" class="btn submit green-box" value="<?php echo _('Install'); ?>" />
+			  		<div class="hidden grey-loader"></div>
+		  		</div>
+		  	</div>
+
 	  	</form>
 
 		<?php } ?>
