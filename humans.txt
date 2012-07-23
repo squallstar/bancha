@@ -32,6 +32,11 @@
    E-mail: office@pk-informatics.com
    Location: Linz, Austria
 
+   Contributor (German translation): Rodrigo Peña
+   E-mail: rodrigo.pena.retacchi@gmail.com
+   Location: Argentina
+
+
 /* TECHNOLOGIES */
    Standards: HTML5, CSS3 - Works on IE7+, FF3.6+, Chrome, Safari and Opera
    Components: jQuery, jQuery UI and many other little things
