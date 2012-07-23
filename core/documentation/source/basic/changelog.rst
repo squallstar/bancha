@@ -2,6 +2,11 @@
 ChangeLog
 #########
 
+**v 1.2.3** (2012-07-23)
+
+- Spanish localization added (thanks to Rodrigo Peña)
+- NOTE ABOUT BANCHA DEVELOPMENT: Don't worry, we are working hard to implement many cool things to Bancha, and a 2.0 version preview version is scheduled to be released at the end of this summer. We are going to implement hooks for themes, hooks and MVC for modules, a complete rebrush of the administration theme (it will be designed by the italian designer Lorenzo Franchini) and many other things. We may add a new theme for the basic frontend and also a complete rebrush of our website. :)
+
 **v 1.2.2** (2012-06-14)
 
 - Installed themes config variable removed

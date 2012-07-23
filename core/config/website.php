@@ -20,7 +20,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Bancha primary version
  */
-define('BANCHA_VERSION', '1.2.2');
+define('BANCHA_VERSION', '1.2.3');
 
 
 /* WEBSITE LANGUAGES
@@ -55,6 +55,12 @@ $config['admin_languages'] = array(
 		'name'			=> 'italian',
 		'locale'		=> 'it_IT',
 		'description'	=> 'Italiano',
+		'date_format'	=> 'd/m/Y'
+	),
+	'es' => array(
+		'name'			=> 'espanol',
+		'locale'		=> 'es_ES',
+		'description'	=> 'Español',
 		'date_format'	=> 'd/m/Y'
 	)
 );

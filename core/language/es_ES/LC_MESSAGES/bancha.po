@@ -1,0 +1,1650 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Bancha\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-07 11:52+0100\n"
+"PO-Revision-Date: 2012-07-23 23:38+0100\n"
+"Last-Translator: Nicholas Valbusa <squallstar@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_trans\n"
+"X-Poedit-Basepath: ../../../../\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: ARGENTINA\n"
+"X-Poedit-SearchPath-0: controllers/admin\n"
+"X-Poedit-SearchPath-1: libraries\n"
+"X-Poedit-SearchPath-2: models\n"
+"X-Poedit-SearchPath-3: views/admin\n"
+"X-Poedit-SearchPath-4: core\n"
+"X-Poedit-SearchPath-5: helpers\n"
+"X-Poedit-SearchPath-6: errors\n"
+"X-Poedit-SearchPath-7: modules\n"
+
+#: controllers/admin/auth.php:58
+msgid "Username/password wrong."
+msgstr "Usuario/Contraseña equivocado/a."
+
+#: controllers/admin/contents.php:133
+msgid "The records have been published."
+msgstr "Los registros han sido publicados"
+
+#: controllers/admin/contents.php:141
+msgid "The records have been depublished."
+msgstr "Los registros han sido despublicados."
+
+#: controllers/admin/contents.php:148
+msgid "The records have been deleted."
+msgstr "Los registros se han eliminado."
+
+#: controllers/admin/contents.php:155
+msgid "The records have been rolled back to the production ones."
+msgstr "Los registros se han revertido a los de producción."
+
+#: controllers/admin/contents.php:355
+msgid "The content %n has been saved."
+msgstr "El contenido %n ha sido guardado."
+
+#: controllers/admin/contents.php:365
+msgid "The content %n has been published."
+msgstr "El contenido %n ha sido publicado."
+
+#: controllers/admin/contents.php:366
+#: controllers/admin/contents.php:372
+msgid "View content"
+msgstr "Ver contenido."
+
+#: controllers/admin/contents.php:372
+msgid "The content has been saved."
+msgstr "El contenido ha sido guardado."
+
+#: controllers/admin/contents.php:394
+msgid "Something went wrong..."
+msgstr "Ha sucedido un error."
+
+#: controllers/admin/contents.php:409
+msgid "First level"
+msgstr "Primer nivel"
+
+#: controllers/admin/contents.php:509
+msgid "Cannot delete the record %r of type %t"
+msgstr "No puede eliminar el registro %r de tipo %t."
+
+#: controllers/admin/contents.php:509
+#: controllers/admin/contents.php:538
+#: controllers/admin/schemes.php:77
+msgid "Error"
+msgstr "Error"
+
+#: controllers/admin/contents.php:531
+msgid "The record %n has been deleted."
+msgstr "El registro %n ha sido eliminado."
+
+#: controllers/admin/contents.php:538
+msgid "The record ID was not set."
+msgstr "El registro ID no ha sido seteado."
+
+#: controllers/admin/contents.php:568
+msgid "Please insert a name for this type."
+msgstr "Por favor inserte un nombre para este tipo."
+
+#: controllers/admin/contents.php:594
+msgid "The scheme of the content type %n has been updated"
+msgstr "El esquema de tipo contenido %n ha sido actualizado."
+
+#: controllers/admin/contents.php:600
+msgid "Cannot save that scheme."
+msgstr "No puede guardarse este esquema."
+
+#: controllers/admin/contents.php:600
+msgid "Saving error"
+msgstr "Guardar error."
+
+#: controllers/admin/contents.php:604
+msgid "Cannot read the file."
+msgstr "No puede leer el archivo xml/yaml."
+
+#: controllers/admin/contents.php:631
+msgid "The category %n has been added."
+msgstr "La categoría %n ha sido agregada."
+
+#: controllers/admin/contents.php:633
+msgid "Cannot insert the category %n."
+msgstr "No puede insertar la categoría %n."
+
+#: controllers/admin/contents.php:636
+msgid "A category named %n already exists."
+msgstr "Ya existe una categoría llamada %n."
+
+#: controllers/admin/contents.php:660
+msgid "The category %n has been deleted."
+msgstr "Ha sido eliminada la categoría %n"
+
+#: controllers/admin/contents.php:715
+msgid "The type named %n has been removed."
+msgstr "El tipo %n ha sido removido."
+
+#: controllers/admin/hierarchies.php:47
+msgid "The hierarchy %n has been added."
+msgstr "La jerarquía %n ha sido agregada."
+
+#: controllers/admin/hierarchies.php:57
+msgid "The selected hierarchies have been deleted."
+msgstr "La jerarquia seleccionada ha sido eliminada."
+
+#: controllers/admin/import.php:45
+msgid "Choose one..."
+msgstr "Seleccione uno."
+
+#: controllers/admin/import.php:62
+msgid "Adapter not found."
+msgstr "No se encontro adaptador."
+
+#: controllers/admin/import.php:67
+msgid "You must upload a file."
+msgstr "Es necesario subir un archivo."
+
+#: controllers/admin/import.php:79
+msgid "The mime-type of the file is not allowed by this adapter."
+msgstr "El tipo de archivo mime-type no esta permitido para este adaptador."
+
+#: controllers/admin/import.php:102
+#, php-format
+msgid "%c records have been imported."
+msgstr "%c registros han sido importados."
+
+#: controllers/admin/install.php:126
+msgid "%n has been installed!"
+msgstr "%n Ha sido instalado."
+
+#: controllers/admin/modules.php:73
+msgid "The module %m has no documentation or not exists."
+msgstr "El módulo %n no existe o no tiene documentación."
+
+#: controllers/admin/preview.php:43
+msgid "The are no pages that are listing this record."
+msgstr "No hay paginas que esten listadas en este registro."
+
+#: controllers/admin/schemes.php:50
+msgid "The tables of the content type %n has been rebuilded."
+msgstr "Las tablas del tipo de contenido %n han sido reconstruidas."
+
+#: controllers/admin/schemes.php:77
+msgid "Cannot renew the cache."
+msgstr "No es posible renovar el cache."
+
+#: controllers/admin/schemes.php:79
+msgid "The cache of the content types has been cleared."
+msgstr "El caché del tipo contenido ha sido despejado."
+
+#: controllers/admin/settings.php:57
+msgid "The settings has been updated"
+msgstr "La configuracion ha sido actualizadas."
+
+#: controllers/admin/themes.php:57
+msgid "The settings have been updated."
+msgstr "Las configuraciones han sido actualizadas."
+
+#: controllers/admin/themes.php:154
+#, php-format
+msgid "The folder %d has not been found on the filesystem."
+msgstr "La carpeta %d no ha sido encontrada en el sistema de archivos."
+
+#: controllers/admin/themes.php:159
+msgid "The theme %n does not exists."
+msgstr "El tema %n no existe."
+
+#: controllers/admin/users.php:72
+msgid "The user has been deleted."
+msgstr "El usuario ha sido eliminado."
+
+#: controllers/admin/users.php:131
+msgid "The user informations have been updated."
+msgstr "La información del usuario ha sido actualizada."
+
+#: controllers/admin/users.php:152
+msgid "User not found"
+msgstr "No se encontro el usuario."
+
+#: controllers/admin/users.php:218
+msgid "The group has been updated."
+msgstr "El grupo ha sido actualizado."
+
+#: controllers/admin/users.php:225
+msgid "A group with that name already exists."
+msgstr "Ya existe un grupo con este nombre."
+
+#: controllers/admin/users.php:236
+msgid "The group has been created."
+msgstr "El grupo ha sido creado."
+
+#: controllers/admin/users.php:255
+msgid "The requested group has not been found."
+msgstr "El grupo requerido no se ha encontrado."
+
+#: controllers/admin/users.php:285
+msgid "You cannot delete your own group."
+msgstr "No puede eliminar su propio grupo."
+
+#: controllers/admin/users.php:292
+msgid "The group has been deleted."
+msgstr "El grupo ha sido eliminado."
+
+#: libraries/Bancha_Profiler.php:84
+msgid "Edit this content"
+msgstr "Editar este contenido"
+
+#: libraries/Bancha_Profiler.php:91
+msgid "Edit this page"
+msgstr "Editar esta página."
+
+#: libraries/Bancha_Profiler.php:99
+msgid "Live"
+msgstr "Vivo"
+
+#: libraries/Bancha_Profiler.php:99
+msgid "Preview"
+msgstr "Previsualizar"
+
+#: libraries/Bancha_Profiler.php:101
+msgid "Back to admin"
+msgstr "Volver al Administrador"
+
+#: libraries/Bancha_Profiler.php:102
+msgid "Switch to preview"
+msgstr "Cambiar a previsualizar"
+
+#: libraries/Bancha_Profiler.php:102
+msgid "Switch to published contents"
+msgstr "Cambiar a contenido publicado"
+
+#: libraries/Bancha_Profiler.php:104
+msgid "Open profiler"
+msgstr "Abrir perfil"
+
+#: libraries/bancha/blocks.php:126
+msgid "Delete section"
+msgstr "Eliminar sección"
+
+#: libraries/bancha/content.php:126
+msgid "You cannot create a content type named [cache]."
+msgstr "No puede crear un tipo contenido llamado [cache]."
+
+#: libraries/bancha/content.php:126
+msgid "Name reserved"
+msgstr "Nombre reservado"
+
+#: libraries/bancha/content.php:133
+msgid "A content type named %n already exists"
+msgstr "Un tipo de contenido llamado %n ya existe."
+
+#: libraries/bancha/content.php:134
+msgid "Cannot create that type"
+msgstr "No puede crear este tipo"
+
+#: libraries/bancha/content.php:145
+msgid "Cannot insert that content type."
+msgstr "No puede insertar este tipo de contenido."
+
+#: libraries/bancha/content.php:190
+msgid "Cannot delete the template view directory for the content type %n."
+msgstr "No puede eliminar el template view del directorio por el tipo de contenido %n."
+
+#: libraries/bancha/form_renderer.php:34
+msgid "Categories"
+msgstr "Categoría"
+
+#: libraries/bancha/form_renderer.php:37
+msgid "Hierarchies"
+msgstr "Jerarquía"
+
+#: libraries/bancha/form_renderer.php:40
+msgid "Relations"
+msgstr "Relaciones"
+
+#: libraries/bancha/installer.php:329
+msgid "Administrators"
+msgstr "Administrador"
+
+#: libraries/bancha/installer.php:329
+msgid "Editors"
+msgstr "Editores"
+
+#: libraries/bancha/installer.php:378
+msgid "Default content type not defined"
+msgstr "Contenido por defecto sin definir"
+
+#: libraries/bancha/installer.php:553
+msgid "My first post"
+msgstr "Mi primer Post"
+
+#: libraries/bancha/installer.php:554
+msgid "Hello world"
+msgstr "Hola mundo"
+
+#: libraries/bancha/installer.php:596
+msgid "Hello world by a sample page."
+msgstr "Hola mundo en página simple."
+
+#: libraries/bancha/xml.php:89
+msgid "Type not set."
+msgstr "Tipo no establecido."
+
+#: libraries/bancha/xml.php:371
+msgid "Primary key or table not defined for the content type %n."
+msgstr "Clave primaria o tabla no definida para el tipo de contenido %n."
+
+#: libraries/bancha/xml.php:371
+#: libraries/bancha/xml.php:485
+#: libraries/bancha/xml.php:487
+#: libraries/bancha/xml.php:503
+#: libraries/bancha/xml.php:529
+#: libraries/bancha/xml.php:534
+msgid "XML parser: Error"
+msgstr "Error durante el parseo  XML"
+
+#: libraries/bancha/xml.php:475
+msgid "Untitled"
+msgstr "Sin título"
+
+#: libraries/bancha/xml.php:485
+msgid "One of the fieldsets of type %n does not have the name attribute (mandatory)."
+msgstr "Uno de los campos tipo %n no tiene el atributo obligatorio  \"name\"."
+
+#: libraries/bancha/xml.php:487
+msgid "The type %t has more than one fieldset named %n."
+msgstr "El tipo %t tiene mas un campo establecido nombrado %n."
+
+#: libraries/bancha/xml.php:503
+msgid "One of the fields of type %t does not have a name."
+msgstr "El campo de tipo %t no tiene un nombre."
+
+#: libraries/bancha/xml.php:529
+msgid "The field name %n is reserved (Type: %t) and needs to be changed!"
+msgstr "El campo %n de tipo %t utiliza un nombre reservado y debe ser cambiado."
+
+#: libraries/bancha/xml.php:534
+msgid "The value of the node named type (field: %n, type %t) does not exists. Allowed values are: %v"
+msgstr "El valor del nodo llamado tipo (campo: %n, tipo %t) no existe. Los valores permitidos son: %v"
+
+#: libraries/bancha/adapters/adapter_wordpress.php:87
+msgid "Without title"
+msgstr "Sin titulo"
+
+#: libraries/bancha/templates/type_views/list.php:33
+msgid "View detail"
+msgstr "Ver detalle"
+
+#: models/bancha/model_hierarchies.php:105
+msgid "You cannot create a hierarchy without a name."
+msgstr "No puedes crear una jerarquía sin un nombre."
+
+#: models/bancha/model_records.php:532
+msgid "Cannot build the record."
+msgstr "No puede crear el registro."
+
+#: views/admin/auth/login.php:7
+msgid "Administration login"
+msgstr "Ingreso a la administración"
+
+#: views/admin/auth/login.php:9
+msgid "Back to site"
+msgstr "Volver al sitio"
+
+#: views/admin/auth/login.php:19
+msgid "Please log in with your provided credentials"
+msgstr "Por favor ingrese con su Usuario/Contraseña"
+
+#: views/admin/auth/login.php:23
+msgid "Username"
+msgstr "Usuario"
+
+#: views/admin/auth/login.php:30
+msgid "Password"
+msgstr "Contraseña"
+
+#: views/admin/auth/login.php:39
+msgid "Login"
+msgstr "Ingreso"
+
+#: views/admin/auth/login.php:40
+msgid "Remember me"
+msgstr "Recordame"
+
+#: views/admin/content/documents_finder.php:9
+msgid "Browse attachments"
+msgstr "Buscar adjuntos"
+
+#: views/admin/content/documents_finder.php:12
+msgid "Close window"
+msgstr "Cerrar ventana"
+
+#: views/admin/content/documents_finder.php:20
+msgid "Repository"
+msgstr "Repositorio"
+
+#: views/admin/content/documents_finder.php:21
+#: views/admin/content/documents_finder.php:78
+msgid "Record documents"
+msgstr "registro de documentos"
+
+#: views/admin/content/documents_finder.php:26
+msgid "Documents repository"
+msgstr "Repositorio de documentos"
+
+#: views/admin/content/documents_finder.php:28
+msgid "Here you can find the uploaded documents."
+msgstr "Aquí puedes encontrar los documentos actualizados"
+
+#: views/admin/content/documents_finder.php:41
+msgid "Upload file"
+msgstr "Subir archivo"
+
+#: views/admin/content/documents_finder.php:50
+#: views/admin/content/documents_finder.php:83
+msgid "Thumbnail"
+msgstr "Thumbnail"
+
+#: views/admin/content/documents_finder.php:51
+msgid "Filename"
+msgstr "Nombre de archivo"
+
+#: views/admin/content/documents_finder.php:52
+msgid "Preset"
+msgstr "Preestablecido"
+
+#: views/admin/content/documents_finder.php:53
+#: views/admin/content/documents_finder.php:89
+#: views/admin/content/documents_finder.php:90
+#: views/admin/content/documents_finder.php:91
+msgid "Choose"
+msgstr "Elegir"
+
+#: views/admin/content/documents_finder.php:54
+msgid "Actions"
+msgstr "Acciones"
+
+#: views/admin/content/documents_finder.php:66
+msgid "Select"
+msgstr "Seleccionar"
+
+#: views/admin/content/documents_finder.php:68
+msgid "Apply preset"
+msgstr "Aplicar preestablecido"
+
+#: views/admin/content/documents_finder.php:69
+#: views/admin/content/record_edit.php:382
+msgid "Delete file"
+msgstr "Eliminar archivo"
+
+#: views/admin/content/documents_finder.php:83
+#: views/admin/content/record_edit.php:338
+msgid "Original"
+msgstr "Original"
+
+#: views/admin/content/documents_finder.php:83
+#: views/admin/content/record_edit.php:338
+msgid "Resized"
+msgstr "Redimensionar"
+
+#: views/admin/content/documents_finder.php:83
+#: views/admin/content/record_edit.php:338
+#: views/admin/content/record_edit.php:376
+msgid "Alternative text"
+msgstr "Texto alternativo"
+
+#: views/admin/content/documents_finder.php:89
+#: views/admin/content/documents_finder.php:90
+#: views/admin/content/record_edit.php:348
+#: views/admin/content/record_edit.php:349
+msgid "View"
+msgstr "Ver"
+
+#: views/admin/content/documents_finder.php:93
+#: views/admin/content/record_edit.php:352
+msgid "Delete image"
+msgstr "Eliminar imágen"
+
+#: views/admin/content/documents_finder.php:100
+msgid "No attachments found for this record."
+msgstr "No se encontro ningún registro adjunto"
+
+#: views/admin/content/record_edit.php:25
+#: views/admin/content/record_edit.php:42
+msgid "Edit content"
+msgstr "Editar contenido"
+
+#: views/admin/content/record_edit.php:28
+msgid "Back to list"
+msgstr "Volver a la lista"
+
+#: views/admin/content/record_edit.php:40
+msgid "Contents"
+msgstr "Contenidos"
+
+#: views/admin/content/record_edit.php:40
+msgid "Pages"
+msgstr "Páginas"
+
+#: views/admin/content/record_edit.php:93
+msgid "Page address:"
+msgstr "Direccion de página:"
+
+#: views/admin/content/record_edit.php:292
+msgid "Add"
+msgstr "Agregar"
+
+#: views/admin/content/record_edit.php:295
+msgid "Remove"
+msgstr "Eliminar"
+
+#: views/admin/content/record_edit.php:331
+#: views/admin/content/record_edit.php:334
+msgid "You can attach up to %n images"
+msgstr "Usted puede adjuntar %n imagenes"
+
+#: views/admin/content/record_edit.php:333
+msgid "Number of uploadable images excedeed."
+msgstr "Se ha excedido el número de imagenes para subir."
+
+#: views/admin/content/record_edit.php:338
+msgid "Order"
+msgstr "Orden"
+
+#: views/admin/content/record_edit.php:369
+#: views/admin/content/record_edit.php:372
+msgid "You can attach up to %n files"
+msgstr "Puede adjuntar  %n archivos"
+
+#: views/admin/content/record_edit.php:371
+msgid "File limit exceeded."
+msgstr "Se ha excedido el limite de archivos para subir"
+
+#: views/admin/content/record_edit.php:376
+msgid "File name"
+msgstr "Nombre de archivo"
+
+#: views/admin/content/record_edit.php:376
+msgid "File type"
+msgstr "Tipo de archivo"
+
+#: views/admin/content/record_edit.php:444
+msgid "This type has no categories"
+msgstr "Este tipo no tiene categorías"
+
+#: views/admin/content/record_edit.php:474
+msgid "There are no hierarchies"
+msgstr "No existen jerarquías"
+
+#: views/admin/content/record_edit.php:500
+msgid "Load"
+msgstr "Cargar"
+
+# Bottone salva
+#: views/admin/content/record_edit.php:511
+msgid "Save"
+msgstr "Guardar"
+
+#: views/admin/content/record_edit.php:512
+msgid "Save and go to list"
+msgstr "Guardar y volver a la lista"
+
+#: views/admin/content/record_edit.php:513
+msgid "Publish and go to list"
+msgstr "Publicar e ir a la lista"
+
+#: views/admin/content/record_edit.php:530
+msgid "Errors"
+msgstr "Errores"
+
+#: views/admin/content/record_edit.php:533
+msgid "Close"
+msgstr "Cerrar"
+
+#: views/admin/content/record_list.php:17
+#: views/admin/content/type_list.php:44
+msgid "Manage categories"
+msgstr "Manejar categorías"
+
+#: views/admin/content/record_list.php:39
+msgid "Status"
+msgstr "Estado"
+
+#: views/admin/content/record_list.php:58
+#: views/admin/content/record_list.php:136
+msgid "Draft"
+msgstr "Proyecto"
+
+#: views/admin/content/record_list.php:58
+#: views/admin/content/record_list.php:145
+msgid "Published"
+msgstr "Publicado"
+
+#: views/admin/content/record_list.php:58
+#: views/admin/content/record_list.php:139
+msgid "Different"
+msgstr "Diferente"
+
+#: views/admin/content/record_list.php:112
+msgid "Apply filters"
+msgstr "Aplicar filtros"
+
+#: views/admin/content/record_list.php:142
+msgid "Programmed"
+msgstr "Programado"
+
+#: views/admin/content/record_list.php:212
+msgid "Add child page"
+msgstr "Agregar página Hija"
+
+#: views/admin/content/record_list.php:214
+msgid "View children pages"
+msgstr "Ver páginas hijas"
+
+#: views/admin/content/record_list.php:217
+#: views/admin/content/record_list.php:232
+#: views/admin/content/type_list.php:53
+msgid "Delete"
+msgstr "eliminar"
+
+#: views/admin/content/record_list.php:217
+msgid "Do you really want to delete this content?"
+msgstr "Realmente quiere eliminar este contenido?"
+
+#: views/admin/content/record_list.php:229
+msgid "Publish"
+msgstr "Publicar"
+
+#: views/admin/content/record_list.php:230
+msgid "Unpublish"
+msgstr "Ocultar publicación"
+
+#: views/admin/content/record_list.php:231
+msgid "Discard draft"
+msgstr "Descargar el proyecto"
+
+#: views/admin/content/record_list.php:235
+msgid "Apply to selected"
+msgstr "aplicar a la selección"
+
+#: views/admin/content/record_list.php:237
+msgid "There are"
+msgstr "Hay"
+
+#: views/admin/content/record_list.php:244
+#: views/admin/content/type_list.php:67
+msgid "add a new one"
+msgstr "Agregar uno"
+
+#: views/admin/content/record_list.php:243
+msgid "There are no contents/pages for this type. To start, %a."
+msgstr "No hay contenido/páginas para este tipo. Para empezar, %a."
+
+#: views/admin/content/renewed.php:5
+msgid "Clear cache"
+msgstr "Borrar caché"
+
+#: views/admin/content/settings_edit.php:25
+msgid "Manage settings"
+msgstr "Administrar configuraciones"
+
+#: views/admin/content/settings_edit.php:34
+msgid "Scheme"
+msgstr "Esquema"
+
+#: views/admin/content/settings_edit.php:268
+msgid "Update settings"
+msgstr "Actualizar configuraciones"
+
+#: views/admin/content/translations.php:3
+msgid "Menu"
+msgstr "Menu"
+
+#: views/admin/content/translations.php:4
+msgid "New page"
+msgstr "Página nueva"
+
+#: views/admin/content/translations.php:5
+msgid "General informations"
+msgstr "Informaciones generales"
+
+#: views/admin/content/translations.php:6
+msgid "Visibility date"
+msgstr "Fecha visible"
+
+#: views/admin/content/translations.php:7
+msgid "Parent page"
+msgstr "Página padre"
+
+#: views/admin/content/translations.php:8
+msgid "Title"
+msgstr "Título"
+
+#: views/admin/content/translations.php:9
+msgid "Page URL"
+msgstr "Url de la página"
+
+#: views/admin/content/translations.php:10
+msgid "Language"
+msgstr "Idioma"
+
+#: views/admin/content/translations.php:11
+msgid "Content"
+msgstr "Contenido"
+
+#: views/admin/content/translations.php:12
+msgid "Show in menu"
+msgstr "Mostrar en menu"
+
+#: views/admin/content/translations.php:13
+msgid "Main menu"
+msgstr "Menú principal"
+
+#: views/admin/content/translations.php:14
+msgid "Sitemap"
+msgstr "Mapa del sitio"
+
+#: views/admin/content/translations.php:15
+msgid "Don't show"
+msgstr "No mostrar"
+
+#: views/admin/content/translations.php:16
+msgid "Child no."
+msgstr "Sin hijo."
+
+#: views/admin/content/translations.php:17
+msgid "Aspect"
+msgstr "Aspecto"
+
+#: views/admin/content/translations.php:18
+msgid "View template"
+msgstr "Ver plantilla"
+
+#: views/admin/content/translations.php:19
+msgid "Default"
+msgstr "Por defecto"
+
+#: views/admin/content/translations.php:20
+msgid "Homepage"
+msgstr "Página principal"
+
+#: views/admin/content/translations.php:21
+msgid "CSS Stylesheet"
+msgstr "Hoja de estilos CSS"
+
+#: views/admin/content/translations.php:22
+msgid "Javascript code"
+msgstr "Codigo Javascript"
+
+#: views/admin/content/translations.php:24
+msgid "Page cache (minutes)"
+msgstr "Página cache(minutos)"
+
+#: views/admin/content/translations.php:25
+msgid "Priority"
+msgstr "Prioridad"
+
+#: views/admin/content/translations.php:26
+msgid "Page action"
+msgstr "Acción de página"
+
+#: views/admin/content/translations.php:27
+msgid "Single text"
+msgstr "Texto único"
+
+#: views/admin/content/translations.php:28
+msgid "Content list"
+msgstr "Listar contenido"
+
+#: views/admin/content/translations.php:29
+msgid "Custom action"
+msgstr "Acción personalizada"
+
+#: views/admin/content/translations.php:30
+msgid "External link"
+msgstr "Link externo"
+
+#: views/admin/content/translations.php:31
+msgid "Content type"
+msgstr "Tipo de contenido"
+
+#: views/admin/content/translations.php:34
+msgid "WHERE Condition"
+msgstr "Condición WHERE"
+
+#: views/admin/content/translations.php:35
+msgid "Results per page"
+msgstr "Resultados por página"
+
+#: views/admin/content/translations.php:36
+msgid "Results order"
+msgstr "Orden de resultados"
+
+#: views/admin/content/translations.php:37
+msgid "ID record (DESC)"
+msgstr "Registro ID (DESC)"
+
+#: views/admin/content/translations.php:38
+msgid "ID record (ASC)"
+msgstr "Registro ID (ASC)"
+
+#: views/admin/content/translations.php:39
+msgid "Publish date (DESC)"
+msgstr "Publicar fecha(DESC)"
+
+#: views/admin/content/translations.php:40
+msgid "Publish date (ASC)"
+msgstr "Publicar fecha (ASC)"
+
+#: views/admin/content/translations.php:41
+msgid "RSS Feed"
+msgstr "Feed RSS"
+
+#: views/admin/content/translations.php:42
+msgid "Yes"
+msgstr "Si"
+
+#: views/admin/content/translations.php:43
+msgid "No"
+msgstr "No"
+
+#: views/admin/content/translations.php:44
+msgid "Action name"
+msgstr "Nombre de acción"
+
+#: views/admin/content/translations.php:45
+msgid "Action mode"
+msgstr "Modo de acción"
+
+#: views/admin/content/translations.php:46
+msgid "Dispatch"
+msgstr "Despachador"
+
+#: views/admin/content/translations.php:47
+msgid "Content render"
+msgstr "Visualizar contenido"
+
+#: views/admin/content/translations.php:48
+msgid "Redirect URL"
+msgstr "Redireccionar a URL"
+
+#: views/admin/content/translations.php:49
+msgid "Attachments"
+msgstr "Adjuntos"
+
+#: views/admin/content/translations.php:50
+msgid "Images"
+msgstr "Imágenes"
+
+#: views/admin/content/translations.php:51
+msgid "Meta tags"
+msgstr "Meta tags"
+
+#: views/admin/content/translations.php:52
+#: views/admin/content/type_list.php:27
+msgid "Description"
+msgstr "Descripción"
+
+#: views/admin/content/translations.php:53
+msgid "Keywords"
+msgstr "Palabras clave"
+
+#: views/admin/content/translations.php:54
+msgid "Blog"
+msgstr "Blog"
+
+#: views/admin/content/translations.php:55
+msgid "Blog posts"
+msgstr "Post del blog"
+
+#: views/admin/content/translations.php:56
+msgid "New post"
+msgstr "Artículo nuevo"
+
+#: views/admin/content/translations.php:57
+msgid "Post content"
+msgstr "Contenido del post"
+
+#: views/admin/content/translations.php:58
+msgid "Friendly URL"
+msgstr "URL amigable"
+
+#: views/admin/content/translations.php:59
+msgid "Comments no."
+msgstr "Sin comentarios."
+
+#: views/admin/content/translations.php:60
+msgid "Image and files"
+msgstr "Imágenes y archivos"
+
+#: views/admin/content/translations.php:61
+msgid "Files"
+msgstr "Archivos"
+
+#: views/admin/content/translations.php:62
+msgid "Comments"
+msgstr "Comentarios"
+
+#: views/admin/content/translations.php:63
+msgid "New comment"
+msgstr "Nuevo comentario"
+
+#: views/admin/content/translations.php:64
+msgid "Author info"
+msgstr "Información del autor"
+
+#: views/admin/content/translations.php:65
+#: views/admin/content/type_list.php:26
+msgid "Name"
+msgstr "Nombre"
+
+#: views/admin/content/translations.php:66
+msgid "Website"
+msgstr "Website"
+
+#: views/admin/content/translations.php:67
+msgid "E-mail address"
+msgstr "Sitio web"
+
+#: views/admin/content/translations.php:68
+msgid "Message"
+msgstr "Mensaje"
+
+#: views/admin/content/translations.php:69
+msgid "Linked post"
+msgstr "Linkear al post"
+
+#: views/admin/content/type_add.php:8
+msgid "Add new content type"
+msgstr "Agregar nuevo tipo de contenido"
+
+#: views/admin/content/type_add.php:11
+msgid "Back to types list"
+msgstr "Volver al listado tipos"
+
+#: views/admin/content/type_add.php:20
+#: views/admin/content/type_list.php:11
+msgid "Add new type"
+msgstr "Agregar nuevo tipo"
+
+#: views/admin/content/type_add.php:24
+#: views/admin/content/type_delete.php:31
+#: views/admin/content/type_edit_xml.php:22
+msgid "WARNING"
+msgstr "Atención"
+
+#: views/admin/content/type_add.php:24
+msgid "You can't change the type name after its creation."
+msgstr "No se puede cambiar el nombre del tipo despues de crearse"
+
+#: views/admin/content/type_add.php:33
+msgid "Type name"
+msgstr "Nombre del tipo"
+
+#: views/admin/content/type_add.php:37
+#: views/admin/content/type_edit_xml.php:34
+msgid "Type description"
+msgstr "Descripción del tipo"
+
+#: views/admin/content/type_add.php:42
+#: views/admin/content/type_list.php:28
+msgid "New item label"
+msgstr "Nuevo item nivel"
+
+#: views/admin/content/type_add.php:43
+msgid "New content"
+msgstr "Nuevo contenido"
+
+#: views/admin/content/type_add.php:47
+msgid "Type structure"
+msgstr "Tipo de estructra"
+
+#: views/admin/content/type_add.php:48
+msgid "Simple (Contents)"
+msgstr "Simple (Contenido)"
+
+#: views/admin/content/type_add.php:48
+msgid "Tree (Pages)"
+msgstr "Arbol (Páginas)"
+
+#: views/admin/content/type_add.php:52
+msgid "Scheme format"
+msgstr "Formato del esquema"
+
+#: views/admin/content/type_add.php:53
+msgid "YAML (Recommended)"
+msgstr "YAML (Recomendado)"
+
+#: views/admin/content/type_categories.php:11
+msgid "Back to contents"
+msgstr "Volver a contenidos"
+
+#: views/admin/content/type_categories.php:22
+msgid "Categories list"
+msgstr "Lista de categorías"
+
+#: views/admin/content/type_categories.php:23
+#: views/admin/content/type_categories.php:63
+msgid "Add new category"
+msgstr "Agregar nueva categoría"
+
+#: views/admin/content/type_categories.php:40
+#: views/admin/content/type_categories.php:69
+msgid "Category name"
+msgstr "Nombre de categoría"
+
+#: views/admin/content/type_categories.php:50
+msgid "Do you want to delete this category?"
+msgstr "Quiere eliminar esta categoría?"
+
+#: views/admin/content/type_categories.php:50
+msgid "Delete category"
+msgstr "Eliminar categoría"
+
+#: views/admin/content/type_categories.php:56
+msgid "This content type has no categories."
+msgstr "Este tipo de contenido no tiene categorías."
+
+#: views/admin/content/type_categories.php:65
+msgid "Categories permits your contents to be more differents each other."
+msgstr "Las categorías permiten que tus contenidos sean diferentes unos de otros"
+
+#: views/admin/content/type_categories.php:65
+msgid "They can be useful to make different extractions and use them such as tags."
+msgstr "Ellas pueden ser realmente útiles para hacer diferentes extracciones y usarlas como etiquetas"
+
+#: views/admin/content/type_delete.php:9
+msgid "Type delete"
+msgstr "Eliminar tipo"
+
+#: views/admin/content/type_delete.php:12
+#: views/admin/content/type_delete.php:41
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: views/admin/content/type_delete.php:21
+msgid "Content type delete"
+msgstr "Eliminar tipo de contenido"
+
+#: views/admin/content/type_delete.php:23
+msgid "If you delete the content type %n, will be also deleted from the filesystem these files:"
+msgstr "Si elimina el tipo de contenido %n, tambien eliminará los archivos de este sistema de archivos:"
+
+#: views/admin/content/type_delete.php:26
+msgid "Content type scheme definition"
+msgstr "Definicion para el tipo de contenido del esquema"
+
+#: views/admin/content/type_delete.php:27
+msgid "View files related to list/detail actions of this content type (php templates)."
+msgstr "La vista de archivos esta relacionada con las acciones lista/detalle de este tipo de contenido (templates .php)"
+
+#: views/admin/content/type_delete.php:31
+msgid "All contents associated to this type will be deleted."
+msgstr "Todo los contenidos asociados a este tipo se eliminarán."
+
+#: views/admin/content/type_delete.php:31
+#: views/admin/content/type_delete.php:34
+msgid "You can enable/disable this function through the variabile \"DEAD RECORDS\" in the config file."
+msgstr "Usted puede habilitar/deshabilitar esta función a través de la variable \"DEAD RECORDS\" en el archivo de configuración."
+
+#: views/admin/content/type_delete.php:34
+msgid "All contents associated to this type will NOT be deleted."
+msgstr "Todo los contenidos asociados a este tipo se eliminarán."
+
+#: views/admin/content/type_delete.php:40
+msgid "Delete type"
+msgstr "Eliminar tipo"
+
+#: views/admin/content/type_edit_xml.php:9
+#: views/admin/content/type_edit_xml.php:20
+#: views/admin/content/type_list.php:48
+msgid "Edit scheme"
+msgstr "Editar esquema"
+
+#: views/admin/content/type_edit_xml.php:12
+msgid "Discard all"
+msgstr "Descartar todo"
+
+#: views/admin/content/type_edit_xml.php:22
+msgid "A wrong compilation of the scheme may cause a malfunction of the website."
+msgstr "Un error de compilación del esquema debe causar una mal funcion de este sitio web."
+
+#: views/admin/content/type_edit_xml.php:43
+msgid "Structure"
+msgstr "Estructura"
+
+#: views/admin/content/type_edit_xml.php:47
+msgid "Save scheme"
+msgstr "Guardar esquema"
+
+#: views/admin/content/type_list.php:29
+msgid "Structure type"
+msgstr "Tipo de estructura"
+
+#: views/admin/content/type_list.php:42
+msgid "Tree"
+msgstr "Arbol"
+
+#: views/admin/content/type_list.php:42
+msgid "Simple"
+msgstr "Semplice"
+
+#: views/admin/content/type_list.php:66
+msgid "No type of contents found. To start, %link."
+msgstr "No se encontraron este tipo de contenidos. Por empezar, %link."
+
+#: views/admin/dashboard/events.php:7
+msgid "Last %n events."
+msgstr "Ultimo %n eventos."
+
+#: views/admin/dashboard/events.php:17
+msgid "Today"
+msgstr "Hoy"
+
+#: views/admin/dashboard/events.php:17
+msgid "at %time"
+msgstr "a %tiempo"
+
+#: views/admin/dashboard/events.php:28
+#: views/admin/dashboard/events.php:32
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: views/admin/dashboard/events.php:43
+msgid "%u updated the content %c of type %t."
+msgstr "%u ha actualizado contenido %c tipo de %t."
+
+#: views/admin/dashboard/events.php:51
+msgid "%u created a new content of type %t named %c."
+msgstr "%u ha creado un nuevo tipo de contenido %t llamado %c."
+
+#: views/admin/dashboard/events.php:60
+msgid "%u published the content %c of type %t."
+msgstr "%u ha publicado el contenido %c de tipo %t."
+
+#: views/admin/dashboard/events.php:69
+#, php-format
+msgid "%u depublished the content %c."
+msgstr "%u ha despublicado el contenido %c."
+
+#: views/admin/dashboard/events.php:77
+#, php-format
+msgid "%u installed %c."
+msgstr "%u ha instalado %c."
+
+#: views/admin/dashboard/events.php:85
+#, php-format
+msgid "%u login."
+msgstr "%u ha efectuado el ingreso."
+
+#: views/admin/dashboard/events.php:89
+#, php-format
+msgid "%u logout."
+msgstr "%u ha efectuado la salida."
+
+#: views/admin/hierarchies/list.php:18
+msgid "Manage hierarchies"
+msgstr "Administrar categorías"
+
+#: views/admin/hierarchies/list.php:24
+#: views/admin/hierarchies/list.php:32
+msgid "Hierarchies list"
+msgstr "Lista de Jerarquía"
+
+#: views/admin/hierarchies/list.php:25
+#: views/admin/hierarchies/list.php:57
+msgid "Add hierarchy"
+msgstr "Agregar jerarquía"
+
+#: views/admin/hierarchies/list.php:33
+msgid "Here you will find the inserted hierarchies."
+msgstr "Aquí encontrara las jerarquías que fueron insertadas"
+
+#: views/admin/hierarchies/list.php:42
+msgid "Delete selected"
+msgstr "Eliminar selección"
+
+#: views/admin/hierarchies/list.php:48
+msgid "There are no hierarchies."
+msgstr "No hay jerarquías"
+
+#: views/admin/hierarchies/list.php:63
+msgid "Hierarchy name"
+msgstr "Nombre de jerarquía"
+
+#: views/admin/hierarchies/list.php:66
+msgid "Parent hierarchy"
+msgstr "Jerarquía padre"
+
+#: views/admin/import/records.php:7
+msgid "Import/export data"
+msgstr "Importar/exportar datos"
+
+#: views/admin/import/records.php:14
+#: views/admin/import/records.php:43
+msgid "Import records"
+msgstr "Importar registros"
+
+#: views/admin/import/records.php:25
+msgid "Destination content type"
+msgstr "Destino del tipo de contenido"
+
+#: views/admin/import/records.php:31
+msgid "Adapter type"
+msgstr "Tipo de adaptador"
+
+#: views/admin/import/records.php:37
+msgid "Source file"
+msgstr "Fichero fuente"
+
+#: views/admin/import/report.php:3
+msgid "Import report"
+msgstr "Importar informe"
+
+#: views/admin/installer/request.php:7
+#: views/admin/installer/success.php:4
+msgid "%n Installer"
+msgstr "Instalador di %n"
+
+#: views/admin/installer/request.php:12
+msgid "Bancha is already installed on this database!"
+msgstr "Bancha ya esta instalado en esta base de datos!"
+
+#: views/admin/installer/request.php:13
+msgid "To reinstall Bancha, you need to delete the \"is_installed\" key on the \"settings\" table."
+msgstr "Para reinstalar Bancha, debe eliminar el archivo \"is_installed\" de la tabla \"settings\"."
+
+#: views/admin/installer/request.php:21
+msgid "Bancha will be installed on the current host. Please select the operations that you want to perform"
+msgstr "Bancha sera instalado en su actual host. Seleccione las operaciones que desea personalizar."
+
+#: views/admin/installer/request.php:25
+msgid "Select operations"
+msgstr "Seleccionar operaciones."
+
+#: views/admin/installer/request.php:27
+msgid "Remove/Create directories"
+msgstr "Eliminar/Crear directorios"
+
+#: views/admin/installer/request.php:28
+msgid "Drop records and create tables"
+msgstr "Vaciar registros y crear tablas"
+
+#: views/admin/installer/request.php:29
+msgid "Restore default types"
+msgstr "Restaurar los tipos por defecto"
+
+#: views/admin/installer/request.php:30
+msgid "Restore default settings"
+msgstr "Restaurar las configuraciones por defecto"
+
+#: views/admin/installer/request.php:31
+msgid "Clear and rebuild cache"
+msgstr "Limpiar y reconstruir cache"
+
+#: views/admin/installer/request.php:32
+msgid "Enable event logging"
+msgstr "Habilitar el registro de eventos"
+
+#: views/admin/installer/request.php:37
+msgid "Admin default language"
+msgstr "Idioma de admin por defecto"
+
+#: views/admin/installer/request.php:44
+msgid "Install type"
+msgstr "Tipo de instalación"
+
+#: views/admin/installer/request.php:47
+msgid "Full"
+msgstr "Completo"
+
+#: views/admin/installer/request.php:48
+msgid "Minimal"
+msgstr "Mínimo"
+
+#: views/admin/installer/request.php:54
+msgid "Theme"
+msgstr "Tema"
+
+#: views/admin/installer/request.php:62
+msgid "Preinstalled schemes format"
+msgstr "Formato inicial del esquema"
+
+#: views/admin/installer/request.php:74
+msgid "Install"
+msgstr "Instalar"
+
+#: views/admin/layout/footer.php:25
+msgid "Page rendered in %n seconds using %m of memory."
+msgstr "La página fue cargada %n segundos, se utilizo %m de memoria."
+
+#: views/admin/layout/header.php:65
+msgid "Users"
+msgstr "Usuarios"
+
+#: views/admin/layout/header.php:71
+msgid "Add new user"
+msgstr "Agregar nuevo"
+
+#: views/admin/layout/header.php:77
+msgid "Users list"
+msgstr "Lista de usuarios"
+
+#: views/admin/layout/header.php:82
+msgid "Groups and permissions"
+msgstr "Grupos y permisos"
+
+#: views/admin/layout/header.php:90
+msgid "Manage"
+msgstr "Administrador"
+
+#: views/admin/layout/header.php:95
+#: views/admin/schemes/list.php:9
+msgid "Content types"
+msgstr "Tipo de contenidos"
+
+#: views/admin/layout/header.php:106
+msgid "Settings"
+msgstr "Configuraciones"
+
+#: views/admin/layout/header.php:112
+msgid "Modules"
+msgstr "Modulos"
+
+#: views/admin/layout/header.php:117
+msgid "Themes"
+msgstr "Temas"
+
+#: views/admin/layout/header.php:127
+msgid "Last events"
+msgstr "Ultimos eventos"
+
+#: views/admin/layout/header.php:137
+#: views/admin/unit_tests/intro.php:3
+msgid "Unit tests"
+msgstr "Test Unit"
+
+#: views/admin/layout/header.php:146
+msgid "Logout"
+msgstr "Salir"
+
+#: views/admin/modules/docs.php:6
+msgid "Module documentation"
+msgstr "Modulo de documentación"
+
+#: views/admin/modules/list.php:7
+msgid "Installed modules"
+msgstr "Instalar modulos"
+
+#: views/admin/modules/list.php:16
+msgid "These are the currently installed modules. To install a module, just place it in the application/modules folder."
+msgstr "Los siguiente modulos se encuentran instaldos. Para instalar un modulo, dirigirse al directorio application/modules."
+
+#: views/admin/modules/list.php:23
+msgid "Documentation"
+msgstr "Documentación"
+
+#: views/admin/modules/list.php:39
+msgid "There are no modules installed."
+msgstr "No hay modulos instalados."
+
+#: views/admin/relations/single.php:22
+msgid "This record has no relations of this type."
+msgstr "Este registro no tiene relacion de este tipo."
+
+#: views/admin/relations/single.php:31
+msgid "Content name"
+msgstr "Nombre de contenido"
+
+#: views/admin/relations/single.php:33
+msgid "Insert date"
+msgstr "Insertar fecha"
+
+#: views/admin/repository/list.php:20
+msgid "Images repository"
+msgstr "Repositorio de imágenes"
+
+#: views/admin/repository/list.php:22
+msgid "Here you can find the last uploaded images."
+msgstr "Aquí puede encontrar las últimas imágenes cargadas."
+
+#: views/admin/schemes/list.php:12
+msgid "Rebuild schemes cache"
+msgstr "Reconstruir el esquema de cache."
+
+#: views/admin/schemes/list.php:33
+msgid "Table"
+msgstr "Tabla"
+
+#: views/admin/schemes/list.php:34
+msgid "Stage table"
+msgstr "Etapa de la tabla"
+
+#: views/admin/schemes/list.php:52
+msgid "Rebuild tables"
+msgstr "Reconstruir tablas"
+
+#: views/admin/themes/list.php:4
+msgid "Installed themes"
+msgstr "Temas instalados"
+
+#: views/admin/themes/list.php:20
+msgid "Desktop theme"
+msgstr "Tema de escritorio"
+
+#: views/admin/themes/list.php:21
+msgid "Mobile theme"
+msgstr "Tema de móvil"
+
+#: views/admin/themes/list.php:32
+msgid "Manage templates"
+msgstr "Administrar plantillas"
+
+#: views/admin/themes/list.php:39
+msgid "Apply changes"
+msgstr "Aplicar cambios"
+
+#: views/admin/themes/list.php:45
+msgid "There are no installed themes."
+msgstr "No hay temas instalados"
+
+#: views/admin/themes/section_composer.php:7
+msgid "Sections"
+msgstr "Secciones"
+
+#: views/admin/themes/section_composer.php:18
+#: views/admin/themes/section_composer.php:24
+msgid "Add HTML"
+msgstr "Agregar HTML"
+
+#: views/admin/themes/section_composer.php:19
+#: views/admin/themes/section_composer.php:36
+msgid "Add PHP code"
+msgstr "Agregar código PHP"
+
+#: views/admin/themes/template_edit.php:7
+#: views/admin/themes/theme.php:31
+#: views/admin/themes/theme.php:53
+msgid "Edit blocks"
+msgstr "Editar bloques"
+
+#: views/admin/themes/template_edit.php:10
+msgid "Back to templates list"
+msgstr "Volver a la lista de plantillas"
+
+#: views/admin/themes/template_edit.php:37
+msgid "Add section"
+msgstr "Agregar sección"
+
+#: views/admin/themes/template_edit.php:44
+msgid "Save changes"
+msgstr "Guardar cambios"
+
+#: views/admin/themes/template_edit.php:47
+msgid "This templates has no blocks."
+msgstr "Esta plantilla no tiene bloques."
+
+#: views/admin/themes/theme.php:7
+msgid "Theme templates"
+msgstr "Tema de plantilla"
+
+#: views/admin/themes/theme.php:23
+msgid "Template name"
+msgstr "Nome del template"
+
+#: views/admin/themes/theme.php:31
+msgid "Duplicate template"
+msgstr "Duplicar template"
+
+#: views/admin/unit_tests/intro.php:9
+msgid "Press the button below to start the automatic unit tests."
+msgstr "Presione el boton de abajo para comenzar el test automatico de unidad"
+
+#: views/admin/unit_tests/intro.php:10
+msgid "Start tests"
+msgstr "Comenzar Test"
+
+#: views/admin/unit_tests/results.php:3
+msgid "Unit tests results"
+msgstr "Resultado de test Units"
+
+#: views/admin/users/list.php:27
+#: views/admin/users/groups/list.php:20
+msgid "List"
+msgstr "Lista"
+
+#: views/admin/users/list.php:44
+msgid "Surname"
+msgstr "Apellido"
+
+#: views/admin/users/list.php:45
+msgid "Email address"
+msgstr "Dirección de email"
+
+#: views/admin/users/list.php:46
+msgid "Group"
+msgstr "Grupo"
+
+#: views/admin/users/list.php:64
+msgid "Do you want to delete this user?"
+msgstr "Quiere eliminar este usuario?"
+
+#: views/admin/users/list.php:79
+msgid "There are %n users."
+msgstr "Hay %n usuarios."
+
+#: views/admin/users/groups/edit.php:8
+msgid "Manage group"
+msgstr "Administrar grupo"
+
+#: views/admin/users/groups/edit.php:8
+#: views/admin/users/groups/edit.php:52
+msgid "Add group"
+msgstr "Agregar grupo"
+
+#: views/admin/users/groups/edit.php:11
+msgid "Back to groups list"
+msgstr "Volver a lista de grupos"
+
+#: views/admin/users/groups/edit.php:20
+msgid "Group informations"
+msgstr "Informaciones de grupo"
+
+#: views/admin/users/groups/edit.php:36
+#: views/admin/users/groups/list.php:33
+msgid "Group name"
+msgstr "Nombre del grupo"
+
+#: views/admin/users/groups/edit.php:39
+msgid "Permissions"
+msgstr "Permisos"
+
+#: views/admin/users/groups/list.php:13
+msgid "Add new group"
+msgstr "Agregar nuevo grupo"
+
+#: views/admin/users/groups/list.php:14
+msgid "Back to users"
+msgstr "Volver a usuarios"
+
+#: views/admin/users/groups/list.php:45
+msgid "Do you want to delete this group?"
+msgstr "Quiere eliminar este grupo?"
+
+#: views/admin/users/groups/list.php:45
+msgid "Delete group"
+msgstr "Eliminar grupo"
+
+#: helpers/website_helper.php:52
+msgid "You have no rights to access this page."
+msgstr "No tiene permisos para acceder a esta página"
+
+#: errors/error_custom.php:55
+#: errors/error_custom.php:65
+msgid "Go back"
+msgstr "Volver"
+
+#: modules/contact_form/contact_form_view.php:20
+msgid "First name"
+msgstr "Rodrigo"
+
+#: modules/contact_form/contact_form_view.php:23
+msgid "Last name"
+msgstr "Apellido"
+
+msgid "Page not found"
+msgstr "Página no encontrada"
+
+msgid "Nuovo prodotto"
+msgstr "Nuevo producto"
+
+msgid "The cache has been cleared."
+msgstr "El cache ha sido removido."
+
+msgid "The website is currently under maintenance. Please try later."
+msgstr "El sitio web esta actualmente en mantenimiento. Por favor ingrese en otro momento."
+
+msgid "The default homepage has not been set. Please go to the settings and update the website homepage."
+msgstr "La página principal por defecto no ha sito preestablecida. Por favor vaya a las configuraciones y actualice la página principal del sitio web."
+
+msgid "Mandatory"
+msgstr "Obligatorio"
+
+msgid "Welcome back, %u"
+msgstr "Bienvenido nuevamente, %u"
+
+msgid "Export records"
+msgstr "Exportar registros"
+
+msgid "This function is under construction!"
+msgstr "Esta función esta en construcción!"
+
+msgid "The address of this page is:"
+msgstr "La direccion de la página es: "
+
+msgid "This content can be associated to these categories"
+msgstr "El contenido puede ser asociado para estas categorias"
+
+msgid "This content can be associated to these hierarchies"
+msgstr "El contenido puede ser asociado a estas jerarquías"
+
+msgid "Select the operations you want to perform"
+msgstr "Seleccione las operaciones que quiere personalizar"
+
+msgid "Dashboard"
+msgstr "Panel de control"
+
+msgid "New group"
+msgstr "Grupo nuevo"
+
+msgid "Choose file"
+msgstr "Seleccione archivo"
+
+msgid "Add module"
+msgstr "Agregar módulo"
+
+msgid "File"
+msgstr "Archivo"
+
