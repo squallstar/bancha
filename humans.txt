@@ -32,7 +32,7 @@
    E-mail: office@pk-informatics.com
    Location: Linz, Austria
 
-   Contributor (German translation): Rodrigo Peña
+   Contributor (Spanish translation): Rodrigo Peña
    E-mail: rodrigo.pena.retacchi@gmail.com
    Location: Argentina
 
