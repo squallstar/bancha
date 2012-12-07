@@ -734,7 +734,7 @@ Class Model_records extends CI_Model {
 	      		}
 
 				//Triggers
-		  		if (isset($tipo['triggers']) && count($tipo['triggers']))
+		  		if (isset($tipo['triggers'][$action]) && count($tipo['triggers']))
 		  		{
 		  			$this->load->triggers();
 		  			$this->triggers->set_stage(TRUE)
