@@ -495,7 +495,7 @@ Class Model_records extends CI_Model {
 
   					foreach ($fields_to_select as $column)
   					{
-  						if ($item->$column)
+  						if (!is_null($item->$column))
   						{
   							if (isset($tipo['fields'][$column]['type']))
   							{
