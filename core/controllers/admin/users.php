@@ -110,7 +110,7 @@ Class Core_Users extends Bancha_Controller
 			} else {
 				$user->set('password', md5($user->get('password')));
 			}
-			
+			$user->set('password_confirm', $user->get('password'));			
 
 			if ($id_username != '' && !$this->auth->has_permission('users', 'groups')) {
 				//User can't edit groups
