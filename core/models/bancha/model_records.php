@@ -250,6 +250,17 @@ Class Model_records extends CI_Model {
     	return $this;
   	}
 
+	/**
+	 * Sets a where_in condition
+	 * @param string $column colonna
+	 * @param string $value valore
+	 */
+	public function where_in($column, $values = array(),$escape = TRUE)
+	{
+		$this->db->where_in($column, $values,$escape);
+		return $this;
+	}
+
     /**
      * Sets an "OR WHERE" condition
      * @param string $field
