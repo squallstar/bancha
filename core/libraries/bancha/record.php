@@ -389,7 +389,7 @@ Class Record {
   {
     if ($this->_categories == -1) {
       $B =& get_instance();
-      $b->load->categories();
+      $B->load->categories();
       $this->_categories = $B->categories->get_record_categories($this->id);
     }
     return $this->_categories;
