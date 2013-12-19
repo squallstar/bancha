@@ -53,3 +53,6 @@ Now you can pull the upstream updates anytime you want via these commands:
 
     git fetch upstream
     git merge upstream/master
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/squallstar/bancha/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
