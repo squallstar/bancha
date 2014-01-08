@@ -29,7 +29,7 @@ https://github.com/squallstar/bancha-bash
 
 # Application MVC Scheme
 
-![MVC Scheme](http://static.squallstar.it/images/bancha_mvc_scheme.png)
+![MVC Scheme](http://docs.getbancha.com/_images/mvc-scheme.png)
 
 # Changelog
 
