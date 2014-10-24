@@ -4,7 +4,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -77,7 +77,7 @@ Class Core_Api extends Bancha_Controller
 			$this->load->events();
 			$this->events->log('api-login');
 
-			$this->_display(array('token' => $token));			
+			$this->_display(array('token' => $token));
 		} else {
 			$this->_display(NULL, 403, 'USER_PWD_WRONG');
 		}
@@ -129,7 +129,7 @@ Class Core_Api extends Bancha_Controller
 		} else {
 			$this->_display(NULL, 403, $errormsg);
 		}
-		
+
 	}
 
 	public function records()
@@ -176,7 +176,7 @@ Class Core_Api extends Bancha_Controller
 				}
 			}
 			if (is_array($result) && count($result) && $result[0] instanceof Record)
-			{	
+			{
 				$compiled_result = array();
 				foreach ($result as $record)
 				{
@@ -194,7 +194,7 @@ Class Core_Api extends Bancha_Controller
 				} else {
 					//No results
 					$this->_display(NULL, 200, 'NO_RECORDS');
-				}	
+				}
 			}
 		} else {
 			$this->_display(NULL, 400, 'BAD_QUERY');
@@ -209,7 +209,7 @@ Class Core_Api extends Bancha_Controller
 		if ($name == '')
 		{
 			$name = $this->input->post('type');
-		}	
+		}
 		if ($name)
 		{
 			//Single content type

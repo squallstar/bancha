@@ -8,7 +8,7 @@ if ( ! defined('CUSTOM_ACTION')) exit('This controller should be called only fro
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -37,7 +37,7 @@ Class Core_Actions
 		{
 			//This will be rendered inside the content_render
 			echo 'Hello world by the custom action';
-		}		
+		}
 	}
 
 	/**

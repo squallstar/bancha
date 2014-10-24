@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -21,7 +21,7 @@ Class Core_Hierarchies extends Bancha_Controller
   	{
 	    parent::__construct();
 	    $this->load->database();
-	    
+
 	    //We are always in staging here
 	    $this->content->set_stage(TRUE);
 
@@ -36,7 +36,7 @@ Class Core_Hierarchies extends Bancha_Controller
   	}
 
 	public function index()
-	{	
+	{
 		if ($this->input->post('new'))
 		{
 			//New hierarchy

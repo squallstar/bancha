@@ -5,7 +5,7 @@
 #
 # @author    Nicholas Valbusa
 # @license   GNU/GPL (General Public License)
-# @copyright Copyright (c) 2011-2012, Squallstar Studio
+# @copyright Copyright (c) 2011-2014, Squallstar Studio
 # @see       http://docs.getbancha.com/content-types
 
 
@@ -191,7 +191,7 @@ fieldsets :
 	  		    S : Sitemap
 	  		    F : Don't show
 
-	  	view_template : 
+	  	view_template :
 	  		description : View template
 	  		type        : select
 	  		rules       : required

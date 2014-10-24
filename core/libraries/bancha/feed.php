@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -131,7 +131,7 @@ Class Feed
 
 		//Before rendering, we re-add the /feed.type to the path
 		//so CI can cache that page differently from the real one
-		$this->CI->uri->uri_string .= $this->CI->tree->last_piece; 
+		$this->CI->uri->uri_string .= $this->CI->tree->last_piece;
 
 		$this->CI->view->set('type', $this->_type);
 

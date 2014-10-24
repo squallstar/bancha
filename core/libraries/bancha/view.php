@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -158,7 +158,7 @@ Class View
 		$themes = array();
 		foreach ($dirs as $dir) {
 			if (!is_dir(THEMESPATH . $dir) || $dir == 'admin') continue;
-			
+
 			$ini = THEMESPATH . $dir . DIRECTORY_SEPARATOR . 'description.ini';
 			if (file_exists($ini)) {
 				$description = parse_ini_file($ini);
@@ -204,7 +204,7 @@ Class View
 	{
 		//We set a single cookie to help the Output class to send cached pages
 		$_SESSION['_website_theme'] = $this->theme;
-		
+
 		return $this->update_ci_path();
 	}
 
@@ -334,7 +334,7 @@ Class View
 			$type = $this->_CI->content->type($type_name);
 			$view_path = $this->_CI->config->item('views_templates_folder') . 'Default-' . ($type['tree'] ? 'Page' : 'Content') . '/' . $view_file;
 		}
-			
+
 		$this->_CI->load->view($view_path, $propagate_data ? $this->_data : '');
 	}
 

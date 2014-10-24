@@ -4,7 +4,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -21,7 +21,7 @@ if (!defined('DYNATREE')) {
 <script type="text/javascript" src="<?php echo site_url(THEMESPATH.'admin/js/jquery-ui.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo site_url(THEMESPATH.'admin/js/jquery.dynatree.min.js'); ?>"></script>
 <?php
-} else { 
+} else {
 	define('DYNATREE', TRUE);
 }
 ?>
@@ -41,9 +41,9 @@ $(document).ready(function() {
 
 	    // then append Dynatree selected 'checkboxes':
 	    var tree = $("#<?php echo $tree_id; ?>").dynatree("getTree");
-		
+
 		if (tree) {
-			 
+
 			var nodeList = tree.getSelectedNodes(), arr = [];
 			for(var i=0, l=nodeList.length; i<l; i++){
 				//arr.push(nodeList[i].data.key);

@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -72,7 +72,7 @@ Class Dispatcher_resources
 
 		$minified = '';
 
-		$ext_libs = str_replace(array('\\','/'), DIRECTORY_SEPARATOR, APPPATH . 'libraries' . DIRECTORY_SEPARATOR . 
+		$ext_libs = str_replace(array('\\','/'), DIRECTORY_SEPARATOR, APPPATH . 'libraries' . DIRECTORY_SEPARATOR .
 			  	   'externals' . DIRECTORY_SEPARATOR);
   	   $B->load->helper('file');
 
@@ -81,7 +81,7 @@ Class Dispatcher_resources
 			//JSMin lib
 			$path =  $ext_libs . 'JSMin.php';
 			require_once($path);
-			
+
 			foreach ($files as $file)
 			{
 				$content = read_file($full_path . $file);

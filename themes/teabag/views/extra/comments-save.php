@@ -7,7 +7,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  *
  */
@@ -20,7 +20,7 @@ $is_spam = FALSE;
 
 $akismet_key = $this->settings->get('akismet_key', 'Services');
 if (strlen($akismet_key))
-{	
+{
 	$this->load->extlibrary('akismet', array(
 		'key'		=> $akismet_key,
 		'author'	=> $author,

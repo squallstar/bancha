@@ -3,7 +3,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
 
@@ -304,7 +304,7 @@ body.no-header .block, .block.no_margin {
 			}
 			.block_content form .fieldset .right label {
 				margin-right:20px;
-			}	
+			}
 		.block_content form .fieldset {
 			display:block;
 			padding:10px 10px 10px 20px;
@@ -317,7 +317,7 @@ body.no-header .block, .block.no_margin {
 		.block_content form .fieldset:hover {
 			/*background:#FFF6D9;*/
 		}
-			
+
 
 /************/
 /* Messages */

@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -37,7 +37,7 @@ Class Core_Dashboard extends Bancha_Controller {
 			$this->lang->set_lang($lang);
 			$this->lang->set_cookie();
 		}
-		$this->view->render_layout('dashboard/intro');	
+		$this->view->render_layout('dashboard/intro');
 	}
 
 	public function events($limit = 30)

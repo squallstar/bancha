@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -41,10 +41,10 @@ Class Blocks
       		//We remove the un-necessary path
       		$view_template = str_replace(THEMESPATH . $theme . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR, '', $view_template);
 
-      		
+
 			if ($view_template && $theme)
       		{
-      			
+
         		$block = $this->fill_block($block_id, $theme, $view_template);
 				if (is_array($block) && count($block))
 				{

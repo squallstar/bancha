@@ -223,7 +223,7 @@ man_pages = [
 epub_title = u'Bancha'
 epub_author = u'Nicholas Valbusa'
 epub_publisher = u'Squallstar Studio'
-epub_copyright = u'2011-2012, Squallstar Studio'
+epub_copyright = u'2011-2014, Squallstar Studio'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.

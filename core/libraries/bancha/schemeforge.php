@@ -7,7 +7,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -91,7 +91,7 @@ Class Schemeforge
 					case 'textarea_code':
 						$tmp['type'] = 'TEXT';
 						unset($tmp['constraint']);
-					
+
 					case 'files':
 					case 'images':
 						continue;
@@ -121,14 +121,14 @@ Class Schemeforge
 		{
 			//New table
 			$done = $this->_create_table($type, $fields);
-			
+
 			//New stage table
-			$done = $this->_create_table($type, $fields, TRUE) && $done;	
-					
+			$done = $this->_create_table($type, $fields, TRUE) && $done;
+
 		} else {
 			//Table exists! We need to check and update it
 			$done = $this->_update_table($type, $fields);
-			
+
 			//Also the stage table
 			$done = $this->_update_table($type, $fields, TRUE) && $done;
 		}
@@ -186,7 +186,7 @@ Class Schemeforge
     				{
     					continue;
     				}
-    				
+
     				if (in_array($field->name, $ctype['columns']))
     				{
     					$found = TRUE;
@@ -214,7 +214,7 @@ Class Schemeforge
 
     				// 1st condition
 	    			strtolower($col->type) !== strtolower($field['type'])
-    				
+
     				// 2nd condition
     				|| (isset($field['constraint']) && isset($col->max_length)
     					&& $field['constraint'] != $col->max_length)
@@ -230,7 +230,7 @@ Class Schemeforge
     			}
     		}
     	}
-    	
+
     	if (count($new_fields))
     	{
     		$FORGE->add_column($table, $new_fields);
@@ -259,7 +259,7 @@ Class Schemeforge
 
 		if (isset($type['fields']['id_type']))
 		{
-			$FORGE->add_foreign_key('id_type', 'types', 'id_type');	
+			$FORGE->add_foreign_key('id_type', 'types', 'id_type');
 		}
 
 		if ($stage && $type['stage'])

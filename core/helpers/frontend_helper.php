@@ -11,7 +11,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -82,7 +82,7 @@ function tree($which='')
 
 		case 'current':
 			return $B->tree->get_current_branch();
-		
+
 		case 'breadcrumbs':
 			return $B->tree->breadcrumbs;
 	}

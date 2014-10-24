@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -98,14 +98,14 @@ Class Record {
     		if (!isset($data[$field_name])) continue;
 
         $value = $data[$field_name];
-            
+
     		if ($CI->config->item('strip_website_url')
                 && in_array($field['type'], array('textarea', 'textarea_full', 'textarea_code')))
     		{
     			//We strip the website url from the textarea fields
     			$value = str_replace(site_url(), '/', $value);
     		}
-            
+
    			$this->_data[$field_name] = $value;
 
    			if ($field['type'] == 'date' || $field['type'] == 'datetime')
@@ -131,7 +131,7 @@ Class Record {
     						list($year, $month, $day) = $tmp;
     					}
     					break;
-    					
+
     				//American format
     				case 'm/d/Y':
     					$tmp = explode('/', $this->_data[$field_name]);
@@ -139,8 +139,8 @@ Class Record {
     					{
     						list($month, $day, $year) = $tmp;
     					}
-    					break;    
-    				
+    					break;
+
     				//European date
     				case 'd/m/Y':
     					$tmp = explode('/', $this->_data[$field_name]);
@@ -148,7 +148,7 @@ Class Record {
     					{
     						list($day, $month, $year) = $tmp;
     					}
-    					break;					
+    					break;
     			}
 
     			if (!isset($day) && !isset($month) && !isset($year))
@@ -170,7 +170,7 @@ Class Record {
 	    				$hour = date('H');
 	    				$min = date('i');
 	    			}
-	    			$this->_data[$field_name] = mktime($hour, $min, '00', $month, $day, $year);    			
+	    			$this->_data[$field_name] = mktime($hour, $min, '00', $month, $day, $year);
 	    		}
    			}
     	}

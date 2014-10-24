@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -53,7 +53,7 @@ Class Core_Auth extends Bancha_Controller
 					redirect(urldecode($redirect));
 				}
 				redirect(ADMIN_PUB_PATH.'dashboard');
-				
+
 			} else {
 				$this->view->set('message', _('Username/password wrong.'));
 			}

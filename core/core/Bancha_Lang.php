@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -152,7 +152,7 @@ class Bancha_Lang extends CI_Lang {
 
     	$folder = $this->language_context;
     	//$this->gettext_path = $this->gettext_path . '/' . trim($folder, '/');
-    	
+
     	if (!$this->languages)
     	{
 			$this->_load_languages();

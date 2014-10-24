@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -47,13 +47,13 @@ Class Core_Import extends Bancha_Controller
 		{
 			$tipi[$type['id']] = $type['name'];
 		}
-		
+
 		$this->view->set('tipi', $tipi);
-		
+
 		$this->view->render_layout('import/records');
 	}
 
-	public function step($which = 1) 
+	public function step($which = 1)
 	{
 		$adapter_type = $this->input->post('adapter_type');
 
@@ -84,7 +84,7 @@ Class Core_Import extends Bancha_Controller
 		$autosave = TRUE;
 
 		$records = $this->adapter->parse_stream($contents, TRUE, $this->input->post('type_id'), $autosave);
-		
+
 		if (count($records) && !$autosave)
 		{
 			foreach ($records as $record)

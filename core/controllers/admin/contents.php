@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -96,7 +96,7 @@ Class Core_Contents extends Bancha_Controller
 					$this->pages->publish($to_publish);
 					$this->tree->clear_cache();
 				}
-        		
+
 				$this->view->message('success', 'The record ['.$to_publish.'] has been published.');
         	}
         }

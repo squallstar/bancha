@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -162,13 +162,13 @@ if (isset(bancha()->app_packages)) {
 		$packages['sons'][] = array(
 			'name'	=> $module_label,
 			'url'	=> $_admin_url . $packages['segment'] . '/package/' . $module_name
-		);		
+		);
 	}
 	array_splice($menu, 3, 0, array($packages));
 }
 
 ?><div id="header">
-	
+
 	<a href="<?php echo admin_url(); ?>"><h1 class="logo_img"></h1></a>
 	<hr />
 
@@ -194,7 +194,7 @@ if (isset(bancha()->app_packages)) {
 					} else {
 						$available_2 = TRUE;
 					}
-					
+
 					if ($available_2) {
 						if (isset($son['altsegment'])) {
 							$is_active = $segment_3 == $son['altsegment'] || $segment_4 == $son['altsegment'];
@@ -212,11 +212,11 @@ if (isset(bancha()->app_packages)) {
 				echo '</ul>';
 			}
 			echo '</li>';
-		
+
 		}
 		?>
 
 	</ul>
 	<p class="copyright"><a href="http://getbancha.com"><?php echo CMS . ' v' . BANCHA_VERSION; ?></a>
-	<br /><a href="http://www.squallstar.it">Squallstar Studio</a> &copy; 2011-2012</p>
+	<br /><a href="http://www.squallstar.it">Squallstar Studio</a> &copy; 2011-2014</p>
 </div>

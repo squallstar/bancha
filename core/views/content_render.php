@@ -3,16 +3,16 @@
  * (Core) Content Render
  *
  * The default content render of the website
- * 
+ *
  * Tipically you should not touch this file.
  * Feel free to extend it in your theme
- * 
+ *
  * To use your custom content render, create a file named
  * content_render.php inside the "views" directory of your theme
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -23,7 +23,7 @@ if (isset($page) && $page instanceof Record)
 	$action = $page->get('action');
 
 	if ($action)
-	{			
+	{
 		switch ($action)
 		{
 			case 'text':
@@ -51,7 +51,7 @@ if (isset($page) && $page instanceof Record)
 					$this->view->render_type_template($this->content->type_name($page->get('action_list_type')), 'list');
 				}
 				break;
-			
+
 			case 'action_render':
 				$class = $page->get('_action_class');
 				if ($class)

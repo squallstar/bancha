@@ -4,7 +4,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -283,7 +283,7 @@ Class Model_Pages extends CI_Model {
 	    	{
 	    		@unlink($filepath);
 	    	}
-	    }	
+	    }
     }
 
     /**

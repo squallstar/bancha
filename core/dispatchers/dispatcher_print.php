@@ -7,7 +7,7 @@
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
  * @author		Alessandro Maroldi - alexmaroldi@gmail.com - @alexmaroldi
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -23,8 +23,8 @@ Class Dispatcher_Print
 	public function __construct()
 	{
 		$this->_dompdfpath =  str_replace(array('\\','/'), DIRECTORY_SEPARATOR,
-					APPPATH . 'libraries' . DIRECTORY_SEPARATOR . 
-		  		  'externals' . DIRECTORY_SEPARATOR . 
+					APPPATH . 'libraries' . DIRECTORY_SEPARATOR .
+		  		  'externals' . DIRECTORY_SEPARATOR .
 			  		'dompdf' . DIRECTORY_SEPARATOR);
 
 		if (!is_dir($this->_dompdfpath)) {
@@ -71,7 +71,7 @@ Class Dispatcher_Print
 		if ($return)
 		{
 			//Returns the generated pdf
-			return $dompdf->output(); 
+			return $dompdf->output();
 		} else {
 			//Sends the content to the browser
 			$CI->output->set_content_type('pdf')

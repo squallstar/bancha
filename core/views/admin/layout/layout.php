@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -25,7 +25,7 @@ if ($this->input->is_ajax_request())
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->lang->current_language; ?>">
 	<head>
 		<title><?php echo $title != '' ? $title . ' &bull; ' : ''; ?>Bancha</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=7" />
 		<style type="text/css" media="all">
 			@import url("<?php echo $css_url; ?>style.css");

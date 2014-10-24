@@ -7,7 +7,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  *
  */
@@ -28,14 +28,14 @@ $records = & $page->get('records');
 	<ul>
 	<?php foreach ($records as $record) { ?>
 		<li>
-			<?php echo $record->get('date_publish'); ?> - 
+			<?php echo $record->get('date_publish'); ?> -
 			<strong><?php echo $record->get('title'); ?></strong><br />
 			<a href="<?php echo current_url() . '/' . $record->get('uri'); ?>"><?php echo _('View detail'); ?></a>
 			<br /><br />
 		</li>
 	<?php } ?>
 	</ul>
-	
+
 	<?php
 	if (isset($this->pagination))
 	{

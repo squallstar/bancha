@@ -4,7 +4,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -33,7 +33,7 @@ Class Core_Preview extends Bancha_Controller
         $this->auth->check_permission('content', $type['name']);
 
         $record = $this->records->type($type_name)->get($id);
-       	
+
        	if ($record instanceof Record)
        	{
        		$url = semantic_url($record);
@@ -44,5 +44,5 @@ Class Core_Preview extends Bancha_Controller
        		}
        	}
 	}
-	
+
 }

@@ -8,7 +8,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -250,7 +250,7 @@ foreach ($tipo['fieldsets'] as $fieldset)
 				break;
 		}
 
-		
+
 
 		if (isset($field['visible']))
 		{

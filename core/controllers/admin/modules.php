@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -60,10 +60,10 @@ Class Core_Modules extends Bancha_Controller
 				}
 			}
 		}
-		
 
 
-		$modules = directory_map($modules_dir, 1);	
+
+		$modules = directory_map($modules_dir, 1);
 
 		//Filter non-directories
 		$compiled_modules = array();

@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -182,7 +182,7 @@ Class Dispatcher_default
 			{
 				$cat_sql = $this->_CI->categories->get_records_for_categories($cat_ids, TRUE);
 			}
-			
+
 		}
 
 		//Now we extract the hierarchies (just a select statement)

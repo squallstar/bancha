@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  *
  */
@@ -15,7 +15,7 @@
 if ($this->input->post('message') && $this->input->post('author'))
 {
 	//Check the sandbox/views/extra/comments-save.php file
-	render('extra/comments-save');	
+	render('extra/comments-save');
 }
 
 //Finally we get the comments linked to the current post that we are viewing

@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -42,7 +42,7 @@ Class Adapter_csv implements Adapter
 		{
 			$model_records = & get_instance()->records;
 		}
-		
+
 		if (!$to_record)
 		{
 			return $data;
@@ -75,29 +75,29 @@ Class Adapter_csv implements Adapter
 		}
 	}
 
-	private function _csv_to_array($input, $delimiter=';') 
+	private function _csv_to_array($input, $delimiter=';')
 	{
-	    $header = null; 
-	    $data = array(); 
-	    $csvData = str_getcsv($input, "\n"); 
-	    
-	    foreach($csvData as $csvLine){ 
-	        if(is_null($header)) $header = explode($delimiter, $csvLine); 
-	        else{ 
-	            
-	            $items = explode($delimiter, $csvLine); 
-	            
-	            for($n = 0, $m = count($header); $n < $m; $n++){ 
+	    $header = null;
+	    $data = array();
+	    $csvData = str_getcsv($input, "\n");
+
+	    foreach($csvData as $csvLine){
+	        if(is_null($header)) $header = explode($delimiter, $csvLine);
+	        else{
+
+	            $items = explode($delimiter, $csvLine);
+
+	            for($n = 0, $m = count($header); $n < $m; $n++){
 	            	if (isset($items[$n]))
 	            	{
-	                	$prepareData[$header[$n]] = $items[$n]; 
+	                	$prepareData[$header[$n]] = $items[$n];
 	            	}
-	            } 
-	            
-	            $data[] = $prepareData; 
-	        } 
-	    } 
-	    
-	    return $data; 
+	            }
+
+	            $data[] = $prepareData;
+	        }
+	    }
+
+	    return $data;
 	}
 }

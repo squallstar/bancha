@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		  http://squallstar.it
  *
@@ -159,7 +159,7 @@ Class Xml
     function parse_yamlscheme($filepath)
     {
       require_once(APPPATH . '/libraries/externals/spyc.php');
-      
+
       //1. parse yaml scheme
       $yaml = Spyc::YAMLLoad($filepath) or show_error('Cannot parse the YAML scheme: ' . $filepath);
 
@@ -205,7 +205,7 @@ Class Xml
                 foreach(array('action', 'type', 'target', 'value') as $val) {
                     if (isset($trigger['sql'][$val]))  $node_sql->addAttribute($val, $trigger['sql'][$val]);
                 }
-                if (isset($trigger['sql']['escape']))  $node_sql->addAttribute('escape', $trigger['sql']['escape'] ? 'true' : 'false');                
+                if (isset($trigger['sql']['escape']))  $node_sql->addAttribute('escape', $trigger['sql']['escape'] ? 'true' : 'false');
             }
 
             if (isset($trigger['call'])) {
@@ -290,7 +290,7 @@ Class Xml
             }
         }
       }
-      
+
       //3. return the SimpleXML object
       return $xml;
     }
@@ -452,7 +452,7 @@ Class Xml
                     'to'    => (string)$attr->to,
                 );
 
-                $content['relations'][(string)$attr->name] = $relation;   
+                $content['relations'][(string)$attr->name] = $relation;
             }
         }
 
@@ -478,7 +478,7 @@ Class Xml
             //We add the fieldset name to the localized labels
             $this->_translations[$fieldset_name] = TRUE;
 
-            
+
             //Fieldset name is needed
       		if ($fieldset_name == '')
       		{

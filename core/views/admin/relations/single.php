@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -49,8 +49,8 @@ foreach ($objects as $relation) {
 	<td><?php echo $tipo['description']; ?></td>
 	<td><?php echo date(LOCAL_DATE_FORMAT, $relation->get('date_insert')); ?></td>
 </tr>
- 
- 
+
+
 <?php } ?>
 	</tbody>
 </table>

@@ -4,7 +4,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -32,11 +32,11 @@ $this->load->helper('form');
 			<h3><?php echo _('Hierarchies list'); ?></h3>
 			<p><?php echo _('Here you will find the inserted hierarchies.'); ?></p>
 
-			
+
 
 			<?php if (count($hierarchies)) { ?>
 			<form action="" method="POST" class="tree">
-				
+
 				<div id="tree" name="selNodes"></div>
 				<br />
 				<?php echo form_submit('submit', _('Delete selected'), 'class="submit long"'); ?>

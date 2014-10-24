@@ -63,5 +63,5 @@ _('Dispatcher (before rendering)');
 _('Inside the theme (while rendering)');
 _('Redirect URL');
 _('Attachments');
-_('Products');
-_('New product');
+_('Projects');
+_('New project');

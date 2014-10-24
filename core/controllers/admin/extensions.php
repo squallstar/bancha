@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -42,7 +42,7 @@ Class Core_Extensions extends Bancha_Controller
 		if (!class_exists($classname)) {
 			show_error("The class $classname has not been implemented inside the file $path");
 		}
-		
+
 		$c = new $classname();
 		if (!method_exists($c, $action)) {
 			show_error("The controller $classname does not implement the $action method.");

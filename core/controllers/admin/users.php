@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -80,7 +80,7 @@ Class Core_Users extends Bancha_Controller
 
 		//A user can always edit itself
 		if ($id_username != $this->auth->user('id')) {
-			$this->auth->check_permission('users', 'add');	
+			$this->auth->check_permission('users', 'add');
 		}
 
 		$this->load->categories();
@@ -110,18 +110,18 @@ Class Core_Users extends Bancha_Controller
 			} else {
 				$user->set('password', md5($user->get('password')));
 			}
-			$user->set('password_confirm', $user->get('password'));			
+			$user->set('password_confirm', $user->get('password'));
 
 			if ($id_username != '' && !$this->auth->has_permission('users', 'groups')) {
 				//User can't edit groups
 				if (!isset($users)) {
 					$users = $this->records->set_type($type_definition)->limit(1)->where('id_user', $id_username)->get();
 				}
-				
+
 				if ($users) {
 					$tmp_user = $users[0];
 					$user->set('id_group', $tmp_user->get('id_group'));
-				}	
+				}
 			}
 
 			$done = $this->records->save($user);
@@ -153,7 +153,7 @@ Class Core_Users extends Bancha_Controller
 				} else {
 					$user = $users[0];
 				}
-			}	
+			}
 			$user->set('password', '');
 			$user->set('password_confirm', '');
 		} else {

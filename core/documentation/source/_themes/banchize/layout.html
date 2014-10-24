@@ -8,10 +8,10 @@
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	
+
 	<!-- Set the viewport width to device width for mobile -->
 	<meta name="viewport" content="width=device-width" />
-	
+
 	{{ metatags }}
     {%- if not embedded and docstitle %}
       {%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
@@ -21,7 +21,7 @@
     {%- block htmltitle %}
     <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
     {%- endblock %}
-  
+
 	<!-- Included CSS Files -->
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="{{ pathto('_static/stylesheets/foundation.css', 1) }}" type="text/css" />
@@ -32,7 +32,7 @@
 		<link rel="stylesheet" href="{{ pathto('_static/stylesheets/ie.css', 1) }}" type="text/css" />
 	<![endif]-->
 
-	
+
 	<!-- IE Fix for HTML5 Tags -->
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -43,7 +43,7 @@
 
 	<!-- container -->
 	<div class="container">
-		
+
 		<div class="row">
 			<div class="six columns header">
 				<a href="http://getbancha.com/"><img src="{{ pathto('_static/asset/logo.png', 1) }}" alt="{{ project }}"></a>
@@ -59,12 +59,12 @@
 			<div class="twelve columns">
 				<ul class="breadcrumbs">
 
-					You are here: 
+					You are here:
 
 					{%- block rootrellink %}
 					<!--<li class="home"><a href="{{ pathto(master_doc) }}">Home</a>&nbsp;&nbsp;{{ reldelim1 }}</li>-->
 					{%- endblock %}
-					
+
 					{%- for parent in parents %}
 					<li class="bread"><a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>&nbsp;&nbsp; {{ reldelim1 }}</li>
 			        {%- endfor %}
@@ -75,9 +75,9 @@
 		</div>
 
 		<hr />
-		
+
 		<div class="row">
-			
+
 
 			<div class="three columns">
 				{{ toctree(collapse=false) }}
@@ -92,9 +92,9 @@
 		<hr />
 
 		<div class="row">
-			
+
 			<div class="twelve columns">
-			Bancha - Copyright 2011-2012(C) Squallstar Studio - <a href="http://www.squallstar.it">www.squallstar.it</a>
+			Bancha - Copyright 2011-2014(C) Squallstar Studio - <a href="http://www.squallstar.it">www.squallstar.it</a>
 			</div>
 
 			<div class="six columns">
@@ -102,16 +102,16 @@
 			</div>
 
 		</div>
-		
+
 	</div>
 	<!-- container -->
-	
-	
+
+
 
 
 	<!-- Included JS Files -->
 	<script src="{{ pathto('_static/javascripts/foundation.js', 1) }}"></script>
 	<script src="{{ pathto('_static/javascripts/app.js', 1) }}"></script>
-	
+
 </body>
 </html>

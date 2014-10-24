@@ -4,7 +4,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -118,7 +118,7 @@ Class Core_Themes extends Bancha_Controller
 					$this->load->frlibrary('blocks');
 					$blocks = $this->blocks->search_blocks($content);
 
-					
+
 
 					$filled_blocks = $this->blocks->fill_blocks($blocks, $name, $filename);
 
@@ -234,7 +234,7 @@ Class Core_Themes extends Bancha_Controller
 				$new_block[$new_pos] = $section;
 			}
 
-			for ($i=0; $i < count($new_block); $i++) { 
+			for ($i=0; $i < count($new_block); $i++) {
 				$reordered_blocks[$i] = $new_block[$i];
 			}
 
@@ -242,7 +242,7 @@ Class Core_Themes extends Bancha_Controller
 			$this->settings->clear_cache();
 			if ($done) echo 1;
 			return;
-			
+
 		}
 
 	}

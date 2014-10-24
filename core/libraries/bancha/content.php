@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -288,7 +288,7 @@ Class Content
 	{
 		//Loads the Database
 		$this->CI->load->database();
-		
+
 		//All types
 		$this->CI->load->helper(array('file', 'text'));
 

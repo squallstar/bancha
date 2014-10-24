@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -119,7 +119,7 @@ Class Model_records extends CI_Model {
   				$tipi_id[] = $tmp['id'];
   				$tipi[] = $tmp;
   			}
- 
+
   			if ($tipi[0]['tree'])
 	        {
 	        	$this->last_search_has_tree = TRUE;
@@ -437,7 +437,7 @@ Class Model_records extends CI_Model {
   				{
   					if ($this->_single_type['fields'][$single_field]['list'] === TRUE
   					    || ($this->_single_type['fields'][$single_field]['admin'] === TRUE && $this->_is_adminlist)
-  					
+
   					)
   					{
   						$fields_to_select[] = $single_field;
@@ -566,7 +566,7 @@ Class Model_records extends CI_Model {
                             $attachments = $docs[$record->id];
                             foreach ($attachments as $field_name => $attachs)
                             {
-                                $record->set($field_name, $attachs);   
+                                $record->set($field_name, $attachs);
                             }
                         }
                         $record->documents_extracted = TRUE;

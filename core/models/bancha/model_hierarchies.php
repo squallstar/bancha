@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -250,14 +250,14 @@ Class Model_hierarchies extends CI_Model {
   		$res = $this->db->select('id_record')
 		   		    	->from($this->table_relations)
 		   		    	->where_in('id_hierarchy', $hierarchies);
-		
+
 		if ($sql_string)
 		{
 			return $this->db->get_sql();
 		} else {
 			$result = $this->db->get()->result_array();
 		}
-		   		    	
+
 		$ids = array();
 		foreach ($result as $record)
 		{

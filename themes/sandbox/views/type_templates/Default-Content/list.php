@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  *
  */
@@ -26,7 +26,7 @@
 			</li>
 	<?php } ?>
 	</ul>
-	
+
 
 	<?php echo pagination(); ?>
 

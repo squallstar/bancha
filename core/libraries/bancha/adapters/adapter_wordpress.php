@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -27,7 +27,7 @@ Class Adapter_wordpress implements Adapter
 	public function __construct()
 	{
 		$this->mimes = array(
-			'text/xml', 'application/xml'	
+			'text/xml', 'application/xml'
 		);
 	}
 
@@ -77,7 +77,7 @@ Class Adapter_wordpress implements Adapter
 		$dom = simplexml_load_string($prepared_stream, 'SimpleXMLElement', LIBXML_NOCDATA);
 
 		if (!isset($dom->channel->item)) return FALSE;
-	
+
 		$channel = $dom->channel;
 		$data = array();
 		foreach ($channel->item as $item)
@@ -91,7 +91,7 @@ Class Adapter_wordpress implements Adapter
 				'lang'			=> $B->lang->default_language,
 				'categories'	=> array()
 			);
-			
+
 			if (isset($item->category[0]))
 			{
 				foreach ($item->category as $cat) {
@@ -99,12 +99,12 @@ Class Adapter_wordpress implements Adapter
 					if ( in_array($cat, array_keys($categories))) {
 						$post['categories'][] = $categories[$cat];
 					}
-				}		
+				}
 			}
 			if (count($item->comments))
 			{
 				$comments = array();
-				
+
 				foreach ($item->comments as $comment)
 				{
 					$comments[] = array(
@@ -186,6 +186,6 @@ Class Adapter_wordpress implements Adapter
 				$records[]= $post;
 			}
 			return $records;
-		}		
+		}
 	}
 }

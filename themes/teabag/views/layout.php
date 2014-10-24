@@ -7,7 +7,7 @@
  * @package		Bancha
  * @author		(PHP) Nicholas Valbusa - @squallstar
  * @author		(MARKUP, JS, CSS) Matteo Gildone - @DomSmasher
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *

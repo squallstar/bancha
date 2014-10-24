@@ -6,7 +6,7 @@
  *
  * @package		Bancha
  * @author		Nicholas Valbusa - info@squallstar.it - @squallstar
- * @copyright	Copyright (c) 2011-2012, Squallstar
+ * @copyright	Copyright (c) 2011-2014, Squallstar
  * @license		GNU/GPL (General Public License)
  * @link		http://squallstar.it
  *
@@ -28,12 +28,12 @@ Class Model_triggers extends CI_Model {
 	 * @var mixed Delegato (oggetto dell'operazione)
 	 */
 	private $_delegate = FALSE;
-	
+
 	/**
 	 * @var bool Indica se siamo in stage
 	 */
 	private $_is_stage = TRUE;
-	
+
 	/**
 	 * Imposta se utilizzare i trigger sulle tabelle di stage
 	 * @param bool $stage
@@ -93,18 +93,18 @@ Class Model_triggers extends CI_Model {
 		if (!count($this->_triggers)) {
 			return;
 		}
-		
+
 		foreach ($this->_triggers as $trigger)
 		{
 			switch (strtolower($trigger['action']))
 			{
 				//Vari triggers che generano query SQL
 				case 'sql':
-					
+
 					$sql = $trigger['sql'];
 					$target_tipo = $this->content->type($sql['type']);
 					$table_key = $this->_is_stage ? 'table_stage' : 'table';
-					
+
 					switch ($sql['action'])
 					{
 						//Effettua una update sul DB
@@ -118,24 +118,24 @@ Class Model_triggers extends CI_Model {
 								}
 								$this->db->where($target_tipo['primary_key'], $value);
 							}
-	
+
 							$this->db->set($sql['target'], $sql['value'], $sql['escape'] ? TRUE : FALSE);
 							$this->db->update($target_tipo[$table_key]);
 							break;
-						
+
 						//Riconta i figli di un record
 						case 'recount':
 							$record_tipo = $this->content->type($this->_delegate->_tipo);
-							
+
 							$value = $this->_delegate->get($trigger['field']);
-							
+
 							if ($value)
 							{
 								$count = $this->db->select('count(*) AS total')
 												  ->from($record_tipo[$table_key])
 												  ->where($trigger['field'], $value)
 												  ->get()->row(0);
-												  
+
 								$this->db->set($sql['target'], $count->total);
 								$this->db->where($target_tipo['primary_key'], $value);
 								$this->db->update($target_tipo[$table_key]);
@@ -143,32 +143,32 @@ Class Model_triggers extends CI_Model {
 							break;
 					}
 					break;
-				
+
 				//Chiamata ad azione custom
 				case 'call':
-					
+
 					if (!defined('CUSTOM_TRIGGER'))
 					{
 						define('CUSTOM_TRIGGER', TRUE);
 					}
-					
+
 					$folder = $this->config->item('custom_controllers_folder');
 					require_once($folder . 'triggers.php');
 					$trigger_class = new Triggers();
 					$method_name = $trigger['method'];
-					
+
 					//Chiamo l'azione definita su controllers/custom/triggers
 					if (is_callable(array($trigger_class, $method_name)))
 					{
 						$trigger_class->$method_name(isset($this->_delegate) ? $this->_delegate : NULL);
 					} else {
 						show_error('Someone triggered an action named ' . $method_name . '() that doesn\'t exists in the class ' . get_class($trigger_class) . '.');
-					}			
+					}
 					break;
-									
+
 			} //end-switch
 		} //end-foreach
-		
+
 		//Elimino i trigger
 		$this->_triggers = array();
 	}
