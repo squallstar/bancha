@@ -27,7 +27,7 @@ Class Bancha_Loader extends CI_Loader {
 		if (get_instance()->router->class != 'install') {
 			$this->settings();
 		}
-		
+
 		//Standard Bancha Libraries
 		$this->library(
 			array(
@@ -189,7 +189,7 @@ Class Bancha_Loader extends CI_Loader {
 		if (!isset($this->_loaded_modules[$module_name]))
 		{
 			$B =& get_instance();
-			
+
 			if (is_dir($user_modules)) {
 				require_once($user_modules.DIRECTORY_SEPARATOR.'module.php');
 			} else {
@@ -368,7 +368,7 @@ Class Bancha_Loader extends CI_Loader {
 			//We set the current view
 			$previous_view = $this->view->current_view;
 			$_ci_CI->view->current_view = $_ci_path;
-			
+
 			include($_ci_path); // include() vs include_once() allows for multiple views with the same name
 
 			//And we set back the current view to the previous one
@@ -376,7 +376,7 @@ Class Bancha_Loader extends CI_Loader {
 
 		}
 
-		
+
 
 		log_message('debug', 'File loaded: '.$_ci_path);
 
@@ -440,34 +440,13 @@ Class Bancha_Loader extends CI_Loader {
 				continue;
 			}
 
-			$helper_path = 'helpers/'.config_item('subclass_prefix').$helper.'.php';
+			$helper_path = 'helpers/'.$helper.'.php';
 
-			$ext_helper = file_exists(USERPATH . $helper_path) ? USERPATH . $helper_path : APPPATH . $helper_path;
+			foreach (array(USERPATH, APPPATH, BASEPATH) as $path) {
+				$helper_full_path = $path . $helper_path;
 
-			// Is this a helper extension request?
-			if (file_exists($ext_helper))
-			{
-				$base_helper = BASEPATH.'helpers/'.$helper.'.php';
-
-				if ( ! file_exists($base_helper))
-				{
-					show_error('Unable to load the requested file: helpers/'.$helper.'.php');
-				}
-
-				include_once($ext_helper);
-				include_once($base_helper);
-
-				$this->_ci_helpers[$helper] = TRUE;
-				log_message('debug', 'Helper loaded: '.$helper);
-				continue;
-			}
-
-			// Try to load the helper
-			foreach ($this->_ci_helper_paths as $path)
-			{
-				if (file_exists($path.'helpers/'.$helper.'.php'))
-				{
-					include_once($path.'helpers/'.$helper.'.php');
+				if (file_exists($helper_full_path)) {
+					include_once($helper_full_path);
 
 					$this->_ci_helpers[$helper] = TRUE;
 					log_message('debug', 'Helper loaded: '.$helper);
@@ -482,5 +461,4 @@ Class Bancha_Loader extends CI_Loader {
 			}
 		}
 	}
-
 }
