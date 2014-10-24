@@ -2,7 +2,7 @@
 
 /* TEAM */
 
-   Main Developer: Nicholas Valbusa
+   Lead Developer: Nicholas Valbusa
    Site: www.squallstar.it
    Mail: info@squallsar.it
    Twitter: @squallstar
@@ -15,12 +15,12 @@
    GitHub: @MintSugar
    Location: Verona, IT
 
-   Developer: Alessandro Maroldi
+   Contributor: Alessandro Maroldi
    Twitter: @alexmaroldi
    Github: @alexmaroldi
    Location: Verona, IT
 
-   Front-end Developer: Matteo Gildone
+   Contributor: Matteo Gildone
    Github: @DomSmasher
    Location: Verona, IT
 
