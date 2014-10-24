@@ -449,7 +449,7 @@ Class Bancha_Loader extends CI_Loader {
 					include_once($helper_full_path);
 
 					$this->_ci_helpers[$helper] = TRUE;
-					log_message('debug', 'Helper loaded: '.$helper);
+					log_message('debug', 'Helper loaded: '.$helper_full_path);
 					break;
 				}
 			}
