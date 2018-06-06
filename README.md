@@ -2,6 +2,8 @@
 
 # BANCHA - Open-source CMS
 
+**NOTE: as you might have guessed after 4 years of inactivity, this project is no longer maintain although can still be used with virtually no issues.**
+
 BANCHA is a Content Management System made with PHP5 and Code Igniter, a light and powerful PHP framework.
 It is capable to manage any kind of project/website, specially when it have many different types of contents.
 
